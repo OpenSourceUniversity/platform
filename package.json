@@ -1,0 +1,35 @@
+{
+  "name": "osuni",
+  "version": "0.0.1",
+  "description": "The World's Academic & Career Development Ledger",
+  "main": "truffle.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-lodash": "^3.2.11",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-1": "^6.24.1",
+    "cross-env": "^5.0.5",
+    "react": "^15.6.2",
+    "react-dom": "^15.6.2",
+    "semantic-ui-react": "^0.74.2",
+    "webpack": "^2.7.0",
+    "web3": "^1.0.0-beta2"
+  },
+  "devDependencies": {
+    "webpack-bundle-analyzer": "^2.9.1"
+  },
+  "scripts": {
+    "analyze": "cross-env ANALYZE_ENV=true yarn build",
+    "analyze:production": "cross-env ANALYZE_ENV=true yarn build:production",
+    "build": "webpack",
+    "build:production": "cross-env NODE_ENV=production yarn build"
+  },
+  "repository": "git@git.codeideo.com:edu-ico/platform.git",
+  "author": "Rechained",
+  "license": "MIT"
+}

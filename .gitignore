@@ -59,3 +59,5 @@ typings/
 .env
 
 package-lock.json
+
+src/public/dist/

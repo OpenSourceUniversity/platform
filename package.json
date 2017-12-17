@@ -17,8 +17,8 @@
     "react": "^15.6.2",
     "react-dom": "^15.6.2",
     "semantic-ui-react": "^0.74.2",
-    "webpack": "^2.7.0",
-    "web3": "^1.0.0-beta2"
+    "web3": "^1.0.0-beta2",
+    "webpack": "^2.7.0"
   },
   "devDependencies": {
     "webpack-bundle-analyzer": "^2.9.1"

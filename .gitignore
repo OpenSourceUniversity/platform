@@ -60,4 +60,4 @@ typings/
 
 package-lock.json
 
-src/public/dist/
+public

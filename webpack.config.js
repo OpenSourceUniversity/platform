@@ -12,7 +12,7 @@ const webpackConfig = {
   entry: {
     app: [
       'react-hot-loader/patch',
-      path.resolve('src/main.js'),
+      path.resolve('src/index.js'),
     ],
   },
 

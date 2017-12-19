@@ -1,16 +1,27 @@
 import React from 'react';
+import PropTypes from 'prop-types'
+import { withRouter } from 'react-router-dom';
 import { Button, Container, Menu, Dropdown, Icon } from 'semantic-ui-react'
 
-class Header extends React.Component {
+class HeaderWithoutRouter extends React.Component {
   state = {}
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  static propTypes = {
+    match: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
+  }
+
+  handleItemClick = (e, { name }) => {
+    this.setState({ activeItem: name });
+    this.props.history.push(`/${name}`);
+  }
 
   render() {
     const { activeItem } = this.state;
 
     return (
-      <Menu size="massive" fixed="top">
+      <Menu size="massive">
         <Container>
           <Menu.Item header>
             Open Source University
@@ -22,8 +33,8 @@ class Header extends React.Component {
           <Menu.Item name="courses" active={activeItem == "courses"} onClick={this.handleItemClick}>
             Courses
           </Menu.Item>
-          <Menu.Item name="learners" active={activeItem == "learners"} onClick={this.handleItemClick}>
-            Learners
+          <Menu.Item name="jobs" active={activeItem == "jobs"} onClick={this.handleItemClick}>
+            Jobs
           </Menu.Item>
 
           <Menu.Menu position="right">
@@ -38,5 +49,7 @@ class Header extends React.Component {
     );
   }
 }
+
+const Header = withRouter(HeaderWithoutRouter);
 
 export default Header;

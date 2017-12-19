@@ -18,12 +18,17 @@
     "react-dom": "^15.6.2",
     "semantic-ui-react": "^0.74.2",
     "web3": "^1.0.0-beta2",
-    "webpack": "^2.7.0"
+    "webpack": "^2.7.0",
+    "webpack-dev-server": "^2.9.7"
   },
   "devDependencies": {
+    "file-loader": "^1.1.6",
+    "react-hot-loader": "^3.1.3",
     "webpack-bundle-analyzer": "^2.9.1"
   },
   "scripts": {
+    "start": "webpack-dev-server --progress --inline --watch --hot --content-base ./public/",
+    "watch": "webpack --progress --colors --watch",
     "analyze": "cross-env ANALYZE_ENV=true yarn build",
     "analyze:production": "cross-env ANALYZE_ENV=true yarn build:production",
     "build": "webpack",

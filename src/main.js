@@ -9,7 +9,7 @@ const App = () => (
     <Header as='h1'>Hello world!</Header>
 
     <Button
-      content='Discover docs'
+      content='Discover the docs'
       href='http://react.semantic-ui.com'
       icon='github'
       labelPosition='left'

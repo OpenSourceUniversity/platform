@@ -10,7 +10,10 @@ const webpackConfig = {
   target: 'web',
 
   entry: {
-    app: path.resolve('src/main.js'),
+    app: [
+      'react-hot-loader/patch',
+      path.resolve('src/main.js'),
+    ],
   },
 
   module: {
@@ -31,7 +34,7 @@ const webpackConfig = {
 
   output: {
     filename: '[name].js',
-    path: path.resolve('src/public/dist'),
+    path: path.resolve('public'),
     publicPath: '/',
   },
 

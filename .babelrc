@@ -5,6 +5,7 @@
     "stage-1"
   ],
   "plugins": [
-    ["lodash", { "id": ["lodash", "semantic-ui-react"] }]
+    ["lodash", { "id": ["lodash", "semantic-ui-react"] }],
+    ["react-hot-loader/babel"],
   ]
 }

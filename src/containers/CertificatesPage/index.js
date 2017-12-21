@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Header, Grid, Segment, Button, Icon, Divider } from 'semantic-ui-react';
+import { Container, Header, Grid, Segment, Button, Icon, Divider, Breadcrumb } from 'semantic-ui-react';
 import CertificateItem from 'components/CertificateItem';
 
 
@@ -7,6 +7,13 @@ export default class CertificatesPage extends React.Component {
   render() {
     return (
       <Container>
+        <Breadcrumb>
+          <Breadcrumb.Section link>Home</Breadcrumb.Section>
+          <Breadcrumb.Divider icon='right angle' />
+          <Breadcrumb.Section active>Certificates</Breadcrumb.Section>
+        </Breadcrumb>
+
+        <Divider clearing />
         <Header size='large' floated='left'>
           Certificates
         </Header>
@@ -35,7 +42,7 @@ export default class CertificatesPage extends React.Component {
       {title: 'Computer Vision', verified: true, grade: 100},
     ];
     return certificates.map((certificate, index) => {
-      return (<Grid.Column computer={4} largeScreen={4} widescreen={4} tablet={8} mobile={8} key={index}>
+      return (<Grid.Column computer={4} largeScreen={4} widescreen={4} tablet={8} mobile={16} key={index}>
         <CertificateItem certificate={certificate} />
       </Grid.Column>)
     });

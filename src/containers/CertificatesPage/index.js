@@ -1,14 +1,16 @@
 import React from 'react';
 import { Container, Header, Grid, Segment, Button, Icon, Divider, Breadcrumb } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import CertificateItem from 'components/CertificateItem';
 
 
 export default class CertificatesPage extends React.Component {
+
   render() {
     return (
       <Container>
         <Breadcrumb>
-          <Breadcrumb.Section link>Home</Breadcrumb.Section>
+          <Breadcrumb.Section href='/#/'>Home</Breadcrumb.Section>
           <Breadcrumb.Divider icon='right angle' />
           <Breadcrumb.Section active>Certificates</Breadcrumb.Section>
         </Breadcrumb>
@@ -17,7 +19,7 @@ export default class CertificatesPage extends React.Component {
         <Header size='large' floated='left'>
           Certificates
         </Header>
-        <Button icon labelPosition='left' positive floated='right'>
+        <Button icon labelPosition='left' positive floated='right' as={Link} to='/certificates/add'>
           <Icon name='plus' />
           Add Certificate
         </Button>

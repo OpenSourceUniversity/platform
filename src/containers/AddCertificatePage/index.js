@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Header, Grid, Button, Message, Divider, Breadcrumb, Form } from 'semantic-ui-react';
+import { Container, Header, Grid, Button, Message, Divider, Breadcrumb, Form, Input } from 'semantic-ui-react';
 import CertificateItem from 'components/CertificateItem';
 
 
@@ -28,23 +28,29 @@ export default class AddCertificatePage extends React.Component {
             <Form size='huge'>
               <Form.Field>
                 <label>Certificate name</label>
-                <input placeholder='Certificate name' />
+                <Input  iconPosition='left' icon='certificate' placeholder='Certificate name' />
               </Form.Field>
               <Form.Field>
                 <label>Academy address</label>
-                <input placeholder='Academy address' />
+                <Input iconPosition='left' icon='address card' placeholder='Academy address' />
               </Form.Field>
               <Form.Field>
                 <label>Issuing date</label>
-                <input placeholder='Issuing date' />
+                <Input iconPosition='left' icon='calendar check' placeholder='Issuing date' />
               </Form.Field>
               <Form.Field>
                 <label>Expiration date</label>
-                <input placeholder='Expiration date' />
+                <Input iconPosition='left' icon='calendar times' placeholder='Expiration date' />
               </Form.Field>
               <Form.Field>
                 <label>Skills</label>
-                <input placeholder='Skills' />
+                <Input
+                  icon='tags'
+                  iconPosition='left'
+                  label={{ tag: true, content: 'Add skill' }}
+                  labelPosition='right'
+                  placeholder='Skills'
+                />
               </Form.Field>
               <Button type='submit' size='huge'>Submit</Button>
             </Form>

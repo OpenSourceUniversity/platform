@@ -43,12 +43,9 @@ export default class AddCertificatePage extends React.Component {
                 <Input iconPosition='left' icon='calendar times' placeholder='Expiration date' />
               </Form.Field>
               <Form.Field>
-                <label>Skills</label>
                 <Input
                   icon='tags'
                   iconPosition='left'
-                  label={{ tag: true, content: 'Add skill' }}
-                  labelPosition='right'
                   placeholder='Skills'
                 />
               </Form.Field>

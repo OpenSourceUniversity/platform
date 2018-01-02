@@ -6,8 +6,8 @@ export default class HomePage extends React.Component {
   render() {
     return (
       <Container>
-        <Header size='huge'>Home</Header>
+        <Header size="huge">Home</Header>
       </Container>
-    )
+    );
   }
 }

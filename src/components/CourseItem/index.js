@@ -11,15 +11,14 @@ export default class CourseItem extends React.Component {
           <Card.Header>{this.props.certificate.title}</Card.Header>
         </Card.Content>
         <Card.Content extra>
-          <Icon name={ this.props.certificate.verified ? 'check' : 'close' } color={color}/>
+          <Icon name={this.props.certificate.verified ? 'check' : 'close'} color={color} />
           { this.props.certificate.verified ? 'Verified' : 'Not verified' }
         </Card.Content>
         <Card.Content extra>
-          <Icon name='graduation' color={color}/>
+          <Icon name="graduation" color={color} />
           { this.props.certificate.grade }%
         </Card.Content>
       </Card>
-    )
+    );
   }
-
 }

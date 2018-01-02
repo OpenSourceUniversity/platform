@@ -8,23 +8,23 @@ export default class CoursesPage extends React.Component {
     return (
       <Container>
         <Breadcrumb>
-          <Breadcrumb.Section href='/#/'>Home</Breadcrumb.Section>
-          <Breadcrumb.Divider icon='right angle' />
+          <Breadcrumb.Section href="/#/">Home</Breadcrumb.Section>
+          <Breadcrumb.Divider icon="right angle" />
           <Breadcrumb.Section active>Courses</Breadcrumb.Section>
         </Breadcrumb>
 
         <Divider clearing />
 
-        <Header size='large' floated='left'>
+        <Header size="large" floated="left">
           Courses
         </Header>
 
         <Divider clearing />
 
-        <Grid reversed='mobile'>
+        <Grid reversed="mobile">
           <Grid.Column width={10}>
             <Grid>
-                {this.renderCourses()}
+              {this.renderCourses()}
             </Grid>
           </Grid.Column>
 
@@ -37,13 +37,13 @@ export default class CoursesPage extends React.Component {
                 <Form>
                   <Form.Field>
                     <label>Name</label>
-                    <Input placeholder='Name' />
+                    <Input placeholder="Name" />
                   </Form.Field>
                   <Form.Field>
                     <label>Subject</label>
-                    <Input placeholder='Subject' />
+                    <Input placeholder="Subject" />
                   </Form.Field>
-                  <Button type='submit'>Filter</Button>
+                  <Button type="submit">Filter</Button>
                 </Form>
               </Segment>
             </Sticky>
@@ -51,30 +51,28 @@ export default class CoursesPage extends React.Component {
         </Grid>
 
       </Container>
-    )
+    );
   }
 
   renderCourses() {
     const courses = [
-      {title: 'Python Development', verified: true, grade: 90},
-      {title: 'Scrum Master', verified: true, grade: 80},
-      {title: 'Machine Learning', verified: false, grade: 100},
-      {title: 'Solidity Development', verified: true, grade: 75},
-      {title: 'Unit Testing', verified: true, grade: 90},
-      {title: 'Computer Vision', verified: true, grade: 100},
-      {title: 'Computer Vision', verified: true, grade: 100},
-      {title: 'Computer Vision', verified: true, grade: 100},
-      {title: 'Computer Vision', verified: true, grade: 100},
-      {title: 'Computer Vision', verified: true, grade: 100},
-      {title: 'Computer Vision', verified: true, grade: 100},
-      {title: 'Computer Vision', verified: true, grade: 100},
-      {title: 'Computer Vision', verified: true, grade: 100},
-      {title: 'Computer Vision', verified: true, grade: 100},
+      { title: 'Python Development', verified: true, grade: 90 },
+      { title: 'Scrum Master', verified: true, grade: 80 },
+      { title: 'Machine Learning', verified: false, grade: 100 },
+      { title: 'Solidity Development', verified: true, grade: 75 },
+      { title: 'Unit Testing', verified: true, grade: 90 },
+      { title: 'Computer Vision', verified: true, grade: 100 },
+      { title: 'Computer Vision', verified: true, grade: 100 },
+      { title: 'Computer Vision', verified: true, grade: 100 },
+      { title: 'Computer Vision', verified: true, grade: 100 },
+      { title: 'Computer Vision', verified: true, grade: 100 },
+      { title: 'Computer Vision', verified: true, grade: 100 },
+      { title: 'Computer Vision', verified: true, grade: 100 },
+      { title: 'Computer Vision', verified: true, grade: 100 },
+      { title: 'Computer Vision', verified: true, grade: 100 },
     ];
-    return courses.map((certificate, index) => {
-      return (<Grid.Column computer={8} largeScreen={8} widescreen={8} tablet={8} mobile={16} key={index}>
-        <CourseItem certificate={certificate} />
-      </Grid.Column>)
-    });
+    return courses.map((certificate, index) => (<Grid.Column computer={8} largeScreen={8} widescreen={8} tablet={8} mobile={16} key={index}>
+      <CourseItem certificate={certificate} />
+    </Grid.Column>));
   }
 }

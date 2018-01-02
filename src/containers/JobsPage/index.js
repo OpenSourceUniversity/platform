@@ -6,8 +6,8 @@ export default class JobsPage extends React.Component {
   render() {
     return (
       <Container>
-        <Header size='huge'>Jobs</Header>
+        <Header size="huge">Jobs</Header>
       </Container>
-    )
+    );
   }
 }

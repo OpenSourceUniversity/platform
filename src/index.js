@@ -5,8 +5,10 @@ import App from './app.js';
 
 const MOUNT_NODE = document.getElementById('root');
 
-render((
-  <HashRouter>
-    <App />
-  </HashRouter>
-), MOUNT_NODE);
+render(
+  (
+    <HashRouter>
+      <App />
+    </HashRouter>
+  ), MOUNT_NODE,
+);

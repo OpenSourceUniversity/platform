@@ -5,49 +5,45 @@ import CertificateItem from 'components/CertificateItem';
 
 
 export default class CertificatesPage extends React.Component {
-
   render() {
     return (
       <Container>
         <Breadcrumb>
-          <Breadcrumb.Section href='/#/'>Home</Breadcrumb.Section>
-          <Breadcrumb.Divider icon='right angle' />
+          <Breadcrumb.Section href="/#/">Home</Breadcrumb.Section>
+          <Breadcrumb.Divider icon="right angle" />
           <Breadcrumb.Section active>Certificates</Breadcrumb.Section>
         </Breadcrumb>
 
         <Divider clearing />
-        <Header size='large' floated='left'>
+        <Header size="large" floated="left">
           Certificates
         </Header>
-        <Button icon labelPosition='left' positive floated='right' as={Link} to='/certificates/add'>
-          <Icon name='plus' />
+        <Button icon labelPosition="left" positive floated="right" as={Link} to="/certificates/add">
+          <Icon name="plus" />
           Add Certificate
         </Button>
 
         <Divider clearing />
 
         <Grid>
-            {this.renderCertificates()}
+          {this.renderCertificates()}
         </Grid>
 
       </Container>
-    )
+    );
   }
 
   renderCertificates() {
     const certificates = [
-      {title: 'Python Development', verified: true, grade: 90},
-      {title: 'Scrum Master', verified: true, grade: 80},
-      {title: 'Machine Learning', verified: false, grade: 100},
-      {title: 'Solidity Development', verified: true, grade: 75},
-      {title: 'Unit Testing', verified: true, grade: 90},
-      {title: 'Computer Vision', verified: true, grade: 100},
+      { title: 'Python Development', verified: true, grade: 90 },
+      { title: 'Scrum Master', verified: true, grade: 80 },
+      { title: 'Machine Learning', verified: false, grade: 100 },
+      { title: 'Solidity Development', verified: true, grade: 75 },
+      { title: 'Unit Testing', verified: true, grade: 90 },
+      { title: 'Computer Vision', verified: true, grade: 100 },
     ];
-    return certificates.map((certificate, index) => {
-      return (<Grid.Column computer={4} largeScreen={4} widescreen={4} tablet={8} mobile={16} key={index}>
-        <CertificateItem certificate={certificate} />
-      </Grid.Column>)
-    });
+    return certificates.map((certificate, index) => (<Grid.Column computer={4} largeScreen={4} widescreen={4} tablet={8} mobile={16} key={index}>
+      <CertificateItem certificate={certificate} />
+    </Grid.Column>));
   }
-
 }

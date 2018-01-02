@@ -1,7 +1,7 @@
 import { render } from 'react-dom';
 import { HashRouter } from 'react-router-dom';
 import React from 'react';
-import App from './app.js';
+import App from './app';
 
 const MOUNT_NODE = document.getElementById('root');
 

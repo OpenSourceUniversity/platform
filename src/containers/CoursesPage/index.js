@@ -28,9 +28,9 @@ export default class CoursesPage extends React.Component {
         widescreen={8}
         tablet={8}
         mobile={16}
-        key={index.id}
+        key={index}
       >
-        <CourseItem certificate={certificate} />
+        <CourseItem certificate={certificate} key={index} />
       </Grid.Column>));
   }
 

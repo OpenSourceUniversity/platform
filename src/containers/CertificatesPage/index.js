@@ -21,9 +21,9 @@ export default class CertificatesPage extends React.Component {
         widescreen={4}
         tablet={8}
         mobile={16}
-        key={index.id}
+        key={index}
       >
-        <CertificateItem certificate={certificate} />
+        <CertificateItem certificate={certificate} key={index} />
       </Grid.Column>
     ));
   }

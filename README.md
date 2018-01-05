@@ -8,11 +8,22 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-To be added.
+Make sure you have the following dependencies installed on your system.
 
-### Installing
+* `nodejs >= 9.3.0`
+* `npm >= 5.5.1`
 
-To be added.
+Navigate to the project directory and execute the following command in order to install project dependencies:
+
+    npm install
+
+### Running
+
+Within the project directory execute the following command:
+
+    npm run start
+
+This script will run the `webpack-dev-server` in hot reloading mode. Open your browser on this address and you are ready to develop: http://localhost:8080/
 
 ## Running the tests
 
@@ -20,8 +31,22 @@ To be added.
 
 ### Coding style
 
+Make sure the style of the source code you commit is consistent with the style of the rest of the project.
+
+If you are in doubt refer to the Airbnb style guide for JavaScript code and to the Solidity Style Guide for smart contracts.
+
 * [Airbnb Style Guide](https://github.com/airbnb/javascript) - JavaScript
 * [Solidity Style Guide](http://solidity.readthedocs.io/en/develop/style-guide.html) - Solidity
+
+
+#### Automatically linting your code
+
+Before commiting your changes, make sure the following command exits with zero-code:
+
+    npm run lint
+
+#### Editor configuration
+For Atom install [linter-eslint](https://atom.io/packages/linter-eslint): `apm install linter-eslint`.
 
 ## Deployment
 
@@ -29,6 +54,7 @@ To be added.
 
 ## Built With
 
+* [Semantic UI](react.semantic-ui.com) - UI Framework
 * [Truffle](http://truffleframework.com/) - Development framework for Ethereum
 
 ## Contributing

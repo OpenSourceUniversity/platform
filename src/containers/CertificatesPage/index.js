@@ -1,10 +1,33 @@
 import React from 'react';
-import { Container, Header, Grid, Segment, Button, Icon, Divider, Breadcrumb } from 'semantic-ui-react';
+import { Container, Header, Grid, Button, Icon, Divider, Breadcrumb } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import CertificateItem from 'components/CertificateItem';
 
 
 export default class CertificatesPage extends React.Component {
+  renderCertificates() {
+    const certificates = [
+      { title: 'Python Development', verified: true, grade: 90 },
+      { title: 'Scrum Master', verified: true, grade: 80 },
+      { title: 'Machine Learning', verified: false, grade: 100 },
+      { title: 'Solidity Development', verified: true, grade: 75 },
+      { title: 'Unit Testing', verified: true, grade: 90 },
+      { title: 'Computer Vision', verified: true, grade: 100 },
+    ];
+    return certificates.map((certificate, index) => (
+      <Grid.Column
+        computer={4}
+        largeScreen={4}
+        widescreen={4}
+        tablet={8}
+        mobile={16}
+        key={index.id}
+      >
+        <CertificateItem certificate={certificate} />
+      </Grid.Column>
+    ));
+  }
+
   render() {
     return (
       <Container>
@@ -31,19 +54,5 @@ export default class CertificatesPage extends React.Component {
 
       </Container>
     );
-  }
-
-  renderCertificates() {
-    const certificates = [
-      { title: 'Python Development', verified: true, grade: 90 },
-      { title: 'Scrum Master', verified: true, grade: 80 },
-      { title: 'Machine Learning', verified: false, grade: 100 },
-      { title: 'Solidity Development', verified: true, grade: 75 },
-      { title: 'Unit Testing', verified: true, grade: 90 },
-      { title: 'Computer Vision', verified: true, grade: 100 },
-    ];
-    return certificates.map((certificate, index) => (<Grid.Column computer={4} largeScreen={4} widescreen={4} tablet={8} mobile={16} key={index}>
-      <CertificateItem certificate={certificate} />
-    </Grid.Column>));
   }
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Container, Header, Grid, Button, Message, Divider, Breadcrumb, Form, Input } from 'semantic-ui-react';
-import CertificateItem from 'components/CertificateItem';
 
 
 export default class AddCertificatePage extends React.Component {
@@ -27,27 +26,39 @@ export default class AddCertificatePage extends React.Component {
           <Grid.Column width={10}>
             <Form size="huge">
               <Form.Field>
-                <label>Certificate name</label>
-                <Input iconPosition="left" icon="certificate" placeholder="Certificate name" />
+                <label htmlFor="certificateName">
+                  Certificate name
+                  <Input id="certificateName" iconPosition="left" icon="certificate" placeholder="Certificate name" />
+                </label>
               </Form.Field>
               <Form.Field>
-                <label>Academy address</label>
-                <Input iconPosition="left" icon="address card" placeholder="Academy address" />
+                <label htmlFor="academyAddress">
+                  Academy address
+                  <Input id="academyAddress" iconPosition="left" icon="address card" placeholder="Academy address" />
+                </label>
               </Form.Field>
               <Form.Field>
-                <label>Issuing date</label>
-                <Input iconPosition="left" icon="calendar check" placeholder="Issuing date" />
+                <label htmlFor="dateIssued">
+                  Issuing date
+                  <Input id="dateIssued" iconPosition="left" icon="calendar check" placeholder="Issuing date" />
+                </label>
               </Form.Field>
               <Form.Field>
-                <label>Expiration date</label>
-                <Input iconPosition="left" icon="calendar times" placeholder="Expiration date" />
+                <label htmlFor="expirationDate">
+                  Expiration date
+                  <Input id="expirationDate" iconPosition="left" icon="calendar times" placeholder="Expiration date" />
+                </label>
               </Form.Field>
               <Form.Field>
-                <Input
-                  icon="tags"
-                  iconPosition="left"
-                  placeholder="Skills"
-                />
+                <label htmlFor="skills">
+                  Skills
+                  <Input
+                    id="skills"
+                    icon="tags"
+                    iconPosition="left"
+                    placeholder="Skills"
+                  />
+                </label>
               </Form.Field>
               <Button type="submit" size="huge">Submit</Button>
             </Form>

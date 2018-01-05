@@ -4,6 +4,36 @@ import CourseItem from 'components/CourseItem';
 
 
 export default class CoursesPage extends React.Component {
+  renderCourses() {
+    const courses = [
+      { title: 'Python Development', verified: true, grade: 90 },
+      { title: 'Scrum Master', verified: true, grade: 80 },
+      { title: 'Machine Learning', verified: false, grade: 100 },
+      { title: 'Solidity Development', verified: true, grade: 75 },
+      { title: 'Unit Testing', verified: true, grade: 90 },
+      { title: 'Computer Vision', verified: true, grade: 100 },
+      { title: 'Computer Vision', verified: true, grade: 100 },
+      { title: 'Computer Vision', verified: true, grade: 100 },
+      { title: 'Computer Vision', verified: true, grade: 100 },
+      { title: 'Computer Vision', verified: true, grade: 100 },
+      { title: 'Computer Vision', verified: true, grade: 100 },
+      { title: 'Computer Vision', verified: true, grade: 100 },
+      { title: 'Computer Vision', verified: true, grade: 100 },
+      { title: 'Computer Vision', verified: true, grade: 100 },
+    ];
+    return courses.map((certificate, index) => (
+      <Grid.Column
+        computer={8}
+        largeScreen={8}
+        widescreen={8}
+        tablet={8}
+        mobile={16}
+        key={index.id}
+      >
+        <CourseItem certificate={certificate} />
+      </Grid.Column>));
+  }
+
   render() {
     return (
       <Container>
@@ -36,12 +66,16 @@ export default class CoursesPage extends React.Component {
                 </Header>
                 <Form>
                   <Form.Field>
-                    <label>Name</label>
-                    <Input placeholder="Name" />
+                    <label htmlFor="name">
+                      Name
+                      <Input id="name" placeholder="Name" />
+                    </label>
                   </Form.Field>
                   <Form.Field>
-                    <label>Subject</label>
-                    <Input placeholder="Subject" />
+                    <label htmlFor="subject">
+                      Subject
+                      <Input id="subject" placeholder="Subject" />
+                    </label>
                   </Form.Field>
                   <Button type="submit">Filter</Button>
                 </Form>
@@ -52,27 +86,5 @@ export default class CoursesPage extends React.Component {
 
       </Container>
     );
-  }
-
-  renderCourses() {
-    const courses = [
-      { title: 'Python Development', verified: true, grade: 90 },
-      { title: 'Scrum Master', verified: true, grade: 80 },
-      { title: 'Machine Learning', verified: false, grade: 100 },
-      { title: 'Solidity Development', verified: true, grade: 75 },
-      { title: 'Unit Testing', verified: true, grade: 90 },
-      { title: 'Computer Vision', verified: true, grade: 100 },
-      { title: 'Computer Vision', verified: true, grade: 100 },
-      { title: 'Computer Vision', verified: true, grade: 100 },
-      { title: 'Computer Vision', verified: true, grade: 100 },
-      { title: 'Computer Vision', verified: true, grade: 100 },
-      { title: 'Computer Vision', verified: true, grade: 100 },
-      { title: 'Computer Vision', verified: true, grade: 100 },
-      { title: 'Computer Vision', verified: true, grade: 100 },
-      { title: 'Computer Vision', verified: true, grade: 100 },
-    ];
-    return courses.map((certificate, index) => (<Grid.Column computer={8} largeScreen={8} widescreen={8} tablet={8} mobile={16} key={index}>
-      <CourseItem certificate={certificate} />
-    </Grid.Column>));
   }
 }

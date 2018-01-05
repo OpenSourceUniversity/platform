@@ -16,6 +16,13 @@ module.exports = {
     "plugins": [
         "react"
     ],
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "paths": ["src"]
+            }
+        },
+    },
     "rules": {
         "indent": [
             "error",
@@ -37,5 +44,18 @@ module.exports = {
             1,
             { "extensions": [".js", ".jsx"]
         }],
+        "react/prefer-stateless-function": [
+            0,
+            { "ignorePureComponents": true }
+        ],
+        "react/prop-types": [
+            0
+        ],
+        "react/forbid-prop-types": [
+            0
+        ],
+        "class-methods-use-this": [
+            0
+        ],
     }
 };

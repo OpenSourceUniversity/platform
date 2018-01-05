@@ -10,14 +10,13 @@ class Main extends React.Component {
   state = {}
 
   render() {
-
     return (
       <Switch>
-        <Route exact path='/' component={HomePage}/>
-        <Route exact path='/certificates' component={CertificatesPage}/>
-        <Route exact path='/certificates/add' component={AddCertificatePage}/>
-        <Route path='/courses' component={CoursesPage}/>
-        <Route path='/jobs' component={JobsPage}/>
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/certificates" component={CertificatesPage} />
+        <Route exact path="/certificates/add" component={AddCertificatePage} />
+        <Route path="/courses" component={CoursesPage} />
+        <Route path="/jobs" component={JobsPage} />
       </Switch>
     );
   }

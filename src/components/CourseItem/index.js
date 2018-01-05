@@ -1,5 +1,5 @@
 import React from 'react';
-import { Divider, Card, Icon } from 'semantic-ui-react';
+import { Card, Icon } from 'semantic-ui-react';
 
 
 export default class CourseItem extends React.Component {

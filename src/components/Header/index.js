@@ -1,16 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { Button, Container, Menu, Dropdown, Icon } from 'semantic-ui-react'
+import { Container, Menu, Dropdown } from 'semantic-ui-react';
+
 
 class HeaderWithoutRouter extends React.Component {
-  state = {}
-
   static propTypes = {
-    match: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
   }
+
+  state = {}
 
   handleItemClick = (e, { name }) => {
     this.setState({ activeItem: name });
@@ -27,13 +26,13 @@ class HeaderWithoutRouter extends React.Component {
             Open Source University
           </Menu.Item>
 
-          <Menu.Item name="certificates" active={activeItem == "certificates"} onClick={this.handleItemClick}>
+          <Menu.Item name="certificates" active={activeItem === 'certificates'} onClick={this.handleItemClick}>
             Certificates
           </Menu.Item>
-          <Menu.Item name="courses" active={activeItem == "courses"} onClick={this.handleItemClick}>
+          <Menu.Item name="courses" active={activeItem === 'courses'} onClick={this.handleItemClick}>
             Courses
           </Menu.Item>
-          <Menu.Item name="jobs" active={activeItem == "jobs"} onClick={this.handleItemClick}>
+          <Menu.Item name="jobs" active={activeItem === 'jobs'} onClick={this.handleItemClick}>
             Jobs
           </Menu.Item>
 

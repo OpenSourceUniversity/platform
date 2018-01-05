@@ -1,3 +1,4 @@
+import 'semantic-ui-css/semantic.min.css';
 import { render } from 'react-dom';
 import { HashRouter } from 'react-router-dom';
 import React from 'react';

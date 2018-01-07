@@ -13,7 +13,16 @@ class HeaderWithoutRouter extends React.Component {
 
   handleItemClick = (e, { name }) => {
     this.setState({ activeItem: name });
-    this.props.history.push(`/${name}`);
+    let newPath;
+    if (name === 'home') {
+      newPath = '/';
+    } else {
+      newPath = `/${name}`;
+    }
+
+    if (this.props.history.location.pathname !== newPath) {
+      this.props.history.push(newPath);
+    }
   }
 
   render() {
@@ -22,7 +31,7 @@ class HeaderWithoutRouter extends React.Component {
     return (
       <Menu size="massive">
         <Container>
-          <Menu.Item header>
+          <Menu.Item name="home" header onClick={this.handleItemClick}>
             Open Source University
           </Menu.Item>
 

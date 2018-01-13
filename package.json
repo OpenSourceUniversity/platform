@@ -21,6 +21,8 @@
     "react-router-dom": "^4.2.2",
     "semantic-ui-css": "^2.2.12",
     "semantic-ui-react": "^0.74.2",
+    "update": "^0.7.4",
+    "upgrade": "^1.1.0",
     "web3": "^1.0.0-beta2",
     "webpack": "^2.7.0",
     "webpack-dev-server": "^2.9.7"

@@ -36,7 +36,7 @@ export default class BusinessPage extends React.Component {
         <Header size="large" floated="left">
           People
         </Header>
-        <Button icon labelPosition="left" positive floated="right" as={Link} to="/businessPeople/add">
+        <Button icon labelPosition="left" positive floated="right" as={Link} to="/BusinessPeopleItem/add">
           <Icon name="plus" />
           Add Person
         </Button>

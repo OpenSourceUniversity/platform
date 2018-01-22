@@ -5,11 +5,11 @@ import "./FactoryCertificate.sol";
 contract FactoryCertificateInterface {
     event CertificateStorageCreated(address certificate, uint now_time);
 
-    function createCertificateStorage();
+    function createCertificateStorage() public returns (bool);
 
 }
 
-contract MegaFactoryCertificate is FactoryCertificateInterface {
+contract MegaFactoryCertificate {
     address owner;
     address osu;
 

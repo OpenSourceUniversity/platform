@@ -1,8 +1,37 @@
 import React from 'react';
 import { Container, Header, Grid, Button, Message, Divider, Breadcrumb, Form, Input } from 'semantic-ui-react';
+import { addCertificate } from './actions';
 
 
 export default class AddCertificatePage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      certificateName: '',
+      academyAddress: '',
+      dateIssued: '',
+      expirationDate: '',
+      skills: '',
+    };
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    addCertificate(this.state);
+  }
+
   render() {
     return (
       <Container>
@@ -24,29 +53,57 @@ export default class AddCertificatePage extends React.Component {
 
         <Grid>
           <Grid.Column width={10}>
-            <Form size="huge">
+            <Form size="huge" onSubmit={this.handleSubmit}>
               <Form.Field>
                 <label htmlFor="certificateName">
                   Certificate name
-                  <Input id="certificateName" iconPosition="left" icon="certificate" placeholder="Certificate name" />
+                  <Input
+                    id="certificateName"
+                    name="certificateName"
+                    iconPosition="left"
+                    icon="certificate"
+                    placeholder="Certificate name"
+                    onChange={this.handleInputChange}
+                  />
                 </label>
               </Form.Field>
               <Form.Field>
                 <label htmlFor="academyAddress">
                   Academy address
-                  <Input id="academyAddress" iconPosition="left" icon="address card" placeholder="Academy address" />
+                  <Input
+                    id="academyAddress"
+                    name="academyAddress"
+                    iconPosition="left"
+                    icon="address card"
+                    placeholder="Academy address"
+                    onChange={this.handleInputChange}
+                  />
                 </label>
               </Form.Field>
               <Form.Field>
                 <label htmlFor="dateIssued">
                   Issuing date
-                  <Input id="dateIssued" iconPosition="left" icon="calendar check" placeholder="Issuing date" />
+                  <Input
+                    id="dateIssued"
+                    name="dateIssued"
+                    iconPosition="left"
+                    icon="calendar check"
+                    placeholder="Issuing date"
+                    onChange={this.handleInputChange}
+                  />
                 </label>
               </Form.Field>
               <Form.Field>
                 <label htmlFor="expirationDate">
                   Expiration date
-                  <Input id="expirationDate" iconPosition="left" icon="calendar times" placeholder="Expiration date" />
+                  <Input
+                    id="expirationDate"
+                    name="expirationDate"
+                    iconPosition="left"
+                    icon="calendar times"
+                    placeholder="Expiration date"
+                    onChange={this.handleInputChange}
+                  />
                 </label>
               </Form.Field>
               <Form.Field>
@@ -54,9 +111,11 @@ export default class AddCertificatePage extends React.Component {
                   Skills
                   <Input
                     id="skills"
+                    name="skills"
                     icon="tags"
                     iconPosition="left"
                     placeholder="Skills"
+                    onChange={this.handleInputChange}
                   />
                 </label>
               </Form.Field>

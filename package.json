@@ -15,6 +15,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-1": "^6.24.1",
     "cross-env": "^5.0.5",
+    "ethereumjs-testrpc": "^6.0.3",
     "prop-types": "^15.6.0",
     "react": "^15.6.2",
     "react-dom": "^15.6.2",
@@ -23,6 +24,7 @@
     "redux": "^3.7.2",
     "semantic-ui-css": "^2.2.12",
     "semantic-ui-react": "^0.74.2",
+    "truffle-contract": "^3.0.2",
     "web3": "^0.20.4",
     "webpack": "^2.7.0",
     "webpack-dev-server": "^2.9.7"
@@ -49,7 +51,8 @@
     "analyze": "cross-env ANALYZE_ENV=true yarn build",
     "analyze:production": "cross-env ANALYZE_ENV=true yarn build:production",
     "build": "webpack",
-    "build:production": "cross-env NODE_ENV=production yarn build"
+    "build:production": "cross-env NODE_ENV=production yarn build",
+    "testrpc": "testrpc"
   },
   "repository": "git@git.codeideo.com:edu-ico/platform.git",
   "author": "Rechained",

@@ -2,6 +2,12 @@ var CertificateStorage = artifacts.require("./certificates/CertificateStorage.so
 var FactoryCertificate = artifacts.require("./certificates/FactoryCertificate.sol");
 var MegaFactoryCertificate = artifacts.require("./certificates/MegaFactoryCertificate.sol");
 
+var UsersStorage = artifacts.require("./users/UsersStorage.sol");
+var User = artifacts.require("./users/User.sol");
+var UsersProxy = artifacts.require("./users/UsersProxy.sol");
+var FactoryUsers = artifacts.require("./users/FactoryUsers.sol");
+var MegaFactoryUsers = artifacts.require("./users/MegaFactoryUsers.sol");
+
 module.exports = function(deployer) {
     deployer.deploy(CertificateStorage,
         web3.eth.accounts[0],

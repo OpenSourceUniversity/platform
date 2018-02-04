@@ -50,7 +50,6 @@ export default class AddCertificatePage extends React.Component {
 
         <Divider clearing />
 
-
         <Grid>
           <Grid.Column width={10}>
             <Form size="huge" onSubmit={this.handleSubmit}>

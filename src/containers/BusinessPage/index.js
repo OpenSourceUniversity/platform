@@ -5,11 +5,13 @@ import BusinessItem from 'components/BusinessItem';
 
 
 export default class BusinessPage extends React.Component {
-  renderPeople() {
-    const people = [
-
+  renderBusinesses() {
+    const positions = [
+      { title: 'Python Development' },
+      { title: 'Scrum Master' },
+      { title: 'Machine Learning' },
     ];
-    return people.map((people, index) => (
+    return positions.map((position, index) => (
       <Grid.Column
         computer={4}
         largeScreen={4}
@@ -18,7 +20,7 @@ export default class BusinessPage extends React.Component {
         mobile={16}
         key={index}
       >
-        <BusinessItem people={people} key={index} />
+        <BusinessItem position={position} key={index} />
       </Grid.Column>
     ));
   }
@@ -29,22 +31,22 @@ export default class BusinessPage extends React.Component {
         <Breadcrumb>
           <Breadcrumb.Section href="/#/">Home</Breadcrumb.Section>
           <Breadcrumb.Divider icon="right angle" />
-          <Breadcrumb.Section active>People</Breadcrumb.Section>
+          <Breadcrumb.Section active>Businesses</Breadcrumb.Section>
         </Breadcrumb>
 
         <Divider clearing />
         <Header size="large" floated="left">
-          People
+          Businesses
         </Header>
-        <Button icon labelPosition="left" positive floated="right" as={Link} to="/BusinessPeopleItem/add">
+        <Button icon labelPosition="left" positive floated="right" as={Link} to="/businesses/add">
           <Icon name="plus" />
-          Add Person
+          Add Position
         </Button>
 
         <Divider clearing />
 
         <Grid>
-          {this.renderPeople()}
+          {this.renderBusinesses()}
         </Grid>
 
       </Container>

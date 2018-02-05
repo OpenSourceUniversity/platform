@@ -1,4 +1,5 @@
 before_script:
+  - echo "Showing NodeJS Version" && echo `node --version`
   - apt-get update -qq && apt-get install -y -qq nodejs
   - npm install
 

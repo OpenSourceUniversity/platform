@@ -1,0 +1,7 @@
+before_script:
+  - apt-get update -qq && apt-get install -y -qq nodejs
+  - npm install
+
+rspec:
+  script:
+    - npm run lint

@@ -1,8 +1,12 @@
+image: node:latest
+
 before_script:
-  - echo "Showing NodeJS Version" && echo `node --version`
-  - apt-get update -qq && apt-get install -y -qq nodejs
   - npm install
 
-rspec:
+stages:
+  - lint
+
+run_js_linter:
+  stage: lint
   script:
     - npm run lint

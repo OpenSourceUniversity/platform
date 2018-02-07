@@ -1,28 +1,30 @@
 import React from 'react';
-import { Container, Header, Grid, Button, Message, Divider, Breadcrumb, Form, Input, Icon } from 'semantic-ui-react';
+import { Container, Header, Grid, Button, Message, Divider, Breadcrumb, Form, Input } from 'semantic-ui-react';
 import { addPosition } from './actions';
 
 
 export default class AddPositionToBusinessPage extends React.Component {
   constructor(props) {
     super(props);
+    /* eslint-disable */
     this.state = {
       positionName: '',
       skillsRequired: '',
       description: '',
       salary: '',
     };
+    /* eslint-enable */
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleInputChange(event) {
-    const target = event.target;
+    const target = { event };
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
+    const name = { target };
 
     this.setState({
-      [name]: value
+      [name]: value,
     });
   }
 

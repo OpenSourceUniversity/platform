@@ -21,8 +21,8 @@ function addCertificate() {
         .then((result) => {
           console.log(result);
         })
-        .catch((error) => {
-          console.error(error);
+        .catch((addCertificateError) => {
+          console.error(addCertificateError);
         });
     });
   });

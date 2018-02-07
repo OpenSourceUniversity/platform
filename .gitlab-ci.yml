@@ -10,5 +10,5 @@ stages:
 run_js_linter:
   stage: lint
   script:
-    - truffle build
+    - truffle compile
     - npm run lint

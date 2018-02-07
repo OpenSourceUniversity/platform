@@ -1,6 +1,7 @@
 image: node:latest
 
 before_script:
+  - npm install -g truffle
   - npm install
 
 stages:
@@ -9,4 +10,5 @@ stages:
 run_js_linter:
   stage: lint
   script:
+    - truffle build
     - npm run lint

@@ -7,6 +7,7 @@ import AddPositionToBusinessPage from 'containers/AddPositionToBusinessPage';
 import CoursesPage from 'containers/CoursesPage';
 import JobsPage from 'containers/JobsPage';
 import BusinessPage from 'containers/BusinessPage';
+import ProfilePage from 'containers/ProfilePage';
 
 class Main extends React.Component {
   state = {}
@@ -21,6 +22,7 @@ class Main extends React.Component {
         <Route path="/courses" component={CoursesPage} />
         <Route path="/jobs" component={JobsPage} />
         <Route path="/business" component={BusinessPage} />
+        <Route path="/profile" component={ProfilePage} />
       </Switch>
     );
   }

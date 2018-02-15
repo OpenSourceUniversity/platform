@@ -6,6 +6,8 @@ import { addCertificate } from './actions';
 export default class AddCertificatePage extends React.Component {
   constructor(props) {
     super(props);
+
+    /* eslint-disable */
     this.state = {
       certificateName: '',
       academyAddress: '',
@@ -13,17 +15,19 @@ export default class AddCertificatePage extends React.Component {
       expirationDate: '',
       skills: '',
     };
+    /* eslint-enable */
+
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleInputChange(event) {
-    const target = event.target;
+    const target = { event };
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
+    const name = { target };
 
     this.setState({
-      [name]: value
+      [name]: value,
     });
   }
 

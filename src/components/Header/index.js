@@ -51,7 +51,7 @@ class HeaderWithoutRouter extends React.Component {
           <Menu.Menu position="right">
             <Dropdown item icon="user" text="Profile">
               <Dropdown.Menu>
-                <Dropdown.Item name ="profile" active={activeItem === 'profile'} onClick={this.handleItemClick}>My Profile</Dropdown.Item>
+                <Dropdown.Item name="profile" active={activeItem === 'profile'} onClick={this.handleItemClick}>My Profile</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </Menu.Menu>

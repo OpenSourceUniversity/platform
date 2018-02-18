@@ -1,10 +1,10 @@
 import React from 'react';
-import {Segment} from 'semantic-ui-react';
+import { Segment } from 'semantic-ui-react';
 
 export default class AchievementItem extends React.Component {
   render() {
     return (
-      <Segment padded='very'>
+      <Segment padded="very">
         {this.props.achievement.achievementItem}
       </Segment>
     );

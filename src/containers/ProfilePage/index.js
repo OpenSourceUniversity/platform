@@ -5,23 +5,23 @@ import ProfileAchievement from 'components/ProfileAchievement';
 
 export default class ProfilePage extends React.Component {
   renderOverview() {
-    const overview = [
+    const overviewData = [
       { title: 'Education' },
       { title: 'Sertificate' },
       { title: 'Courses' },
     ];
-    return overview.map((overview, index) => (
+    return overviewData.map((overview, index) => (
       <OverviewItem overview={overview} key={index} />
     ));
   }
 
   renderAchievement() {
-    const achievement = [
+    const achievementData = [
       { achievementItem: 'Education' },
       { achievementItem: 'Sertificate' },
       { achievementItem: 'Courses' },
     ];
-    return achievement.map((achievement, index) => (
+    return achievementData.map((achievement, index) => (
       <ProfileAchievement achievement={achievement} key={index} />
     ));
   }

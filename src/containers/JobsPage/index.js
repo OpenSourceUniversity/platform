@@ -1,10 +1,10 @@
 import React from 'react';
-import { Container, Header, Breadcrumb, Divider, Grid, Segment, Form, Input, Sticky, Button, Icon, Item, Label } from 'semantic-ui-react';
+import { Container, Header, Breadcrumb, Divider, Grid, Segment, Form, Input, Sticky, Button, Item } from 'semantic-ui-react';
 import JobsItem from 'components/JobsItem';
 
 export default class JobsPage extends React.Component {
   renderJobs() {
-    const jobs = [
+    const jobsData = [
       {
         title: 'React Engineer', firm: 'OS.UNI', location: 'Sofia', description: 'notes - Remote, Paid relocation, ...', salary: '€70k - 90k', labels: ['react', 'python'],
       },
@@ -27,7 +27,7 @@ export default class JobsPage extends React.Component {
         title: 'Backend Ruby Developer', firm: 'ING', location: 'No office location', description: 'notes - Remote, Paid relocation, ...', salary: 'Equity', labels: ['react'],
       },
     ];
-    return jobs.map((jobs, index) => (
+    return jobsData.map((jobs, index) => (
       <JobsItem jobs={jobs} key={index} />
     ));
   }

@@ -11,7 +11,7 @@ contract mainAuthorities {
 
     mapping (address => MainAuthoritiesStruct) public mainAuthorityMapping;
 
-    function mainAuthorities(address _owner, address _osu) {
+    function mainAuthorities(address _owner, address _osu) public {
         owner = _owner;
         osu = _osu;
     }
@@ -25,7 +25,7 @@ contract mainAuthorities {
         public
         returns (bool)
     {
-        require(owner == tx.origin || osu == tx.origin]);
+        require(owner == tx.origin || osu == tx.origin);
         if (mainAuthorityMapping[_mainAuthority].country != "")
             return false;
 

@@ -17,4 +17,4 @@ run_js_linter:
 run_solidity_tests:
   stage: test_solidity
   script:
-    - find test/unit/ -name '*.js' -exec truffle test {} \;
+    - echo "TODO: Execute Solidity Tests"

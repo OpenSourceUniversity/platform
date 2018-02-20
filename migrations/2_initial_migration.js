@@ -1,30 +1,37 @@
-var CertificateStorage = artifacts.require("./certificates/CertificateStorage.sol");
-var FactoryCertificate = artifacts.require("./certificates/FactoryCertificate.sol");
-var MegaFactoryCertificate = artifacts.require("./certificates/MegaFactoryCertificate.sol");
+let CertificateStorage = artifacts.require("./certificates/CertificateStorage.sol");
+let FactoryCertificate = artifacts.require("./certificates/FactoryCertificate.sol");
+let MegaFactoryCertificate = artifacts.require("./certificates/MegaFactoryCertificate.sol");
 
-var UsersStorage = artifacts.require("./users/UsersStorage.sol");
-var User = artifacts.require("./users/User.sol");
-var UsersProxy = artifacts.require("./users/UsersProxy.sol");
-var FactoryUsers = artifacts.require("./users/FactoryUsers.sol");
-var MegaFactoryUsers = artifacts.require("./users/MegaFactoryUsers.sol");
+let UsersStorage = artifacts.require("./users/UsersStorage.sol");
+let User = artifacts.require("./users/User.sol");
+let UsersProxy = artifacts.require("./users/UsersProxy.sol");
+let FactoryUsers = artifacts.require("./users/FactoryUsers.sol");
+let MegaFactoryUsers = artifacts.require("./users/MegaFactoryUsers.sol");
 
-var Course = artifacts.require("./courses/Course.sol");
-var CourseLearners = artifacts.require("./courses/CourseLearners.sol");
-var CoursesProxy = artifacts.require("./courses/CoursesProxy.sol");
-var CoursesStorage = artifacts.require("./courses/CoursesStorage.sol");
-var FactoryCourses = artifacts.require("./courses/FactoryCourses.sol");
-var MegaFactoryCourses = artifacts.require("./courses/MegaFactoryCourses.sol");
+let Course = artifacts.require("./courses/Course.sol");
+let CourseLearners = artifacts.require("./courses/CourseLearners.sol");
+let CoursesProxy = artifacts.require("./courses/CoursesProxy.sol");
+let CoursesStorage = artifacts.require("./courses/CoursesStorage.sol");
+let FactoryCourses = artifacts.require("./courses/FactoryCourses.sol");
+let MegaFactoryCourses = artifacts.require("./courses/MegaFactoryCourses.sol");
 
 module.exports = function(deployer) {
-    deployer.deploy(CertificateStorage,
-        web3.eth.accounts[0],
-        web3.eth.accounts[1]
-    );
-    deployer.deploy(FactoryCertificate,
-        web3.eth.accounts[0]
-    );
-    deployer.deploy(MegaFactoryCertificate,
-        web3.eth.accounts[0],
-        web3.eth.accounts[1]
-    );
+  /* Certificates */
+  deployer.deploy(CertificateStorage,
+      web3.eth.accounts[0],
+      web3.eth.accounts[1]
+  );
+  deployer.deploy(FactoryCertificate,
+      web3.eth.accounts[0]
+  );
+  deployer.deploy(MegaFactoryCertificate,
+      web3.eth.accounts[0],
+      web3.eth.accounts[1]
+  );
+
+  /* Courses */
+  deployer.deploy(Course,
+    web3.eth.accounts[0],
+    web3.eth.accounts[1]
+  );
 };

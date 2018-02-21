@@ -89,7 +89,7 @@ contract Course {
         return course.length;
     }
 
-    function getLength() public constant returns (uint) {
+    function getCoursesLength() public constant returns (uint) {
         return course.length;
     }
 

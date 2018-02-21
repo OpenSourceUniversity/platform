@@ -32,7 +32,7 @@ contract('TestCourse', (accounts) => {
   });
 
   it('Test adding a course', () => {
-    return courseInstance.addCourse(
+    courseInstance.addCourse(
       '0x0000000000000000000000000000000000000000',  // Verifier
       ['Python', 'Yoga'],
       5,
@@ -43,11 +43,22 @@ contract('TestCourse', (accounts) => {
       'Category',
       'Subcategory'
     );
+    courseInstance.addCourse(
+      '0x0000000000000000000000000000000000000003',  // Verifier
+      ['Python', 'Testing'],
+      5,
+      10,
+      ['Introduction to', ' Python programming & Testing'],
+      ['0x0000000000000000000000000000000000000004'],
+      ['0x0000000000000000000000000000000000000005'],
+      'Category',
+      'Subcategory'
+    );
   });
 
   it('Test length correctly retrieved', () => {
-    return courseInstance.getLength.call().then((result) => {
-      assert.equal(result, 1);
+    return courseInstance.getCoursesLength.call().then((result) => {
+      assert.equal(result, 2);
     });
   });
 

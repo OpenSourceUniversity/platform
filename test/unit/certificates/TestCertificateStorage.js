@@ -35,8 +35,27 @@ contract('TestCertificateStorage', function(accounts) {
            return certificateStorage.certificateCounter.call();
          }).then(function (result) {
            assert.equal(result.toNumber(), 1, "Test that the counter of stored certificates is working properly ");
+         }).then(function () {
+           return certificateStorage.addCertificate(web3.eth.accounts[5], course, web3.eth.accounts[6], ['title[0]_second', 'title[1]_second'], ['subject[0]_second', 'subject[1]_second'], 2, 0);
+         }).then(function (result) {
+           assert.equal(Boolean(result), true, "Test if the second contract is stored successfully");
+         }).then(function () {
+           return certificateStorage.certificateCounter.call();
+         }).then(function (result) {
+           assert.equal(result.toNumber(), 2, "Testing that number of certificates increment correctly");
+         }).then(function () {
+           return certificateStorage.certificateCounter.call();
          });
+    });
 
+    it("Retrieving information from smart contract", function() {
+        return certificateStorage.getCertificateAddressesByIndex(0)
+        .then(function(result) {
+          assert.equal(result[0], academy, "Verify that retrieved address of the academy stored in first certificate is as expected");
+          assert.equal(result[1], course, "Verify that retrieved address of the course stored in first certificate is as expected");
+          assert.equal(result[2], learner, "Verify that retrieved address of the learner stored in first certificate is as expected");
+          assert.equal(result[3], web3.eth.accounts[0], "Verify that retrieved address of the author stored in first certificate is as expected");
+        });
     });
 
     // it("EDU token should return contribution states", function() {

@@ -75,39 +75,29 @@ contract CertificateStorage {
     }
 
 
+    // Get all addresses for a specific certificate
+    function getCertificateAddressesByIndex(uint _index) public constant returns (address, address, address, address) {
+        require(certificateStruct.length != 0 && certificateStruct.length > _index);
 
-
-
-    /* function getCertificateByIndex(uint _index) public constant returns (address, address, address, bytes32[2], bytes32[2], bool, uint8, address) {
-        require(certificateStruct.length != 0 && _index < certificateStruct.length);
-        address[] memory academyMem = new address[](1);
-        address[] memory courseMem = new address[](1);
-        address[] memory learnerMem = new address[](1);
-        bytes32[] memory nameMem = new bytes32[](2);
-        bytes32[] memory subjectMem = new bytes32[](2);
-        bool[] memory verifiedMem = new bool[](1);
-        uint8[] memory scoreMem = new uint8[](1);
-        address[] memory creatorMem = new address[](1);
-
-        academyMem[0] = certificateStruct[_index].academy;
-        courseMem[0] = certificateStruct[_index].course;
-        learnerMem[0] = certificateStruct[_index].learner;
-        nameMem[0] = certificateStruct[_index].name[0];
-        subjectMem[0] = certificateStruct[_index].subject[0];
-        verifiedMem[0] = certificateStruct[_index].verified;
-        scoreMem[0] = certificateStruct[_index].score;
-        creatorMem[0] = certificateStruct[_index].creator;
-
-        return (academyMem[0],
-                courseMem[0],
-                learnerMem[0],
-                nameMem,
-                subjectMem,
-                verifiedMem[0],
-                scoreMem[0],
-                creatorMem[0]
+        return (certificateStruct[_index].academy,
+                certificateStruct[_index].course,
+                certificateStruct[_index].learner,
+                certificateStruct[_index].creator
         );
-    } */
+    }
+
+
+    // Get all the additional information for a specific certificate
+    function getCertificateDataByIndex(uint _index) public constant returns (bytes32[2], bytes32[2], bool, uint8, uint) {
+        require(certificateStruct.length != 0 && certificateStruct.length > _index);
+
+        return (certificateStruct[_index].name,
+                certificateStruct[_index].subject,
+                certificateStruct[_index].verified,
+                certificateStruct[_index].score,
+                certificateStruct[_index].expirationDate
+        );
+    }
 
 
     // Update existing certificate

@@ -12,30 +12,86 @@ contract('TestCertificateStorage', function(accounts) {
     var course = web3.eth.accounts[5];
 
     it("Deploiment and initial information", function() {
-        return TestCertificateStorage.new(owner, osu).then(function(instance) {
-            certificateStorage = instance;
-        })
+      return TestCertificateStorage.deployed(owner, osu).then(function(instance){
+        certificateStorage = instance;
+        return certificateStorage.owner.call();
+        // assert.equal(Boolean(edu_token.getAllowContributionFlag()), false, "Result after comparing get and set methods of the additional contribution flag!");
+      }).then(function (result) {
+        assert.equal(result, web3.eth.accounts[0], "Owner address is as expected");
+      }).then(function () {
+        return certificateStorage.osu.call();
+      }).then(function (result) {
+        assert.equal(result, web3.eth.accounts[1], "OSUni address is as expected");
+      }).then(function () {
+        return certificateStorage.addCertificate(academy, course, learner, ['test', 'test2'], ['test', 'test2'], 2, true);
+      }).then(function (result) {
+        assert.equal(Boolean(result), true, "Certificate was updated successfully");
+      }).then(function () {
+        return certificateStorage.certificateCounter.call();
+      }).then(function (result) {
+        assert.equal(result.toNumber(), 1, "Test that the counter of stored certificates is working properly ");
+      });
+
+      // .then(function () {
+      //   return certificateStorage.updateCertificateByIndex.call(0, academy, course, learner, ['test', 'test2'], web3.eth.accounts[7], web3.eth.accounts[8], web3.eth.accounts[9], ['test', 'test3'], ['sub', 'ject'], 2, true);
+      // }).then(function (result) {
+      //   assert.equal(result, true, "Certificate was updated successfully");
+      // });
+
+
+
+
+
+        // return TestCertificateStorage.new(owner, osu).then(function(instance) {
+        //     certificateStorage = instance;
+        // })
     });
 
-    it("Ownership", function() {
-        return certificateStorage.owner.call()
-        .then(function(result) {
-            assert.equal(result, owner);
-        })
-        .then(function() {
-            return certificateStorage.osu.call()
-        })
-        .then(function(result) {
-            assert.equal(result, osu);
-        })
-    });
+    // it("EDU token should return contribution states", function() {
+    //   return certificateStorage.updateCertificateByIndex(0, academy, course, learner, ['test', 'test2'], web3.eth.accounts[7], web3.eth.accounts[8], web3.eth.accounts[9], ['test', 'test3'], ['sub', 'ject'], 2, true)
+    //   .then(function(result){
+    //     assert.equal(Boolean(result), true, "Result after changing the contribution flag to 'false' successful!");
+    //     // assert.equal(Boolean(edu_token.getAllowContributionFlag()), false, "Result after comparing get and set methods of the additional contribution flag!");
+    //   });
+    // });
 
-    // it("Adding Certificates", function() {
+
+
+
     //
-    //     return certificateStorage.addCertificate.call(academy, course, learner, 'test', 'test', 2, true)
+    //
+    it("Verify already stored certificates into the blockchain", function() {
+        return certificateStorage.updateCertificateByIndex(
+          0,
+          academy,
+          course,
+          learner,
+          ['test', 'test2'],
+          web3.eth.accounts[7],
+          web3.eth.accounts[8],
+          web3.eth.accounts[9],
+          ['test', 'test3'],
+          ['sub', 'ject'],
+          2,
+          true
+        )
+        .then(function(result) {
+            assert.equal(Boolean(result), true);
+        });
+    });
+    //
+    // it("Adding Certificates", function() {
+    //     return certificateStorage.addCertificate.call(academy, course, learner, ['test', 'test2'], ['test', 'test2'], 2, true)
     //     .then(function(result) {
     //         assert.equal(result, true);
+    //         return certificateStorage.updateCertificateByIndex.call(1, academy, course, learner, ['test', 'test2'], web3.eth.accounts[7], web3.eth.accounts[8], web3.eth.accounts[9], ['test', 'test3'], ['sub', 'ject'], 2, true)
+    //         .then(function(result_data) {
+    //           assert.equal(result_data, false);
+    //         })
     //     })
+    //
     // });
+
+
 
 });

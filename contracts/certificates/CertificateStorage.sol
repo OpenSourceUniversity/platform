@@ -20,6 +20,7 @@ contract CertificateStorage {
         bool verified;
         uint8 score;
         address creator;
+        uint expirationDate;
     }
 
     // Ownership of the contract
@@ -44,7 +45,7 @@ contract CertificateStorage {
         bytes32[2] _name,
         bytes32[2] _subject,
         uint8 _score,
-        bool _verified
+        uint _expirationDate
     )
         public
         returns (bool)
@@ -61,16 +62,53 @@ contract CertificateStorage {
         certificateStruct[certificateStruct.length-1].name = _name;
         certificateStruct[certificateStruct.length-1].subject = _subject;
         if (certificateStruct[certificateStruct.length-1].academy == msg.sender) {
-            certificateStruct[certificateStruct.length-1].verified = _verified;
+            certificateStruct[certificateStruct.length-1].verified = true;     // TODO
         } else {
             certificateStruct[certificateStruct.length-1].verified = false;
         }
         certificateStruct[certificateStruct.length-1].score = _score;
         certificateStruct[certificateStruct.length-1].creator = msg.sender;
+        certificateStruct[certificateStruct.length-1].expirationDate = _expirationDate;
 
-        CertificateCreated(_academy, _course, _learner, _name, _subject, _verified, _score);
+        CertificateCreated(_academy, _course, _learner, _name, _subject, certificateStruct[certificateStruct.length-1].verified, _score);
         return true;
     }
+
+
+
+
+
+    /* function getCertificateByIndex(uint _index) public constant returns (address, address, address, bytes32[2], bytes32[2], bool, uint8, address) {
+        require(certificateStruct.length != 0 && _index < certificateStruct.length);
+        address[] memory academyMem = new address[](1);
+        address[] memory courseMem = new address[](1);
+        address[] memory learnerMem = new address[](1);
+        bytes32[] memory nameMem = new bytes32[](2);
+        bytes32[] memory subjectMem = new bytes32[](2);
+        bool[] memory verifiedMem = new bool[](1);
+        uint8[] memory scoreMem = new uint8[](1);
+        address[] memory creatorMem = new address[](1);
+
+        academyMem[0] = certificateStruct[_index].academy;
+        courseMem[0] = certificateStruct[_index].course;
+        learnerMem[0] = certificateStruct[_index].learner;
+        nameMem[0] = certificateStruct[_index].name[0];
+        subjectMem[0] = certificateStruct[_index].subject[0];
+        verifiedMem[0] = certificateStruct[_index].verified;
+        scoreMem[0] = certificateStruct[_index].score;
+        creatorMem[0] = certificateStruct[_index].creator;
+
+        return (academyMem[0],
+                courseMem[0],
+                learnerMem[0],
+                nameMem,
+                subjectMem,
+                verifiedMem[0],
+                scoreMem[0],
+                creatorMem[0]
+        );
+    } */
+
 
     // Update existing certificate
     function updateCertificateByIndex(
@@ -93,6 +131,7 @@ contract CertificateStorage {
         // check if the user of some of owner addresses is using this functionality
         require(_academyOLD == msg.sender || _learnerOLD == msg.sender || owner == msg.sender || osu == msg.sender);
         require(certificateStruct.length != 0);
+        return true;
 
         if (certificateStruct[_index].academy == _academyOLD &&
             certificateStruct[_index].course == _courseOLD &&
@@ -169,6 +208,10 @@ contract CertificateStorage {
             }
         }
         return false;
+    }
+
+    function certificateCounter() public constant returns (uint) {
+        return certificateStruct.length;
     }
 
     // remove specific record from the array of certificates

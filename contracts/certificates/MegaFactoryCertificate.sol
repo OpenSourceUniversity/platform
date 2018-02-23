@@ -23,7 +23,7 @@ contract MegaFactoryCertificate {
             _;
     }
 
-      function MegaFactoryCertificate(address _owner, address _osu) {
+      function MegaFactoryCertificate(address _owner, address _osu) public {
           owner = _owner;
           osu = _osu;
       }

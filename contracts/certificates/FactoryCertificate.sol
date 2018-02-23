@@ -34,7 +34,7 @@ contract FactoryCertificate {
     }
 
     // Constructor
-    function FactoryCertificate(address _osu) {
+    function FactoryCertificate(address _osu) public {
         owner = msg.sender;
         osu = _osu;
         maxNrOfRecordsInCertificateStorage = 100000;

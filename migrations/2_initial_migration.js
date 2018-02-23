@@ -10,6 +10,7 @@ let UsersProxy = artifacts.require("./users/UsersProxy.sol");
 let FactoryUsers = artifacts.require("./users/FactoryUsers.sol");
 let MegaFactoryUsers = artifacts.require("./users/MegaFactoryUsers.sol");
 
+
 // Package Courses&Degrees
 let Course = artifacts.require("./courses/Course.sol");
 let CourseLearners = artifacts.require("./courses/CourseLearners.sol");
@@ -47,5 +48,5 @@ module.exports = function(deployer) {
     web3.eth.accounts[0],
     web3.eth.accounts[1]
   );
-  
+
 };

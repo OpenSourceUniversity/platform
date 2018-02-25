@@ -2,7 +2,7 @@ pragma solidity ^0.4.15;
 
 
 contract CertificateStorage {
-    event CertificateCreated(uint upon_creation);
+    event CertificateCreated(uint upon_creation, uint index);
     event CertificateUpdated(uint upon_creation);
     event CertificateDeleted(uint upon_creation);
 
@@ -73,7 +73,7 @@ contract CertificateStorage {
         certificateStruct[certificateStruct.length-1].creator = msg.sender;
         certificateStruct[certificateStruct.length-1].expirationDate = _expirationDate;
 
-        CertificateCreated(now);
+        CertificateCreated(now, certificateStruct.length-1);
         return true;
     }
 

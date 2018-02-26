@@ -94,7 +94,7 @@ contract Course {
     }
 
     function getCourseCreator (uint _index) public constant returns (address) {
-        /* require(_index < course.length); */
+        require(_index < course.length);
         return course[_index].creator;
     }
 

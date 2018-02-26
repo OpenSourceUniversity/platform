@@ -2,7 +2,7 @@ pragma solidity ^0.4.15;
 
 
 contract CertificateStorage {
-    event CertificateCreated(uint upon_creation);
+    event CertificateCreated(uint upon_creation, uint index);
     event CertificateUpdated(uint upon_creation);
     event CertificateDeleted(uint upon_creation);
     event FullCertificateStorage(uint startIndex, uint maxNrRecords, uint upon_creation);
@@ -99,7 +99,7 @@ contract CertificateStorage {
         certificateStruct[certificateStruct.length-1].UID = tempIndex;
         tempIndex++;
 
-        CertificateCreated(now);
+        CertificateCreated(now, tempIndex);
         return true;
     }
 

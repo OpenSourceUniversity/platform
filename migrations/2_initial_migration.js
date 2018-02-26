@@ -27,10 +27,13 @@ module.exports = function(deployer) {
   /* Certificates */
   deployer.deploy(CertificateStorage,
       web3.eth.accounts[0],
-      web3.eth.accounts[1]
+      web3.eth.accounts[1],
+      0,
+      100000
   );
   deployer.deploy(FactoryCertificate,
-      web3.eth.accounts[0]
+      web3.eth.accounts[0],
+      web3.eth.accounts[1]
   );
   deployer.deploy(MegaFactoryCertificate,
       web3.eth.accounts[0],

@@ -46,6 +46,12 @@ module.exports = function(deployer) {
       web3.eth.accounts[1]
   );
 
+  /* Courses Storage */
+  deployer.deploy(CoursesStorage,
+    web3.eth.accounts[0],
+    web3.eth.accounts[1]
+  );
+
   /* Authorities */
   deployer.deploy(AuthorityStorage,
       web3.eth.accounts[0],

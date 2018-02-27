@@ -42,14 +42,14 @@ module.exports = function(deployer) {
 
   /* Courses */
   deployer.deploy(Course,
-    web3.eth.accounts[0],
-    web3.eth.accounts[1]
+      web3.eth.accounts[0],
+      web3.eth.accounts[1]
   );
 
   /* Authorities */
   deployer.deploy(AuthorityStorage,
-    web3.eth.accounts[0],
-    web3.eth.accounts[1]
+      web3.eth.accounts[0],
+      web3.eth.accounts[1]
   );
 
 };

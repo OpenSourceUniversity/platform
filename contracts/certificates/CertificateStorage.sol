@@ -121,11 +121,12 @@ contract CertificateStorage {
 
 
     // Get all the additional information for a specific certificate
-    function getCertificateDataByIndex(uint _index) public constant returns (bytes32[2], bytes32[2], bool, uint8, uint) {
+    function getCertificateDataByIndex(uint _index) public constant returns (uint, bytes32[2], bytes32[2], bool, uint8, uint) {
         if (relationalMapping[_index] < certificateStruct.length) {
             uint[] memory tmpCounter = new uint[](1);
             tmpCounter[0] = relationalMapping[_index];
-            return (certificateStruct[tmpCounter[0]].name,
+            return (certificateStruct[tmpCounter[0]].UID,
+                    certificateStruct[tmpCounter[0]].name,
                     certificateStruct[tmpCounter[0]].subject,
                     certificateStruct[tmpCounter[0]].verified,
                     certificateStruct[tmpCounter[0]].score,
@@ -133,7 +134,7 @@ contract CertificateStorage {
             );
         } else {
             bytes32[2] memory tmp1;
-            return (tmp1, tmp1, false, 0, 0);
+            return (0, tmp1, tmp1, false, 0, 0);
         }
     }
 

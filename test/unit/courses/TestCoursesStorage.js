@@ -69,7 +69,7 @@ contract('TestCoursesStorage', (accounts) => {
   });
 
   it('Test updateUserViewRecord', () => {
-    coursesStorageInstance.updateUserViewRecord(
+    return coursesStorageInstance.updateUserViewRecord(
       firstCourse,
       owner,
       0,
@@ -81,7 +81,7 @@ contract('TestCoursesStorage', (accounts) => {
       'SubCategory',
       {from: proxyAddress}
     )
-    .then(function(result){
+    .then((result) => {
       assert.equal(Boolean(result), true);
     });
   });
@@ -97,9 +97,8 @@ contract('TestCoursesStorage', (accounts) => {
 
 //TODO always return undefined
   it('Test getCourseViewRecord', () => {
-    coursesStorageInstance.getCourseViewRecord(proxyAddress)
-    .then(function (result) {
-      assert.equal(true, false); //Явно не влиза тук, защото този тест минава, като успешен!?!?!
+    return coursesStorageInstance.getCourseViewRecord.call({from: proxyAddress}).then((result) => {
+      //assert.equal(true, false); //Явно не влиза тук, защото този тест минава, като успешен!?!?!
       assert.equal(result[0], firstCourse, "Test that verify ower is ok");
       assert.equal(result[1], owner);
       assert.equal(result[2].toNumber(), 0);

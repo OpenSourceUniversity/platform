@@ -5,7 +5,9 @@ contract CertificateStorage {
     event CertificateCreated(uint upon_creation, uint index);
     event CertificateUpdated(uint upon_creation);
     event CertificateDeleted(uint upon_creation);
-    event FullCertificateStorage(uint startIndex, uint maxNrRecords, uint upon_creation);
+
+    event MaxNrOfRecordsReached(address smartcontract, uint startIndex, uint maxNrRecords, uint upon_creation);
+    event CloseToMaxNrOfRecords(address smartcontract, uint startIndex, uint maxNrRecords, uint currentNrRecords, uint upon_creation);
 
     address public owner;
     address public osu;
@@ -19,7 +21,13 @@ contract CertificateStorage {
     uint startIndex;
     uint maxLimitOfRecords;
     uint endIndex;
-    mapping (uint => uint) public relationalMapping;
+
+    struct RelationalUIDStruct {
+        uint index;
+        bool isExisting;
+    }
+
+    mapping (uint => RelationalUIDStruct) public relationalMapping;
 
     struct CertificateStruct {
         uint UID;
@@ -68,9 +76,12 @@ contract CertificateStorage {
         // check if the user of some of owner addresses is using this functionality
         require(_academy == tx.origin || _learner == tx.origin || owner == tx.origin || osu == tx.origin);
         if (tempIndex >= endIndex) {
-            FullCertificateStorage(startIndex, maxLimitOfRecords, now);
+            MaxNrOfRecordsReached(address(this), startIndex, maxLimitOfRecords, now);
             return false;
+        } else if (tempIndex + 100 >= endIndex) {
+            CloseToMaxNrOfRecords(address(this), startIndex, maxLimitOfRecords, tempIndex+1, now);
         }
+
         if (_academy == address(0) && _learner == address(0)) {
             return false;
         }
@@ -91,7 +102,8 @@ contract CertificateStorage {
         certificateStruct[certificateStruct.length-1].expirationDate = _expirationDate;
 
         // Index relation
-        relationalMapping[tempIndex] = certificateStruct.length-1;
+        relationalMapping[tempIndex].index = certificateStruct.length-1;
+        relationalMapping[tempIndex].isExisting = true;
         certificateStruct[certificateStruct.length-1].UID = tempIndex;
         tempIndex++;
 
@@ -102,9 +114,10 @@ contract CertificateStorage {
 
     // Get all addresses for a specific certificate
     function getCertificateAddressesByIndex(uint _index) public constant returns (address, address, address, address) {
-        if (relationalMapping[_index] < certificateStruct.length) {
+        require(relationalMapping[_index].isExisting);
+        if (relationalMapping[_index].index < certificateStruct.length) {
             uint[] memory tmpCounter = new uint[](1);
-            tmpCounter[0] = relationalMapping[_index];
+            tmpCounter[0] = relationalMapping[_index].index;
             return (certificateStruct[tmpCounter[0]].academy,
                     certificateStruct[tmpCounter[0]].course,
                     certificateStruct[tmpCounter[0]].learner,
@@ -118,9 +131,10 @@ contract CertificateStorage {
 
     // Get all the additional information for a specific certificate
     function getCertificateDataByIndex(uint _index) public constant returns (uint, bytes32[2], bytes32[2], bool, uint8, uint) {
-        if (relationalMapping[_index] < certificateStruct.length) {
+        require(relationalMapping[_index].isExisting);
+        if (relationalMapping[_index].index < certificateStruct.length) {
             uint[] memory tmpCounter = new uint[](1);
-            tmpCounter[0] = relationalMapping[_index];
+            tmpCounter[0] = relationalMapping[_index].index;
             return (certificateStruct[tmpCounter[0]].UID,
                     certificateStruct[tmpCounter[0]].name,
                     certificateStruct[tmpCounter[0]].subject,
@@ -152,9 +166,9 @@ contract CertificateStorage {
         returns (bool)
     {
         // check if the user of some of owner addresses is using this functionality
-        require(certificateStruct.length != 0);
-        require(relationalMapping[_i] < certificateStruct.length);
-        updPosition = relationalMapping[_i];
+        require(certificateStruct.length != 0 && relationalMapping[_i].isExisting == true);
+        require(relationalMapping[_i].index < certificateStruct.length);
+        updPosition = relationalMapping[_i].index;
         require(certificateStruct[updPosition].academy == tx.origin || certificateStruct[updPosition].learner == tx.origin || owner == tx.origin || osu == tx.origin);
 
         // Right to update only specific information about the certificate
@@ -194,11 +208,16 @@ contract CertificateStorage {
         returns (bool)
     {
         // check if the user of some of owner addresses is using this functionality
-        updPosition = relationalMapping[_index];
+        require(relationalMapping[_index].isExisting);
+        updPosition = relationalMapping[_index].index;
         require(certificateStruct[updPosition].learner == tx.origin || owner == tx.origin || osu == tx.origin);
 
         if (certificateStruct[updPosition].UID == _index) {
-            return remove(updPosition);
+            if (updPosition >= certificateStruct.length) return false;
+            delete certificateStruct[updPosition];
+            delete relationalMapping[_index];
+            CertificateDeleted(now);
+            return true;
         }
         return false;
     }
@@ -207,12 +226,5 @@ contract CertificateStorage {
         return certificateStruct.length;
     }
 
-    // remove specific record from the array of certificates
-    function remove(uint index) internal returns(bool) {
-        if (index >= certificateStruct.length) return false;
-        delete certificateStruct[index];
-        CertificateDeleted(now);
-        return true;
-    }
 
 }

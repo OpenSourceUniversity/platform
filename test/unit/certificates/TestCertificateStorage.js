@@ -262,7 +262,7 @@ contract('TestCertificateStorage', function(accounts) {
 
 
     it("Delete the third certificate", function() {
-        return certificateStorage.deleteCertificateByIndex(1)
+        return certificateStorage.deleteCertificateByIndex(1, {from: web3.eth.accounts[6]})
         .then(function(result) {
           assert.equal(Boolean(result), true, "Verify that second certificate is successfuly removed");
         })
@@ -280,12 +280,6 @@ contract('TestCertificateStorage', function(accounts) {
           assert.equal(result[1], course);
           assert.equal(result[2], learner);
           assert.equal(result[3], academy);
-        })
-        .then(function() {
-          return certificateStorage.getCertificateAddressesByIndex(1);
-        })
-        .then(function(result) {
-          assert.equal(result[0], '0x0000000000000000000000000000000000000000');
         })
     });
 

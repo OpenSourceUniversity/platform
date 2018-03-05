@@ -43,13 +43,24 @@ module.exports = function(deployer) {
   /* Courses */
   deployer.deploy(Course,
       web3.eth.accounts[0],
-      web3.eth.accounts[1]
+      web3.eth.accounts[1],
+      web3.eth.accounts[2],
+      ['Python', 'Java'],
+      1,
+      10,
+      ['Web Development', ' with Python'],
+      [web3.eth.accounts[4], web3.eth.accounts[7]],
+      [web3.eth.accounts[5], web3.eth.accounts[6]],
+      'Computer Science',
+      'IT beginner certification'
   );
 
   /* Courses Storage */
   deployer.deploy(CoursesStorage,
     web3.eth.accounts[0],
-    web3.eth.accounts[1]
+    web3.eth.accounts[1],
+    0,
+    100000
   );
 
   /* Authorities */

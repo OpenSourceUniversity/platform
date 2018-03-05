@@ -24,6 +24,7 @@ contract FactoryCertificate {
         public
         returns (address)
     {
+        require(tx.origin == owner || tx.origin == osu);
         CertificateStorage newCertificateStorage = new CertificateStorage(owner, osu, _startIndex, _maxLimitOfRecords);
         return newCertificateStorage;
     }

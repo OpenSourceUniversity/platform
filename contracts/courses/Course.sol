@@ -2,59 +2,118 @@ pragma solidity ^0.4.15;
 
 
 contract CourseLearnersInterface {
-    address courseAddress;
-    address[] public participants;
-    uint[] public participantsDates;
-    address[] public graduated;
-    uint[] public graduatedDate;
-    function getParticipantsCount() public constant returns (uint);
-    function getAllParticipants() public constant returns (address[], uint[]);
-    function getParticipant(uint _index) public constant returns (address, uint);
-    function setParticipant(address _participantAddress) public returns (bool);
-    function deleteParticipant(address _participantAddress) public returns (bool);
-    function getGraduatesCount() public constant returns (uint);
-    function getAllGraduates() public constant returns (address[], uint[]);
-    function getGraduate(uint _index) public constant returns (address, uint);
-    function setGraduate(address _graduateAddress) public returns (bool);
-    function deleteGraduate(address _graduateAddress) public returns (bool);
-    function compleateCourse(address _graduateAddress) public returns (bool);
+  event NewParticipant(address courseAddress, address courseLearnersAddress, uint NrOfParticipants, uint NrOfGraduated, uint upon_creation);
+  event NewGraduated(address courseAddress, address courseLearnersAddress, uint NrOfParticipants, uint NrOfGraduated, uint upon_creation);
+
+  address public owner;
+  address public osu;
+
+  address courseAddress;
+
+  address[] public participants;
+  uint[] public participantsDates;
+
+  address[] public graduated;
+  uint[] public graduatedDate;
+
+  mapping (address => bool) public allJoinedLearners;
+
+  function getParticipantsCount() public constant returns (uint);
+  function getAllParticipants() public constant returns (address[], uint[]);
+  function getParticipant(uint _index) public constant returns (address, uint);
+  function setParticipant(address _participantAddress) public returns (bool);
+  function deleteParticipant(address _participantAddress) public returns (bool);
+  function getGraduatesCount() public constant returns (uint);
+  function getAllGraduates() public constant returns (address[], uint[]);
+  function getGraduate(uint _index) public constant returns (address, uint);
+  function setGraduate(address _graduateAddress) public returns (bool);
+  function deleteGraduate(address _graduateAddress) public returns (bool);
+  function compleateCourse(address _graduateAddress) public returns (bool);
+}
+
+contract CoursesStorageInterface {
+  event MaxNrOfRecordsReached(address smartcontract, uint startIndex, uint maxNrRecords, uint upon_creation);
+  event CloseToMaxNrOfRecords(address smartcontract, uint startIndex, uint maxNrRecords, uint currentNrRecords, uint upon_creation);
+
+  address public owner;
+  address public osu;
+
+  struct CoursePresentStruct {
+      address courseContract;
+      address issuer;
+      bytes32[] skills;
+      uint level;
+      bytes32[2] title;
+      bytes32 category;
+      bytes32 subcategory;
+      bool isExisting;
+  }
+
+  function addCourseViewRecord(address _courseContract, address _issuer, uint _averageRating, bytes32[] _skills, uint _level, bytes32[2] _title, bytes32 _category, bytes32 _subcategory) public returns (bool);
+
+  function getCourseViewRecord(address _courseAddress) public constant returns (address, address, uint, bytes32[], uint, bytes32[2], bytes32, bytes32);
+
+  function updateCourseViewRecord(address _courseContract, address _issuer, uint _averageRating, bytes32[] _skills, uint _level, bytes32[2] _title, bytes32 _category, bytes32 _subcategory) public returns (bool);
+
+  function deleteCourseViewRecord(address _issuer, address _courseContract) public returns (bool);
 }
 
 
 contract Course {
+    event AddCourse(address courseAddress, uint upon_creation);
+
     // Ownership
     address public owner;
     address public osu;
+    address public issuer;
 
     // State
     bool public isDegree;             // if there are more than one course
 
+
     // Course learner storage
     CourseLearnersInterface public courseLearners;
+    CoursesStorageInterface public coursesStorage;
 
     // Information about the course
     struct CourseStruct {
         address creator;              // address of the coure creator
         address verifier;             // address of the autority which will verify the course
         bool isActive;                // if this specific course is still active 'true'
-        uint numberRatings;           // number of raters for this specific course
-        uint averageRating;          // current rating of the course
         bytes32[] skills;             // skills which can be urned after compleating the course
-        uint level;                  // specify the level of this course (1 - beginners; 2 - Intermediate; 3 - Expert; 4 - All levels)
+        uint level;                   // specify the level of this course (1 - beginners; 2 - Intermediate; 3 - Expert; 4 - All levels)
         uint numberLectures;          // number of lectures this course has
         bytes32[2] title;             // title of the course
         address[] participantStorage; // storages of all users in state of taking the course
-        address[] graduateStorage;     // graduate storages containing all the users who compleated this course
+        address[] graduateStorage;    // graduate storages containing all the users who compleated this course
         bytes32 category;             // name of the category in which is this course
         bytes32 subcategory;          // name of the subcategory in which is this course
     }
 
     CourseStruct[] public course;
 
-    function Course(address _owner, address _osu) public {
+    function Course(
+        address _owner,
+        address _osu,
+        address _verifier,
+        bytes32[] _skills,
+        uint _level,
+        uint _numberLectures,
+        bytes32[2] _title,
+        address[] _participantStorage,
+        address[] _graduateStorage,
+        bytes32 _category,
+        bytes32 _subcategory
+    )
+        public
+    {
         owner = _owner;
         osu = _osu;
+        issuer = tx.origin;
+        addCourse(_verifier, _skills, _level, _numberLectures, _title, _participantStorage, _graduateStorage, _category, _subcategory);
     }
+
+
 
     // CRUD course (if number of courses > 1 than its a degree)
     function addCourse (
@@ -86,14 +145,55 @@ contract Course {
         if (course.length > 1) {
             isDegree = true;
         }
+
+        AddCourse(address(this), now);
         return course.length;
     }
+
+    // TODO
+    /* function setCoursesStorageRecord() public returns (bool) {
+        require();
+        coursesStorage.addCourseViewRecord(address(this), tx.origin, _skills, _level, _title, _category, _subcategory);
+    } */
 
     function getCoursesLength() public constant returns (uint) {
         return course.length;
     }
 
-    function getCourseCreator (uint _index) public constant returns (address) {
+    function getCourseGeneralData(
+        uint _index
+    )
+        public
+        constant
+        returns (address, address, bool, bytes32[], uint)
+    {
+        require(_index < course.length);
+        return (course[_index].creator,
+                course[_index].verifier,
+                course[_index].isActive,
+                course[_index].skills,
+                course[_index].level
+                );
+    }
+
+    function getCourseAdditionalData(
+        uint _index
+    )
+        public
+        constant
+        returns (uint, bytes32[2], address[], address[], bytes32, bytes32)
+    {
+        require(_index < course.length);
+        return (course[_index].numberLectures,
+                course[_index].title,
+                course[_index].participantStorage,
+                course[_index].graduateStorage,
+                course[_index].category,
+                course[_index].subcategory
+                );
+    }
+
+    /* function getCourseCreator (uint _index) public constant returns (address) {
         require(_index < course.length);
         return course[_index].creator;
     }
@@ -108,15 +208,6 @@ contract Course {
         return course[_index].isActive;
     }
 
-    function getNrOfRaters (uint _index) public constant returns (uint) {
-        require(_index < course.length);
-        return course[_index].numberRatings;
-    }
-
-    function getRating (uint _index) public constant returns (uint) {
-        require(_index < course.length);
-        return course[_index].averageRating;
-    }
 
     function getSkills (uint _index) public constant returns (bytes32[]) {
         require(_index < course.length);
@@ -161,19 +252,15 @@ contract Course {
     function getSubcategory (uint _index) public constant returns (bytes32) {
         require(_index < course.length);
         return course[_index].subcategory;
-    }
+    } */
 
 
     function updateEntireCourse (
         address _verifier,
-        uint _numberRatings,
-        uint _averageRating,
         bytes32[] _skills,
         uint _level,
         uint _numberLectures,
         bytes32[2] _title,
-        address[] _participantStorage,
-        address[] _graduateStorage,
         bytes32 _category,
         bytes32 _subcategory
     )
@@ -185,16 +272,10 @@ contract Course {
           for (i[0] = 0; i[0] < course.length; i[0]++) {
               if (course[i[0]].creator == tx.origin) {
                   course[i[0]].verifier = _verifier;
-                  // TODO: creator should not be able to update the rating of
-                  // their own courses.
-                  course[i[0]].numberRatings = _numberRatings;
-                  course[i[0]].averageRating = _averageRating;
                   course[i[0]].skills = _skills;
                   course[i[0]].level = _level;
                   course[i[0]].numberLectures = _numberLectures;
                   course[i[0]].title = _title;
-                  course[i[0]].participantStorage = _participantStorage;
-                  course[i[0]].graduateStorage = _graduateStorage;
                   course[i[0]].category = _category;
                   course[i[0]].subcategory = _subcategory;
                   return true;

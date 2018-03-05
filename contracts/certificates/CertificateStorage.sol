@@ -47,11 +47,7 @@ contract CertificateStorage {
         osu = _osu;
         startIndex = _startIndex;
         maxLimitOfRecords = _maxLimitOfRecords;
-        if (maxLimitOfRecords > 0) {
-            endIndex = startIndex + maxLimitOfRecords;
-        } else {
-            endIndex = startIndex;
-        }
+        endIndex = startIndex + maxLimitOfRecords;
         tempIndex = startIndex;
     }
 
@@ -71,7 +67,7 @@ contract CertificateStorage {
     {
         // check if the user of some of owner addresses is using this functionality
         require(_academy == tx.origin || _learner == tx.origin || owner == tx.origin || osu == tx.origin);
-        if (tempIndex >= maxLimitOfRecords) {
+        if (tempIndex >= endIndex) {
             FullCertificateStorage(startIndex, maxLimitOfRecords, now);
             return false;
         }

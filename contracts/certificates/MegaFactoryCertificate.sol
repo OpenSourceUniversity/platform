@@ -8,7 +8,7 @@ contract FactoryCertificateInterface {
 }
 
 contract MegaFactoryCertificate {
-    event CertificateStorageCreating(address certificate, uint now_time);
+    event CertificateStorageCreating(address certificate, uint upon_creation);
 
     address public owner;
     address public osu;
@@ -66,10 +66,8 @@ contract MegaFactoryCertificate {
             newCertificateStorage = address(0);
             currentIndex = currentIndex + maxLimitOfRecords + 1;
             return true;
-        } else {
-            newCertificateStorage = address(0);
-            return false;
         }
+        return false;
     }
 
     // Extra functionality to have full controll over the creation of CertificateStorage contracts

@@ -2,9 +2,12 @@ pragma solidity ^0.4.15;
 
 
 contract CourseLearners {
+    event NewParticipant(address courseAddress, address courseLearnersAddress, uint NrOfParticipants, uint NrOfGraduated, uint upon_creation);
+    event NewGraduated(address courseAddress, address courseLearnersAddress, uint NrOfParticipants, uint NrOfGraduated, uint upon_creation);
+
     // Ownership
-    address owner;
-    address osu;
+    address public owner;
+    address public osu;
 
     // Course
     address courseAddress;
@@ -20,6 +23,11 @@ contract CourseLearners {
     // Increments
     uint iParticipants;
     uint iGraduated;
+
+    // Store all participants and graduated
+    // address of the learner
+    // bool is 'true' if learner didn't reject to participate
+    mapping (address => bool) public allJoinedLearners;
 
     // Constructor
     function CourseLearners (address _owner, address _osu, address _courseAddress) public {
@@ -46,18 +54,21 @@ contract CourseLearners {
 
     function setParticipant(address _participantAddress) public returns (bool) {
         require(courseAddress == msg.sender);
+        require(allJoinedLearners[tx.origin] != true);
         if (participants.length != participantsDates.length) {
             participants.length = iParticipants;
             participantsDates.length = iParticipants;
         }
         participants.push(_participantAddress);
         participantsDates.push(now);
+        allJoinedLearners[tx.origin] = true;
         iParticipants++;
         return true;
     }
 
     function deleteParticipant(address _participantAddress) public returns (bool) {
         require(courseAddress == msg.sender);
+        require(allJoinedLearners[tx.origin] == true);
         if (participants.length != participantsDates.length) {
             participants.length = iParticipants;
             participantsDates.length = iParticipants;
@@ -94,6 +105,7 @@ contract CourseLearners {
 
     function setGraduate(address _graduateAddress) public returns (bool) {
         require(courseAddress == msg.sender);
+        require(allJoinedLearners[tx.origin] == true);
         if (graduated.length != graduatedDate.length) {
             graduated.length = iGraduated;
             graduatedDate.length = iGraduated;
@@ -106,6 +118,7 @@ contract CourseLearners {
 
     function deleteGraduate(address _graduateAddress) public returns (bool) {
         require(courseAddress == msg.sender);
+        require(allJoinedLearners[tx.origin] == true);
         if (graduated.length != graduatedDate.length) {
             graduated.length = iGraduated;
             graduatedDate.length = iGraduated;
@@ -128,6 +141,7 @@ contract CourseLearners {
 
     function compleateCourse(address _graduateAddress) public returns (bool) {
         require(courseAddress == msg.sender);
+        require(allJoinedLearners[tx.origin] == true && tx.origin != owner && tx.origin != osu);
         deleteParticipant(_graduateAddress);
         setGraduate(_graduateAddress);
         return true;

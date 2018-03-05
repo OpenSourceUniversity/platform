@@ -109,5 +109,4 @@ contract MegaFactoryCertificate {
         return factoryAddress;
     }
 
-
 }

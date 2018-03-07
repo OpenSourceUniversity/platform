@@ -1,7 +1,5 @@
 pragma solidity ^0.4.15;
 
-import "./FactoryCourses.sol";
-
 
 contract FactoryCoursesInterface {
 
@@ -75,6 +73,32 @@ contract CoursesProxyInterface {
 }
 
 
+contract CoursesStorageInterface {
+    event MaxNrOfRecordsReached(address smartcontract, uint startIndex, uint maxNrRecords, uint upon_creation);
+    event CloseToMaxNrOfRecords(address smartcontract, uint startIndex, uint maxNrRecords, uint currentNrRecords, uint upon_creation);
+
+    address public owner;
+    address public osu;
+
+    struct CoursePresentStruct {
+        address courseContract;
+        address issuer;
+        bytes32[] skills;
+        uint level;
+        bytes32[2] title;
+        bytes32 category;
+        bytes32 subcategory;
+        bool isExisting;
+    }
+
+    mapping (address => CoursePresentStruct) public coursesInformation;
+    function addCourseViewRecord(address _courseContract,address _issuer,bytes32[] _skills,uint _level,bytes32[2] _title,bytes32 _category,bytes32 _subcategory) public returns (bool);
+    function getCourseViewGeneralRecord(address _courseAddress) public constant returns (address, address, bytes32[], uint);
+    function getCourseViewAdditionalRecord(address _courseAddress) public constant returns (bytes32[2], bytes32, bytes32);
+    function updateCourseViewRecord(address _courseContract,address _issuer,bytes32[] _skills,uint _level,bytes32[2] _title,bytes32 _category,bytes32 _subcategory) public returns (bool);
+    function deleteCourseViewRecord(address _issuer, address _courseContract) public returns (bool);
+}
+
 contract MegaFactoryCourses {
     event CoursesStorageCreating(address coursesStorage, uint upon_creation);
     event CourseContractCreating(address courseContract, address courseContractLearners, uint upon_creation);
@@ -94,8 +118,9 @@ contract MegaFactoryCourses {
     address public proxyAddress;
 
     // Interfaces
-    FactoryCoursesInterface public factory;
-    CoursesProxyInterface public proxy;
+    FactoryCoursesInterface public factoryInterface;
+    CoursesProxyInterface public proxyInterface;
+    CoursesStorageInterface public storageInterface;
 
     // About CoursesStorage
     uint public maxLimitOfRecordsCourses;
@@ -149,18 +174,21 @@ contract MegaFactoryCourses {
     function createCoursesStorage() public returns(address) {
         require(tx.origin == owner || tx.origin == osu);
         require(factoryAddress != address(0));
-        factory = FactoryCoursesInterface(factoryAddress);
-        newCoursesStorage = factory.createCoursesStorage(currentIndexCourses, maxLimitOfRecordsCourses);
+        factoryInterface = FactoryCoursesInterface(factoryAddress);
+        newCoursesStorage = factoryInterface.createCoursesStorage(currentIndexCourses, maxLimitOfRecordsCourses);
         CoursesStorageCreating(newCoursesStorage, now);
         return newCoursesStorage;
     }
 
     // after confirming that the CoursesStorage contract is created successfuly
-    function confirmedCreationOfCoursesStorage(address _confirmedAddress) public returns(bool) {
+    // newCoursesStorage needs to hold the actual address of the new smart contract
+    function confirmedCreationOfCoursesStorage() public returns(bool) {
         require(tx.origin == owner || tx.origin == osu);
+        storageInterface = CoursesStorageInterface(newCoursesStorage);
+        require(storageInterface.owner() == owner);
         if (newCoursesStorage != address(0)) {
              coursesStoragesMined.length++;
-             coursesStoragesMined[coursesStoragesMined.length-1].storageAddress = _confirmedAddress;
+             coursesStoragesMined[coursesStoragesMined.length-1].storageAddress = newCoursesStorage;
              coursesStoragesMined[coursesStoragesMined.length-1].startIndex = currentIndexCourses;
              coursesStoragesMined[coursesStoragesMined.length-1].storageLimitation = maxLimitOfRecordsCourses;
              newCoursesStorage = address(0);
@@ -222,8 +250,8 @@ contract MegaFactoryCourses {
         returns (address, address)
     {
         require(tx.origin != address(0) && factoryAddress != address(0));
-        factory = FactoryCoursesInterface(factoryAddress);
-        (newCourseContract, newCourseLearner) = factory.createCourseContract(_verifier, _skills, _level, _numberLectures, _title, _participantStorage, _graduateStorage, _category, _subcategory);
+        factoryInterface = FactoryCoursesInterface(factoryAddress);
+        (newCourseContract, newCourseLearner) = factoryInterface.createCourseContract(_verifier, _skills, _level, _numberLectures, _title, _participantStorage, _graduateStorage, _category, _subcategory);
         CourseContractCreating(newCourseContract, newCourseLearner, now);
         courseContractsOwnership[tx.origin].CourseContract = newCourseContract;
         courseContractsOwnership[tx.origin].CourseLearnersContract = newCourseLearner;
@@ -246,8 +274,8 @@ contract MegaFactoryCourses {
         returns (address)
     {
         require(tx.origin != address(0) && factoryAddress != address(0));
-        factory = FactoryCoursesInterface(factoryAddress);
-        newCourseContract = factory.createOnlyCourseContract(_verifier, _skills, _level, _numberLectures, _title, _participantStorage, _graduateStorage, _category, _subcategory);
+        factoryInterface = FactoryCoursesInterface(factoryAddress);
+        newCourseContract = factoryInterface.createOnlyCourseContract(_verifier, _skills, _level, _numberLectures, _title, _participantStorage, _graduateStorage, _category, _subcategory);
         OnlyCourseContractCreating(newCourseContract, now);
         courseContractsOwnership[tx.origin].CourseContract = newCourseContract;
         courseContractsOwnership[tx.origin].isExisting = true;
@@ -256,8 +284,8 @@ contract MegaFactoryCourses {
 
     function createOnlyCourseLearners(address _newContract) public returns (address) {
         require(tx.origin != address(0) && factoryAddress != address(0));
-        factory = FactoryCoursesInterface(factoryAddress);
-        newCourseContract = factory.createOnlyCourseLearners(_newContract);
+        factoryInterface = FactoryCoursesInterface(factoryAddress);
+        newCourseContract = factoryInterface.createOnlyCourseLearners(_newContract);
         OnlyCourseLearnersCreating(newCourseContract, now);
         courseContractsOwnership[tx.origin].CourseLearnersContract = newCourseContract;
         courseContractsOwnership[tx.origin].isExisting = true;
@@ -265,18 +293,18 @@ contract MegaFactoryCourses {
     }
 
     // after confirming that the CourseContract is created successfuly
-    function confirmedCreationOfCourse(address _newCourseContract, address _newCourseLearner) public returns(bool) {
+    function confirmedCreationOfCourse() public returns(bool) {
         if (courseContractsOwnership[tx.origin].CourseContract != address(0) &&
             courseContractsOwnership[tx.origin].CourseLearnersContract != address(0) &&
             courseContractsOwnership[tx.origin].isExisting == true) {
             if (coursesProxyesMined.length > 0) {
-                if (bool(proxy.isFull()) == false) {
-                    if (bool(proxy.isCloseToFull()) == true) {
-                      CloseToMaximumProxy(address(proxy), now);
+                if (bool(proxyInterface.isFull()) == false) {
+                    if (bool(proxyInterface.isCloseToFull()) == true) {
+                      CloseToMaximumProxy(address(proxyInterface), now);
                     }
-                    return proxy.setCourseRelation(courseContractsOwnership[tx.origin].CourseContract, courseContractsOwnership[tx.origin].CourseLearnersContract);
+                    return proxyInterface.setCourseRelation(courseContractsOwnership[tx.origin].CourseContract, courseContractsOwnership[tx.origin].CourseLearnersContract);
                 } else {
-                    FullProxyStorage(address(proxy), now);
+                    FullProxyStorage(address(proxyInterface), now);
                 }
             }
         }
@@ -290,8 +318,8 @@ contract MegaFactoryCourses {
     function createCoursesProxy() public returns(address) {
         require(tx.origin == owner || tx.origin == osu);
         require(factoryAddress != address(0));
-        factory = FactoryCoursesInterface(factoryAddress);
-        newCoursesProxy = factory.createCoursesProxy(currentIndexProxy, maxLimitOfRecordsProxy);
+        factoryInterface = FactoryCoursesInterface(factoryAddress);
+        newCoursesProxy = factoryInterface.createCoursesProxy(currentIndexProxy, maxLimitOfRecordsProxy);
         CoursesProxyCreating(newCoursesProxy, now);
         return newCoursesProxy;
     }
@@ -318,14 +346,14 @@ contract MegaFactoryCourses {
         setFactoryAddress(_factoryAddress);
         setProxyAddress(_proxyAddress);
         setStorageAddress(_storageAddress);
-        factory.setMegaFactoryCoursesAddress(_megaFactoryAddress);
+        factoryInterface.setMegaFactoryCoursesAddress(_megaFactoryAddress);
         return true;
     }
 
     function setFactoryAddress(address _factoryAddress) public returns(bool) {
         require(tx.origin == owner || tx.origin == osu);
         factoryAddress = _factoryAddress;
-        factory = FactoryCoursesInterface(factoryAddress);
+        factoryInterface = FactoryCoursesInterface(factoryAddress);
         FactoryAddressWasSet(factoryAddress, now);
         return true;
     }
@@ -341,7 +369,7 @@ contract MegaFactoryCourses {
         newCoursesProxy = address(0);
         //.....................................................
         currentIndexProxy = currentIndexProxy + maxLimitOfRecordsProxy + 1;
-        proxy = CoursesProxyInterface(proxyAddress);
+        proxyInterface = CoursesProxyInterface(proxyAddress);
         return true;
     }
 

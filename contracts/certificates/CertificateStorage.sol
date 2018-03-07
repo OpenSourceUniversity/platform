@@ -105,9 +105,8 @@ contract CertificateStorage {
         relationalMapping[tempIndex].index = certificateStruct.length-1;
         relationalMapping[tempIndex].isExisting = true;
         certificateStruct[certificateStruct.length-1].UID = tempIndex;
-        tempIndex++;
-
         CertificateCreated(now, tempIndex);
+        tempIndex++;
         return true;
     }
 

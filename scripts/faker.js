@@ -4,7 +4,7 @@ const CertificateStorage = artifacts.require('CertificateStorage');
 function fakeCertificates() {
   CertificateStorage.deployed().then((instance) => {
     // Add certificates
-    Array(1).fill().map((_, i) => {
+    Array(200).fill().map((_, i) => {
       console.log(`Adding certificate ${i}`);
       return instance.addCertificate(
         '0x0000000000000000000000000000000000000001',

@@ -1,20 +1,18 @@
 import React from 'react';
-import { Container, Header, Grid, Button, Icon, Divider, Breadcrumb } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { Container, Header, Grid, Button, Icon, Divider, Breadcrumb, Loader, Segment, Dimmer } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import CertificateItem from 'components/CertificateItem';
+import { fetchCertificates } from './actions';
 
 
-export default class CertificatesPage extends React.Component {
+class CertificatesPage extends React.Component {
+  componentDidMount() {
+    this.props.fetchCertificates();
+  }
+
   renderCertificates() {
-    const certificates = [
-      { title: 'Python Development', verified: true, grade: 90 },
-      { title: 'Scrum Master', verified: true, grade: 80 },
-      { title: 'Machine Learning', verified: false, grade: 100 },
-      { title: 'Solidity Development', verified: true, grade: 75 },
-      { title: 'Unit Testing', verified: true, grade: 90 },
-      { title: 'Computer Vision', verified: true, grade: 100 },
-    ];
-    return certificates.map((certificate, index) => (
+    return this.props.certificates.map((certificate, index) => (
       <Grid.Column
         computer={4}
         largeScreen={4}
@@ -48,6 +46,10 @@ export default class CertificatesPage extends React.Component {
 
         <Divider clearing />
 
+        <Dimmer active={this.props.isFetching} inverted>
+          <Loader size="large">Loading</Loader>
+        </Dimmer>
+
         <Grid>
           {this.renderCertificates()}
         </Grid>
@@ -56,3 +58,23 @@ export default class CertificatesPage extends React.Component {
     );
   }
 }
+
+
+function mapStateToProps(state) {
+  return {
+    certificates: state.certificates.certificates,
+    isFetching: state.certificates.isFetching,
+  };
+}
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchCertificates() {
+      dispatch(fetchCertificates());
+    },
+  };
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(CertificatesPage);

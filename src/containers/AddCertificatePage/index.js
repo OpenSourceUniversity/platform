@@ -1,9 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Container, Header, Grid, Button, Message, Divider, Breadcrumb, Form, Input } from 'semantic-ui-react';
 import { addCertificate } from './actions';
 
 
-export default class AddCertificatePage extends React.Component {
+class AddCertificatePage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -33,7 +34,7 @@ export default class AddCertificatePage extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    addCertificate(this.state);
+    this.props.addCertificate(this.state);
   }
 
   render() {
@@ -53,6 +54,10 @@ export default class AddCertificatePage extends React.Component {
         </Header>
 
         <Divider clearing />
+
+        <Message error hidden={!this.props.error}>
+          <p>{this.props.error}</p>
+        </Message>
 
         <Grid>
           <Grid.Column width={10}>
@@ -142,3 +147,23 @@ export default class AddCertificatePage extends React.Component {
     );
   }
 }
+
+
+function mapStateToProps(state) {
+  return {
+    isAdding: state.addCertificate.isAdding,
+    error: state.addCertificate.error,
+  };
+}
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+    addCertificate(state) {
+      dispatch(addCertificate(state));
+    },
+  };
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddCertificatePage);

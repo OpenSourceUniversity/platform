@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Container, Header, Grid, Button, Icon, Divider, Breadcrumb, Loader, Segment, Dimmer } from 'semantic-ui-react';
+import { Container, Header, Grid, Button, Icon, Divider, Breadcrumb, Loader, Message, Dimmer } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import CertificateItem from 'components/CertificateItem';
 import { fetchCertificates } from './actions';
@@ -49,6 +49,12 @@ class CertificatesPage extends React.Component {
         <Dimmer active={this.props.isFetching} inverted>
           <Loader size="large">Loading</Loader>
         </Dimmer>
+
+        <Message info hidden={this.props.certificates.length > 0}>
+          <p>
+            You do not have any certificates yet. Go ahead and add some.
+          </p>
+        </Message>
 
         <Grid>
           {this.renderCertificates()}

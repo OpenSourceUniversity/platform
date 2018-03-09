@@ -55,11 +55,15 @@ class AddCertificatePage extends React.Component {
 
         <Divider clearing />
 
+        <Message success hidden={!this.props.isAdded}>
+          <p>Certificate added successfully.</p>
+        </Message>
+
         <Message error hidden={!this.props.error}>
           <p>{this.props.error}</p>
         </Message>
 
-        <Grid>
+        <Grid style={{ display: this.props.isAdded ? 'none' : 'block' }}>
           <Grid.Column width={10}>
             <Form size="huge" onSubmit={this.handleSubmit}>
               <Form.Field>
@@ -153,6 +157,7 @@ function mapStateToProps(state) {
   return {
     isAdding: state.addCertificate.isAdding,
     error: state.addCertificate.error,
+    isAdded: state.addCertificate.isAdded,
   };
 }
 

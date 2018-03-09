@@ -23,9 +23,9 @@ class AddCertificatePage extends React.Component {
   }
 
   handleInputChange(event) {
-    const target = { event };
+    const { target } = event;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = { target };
+    const { name } = target;
 
     this.setState({
       [name]: value,

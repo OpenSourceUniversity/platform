@@ -22,16 +22,20 @@ export function addCertificate(state) {
       certificateStorage.deployed().then((instance) => {
         const certificateStorageInstance = instance;
 
+        const name = state.certificateName;
+        const name1 = name.substring(0, 32) || ' ';
+        const name2 = name.substring(32, 64) || ' ';
+
         certificateStorageInstance.addCertificate(
           '0x0000000000000000000000000000000000000001',
           '0x0000000000000000000000000000000000000002',
           '0x0000000000000000000000000000000000000003',
-          [web3.fromUtf8('Баба '), web3.fromUtf8(' Дядо')],
+          [web3.fromUtf8(name1), web3.fromUtf8(name2)],
           [web3.fromUtf8('Тест '), web3.fromUtf8(' Тест')],
           true,
           10,
           1519302362,
-          { from: coinbase },
+          { from: coinbase, gas: 3000000 },
         )
           .then((result) => {
             console.log(result);

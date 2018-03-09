@@ -38,7 +38,10 @@ export function addCertificate(state) {
           { from: coinbase, gas: 3000000 },
         )
           .then((result) => {
-            console.log(result);
+            dispatch({
+              type: 'ADD_CERTIFICATE_SUCCESS',
+              certificate: result,
+            });
           })
           .catch((addError) => {
             dispatch({

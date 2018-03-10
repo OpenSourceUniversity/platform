@@ -81,6 +81,7 @@ contract CourseLearners {
         participantsDates[participantsDates.length-1] = now;
         allJoinedLearners[tx.origin] = true;
         iParticipants = participants.length;
+        NewParticipant(courseAddress, address(this), iParticipants, iGraduated, now);
         return true;
     }
 
@@ -153,6 +154,7 @@ contract CourseLearners {
         graduated[graduated.length-1] = _graduateAddress;
         graduatedDate[graduatedDate.length-1] = now;
         iGraduated = graduated.length;
+        NewGraduated(courseAddress, address(this), iParticipants, iGraduated, now);
         return true;
     }
 

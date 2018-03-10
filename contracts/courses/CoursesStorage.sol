@@ -48,9 +48,8 @@ contract CoursesStorage {
 
 
     // Set record via Course contract when it's successfully deployed
+    // It's necessary to be set via Course contract because we need to verify that it's unique
     function addCourseViewRecord(
-        address _courseContract,
-        address _issuer,
         bytes32[] _skills,
         uint _level,
         bytes32[2] _title,
@@ -60,8 +59,7 @@ contract CoursesStorage {
         public
         returns (bool)
     {
-        require(tx.origin == _issuer && msg.sender == _courseContract);
-        require(coursesInformation[tx.origin].isExisting == false);
+        require(coursesInformation[msg.sender].isExisting == false);
         if (tempIndex >= endIndex) {
             MaxNrOfRecordsReached(address(this), startIndex, maxLimitOfRecords, now);
             return false;
@@ -69,8 +67,8 @@ contract CoursesStorage {
             CloseToMaxNrOfRecords(address(this), startIndex, maxLimitOfRecords, tempIndex+1, now);
         }
 
-        coursesInformation[msg.sender].courseContract = _courseContract;
-        coursesInformation[msg.sender].issuer = _issuer;
+        coursesInformation[msg.sender].courseContract = msg.sender;
+        coursesInformation[msg.sender].issuer = tx.origin;
         coursesInformation[msg.sender].skills = _skills;
         coursesInformation[msg.sender].level = _level;
         coursesInformation[msg.sender].title = _title;
@@ -82,32 +80,37 @@ contract CoursesStorage {
     }
 
     // Get short information after specify the address of the course contract
-    function getCourseViewGeneralRecord(address _courseAddress) public constant returns (address, address, bytes32[], uint) {
-        if (coursesInformation[_courseAddress].isExisting) {
-            return (coursesInformation[_courseAddress].courseContract,
-                    coursesInformation[_courseAddress].issuer,
-                    coursesInformation[_courseAddress].skills,
-                    coursesInformation[_courseAddress].level
-                    );
-        }
-        bytes32[] memory tstBytes32Array = new bytes32[](1);
-        return (address(0),address(0), tstBytes32Array, 0);
+    function getCourseViewGeneralRecord(
+        address _courseAddress
+    )
+        public
+        constant
+        returns (address, address, bytes32[], uint)
+    {
+        require(coursesInformation[_courseAddress].isExisting);
+        return (coursesInformation[_courseAddress].courseContract,
+                coursesInformation[_courseAddress].issuer,
+                coursesInformation[_courseAddress].skills,
+                coursesInformation[_courseAddress].level
+                );
     }
 
     // Get short information after specify the address of the course contract
-    function getCourseViewAdditionalRecord(address _courseAddress) public constant returns (bytes32[2], bytes32, bytes32) {
-        if (coursesInformation[_courseAddress].isExisting) {
-            return (coursesInformation[_courseAddress].title,
-                    coursesInformation[_courseAddress].category,
-                    coursesInformation[_courseAddress].subcategory
-                    );
-        }
-        bytes32[2] memory tstBytes32Array2;
-        return (tstBytes32Array2, '', '');
+    function getCourseViewAdditionalRecord(
+        address _courseAddress
+    )
+        public
+        constant
+        returns (bytes32[2], bytes32, bytes32)
+    {
+        require(coursesInformation[_courseAddress].isExisting);
+        return (coursesInformation[_courseAddress].title,
+                coursesInformation[_courseAddress].category,
+                coursesInformation[_courseAddress].subcategory
+                );
     }
 
 
-    // Update record
     function updateCourseViewRecord(
         address _courseContract,
         address _issuer,
@@ -120,33 +123,33 @@ contract CoursesStorage {
         public
         returns (bool)
     {
-        require((tx.origin == _issuer && msg.sender == _courseContract) || tx.origin == owner || tx.origin == osu);
-        require(coursesInformation[tx.origin].isExisting == false);
+        require(tx.origin == _issuer || tx.origin == owner || tx.origin == osu);
+        require(coursesInformation[_courseContract].isExisting);
 
-        if (coursesInformation[_courseContract].isExisting) {
-            coursesInformation[_courseContract].courseContract = _courseContract;
-            coursesInformation[_courseContract].issuer = _issuer;
-            coursesInformation[_courseContract].skills = _skills;
-            coursesInformation[_courseContract].level = _level;
-            coursesInformation[_courseContract].title = _title;
-            coursesInformation[_courseContract].category = _category;
-            coursesInformation[_courseContract].subcategory = _subcategory;
-            coursesInformation[_courseContract].isExisting = true;
-            return true;
-        }
-        return false;
+        coursesInformation[_courseContract].courseContract = _courseContract;
+        coursesInformation[_courseContract].issuer = _issuer;
+        coursesInformation[_courseContract].skills = _skills;
+        coursesInformation[_courseContract].level = _level;
+        coursesInformation[_courseContract].title = _title;
+        coursesInformation[_courseContract].category = _category;
+        coursesInformation[_courseContract].subcategory = _subcategory;
+        coursesInformation[_courseContract].isExisting = true;
+        return true;
     }
 
 
     // Will be initiated again via Course contract
-    function deleteCourseViewRecord(address _issuer, address _courseContract) public returns (bool) {
-        require((tx.origin == _issuer && msg.sender == _courseContract) || tx.origin == owner || tx.origin == osu);
-        if (coursesInformation[_courseContract].isExisting) {
-            coursesInformation[_courseContract].isExisting = false;
-            delete coursesInformation[_courseContract];
-            return true;
-        }
-        return false;
+    function deleteCourseViewRecord(
+        address _courseContract
+    )
+       public
+       returns (bool)
+    {
+        require(coursesInformation[_courseContract].isExisting);
+        require(coursesInformation[_courseContract].issuer == tx.origin || owner == tx.origin || osu == tx.origin);
+        coursesInformation[_courseContract].isExisting = false;
+        delete coursesInformation[_courseContract];
+        return true;
     }
 
 

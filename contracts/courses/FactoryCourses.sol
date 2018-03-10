@@ -1,6 +1,5 @@
 pragma solidity ^0.4.15;
 
-
 import "./CoursesStorage.sol";
 import "./Course.sol";
 import "./CourseLearners.sol";

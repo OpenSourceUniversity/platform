@@ -307,6 +307,7 @@ contract MegaFactoryCourses {
                       CloseToMaximumProxy(address(proxyInterface), now);
                     }
                     proxyInterface.setCourseRelation(courseContractsOwnership[tx.origin].CourseContract, courseContractsOwnership[tx.origin].CourseLearnersContract);
+                    factoryInterface.setCourseLearnersAddress(courseContractsOwnership[tx.origin].CourseContract, courseContractsOwnership[tx.origin].CourseLearnersContract);
                     delete courseContractsOwnership[tx.origin];
                     return true;
                 } else {

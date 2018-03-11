@@ -15,7 +15,7 @@ contract CoursesProxy {
     uint maxLimitOfRecords;
     uint endIndex;
 
-    // flag if this proxy is full with records
+    // flags in regard of the capacity of records
     bool public isFull;
     bool public isCloseToFull;
 
@@ -50,7 +50,13 @@ contract CoursesProxy {
     }
 
     // get addresses of course contract and coresponding learners participating to the course
-    function setCourseRelation(address _courseAddress, address _learnersAddress) public returns (bool) {
+    function setCourseRelation(
+        address _courseAddress,
+        address _learnersAddress
+    )
+        public
+        returns (bool)
+    {
         if (tempIndex >= endIndex) {
             MaxNrOfRecordsReached(address(this), startIndex, maxLimitOfRecords, now);
             isFull = true;
@@ -70,7 +76,13 @@ contract CoursesProxy {
     }
 
     // -------------  Methods (using index over all records in the contract) --------------
-    function getCourseRelationByIndex(uint _index) public constant returns (address, address, bool) {
+    function getCourseRelationByIndex(
+        uint _index
+    )
+        public
+        constant
+        returns (address, address, bool)
+    {
         require(courseLearnersStruct.length > _index);
         return (courseLearnersStruct[_index].courseAddress,
                 courseLearnersStruct[_index].learnersAddress,
@@ -83,28 +95,50 @@ contract CoursesProxy {
 
 
     // -------------  Methods (by issuer in the contract) --------------
-    function getCourseRelationByIssuer(uint _index) public constant returns (address, address, bool) {
-        require(coursesBySenderMapping[tx.origin].length > _index);
-        return (courseLearnersStruct[coursesBySenderMapping[tx.origin][_index]].courseAddress,
-                courseLearnersStruct[coursesBySenderMapping[tx.origin][_index]].learnersAddress,
-                courseLearnersStruct[coursesBySenderMapping[tx.origin][_index]].isActive);
+    function getCourseRelationByIssuer(
+        address _issuerAddress,
+        uint _index
+    )
+        public
+        constant
+        returns (address, address, bool)
+    {
+        require(coursesBySenderMapping[_issuerAddress].length > _index);
+        return (courseLearnersStruct[coursesBySenderMapping[_issuerAddress][_index]].courseAddress,
+                courseLearnersStruct[coursesBySenderMapping[_issuerAddress][_index]].learnersAddress,
+                courseLearnersStruct[coursesBySenderMapping[_issuerAddress][_index]].isActive);
     }
 
-    function getNrOfCoursesByIssuer(address _issuerAddress) public constant returns (uint) {
-        if (coursesBySenderMapping[tx.origin].length > 0) {
-            return coursesBySenderMapping[tx.origin].length;
+    function getAllCoursesRelationByIssuer(
+        address _issuerAddress
+    )
+        public
+        constant
+        returns (address[], address[], bool[])
+    {
+        require(coursesBySenderMapping[_issuerAddress].length > 0);
+        address[] memory resultAddressesCourses = new address[](coursesBySenderMapping[_issuerAddress].length);
+        address[] memory resultAddressesLearners = new address[](coursesBySenderMapping[_issuerAddress].length);
+        bool[] memory resultActive = new bool[](coursesBySenderMapping[_issuerAddress].length);
+        uint[] memory i = new uint[](1);
+        i[0] = 0;
+        for (i[0] = 0; i[0] < coursesBySenderMapping[_issuerAddress].length; i[0]++) {
+            resultAddressesCourses[i[0]] = courseLearnersStruct[coursesBySenderMapping[_issuerAddress][i[0]]].courseAddress;
+            resultAddressesLearners[i[0]] = courseLearnersStruct[coursesBySenderMapping[_issuerAddress][i[0]]].learnersAddress;
+            resultActive[i[0]] = courseLearnersStruct[coursesBySenderMapping[_issuerAddress][i[0]]].isActive;
         }
-        return 0;
+        return (resultAddressesCourses, resultAddressesLearners, resultActive);
     }
 
-    // get addresses of course contract and coresponding learners participating to the course
-    /* function getCourseRelation(uint _index) public constant returns (address, address) {
-        require(_index < courseMapping[tx.origin].length);
-        if (courseMapping[tx.origin][_index].isActive == true) {
-            return (courseMapping[tx.origin][_index].courseAddress, courseMapping[tx.origin][_index].learnersAddress);
-        } else {
-            return (address(0), address(0));
-        }
-    } */
+    function getNrOfCoursesByIssuer(
+        address _issuerAddress
+    )
+        public
+        constant
+        returns (uint)
+    {
+        require(coursesBySenderMapping[_issuerAddress].length > 0);
+        return coursesBySenderMapping[_issuerAddress].length;
+    }
 
 }

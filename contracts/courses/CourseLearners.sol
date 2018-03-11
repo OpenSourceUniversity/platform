@@ -8,9 +8,10 @@ contract CourseLearners {
     // Ownership
     address public owner;
     address public osu;
+    address public issuer;
 
     // Course
-    address courseAddress;
+    address public courseAddress;
 
     // Learners who still learning following course
     address[] public participants;
@@ -26,13 +27,19 @@ contract CourseLearners {
 
     // Store all participants and graduated
     // address of the learner
-    // bool is 'true' if learner didn't reject to participate
+    // bool is 'true' if learner participate or graduated this course
+    // if learner cancel his participation in this course is 'false'
     mapping (address => bool) public allJoinedLearners;
 
     // Constructor
-    function CourseLearners (address _owner, address _osu, address _courseAddress) public {
+    function CourseLearners (
+        address _owner,
+        address _osu,
+        address _courseAddress
+    ) public {
         owner = _owner;
         osu = _osu;
+        issuer = tx.origin;
         courseAddress = _courseAddress;
         iParticipants=0;
         iGraduated=0;
@@ -44,31 +51,51 @@ contract CourseLearners {
     }
 
     function getAllParticipants() public constant returns (address[], uint[]) {
+        require(participants.length > 0);
         return (participants, participantsDates);
     }
 
-    function getParticipant(uint _index) public constant returns (address, uint) {
+    function getParticipantByIndex(
+        uint _index
+    )
+        public
+        constant
+        returns (address, uint)
+    {
         require(_index < participants.length && _index < participantsDates.length);
         return (participants[_index], participantsDates[_index]);
     }
 
-    function setParticipant(address _participantAddress) public returns (bool) {
+    // Only participant can join to a course via Course contract
+    function setParticipant() public returns (bool) {
         require(courseAddress == msg.sender);
         require(allJoinedLearners[tx.origin] != true);
+        // Recover
         if (participants.length != participantsDates.length) {
             participants.length = iParticipants;
             participantsDates.length = iParticipants;
         }
-        participants.push(_participantAddress);
-        participantsDates.push(now);
+        participants.length++;
+        participantsDates.length = participants.length;
+        participants[participants.length-1] = tx.origin;
+        participantsDates[participantsDates.length-1] = now;
         allJoinedLearners[tx.origin] = true;
-        iParticipants++;
+        iParticipants = participants.length;
+        NewParticipant(courseAddress, address(this), iParticipants, iGraduated, now);
         return true;
     }
 
-    function deleteParticipant(address _participantAddress) public returns (bool) {
+    // Delete participant
+    // Deletion of participant can be done via Course contract
+    function deleteParticipant(
+        address _participantAddress
+    )
+        public
+        returns (bool)
+    {
         require(courseAddress == msg.sender);
-        require(allJoinedLearners[tx.origin] == true);
+        require(_participantAddress == tx.origin || owner == tx.origin || osu == tx.origin);
+        // Recover
         if (participants.length != participantsDates.length) {
             participants.length = iParticipants;
             participantsDates.length = iParticipants;
@@ -98,50 +125,48 @@ contract CourseLearners {
         return (graduated, graduatedDate);
     }
 
-    function getGraduate(uint _index) public constant returns (address, uint) {
+    function getGraduateByIndex(
+        uint _index
+    )
+        public
+        constant
+        returns (address, uint)
+    {
         require(_index < graduated.length && _index < graduatedDate.length);
         return (graduated[_index], graduatedDate[_index]);
     }
 
-    function setGraduate(address _graduateAddress) public returns (bool) {
+    function setGraduate(
+        address _graduateAddress
+    )
+        public
+        returns (bool)
+    {
         require(courseAddress == msg.sender);
-        require(allJoinedLearners[tx.origin] == true);
+        require(allJoinedLearners[tx.origin] == true && tx.origin == _graduateAddress);
+        // Recover
         if (graduated.length != graduatedDate.length) {
             graduated.length = iGraduated;
             graduatedDate.length = iGraduated;
         }
-        graduated.push(_graduateAddress);
-        graduatedDate.push(now);
-        iGraduated++;
+        graduated.length++;
+        graduatedDate.length = graduated.length;
+        graduated[graduated.length-1] = _graduateAddress;
+        graduatedDate[graduatedDate.length-1] = now;
+        iGraduated = graduated.length;
+        NewGraduated(courseAddress, address(this), iParticipants, iGraduated, now);
         return true;
     }
 
-    function deleteGraduate(address _graduateAddress) public returns (bool) {
-        require(courseAddress == msg.sender);
-        require(allJoinedLearners[tx.origin] == true);
-        if (graduated.length != graduatedDate.length) {
-            graduated.length = iGraduated;
-            graduatedDate.length = iGraduated;
-        }
-        uint[] memory i = new uint[](1);
-        i[0] = 0;
-        for (i[0] = 0; i[0] < iGraduated; i[0]++) {
-            if (graduated[i[0]] == _graduateAddress) {
-                graduated[i[0]] = graduated[graduated.length-1];
-                delete graduated[graduated.length-1];
-                graduated.length--;
-                graduatedDate[i[0]] = graduatedDate[graduatedDate.length-1];
-                delete graduatedDate[graduatedDate.length-1];
-                graduatedDate.length--;
-                iGraduated--;
-                return true;
-            }
-        }
-    }
 
-    function compleateCourse(address _graduateAddress) public returns (bool) {
+    function compleateCourse(
+        address _graduateAddress
+    )
+        public
+        returns (bool)
+    {
         require(courseAddress == msg.sender);
-        require(allJoinedLearners[tx.origin] == true && tx.origin != owner && tx.origin != osu);
+        require(allJoinedLearners[tx.origin] == true && tx.origin == _graduateAddress);
         deleteParticipant(_graduateAddress);
         setGraduate(_graduateAddress);
         return true;

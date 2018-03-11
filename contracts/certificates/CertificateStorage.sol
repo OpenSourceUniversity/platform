@@ -37,8 +37,10 @@ contract CertificateStorage {
         bytes32[2] name;
         bytes32[2] subject;
         bool verified;
+        bytes32[] skills;
         uint8 score;
         address creator;
+        uint creationDate;
         uint expirationDate;
     }
 
@@ -67,7 +69,9 @@ contract CertificateStorage {
         bytes32[2] _name,
         bytes32[2] _subject,
         bool _verified,
+        bytes32[] _skills,
         uint8 _score,
+        uint _creationDate,
         uint _expirationDate
     )
         public
@@ -97,8 +101,10 @@ contract CertificateStorage {
         } else {
             certificateStruct[certificateStruct.length-1].verified = false;
         }
+        certificateStruct[certificateStruct.length-1].skills = _skills;
         certificateStruct[certificateStruct.length-1].score = _score;
         certificateStruct[certificateStruct.length-1].creator = tx.origin;
+        certificateStruct[certificateStruct.length-1].creationDate = _creationDate;
         certificateStruct[certificateStruct.length-1].expirationDate = _expirationDate;
 
         // Index relation
@@ -112,39 +118,44 @@ contract CertificateStorage {
 
 
     // Get all addresses for a specific certificate
-    function getCertificateAddressesByIndex(uint _index) public constant returns (address, address, address, address) {
+    function getCertificateAddressesByIndex(
+        uint _index
+    )
+        public
+        constant
+        returns (uint, address, address, address, address)
+    {
         require(relationalMapping[_index].isExisting);
-        if (relationalMapping[_index].index < certificateStruct.length) {
-            uint[] memory tmpCounter = new uint[](1);
-            tmpCounter[0] = relationalMapping[_index].index;
-            return (certificateStruct[tmpCounter[0]].academy,
-                    certificateStruct[tmpCounter[0]].course,
-                    certificateStruct[tmpCounter[0]].learner,
-                    certificateStruct[tmpCounter[0]].creator
-            );
-        } else {
-            return (address(0), address(0), address(0), address(0));
-        }
+        require(relationalMapping[_index].index < certificateStruct.length);
+        uint[] memory tmpCounter = new uint[](1);
+        tmpCounter[0] = relationalMapping[_index].index;
+        return (certificateStruct[tmpCounter[0]].UID,
+                certificateStruct[tmpCounter[0]].academy,
+                certificateStruct[tmpCounter[0]].course,
+                certificateStruct[tmpCounter[0]].learner,
+                certificateStruct[tmpCounter[0]].creator);
     }
 
 
     // Get all the additional information for a specific certificate
-    function getCertificateDataByIndex(uint _index) public constant returns (uint, bytes32[2], bytes32[2], bool, uint8, uint) {
+    function getCertificateDataByIndex(
+        uint _index
+    )
+        public
+        constant
+        returns (bytes32[2], bytes32[2], bool, bytes32[], uint8, uint, uint)
+    {
         require(relationalMapping[_index].isExisting);
-        if (relationalMapping[_index].index < certificateStruct.length) {
-            uint[] memory tmpCounter = new uint[](1);
-            tmpCounter[0] = relationalMapping[_index].index;
-            return (certificateStruct[tmpCounter[0]].UID,
-                    certificateStruct[tmpCounter[0]].name,
-                    certificateStruct[tmpCounter[0]].subject,
-                    certificateStruct[tmpCounter[0]].verified,
-                    certificateStruct[tmpCounter[0]].score,
-                    certificateStruct[tmpCounter[0]].expirationDate
-            );
-        } else {
-            bytes32[2] memory tmp1;
-            return (0, tmp1, tmp1, false, 0, 0);
-        }
+        require(relationalMapping[_index].index < certificateStruct.length);
+        uint[] memory tmpCounter = new uint[](1);
+        tmpCounter[0] = relationalMapping[_index].index;
+        return (certificateStruct[tmpCounter[0]].name,
+                certificateStruct[tmpCounter[0]].subject,
+                certificateStruct[tmpCounter[0]].verified,
+                certificateStruct[tmpCounter[0]].skills,
+                certificateStruct[tmpCounter[0]].score,
+                certificateStruct[tmpCounter[0]].creationDate,
+                certificateStruct[tmpCounter[0]].expirationDate);
     }
 
 
@@ -159,6 +170,8 @@ contract CertificateStorage {
         bool _verified,
         uint8 _score,
         address _creator,
+        bytes32[] _skills,
+        uint _creationDate,
         uint _expirationDate
     )
         public
@@ -178,6 +191,7 @@ contract CertificateStorage {
                 certificateStruct[updPosition].academy = _academy;
                 certificateStruct[updPosition].course = _course;
                 certificateStruct[updPosition].score = _score;
+                certificateStruct[updPosition].skills = _skills;
                 certificateStruct[updPosition].expirationDate = _expirationDate;
             } else if (certificateStruct[updPosition].learner == tx.origin) {
                 certificateStruct[updPosition].learner = _learner;
@@ -190,6 +204,7 @@ contract CertificateStorage {
                 certificateStruct[updPosition].verified = _verified;
                 certificateStruct[updPosition].score = _score;
                 certificateStruct[updPosition].creator = _creator;
+                certificateStruct[updPosition].creationDate = _creationDate;
                 certificateStruct[updPosition].expirationDate = _expirationDate;
             }
             CertificateUpdated(now);

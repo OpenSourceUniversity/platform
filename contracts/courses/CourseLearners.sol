@@ -14,10 +14,24 @@ contract CourseLearners {
     address public courseAddress;
 
     // Learners who still learning following course
+    struct ParticipantsStruct {
+        address[] participant;
+        uint[] participantDate;
+    }
+
+    ParticipantsStruct[] public participants;
+
     address[] public participants;
     uint[] public participantsDates;
 
     // Learners who already took followign course
+    struct GraduateStruct {
+        address[] graduated;
+        uint[] graduatedDate;
+    }
+
+    GraduateStruct[] public graduates;
+
     address[] public graduated;
     uint[] public graduatedDate;
 
@@ -169,6 +183,8 @@ contract CourseLearners {
         require(allJoinedLearners[tx.origin] == true && tx.origin == _graduateAddress);
         deleteParticipant(_graduateAddress);
         setGraduate(_graduateAddress);
+        // TODO Add the address and the state of the course in the moment of graduation
+        // Need to add this information in User.sol
         return true;
     }
 

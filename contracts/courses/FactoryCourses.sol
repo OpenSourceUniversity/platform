@@ -88,6 +88,18 @@ contract FactoryCourses {
         return newCourseLearners;
     }
 
+    function setCourseLearnersAddress(
+        address _existingCourseContract,
+        address _courseLearnersAddress
+    )
+        public
+        returns (bool)
+    {
+        require(megaFactoryAddress == msg.sender);
+        Course CourseAbstract = new Course(_existingCourseContract);
+        return CourseAbstract.setCourseLearnersAddress(_courseLearnersAddress);
+    }
+
     // =========================== About CoursesProxy =======================================
     function createCoursesProxy(
         uint _startIndex,

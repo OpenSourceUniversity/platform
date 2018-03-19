@@ -17,4 +17,4 @@ run_js_linter:
 run_solidity_tests:
   stage: test_solidity
   script:
-    - echo "TODO: Execute Solidity Tests"
+    - echo "TODO - Execute Solidity Tests"

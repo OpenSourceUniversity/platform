@@ -17,6 +17,12 @@ export function fetchCertificates() {
             certificates: body,
           });
         }
+      })
+      .catch((error) => {
+        dispatch({
+          type: 'FETCH_CERTIFICATES_FAILURE',
+          error,
+        });
       });
   };
 }

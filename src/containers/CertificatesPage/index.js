@@ -50,7 +50,13 @@ class CertificatesPage extends React.Component {
           <Loader size="large">Loading</Loader>
         </Dimmer>
 
-        <Message info hidden={this.props.certificates.length > 0}>
+        <Message error hidden={!this.props.error}>
+          <p>
+            {this.props.error}
+          </p>
+        </Message>
+
+        <Message info hidden={this.props.certificates.length > 0 || !!this.props.error}>
           <p>
             You do not have any certificates yet. Go ahead and add some.
           </p>
@@ -70,6 +76,7 @@ function mapStateToProps(state) {
   return {
     certificates: state.certificates.certificates,
     isFetching: state.certificates.isFetching,
+    error: state.certificates.error,
   };
 }
 

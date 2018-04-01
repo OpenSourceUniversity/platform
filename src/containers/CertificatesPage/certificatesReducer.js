@@ -17,8 +17,8 @@ export default function certificatesReducer(state = INITIAL_STATE, action) {
     });
   case 'FETCH_CERTIFICATES_FAILURE':
     return Object.assign({}, state, {
-      isFetching: true,
-      error: action.error,
+      isFetching: false,
+      error: action.error.message,
     });
   default:
     return state;

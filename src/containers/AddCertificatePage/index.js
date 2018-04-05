@@ -11,6 +11,7 @@ class AddCertificatePage extends React.Component {
     /* eslint-disable */
     this.state = {
       certificateName: '',
+      certificateFile: '',
       academyAddress: '',
       dateIssued: '',
       expirationDate: '',
@@ -24,8 +25,20 @@ class AddCertificatePage extends React.Component {
 
   handleInputChange(event) {
     const { target } = event;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
     const { name } = target;
+
+    let value;
+
+    switch (target.type) {
+    case 'checkbox':
+      value = target.checked;
+      break;
+    case 'file':
+      [value] = target.files;
+      break;
+    default:
+      value = { target };
+    }
 
     this.setState({
       [name]: value,
@@ -93,6 +106,18 @@ class AddCertificatePage extends React.Component {
                 </label>
               </Form.Field>
               <Form.Field>
+                <label htmlFor="certificateFile">
+                  Certificate File
+                  <Input
+                    id="certificateFile"
+                    type="file"
+                    name="certificateFile"
+                    placeholder="Certificate File"
+                    onChange={this.handleInputChange}
+                  />
+                </label>
+              </Form.Field>
+              <Form.Field>
                 <label htmlFor="dateIssued">
                   Issuing date
                   <Input
@@ -134,17 +159,7 @@ class AddCertificatePage extends React.Component {
               <Button type="submit" size="huge">Submit</Button>
             </Form>
           </Grid.Column>
-          <Grid.Column width={6}>
-            <Message positive>
-              <Message.Header>
-                  Adding certificate
-              </Message.Header>
-              <Message.Content>
-                  Use this screen to add your certificates. Once you add a certificate,
-                  academia will have the opportunity to verify it.
-              </Message.Content>
-            </Message>
-          </Grid.Column>
+          <Grid.Column width={6} />
         </Grid>
 
       </Container>

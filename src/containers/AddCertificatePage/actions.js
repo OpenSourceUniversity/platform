@@ -1,7 +1,6 @@
-import CertificateStorage from '../../../build/contracts/CertificateStorage.json';
+import { Buffer } from 'buffer';
 import store from '../../store';
-
-const contract = require('truffle-contract');
+// const contract = require('truffle-contract');
 
 
 export function addCertificate(state) {
@@ -11,45 +10,26 @@ export function addCertificate(state) {
     });
 
     const web3 = store.getState().web3.web3Instance;
-    const certificateStorage = contract(CertificateStorage);
-    certificateStorage.setProvider(web3.currentProvider);
+    const ipfs = store.getState().ipfs.ipfsInstance;
+    const reader = new FileReader();
 
-    web3.eth.getCoinbase((error, coinbase) => {
-      if (error) {
-        return;
-      }
-
-      certificateStorage.deployed().then((instance) => {
-        const certificateStorageInstance = instance;
-
-        const name = state.certificateName;
-        const name1 = name.substring(0, 32) || ' ';
-        const name2 = name.substring(32, 64) || ' ';
-
-        certificateStorageInstance.addCertificate(
-          '0x0000000000000000000000000000000000000001',
-          '0x0000000000000000000000000000000000000002',
-          '0x0000000000000000000000000000000000000003',
-          [web3.fromUtf8(name1), web3.fromUtf8(name2)],
-          [web3.fromUtf8('Тест '), web3.fromUtf8(' Тест')],
-          true,
-          10,
-          1519302362,
-          { from: coinbase, gas: 3000000 },
-        )
-          .then((result) => {
-            dispatch({
-              type: 'ADD_CERTIFICATE_SUCCESS',
-              certificate: result,
-            });
-          })
-          .catch((addError) => {
-            dispatch({
-              type: 'ADD_CERTIFICATE_FAILURE',
-              error: addError,
-            });
-          });
+    reader.onloadend = (event) => {
+      const { result } = event.target;
+      ipfs.files.add(Buffer.from(result), (err, hash) => {
+        if (err) {
+          console.log(err);
+        }
+        if (hash) {
+          console.log('The hash is here: ', hash);
+        }
       });
-    });
+    };
+    reader.onerror = (error) => {
+      dispatch({
+        type: 'ADD_CERTIFICATE_FAILURE',
+        error,
+      });
+    };
+    reader.readAsArrayBuffer(state.certificateFile);
   };
 }

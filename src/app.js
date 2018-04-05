@@ -3,6 +3,7 @@ import { withRouter } from 'react-router';
 import { Container } from 'semantic-ui-react';
 import React from 'react';
 import './util/web3/getWeb3';
+import './util/ipfs/getIpfs';
 
 // Layouts
 import Header from './components/Header';

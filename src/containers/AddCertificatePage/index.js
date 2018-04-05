@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Container, Header, Grid, Button, Message, Divider, Breadcrumb, Form, Input } from 'semantic-ui-react';
+import { Container, Header, Segment, Button, Message, Divider, Breadcrumb, Form, Input } from 'semantic-ui-react';
 import { addCertificate } from './actions';
 
 
@@ -11,11 +11,9 @@ class AddCertificatePage extends React.Component {
     /* eslint-disable */
     this.state = {
       certificateName: '',
-      certificateFile: '',
-      academyAddress: '',
-      dateIssued: '',
-      expirationDate: '',
-      skills: '',
+      issuer: '',
+      recipient: '',
+      file: '',
     };
     /* eslint-enable */
 
@@ -76,92 +74,64 @@ class AddCertificatePage extends React.Component {
           <p>{this.props.error}</p>
         </Message>
 
-        <Grid style={{ display: this.props.isAdded ? 'none' : 'block' }}>
-          <Grid.Column width={10}>
-            <Form size="huge" onSubmit={this.handleSubmit}>
-              <Form.Field>
-                <label htmlFor="certificateName">
-                  Certificate name
-                  <Input
-                    id="certificateName"
-                    name="certificateName"
-                    iconPosition="left"
-                    icon="certificate"
-                    placeholder="Certificate name"
-                    onChange={this.handleInputChange}
-                  />
-                </label>
-              </Form.Field>
-              <Form.Field>
-                <label htmlFor="academyAddress">
-                  Academy address
-                  <Input
-                    id="academyAddress"
-                    name="academyAddress"
-                    iconPosition="left"
-                    icon="address card"
-                    placeholder="Academy address"
-                    onChange={this.handleInputChange}
-                  />
-                </label>
-              </Form.Field>
-              <Form.Field>
-                <label htmlFor="certificateFile">
-                  Certificate File
-                  <Input
-                    id="certificateFile"
-                    type="file"
-                    name="certificateFile"
-                    placeholder="Certificate File"
-                    onChange={this.handleInputChange}
-                  />
-                </label>
-              </Form.Field>
-              <Form.Field>
-                <label htmlFor="dateIssued">
-                  Issuing date
-                  <Input
-                    id="dateIssued"
-                    name="dateIssued"
-                    iconPosition="left"
-                    icon="calendar check"
-                    placeholder="Issuing date"
-                    onChange={this.handleInputChange}
-                  />
-                </label>
-              </Form.Field>
-              <Form.Field>
-                <label htmlFor="expirationDate">
-                  Expiration date
-                  <Input
-                    id="expirationDate"
-                    name="expirationDate"
-                    iconPosition="left"
-                    icon="calendar times"
-                    placeholder="Expiration date"
-                    onChange={this.handleInputChange}
-                  />
-                </label>
-              </Form.Field>
-              <Form.Field>
-                <label htmlFor="skills">
-                  Skills
-                  <Input
-                    id="skills"
-                    name="skills"
-                    icon="tags"
-                    iconPosition="left"
-                    placeholder="Skills"
-                    onChange={this.handleInputChange}
-                  />
-                </label>
-              </Form.Field>
-              <Button type="submit" size="huge">Submit</Button>
-            </Form>
-          </Grid.Column>
-          <Grid.Column width={6} />
-        </Grid>
-
+        <Segment style={{ display: this.props.isAdded ? 'none' : 'block' }}>
+          <Form size="huge" onSubmit={this.handleSubmit}>
+            <Form.Field>
+              <label htmlFor="certificateName">
+                Certificate name
+                <Input
+                  id="certificateName"
+                  name="certificateName"
+                  iconPosition="left"
+                  icon="certificate"
+                  placeholder="Certificate name"
+                  onChange={this.handleInputChange}
+                />
+              </label>
+            </Form.Field>
+            <Form.Field>
+              <label htmlFor="issuer">
+                Issuer
+                <Input
+                  id="issuer"
+                  name="issuer"
+                  iconPosition="left"
+                  icon="address card"
+                  placeholder="Issuer address"
+                  onChange={this.handleInputChange}
+                />
+              </label>
+            </Form.Field>
+            <Form.Field>
+              <label htmlFor="recipient">
+                Recipient
+                <Input
+                  id="recipient"
+                  name="recipient"
+                  iconPosition="left"
+                  icon="address card"
+                  placeholder="Recipient ETH address"
+                  onChange={this.handleInputChange}
+                />
+              </label>
+            </Form.Field>
+            <Form.Field>
+              <label htmlFor="certificateFile">
+                Certificate
+                <Input
+                  id="file"
+                  iconPosition="left"
+                  icon="address card"
+                  type="file"
+                  name="file"
+                  placeholder="Certificate File"
+                  onChange={this.handleInputChange}
+                />
+              </label>
+            </Form.Field>
+            <Button type="submit" size="huge">Submit</Button>
+          </Form>
+        </Segment>
       </Container>
     );
   }

@@ -5,6 +5,14 @@ import store from '../../store';
 
 export function addCertificate(state) {
   return function action(dispatch) {
+    if (!state.certificateName || !state.issuer || !state.recipient || !state.file) {
+      dispatch({
+        type: 'ADD_CERTIFICATE_FAILURE',
+        error: { message: 'Fill in all fields.' },
+      });
+      return;
+    }
+
     dispatch({
       type: 'ADD_CERTIFICATE_REQUEST',
     });
@@ -30,6 +38,6 @@ export function addCertificate(state) {
         error,
       });
     };
-    reader.readAsArrayBuffer(state.certificateFile);
+    reader.readAsArrayBuffer(state.file);
   };
 }

@@ -38,13 +38,13 @@ class HeaderWithoutRouter extends React.Component {
           <Menu.Item name="certificates" active={activeItem === 'certificates'} onClick={this.handleItemClick}>
             Certificates
           </Menu.Item>
-          <Menu.Item name="courses" active={activeItem === 'courses'} onClick={this.handleItemClick}>
+          <Menu.Item style={{ display: 'none' }} name="courses" active={activeItem === 'courses'} onClick={this.handleItemClick}>
             Courses
           </Menu.Item>
-          <Menu.Item name="jobs" active={activeItem === 'jobs'} onClick={this.handleItemClick}>
+          <Menu.Item style={{ display: 'none' }} name="jobs" active={activeItem === 'jobs'} onClick={this.handleItemClick}>
             Jobs
           </Menu.Item>
-          <Menu.Item name="business" active={activeItem === 'business'} onClick={this.handleItemClick}>
+          <Menu.Item style={{ display: 'none' }} name="business" active={activeItem === 'business'} onClick={this.handleItemClick}>
             Business
           </Menu.Item>
 

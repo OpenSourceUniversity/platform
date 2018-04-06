@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Container, Header, Segment, Button, Message, Divider, Breadcrumb, Form, Input } from 'semantic-ui-react';
+import { Container, Header, Segment, Button, Message, Divider, Breadcrumb, Form, Input, Dimmer, Loader } from 'semantic-ui-react';
 import { addCertificate } from './actions';
 
 
@@ -75,6 +75,12 @@ class AddCertificatePage extends React.Component {
         </Message>
 
         <Segment style={{ display: this.props.isAdded ? 'none' : 'block' }}>
+          <Dimmer active={this.props.isAdding} inverted>
+            <Loader size="medium">
+              Adding certificate...
+            </Loader>
+          </Dimmer>
+
           <Form size="huge" onSubmit={this.handleSubmit}>
             <Form.Field>
               <label htmlFor="certificateName">

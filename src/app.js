@@ -14,7 +14,7 @@ const App = () => (
     <Header />
 
     <div id="Main">
-      <Main />
+      <Main/>
     </div>
   </div>
 );

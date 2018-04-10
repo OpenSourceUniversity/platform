@@ -29,7 +29,7 @@ export default class ProfilePage extends React.Component {
   render() {
     return (
       <div>
-        <Container>
+        <Container  fluid>
           <Header size="huge">
             <Icon name="user" />
             OS.UNI

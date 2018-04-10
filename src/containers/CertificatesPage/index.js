@@ -30,7 +30,7 @@ export default class CertificatesPage extends React.Component {
 
   render() {
     return (
-      <Container>
+      <Container fluid>
         <Breadcrumb>
           <Breadcrumb.Section href="/#/">Home</Breadcrumb.Section>
           <Breadcrumb.Divider icon="right angle" />

@@ -7,10 +7,19 @@ div.App {
     a.header, a.header:hover {
       background-image: url('./edu-logo.png');
       background-repeat: no-repeat;
-      background-size: 32px 32px;
-      background-position: left center;
-      padding-left: 32px;
+      background-size: 40px 40px;
+      background-position: 2px center;
+      padding-left: 40px;
+      border-left: none !important;
+      width: 40px;
     }
+    padding-left: 20px;
+  }
+  div.dropdown {
+    margin-right: 10px !important;
+  }
+  .grid {
+    width: 100%;
   }
 }
 
@@ -19,5 +28,15 @@ div#Main {
     background: white;
     padding: 25px;
     border-radius: 5px;
+    padding-top: 100px;
+  }
+}
+
+div.search-bar {
+  margin-right: 20px;
+  input {
+    border-radius: 30px !important;
+    height: 75%;
+    margin-top: 3% !important;
   }
 }

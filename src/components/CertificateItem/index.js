@@ -8,7 +8,7 @@ export default class CertificateItem extends React.Component {
     return (
       <Card color={color}>
         <Card.Content>
-          <Card.Header>{this.props.certificate.title}</Card.Header>
+          <Card.Header>{this.props.certificate.name}</Card.Header>
         </Card.Content>
         <Card.Content extra>
           <Icon name={this.props.certificate.verified ? 'check' : 'close'} color={color} />
@@ -16,7 +16,8 @@ export default class CertificateItem extends React.Component {
         </Card.Content>
         <Card.Content extra>
           <Icon name="graduation" color={color} />
-          { this.props.certificate.grade }%
+          Score:
+          { this.props.certificate.score }
         </Card.Content>
       </Card>
     );

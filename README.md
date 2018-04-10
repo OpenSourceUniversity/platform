@@ -17,6 +17,11 @@ Navigate to the project directory and execute the following command in order to 
 
     npm install
 
+Install truffle as global dependency and compile the smart contracts.
+
+* `npm install -g truffle`
+* `truffle compile`
+
 ### Running
 
 Within the project directory execute the following command:

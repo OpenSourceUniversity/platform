@@ -27,6 +27,7 @@ class HeaderWithoutRouter extends React.Component {
 
   render() {
     const { activeItem } = this.state;
+    let logo = require('../../styles/edu-logo.png');
 
     return (
       <Menu size="massive" fixed='top'>
@@ -34,7 +35,7 @@ class HeaderWithoutRouter extends React.Component {
           <Grid divided='vertically'>
             <Grid.Row>
               <Menu.Item name="home" onClick={this.handleItemClick}>
-                  <img src="https://os.university/static/assets/icons/osu-logo.png" />
+                  <img src={logo} />
               </Menu.Item>
 
               <Menu.Item name="certificates" active={activeItem === 'certificates'} onClick={this.handleItemClick}>

@@ -68,6 +68,17 @@ div#Main {
     border-radius: 5px;
     padding-top: 170px;
   }
+  .sign-in {
+      background-image: url("../img/business-academia.jpg") !important;
+      background-repeat: no-repeat !important;
+      div.sign-in-card {
+        text-align: center;
+        position: absolute;
+        right: 10%;
+        width: auto;
+        padding: 40px;
+      }
+    }
 }
 
 

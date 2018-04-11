@@ -136,6 +136,9 @@ class HeaderWithoutRouter extends React.Component {
               <Menu.Item name="interviews" active={activeItem === 'business'} onClick={this.handleItemClick}>
                 Interviews
               </Menu.Item>
+              <Menu.Item name="sign-in" active={activeItem === 'sign-in'} onClick={this.handleItemClick}>
+                Sign In (Just testing)
+              </Menu.Item>
             </Grid.Row>
           </Grid>
         </Container>

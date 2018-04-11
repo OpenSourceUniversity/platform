@@ -43759,7 +43759,7 @@ var ProfilePage = function (_React$Component) {
   _createClass(ProfilePage, [{
     key: 'renderOverview',
     value: function renderOverview() {
-      var overviewData = [{ title: 'Education' }, { title: 'Sertificate' }, { title: 'Courses' }];
+      var overviewData = [{ title: 'Education' }, { title: 'Certificate' }, { title: 'Courses' }];
       return overviewData.map(function (overview, index) {
         return __WEBPACK_IMPORTED_MODULE_8_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9_components_ProfileOverviewItem__["a" /* default */], { overview: overview, key: index });
       });
@@ -43767,7 +43767,7 @@ var ProfilePage = function (_React$Component) {
   }, {
     key: 'renderAchievement',
     value: function renderAchievement() {
-      var achievementData = [{ achievementItem: 'Education' }, { achievementItem: 'Sertificate' }, { achievementItem: 'Courses' }];
+      var achievementData = [{ achievementItem: 'Education' }, { achievementItem: 'Certificate' }, { achievementItem: 'Courses' }];
       return achievementData.map(function (achievement, index) {
         return __WEBPACK_IMPORTED_MODULE_8_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10_components_ProfileAchievement__["a" /* default */], { achievement: achievement, key: index });
       });

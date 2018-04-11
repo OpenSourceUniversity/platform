@@ -7,7 +7,7 @@ export default class ProfilePage extends React.Component {
   renderOverview() {
     const overviewData = [
       { title: 'Education' },
-      { title: 'Sertificate' },
+      { title: 'Certificate' },
       { title: 'Courses' },
     ];
     return overviewData.map((overview, index) => (
@@ -18,7 +18,7 @@ export default class ProfilePage extends React.Component {
   renderAchievement() {
     const achievementData = [
       { achievementItem: 'Education' },
-      { achievementItem: 'Sertificate' },
+      { achievementItem: 'Certificate' },
       { achievementItem: 'Courses' },
     ];
     return achievementData.map((achievement, index) => (

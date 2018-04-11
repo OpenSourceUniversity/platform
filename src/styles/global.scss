@@ -2,42 +2,71 @@ body {
   background: #ecf0f1;
 }
 
+// ***Nav-bar START***
+
 div.App {
   div.menu {
-    a.header, a.header:hover {
-      background-image: url('./edu-logo.png');
-      background-repeat: no-repeat;
-      background-size: 40px 40px;
-      background-position: 2px center;
-      padding-left: 40px;
-      border-left: none !important;
-      width: 40px;
+    .item:before {
+      background: none;
     }
-    padding-left: 20px;
-  }
-  div.dropdown {
-    margin-right: 10px !important;
-  }
-  .grid {
-    width: 100%;
+    img {
+      width: 3em !important;
+      margin-left: 0.7em !important
+    }
+    div.row.main-nav {
+      padding-bottom: 0;
+      div.right.menu {
+        padding-right: 20px;
+      }
+    }
+    div.row.secondary-nav {
+      padding-top: 0;
+      padding-left: 0.7em;
+    }
+    div.right {
+      div.search-bar {
+        margin-right: 20px;
+        input {
+          border-radius: 30px !important;
+          height: 60%;
+          margin-top: 7% !important;
+        }
+      }
+      div.dropdown {
+        div.transition {
+          div.item {
+            border-bottom: 1px solid rgba(34,36,38,.1);
+            svg {
+              margin-right: 12px;
+              margin-bottom: -3px;
+            }
+            span.balance-nav {
+              span.fraction {
+                font-size: 50%;
+              }
+            }
+            svg.edu-token {
+              margin-right: 2px;
+              margin-left: 30px;
+            }
+          }
+        } 
+      }
+    }
+    .grid {
+      width: 102%;
+    }
   }
 }
+
+// ***Nav-bar END***
 
 div#Main {
   div.container {
     background: white;
     padding: 25px;
     border-radius: 5px;
-    padding-top: 100px;
-  }
-}
-
-div.search-bar {
-  margin-right: 20px;
-  input {
-    border-radius: 30px !important;
-    height: 75%;
-    margin-top: 3% !important;
+    padding-top: 170px;
   }
 }
 

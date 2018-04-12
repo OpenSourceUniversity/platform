@@ -35,12 +35,56 @@ class HeaderWithoutRouter extends React.Component {
     let arrow = require('../../icons/arrow.svg');
     let avatar_placeholder = require('../../icons/avatar_placeholder.svg');
     let token = require('../../icons/edu_token.svg');
+    let network = require('../../icons/nav_network.svg');
+    let messages = require('../../icons/nav_messages.svg');
+    let notifications = require('../../icons/nav_notifications.svg');
 
-    const trigger = (
+    const avatar_trigger = (
       <span>
-        <Image avatar src={avatar_placeholder} />
+        <Image className='avatar' avatar src={avatar_placeholder} />
       </span>
     )
+
+    const network_trigger = (
+      <span>
+        <Image className='network icon' src={network} />
+      </span>
+    )
+
+    const messages_trigger = (
+      <span>
+        <Image className='messages icon' src={messages} />
+      </span>
+    )
+
+    const notifications_trigger = (
+      <span>
+        <Image className='notifications icon' src={notifications} />
+      </span>
+    )
+
+    const options_notifications = [
+      { key: 'alarm1', text: 'First notification', icon: 'alarm' },
+      { key: 'alarm2', text: 'Second  notification', icon: 'alarm' },
+      { key: 'alarm3', text: 'Third  notification', icon: 'alarm' },
+      { key: 'alarm4', text: 'etc', icon: 'alarm' },
+    ]
+
+    const options_messages = [
+      { key: 'message1', text: 'First notification', icon: 'comments' },
+      { key: 'message2', text: 'Second  notification', icon: 'comments' },
+      { key: 'message3', text: 'Third  notification', icon: 'comments' },
+      { key: 'message4', text: 'etc', icon: 'comments' },
+    ]
+
+    const options_network = [
+      { key: 'user1', text: 'First notification', icon: 'user' },
+      { key: 'user2', text: 'Second  notification', icon: 'user' },
+      { key: 'user3', text: 'Third  notification', icon: 'user' },
+      { key: 'user4', text: 'etc', icon: 'user' },
+    ]
+
+
 
     return (
       <Menu size="massive" fixed='top'>
@@ -48,26 +92,38 @@ class HeaderWithoutRouter extends React.Component {
           <Grid divided='vertically'>
             <Grid.Row className='main-nav'>
               <Menu.Item name="home" onClick={this.handleItemClick}>
-                  <img src={logo} />
+                  <img className='main-nav-logo' src={logo} />
               </Menu.Item>
-
-              <Menu.Item name="certificates" active={activeItem === 'certificates'} onClick={this.handleItemClick}>
-                Certificates
-              </Menu.Item>
-              <Menu.Item name="courses" active={activeItem === 'courses'} onClick={this.handleItemClick}>
-                Courses
-              </Menu.Item>
-              <Menu.Item name="jobs" active={activeItem === 'jobs'} onClick={this.handleItemClick}>
-                Jobs
-              </Menu.Item>
-              <Menu.Item name="business" active={activeItem === 'business'} onClick={this.handleItemClick}>
-                Business
-              </Menu.Item>
+              <Dropdown item text='Academia'>
+                <Dropdown.Menu>
+                  <Dropdown.Item text='Certificates' name="certificates" active={activeItem === 'certificates'} onClick={this.handleItemClick} />
+                  <Dropdown.Item text='Courses' name="courses" active={activeItem === 'courses'} onClick={this.handleItemClick} />
+                  <Dropdown.Item text='Programs' name="programs" active={activeItem === 'programs'} onClick={this.handleItemClick} />
+                  <Dropdown.Item text='Categories' name="categories" active={activeItem === 'categories'} onClick={this.handleItemClick} />
+                  <Dropdown.Item text='Academies' name="academies" active={activeItem === 'academies'} onClick={this.handleItemClick} />
+                </Dropdown.Menu>
+              </Dropdown>
+              <Dropdown item text='Businesses'>
+                <Dropdown.Menu>
+                  <Dropdown.Item text='Open positions' name="jobs" active={activeItem === 'jobs'} onClick={this.handleItemClick} />
+                  <Dropdown.Item text='Careers' name="careers" active={activeItem === 'careers'} onClick={this.handleItemClick} />
+                  <Dropdown.Item text='Interviews' name="interviews" active={activeItem === 'interviews'} onClick={this.handleItemClick} />
+                  <Dropdown.Item text='Challenges' name="challenges" active={activeItem === 'challenges'} onClick={this.handleItemClick} />
+                  <Dropdown.Item text='Scholarships' name="scholarships" active={activeItem === 'scholarships'} onClick={this.handleItemClick} />
+                  <Dropdown.Item text='Companies' name="companies" active={activeItem === 'companies'} onClick={this.handleItemClick} />
+                </Dropdown.Menu>
+              </Dropdown>
+              <Input className='search-bar' icon='search' placeholder='Search...' />
 
 
               <Menu.Menu position="right">
-                <Input className='search-bar' icon='search' placeholder='Search...' />
-                <Dropdown item trigger={trigger} pointing='top right' > 
+                <Dropdown item trigger={network_trigger} pointing='top right' options={options_network} icon={null} />
+
+                <Dropdown item trigger={messages_trigger} pointing='top right' options={options_messages} icon={null} />
+
+                <Dropdown item trigger={notifications_trigger} pointing='top right' options={options_notifications} icon={null} />
+
+                <Dropdown item trigger={avatar_trigger} pointing='top right' > 
                   <Dropdown.Menu>
                     <Dropdown.Item name="balance" className='balance-nav' onClick={this.handleItemClick}>
                       EDUx Balance:
@@ -90,19 +146,19 @@ class HeaderWithoutRouter extends React.Component {
                       </svg>
                       My Profile
                     </Dropdown.Item>
-                    <Dropdown.Item name="deposit" className='deposit-nav' onClick={this.handleItemClick}>
+                    <Dropdown.Item name="deposit" className='deposit-nav' active={activeItem === 'deposit'} onClick={this.handleItemClick}>
                       <svg width="16" height="16"> 
                         <image href={deposit}  x="0" y="0" width="100%" height="100%"></image>
                       </svg>
                       Deposit/Withdraw
                     </Dropdown.Item>
-                    <Dropdown.Item name="settings" className='settings-nav' onClick={this.handleItemClick}>
+                    <Dropdown.Item name="settings" className='settings-nav' active={activeItem === 'settings'} onClick={this.handleItemClick}>
                       <svg width="16" height="16"> 
                         <image href={settings}  x="0" y="0" width="100%" height="100%"></image>
                       </svg>
                       Account Settings
                     </Dropdown.Item>
-                    <Dropdown.Item name="logout" className='logout-nav' onClick={this.handleItemClick}>
+                    <Dropdown.Item name="sign-in" className='logout-nav' onClick={this.handleItemClick}>
                       <svg width="16" height="16"> 
                         <image href={logout}  x="0" y="0" width="100%" height="100%"></image>
                       </svg>
@@ -114,30 +170,27 @@ class HeaderWithoutRouter extends React.Component {
             </Grid.Row>
 
             <Grid.Row className='secondary-nav'>
-              <Menu.Item name="dashboard" active={activeItem === 'certificates'} onClick={this.handleItemClick}>
+              <Menu.Item name="dashboard" active={activeItem === 'dashboard'} onClick={this.handleItemClick}>
                 Dashboard
               </Menu.Item>
 
-              <Menu.Item name="courses" active={activeItem === 'certificates'} onClick={this.handleItemClick}>
+              <Menu.Item name="courses" active={activeItem === 'courses'} onClick={this.handleItemClick}>
                 Courses
               </Menu.Item>
-              <Menu.Item name="programs" active={activeItem === 'courses'} onClick={this.handleItemClick}>
+              <Menu.Item name="programs" active={activeItem === 'programs'} onClick={this.handleItemClick}>
                 Programs
               </Menu.Item>
-              <Menu.Item name="certificates" active={activeItem === 'jobs'} onClick={this.handleItemClick}>
+              <Menu.Item name="certificates" active={activeItem === 'certificates'} onClick={this.handleItemClick}>
                 Certification
               </Menu.Item>
-              <Menu.Item name="challenges" active={activeItem === 'business'} onClick={this.handleItemClick}>
+              <Menu.Item name="challenges" active={activeItem === 'challenges'} onClick={this.handleItemClick}>
                 Challenges
               </Menu.Item>
-              <Menu.Item name="jobs" active={activeItem === 'business'} onClick={this.handleItemClick}>
+              <Menu.Item name="jobs" active={activeItem === 'jobs'} onClick={this.handleItemClick}>
                 Job positions
               </Menu.Item>
-              <Menu.Item name="interviews" active={activeItem === 'business'} onClick={this.handleItemClick}>
+              <Menu.Item name="interviews" active={activeItem === 'interviews'} onClick={this.handleItemClick}>
                 Interviews
-              </Menu.Item>
-              <Menu.Item name="sign-in" active={activeItem === 'sign-in'} onClick={this.handleItemClick}>
-                Sign In (Just testing)
               </Menu.Item>
             </Grid.Row>
           </Grid>

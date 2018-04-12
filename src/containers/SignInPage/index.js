@@ -15,10 +15,10 @@ export default class SignInPage extends React.Component {
 		        		<img className='logo-sign-in' src={logo} />
 		        		<span className='osu-text-logo-sign-in'>
 		        			<span className='bold-sign-in'>
-					        	Open Sorce <br/>
+					        	OPEN SOURCE <br/>
 					        </span>
 					        <span className='standard-logo-sign-in'> 
-					        	University
+					        	UNIVERSITY
 					        </span>
 				        </span>
 				      </Grid.Row>
@@ -28,7 +28,7 @@ export default class SignInPage extends React.Component {
 		      	<span className='welcome-sign-in'>
 		        	Welcome Back! <br/>
 		        </span>
-		        <span className='gray-sign-in'>
+		        <span className='orange-sign-in'>
 		          Sign in to your account.
 		        </span>
 		      </Card.Description>
@@ -50,11 +50,11 @@ export default class SignInPage extends React.Component {
 								  <Input type='password' placeholder='Password' />
 								</Form.Field>
 							</Form.Group>
-							<Form.Button>LOG IN</Form.Button>
+							<Form.Button className='log-in-button'>LOG IN</Form.Button>
 					  </Form>
 					  <a href="#">Forgot your password? </a> <br/>
 					  <span> Don't have an account? </span>
-					  <Button>SIGN UP</Button>
+					  <Button className='sign-up-button'>SIGN UP</Button>
         	</Card.Content>
         </Card>
       </Container>

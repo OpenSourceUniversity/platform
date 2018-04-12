@@ -8,6 +8,7 @@ import CoursesPage from 'containers/CoursesPage';
 import JobsPage from 'containers/JobsPage';
 import BusinessPage from 'containers/BusinessPage';
 import ProfilePage from 'containers/ProfilePage';
+import Account from 'containers/Account';
 import SignInPage from 'containers/SignInPage';
 
 class Main extends React.Component {
@@ -24,6 +25,7 @@ class Main extends React.Component {
         <Route path="/jobs" component={JobsPage} />
         <Route path="/business" component={BusinessPage} />
         <Route path="/profile" component={ProfilePage} />
+        <Route path="/settings" component={Account} />
         <Route path="/sign-in" component={SignInPage} />
       </Switch>
     );

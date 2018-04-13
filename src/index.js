@@ -1,4 +1,4 @@
-import 'semantic-ui-css/semantic.min.css';
+import '../semantic/dist/semantic.min.css';
 import { Provider } from 'react-redux';
 import { render } from 'react-dom';
 import { HashRouter } from 'react-router-dom';

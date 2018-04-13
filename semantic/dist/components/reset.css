@@ -1,0 +1,44 @@
+/*!
+ * # Semantic UI 2.3.1 - Reset
+ * http://github.com/semantic-org/semantic-ui/
+ *
+ *
+ * Released under the MIT license
+ * http://opensource.org/licenses/MIT
+ *
+ */
+
+
+/*******************************
+             Reset
+*******************************/
+
+
+/* Border-Box */
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+}
+html {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+/* iPad Input Shadows */
+input[type="text"],
+input[type="email"],
+input[type="search"],
+input[type="password"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  
+/* mobile firefox too! */
+}
+
+
+/*******************************
+         Site Overrides
+*******************************/
+

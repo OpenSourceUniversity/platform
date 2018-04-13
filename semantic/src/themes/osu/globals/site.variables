@@ -55,7 +55,7 @@
 @secondaryColor      : @black;
 
 @lightPrimaryColor   : @lightBlue;
-@lightSecondaryColor : @yellow;
+@lightSecondaryColor : @lightBlack;
 
 /*--------------
   Page Heading

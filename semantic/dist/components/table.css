@@ -24,7 +24,7 @@
           box-shadow: none;
   border-radius: 0.28571429rem;
   text-align: left;
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(0, 0, 0, 0.87);
   border-collapse: separate;
   border-spacing: 0px;
 }
@@ -57,7 +57,7 @@
   cursor: auto;
   background: #F9FAFB;
   text-align: inherit;
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(0, 0, 0, 0.87);
   padding: 0.92857143em 0.78571429em;
   vertical-align: inherit;
   font-style: none;
@@ -89,7 +89,7 @@
   border-top: 1px solid rgba(34, 36, 38, 0.15);
   background: #F9FAFB;
   text-align: inherit;
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(0, 0, 0, 0.87);
   padding: 0.78571429em 0.78571429em;
   vertical-align: middle;
   font-style: normal;
@@ -368,13 +368,13 @@
 
 .ui.table tr.active,
 .ui.table td.active {
-  -webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.8) inset;
-          box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.8) inset;
+  -webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.87) inset;
+          box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.87) inset;
 }
 .ui.table tr.active,
 .ui.table td.active {
   background: #E0E0E0 !important;
-  color: rgba(0, 0, 0, 0.8) !important;
+  color: rgba(0, 0, 0, 0.87) !important;
 }
 
 /*--------------
@@ -507,7 +507,7 @@
 }
 .ui.selectable.inverted.table tbody tr:hover,
 .ui.inverted.table tbody tr td.selectable:hover {
-  background: rgba(255, 255, 255, 0.05) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
   color: #ffffff !important;
 }
 
@@ -538,7 +538,7 @@
 .ui.table tr td.selectable.active:hover,
 .ui.selectable.table tr:hover td.active {
   background: #E0E0E0 !important;
-  color: rgba(0, 0, 0, 0.8) !important;
+  color: rgba(0, 0, 0, 0.87) !important;
 }
 .ui.selectable.table tr.positive:hover,
 .ui.table tr td.selectable.positive:hover,
@@ -643,28 +643,28 @@
 
 /* Red */
 .ui.red.table {
-  border-top: 0.2em solid #FF4136;
+  border-top: 0.2em solid #DB2828;
 }
 .ui.inverted.red.table {
-  background-color: #FF4136 !important;
+  background-color: #DB2828 !important;
   color: #FFFFFF !important;
 }
 
 /* Orange */
 .ui.orange.table {
-  border-top: 0.2em solid #FF851B;
+  border-top: 0.2em solid #F2711C;
 }
 .ui.inverted.orange.table {
-  background-color: #FF851B !important;
+  background-color: #F2711C !important;
   color: #FFFFFF !important;
 }
 
 /* Yellow */
 .ui.yellow.table {
-  border-top: 0.2em solid #FFCB08;
+  border-top: 0.2em solid #FBBD08;
 }
 .ui.inverted.yellow.table {
-  background-color: #FFCB08 !important;
+  background-color: #FBBD08 !important;
   color: #FFFFFF !important;
 }
 
@@ -679,28 +679,28 @@
 
 /* Green */
 .ui.green.table {
-  border-top: 0.2em solid #2ECC40;
+  border-top: 0.2em solid #21BA45;
 }
 .ui.inverted.green.table {
-  background-color: #2ECC40 !important;
+  background-color: #21BA45 !important;
   color: #FFFFFF !important;
 }
 
 /* Teal */
 .ui.teal.table {
-  border-top: 0.2em solid #39CCCC;
+  border-top: 0.2em solid #00B5AD;
 }
 .ui.inverted.teal.table {
-  background-color: #39CCCC !important;
+  background-color: #00B5AD !important;
   color: #FFFFFF !important;
 }
 
 /* Blue */
 .ui.blue.table {
-  border-top: 0.2em solid #0074D9;
+  border-top: 0.2em solid #2185D0;
 }
 .ui.inverted.blue.table {
-  background-color: #0074D9 !important;
+  background-color: #2185D0 !important;
   color: #FFFFFF !important;
 }
 
@@ -715,19 +715,19 @@
 
 /* Purple */
 .ui.purple.table {
-  border-top: 0.2em solid #A24096;
+  border-top: 0.2em solid #A333C8;
 }
 .ui.inverted.purple.table {
-  background-color: #A24096 !important;
+  background-color: #A333C8 !important;
   color: #FFFFFF !important;
 }
 
 /* Pink */
 .ui.pink.table {
-  border-top: 0.2em solid #D9499A;
+  border-top: 0.2em solid #E03997;
 }
 .ui.inverted.pink.table {
-  background-color: #D9499A !important;
+  background-color: #E03997 !important;
   color: #FFFFFF !important;
 }
 
@@ -742,19 +742,19 @@
 
 /* Grey */
 .ui.grey.table {
-  border-top: 0.2em solid #CCCCCC;
+  border-top: 0.2em solid #767676;
 }
 .ui.inverted.grey.table {
-  background-color: #CCCCCC !important;
+  background-color: #767676 !important;
   color: #FFFFFF !important;
 }
 
 /* Black */
 .ui.black.table {
-  border-top: 0.2em solid #191919;
+  border-top: 0.2em solid #1B1C1D;
 }
 .ui.inverted.black.table {
-  background-color: #191919 !important;
+  background-color: #1B1C1D !important;
   color: #FFFFFF !important;
 }
 
@@ -887,7 +887,7 @@
   cursor: pointer;
   white-space: nowrap;
   border-left: 1px solid rgba(34, 36, 38, 0.15);
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(0, 0, 0, 0.87);
 }
 .ui.sortable.table thead th:first-child {
   border-left: none;
@@ -945,15 +945,15 @@
 
 /* Inverted */
 .ui.inverted.sortable.table thead th.sorted {
-  background: rgba(255, 255, 255, 0.01) -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(0, 0, 0, 0.05)));
-  background: rgba(255, 255, 255, 0.01) -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.05));
-  background: rgba(255, 255, 255, 0.01) linear-gradient(transparent, rgba(0, 0, 0, 0.05));
+  background: rgba(255, 255, 255, 0.15) -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(0, 0, 0, 0.05)));
+  background: rgba(255, 255, 255, 0.15) -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.05));
+  background: rgba(255, 255, 255, 0.15) linear-gradient(transparent, rgba(0, 0, 0, 0.05));
   color: #ffffff;
 }
 .ui.inverted.sortable.table thead th:hover {
-  background: rgba(255, 255, 255, 0.05) -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(0, 0, 0, 0.05)));
-  background: rgba(255, 255, 255, 0.05) -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.05));
-  background: rgba(255, 255, 255, 0.05) linear-gradient(transparent, rgba(0, 0, 0, 0.05));
+  background: rgba(255, 255, 255, 0.08) -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(0, 0, 0, 0.05)));
+  background: rgba(255, 255, 255, 0.08) -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.05));
+  background: rgba(255, 255, 255, 0.08) linear-gradient(transparent, rgba(0, 0, 0, 0.05));
   color: #ffffff;
 }
 .ui.inverted.sortable.table thead th {
@@ -994,7 +994,7 @@
   background: #FFFFFF;
 }
 .ui.inverted.definition.table tr td:first-child {
-  background: rgba(255, 255, 255, 0.01);
+  background: rgba(255, 255, 255, 0.02);
   color: #ffffff;
 }
 

@@ -19,11 +19,11 @@
   border: none;
   margin: calc(2rem -  0.14285714em ) 0em 1rem;
   padding: 0em 0em;
-  font-family: "Open Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-weight: bold;
   line-height: 1.28571429em;
   text-transform: none;
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(0, 0, 0, 0.87);
 }
 .ui.header:first-child {
   margin-top: -0.14285714em;
@@ -327,13 +327,13 @@ h5.ui.header .sub.header {
 /*--- Red ---*/
 
 .ui.red.header {
-  color: #FF4136 !important;
+  color: #DB2828 !important;
 }
 a.ui.red.header:hover {
-  color: #ff291c !important;
+  color: #d01919 !important;
 }
 .ui.red.dividing.header {
-  border-bottom: 2px solid #FF4136;
+  border-bottom: 2px solid #DB2828;
 }
 
 /* Inverted */
@@ -347,13 +347,13 @@ a.ui.inverted.red.header:hover {
 /*--- Orange ---*/
 
 .ui.orange.header {
-  color: #FF851B !important;
+  color: #F2711C !important;
 }
 a.ui.orange.header:hover {
-  color: #ff7701 !important;
+  color: #f26202 !important;
 }
 .ui.orange.dividing.header {
-  border-bottom: 2px solid #FF851B;
+  border-bottom: 2px solid #F2711C;
 }
 
 /* Inverted */
@@ -387,13 +387,13 @@ a.ui.inverted.olive.header:hover {
 /*--- Yellow ---*/
 
 .ui.yellow.header {
-  color: #FFCB08 !important;
+  color: #FBBD08 !important;
 }
 a.ui.yellow.header:hover {
-  color: #edbb00 !important;
+  color: #eaae00 !important;
 }
 .ui.yellow.dividing.header {
-  border-bottom: 2px solid #FFCB08;
+  border-bottom: 2px solid #FBBD08;
 }
 
 /* Inverted */
@@ -407,13 +407,13 @@ a.ui.inverted.yellow.header:hover {
 /*--- Green ---*/
 
 .ui.green.header {
-  color: #2ECC40 !important;
+  color: #21BA45 !important;
 }
 a.ui.green.header:hover {
-  color: #22be34 !important;
+  color: #16ab39 !important;
 }
 .ui.green.dividing.header {
-  border-bottom: 2px solid #2ECC40;
+  border-bottom: 2px solid #21BA45;
 }
 
 /* Inverted */
@@ -427,13 +427,13 @@ a.ui.inverted.green.header:hover {
 /*--- Teal ---*/
 
 .ui.teal.header {
-  color: #39CCCC !important;
+  color: #00B5AD !important;
 }
 a.ui.teal.header:hover {
-  color: #29c2c2 !important;
+  color: #009c95 !important;
 }
 .ui.teal.dividing.header {
-  border-bottom: 2px solid #39CCCC;
+  border-bottom: 2px solid #00B5AD;
 }
 
 /* Inverted */
@@ -447,13 +447,13 @@ a.ui.inverted.teal.header:hover {
 /*--- Blue ---*/
 
 .ui.blue.header {
-  color: #0074D9 !important;
+  color: #2185D0 !important;
 }
 a.ui.blue.header:hover {
-  color: #0066c0 !important;
+  color: #1678c2 !important;
 }
 .ui.blue.dividing.header {
-  border-bottom: 2px solid #0074D9;
+  border-bottom: 2px solid #2185D0;
 }
 
 /* Inverted */
@@ -487,33 +487,33 @@ a.ui.inverted.violet.header:hover {
 /*--- Purple ---*/
 
 .ui.purple.header {
-  color: #A24096 !important;
+  color: #A333C8 !important;
 }
 a.ui.purple.header:hover {
-  color: #943488 !important;
+  color: #9627ba !important;
 }
 .ui.purple.dividing.header {
-  border-bottom: 2px solid #A24096;
+  border-bottom: 2px solid #A333C8;
 }
 
 /* Inverted */
 .ui.inverted.purple.header {
-  color: #CDC6FF !important;
+  color: #DC73FF !important;
 }
 a.ui.inverted.purple.header:hover {
-  color: #b7acff !important;
+  color: #d65aff !important;
 }
 
 /*--- Pink ---*/
 
 .ui.pink.header {
-  color: #D9499A !important;
+  color: #E03997 !important;
 }
 a.ui.pink.header:hover {
-  color: #dd2c8f !important;
+  color: #e61a8d !important;
 }
 .ui.pink.dividing.header {
-  border-bottom: 2px solid #D9499A;
+  border-bottom: 2px solid #E03997;
 }
 
 /* Inverted */
@@ -547,13 +547,13 @@ a.ui.inverted.brown.header:hover {
 /*--- Grey ---*/
 
 .ui.grey.header {
-  color: #CCCCCC !important;
+  color: #767676 !important;
 }
 a.ui.grey.header:hover {
-  color: #d9d9d9 !important;
+  color: #838383 !important;
 }
 .ui.grey.dividing.header {
-  border-bottom: 2px solid #CCCCCC;
+  border-bottom: 2px solid #767676;
 }
 
 /* Inverted */
@@ -713,6 +713,12 @@ a.ui.inverted.grey.header:hover {
 .ui.header:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) {
   font-size: 1.28571429em;
 }
+
+
+/*******************************
+         Theme Overrides
+*******************************/
+
 
 
 /*******************************

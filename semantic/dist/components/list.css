@@ -159,9 +159,9 @@ ol.ui.list ol li,
 .ui.list > .item .header {
   display: block;
   margin: 0em;
-  font-family: "Open Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-weight: bold;
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(0, 0, 0, 0.87);
 }
 
 /* Description */
@@ -181,11 +181,11 @@ ol.ui.list ol li,
 .ui.list .list > a.item,
 .ui.list > a.item {
   cursor: pointer;
-  color: #009FDA;
+  color: #4183C4;
 }
 .ui.list .list > a.item:hover,
 .ui.list > a.item:hover {
-  color: #00b2f3;
+  color: #1e70bf;
 }
 
 /* Linked Item Icons */
@@ -198,11 +198,11 @@ ol.ui.list ol li,
 .ui.list .list > .item a.header,
 .ui.list > .item a.header {
   cursor: pointer;
-  color: #009FDA !important;
+  color: #4183C4 !important;
 }
 .ui.list .list > .item a.header:hover,
 .ui.list > .item a.header:hover {
-  color: #00b2f3 !important;
+  color: #1e70bf !important;
 }
 
 /* Floated Content */
@@ -332,7 +332,7 @@ ol.ui.list ol li,
 
 .ui.list .list > a.item:hover .icon,
 .ui.list > a.item:hover .icon {
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(0, 0, 0, 0.87);
 }
 
 
@@ -366,7 +366,7 @@ ol.ui.list ol li,
 }
 .ui.inverted.list .list > a.item:hover,
 .ui.inverted.list > a.item:hover {
-  color: #00b2f3;
+  color: #1e70bf;
 }
 
 /* Linking Content */
@@ -374,7 +374,7 @@ ol.ui.list ol li,
   color: rgba(255, 255, 255, 0.9) !important;
 }
 .ui.inverted.list .item a:not(.ui):hover {
-  color: #00b2f3 !important;
+  color: #1e70bf !important;
 }
 
 /*-------------------
@@ -483,17 +483,17 @@ ol.ui.list ol li,
 }
 .ui.inverted.selection.list > .item:hover,
 .ui.inverted.selection.list > .item:hover {
-  background: rgba(255, 255, 255, 0.01);
+  background: rgba(255, 255, 255, 0.02);
   color: #ffffff;
 }
 .ui.inverted.selection.list > .item:active,
 .ui.inverted.selection.list > .item:active {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.08);
   color: #ffffff;
 }
 .ui.inverted.selection.list > .item.active,
 .ui.inverted.selection.list > .item.active {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.08);
   color: #ffffff;
 }
 
@@ -566,7 +566,7 @@ ul.ui.list li:before,
 ul.ui.list li:before,
 .ui.bulleted.list .list > a.item:before,
 .ui.bulleted.list > a.item:before {
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(0, 0, 0, 0.87);
 }
 ul.ui.list ul,
 .ui.bulleted.list .list {
@@ -588,7 +588,7 @@ ul.ui.horizontal.bulleted.list li:first-child,
 }
 ul.ui.horizontal.bulleted.list li::before,
 .ui.horizontal.bulleted.list > .item::before {
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(0, 0, 0, 0.87);
 }
 ul.ui.horizontal.bulleted.list li:first-child::before,
 .ui.horizontal.bulleted.list > .item:first-child::before {
@@ -628,7 +628,7 @@ ol.ui.list li:before,
   counter-increment: ordered;
   content: counters(ordered, ".") " ";
   text-align: right;
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(0, 0, 0, 0.87);
   vertical-align: middle;
   opacity: 0.8;
 }
@@ -937,6 +937,12 @@ ol.ui.horizontal.list li:before,
 .ui.massive.horizontal.list > .item {
   font-size: 1.71428571rem;
 }
+
+
+/*******************************
+         Theme Overrides
+*******************************/
+
 
 
 /*******************************

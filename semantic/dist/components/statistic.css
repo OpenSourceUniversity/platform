@@ -102,11 +102,11 @@
 
 .ui.statistics .statistic > .value,
 .ui.statistic > .value {
-  font-family: "Open Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-size: 4rem;
   font-weight: normal;
   line-height: 1em;
-  color: #191919;
+  color: #1B1C1D;
   text-transform: uppercase;
   text-align: center;
 }
@@ -117,10 +117,10 @@
 
 .ui.statistics .statistic > .label,
 .ui.statistic > .label {
-  font-family: "Open Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-size: 1em;
   font-weight: bold;
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(0, 0, 0, 0.87);
   text-transform: uppercase;
   text-align: center;
 }
@@ -320,17 +320,17 @@
 .ui.red.statistics .statistic > .value,
 .ui.statistics .red.statistic > .value,
 .ui.red.statistic > .value {
-  color: #FF4136;
+  color: #DB2828;
 }
 .ui.orange.statistics .statistic > .value,
 .ui.statistics .orange.statistic > .value,
 .ui.orange.statistic > .value {
-  color: #FF851B;
+  color: #F2711C;
 }
 .ui.yellow.statistics .statistic > .value,
 .ui.statistics .yellow.statistic > .value,
 .ui.yellow.statistic > .value {
-  color: #FFCB08;
+  color: #FBBD08;
 }
 .ui.olive.statistics .statistic > .value,
 .ui.statistics .olive.statistic > .value,
@@ -340,17 +340,17 @@
 .ui.green.statistics .statistic > .value,
 .ui.statistics .green.statistic > .value,
 .ui.green.statistic > .value {
-  color: #2ECC40;
+  color: #21BA45;
 }
 .ui.teal.statistics .statistic > .value,
 .ui.statistics .teal.statistic > .value,
 .ui.teal.statistic > .value {
-  color: #39CCCC;
+  color: #00B5AD;
 }
 .ui.blue.statistics .statistic > .value,
 .ui.statistics .blue.statistic > .value,
 .ui.blue.statistic > .value {
-  color: #0074D9;
+  color: #2185D0;
 }
 .ui.violet.statistics .statistic > .value,
 .ui.statistics .violet.statistic > .value,
@@ -360,12 +360,12 @@
 .ui.purple.statistics .statistic > .value,
 .ui.statistics .purple.statistic > .value,
 .ui.purple.statistic > .value {
-  color: #A24096;
+  color: #A333C8;
 }
 .ui.pink.statistics .statistic > .value,
 .ui.statistics .pink.statistic > .value,
 .ui.pink.statistic > .value {
-  color: #D9499A;
+  color: #E03997;
 }
 .ui.brown.statistics .statistic > .value,
 .ui.statistics .brown.statistic > .value,
@@ -375,7 +375,7 @@
 .ui.grey.statistics .statistic > .value,
 .ui.statistics .grey.statistic > .value,
 .ui.grey.statistic > .value {
-  color: #CCCCCC;
+  color: #767676;
 }
 
 /*--------------
@@ -433,7 +433,7 @@
 .ui.inverted.purple.statistics .statistic > .value,
 .ui.statistics .inverted.purple.statistic > .value,
 .ui.inverted.purple.statistic > .value {
-  color: #CDC6FF;
+  color: #DC73FF;
 }
 .ui.inverted.pink.statistics .statistic > .value,
 .ui.statistics .inverted.pink.statistic > .value,
@@ -555,6 +555,12 @@
 .ui.huge.statistic > .text.value {
   font-size: 2.5rem !important;
 }
+
+
+/*******************************
+         Theme Overrides
+*******************************/
+
 
 
 /*******************************

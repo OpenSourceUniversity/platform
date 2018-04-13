@@ -189,7 +189,7 @@
     padding-right: 2em;
   }
 }
-@media only screen and (min-width: 992px) and (max-width: 1399px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
   .ui.page.grid {
     width: auto;
     margin-left: 0em;
@@ -198,7 +198,7 @@
     padding-right: 3%;
   }
 }
-@media only screen and (min-width: 1400px) and (max-width: 1899px) {
+@media only screen and (min-width: 1200px) and (max-width: 1919px) {
   .ui.page.grid {
     width: auto;
     margin-left: 0em;
@@ -207,7 +207,7 @@
     padding-right: 15%;
   }
 }
-@media only screen and (min-width: 1900px) {
+@media only screen and (min-width: 1920px) {
   .ui.page.grid {
     width: auto;
     margin-left: 0em;
@@ -759,7 +759,7 @@
 }
 
 /* Large Monitor Sizing Combinations */
-@media only screen and (min-width: 1400px) and (max-width: 1899px) {
+@media only screen and (min-width: 1200px) and (max-width: 1919px) {
   .ui.grid > .row > [class*="one wide large screen"].column,
   .ui.grid > .column.row > [class*="one wide large screen"].column,
   .ui.grid > [class*="one wide large screen"].column,
@@ -859,7 +859,7 @@
 }
 
 /* Widescreen Sizing Combinations */
-@media only screen and (min-width: 1900px) {
+@media only screen and (min-width: 1920px) {
   .ui.grid > .row > [class*="one wide widescreen"].column,
   .ui.grid > .column.row > [class*="one wide widescreen"].column,
   .ui.grid > [class*="one wide widescreen"].column,
@@ -1352,7 +1352,7 @@
 .ui.grid > .red.row,
 .ui.grid > .red.column,
 .ui.grid > .row > .red.column {
-  background-color: #FF4136 !important;
+  background-color: #DB2828 !important;
   color: #FFFFFF;
 }
 
@@ -1360,7 +1360,7 @@
 .ui.grid > .orange.row,
 .ui.grid > .orange.column,
 .ui.grid > .row > .orange.column {
-  background-color: #FF851B !important;
+  background-color: #F2711C !important;
   color: #FFFFFF;
 }
 
@@ -1368,7 +1368,7 @@
 .ui.grid > .yellow.row,
 .ui.grid > .yellow.column,
 .ui.grid > .row > .yellow.column {
-  background-color: #FFCB08 !important;
+  background-color: #FBBD08 !important;
   color: #FFFFFF;
 }
 
@@ -1384,7 +1384,7 @@
 .ui.grid > .green.row,
 .ui.grid > .green.column,
 .ui.grid > .row > .green.column {
-  background-color: #2ECC40 !important;
+  background-color: #21BA45 !important;
   color: #FFFFFF;
 }
 
@@ -1392,7 +1392,7 @@
 .ui.grid > .teal.row,
 .ui.grid > .teal.column,
 .ui.grid > .row > .teal.column {
-  background-color: #39CCCC !important;
+  background-color: #00B5AD !important;
   color: #FFFFFF;
 }
 
@@ -1400,7 +1400,7 @@
 .ui.grid > .blue.row,
 .ui.grid > .blue.column,
 .ui.grid > .row > .blue.column {
-  background-color: #0074D9 !important;
+  background-color: #2185D0 !important;
   color: #FFFFFF;
 }
 
@@ -1416,7 +1416,7 @@
 .ui.grid > .purple.row,
 .ui.grid > .purple.column,
 .ui.grid > .row > .purple.column {
-  background-color: #A24096 !important;
+  background-color: #A333C8 !important;
   color: #FFFFFF;
 }
 
@@ -1424,7 +1424,7 @@
 .ui.grid > .pink.row,
 .ui.grid > .pink.column,
 .ui.grid > .row > .pink.column {
-  background-color: #D9499A !important;
+  background-color: #E03997 !important;
   color: #FFFFFF;
 }
 
@@ -1440,7 +1440,7 @@
 .ui.grid > .grey.row,
 .ui.grid > .grey.column,
 .ui.grid > .row > .grey.column {
-  background-color: #CCCCCC !important;
+  background-color: #767676 !important;
   color: #FFFFFF;
 }
 
@@ -1448,7 +1448,7 @@
 .ui.grid > .black.row,
 .ui.grid > .black.column,
 .ui.grid > .row > .black.column {
-  background-color: #191919 !important;
+  background-color: #1B1C1D !important;
   color: #FFFFFF;
 }
 
@@ -1961,7 +1961,7 @@
 }
 
 /* Computer Only Hide */
-@media only screen and (min-width: 992px) and (max-width: 1399px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
   .ui[class*="mobile only"].grid.grid.grid:not(.computer),
   .ui.grid.grid.grid > [class*="mobile only"].row:not(.computer),
   .ui.grid.grid.grid > [class*="mobile only"].column:not(.computer),
@@ -1989,7 +1989,7 @@
 }
 
 /* Large Screen Only Hide */
-@media only screen and (min-width: 1400px) and (max-width: 1899px) {
+@media only screen and (min-width: 1200px) and (max-width: 1919px) {
   .ui[class*="mobile only"].grid.grid.grid:not(.computer),
   .ui.grid.grid.grid > [class*="mobile only"].row:not(.computer),
   .ui.grid.grid.grid > [class*="mobile only"].column:not(.computer),
@@ -2011,7 +2011,7 @@
 }
 
 /* Widescreen Only Hide */
-@media only screen and (min-width: 1900px) {
+@media only screen and (min-width: 1920px) {
   .ui[class*="mobile only"].grid.grid.grid:not(.computer),
   .ui.grid.grid.grid > [class*="mobile only"].row:not(.computer),
   .ui.grid.grid.grid > [class*="mobile only"].column:not(.computer),
@@ -2025,6 +2025,12 @@
     display: none !important;
   }
 }
+
+
+/*******************************
+         Theme Overrides
+*******************************/
+
 
 
 /*******************************

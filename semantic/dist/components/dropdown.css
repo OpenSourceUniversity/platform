@@ -115,7 +115,7 @@
   text-align: left;
   border-top: none;
   line-height: 1em;
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(0, 0, 0, 0.87);
   padding: 0.78571429rem 1.14285714rem !important;
   font-size: 1rem;
   text-transform: none;
@@ -359,7 +359,7 @@
   background: #FFFFFF;
   display: inline-block;
   padding: 0.78571429em 2.1em 0.78571429em 1em;
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(0, 0, 0, 0.87);
   -webkit-box-shadow: none;
           box-shadow: none;
   border: 1px solid rgba(34, 36, 38, 0.15);
@@ -448,7 +448,7 @@ select.ui.dropdown {
     max-height: 16.02857143rem;
   }
 }
-@media only screen and (min-width: 1900px) {
+@media only screen and (min-width: 1920px) {
   .ui.selection.dropdown .menu {
     max-height: 21.37142857rem;
   }
@@ -608,7 +608,7 @@ select.ui.dropdown {
   opacity: 0.45;
 }
 .ui.active.search.dropdown input.search:focus + .text {
-  color: rgba(115, 115, 115, 0.8) !important;
+  color: rgba(115, 115, 115, 0.87) !important;
 }
 
 /* Search Menu */
@@ -634,7 +634,7 @@ select.ui.dropdown {
     max-height: 16.02857143rem;
   }
 }
-@media only screen and (min-width: 1900px) {
+@media only screen and (min-width: 1920px) {
   .ui.search.dropdown .menu {
     max-height: 21.37142857rem;
   }
@@ -816,7 +816,7 @@ select.ui.dropdown {
   -webkit-animation-iteration-count: infinite;
           animation-iteration-count: infinite;
   border-radius: 500rem;
-  border-color: #CCCCCC transparent transparent;
+  border-color: #767676 transparent transparent;
   border-style: solid;
   border-width: 0.2em;
 }
@@ -853,11 +853,11 @@ select.ui.dropdown {
 
 .ui.dropdown:not(.button) > .default.text,
 .ui.default.dropdown:not(.button) > .text {
-  color: rgba(191, 191, 191, 0.8);
+  color: rgba(191, 191, 191, 0.87);
 }
 .ui.dropdown:not(.button) > input:focus ~ .default.text,
 .ui.default.dropdown:not(.button) > input:focus ~ .text {
-  color: rgba(115, 115, 115, 0.8);
+  color: rgba(115, 115, 115, 0.87);
 }
 
 /*--------------------
@@ -1146,7 +1146,7 @@ select.ui.dropdown {
     max-height: 20.57142857rem;
   }
 }
-@media only screen and (min-width: 1900px) {
+@media only screen and (min-width: 1920px) {
   .ui.scrolling.dropdown .menu,
   .ui.dropdown .scrolling.menu {
     max-height: 20.57142857rem;
@@ -1440,6 +1440,65 @@ select.ui.dropdown {
   -webkit-box-shadow: -1px -1px 0px 0px rgba(34, 36, 38, 0.15);
           box-shadow: -1px -1px 0px 0px rgba(34, 36, 38, 0.15);
 }
+
+
+/*******************************
+         Theme Overrides
+*******************************/
+
+
+/* Dropdown Carets */
+@font-face {
+  font-family: 'Dropdown';
+  src: url(data:application/x-font-ttf;charset=utf-8;base64,AAEAAAALAIAAAwAwT1MvMggjB5AAAAC8AAAAYGNtYXAPfuIIAAABHAAAAExnYXNwAAAAEAAAAWgAAAAIZ2x5Zjo82LgAAAFwAAABVGhlYWQAQ88bAAACxAAAADZoaGVhAwcB6QAAAvwAAAAkaG10eAS4ABIAAAMgAAAAIGxvY2EBNgDeAAADQAAAABJtYXhwAAoAFgAAA1QAAAAgbmFtZVcZpu4AAAN0AAABRXBvc3QAAwAAAAAEvAAAACAAAwIAAZAABQAAAUwBZgAAAEcBTAFmAAAA9QAZAIQAAAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAAAAAAAABAAADw2gHg/+D/4AHgACAAAAABAAAAAAAAAAAAAAAgAAAAAAACAAAAAwAAABQAAwABAAAAFAAEADgAAAAKAAgAAgACAAEAIPDa//3//wAAAAAAIPDX//3//wAB/+MPLQADAAEAAAAAAAAAAAAAAAEAAf//AA8AAQAAAAAAAAAAAAIAADc5AQAAAAABAAAAAAAAAAAAAgAANzkBAAAAAAEAAAAAAAAAAAACAAA3OQEAAAAAAQAAAIABJQElABMAABM0NzY3BTYXFhUUDwEGJwYvASY1AAUGBwEACAUGBoAFCAcGgAUBEgcGBQEBAQcECQYHfwYBAQZ/BwYAAQAAAG4BJQESABMAADc0PwE2MzIfARYVFAcGIyEiJyY1AAWABgcIBYAGBgUI/wAHBgWABwaABQWABgcHBgUFBgcAAAABABIASQC3AW4AEwAANzQ/ATYXNhcWHQEUBwYnBi8BJjUSBoAFCAcFBgYFBwgFgAbbBwZ/BwEBBwQJ/wgEBwEBB38GBgAAAAABAAAASQClAW4AEwAANxE0NzYzMh8BFhUUDwEGIyInJjUABQYHCAWABgaABQgHBgVbAQAIBQYGgAUIBwWABgYFBwAAAAEAAAABAADZuaKOXw889QALAgAAAAAA0ABHWAAAAADQAEdYAAAAAAElAW4AAAAIAAIAAAAAAAAAAQAAAeD/4AAAAgAAAAAAASUAAQAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAABAAAAASUAAAElAAAAtwASALcAAAAAAAAACgAUAB4AQgBkAIgAqgAAAAEAAAAIABQAAQAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAOAK4AAQAAAAAAAQAOAAAAAQAAAAAAAgAOAEcAAQAAAAAAAwAOACQAAQAAAAAABAAOAFUAAQAAAAAABQAWAA4AAQAAAAAABgAHADIAAQAAAAAACgA0AGMAAwABBAkAAQAOAAAAAwABBAkAAgAOAEcAAwABBAkAAwAOACQAAwABBAkABAAOAFUAAwABBAkABQAWAA4AAwABBAkABgAOADkAAwABBAkACgA0AGMAaQBjAG8AbQBvAG8AbgBWAGUAcgBzAGkAbwBuACAAMQAuADAAaQBjAG8AbQBvAG8Abmljb21vb24AaQBjAG8AbQBvAG8AbgBSAGUAZwB1AGwAYQByAGkAYwBvAG0AbwBvAG4ARgBvAG4AdAAgAGcAZQBuAGUAcgBhAHQAZQBkACAAYgB5ACAASQBjAG8ATQBvAG8AbgAuAAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=) format('truetype'), url(data:application/font-woff;charset=utf-8;base64,d09GRk9UVE8AAAVwAAoAAAAABSgAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABDRkYgAAAA9AAAAdkAAAHZLDXE/09TLzIAAALQAAAAYAAAAGAIIweQY21hcAAAAzAAAABMAAAATA9+4ghnYXNwAAADfAAAAAgAAAAIAAAAEGhlYWQAAAOEAAAANgAAADYAQ88baGhlYQAAA7wAAAAkAAAAJAMHAelobXR4AAAD4AAAACAAAAAgBLgAEm1heHAAAAQAAAAABgAAAAYACFAAbmFtZQAABAgAAAFFAAABRVcZpu5wb3N0AAAFUAAAACAAAAAgAAMAAAEABAQAAQEBCGljb21vb24AAQIAAQA6+BwC+BsD+BgEHgoAGVP/i4seCgAZU/+LiwwHi2v4lPh0BR0AAACIDx0AAACNER0AAAAJHQAAAdASAAkBAQgPERMWGyAlKmljb21vb25pY29tb29udTB1MXUyMHVGMEQ3dUYwRDh1RjBEOXVGMERBAAACAYkABgAIAgABAAQABwAKAA0AVgCfAOgBL/yUDvyUDvyUDvuUDvtvi/emFYuQjZCOjo+Pj42Qiwj3lIsFkIuQiY6Hj4iNhouGi4aJh4eHCPsU+xQFiIiGiYaLhouHjYeOCPsU9xQFiI+Jj4uQCA77b4v3FBWLkI2Pjo8I9xT3FAWPjo+NkIuQi5CJjogI9xT7FAWPh42Hi4aLhomHh4eIiIaJhosI+5SLBYaLh42HjoiPiY+LkAgO+92d928Vi5CNkI+OCPcU9xQFjo+QjZCLkIuPiY6Hj4iNhouGCIv7lAWLhomHh4iIh4eJhouGi4aNiI8I+xT3FAWHjomPi5AIDvvdi+YVi/eUBYuQjZCOjo+Pj42Qi5CLkImOhwj3FPsUBY+IjYaLhouGiYeHiAj7FPsUBYiHhomGi4aLh42Hj4iOiY+LkAgO+JQU+JQViwwKAAAAAAMCAAGQAAUAAAFMAWYAAABHAUwBZgAAAPUAGQCEAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAAAAAAAAQAAA8NoB4P/g/+AB4AAgAAAAAQAAAAAAAAAAAAAAIAAAAAAAAgAAAAMAAAAUAAMAAQAAABQABAA4AAAACgAIAAIAAgABACDw2v/9//8AAAAAACDw1//9//8AAf/jDy0AAwABAAAAAAAAAAAAAAABAAH//wAPAAEAAAABAAA5emozXw889QALAgAAAAAA0ABHWAAAAADQAEdYAAAAAAElAW4AAAAIAAIAAAAAAAAAAQAAAeD/4AAAAgAAAAAAASUAAQAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAABAAAAASUAAAElAAAAtwASALcAAAAAUAAACAAAAAAADgCuAAEAAAAAAAEADgAAAAEAAAAAAAIADgBHAAEAAAAAAAMADgAkAAEAAAAAAAQADgBVAAEAAAAAAAUAFgAOAAEAAAAAAAYABwAyAAEAAAAAAAoANABjAAMAAQQJAAEADgAAAAMAAQQJAAIADgBHAAMAAQQJAAMADgAkAAMAAQQJAAQADgBVAAMAAQQJAAUAFgAOAAMAAQQJAAYADgA5AAMAAQQJAAoANABjAGkAYwBvAG0AbwBvAG4AVgBlAHIAcwBpAG8AbgAgADEALgAwAGkAYwBvAG0AbwBvAG5pY29tb29uAGkAYwBvAG0AbwBvAG4AUgBlAGcAdQBsAGEAcgBpAGMAbwBtAG8AbwBuAEYAbwBuAHQAIABnAGUAbgBlAHIAYQB0AGUAZAAgAGIAeQAgAEkAYwBvAE0AbwBvAG4ALgAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA) format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+.ui.dropdown > .dropdown.icon {
+  font-family: 'Dropdown';
+  line-height: 1;
+  height: 1em;
+  width: 1.23em;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  font-weight: normal;
+  font-style: normal;
+  text-align: center;
+}
+.ui.dropdown > .dropdown.icon {
+  width: auto;
+}
+.ui.dropdown > .dropdown.icon:before {
+  content: '\f0d7';
+}
+
+/* Sub Menu */
+.ui.dropdown .menu .item .dropdown.icon:before {
+  content: '\f0da' /*rtl:'\f0d9'*/;
+}
+.ui.dropdown .item .left.dropdown.icon:before,
+.ui.dropdown .left.menu .item .dropdown.icon:before {
+  content: "\f0d9" /*rtl:"\f0da"*/;
+}
+
+/* Vertical Menu Dropdown */
+.ui.vertical.menu .dropdown.item > .dropdown.icon:before {
+  content: "\f0da" /*rtl:"\f0d9"*/;
+}
+/* Icons for Reference
+.dropdown.down.icon {
+  content: "\f0d7";
+}
+.dropdown.up.icon {
+  content: "\f0d8";
+}
+.dropdown.left.icon {
+  content: "\f0d9";
+}
+.dropdown.icon.icon {
+  content: "\f0da";
+}
+*/
 
 
 /*******************************

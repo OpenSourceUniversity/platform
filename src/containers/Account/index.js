@@ -27,7 +27,7 @@ export default class AccountSettings extends React.Component {
                     </Form.Group>
                     <Checkbox label="Make my profile paid" toggle defaultChecked />
                     <Divider hidden />
-                    <Button type="submit">Submit</Button>
+                    <Button type="submit">Save Changes</Button>
                   </Form>
                 </Segment>
               </Sticky>

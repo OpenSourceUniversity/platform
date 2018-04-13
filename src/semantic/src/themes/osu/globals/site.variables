@@ -47,7 +47,7 @@
     Brand Colors
 --------------------*/
 
-@primaryColor        : @blue;
+@primaryColor        : @orange;
 @secondaryColor      : @black;
 
 @lightPrimaryColor   : @lightBlue;
@@ -374,8 +374,8 @@
 --------------------*/
 
 /* For source only. Modified in gulp for dist */
-@imagePath : '../../themes/default/assets/images';
-@fontPath  : '../../themes/default/assets/fonts';
+@imagePath : '../../themes/osu/assets/images';
+@fontPath  : '../../themes/osu/assets/fonts';
 
 /*-------------------
        Em Sizes

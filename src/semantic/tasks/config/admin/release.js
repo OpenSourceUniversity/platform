@@ -10,7 +10,7 @@ module.exports = {
 
   // modified asset paths for component repos
   paths: {
-    source : '../themes/default/assets/',
+    source : '../themes/osu/assets/',
     output : 'assets/'
   },
 

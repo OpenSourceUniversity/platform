@@ -17,14 +17,14 @@ Package.onUse(function(api) {
 
   api.addFiles([
     // icons
-    'themes/default/assets/fonts/icons.eot',
-    'themes/default/assets/fonts/icons.svg',
-    'themes/default/assets/fonts/icons.ttf',
-    'themes/default/assets/fonts/icons.woff',
-    'themes/default/assets/fonts/icons.woff2',
+    'themes/osu/assets/fonts/icons.eot',
+    'themes/osu/assets/fonts/icons.svg',
+    'themes/osu/assets/fonts/icons.ttf',
+    'themes/osu/assets/fonts/icons.woff',
+    'themes/osu/assets/fonts/icons.woff2',
 
     // flags
-    'themes/default/assets/images/flags.png',
+    'themes/osu/assets/images/flags.png',
 
     // release
     'semantic.css',

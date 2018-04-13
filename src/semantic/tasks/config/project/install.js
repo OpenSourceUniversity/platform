@@ -246,7 +246,7 @@ module.exports = {
     themeConfig  : './src/theme.config.example',
     themeImport  : './src/theme.less',
     themes       : './src/themes',
-    defaultTheme : './src/themes/default',
+    defaultTheme : './src/themes/osu',
     userGulpFile : './tasks/config/npm/gulpfile.js'
   },
 

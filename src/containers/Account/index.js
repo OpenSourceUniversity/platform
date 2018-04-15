@@ -6,11 +6,14 @@ export default class AccountSettings extends React.Component {
   handleChange = (e, { value }) => this.setState({ value })
 
   render() {
+    let settings = require('../../icons/account_settings.svg');
     return (
       <div>
         <Container fluid>
           <Header size="huge">
-            <Icon name="cogs" />
+            <svg width='44' height='44' className='cogs icon'> 
+              <image href={settings}  x='0' y='0' width='100%' height='100%'></image>
+            </svg>
             Account Settings
           </Header>
 

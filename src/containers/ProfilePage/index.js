@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Header, Divider, Grid, Sticky, Segment, Icon, List } from 'semantic-ui-react';
+import { Container, Header, Divider, Grid, Sticky, Segment, Icon, List, Dropdown, Button } from 'semantic-ui-react';
 import OverviewItem from 'components/ProfileOverviewItem';
 import ProfileAchievement from 'components/ProfileAchievement';
 
@@ -27,21 +27,37 @@ export default class ProfilePage extends React.Component {
   }
 
   render() {
+    const skills = [
+    { key: 'css', value: 'css', text: 'CSS' },
+    { key: 'html', value: 'html', text: 'HTML' },
+    { key: 'c++', value: 'c++', text: 'C++' },
+    { key: 'swift', value: 'swift', text: 'Swift' },
+    { key: 'js', value: 'js', text: 'JavaScript' },
+    { key: 'jquery', value: 'jquery', text: 'jQuery' },
+    { key: 'react', value: 'react', text: 'React' },
+  ];
+  let profile = require('../../icons/account_profile.svg');
     return (
       <div>
-        <Container  fluid>
+        <Container fluid>
           <Header size="huge">
-            <Icon name="user" />
+            <svg width='44' height='44' className='cogs icon'> 
+              <image href={profile}  x='0' y='0' width='100%' height='100%'></image>
+            </svg>
             OS.UNI
           </Header>
-        </Container>
+
 
         <Divider clearing />
 
-        <Container>
+
           <Grid reversed="mobile">
             <Grid.Column width={12}>
               {this.renderAchievement()}
+              <div className='ui very padded segment'>
+                <Dropdown placeholder='Select Skills' fluid multiple search selection options={skills} />
+                <Button primary>Save</Button>
+              </div>
             </Grid.Column>
             <Grid.Column width={4}>
               <Sticky>
@@ -58,6 +74,9 @@ export default class ProfilePage extends React.Component {
           </Grid>
         </Container>
       </div>
+
+        
+
     );
   }
 }

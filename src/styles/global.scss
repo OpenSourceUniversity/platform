@@ -20,6 +20,36 @@ div.App {
       box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.08);
       background-color: #fff;
       padding-bottom: 0;
+      span.explore-icon {
+        white-space: nowrap;
+        i {
+          width: initial;
+        }
+      }
+      div.explore-dropdown div.menu {
+        width: 450px;
+        div.nav-list {
+          display: inline-block !important;
+          width: 50%;
+          border: 1px solid rgba(34, 36, 38, 0.1);
+          div.item {
+            border-bottom: none;
+            padding: 8px 0;
+            font-size: 0.95em;
+          }
+          div.item.active {
+            font-weight: 400 !important;
+          }
+          div.academia, div.businesses {
+              border-bottom: 1px solid rgba(34, 36, 38, 0.1);
+              color: black;
+              margin-bottom: 10px;
+              font-weight: 700;
+              font-size: 1.1em;
+              padding-bottom: 10px;
+            }
+        }
+      }
       div.search-bar {
         margin-left: 3em;
         input {
@@ -42,9 +72,9 @@ div.App {
       }
       div.dropdown {
         div.transition {
-          div:hover {
+          div.item:hover {
             background-color: white;
-            color: #f39c12;
+            color: #f39c12 !important;
           }
           div.balance-nav:hover {
             background-color: white !important;
@@ -56,6 +86,7 @@ div.App {
             background-color: white !important;
           }
           div.item {
+            background: transparent !important;
             border-bottom: 1px solid rgba(34,36,38,.1);
             svg {
               margin-right: 12px;
@@ -82,18 +113,23 @@ div.App {
       -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.08);
       -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.08);
       box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.08);
-      a.item {
-        color: rgba(0,0,0,.6);
+      .menu {
+        box-shadow: none;
+        background: transparent;
+        border: none;
+        a.item {
+          color: rgba(0,0,0,.6);
+        }
+        a:hover {
+          background-color: transparent !important;
+          color: rgba(0,0,0,.9);
+        }
+        a.item.active {
+          color: #f39c12 !important;
+          border-bottom: solid 2px #f39c12 !important;
+          background-color: transparent !important;
+        }
       }
-      a:hover {
-            background-color: transparent !important;
-            color: rgba(0,0,0,.9);
-          }
-      a.item.active {
-            color: #f39c12 !important;
-            border-bottom: solid 2px #f39c12 !important;
-            background-color: transparent !important;
-          }
     }
     .grid {
       width: 102%;

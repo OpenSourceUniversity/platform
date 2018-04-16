@@ -27,15 +27,6 @@ export default class ProfilePage extends React.Component {
   }
 
   render() {
-    const skills = [
-    { key: 'css', value: 'css', text: 'CSS' },
-    { key: 'html', value: 'html', text: 'HTML' },
-    { key: 'c++', value: 'c++', text: 'C++' },
-    { key: 'swift', value: 'swift', text: 'Swift' },
-    { key: 'js', value: 'js', text: 'JavaScript' },
-    { key: 'jquery', value: 'jquery', text: 'jQuery' },
-    { key: 'react', value: 'react', text: 'React' },
-  ];
   let profile = require('../../icons/account_profile.svg');
     return (
       <div>
@@ -54,10 +45,6 @@ export default class ProfilePage extends React.Component {
           <Grid reversed="mobile">
             <Grid.Column width={12}>
               {this.renderAchievement()}
-              <div className='ui very padded segment'>
-                <Dropdown placeholder='Select Skills' fluid multiple search selection options={skills} />
-                <Button primary>Save</Button>
-              </div>
             </Grid.Column>
             <Grid.Column width={4}>
               <Sticky>

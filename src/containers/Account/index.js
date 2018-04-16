@@ -1,80 +1,61 @@
 import React from 'react';
-import { Form, Button, Radio, Checkbox, Container, Header, Divider, Grid, Sticky, Segment, Icon, List } from 'semantic-ui-react';
+import { Switch, Route } from 'react-router-dom';
+import { Button, Container, Header, Divider, Grid, Segment, Icon, Menu, Form } from 'semantic-ui-react';
+import LernersSettings from 'components/LernersSettings';
 
 export default class AccountSettings extends React.Component {
   state = {}
   handleChange = (e, { value }) => this.setState({ value })
 
+  state = { activeItem: 'Learners' }
+
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
   render() {
     let settings = require('../../icons/account_settings.svg');
+    
+  const { activeItem } = this.state
     return (
       <div>
-        <Container fluid>
+        <Container fluid className='account-settings'>
           <Header size="huge">
             <svg width='44' height='44' className='cogs icon'> 
               <image href={settings}  x='0' y='0' width='100%' height='100%'></image>
             </svg>
             Account Settings
           </Header>
-
           <Divider clearing />
-
           <Grid reversed="mobile">
-            <Grid.Column width={12}>
-              <Sticky>
+            <Grid.Row className='double-form'>
+              <Grid.Column width={6}>
                 <Segment>
+                  <Header>
+                    Set default profile
+                  </Header>
+                  <Menu fluid vertical pointing>
+                    <Menu.Item name='Lerners' active={activeItem === 'lerners'} onClick={this.handleItemClick} />
+                    <Menu.Item name='Academia' active={activeItem === 'academia'} onClick={this.handleItemClick} />
+                    <Menu.Item name='Businesss' active={activeItem === 'businesss'} onClick={this.handleItemClick} />
+                  </Menu>
+                  <Header>
+                    Change Account Password
+                  </Header>
+                  <Divider clearing />
                   <Form>
-                    <Form.Group widths="equal">
-                      <Form.Field label="First name" control="input" placeholder="First name" />
-                      <Form.Field label="Last name" control="input" placeholder="Last name" />
-                    </Form.Group>
-                    <Checkbox label="Make my profile paid" toggle defaultChecked />
+                    <Form.Field disabled label="Email" autoComplete='email' control="input" type='email' placeholder='Email@gmail.com' />
+                    <Form.Field label="Current Password" control="input" type='password' placeholder="Current Password" />
+                    <Form.Field label="New Password" control="input" type='password' placeholder="New Password" />
                     <Divider hidden />
-                    <Button type="submit">Save Changes</Button>
+                    <Button type="submit">Change Password</Button>
                   </Form>
                 </Segment>
-              </Sticky>
-            </Grid.Column>
-            <Grid.Column width={4}>
-              <Sticky>
+              </Grid.Column>
+              <Grid.Column stretched width={10}>
                 <Segment>
-                  <Form>
-                    <Form.Field>
-                      <Header>
-                        Default Account Profile: {this.state.value}
-                      </Header>
-                    </Form.Field>
-                    <Form.Field>
-                      <Radio
-                        label="Learner"
-                        name="radioGroup"
-                        value="Learner"
-                        checked={this.state.value === 'Learner'}
-                        onChange={this.handleChange}
-                      />
-                    </Form.Field>
-                    <Form.Field>
-                      <Radio
-                        label="Business"
-                        name="radioGroup"
-                        value="Business"
-                        checked={this.state.value === 'Business'}
-                        onChange={this.handleChange}
-                      />
-                    </Form.Field>
-                    <Form.Field>
-                      <Radio
-                        label="Academia"
-                        name="radioGroup"
-                        value="Academia"
-                        checked={this.state.value === 'Academia'}
-                        onChange={this.handleChange}
-                      />
-                    </Form.Field>
-                  </Form>
+                  <LernersSettings />
                 </Segment>
-              </Sticky>
-            </Grid.Column>
+              </Grid.Column>
+            </Grid.Row>
           </Grid>
         </Container>
       </div>

@@ -1,7 +1,6 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
 import { Button, Container, Header, Divider, Grid, Segment, Icon, Menu, Form } from 'semantic-ui-react';
-import LernersSettings from 'components/LernersSettings';
+import SettingsForm from 'containers/SettingsForm';
 
 export default class AccountSettings extends React.Component {
   state = {}
@@ -9,7 +8,19 @@ export default class AccountSettings extends React.Component {
 
   state = { activeItem: 'Learners' }
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  handleItemClick = (e, { name }) => {
+    this.setState({ activeItem: name });
+    let newPath;
+    if (name === 'home') {
+      newPath = '/';
+    } else {
+      newPath = `/${name}`;
+    }
+
+    if (this.props.history.location.pathname !== newPath) {
+      this.props.history.push(newPath);
+    }
+  }
 
   render() {
     let settings = require('../../icons/account_settings.svg');
@@ -33,9 +44,9 @@ export default class AccountSettings extends React.Component {
                     Set default profile
                   </Header>
                   <Menu fluid vertical pointing>
-                    <Menu.Item name='Lerners' active={activeItem === 'lerners'} onClick={this.handleItemClick} />
-                    <Menu.Item name='Academia' active={activeItem === 'academia'} onClick={this.handleItemClick} />
-                    <Menu.Item name='Businesss' active={activeItem === 'businesss'} onClick={this.handleItemClick} />
+                    <Menu.Item name='Lerners' active={activeItem === 'Lerners'} onClick={this.handleItemClick} />
+                    <Menu.Item name='Academia' active={activeItem === 'Academia'} onClick={this.handleItemClick} />
+                    <Menu.Item name='Businesss' active={activeItem === 'Businesss'} onClick={this.handleItemClick} />
                   </Menu>
                   <Header>
                     Change Account Password
@@ -52,7 +63,7 @@ export default class AccountSettings extends React.Component {
               </Grid.Column>
               <Grid.Column stretched width={10}>
                 <Segment>
-                  <LernersSettings />
+                  <SettingsForm />
                 </Segment>
               </Grid.Column>
             </Grid.Row>

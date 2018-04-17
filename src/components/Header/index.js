@@ -51,12 +51,6 @@ class HeaderWithoutRouter extends React.Component {
       </span>
     );
 
-    const messages_trigger = (
-      <span>
-        <Image className='messages icon' src={messages} />
-      </span>
-    );
-
     const notifications_trigger = (
       <span>
         <Image className='notifications icon' src={notifications} />
@@ -145,7 +139,11 @@ class HeaderWithoutRouter extends React.Component {
               <Menu.Menu position='right'>
                 <Dropdown item trigger={network_trigger} pointing='top right' options={options_network} icon={null} />
 
-                <Dropdown item trigger={messages_trigger} pointing='top right' options={options_messages} icon={null} />
+                <Menu.Item name='inbox' onClick={this.handleItemClick}>
+                  <svg width='20' height='20' className='inbox'> 
+                    <image href={messages}  x='0' y='0' width='100%' height='100%'></image>
+                  </svg>
+                </Menu.Item>
 
                 <Dropdown item trigger={notifications_trigger} pointing='top right' options={options_notifications} icon={null} />
 

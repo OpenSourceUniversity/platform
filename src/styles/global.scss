@@ -148,14 +148,14 @@ div#Main {
     padding-top: 170px;
   }
 
-//**Sign In page***
+//**Onboarding page***
 
-  .sign-in {
-    height: 100%vh;
+  .onboarding {
+    height: 100vh;
     background-image: url("../img/business-academia.jpg") !important;
     background-repeat: no-repeat !important;
     background-position: -42% center !important;
-    div.sign-in-card {
+    div.onboarding-card {
       text-align: center;
       position: relative;
       left: 70%;
@@ -166,20 +166,23 @@ div#Main {
       -webkit-box-shadow: 0px 7px 8px 0px rgba(0,0,0,0.18);
       -moz-box-shadow: 0px 7px 8px 0px rgba(0,0,0,0.18);
       box-shadow: 0px 7px 8px 0px rgba(0,0,0,0.18);
+      div.recovery {
+        padding-bottom: 5em;
+      }
       div.header {
-        img.logo-sign-in {
+        img.logo {
           width: 3em;
           height: 3em;
           margin-right: 0.5em;
         }
-        span.osu-text-logo-sign-in {
+        span.osu-text-logo {
           text-align: left;
-          span.bold-sign-in {
+          span.bold {
             color: black;
             font-size: 1.5em;
             font-weight: 600;
           }
-          span.standard-logo-sign-in {
+          span.standard-logo {
             color: black;
             font-size: 1.5em;
           }
@@ -187,10 +190,10 @@ div#Main {
       }
       div.description {
         padding-top: 3em;
-        span.orange-sign-in {
+        span.orange {
           color: #f39c12;
         }
-        span.welcome-sign-in {
+        span.welcome {
           color: black;
           font-size: 2em;
           font-weight: 600;
@@ -207,14 +210,14 @@ div#Main {
         input:focus {
           border-bottom: 1px solid grey;
         }
-        div.log-in-button button {
+        div.orange-button button {
           width: 100%;
           background-color: #f39c12;
           color: white;
           margin-top: 2em;
           margin-bottom: 0.2em;
         }
-        div.log-in-button button:hover {
+        div.orange-button button:hover {
           background-color: #da8b0b;
         }
         a {
@@ -228,14 +231,28 @@ div#Main {
           float: left;
           padding-top: 4em;
         }
-        button.sign-up-button {
+        .sign-up span {
+            padding-top: 3em;
+        }
+        div.check-box {
+          float: left;
+          span {
+            padding-top:0;
+            float: initial;
+          }
+        }
+        button.button {
           background-color: white;
           border: 1px solid #b6b5b5;
           color: #b6b5b5;
           float: right;
           margin-top: 3.4em;
         }
-        button.sign-up-button:hover {
+
+        .sign-up button.button {
+            margin-top: 2.4em;
+          }
+        button.button:hover {
           background-color: #b6b5b5;
           color: white;
         }
@@ -250,7 +267,14 @@ div#Main {
       height: 100%;
     }
   }
+  div.menu {
+    svg {
+      margin-right: 10px;
+    }
+  }
 }
+
+
 
 
 .footer {

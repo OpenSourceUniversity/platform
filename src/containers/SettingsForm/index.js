@@ -1,5 +1,5 @@
 import React from 'react';
-import {LernersSettings} from 'components/LernersSettings';
+import LernersSettings from 'components/LernersSettings';
 import AcademiaSettings from 'components/AcademiaSettings';
 
 export default class SettingsForm extends React.Component {
@@ -10,7 +10,7 @@ export default class SettingsForm extends React.Component {
 
     return (
     	<div>
-    		<AcademiaSettings />
+    		<LernersSettings />
     	</div>
     );
 	}

@@ -10,6 +10,7 @@ import BusinessPage from 'containers/BusinessPage';
 import ProfilePage from 'containers/ProfilePage';
 import Account from 'containers/Account';
 import OnBoarding from 'containers/OnBoarding';
+import Inbox from 'containers/Inbox';
 
 class Main extends React.Component {
   state = {}
@@ -27,6 +28,7 @@ class Main extends React.Component {
         <Route path="/profile" component={ProfilePage} />
         <Route path="/settings" component={Account} />
         <Route path="/onboarding" component={OnBoarding} />
+        <Route path="/inbox" component={Inbox} />
       </Switch>
     );
   }

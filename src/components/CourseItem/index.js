@@ -6,7 +6,7 @@ export default class CourseItem extends React.Component {
   render() {
     const color = this.props.certificate.verified ? 'green' : 'yellow';
     return (
-      <Card color={color}>
+      <Card fluid color={color}>
         <Card.Content>
           <Card.Header>{this.props.certificate.title}</Card.Header>
         </Card.Content>

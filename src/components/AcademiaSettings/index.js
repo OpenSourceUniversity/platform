@@ -6,7 +6,7 @@ export default class AcademiaSettings extends React.Component {
   handleChange = (e, { value }) => this.setState({ value })
   render() {
   	return (
-			<div>
+			<div className ='academia-settings'>
 				<Header>
 					Academy Additional Information
 				</Header>
@@ -32,6 +32,7 @@ export default class AcademiaSettings extends React.Component {
                   name="file"
                   placeholder="authority logo"
                   onChange={this.handleInputChange}
+                  className='input-file'
                 />
               </label>
             </Form.Field>
@@ -89,8 +90,8 @@ export default class AcademiaSettings extends React.Component {
 	        	</span>
 	        </Form.Field>
 	        <Divider clearing />
-	        <Button type="submit" primary>Send request</Button>
-	        <Button>Cancel</Button>
+	        <Button className='save-button' type="submit" primary>Send request</Button>
+	        <Button className='cancel-button'>Cancel</Button>
 	      </Form>
 	    </div>
   	);

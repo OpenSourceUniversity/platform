@@ -70,7 +70,7 @@ export default class AccountSettings extends React.Component {
                 </Segment>
               </Grid.Column>
               <Grid.Column stretched width={10}>
-                <Segment>
+                <Segment className='settings'>
                   <SettingsForm />
                 </Segment>
               </Grid.Column>

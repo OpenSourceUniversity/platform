@@ -10,7 +10,7 @@ export default class SettingsForm extends React.Component {
 
     return (
     	<div>
-    		<LernersSettings />
+    		<AcademiaSettings />
     	</div>
     );
 	}

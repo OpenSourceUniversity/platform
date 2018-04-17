@@ -11,7 +11,7 @@ export default class OnBoarding extends React.Component {
     return (
       <Container fluid className='onboarding'>
         <Card className='onboarding-card'>
-        	<PasswordRecovery />
+        	<SignIn />
         </Card>
       </Container>
     );

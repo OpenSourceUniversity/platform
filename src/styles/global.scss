@@ -2,9 +2,8 @@ body {
   background: #ecf0f1;
 }
 
-// ***Nav-bar START***
-
 div.App {
+// ***Nav-bar START***
   div.menu {
     .item:before {
       background: none;
@@ -259,12 +258,17 @@ div#Main {
       } 
     }
   }
-// ***Sign im page END***
+// ***Onboarding page END***
+
+// ***Account settings page START***
   div.double-form {
     div.segment {
       margin-top: 0 !important;
       margin-bottom: 0 !important;
       height: 100%;
+    }
+    div.segment.settings {
+      padding: 40px 80px;
     }
   }
   div.menu {
@@ -273,6 +277,8 @@ div#Main {
     }
   }
 }
+
+// ***Account settings page END***
 
 
 

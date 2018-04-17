@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Menu, Segment } from 'semantic-ui-react'
+import { Container, Input, Menu, Segment } from 'semantic-ui-react'
 
 export default class Inbox extends React.Component {
   state = { activeItem: 'home' }

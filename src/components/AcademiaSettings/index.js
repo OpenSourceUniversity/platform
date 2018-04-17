@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Form, Button, Radio, Checkbox, Header, Divider } from 'semantic-ui-react';
+import { Input, Form, Button, Radio, Checkbox, Header, Divider, Label } from 'semantic-ui-react';
 
 export default class AcademiaSettings extends React.Component {
 	state = {}
@@ -8,7 +8,7 @@ export default class AcademiaSettings extends React.Component {
   	return (
 			<div>
 				<Header>
-					Additional Information
+					Academy Additional Information
 				</Header>
 				<span>
 					Fill in the following details to register your educational institute
@@ -23,17 +23,18 @@ export default class AcademiaSettings extends React.Component {
 		        label="Authority website" 
 		        control="input" 
 	        />
-	        <Form.Field label="Upload authority logo">
-              <Input
-                id="file"
-                iconPosition="left"
-                icon="address card"
-                type="file"
-                name="file"
-                placeholder="Certificate File"
-                onChange={this.handleInputChange}
-              />
-          </Form.Field>
+	        <Form.Field>
+              <label>
+                Upload authority logo
+                <Input
+                  id="file"
+                  type="file"
+                  name="file"
+                  placeholder="authority logo"
+                  onChange={this.handleInputChange}
+                />
+              </label>
+            </Form.Field>
           <Divider clearing />
           <Form.Group grouped>
             <Form.Field> 
@@ -49,8 +50,8 @@ export default class AcademiaSettings extends React.Component {
             	<Radio
 		            label='I will use MetaMask and an existing Ethereum wallet' 
 		            name='my-wallet'
-		            value='this'
-		            checked={this.state.value === 'this'}
+		            value='that'
+		            checked={this.state.value === 'that'}
 	            	onChange={this.handleChange}
 		          /> 
             </Form.Field> 
@@ -73,6 +74,7 @@ export default class AcademiaSettings extends React.Component {
 	        <Divider hidden />
 	        <span>
 	        	&#42; Will be used to login and for all the updates from OS University
+	        	<br/>
 	        </span>
 	        <span>
 	        	&#42;&#42; It must contain at least 6 characters and must contain at least one capital letter, one small letter and one numeric character

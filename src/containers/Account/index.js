@@ -10,20 +10,13 @@ export default class AccountSettings extends React.Component {
 
   handleItemClick = (e, { name }) => {
     this.setState({ activeItem: name });
-    let newPath;
-    if (name === 'home') {
-      newPath = '/';
-    } else {
-      newPath = `/${name}`;
-    }
-
-    if (this.props.history.location.pathname !== newPath) {
-      this.props.history.push(newPath);
-    }
   }
 
   render() {
     let settings = require('../../icons/account_settings.svg');
+    let learners = require('../../icons/learners.svg');
+    let businesses = require('../../icons/businesses.svg');
+    let academia = require('../../icons/academia.svg');
     
   const { activeItem } = this.state
     return (
@@ -41,12 +34,27 @@ export default class AccountSettings extends React.Component {
               <Grid.Column width={6}>
                 <Segment>
                   <Header>
-                    Set default profile
+                    Set default profile:
                   </Header>
                   <Menu fluid vertical pointing>
-                    <Menu.Item name='Lerners' active={activeItem === 'Lerners'} onClick={this.handleItemClick} />
-                    <Menu.Item name='Academia' active={activeItem === 'Academia'} onClick={this.handleItemClick} />
-                    <Menu.Item name='Businesss' active={activeItem === 'Businesss'} onClick={this.handleItemClick} />
+                    <Menu.Item name='Learner' active={activeItem === 'Learner'} onClick={this.handleItemClick}>
+                    <svg width='16' height='16' className='cogs icon'> 
+                      <image href={learners}  x='0' y='0' width='100%' height='100%'></image>
+                    </svg>
+                    Learner
+                    </Menu.Item>
+                    <Menu.Item name='Academy' active={activeItem === 'Academy'} onClick={this.handleItemClick}>
+                      <svg width='16' height='16' className='cogs icon'> 
+                        <image href={academia}  x='0' y='0' width='100%' height='100%'></image>
+                      </svg>
+                      Academy
+                    </Menu.Item>
+                    <Menu.Item name='Business' active={activeItem === 'Business'} onClick={this.handleItemClick}>
+                      <svg width='16' height='16' className='cogs icon'> 
+                        <image href={businesses}  x='0' y='0' width='100%' height='100%'></image>
+                      </svg>
+                      Business
+                    </Menu.Item>
                   </Menu>
                   <Header>
                     Change Account Password

@@ -182,7 +182,7 @@ class HeaderWithoutRouter extends React.Component {
                       </svg>
                       Account Settings
                     </Dropdown.Item>
-                    <Dropdown.Item name='sign-in' className='logout-nav' onClick={this.handleItemClick}>
+                    <Dropdown.Item name='onboarding' className='logout-nav' onClick={this.handleItemClick}>
                       <svg width='16' height='16'> 
                         <image href={logout}  x='0' y='0' width='100%' height='100%'></image>
                       </svg>
@@ -194,7 +194,7 @@ class HeaderWithoutRouter extends React.Component {
             </Grid.Row>
 
             <Grid.Row className='secondary-nav'>
-              <Menu size='massive' items={learner_academia_dropdown_elements} />
+              <Menu size='massive' items={learner_businesses_dropdown_elements} />
             </Grid.Row>
           </Grid>
         </Container>

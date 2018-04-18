@@ -24,9 +24,13 @@ class HeaderWithoutRouter extends React.Component {
       this.props.history.push(newPath);
     }
   }
+  setSecondaryNav = (e, { name }) => {
+      this.setState({ secondaryNav: name });
+  }
 
   render() {
-    const { activeItem } = this.state;
+    const { activeItem, secondaryNav } = this.state;
+
     let logo = require('../../icons/edu-logo.png');
     let profile = require('../../icons/account_profile.svg');
     let deposit = require('../../icons/account_deposit.svg');
@@ -64,6 +68,13 @@ class HeaderWithoutRouter extends React.Component {
       </span>
     );
 
+    const account_elements = [
+      { key: 'profile', content: 'My Profile', name: 'profile', className: 'profile-nav', active: activeItem === 'profile', onClick: this.handleItemClick },
+      { key: 'deposit', content: 'Deposit/Withdraw', name: 'deposit', className: 'deposit-nav', active: activeItem === 'deposit', onClick: this.handleItemClick },
+      { key: 'settings', content: 'Account Settings', name: 'settings', className: 'settings-nav', active: activeItem === 'settings', onClick: this.handleItemClick },
+      { key: 'onboarding', content: 'Logout', name: 'onboarding',className: 'logout-nav', active: activeItem === 'onboarding', onClick: this.handleItemClick },
+    ]
+
     const options_notifications = [
       { key: 'alarm1', text: 'First notification', icon: 'alarm' },
       { key: 'alarm2', text: 'Second  notification', icon: 'alarm' },
@@ -71,28 +82,11 @@ class HeaderWithoutRouter extends React.Component {
       { key: 'alarm4', text: 'etc', icon: 'alarm' },
     ];
 
-    const options_messages = [
-      { key: 'message1', text: 'First notification', icon: 'comments' },
-      { key: 'message2', text: 'Second  notification', icon: 'comments' },
-      { key: 'message3', text: 'Third  notification', icon: 'comments' },
-      { key: 'message4', text: 'etc', icon: 'comments' },
-    ];
-
     const options_network = [
       { key: 'user1', text: 'First notification', icon: 'user' },
       { key: 'user2', text: 'Second  notification', icon: 'user' },
       { key: 'user3', text: 'Third  notification', icon: 'user' },
       { key: 'user4', text: 'etc', icon: 'user' },
-    ];
-
-    const secondary_nav_elements = [
-      { key: 'dashboard', name: 'dashboard', content: 'Dashboard', active: activeItem === 'dashboard', onClick: this.handleItemClick },
-      { key: 'courses', name: 'courses', content: 'Courses', active: activeItem === 'courses', onClick: this.handleItemClick },
-      { key: 'programs', name: 'programs', content: 'Programs', active: activeItem === 'programs', onClick: this.handleItemClick },
-      { key: 'certificates', name: 'certificates', content: 'Certification', active: activeItem === 'certificates', onClick: this.handleItemClick },
-      { key: 'challenges', name: 'challenges', content: 'Challenges', active: activeItem === 'challenges', onClick: this.handleItemClick },
-      { key: 'jobs', name: 'jobs', content: 'Job positions', active: activeItem === 'jobs', onClick: this.handleItemClick },
-      { key: 'interviews', name: 'interviews', content: 'Interviews', active: activeItem === 'interviews', onClick: this.handleItemClick },
     ];
 
     const learner_academia_dropdown_elements = [
@@ -123,11 +117,11 @@ class HeaderWithoutRouter extends React.Component {
               </Menu.Item>
               <Dropdown className='explore-dropdown' item trigger={explore_trigger}>
               <Dropdown.Menu>
-                <Dropdown.Item className='nav-list'>
+                <Dropdown.Item name='academia' className='nav-list' onClick={this.setSecondaryNav}>
                   <List selection items={learner_academia_dropdown_elements} />
                   
                 </Dropdown.Item>
-                <Dropdown.Item className='nav-list'>
+                <Dropdown.Item name='business' className='nav-list' onClick={this.setSecondaryNav}>
                   <List selection items={learner_businesses_dropdown_elements} />
                 </Dropdown.Item>
               </Dropdown.Menu>
@@ -147,46 +141,48 @@ class HeaderWithoutRouter extends React.Component {
 
                 <Dropdown item trigger={notifications_trigger} pointing='top right' options={options_notifications} icon={null} />
 
-                <Dropdown item trigger={avatar_trigger} pointing='top right' > 
+                <Dropdown item trigger={avatar_trigger} pointing='top right'> 
                   <Dropdown.Menu>
-                    <Dropdown.Item name='balance' className='balance-nav' onClick={this.handleItemClick}>
-                      EDUx Balance:
-                      <span className='balance-nav'>
-                        <svg width='16' height='16' className='edu-token'> 
-                          <image href={token}  x='0' y='0' width='100%' height='100%'></image>
+                    <Dropdown.Item className='account-nav-setter' name='account' onClick={this.setSecondaryNav}>
+                      <Dropdown.Item name='balance' className='balance-nav' onClick={this.handleItemClick}>
+                        EDUx Balance:
+                        <span className='balance-nav'>
+                          <svg width='16' height='16' className='edu-token'> 
+                            <image href={token}  x='0' y='0' width='100%' height='100%'></image>
+                          </svg>
+                          <span className='integer'>
+                            2,389
+                          </span>
+                          .
+                          <span className='fraction'>
+                            071
+                          </span>
+                        </span>
+                      </Dropdown.Item>
+                      <Dropdown.Item name='profile' className='profile-nav' active={activeItem === 'profile'} onClick={this.handleItemClick}>
+                        <svg width='16' height='16'> 
+                          <image href={profile}  x='0' y='0' width='100%' height='100%'></image>
                         </svg>
-                        <span className='integer'>
-                          2,389
-                        </span>
-                        .
-                        <span className='fraction'>
-                          071
-                        </span>
-                      </span>
-                    </Dropdown.Item>
-                    <Dropdown.Item name='profile' className='profile-nav' active={activeItem === 'profile'} onClick={this.handleItemClick}>
-                      <svg width='16' height='16'> 
-                        <image href={profile}  x='0' y='0' width='100%' height='100%'></image>
-                      </svg>
-                      My Profile
-                    </Dropdown.Item>
-                    <Dropdown.Item name='deposit' className='deposit-nav' active={activeItem === 'deposit'} onClick={this.handleItemClick}>
-                      <svg width='16' height='16'> 
-                        <image href={deposit}  x='0' y='0' width='100%' height='100%'></image>
-                      </svg>
-                      Deposit/Withdraw
-                    </Dropdown.Item>
-                    <Dropdown.Item name='settings' className='settings-nav' active={activeItem === 'settings'} onClick={this.handleItemClick}>
-                      <svg width='16' height='16'> 
-                        <image href={settings}  x='0' y='0' width='100%' height='100%'></image>
-                      </svg>
-                      Account Settings
-                    </Dropdown.Item>
-                    <Dropdown.Item name='onboarding' className='logout-nav' onClick={this.handleItemClick}>
-                      <svg width='16' height='16'> 
-                        <image href={logout}  x='0' y='0' width='100%' height='100%'></image>
-                      </svg>
-                      Logout
+                        My Profile
+                      </Dropdown.Item>
+                      <Dropdown.Item name='deposit' className='deposit-nav' active={activeItem === 'deposit'} onClick={this.handleItemClick}>
+                        <svg width='16' height='16'> 
+                          <image href={deposit}  x='0' y='0' width='100%' height='100%'></image>
+                        </svg>
+                        Deposit/Withdraw
+                      </Dropdown.Item>
+                      <Dropdown.Item name='settings' className='settings-nav' active={activeItem === 'settings'} onClick={this.handleItemClick}>
+                        <svg width='16' height='16'> 
+                          <image href={settings}  x='0' y='0' width='100%' height='100%'></image>
+                        </svg>
+                        Account Settings
+                      </Dropdown.Item>
+                      <Dropdown.Item name='onboarding' className='logout-nav' onClick={this.handleItemClick}>
+                        <svg width='16' height='16'> 
+                          <image href={logout}  x='0' y='0' width='100%' height='100%'></image>
+                        </svg>
+                        Logout
+                      </Dropdown.Item>
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
@@ -194,7 +190,16 @@ class HeaderWithoutRouter extends React.Component {
             </Grid.Row>
 
             <Grid.Row className='secondary-nav'>
-              <Menu size='massive' items={learner_businesses_dropdown_elements} />
+              {(() => {
+                switch(this.state.secondaryNav) {
+                case 'business': return <Menu size='massive' items={learner_businesses_dropdown_elements} />;
+                case 'academia': return <Menu size='massive' items={learner_academia_dropdown_elements} />;
+                case 'account': return <Menu size='massive' items={account_elements} />;
+                default: return null;
+                }
+              })()}
+
+
             </Grid.Row>
           </Grid>
         </Container>

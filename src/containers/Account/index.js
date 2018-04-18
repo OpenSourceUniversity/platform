@@ -1,24 +1,29 @@
 import React from 'react';
 import { Button, Container, Header, Divider, Grid, Segment, Icon, Menu, Form } from 'semantic-ui-react';
-import SettingsForm from 'containers/SettingsForm';
+import LernersSettings from 'components/LernersSettings';
+import AcademiaSettings from 'components/AcademiaSettings';
 
 export default class AccountSettings extends React.Component {
   state = {}
-  handleChange = (e, { value }) => this.setState({ value })
-
-  state = { activeItem: 'Learners' }
 
   handleItemClick = (e, { name }) => {
     this.setState({ activeItem: name });
+    if (name === 'Academy') {
+      this.setState({ setAcademia: true });
+    } else if (name === 'Learner') {
+      this.setState({ setAcademia: false });
+    }
   }
+
+  
 
   render() {
     let settings = require('../../icons/account_settings.svg');
     let learners = require('../../icons/learners.svg');
     let businesses = require('../../icons/businesses.svg');
     let academia = require('../../icons/academia.svg');
-    
-  const { activeItem } = this.state
+
+    const { activeItem, setAcademia } = this.state
     return (
       <div>
         <Container fluid className='account-settings'>
@@ -71,7 +76,10 @@ export default class AccountSettings extends React.Component {
               </Grid.Column>
               <Grid.Column stretched width={10}>
                 <Segment className='settings'>
-                  <SettingsForm />
+                  {this.state.setAcademia ?
+                    <AcademiaSettings /> :
+                    <LernersSettings />
+                  }
                 </Segment>
               </Grid.Column>
             </Grid.Row>

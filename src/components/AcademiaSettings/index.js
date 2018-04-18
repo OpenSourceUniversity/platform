@@ -3,7 +3,6 @@ import { Input, Form, Button, Radio, Checkbox, Header, Divider, Label } from 'se
 
 export default class AcademiaSettings extends React.Component {
 	state = {}
-  handleChange = (e, { value }) => this.setState({ value })
   render() {
   	return (
 			<div className ='academia-settings'>

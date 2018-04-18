@@ -272,17 +272,18 @@ div#Main {
     div.segment.settings {
       padding: 40px 80px;
     }
-  }
-  div.menu {
-    svg {
-      margin-right: 10px;
+    button .cancel-button {
+      float: right !important;
+    }
+    div.menu {
+      svg {
+        margin-right: 10px;
+      }
     }
   }
-}
-
 // ***Account settings page END***
 
-
+}
 
 
 .footer {

@@ -33,7 +33,7 @@ export default class Inbox extends React.Component {
           >
             <Icon name='inbox' size='small' />          
             Inbox
-            <Label>1</Label>
+            <Label circular>1</Label>
           </Menu.Item>
           <Menu.Item
             name='sent'
@@ -78,9 +78,12 @@ export default class Inbox extends React.Component {
                       <Comment.Content>
                         <Comment.Author as='a'>Matt</Comment.Author>
                         <Comment.Metadata>
-                          <span>Today at 5:42PM</span>
+                          <span>Today at 5:42PM</span> 
                         </Comment.Metadata>
-                        <Comment.Text>How artistic!</Comment.Text>
+                        <Comment.Text>
+                          <Label circular floated='right' color='orange' size='tiny' empty />
+                           How artistic!
+                        </Comment.Text>
                       </Comment.Content>
                     </Comment>
                   </Item>

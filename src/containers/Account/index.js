@@ -23,7 +23,7 @@ export default class AccountSettings extends React.Component {
       <div>
         <Container fluid className='account-settings'>
           <Header size="huge">
-            <svg width='44' height='44' className='cogs icon'> 
+            <svg width='32' height='32' className='icon'> 
               <image href={settings}  x='0' y='0' width='100%' height='100%'></image>
             </svg>
             Account Settings

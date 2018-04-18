@@ -71,7 +71,6 @@ export default class Inbox extends React.Component {
             <Grid.Column width={4}>
               <Comment.Group threaded>
                 <Item.Group link>
-
                   <Item>
                     <Comment>
                       <Comment.Avatar as='a' src={avatar_placeholder} />
@@ -81,7 +80,7 @@ export default class Inbox extends React.Component {
                           <span>Today at 5:42PM</span> 
                         </Comment.Metadata>
                         <Comment.Text>
-                          <Label circular floated='right' color='orange' size='tiny' empty />
+                          <Label circular color='orange' size='tiny' empty />
                            How artistic!
                         </Comment.Text>
                       </Comment.Content>

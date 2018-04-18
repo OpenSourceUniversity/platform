@@ -77,9 +77,9 @@ export default class AccountSettings extends React.Component {
               <Grid.Column stretched width={10}>
                 <Segment className='settings'>
                   {this.state.setAcademia ?
-                             <AcademiaSettings /> :
-                             <LernersSettings />
-                          }
+                    <AcademiaSettings /> :
+                    <LernersSettings />
+                  }
                 </Segment>
               </Grid.Column>
             </Grid.Row>

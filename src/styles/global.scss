@@ -1,7 +1,6 @@
 body {
   background: #ecf0f1;
 }
-
 div.App {
   div.menu.massive.top  {
     .item:before {
@@ -278,9 +277,18 @@ div#Main {
 }
 
 // ***Account settings page END***
+.ui.segments .segment.profilePicSegment {
+  display: block;
+  margin: 0 auto;
+  padding: 3px;
+}
+.ui.segments.profileSegment .segment .ui[class*="left labeled"].button>.label {width: 80%;text-align: center;}
+.ui.segments.profileSegment .segment .ui[class*="left labeled"].button>.label img {margin-right: 7px;}
 
-
-
+.ui.segments.profileSegment .segment .ui.statistic,
+.ui.segments.profileSegment .segment .header {
+  margin: 5px 0;
+}
 
 .footer {
   padding: 15px 0;

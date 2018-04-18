@@ -11,7 +11,7 @@ export default class CertificateItem extends React.Component {
           <Card.Header>{this.props.certificate.name}</Card.Header>
         </Card.Content>
         <Card.Content extra>
-          <Icon name={this.props.certificate.verified ? 'check' : 'close'} color={color} />
+          <Icon name={this.props.certificate.verified ? 'check' : 'warning sign'} color={color} />
           { this.props.certificate.verified ? 'Verified' : 'Not verified' }
         </Card.Content>
         <Card.Content extra>

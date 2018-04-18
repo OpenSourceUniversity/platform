@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, List, Header, Divider, Label, Segment, Grid, Menu } from 'semantic-ui-react';
+import { Button, List, Header, Divider, Label, Segment, Grid, Menu, Icon } from 'semantic-ui-react';
 
 export default class Course extends React.Component {
 	state = { activeItem: 'about' }
@@ -37,20 +37,21 @@ export default class Course extends React.Component {
 					      <Label as='a'>11</Label>
 					      <Label as='a'>22</Label>
 					      <Label as='a'>33</Label>
+					      <span>
+					      	<span>
+					      		12,400
+					      	</span>
+					      	students interested
+					      </span>
 					    </Label.Group>
-					    <span>
-					    	<span>
-					    		12,400
-					    	</span>
-					    	students interested
-					    </span>
 					    <Divider hidden />
-					    <Grid container>
+					    <Grid>
 					    	<Grid.Row>
 					    		<Grid.Column width={4}>
 					    			<span>
 					    				Price
 					    			</span>
+					    			<br/>
 					    			<span>
 					    				1000 EDU
 					    			</span>
@@ -59,7 +60,7 @@ export default class Course extends React.Component {
 					    			<Button color='green'>BUY COURSE</Button>
 					    		</Grid.Column>
 					    		<Grid.Column width={6}>
-					    			Reviews (<span>1923</span> ratings) <br>
+					    			Reviews (<span>1923</span> ratings) <br/>
 					    			<Icon name='star' />
 					    			<Icon name='star' />
 					    			<Icon name='star' />

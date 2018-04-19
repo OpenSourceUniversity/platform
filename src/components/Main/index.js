@@ -12,6 +12,7 @@ import Account from 'containers/Account';
 import OnBoarding from 'containers/OnBoarding';
 import Inbox from 'containers/Inbox';
 import Deposit from 'containers/Deposit';
+import CoursePage from 'containers/CoursePage';
 
 class Main extends React.Component {
   state = {}
@@ -31,6 +32,8 @@ class Main extends React.Component {
         <Route path="/onboarding" component={OnBoarding} />
         <Route path="/inbox" component={Inbox} />
         <Route path="/deposit" component={Deposit} />
+        //TESTING
+        <Route path="/coursepage" component={CoursePage} />
       </Switch>
     );
   }

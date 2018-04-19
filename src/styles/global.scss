@@ -271,14 +271,15 @@ div#Main {
     div.segment.settings {
       padding: 40px 80px;
     }
-  }
-  div.menu {
-    svg {
-      margin-right: 10px;
+    button .cancel-button {
+      float: right !important;
+    }
+    div.menu {
+      svg {
+        margin-right: 10px;
+      }
     }
   }
-}
-
 // ***Account settings page END***
 .ui.segments .segment.profilePicSegment {
   display: block;
@@ -288,10 +289,15 @@ div#Main {
 .ui.segments.profileSegment .segment .ui[class*="left labeled"].button>.label {width: 80%;text-align: center;}
 .ui.segments.profileSegment .segment .ui[class*="left labeled"].button>.label img {margin-right: 7px;}
 
+
+}
+
+
 .ui.segments.profileSegment .segment .ui.statistic,
 .ui.segments.profileSegment .segment .header {
   margin: 5px 0;
 }
+
 
 .footer {
   padding: 15px 0;

@@ -24,7 +24,7 @@ export default class Deposit extends React.Component {
     const { activeItem } = this.state
 
     return (
-      <Container fluid className='inbox'>
+      <Container>
         <Header size="huge">
           <svg width='32' height='32' className="icon"> 
             <image href={settings}  x='0' y='0' width='100%' height='100%'></image>

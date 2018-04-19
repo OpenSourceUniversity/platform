@@ -35,7 +35,7 @@ export default class AddPositionToBusinessPage extends React.Component {
 
   render() {
     return (
-      <Container fluid>
+      <Container>
         <Breadcrumb>
           <Breadcrumb.Section href="/#/">Home</Breadcrumb.Section>
           <Breadcrumb.Divider icon="right angle" />

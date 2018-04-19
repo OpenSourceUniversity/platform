@@ -34,7 +34,7 @@ export default class JobsPage extends React.Component {
 
   render() {
     return (
-      <Container fluid>
+      <Container>
 
         <Breadcrumb>
           <Breadcrumb.Section href="/#/">Home</Breadcrumb.Section>

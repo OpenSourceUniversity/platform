@@ -38,10 +38,10 @@ export default class ProfilePage extends React.Component {
 
     return (
       <div>
-        <Container fluid>
+        <Container>
 
           <Grid>
-            <Grid.Column mobile={16} tablet={6} computer={4}>
+            <Grid.Column mobile={16} tablet={8} computer={5}>
               <Sticky>
                 <Segment.Group className="profileSegment">
                   <Segment textAlign='center'>
@@ -97,7 +97,7 @@ export default class ProfilePage extends React.Component {
                 </Segment.Group>
               </Sticky>
             </Grid.Column>
-            <Grid.Column mobile={16} tablet={10} computer={12}>
+            <Grid.Column mobile={16} tablet={8} computer={11}>
               <Segment size='large'>
                 <Header>
                   Introduction

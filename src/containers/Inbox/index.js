@@ -89,7 +89,7 @@ export default class Inbox extends React.Component {
                             <span>Today at 5:42PM</span> 
                           </Comment.Metadata>
                           <Comment.Text>
-                            <Label circular color='orange' size='tiny' empty />
+                            <Label circular color='orange' size='tiny' empty /> &nbsp;
                             How artistic!
                           </Comment.Text>
                         </Comment.Content>
@@ -166,7 +166,7 @@ export default class Inbox extends React.Component {
               </Segment>
             </Grid.Column>
             <Grid.Column width={12}>
-              <Message attached="top">
+              <Message attached>
                 <Menu secondary size='small'>
                   <Menu.Item>
                     <Comment.Group>
@@ -183,16 +183,16 @@ export default class Inbox extends React.Component {
                   </Menu.Item>
 
                   <Menu.Item position='right'>
-                    <Button>
-                      <Icon name='reply' size='small' />          
-                        Reply
-                    </Button>
                     <Button basic>
-                      <Icon name='trash' size='small' />          
-                        Delete
+                      <Icon name='trash' size='small' />
+                      Delete
+                    </Button>
+                    &nbsp;&nbsp;
+                    <Button basic>
+                      <Icon name='mail' size='small' />
+                      Mark as unread
                     </Button>
                   </Menu.Item>
-
                 </Menu>
               </Message>
                 
@@ -203,9 +203,13 @@ export default class Inbox extends React.Component {
                 <Divider />
                 {description}
               </Segment>
-              <Message warning attached='bottom'>
-                <Icon name='warning' />
-                You've reached the end of this content segment!
+              <Message attached='bottom'>
+                <Segment vertical clearing>
+                    <Button primary floated='right'>
+                    <Icon name='reply' size='small' />          
+                      Reply
+                  </Button>
+                </Segment>
               </Message>
 
             </Grid.Column>

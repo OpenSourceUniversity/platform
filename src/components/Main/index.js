@@ -11,6 +11,7 @@ import ProfilePage from 'containers/ProfilePage';
 import Account from 'containers/Account';
 import OnBoarding from 'containers/OnBoarding';
 import Inbox from 'containers/Inbox';
+import Network from 'containers/Network';
 import Deposit from 'containers/Deposit';
 import CoursePage from 'containers/CoursePage';
 
@@ -31,6 +32,7 @@ class Main extends React.Component {
         <Route path="/settings" component={Account} />
         <Route path="/onboarding" component={OnBoarding} />
         <Route path="/inbox" component={Inbox} />
+        <Route path="/network" component={Network} />
         <Route path="/deposit" component={Deposit} />
         //TESTING
         <Route path="/coursepage" component={CoursePage} />

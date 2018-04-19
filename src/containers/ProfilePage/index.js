@@ -119,7 +119,7 @@ export default class ProfilePage extends React.Component {
                 </Header>
                 <Divider clearing />
                 <Label.Group size='big'>
-                <Label basic>
+                  <Label basic>
                     <Icon size='small' name={true ? 'check' : 'warning sign'} color={color} />
                     Python
                   </Label>

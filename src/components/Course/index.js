@@ -7,7 +7,7 @@ export default class Course extends React.Component {
   render() {
   	const { activeItem } = this.state
   	return (
-			<div className ='cource'>
+			<div className ='course'>
 				<Header>
 					Header text
 				</Header>

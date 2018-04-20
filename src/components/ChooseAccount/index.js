@@ -3,15 +3,19 @@ import { Button, List, Header, Divider, Label, Segment, Grid, Menu, Icon } from 
 
 export default class ChooseAccount extends React.Component {
   render() {
+  	let academia = require('../../icons/academia_hex.svg');
+  	let learners = require('../../icons/learners_hex.svg');
+  	let businesses = require('../../icons/businesses_hex.svg');
   	return (
 			<div>
 				<Header>
 					SET YOUR DEFAULT PROFILE
 				</Header>
 				<Divider clearing />
-				<Grid>
-					<Grid.Column width={5}>
-						<Segment padded='very'>
+				<Grid columns={3}>
+					<Grid.Column>
+						<Segment padded='very' className='padded-top-segment'>
+							<img className='hex-icon' src={academia} />
 							<Header>
 								ACADEMIA
 							</Header>
@@ -26,8 +30,9 @@ export default class ChooseAccount extends React.Component {
 						</Segment>
 					</Grid.Column>
 
-					<Grid.Column width={5}>
-						<Segment padded='very'>
+					<Grid.Column>
+						<Segment padded='very' className='padded-top-segment'>
+							<img className='hex-icon' src={learners} />
 							<Header>
 								LEARNERS
 							</Header>
@@ -42,8 +47,9 @@ export default class ChooseAccount extends React.Component {
 						</Segment>
 					</Grid.Column>
 
-					<Grid.Column width={5}>
-						<Segment padded='very' textAlign='center'>
+					<Grid.Column>
+						<Segment padded='very' className='padded-top-segment'>
+							<img className='hex-icon' src={businesses} />
 							<Header>
 								BUSINESSES
 							</Header>

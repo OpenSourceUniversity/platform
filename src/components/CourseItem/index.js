@@ -1,22 +1,33 @@
 import React from 'react';
-import { Card, Icon } from 'semantic-ui-react';
+import { Card, Icon, Button, Label, Image } from 'semantic-ui-react';
 
 
 export default class CourseItem extends React.Component {
   render() {
-    const color = this.props.certificate.verified ? 'green' : 'yellow';
+    const level = this.props.certificate.level;
+    const language = this.props.certificate.language;
+    const duration = this.props.certificate.duration;
+    const rating = this.props.certificate.rating;
+    const description = this.props.certificate.description;
+    let profile = require('../../icons/account_profile.svg');
     return (
-      <Card fluid color={color}>
+      <Card fluid>
         <Card.Content>
-          <Card.Header>{this.props.certificate.title}</Card.Header>
+          <Card.Header icon='ellipsis vertical'>{this.props.certificate.title}</Card.Header>
+          <Icon name='signal' /> {level}
+          <Icon name='world' /> {language}
+          <Icon name='time' /> {duration}
+          <Icon name='star' /> {rating}
         </Card.Content>
         <Card.Content extra>
-          <Icon name={this.props.certificate.verified ? 'check' : 'warning sign'} color={color} />
-          { this.props.certificate.verified ? 'Verified' : 'Not verified' }
+          { description }
         </Card.Content>
         <Card.Content extra>
-          <Icon name="graduation" color={color} />
-          { this.props.certificate.grade }%
+          <Button> Show course </Button>
+          <Label as='a'>
+            <Image avatar spaced='right' src={profile} />
+            Title
+          </Label>
         </Card.Content>
       </Card>
     );

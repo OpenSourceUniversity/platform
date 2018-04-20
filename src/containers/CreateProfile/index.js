@@ -6,14 +6,14 @@ import ChooseAccount from 'components/ChooseAccount';
 
 export default class CreateAccount extends React.Component {
 
-	state = {}
+	state = {active: 'profile'}
 
   handleClick = (e, { name }) => this.setState({ active: name, activeSlide: name })
 
   
 
   render() {
-  	const { active = 'profile', activeSlide } = this.state
+  	const { active, activeSlide } = this.state
   	return (
 			<div className ='course'>
 				<Container textAlign='center'>

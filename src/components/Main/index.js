@@ -36,7 +36,7 @@ class Main extends React.Component {
         <Route path="/network" component={Network} />
         <Route path="/deposit" component={Deposit} />
         //TESTING
-        <Route path="/coursepage" component={CoursePage} />
+        <Route path="/course-page" component={CoursePage} />
         <Route path="/create-profile" component={CreateProfile} />
       </Switch>
     );

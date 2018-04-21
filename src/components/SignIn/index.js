@@ -49,9 +49,9 @@ export default class SignIn extends React.Component {
 						</Form.Group>
 						<Form.Button className='orange-button'>LOG IN</Form.Button>
 				  </Form>
-				  <a href="#">Forgot your password? </a> <br/>
+				  <Button fluid name='recovery' className='recovery-link' onClick={this.props.handleItemClick}>Forgot your password? </Button> <br/>
 				  <span> Don't have an account? </span>
-				  <Button className='button'>SIGN UP</Button>
+				  <Button className='button' name='signup' onClick={this.props.handleItemClick} >SIGN UP</Button>
       	</Card.Content>
       </div>
     );

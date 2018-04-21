@@ -41,6 +41,7 @@ export default class PasswordRecovery extends React.Component {
 					  </Form.Group>
 						<Form.Button className='orange-button'>SEND EMAIL</Form.Button>
 				  </Form>
+				   <Button className='button' name='signip' onClick={this.props.handleItemClick} >BACK TO SIGN IN</Button>
       	</Card.Content>
       </div>
     );

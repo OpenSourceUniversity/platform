@@ -59,7 +59,7 @@ export default class SignUp extends React.Component {
 				  </Form>
 				  <div className='sign-up'>
 					  <span> Already have an account? </span>
-					  <Button className='button'>SIGN IN</Button>
+					  <Button className='button' name='signin' onClick={this.props.handleItemClick}>SIGN IN</Button>
 					</div>
       	</Card.Content>
       </div>

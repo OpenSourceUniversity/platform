@@ -1,8 +1,8 @@
 import React from 'react';
 import { Container, Header, Divider, Grid, Segment, Input, Button, Form, Accordion, Menu, Icon, Dropdown } from 'semantic-ui-react';
-import JobItem from 'components/JobItem';
-import TopJobItem from 'components/TopJobItem';
-import TopCompanyItem from 'components/TopCompanyItem';
+import CourseItem from 'components/CourseItem';
+import TopCoursesItem from 'components/TopCoursesItem';
+import TopAcademiaItem from 'components/TopAcademiaItem';
 
 const FilterForm = (
   <Form>
@@ -18,10 +18,10 @@ const options = [
   { key: 'one', text: 'One', value: '1' },
   { key: 'two', text: 'Two', value: '2' },
   { key: 'three', text: 'Three', value: '3' },
-  { key: 'python', text: 'Python', value: 'Python' },
+  { key: 'courses', text: 'Courses', value: 'courses' },
 ]
 
-export default class JobsPage extends React.Component {
+export default class CoursesPage extends React.Component {
   state = { activeIndex: 0, activeItem: 'trending' }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
@@ -34,24 +34,24 @@ export default class JobsPage extends React.Component {
       this.setState({ activeIndex: newIndex })
     }
 
-  renderJobs() {
-    const jobs = [
-      { title: 'Python Development', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
-      { title: 'Scrum Master', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
-      { title: 'Machine Learning', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
-      { title: 'Solidity Development', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah'},
-      { title: 'Unit Testing', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
-      { title: 'Computer Vision', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
-      { title: 'Computer Vision', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
-      { title: 'Computer Vision', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
-      { title: 'Computer Vision', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
-      { title: 'Computer Vision', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
-      { title: 'Computer Vision', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
-      { title: 'Computer Vision', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
-      { title: 'Computer Vision', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
-      { title: 'Computer Vision', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
+  renderCourses() {
+    const courses = [
+      { title: 'Python Development', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
+      { title: 'Scrum Master', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
+      { title: 'Machine Learning', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
+      { title: 'Solidity Development', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah'},
+      { title: 'Unit Testing', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
+      { title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
+      { title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
+      { title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
+      { title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
+      { title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
+      { title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
+      { title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
+      { title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
+      { title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
     ];
-    return jobs.map((job, index) => (
+    return courses.map((certificate, index) => (
       <Grid.Column
         computer={8}
         largeScreen={8}
@@ -60,19 +60,19 @@ export default class JobsPage extends React.Component {
         mobile={16}
         key={index}
       >
-        <JobItem job={job} key={index} />
+        <CourseItem certificate={certificate} key={index} />
       </Grid.Column>));
   }
 
-  renderTopCompany() {
-    const companies = [
-       { title: 'Company Name' },
-       { title: 'Company Name' },
-       { title: 'Company Name' },
-       { title: 'Company Name' },
-       { title: 'Company Name' },
+  renderTopAcademia() {
+    const academias = [
+       { title: 'Academy Name' },
+       { title: 'Academy Name' },
+       { title: 'Academy Name' },
+       { title: 'Academy Name' },
+       { title: 'Academy Name' },
     ];
-    return companies.map((companies, index) => (
+    return academias.map((academia, index) => (
       <Grid.Column
         computer={8}
         largeScreen={8}
@@ -81,19 +81,19 @@ export default class JobsPage extends React.Component {
         mobile={16}
         key={index}
       >
-        <TopCompanyItem companies={companies} key={index} />
+        <TopAcademiaItem academia={academia} key={index} />
       </Grid.Column>));
   }
 
-  renderTopJobs() {
-    const jobs = [
-       { title: 'Job Name', description: 'Description' },
-       { title: 'Job Name', description: 'Description' },
-       { title: 'Job Name', description: 'Description' },
-       { title: 'Job Name', description: 'Description' },
-       { title: 'Job Name', description: 'Description' },
+  renderTopCourses() {
+    const courses = [
+       { title: 'Academy Name', description: 'Description' },
+       { title: 'Academy Name', description: 'Description' },
+       { title: 'Academy Name', description: 'Description' },
+       { title: 'Academy Name', description: 'Description' },
+       { title: 'Academy Name', description: 'Description' },
     ];
-    return jobs.map((jobs, index) => (
+    return courses.map((course, index) => (
       <Grid.Column
         computer={8}
         largeScreen={8}
@@ -102,7 +102,7 @@ export default class JobsPage extends React.Component {
         mobile={16}
         key={index}
       >
-        <TopJobItem jobs={jobs} key={index} />
+        <TopCoursesItem course={course} key={index} />
       </Grid.Column>));
   }
 
@@ -111,7 +111,7 @@ export default class JobsPage extends React.Component {
     return (
       <Container>
         <Header>
-          Jobs
+          Courses
         </Header>
         <Grid>
           <Grid.Column width={3}>
@@ -127,7 +127,7 @@ export default class JobsPage extends React.Component {
                     onClick={this.handleClick}
                   >
                     <Icon name='block layout' />
-                    Industry
+                    Categories
                   </Accordion.Title>
                   <Accordion.Content active={activeIndex === 0} content={FilterForm} />
                 </Menu.Item>
@@ -151,7 +151,7 @@ export default class JobsPage extends React.Component {
                     onClick={this.handleClick}
                   >
                     <Icon name='home' />
-                    Work type
+                    Study type
                   </Accordion.Title>
                   <Accordion.Content active={activeIndex === 2} content={FilterForm} />
                 </Menu.Item>
@@ -187,7 +187,7 @@ export default class JobsPage extends React.Component {
                     onClick={this.handleClick}
                   >
                     <Icon name='money' />
-                    Salary
+                    Price
                   </Accordion.Title>
                   <Accordion.Content active={activeIndex === 5} content={FilterForm} />
                 </Menu.Item>
@@ -211,7 +211,7 @@ export default class JobsPage extends React.Component {
                     onClick={this.handleClick}
                   >
                     <Icon name='world' />
-                    Location
+                    Language
                   </Accordion.Title>
                   <Accordion.Content active={activeIndex === 7} content={FilterForm} />
                 </Menu.Item>
@@ -222,7 +222,7 @@ export default class JobsPage extends React.Component {
           <Grid.Column width={10}>
             <Segment>
                 <Input
-                  label={<Dropdown defaultValue='Python' options={options} />}
+                  label={<Dropdown defaultValue='courses' options={options} />}
                   labelPosition='left'
                   placeholder='Search by keyword...'
                   icon={{ name: 'search', circular: false, link: true }}
@@ -233,22 +233,22 @@ export default class JobsPage extends React.Component {
                   <Menu.Item name='trending' active={activeItem === 'trending'} onClick={this.handleItemClick} />
                   <Menu.Item name='recommended' active={activeItem === 'recommended'} onClick={this.handleItemClick} />
                 </Menu>
-                {this.renderJobs()}
+                {this.renderCourses()}
             </Segment>
           </Grid.Column>
 
           <Grid.Column width={3}>
             <Segment>
               <Header>
-                Top Companies
+                Top Academia
               </Header>
               <Divider clearing />
-              {this.renderTopCompany()}
+              {this.renderTopAcademia()}
               <Header>
-                Top Jobs
+                Top Courses
               </Header>
               <Divider clearing />
-              {this.renderTopJobs()}
+              {this.renderTopCourses()}
             </Segment>
           </Grid.Column>
         </Grid>

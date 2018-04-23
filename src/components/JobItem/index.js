@@ -1,8 +1,26 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { Card, Icon, Button, Label, Image } from 'semantic-ui-react';
 
 
-export default class JobItem extends React.Component {
+ class JobItemWithoutRouter extends React.Component {
+
+  static propTypes = {
+    history: PropTypes.object.isRequired,
+  }
+
+  handleItemClick = (e, { name }) => {
+    let newPath;
+    if (name === 'home') {
+      newPath = '/';
+    } else {
+      newPath = `/${name}`;
+    }
+      this.props.history.push(newPath);
+
+  }
+
   render() {
     const level = this.props.job.level;
     const location = this.props.job.location;
@@ -23,7 +41,7 @@ export default class JobItem extends React.Component {
           { description }
         </Card.Content>
         <Card.Content extra>
-          <Button> Show job's details </Button>
+          <Button name='job-page' onClick={this.handleItemClick}> Show job's details </Button>
           <Label as='a'>
             <Image avatar spaced='right' src={profile} />
             Title
@@ -33,3 +51,7 @@ export default class JobItem extends React.Component {
     );
   }
 }
+
+const JobItem = withRouter(JobItemWithoutRouter);
+
+export default JobItem;

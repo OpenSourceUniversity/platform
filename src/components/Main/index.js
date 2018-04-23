@@ -15,6 +15,7 @@ import Network from 'containers/Network';
 import Deposit from 'containers/Deposit';
 import CoursePage from 'containers/CoursePage';
 import CreateProfile from 'containers/CreateProfile';
+import JobPage from 'containers/JobPage';
 
 class Main extends React.Component {
   state = {}
@@ -35,9 +36,9 @@ class Main extends React.Component {
         <Route path="/inbox" component={Inbox} />
         <Route path="/network" component={Network} />
         <Route path="/deposit" component={Deposit} />
-        //TESTING
         <Route path="/course-page" component={CoursePage} />
         <Route path="/create-profile" component={CreateProfile} />
+        <Route path="/job-page" component={JobPage} />
       </Switch>
     );
   }

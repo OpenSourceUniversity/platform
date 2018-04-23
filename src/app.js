@@ -9,13 +9,13 @@ import './util/ipfs/getIpfs';
 import Header from './components/Header';
 import Main from './components/Main';
 
-
 class App extends React.Component {
+
   render() {
     return (
       <div className="App">
         <Header />
-
+        <div style={{height: 170 + 'px'}} />
         <div id="Main">
           <Main />
         </div>

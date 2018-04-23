@@ -1,8 +1,26 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { Card, Icon, Button, Label, Image } from 'semantic-ui-react';
 
 
-export default class CourseItem extends React.Component {
+class CourseItemWithoutRouter extends React.Component {
+
+  static propTypes = {
+    history: PropTypes.object.isRequired,
+  }
+
+  handleItemClick = (e, { name }) => {
+    let newPath;
+    if (name === 'home') {
+      newPath = '/';
+    } else {
+      newPath = `/${name}`;
+    }
+      this.props.history.push(newPath);
+
+  }
+
   render() {
     const level = this.props.certificate.level;
     const language = this.props.certificate.language;
@@ -23,7 +41,7 @@ export default class CourseItem extends React.Component {
           { description }
         </Card.Content>
         <Card.Content extra>
-          <Button> Show course </Button>
+          <Button name='course-page' onClick={this.handleItemClick}> Show course </Button>
           <Label as='a'>
             <Image avatar spaced='right' src={profile} />
             Title
@@ -33,3 +51,8 @@ export default class CourseItem extends React.Component {
     );
   }
 }
+
+const CourseItem = withRouter(CourseItemWithoutRouter);
+
+export default CourseItem;
+

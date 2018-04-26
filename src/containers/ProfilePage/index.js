@@ -10,7 +10,7 @@ export default class ProfilePage extends React.Component {
 
     //learner
 
-    switcher = 'academy';
+    switcher = 'learner';
 
     setProfile() {
     	var profile_info;

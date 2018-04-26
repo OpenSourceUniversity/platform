@@ -135,7 +135,7 @@ class AddCertificatePage extends React.Component {
                 />
               </label>
             </Form.Field>
-            <Button type="submit" size="huge">Submit</Button>
+            <Button type="submit" primary size="huge">Submit</Button>
           </Form>
         </Segment>
       </Container>

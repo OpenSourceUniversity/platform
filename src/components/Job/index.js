@@ -1,8 +1,24 @@
 import React from 'react';
 import { Button, List, Header, Divider, Label, Segment, Grid, Menu, Icon, Card } from 'semantic-ui-react';
 import JobItem from 'components/JobItem';
+import SkillItem from 'components/SkillItem';
 
 export default class Job extends React.Component {
+
+	renderSkills() {
+    const skills = [
+      { have_icon: false, check: true, name: 'Python', basic: false },
+      { have_icon: false, check: false, name: 'Design', basic: false },
+      { have_icon: false, check: true, name: 'Software', basic: false },
+      { have_icon: false, check: true, name: 'Python', basic: false },
+      { have_icon: false, check: true, name: 'Python', basic: false },
+      { have_icon: false, check: true, name: 'Python', basic: false },
+      { have_icon: false, check: true, name: 'Python', basic: false },
+    ];
+    return skills.map((course, index) => (
+        <SkillItem skill={course} key={index} />
+    ));
+  }
 
 	renderJobs() {
 	  const jobs = [
@@ -30,7 +46,11 @@ export default class Job extends React.Component {
 
 	handleItemClick = (e, { name }) => this.setState({ activeItem: name })
   render() {
-  	let profile = require('../../icons/account_profile.svg');
+
+  	let vals = 
+  		{ job_title: 'UI/UX Designer', company: 'IO Era', location: 'Sofia, Bulgaria', salary: '1000 BGN', overview: 'Overview blah blah blah', description: 'Descriptions blah blah blah', 
+  		resp: 'Responsobilities blah blah blah', qual: 'Qualifications blah blah blah', offer: 'We offer blah blah blah', icon: 'https://os.university/static/assets/icons/osu-logo.png', rating: 5.0, industry: 'IT & Design', posted: '23.05.2018', 
+  		closes: '23.06.2018', exp: '1+ years', time: 'Full-time', job_type: 'Permanent contract', lang: 'English, Bulgarian' };
 
   	const { activeItem } = this.state
   	return (
@@ -40,21 +60,24 @@ export default class Job extends React.Component {
 						<Segment>
 							<div>
 								<Header>
-									Job title
-									<span className='label-status'> New </span>
+									{vals.job_title}
+									<span className='label-status'> [New] </span>
 								</Header>
 								<span>
-									Posted by IO Era <Icon name='point' /> Sofia, Bulgaria <Icon name='dollar' /> 1000 BGN
+									Posted by {vals.company} <Icon name='point' /> {vals.location} <Icon name='dollar' /> {vals.salary}
 								</span>
 								<Header>
 								 	Overview
 								</Header>
 								<span>
-									blah blah blah
+									{vals.overview}
 								</span>
 								<Header>
 									Skills
 								</Header>
+								<Label.Group size='medium'>
+								  {this.renderSkills()}
+								</Label.Group>
 									<Menu pointing secondary>
 					          <Menu.Item name='desc' active={activeItem === 'desc'} onClick={this.handleItemClick}>
 					          	Job Descriptions
@@ -70,61 +93,76 @@ export default class Job extends React.Component {
 					          </Menu.Item>
 					        </Menu>
 					        <span>
-					        	text
+    		            {(() => {
+	                    switch(this.state.activeItem) {
+	                    case 'resp': return vals.resp;
+	                    case 'qual': return vals.qual;
+	                    case 'offer': return vals.offer;
+	                    default: return vals.description;
+                    }
+                  })()}
 					        </span>
 					        <Menu pointing secondary>
-					          <Menu.Item name='desc' active={activeItem === 'desc'} onClick={this.handleItemClick}>
+					          <Menu.Item name='resp' active={true} >
 					          	Responsobilities
 					          </Menu.Item>
 					        </Menu>
 					        <span>
-					        	text
+					        	{vals.resp}
 					        </span>
 					        <Menu pointing secondary>
-					          <Menu.Item name='desc' active={activeItem === 'desc'} onClick={this.handleItemClick}>
+					          <Menu.Item name='qual' active={true}>
 					          	Qualifications
 					          </Menu.Item>
 					        </Menu>
+					        <span> 
+					        	{vals.qual}
+					        </span>
 						    </div>
+						    <Divider hidden />
 						    <Button> Back to search research </Button> 
-						    <Button> Priveus </Button> 
-						    <Button> Next </Button>
+						    <Button style ={{float: 'right'}}> Priveus </Button> 
+						    <Button style ={{float: 'right'}}> Next </Button>
 							</Segment>
 						</Grid.Column>
 						<Grid.Column width={5}>
 						<Segment textAlign='center'>
-							<img src={profile} />
+							<img src={vals.icon} />
+							<Divider hidden />
+							<span> {vals.company} </span>
 							<br/>
-							<span> IO ERA </span>
-							  <Icon name='star' /> 
-							  <Icon name='star' /> 
-							  <Icon name='star' /> 
-							  <Icon name='star' /> 
-							  <Icon name='star' /> 
-							  5.0/5.0
-							<br/>
-							<span> Location: </span> <span> Sofia, Bulgaria </span>
-							<br/>
-							<span> Industry: </span> <span> IT & Design </span>
-							<Divider clearing />
-							<span> Job title: </span> <span> UI/UX Designer </span>
-							<br/>
-							<span> Posted: </span> <span> 20.03.2017 </span>
-							<br/>
-							<span> Closes: </span> <span> 21.09.2018 </span>
-							<br/>
-							<span> Experience level: </span> <span> 1+ years </span>
-							<br/>
-							<span> Hours: </span> <span> Full-time </span>
-							<br/>
-							<span> Job type: </span> <span> Permanent contract </span>
-							<br/>
-							<span> Language: </span> <span> English, Bulgarian </span>
-							<br/>
+							  <Icon color='yellow' name='star' /> 
+							  <Icon color='yellow' name='star' /> 
+							  <Icon color='yellow' name='star' /> 
+							  <Icon color='yellow' name='star' /> 
+							  <Icon color='yellow' name='star' /> 
+							  {vals.rating.toFixed(1)}/5.0
+							<Divider hidden />
+							<div style ={{textAlign: 'left'}}>
+								<span> Location: </span> <span> {vals.location} </span>
+								<br/>
+								<span> Industry: </span> <span> {vals.industry} </span>
+								<Divider clearing />
+								<span> Job title: </span> <span> {vals.job_title} </span>
+								<br/>
+								<span> Posted: </span> <span> {vals.posted} </span>
+								<br/>
+								<span> Closes: </span> <span> {vals.closes} </span>
+								<br/>
+								<span> Experience level: </span> <span> {vals.exp} </span>
+								<br/>
+								<span> Hours: </span> <span> {vals.time} </span>
+								<br/>
+								<span> Job type: </span> <span> {vals.job_type} </span>
+								<br/>
+								<span> Language: </span> <span> {vals.lang} </span>
+								<br/>
+							</div>
+							<Divider hidden />
 							<Button color='green'>APPLY NOW</Button>
 						</Segment>
 						<Segment>
-							<Header>
+							<Header textAlign='center'>
 								Similar positions
 							</Header>
 							{this.renderJobs()}

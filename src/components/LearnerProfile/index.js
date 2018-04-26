@@ -1,9 +1,25 @@
 import React from 'react';
 import { Container, Header, Divider, Grid, Sticky, Segment, Image, Icon, List, Dropdown, Button, Statistic, Label } from 'semantic-ui-react';
+import SkillItem from 'components/SkillItem';
 
 const square = { width: 175, height: 175 }
 
 export default class LearnerProfile extends React.Component {
+
+  renderSkills() {
+    const skills = [
+      { have_icon: true, check: true, name: 'Python', basic: true },
+      { have_icon: true, check: false, name: 'Design', basic: true },
+      { have_icon: true, check: true, name: 'Software', basic: true },
+      { have_icon: true, check: true, name: 'Python', basic: true },
+      { have_icon: true, check: true, name: 'Python', basic: true },
+      { have_icon: true, check: true, name: 'Python', basic: true },
+      { have_icon: true, check: true, name: 'Python', basic: true },
+    ];
+    return skills.map((course, index) => (
+        <SkillItem skill={course} key={index} />
+    ));
+  }
 
   render() {
 
@@ -101,35 +117,8 @@ export default class LearnerProfile extends React.Component {
                 Skills
               </Header>
               <Divider clearing />
-              <Label.Group size='big'>
-                <Label basic>
-                  <Icon size='small' name={true ? 'check' : 'warning sign'} color={color} />
-                  Python
-                </Label>
-                <Label basic>
-                  <Icon size='small' name={false ? 'check' : 'warning sign'} color='orange' />
-                  Design
-                </Label>
-                <Label basic>
-                  <Icon size='small' name={true ? 'check' : 'warning sign'} color={color} />
-                  Software
-                </Label>
-                <Label basic>
-                  <Icon size='small' name={true ? 'check' : 'warning sign'} color={color} />
-                  Python
-                </Label>
-                <Label basic>
-                  <Icon size='small' name={true ? 'check' : 'warning sign'} color={color} />
-                  Python
-                </Label>
-                <Label basic>
-                  <Icon size='small' name={true ? 'check' : 'warning sign'} color={color} />
-                  Python
-                </Label>
-                <Label basic>
-                  <Icon size='small' name={true ? 'check' : 'warning sign'} color={color} />
-                  Python
-                </Label>
+              <Label.Group size='large'>
+                {this.renderSkills()}
               </Label.Group>
             </Segment>
             <Segment.Group size='large'>

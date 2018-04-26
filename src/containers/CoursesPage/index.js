@@ -233,7 +233,12 @@ export default class CoursesPage extends React.Component {
                   <Menu.Item name='trending' active={activeItem === 'trending'} onClick={this.handleItemClick} />
                   <Menu.Item name='recommended' active={activeItem === 'recommended'} onClick={this.handleItemClick} />
                 </Menu>
-                {this.renderCourses()}
+                {(() => {
+                  switch(this.state.activeItem) {
+                  case 'recommended': return 'Recommended page';
+                  default: return this.renderCourses();
+                  }
+                })()}
             </Segment>
           </Grid.Column>
 

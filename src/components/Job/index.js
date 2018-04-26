@@ -1,148 +1,133 @@
 import React from 'react';
-import { Button, List, Header, Divider, Label, Segment, Grid, Menu, Icon } from 'semantic-ui-react';
+import { Button, List, Header, Divider, Label, Segment, Grid, Menu, Icon, Card } from 'semantic-ui-react';
+import JobItem from 'components/JobItem';
 
 export default class Job extends React.Component {
-	state = { activeItem: 'about' }
+
+	renderJobs() {
+	  const jobs = [
+	    { title: 'Python Development', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
+	    { title: 'Scrum Master', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
+	    { title: 'Machine Learning', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
+	    { title: 'Solidity Development', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah'},
+	    { title: 'Unit Testing', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
+	    { title: 'Computer Vision', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah' },
+	  ];
+	  return jobs.map((job, index) => (
+	    <Grid.Column
+	      computer={8}
+	      largeScreen={8}
+	      widescreen={8}
+	      tablet={8}
+	      mobile={16}
+	      key={index}
+	    >
+	      <JobItem job={job} key={index} />
+	    </Grid.Column>));
+	}
+
+	state = { activeItem: 'desc' }
+
 	handleItemClick = (e, { name }) => this.setState({ activeItem: name })
   render() {
+  	let profile = require('../../icons/account_profile.svg');
+
   	const { activeItem } = this.state
   	return (
 			<div className ='course'>
-				<Header>
-					Job title
-				</Header>
 				<Grid>
 					<Grid.Column width={11}>
 						<Segment>
-							<span>
-								<Icon name='plus' />
-								<Icon name='share alternate' />
-							</span>
-							<Header>
-								Job details
-							</Header>
-							<span>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et egestas leo. Aliquam ultricies libero orci, quis malesuada massa posuere quis. Mauris eget ullamcorper elit, et faucibus sem. Aliquam maximus.
-							</span>
-							<Header>
-								Skills
-							</Header>
-							<Label.Group size='medium'>
-						    <Label>Python</Label>
-						    <Label>IT</Label>
-						    <Label>Killing Dragons</Label>
-						    <Label>Senior Magic</Label>
-						  </Label.Group>
-					    <Divider hidden />
-					    <Grid>
-					    	<Grid.Row>
-					    		<Grid.Column width={4}>
-					    			<span>
-					    				Salary
-					    			</span>
-					    			<br/>
-					    			<span>
-					    				1000 $
-					    			</span>
-					    		</Grid.Column>
-					    		<Grid.Column width={6}>
-					    			<Button color='green'>CANDIDATE</Button>
-					    		</Grid.Column>
-					    		<Grid.Column width={6}>
-					    			Company Reviews (<span>1923</span> ratings) <br/>
-					    			<Icon name='star' color='yellow' />
-					    			<Icon name='star' color='yellow' />
-					    			<Icon name='star' color='yellow' />
-					    			<Icon name='star half full' color='yellow' />
-					    			<Icon name='empty star' color='yellow' />
-					    			<span>3.5</span>/5
-					    		</Grid.Column>
-					    	</Grid.Row>
-					    </Grid>
-					    <Divider hidden />
-					    <Menu pointing secondary>
-		            <Menu.Item name='about' active={activeItem === 'about'} onClick={this.handleItemClick} />
-		            <Menu.Item name='entry requirements' active={activeItem === 'entry requirements'} onClick={this.handleItemClick} />
-		            <Menu.Item name='reviews' active={activeItem === 'reviews'} onClick={this.handleItemClick} />
-		          </Menu>
-		          <div>
-		          	<Header>
-		          		Header
-		          	</Header>
-		          	<span>
-		          		text
-		          	</span>
-		          	<Header>
-		          		Header
-		          	</Header>
-		          	<span>
-		          		text
-		          	</span>
-		          	<Header>
-		          		Header
-		          	</Header>
-		          	<span>
-		          		text
-		          	</span>
-		          </div>
+							<div>
+								<Header>
+									Job title
+									<span className='label-status'> New </span>
+								</Header>
+								<span>
+									Posted by IO Era <Icon name='point' /> Sofia, Bulgaria <Icon name='dollar' /> 1000 BGN
+								</span>
+								<Header>
+								 	Overview
+								</Header>
+								<span>
+									blah blah blah
+								</span>
+								<Header>
+									Skills
+								</Header>
+									<Menu pointing secondary>
+					          <Menu.Item name='desc' active={activeItem === 'desc'} onClick={this.handleItemClick}>
+					          	Job Descriptions
+					          </Menu.Item>
+					          <Menu.Item name='resp' active={activeItem === 'resp'} onClick={this.handleItemClick}>
+					          	Responsobilities
+					          </Menu.Item>
+					          <Menu.Item name='qual' active={activeItem === 'qual'} onClick={this.handleItemClick}>
+					          	Qualifications
+					          </Menu.Item>
+					          <Menu.Item name='offer' active={activeItem === 'offer'} onClick={this.handleItemClick}>
+					          	We offer
+					          </Menu.Item>
+					        </Menu>
+					        <span>
+					        	text
+					        </span>
+					        <Menu pointing secondary>
+					          <Menu.Item name='desc' active={activeItem === 'desc'} onClick={this.handleItemClick}>
+					          	Responsobilities
+					          </Menu.Item>
+					        </Menu>
+					        <span>
+					        	text
+					        </span>
+					        <Menu pointing secondary>
+					          <Menu.Item name='desc' active={activeItem === 'desc'} onClick={this.handleItemClick}>
+					          	Qualifications
+					          </Menu.Item>
+					        </Menu>
+						    </div>
+						    <Button> Back to search research </Button> 
+						    <Button> Priveus </Button> 
+						    <Button> Next </Button>
+							</Segment>
+						</Grid.Column>
+						<Grid.Column width={5}>
+						<Segment textAlign='center'>
+							<img src={profile} />
+							<br/>
+							<span> IO ERA </span>
+							  <Icon name='star' /> 
+							  <Icon name='star' /> 
+							  <Icon name='star' /> 
+							  <Icon name='star' /> 
+							  <Icon name='star' /> 
+							  5.0/5.0
+							<br/>
+							<span> Location: </span> <span> Sofia, Bulgaria </span>
+							<br/>
+							<span> Industry: </span> <span> IT & Design </span>
+							<Divider clearing />
+							<span> Job title: </span> <span> UI/UX Designer </span>
+							<br/>
+							<span> Posted: </span> <span> 20.03.2017 </span>
+							<br/>
+							<span> Closes: </span> <span> 21.09.2018 </span>
+							<br/>
+							<span> Experience level: </span> <span> 1+ years </span>
+							<br/>
+							<span> Hours: </span> <span> Full-time </span>
+							<br/>
+							<span> Job type: </span> <span> Permanent contract </span>
+							<br/>
+							<span> Language: </span> <span> English, Bulgarian </span>
+							<br/>
+							<Button color='green'>APPLY NOW</Button>
 						</Segment>
-					</Grid.Column>
-					<Grid.Column width={5}>
 						<Segment>
 							<Header>
-								Ref. Number
+								Similar positions
 							</Header>
-							<Divider hidden />
-							<Icon name='address card outline' />
-								13513
-							<Divider clearing />
-							<Header>
-								Position
-							</Header>
-							<Icon name='find' />
-							<span>
-								Position name
-							</span>
-							<Divider clearing />
-							<Header>
-								Departament/Division
-							</Header>
-							<Icon name='lab' />
-							<span>
-								Departament name
-							</span>
-							<Divider clearing />
-							<Header>
-								Job Type/Departament &#42;&#42;
-							</Header>
-							<Icon name='industry' />
-							<span>
-								??? IDK what iis this and why we have it twice
-							</span>
-							<Divider clearing />
-							<Header>
-								Location
-							</Header>
-							<Icon name='world' />
-							<span>
-								location
-							</span>
-							<Divider clearing />
-							<Header>
-								Posting Date
-							</Header>
-							<Icon name='add to calendar' />
-							<span>
-								dates
-							</span>
-							<Divider clearing />
-							<Header>
-								Closing Date &#42;
-							</Header>
-							<Icon name='calendar times' />
-							<span>
-								dates
-							</span>
+							{this.renderJobs()}
 						</Segment>
 					</Grid.Column>
 				</Grid>

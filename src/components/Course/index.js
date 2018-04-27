@@ -54,10 +54,10 @@ export default class Course extends React.Component {
   render() {
   	let review = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et egestas leo. Aliquam ultricies libero orci, quis malesuada massa posuere quis. Mauris eget ullamcorper elit, et faucibus sem. Aliquam maximus.';
   	let vals = 
-  		{ course_title: 'Course name', review: review, interested: '12, 400 ', price: '1000 EDU', reviews: 1923, 
-  		about: 'About blah blah blah', e_req: 'Entry Requirements blah blah blah', reviews: 'Reviews blah blah blah', link: '#', icon: 'https://os.university/static/assets/icons/osu-logo.png', rating: 3.5, industry: 'IT & Design', dates: '23.05.2018 - 23.06.2018', 
+  		{ course_title: 'Course name', review: review, interested: '12, 400 ', price: '1000 EDU', reviews: 1923, about: 'About blah blah blah', 
+  		e_req: 'Entry Requirements blah blah blah', reviews: 'Reviews blah blah blah', link: '#', icon: 'https://os.university/static/assets/icons/osu-logo.png', rating: 3.5, industry: 'IT & Design', dates: '23.05.2018 - 23.06.2018', 
   		duration: '1 monnth and 2 week(s)', fee: '$250 or 1000 EDU tokens', tutor: 'blah blah', level: 'Beginer', lang: 'English', code: 'NF440F93Fkk34' };
-  	const { activeItem } = this.state
+  	const { activeItem } = this.state;
   	let link_plus = '#';
   	let share = '#';
   	return (
@@ -121,7 +121,7 @@ export default class Course extends React.Component {
 					    	</Grid.Row>
 					    </Grid>
 					    <Divider hidden />
-					    <Menu pointing secondary>
+					    <Menu pointing secondary color='orange'>
 		            <Menu.Item name='about' active={activeItem === 'about'} onClick={this.handleItemClick} />
 		            <Menu.Item name='entry requirements' active={activeItem === 'entry requirements'} onClick={this.handleItemClick} />
 		            <Menu.Item name='reviews' active={activeItem === 'reviews'} onClick={this.handleItemClick} />

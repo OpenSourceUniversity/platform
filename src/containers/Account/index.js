@@ -65,8 +65,8 @@ export default class AccountSettings extends React.Component {
                     Change Account Password
                   </Header>
                   <Divider clearing />
-                  <Form>
-                    <Form.Field disabled label="Email" autoComplete='email' control="input" type='email' placeholder='Email@gmail.com' />
+                  <Form >
+                    <Form.Field disabled label="Email" control="input" type='email' defaultValue='Email@gmail.com' style={{ opacity: 1, color: 'black'}} className='disabled-email' />
                     <Form.Field label="Current Password" control="input" type='password' placeholder="Current Password" />
                     <Form.Field label="New Password" control="input" type='password' placeholder="New Password" />
                     <Divider hidden />

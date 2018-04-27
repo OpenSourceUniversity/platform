@@ -23,9 +23,8 @@ export default class LearnerProfile extends React.Component {
 
   render() {
 
-    let profile = require('../../icons/account_profile.svg');
+    let profilePicture = this.props.learner.profile_src;
     let token = require('../../icons/edu_token.svg');
-    let profilePicture = require('../../img/jj.jpg');
     const color = true ? 'green' : 'orange';
 
     let email = 'mailto:' + this.props.learner.email;

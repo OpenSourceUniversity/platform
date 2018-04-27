@@ -155,9 +155,9 @@ div#Main {
     div.onboarding-card {
       text-align: center;
       position: relative;
-      left: 70%;
+      left: 68%;
       padding: 40px;
-      width: 28em;
+      width: 32em;
       margin-bottom: 10em;
       top: 10em;
       -webkit-box-shadow: 0px 7px 8px 0px rgba(0,0,0,0.18);
@@ -199,6 +199,22 @@ div#Main {
       div.content {
         padding-top: 3em;
         border: none;
+        div.textAreaButtons {
+          border: 1px solid grey !important;
+          border-radius: 5px !important;
+          height: 170px !important;
+          button {
+            background-color: inherit !important;
+            border-color: red !important;
+            color: red !important;
+          }
+          button:hover {
+            background-color: #ff9999 !important;
+            border-color: red !important;
+            color: white !important;
+          }
+
+        }
         input {
           border: none;
           border-radius: 0;
@@ -206,6 +222,17 @@ div#Main {
         }
         input:focus {
           border-bottom: 1px solid grey;
+        }
+        .seedphrase {
+          word-spacing: 1em;
+          line-height: 2em;
+          text-align: center;
+          margin: 1.5em auto 2em auto;
+          background-color: white;
+          border-radius: 6px;
+          border: 2px solid #26292A;
+          padding: 1em 2em;
+          text-transform: uppercase;
         }
         div.orange-button button {
           width: 100%;
@@ -242,7 +269,6 @@ div#Main {
           background-color: white;
           border: 1px solid #b6b5b5;
           color: #b6b5b5;
-          float: right;
           margin-top: 3.4em;
         }
 
@@ -260,6 +286,12 @@ div#Main {
 
 // ***Account settings page START***
   div.double-form {
+    .disabled-email {
+      opacity: 1 !important;
+      label {
+        opacity: 1 !important;
+      }
+    }
     div.segment {
       margin-top: 0 !important;
       margin-bottom: 0 !important;

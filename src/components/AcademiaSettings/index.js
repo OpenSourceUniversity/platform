@@ -3,6 +3,7 @@ import { Input, Form, Button, Radio, Checkbox, Header, Divider, Label, Segment }
 
 export default class AcademiaSettings extends React.Component {
 	state = {}
+  handleChange = (e, { value }) => this.setState({ value })
   render() {
   	return (
 			<div className ='academia-settings'>
@@ -33,6 +34,7 @@ export default class AcademiaSettings extends React.Component {
 	                  placeholder="authority logo"
 	                  onChange={this.handleInputChange}
 	                  className='input-file'
+	                  color='orange'
 	                />
 	              </label>
 	            </Form.Field>
@@ -45,6 +47,7 @@ export default class AcademiaSettings extends React.Component {
 		            	value='this'
 		            	checked={this.state.value === 'this'}
 		            	onChange={this.handleChange}
+		            	color='orange'
 		            	/> 
 	            </Form.Field> 
 	            <Form.Field>
@@ -54,6 +57,7 @@ export default class AcademiaSettings extends React.Component {
 			            value='that'
 			            checked={this.state.value === 'that'}
 		            	onChange={this.handleChange}
+		            	color='orange'
 			          /> 
 	            </Form.Field> 
 	          </Form.Group>
@@ -91,7 +95,7 @@ export default class AcademiaSettings extends React.Component {
 		        </Form.Field>
 		        <Divider clearing />
 		        <Button className='save-button' type="submit" primary>Send request</Button>
-		        <Button className='cancel-button'>Cancel</Button>
+		        <Button className='cancel-button' style={{float: 'right'}}>Cancel</Button>
 		      </Form>
 		    </Segment>
 	    </div>

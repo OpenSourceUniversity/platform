@@ -225,11 +225,11 @@ export default class CoursesPage extends React.Component {
                   label={<Dropdown defaultValue='courses' options={options} />}
                   labelPosition='left'
                   placeholder='Search by keyword...'
-                  icon={{ name: 'search', circular: false, link: true }}
+                  icon={{ name: 'search', circular: false, link: true, bordered: true }}
                   fluid
                 />
                 <Divider clearing />
-                <Menu pointing secondary>
+                <Menu pointing secondary color='orange'>
                   <Menu.Item name='trending' active={activeItem === 'trending'} onClick={this.handleItemClick} />
                   <Menu.Item name='recommended' active={activeItem === 'recommended'} onClick={this.handleItemClick} />
                 </Menu>

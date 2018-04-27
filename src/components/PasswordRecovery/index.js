@@ -23,10 +23,10 @@ export default class PasswordRecovery extends React.Component {
 	      </Card.Header>
 	      <Card.Description>
 	      	<span className='welcome'>
-	        	Password Recovery <br/>
+	        	Wallet Recovery <br/>
 	        </span>
 	        <span className='orange'>
-	          Please enter your email address to recover your password.
+	          Enter your seed phrase. This is the 12 word phrase you were given when you first created your wallet
 	        </span>
 	      </Card.Description>
       	<Card.Content>
@@ -36,12 +36,13 @@ export default class PasswordRecovery extends React.Component {
 					    	<label>
 					    		<Icon name='user' />
 					    	</label>
-					      <Input type='email' placeholder='Email address' />
+					      <Input type='text' placeholder='Seed phrase' />
 					    </Form.Field>
 					  </Form.Group>
-						<Form.Button className='orange-button'>SEND EMAIL</Form.Button>
+						<Form.Button className='orange-button' name='continue'>Continue</Form.Button>
 				  </Form>
-				   <Button className='button' name='signip' onClick={this.props.handleItemClick} >BACK TO SIGN IN</Button>
+				   <Button style={{float: 'left'}} className='button' name='signip' onClick={this.props.handleItemClick} >BACK TO SIGN IN</Button>
+				   <Button style={{float: 'right'}} className='button' name='signup' onClick={this.props.handleItemClick} >NEW WALLET</Button>
       	</Card.Content>
       </div>
     );

@@ -26,32 +26,24 @@ export default class SignIn extends React.Component {
 	        	Welcome Back! <br/>
 	        </span>
 	        <span className='orange'>
-	          Sign in to your account.
+	          Please enter your encryption passphrase to access your wallet
 	        </span>
 	      </Card.Description>
       	<Card.Content>
       		<Form>
-        		<Form.Group inline>
-					    <Form.Field inline width='16'>
-					    	<label>
-					    		<Icon name='user' />
-					    	</label>
-					      <Input type='email' placeholder='Email address' />
-					    </Form.Field>
-					  </Form.Group>
 					  <Form.Group inline>
 					    <Form.Field inline width='16'>
 					    	<label>
 					    		<Icon name='lock' />
 					    	</label>
-							  <Input type='password' placeholder='Password' />
+							  <Input type='password' placeholder='Passphrase' />
 							</Form.Field>
 						</Form.Group>
-						<Form.Button className='orange-button'>LOG IN</Form.Button>
+						<Form.Button className='orange-button'>ACCESS MY WALLET</Form.Button>
 				  </Form>
-				  <Button fluid name='recovery' className='recovery-link' onClick={this.props.handleItemClick}>Forgot your password? </Button> <br/>
-				  <span> Don't have an account? </span>
-				  <Button className='button' name='signup' onClick={this.props.handleItemClick} >SIGN UP</Button>
+				  <Button fluid name='recovery' className='recovery-link' onClick={this.props.handleItemClick}>Wallet Recovery </Button> <br/>
+				  <span> Don't have a wallet? </span>
+				  <Button className='button' style={{float: 'right'}} name='signup' onClick={this.props.handleItemClick} >NEW WALLET</Button>
       	</Card.Content>
       </div>
     );

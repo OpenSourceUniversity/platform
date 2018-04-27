@@ -23,10 +23,10 @@ export default class SignUp extends React.Component {
 	      </Card.Header>
 	      <Card.Description>
 	      	<span className='welcome'>
-	        	Welcome! <br/>
+	        	New ERC20 Wallet <br/>
 	        </span>
 	        <span className='orange'>
-	          Create a new account.
+	          Please enter a passphrase to encrypt your wallet
 	        </span>
 	      </Card.Description>
       	<Card.Content>
@@ -36,17 +36,9 @@ export default class SignUp extends React.Component {
 					    	<label>
 					    		<Icon name='user' />
 					    	</label>
-					      <Input type='email' placeholder='Email address' />
+					      <Input type='password' placeholder='Set your passphrase' />
 					    </Form.Field>
 					  </Form.Group>
-					  <Form.Group inline>
-					    <Form.Field inline width='16'>
-					    	<label>
-					    		<Icon name='lock' />
-					    	</label>
-							  <Input type='password' placeholder='Password' />
-							</Form.Field>
-						</Form.Group>
 						<Form.Field inline className='check-box'>
 							<Input  
 								type='checkbox'
@@ -55,11 +47,11 @@ export default class SignUp extends React.Component {
 								I agree with the Terms&Conditions
 							</span>
 						</Form.Field>
-						<Form.Button className='orange-button'>SIGN UP</Form.Button>
+						<Form.Button name='recoveryPhraseSeed' onClick={this.props.handleItemClick} className='orange-button'>CREATE MY WALLET</Form.Button>
 				  </Form>
 				  <div className='sign-up'>
-					  <span> Already have an account? </span>
-					  <Button className='button' name='signin' onClick={this.props.handleItemClick}>SIGN IN</Button>
+					  <span> Already have a Wallet? </span>
+					  <Button name='signin' style={{float: 'right'}} onClick={this.props.handleItemClick}>ACCESS MY WALLET</Button>
 					</div>
       	</Card.Content>
       </div>

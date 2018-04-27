@@ -78,7 +78,7 @@ export default class Job extends React.Component {
 								<Label.Group size='medium'>
 								  {this.renderSkills()}
 								</Label.Group>
-									<Menu pointing secondary>
+									<Menu pointing secondary color='orange'>
 					          <Menu.Item name='desc' active={activeItem === 'desc'} onClick={this.handleItemClick}>
 					          	Job Descriptions
 					          </Menu.Item>
@@ -102,7 +102,7 @@ export default class Job extends React.Component {
                     }
                   })()}
 					        </span>
-					        <Menu pointing secondary>
+					        <Menu pointing secondary color='orange'>
 					          <Menu.Item name='resp' active={true} >
 					          	Responsobilities
 					          </Menu.Item>
@@ -110,7 +110,7 @@ export default class Job extends React.Component {
 					        <span>
 					        	{vals.resp}
 					        </span>
-					        <Menu pointing secondary>
+					        <Menu pointing secondary color='orange'>
 					          <Menu.Item name='qual' active={true}>
 					          	Qualifications
 					          </Menu.Item>

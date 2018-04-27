@@ -290,9 +290,9 @@ export default class LernersSettings extends React.Component {
 	      </Header>
 	      <Divider clearing />
 	      <Form>
-	        <Form.Field disabled label="Email" control="input" type='email' placeholder='Email@gmail.com' />
+	        <Form.Field disabled label="Email" control="input" type='email' defaultValue='Email@gmail.com' style={{ opacity: 1, color: 'black'}} className='disabled-email' />
 	        <Form.Field label="Phone number" autoComplete='tel' control="input" type='tel' placeholder="Phone number" />
-	        <Form.Dropdown placeholder='Select Country' fluid search selection options={countryOptions} />
+	        <Form.Dropdown placeholder='Select Country' label="Country" fluid search selection options={countryOptions} />
 	        <Divider hidden />
 	        <Button type="submit">Save Profile Settings</Button>
 	      </Form>

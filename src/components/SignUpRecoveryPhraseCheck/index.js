@@ -4,8 +4,8 @@ import { Container, Image, Card, Form, Input, Grid, Button, Icon, Label } from '
 export default class SignUpRecoveryPhraseCheck extends React.Component {
 
 	seedPhraseButtons() {
-		let phrases = [ 'fog', 'prepare', 'party', 'warm', 'tomorrow', 'athlete', 'equip', 'elbow', 'seven', 'stool', 'pet', 'tent'];
-
+		let seedPhrase = this.props.seedPhrase;
+		let phrases = seedPhrase.split(" ");
 		return phrases.map((phrase, index) => (
         <Button name={phrase} style={{textTransform: 'uppercase', marginTop: 5 + 'px'}} key={index} onClick={this.phraseButtonClick} disabled={this.state[phrase]}  > {phrase}</Button>
     ));
@@ -38,8 +38,6 @@ export default class SignUpRecoveryPhraseCheck extends React.Component {
 
 	render() {
 		let logo = require('../../icons/edu-logo.png');
-		console.log('render');
-		console.log(this.choosed);
 		return (
       <div className='recovery'>
       	<Card.Header>
@@ -75,7 +73,7 @@ export default class SignUpRecoveryPhraseCheck extends React.Component {
 	      </Card.Content>
       	<Card.Content>
 				   <Button style={{float: 'left'}} className='button' name='recoveryPhraseSeed' onClick={this.props.handleItemClick} >BACK</Button>
-				   <Button style={{float: 'right'}} className='button' name='signupcheck' onClick={this.props.handleItemClick} >CONTINUE</Button>
+				   <Button style={{float: 'right'}} className='button' name='created' onClick={this.props.handleItemClick} >CONTINUE</Button>
       	</Card.Content>
       </div>
     );

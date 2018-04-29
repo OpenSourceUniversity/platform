@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Image, Card, Form, Input, Grid, Button, Icon } from 'semantic-ui-react';
 
-export default class PasswordRecovery extends React.Component {
+export default class WalletRecovery extends React.Component {
 	render() {
 		let logo = require('../../icons/edu-logo.png');
 		return (
@@ -23,10 +23,10 @@ export default class PasswordRecovery extends React.Component {
 	      </Card.Header>
 	      <Card.Description>
 	      	<span className='welcome'>
-	        	Create New Passphrase <br/>
+	        	Wallet Recovery <br/>
 	        </span>
 	        <span className='orange'>
-	          Enter a new passphrase. This will be stored locally on your browser
+	          Enter your seed phrase. This is the 12 word phrase you were given when you first created your wallet
 	        </span>
 	      </Card.Description>
       	<Card.Content>
@@ -36,11 +36,13 @@ export default class PasswordRecovery extends React.Component {
 					    	<label>
 					    		<Icon name='user' />
 					    	</label>
-					      <Input type='password' placeholder='New passphrase' />
+					      <Input type='text' placeholder='Seed phrase' />
 					    </Form.Field>
 					  </Form.Group>
-						<Form.Button className='orange-button' name='walletrecoverysuccess' onClick={this.props.handleItemClick}>RECOVER MY WALLET</Form.Button>
+						<Form.Button className='orange-button' name='passwordrecovery' onClick={this.props.handleItemClick}>Continue</Form.Button>
 				  </Form>
+				   <Button style={{float: 'left'}} className='button' name='signip' onClick={this.props.handleItemClick} >BACK TO SIGN IN</Button>
+				   <Button style={{float: 'right'}} className='button' name='signup' onClick={this.props.handleItemClick} >NEW WALLET</Button>
       	</Card.Content>
       </div>
     );

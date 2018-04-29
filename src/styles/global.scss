@@ -155,17 +155,14 @@ div#Main {
     div.onboarding-card {
       text-align: center;
       position: relative;
-      left: 68%;
+      left: 65%;
       padding: 40px;
-      width: 32em;
+      width: 39em;
       margin-bottom: 10em;
       top: 10em;
       -webkit-box-shadow: 0px 7px 8px 0px rgba(0,0,0,0.18);
       -moz-box-shadow: 0px 7px 8px 0px rgba(0,0,0,0.18);
       box-shadow: 0px 7px 8px 0px rgba(0,0,0,0.18);
-      div.recovery {
-        padding-bottom: 5em;
-      }
       div.header {
         img.logo {
           width: 3em;
@@ -202,7 +199,7 @@ div#Main {
         div.textAreaButtons {
           border: 1px solid grey !important;
           border-radius: 5px !important;
-          height: 170px !important;
+          height: 180px !important;
           button {
             background-color: inherit !important;
             border-color: red !important;

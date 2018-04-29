@@ -4,9 +4,9 @@ import { Container, Image, Card, Form, Input, Grid, Button, Icon, Label } from '
 export default class SignUpRecoveryPhrase extends React.Component {
 
 	seedPhrase() {
-		return 'fog prepare party warm tomorrow athlete equip elbow seven stool pet tent';
+		let seedPhrase = this.props.seedPhrase;
+		return seedPhrase;
 	}
-
 	render() {
 		let logo = require('../../icons/edu-logo.png');
 		return (
@@ -43,7 +43,7 @@ export default class SignUpRecoveryPhrase extends React.Component {
 	      	</Label>
 	      </Card.Content>
       	<Card.Content>
-				   <Button style={{float: 'left'}} className='button' name='download' onClick={this.props.handleItemClick} >DOWNLOAD SEED PHRASE</Button>
+				   <Button style={{float: 'left'}} className='button' name='download' >DOWNLOAD SEED PHRASE</Button>
 				   <Button style={{float: 'right'}} className='button' name='recoveryPhraseCheck' onClick={this.props.handleItemClick} >CONTINUE</Button>
       	</Card.Content>
       </div>

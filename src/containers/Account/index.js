@@ -4,16 +4,7 @@ import LernersSettings from 'components/LernersSettings';
 import AcademiaSettings from 'components/AcademiaSettings';
 
 export default class AccountSettings extends React.Component {
-  state = {}
-
-  handleItemClick = (e, { name }) => {
-    this.setState({ activeItem: name });
-    if (name === 'Academy') {
-      this.setState({ setAcademia: true });
-    } else if (name === 'Learner') {
-      this.setState({ setAcademia: false });
-    }
-  }
+  state = {defaultProfile: this.props.activeAccount}
 
   
 
@@ -22,8 +13,7 @@ export default class AccountSettings extends React.Component {
     let learners = require('../../icons/learners.svg');
     let businesses = require('../../icons/businesses.svg');
     let academia = require('../../icons/academia.svg');
-
-    const { activeItem, setAcademia } = this.state
+    const { defaultProfile } = this.state
     return (
       <div>
         <Container className='account-settings'>
@@ -42,19 +32,19 @@ export default class AccountSettings extends React.Component {
                     Set default profile:
                   </Header>
                   <Menu fluid vertical pointing>
-                    <Menu.Item name='Learner' active={activeItem === 'Learner'} onClick={this.handleItemClick}>
+                    <Menu.Item name='Learner' active={this.props.activeAccount === 'Learner'} onClick={this.props.setActiveAccount}>
                     <svg width='16' height='16' className='cogs icon'> 
                       <image href={learners}  x='0' y='0' width='100%' height='100%'></image>
                     </svg>
                     Learner
                     </Menu.Item>
-                    <Menu.Item name='Academy' active={activeItem === 'Academy'} onClick={this.handleItemClick}>
+                    <Menu.Item name='Academy' active={this.props.activeAccount === 'Academy'} onClick={this.props.setActiveAccount}>
                       <svg width='16' height='16' className='cogs icon'> 
                         <image href={academia}  x='0' y='0' width='100%' height='100%'></image>
                       </svg>
                       Academy
                     </Menu.Item>
-                    <Menu.Item name='Business' active={activeItem === 'Business'} onClick={this.handleItemClick}>
+                    <Menu.Item name='Business' active={this.props.activeAccount === 'Business'} onClick={this.props.setActiveAccount}>
                       <svg width='16' height='16' className='cogs icon'> 
                         <image href={businesses}  x='0' y='0' width='100%' height='100%'></image>
                       </svg>
@@ -76,10 +66,13 @@ export default class AccountSettings extends React.Component {
               </Grid.Column>
               <Grid.Column stretched width={10}>
                 <Segment className='settings'>
-                  {this.state.setAcademia ?
-                    <AcademiaSettings /> :
-                    <LernersSettings />
-                  }
+                  {(() => {
+                    switch(this.props.activeAccount) {
+                    case 'Academy': return <AcademiaSettings />;
+                    case 'Learner': return <LernersSettings />;
+                    default: return null;
+                    }
+                  })()}
                 </Segment>
               </Grid.Column>
             </Grid.Row>

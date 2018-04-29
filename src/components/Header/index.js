@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { Container, Menu, Dropdown, Input, Grid, Image, Icon, List } from 'semantic-ui-react';
+import { Container, Menu, Dropdown, Input, Grid, Image, Icon, List, Button, Step } from 'semantic-ui-react';
 
 
 class HeaderWithoutRouter extends React.Component {
@@ -9,7 +9,14 @@ class HeaderWithoutRouter extends React.Component {
     history: PropTypes.object.isRequired,
   }
 
-  state = {}
+  checkRoute() {
+     let isCreateAccount = this.props.history.location.pathname ==='/create-profile' ? ('createAccount') : (this.state.secondaryNav);
+     this.setState({ activeItem: isCreateAccount });
+  }
+
+  isCreateAccount = this.props.history.location.pathname ==='/create-profile' ? ('createAccount') : (null)
+
+  state = {isLogged: this.props.isLogged, secondaryNav: this.isCreateAccount}
 
   handleItemClick = (e, { name }) => {
     this.setState({ activeItem: name });
@@ -19,18 +26,56 @@ class HeaderWithoutRouter extends React.Component {
     } else {
       newPath = `/${name}`;
     }
-
     if (this.props.history.location.pathname !== newPath) {
       this.props.history.push(newPath);
     }
   }
   setSecondaryNav = (e, { name }) => {
-      this.setState({ secondaryNav: name });
+      this.setState({ secondaryNav: this.props.history.location.pathname ==='/create-profile' ? ('createAccount') : name });
+  }
+
+  createAccountRender() {
+    return <Step.Group size='mini'>
+            <Step
+              active={this.props.createAccountActiveItem === 'profile'}
+              icon='radio'
+              link
+              onClick={this.props.createAccountActiveItemFunc}
+              title='CHOOSE PROFILE'
+              name='profile'
+            />
+
+            <Step
+              active={this.props.createAccountActiveItem === 'info'}
+              icon='radio'
+              link
+              onClick={this.props.createAccountActiveItemFunc}
+              title='ADDITIONAL INFO'
+              name='info'
+            />
+
+            <Step
+              active={this.props.createAccountActiveItem === 'payment'}
+              icon='radio'
+              link
+              onClick={this.props.createAccountActiveItemFunc}
+              title='PAYMENT METNOD'
+              name='payment'
+            />
+
+            <Step
+              active={this.props.createAccountActiveItem === 'deposit'}
+              icon='radio'
+              link
+              onClick={this.props.createAccountActiveItemFunc}
+              title='DEPOSIT'
+              name='deposit'
+            />
+          </Step.Group>
   }
 
   render() {
-    const { activeItem, secondaryNav } = this.state;
-
+    const { activeItem, secondaryNav, isLogged } = this.state;
     let logo = require('../../icons/edu-logo.png');
     let profile = require('../../icons/account_profile.svg');
     let deposit = require('../../icons/account_deposit.svg');
@@ -66,7 +111,7 @@ class HeaderWithoutRouter extends React.Component {
       { key: 'profile', content: 'My Profile', name: 'profile', className: 'profile-nav', active: activeItem === 'profile', onClick: this.handleItemClick },
       { key: 'deposit', content: 'Deposit/Withdraw', name: 'deposit', className: 'deposit-nav', active: activeItem === 'deposit', onClick: this.handleItemClick },
       { key: 'settings', content: 'Account Settings', name: 'settings', className: 'settings-nav', active: activeItem === 'settings', onClick: this.handleItemClick },
-      { key: 'onboarding', content: 'Logout', name: 'onboarding',className: 'logout-nav', active: activeItem === 'onboarding', onClick: this.handleItemClick },
+      { key: 'onboarding', content: 'Logout', name: 'onboarding', className: 'logout-nav', active: activeItem === 'onboarding', onClick: this.handleItemClick },
     ]
 
     const options_notifications = [
@@ -105,7 +150,8 @@ class HeaderWithoutRouter extends React.Component {
       <Menu size='massive' fixed='top'>
         <Container fluid>
           <Grid divided='vertically'>
-            <Grid.Row className='main-nav'>
+         { this.props.isLogged ?
+            (<Grid.Row className='main-nav'>
               <Menu.Item name='home' onClick={this.handleItemClick}>
                 <img className='main-nav-logo' src={logo} />
               </Menu.Item>
@@ -185,19 +231,33 @@ class HeaderWithoutRouter extends React.Component {
                   </Dropdown.Menu>
                 </Dropdown>
               </Menu.Menu>
-            </Grid.Row>
+            </Grid.Row>) : 
+                      
+             ( <Grid.Row className='main-nav'>
+                 <Menu.Item name='home' onClick={this.handleItemClick}>
+                   <img className='main-nav-logo' src={logo} />
+                   Open Source University
+                 </Menu.Item>
+                 <Menu.Menu position='right'>
+                   <Menu.Item name='network'>
+                     <Button primary name= 'onboarding' onClick={this.handleItemClick} >LOGIN </Button>
+                   </Menu.Item>
+                  </Menu.Menu>
+               </Grid.Row>)
+           }
 
             <Grid.Row className='secondary-nav'>
               {(() => {
-                switch(this.state.secondaryNav) {
-                case 'business': return <Menu size='massive' items={learner_businesses_dropdown_elements} />;
-                case 'academia': return <Menu size='massive' items={learner_academia_dropdown_elements} />;
-                case 'account': return <Menu size='massive' items={account_elements} />;
-                default: return null;
+                if(this.props.isLogged) {
+                  switch(this.state.secondaryNav) {
+                  case 'business': return <Menu size='massive' items={learner_businesses_dropdown_elements} />;
+                  case 'academia': return <Menu size='massive' items={learner_academia_dropdown_elements} />;
+                  case 'account': return <Menu size='massive' items={account_elements} />;
+                  case 'createAccount': return this.createAccountRender();
+                  default: return null;
+                  }
                 }
               })()}
-
-
             </Grid.Row>
           </Grid>
         </Container>

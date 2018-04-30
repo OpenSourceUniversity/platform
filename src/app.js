@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Container } from 'semantic-ui-react';
 import React from 'react';
+import PropTypes from 'prop-types';
 import './util/web3/getWeb3';
 import './util/ipfs/getIpfs';
 
@@ -11,17 +12,34 @@ import Main from './components/Main';
 
 class App extends React.Component {
 
-  isLogged = true;
+  constructor(props) {
+    super(props);
+    this.createAccountNav = this.createAccountNav.bind(this);
+  }
 
-  state = {isLogged: this.isLogged, createAccountActiveSlide: 'profile', activeAccount: 'Learner'}
+  static propTypes = {
+    history: PropTypes.object.isRequired,
+  }
+
+  isLogged = false;
+
+  state = {isLogged: this.isLogged, createAccountActiveSlide: 'profile', activeAccount: 'Learner', secondaryNav: this.isCreateAccount}
 
   setActiveAccount = (e, { name }) => {
-      this.setState({ activeAccount: name });
+    this.setState({ activeAccount: name });
   }
 
 
   setCreateAccountActiveItem = (e, { name }) => {
-      this.setState({ createAccountActiveSlide: name });
+    this.setState({ createAccountActiveSlide: name });
+  }
+
+  setSecondaryNav  = (e, { name }) => {
+    this.setState({ secondaryNav: name });
+  }
+
+  createAccountNav(e) {
+    this.setState({ secondaryNav: 'createAccount' });
   }
 
 
@@ -33,6 +51,8 @@ class App extends React.Component {
           isLogged={this.isLogged} 
           createAccountActiveItem={this.state.createAccountActiveSlide}
           createAccountActiveItemFunc={this.setCreateAccountActiveItem}
+          setSecondaryNav={this.setSecondaryNav}
+          secondaryNav={this.state.secondaryNav}
         />
         <div style={{height: 170 + 'px'}} />
         <div id="Main">
@@ -41,7 +61,7 @@ class App extends React.Component {
             setActiveAccount={this.setActiveAccount} 
             setCreateAccountActiveItem={this.setCreateAccountActiveItem}
             createAccountActiveItem={this.state.createAccountActiveSlide}
-            createAccountActiveItemFunc={this.createAccountActiveItem}
+            createAccountNav={this.createAccountNav}
           />
         </div>
 

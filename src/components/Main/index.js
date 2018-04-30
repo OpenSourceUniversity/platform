@@ -53,7 +53,8 @@ class Main extends React.Component {
           setActiveAccount={this.props.setActiveAccount} 
           setCreateAccountActiveItem={this.props.setCreateAccountActiveItem}
           createAccountActiveItem={this.props.createAccountActiveItem}
-          createAccountActiveItemFunc={this.props.createAccountActiveItem}
+          setCreateAccountNav={this.props.setCreateAccountNav}
+          createAccountNav={this.props.createAccountNav}
           />}
           
         />

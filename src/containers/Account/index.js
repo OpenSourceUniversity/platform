@@ -13,7 +13,7 @@ export default class AccountSettings extends React.Component {
     let learners = require('../../icons/learners.svg');
     let businesses = require('../../icons/businesses.svg');
     let academia = require('../../icons/academia.svg');
-    const { defaultProfile } = this.state
+    const { defaultProfile } = this.state;
     return (
       <div>
         <Container className='account-settings'>

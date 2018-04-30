@@ -9,29 +9,21 @@ class HeaderWithoutRouter extends React.Component {
     history: PropTypes.object.isRequired,
   }
 
-  checkRoute() {
-     let isCreateAccount = this.props.history.location.pathname ==='/create-profile' ? ('createAccount') : (this.state.secondaryNav);
-     this.setState({ activeItem: isCreateAccount });
-  }
-
-  isCreateAccount = this.props.history.location.pathname ==='/create-profile' ? ('createAccount') : (null)
-
   state = {isLogged: this.props.isLogged, secondaryNav: this.isCreateAccount}
 
   handleItemClick = (e, { name }) => {
     this.setState({ activeItem: name });
     let newPath;
     if (name === 'home') {
+      this.props.setSecondaryNav(e, { name });
       newPath = '/';
+
     } else {
       newPath = `/${name}`;
     }
     if (this.props.history.location.pathname !== newPath) {
       this.props.history.push(newPath);
     }
-  }
-  setSecondaryNav = (e, { name }) => {
-      this.setState({ secondaryNav: this.props.history.location.pathname ==='/create-profile' ? ('createAccount') : name });
   }
 
   createAccountRender() {
@@ -157,11 +149,11 @@ class HeaderWithoutRouter extends React.Component {
               </Menu.Item>
               <Dropdown className='explore-dropdown' item trigger={explore_trigger}>
               <Dropdown.Menu>
-                <Dropdown.Item name='academia' className='nav-list' onClick={this.setSecondaryNav}>
+                <Dropdown.Item name='academia' className='nav-list' onClick={this.props.setSecondaryNav}>
                   <List selection items={learner_academia_dropdown_elements} />
                   
                 </Dropdown.Item>
-                <Dropdown.Item name='business' className='nav-list' onClick={this.setSecondaryNav}>
+                <Dropdown.Item name='business' className='nav-list' onClick={this.props.setSecondaryNav}>
                   <List selection items={learner_businesses_dropdown_elements} />
                 </Dropdown.Item>
               </Dropdown.Menu>
@@ -187,7 +179,7 @@ class HeaderWithoutRouter extends React.Component {
 
                 <Dropdown item trigger={avatar_trigger} pointing='top right'> 
                   <Dropdown.Menu>
-                    <Dropdown.Item className='account-nav-setter' name='account' onClick={this.setSecondaryNav}>
+                    <Dropdown.Item className='account-nav-setter' name='account' onClick={this.props.setSecondaryNav}>
                       <Dropdown.Item name='balance' className='balance-nav' onClick={this.handleItemClick}>
                         EDUx Balance:
                         <span className='balance-nav'>
@@ -235,7 +227,7 @@ class HeaderWithoutRouter extends React.Component {
                       
              ( <Grid.Row className='main-nav'>
                  <Menu.Item name='home' onClick={this.handleItemClick}>
-                   <img className='main-nav-logo' src={logo} />
+                   <img className='main-nav-logo' style={{marginRight: 15 + 'px'}} src={logo} />
                    Open Source University
                  </Menu.Item>
                  <Menu.Menu position='right'>
@@ -249,7 +241,7 @@ class HeaderWithoutRouter extends React.Component {
             <Grid.Row className='secondary-nav'>
               {(() => {
                 if(this.props.isLogged) {
-                  switch(this.state.secondaryNav) {
+                  switch(this.props.secondaryNav) {
                   case 'business': return <Menu size='massive' items={learner_businesses_dropdown_elements} />;
                   case 'academia': return <Menu size='massive' items={learner_academia_dropdown_elements} />;
                   case 'account': return <Menu size='massive' items={account_elements} />;

@@ -21,7 +21,7 @@ class App extends React.Component {
     history: PropTypes.object.isRequired,
   }
 
-  isLogged = false;
+  isLogged = true;
 
   state = {isLogged: this.isLogged, createAccountActiveSlide: 'profile', activeAccount: 'Learner', secondaryNav: this.isCreateAccount}
 

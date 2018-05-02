@@ -227,8 +227,8 @@ class HeaderWithoutRouter extends React.Component {
                       
              ( <Grid.Row className='main-nav'>
                  <Menu.Item name='home' onClick={this.handleItemClick}>
-                   <img className='main-nav-logo' style={{marginRight: 15 + 'px'}} src={logo} />
-                   Open Source University
+                    <img className='main-nav-logo' style={{marginRight: 15 + 'px'}} src={logo} />
+                    Open Source <br/> University
                  </Menu.Item>
                  <Menu.Menu position='right'>
                    <Menu.Item name='network'>

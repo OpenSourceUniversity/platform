@@ -4,16 +4,12 @@ import LernersSettings from 'components/LernersSettings';
 import AcademiaSettings from 'components/AcademiaSettings';
 
 export default class AccountSettings extends React.Component {
-  state = {defaultProfile: this.props.activeAccount}
-
-  
 
   render() {
     let settings = require('../../icons/account_settings.svg');
     let learners = require('../../icons/learners.svg');
     let businesses = require('../../icons/businesses.svg');
     let academia = require('../../icons/academia.svg');
-    const { defaultProfile } = this.state;
     return (
       <div>
         <Container className='account-settings'>

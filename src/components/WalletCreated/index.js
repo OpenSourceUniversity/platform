@@ -5,6 +5,11 @@ import { Container, Image, Card, Form, Input, Grid, Button, Icon, Label } from '
 
 class WalletCreatedWithoutRouter extends React.Component {
 
+	constructor(props) {
+	super(props);
+	this.props.setLogInStatus(this, { name: 'login' });
+	}
+
 	walletAddress = '0x5e50703df199c351ffd92f2ab3fa4e9d5e1bbddf'
 
 	static propTypes = {
@@ -18,7 +23,9 @@ class WalletCreatedWithoutRouter extends React.Component {
     } else {
       newPath = `/${name}`;
     }
-      this.props.history.push(newPath);
+    if (this.props.history.location.pathname !== newPath) {
+			this.props.history.push(newPath);
+		}
 
   }
 

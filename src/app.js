@@ -21,14 +21,15 @@ class App extends React.Component {
     history: PropTypes.object.isRequired,
   }
 
-  isLogged = true;
-
-  state = {isLogged: this.isLogged, createAccountActiveSlide: 'profile', activeAccount: 'Learner', secondaryNav: this.isCreateAccount}
+  state = {isLogged: false, createAccountActiveSlide: 'profile', activeAccount: 'Learner', secondaryNav: this.isCreateAccount}
 
   setActiveAccount = (e, { name }) => {
     this.setState({ activeAccount: name });
   }
 
+  setLogInStatus = (e, { name }) => {
+    this.setState({ isLogged: name ==='login' ? true : false});
+  }
 
   setCreateAccountActiveItem = (e, { name }) => {
     this.setState({ createAccountActiveSlide: name });
@@ -48,11 +49,12 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header 
-          isLogged={this.isLogged} 
+          isLogged={this.state.isLogged} 
           createAccountActiveItem={this.state.createAccountActiveSlide}
           createAccountActiveItemFunc={this.setCreateAccountActiveItem}
           setSecondaryNav={this.setSecondaryNav}
           secondaryNav={this.state.secondaryNav}
+          setLogInStatus={this.setLogInStatus}
         />
         <div style={{height: 170 + 'px'}} />
         <div id="Main">
@@ -62,6 +64,7 @@ class App extends React.Component {
             setCreateAccountActiveItem={this.setCreateAccountActiveItem}
             createAccountActiveItem={this.state.createAccountActiveSlide}
             createAccountNav={this.createAccountNav}
+            setLogInStatus={this.setLogInStatus}
           />
         </div>
 

@@ -1,7 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { Container, Image, Card, Form, Input, Grid, Button, Icon } from 'semantic-ui-react';
 
-export default class SignIn extends React.Component {
+class SignInWithoutRouter extends React.Component {
+
+	static propTypes = {
+    history: PropTypes.object.isRequired,
+  }
+
+	loginFunc = (e, { name }) => {
+		this.props.setLogInStatus(e, { name });
+		let newPath = '/';
+		if (this.props.history.location.pathname !== newPath) {
+			this.props.history.push(newPath);
+		}
+  }
+  
+
 	render() {
 		let logo = require('../../icons/edu-logo.png');
 		return (
@@ -39,7 +55,7 @@ export default class SignIn extends React.Component {
 							  <Input type='password' placeholder='Passphrase' />
 							</Form.Field>
 						</Form.Group>
-						<Form.Button className='orange-button'>ACCESS MY WALLET</Form.Button>
+						<Form.Button name="login" onClick={this.loginFunc} className='orange-button'>ACCESS MY WALLET</Form.Button>
 				  </Form>
 				  <Button fluid name='recovery' className='recovery-link' onClick={this.props.handleItemClick}>Wallet Recovery </Button> <br/>
 				  <span> Don't have a wallet? </span>
@@ -49,3 +65,8 @@ export default class SignIn extends React.Component {
     );
   }
 }
+
+const SignIn = withRouter(SignInWithoutRouter);
+
+export default SignIn;
+

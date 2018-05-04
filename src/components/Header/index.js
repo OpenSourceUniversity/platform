@@ -26,6 +26,14 @@ class HeaderWithoutRouter extends React.Component {
     }
   }
 
+  loginFunc = (e, { name }) => {
+    this.props.setLogInStatus(e, { name });
+    let newPath = '/';
+    if (this.props.history.location.pathname !== newPath) {
+      this.props.history.push(newPath);
+    }
+  }
+
   createAccountRender() {
     return <Step.Group size='mini'>
             <Step
@@ -103,7 +111,7 @@ class HeaderWithoutRouter extends React.Component {
       { key: 'profile', content: 'My Profile', name: 'profile', className: 'profile-nav', active: activeItem === 'profile', onClick: this.handleItemClick },
       { key: 'deposit', content: 'Deposit/Withdraw', name: 'deposit', className: 'deposit-nav', active: activeItem === 'deposit', onClick: this.handleItemClick },
       { key: 'settings', content: 'Account Settings', name: 'settings', className: 'settings-nav', active: activeItem === 'settings', onClick: this.handleItemClick },
-      { key: 'onboarding', content: 'Logout', name: 'onboarding', className: 'logout-nav', active: activeItem === 'onboarding', onClick: this.handleItemClick },
+      { key: 'onboarding', content: 'Logout', name: 'logout', className: 'logout-nav', active: activeItem === 'onboarding', onClick: this.loginFunc },
     ]
 
     const options_notifications = [
@@ -213,7 +221,7 @@ class HeaderWithoutRouter extends React.Component {
                         </svg>
                         Account Settings
                       </Dropdown.Item>
-                      <Dropdown.Item name='onboarding' className='logout-nav' onClick={this.handleItemClick}>
+                      <Dropdown.Item name='logout' className='logout-nav' onClick={this.loginFunc}>
                         <svg width='16' height='16'> 
                           <image href={logout}  x='0' y='0' width='100%' height='100%'></image>
                         </svg>

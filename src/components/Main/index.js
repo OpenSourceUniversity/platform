@@ -44,7 +44,13 @@ class Main extends React.Component {
           setActiveAccount={this.props.setActiveAccount}
           />}
         />
-        <Route path="/onboarding" component={OnBoarding} />
+        setLogIn
+
+        <Route path="/onboarding" 
+          render={(props) => <OnBoarding {...props}
+          setLogInStatus={this.props.setLogInStatus}
+          />}
+        />
         <Route path="/inbox" component={Inbox} />
         <Route path="/network" component={Network} />
         <Route path="/deposit" component={Deposit} />

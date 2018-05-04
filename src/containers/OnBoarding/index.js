@@ -28,10 +28,10 @@ export default class OnBoarding extends React.Component {
                 case 'recoveryPhraseSeed': return <SignUpRecoveryPhrase seedPhrase = {this.seedPhrase}  handleItemClick = {(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
                 case 'recovery': return <WalletRecovery handleItemClick = {(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
                 case 'signup': return <SignUp handleItemClick = {(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
-                case 'created': return <WalletCreated handleItemClick = {(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
+                case 'created': return <WalletCreated setLogInStatus={this.props.setLogInStatus} handleItemClick = {(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
                 case 'passwordrecovery': return <PasswordRecovery handleItemClick = {(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
                 case 'walletrecoverysuccess': return <WalletRecoverySuccess handleItemClick = {(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
-                default: return <SignIn handleItemClick = {(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
+                default: return <SignIn setLogInStatus={this.props.setLogInStatus} handleItemClick = {(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
                 }
               })()}
         </Card>

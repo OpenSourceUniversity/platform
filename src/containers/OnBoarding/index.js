@@ -18,11 +18,11 @@ export default class OnBoarding extends React.Component {
   render() {
     const { onboardingActiveForm, seedPhrase } = this.state
 
-  	let background = require('../../img/business-academia.jpg');
+    let background = require('../../img/business-academia.jpg');
     return (
       <Container fluid className='onboarding' style={{backgroundColor: 'white', marginTop: -95 +'px'}}>
         <Card className='onboarding-card'>
-        	{(() => {
+          {(() => {
                 switch(this.state.onboardingActiveForm) {
                 case 'recoveryPhraseCheck': return <SignUpRecoveryPhraseCheck seedPhrase = {this.seedPhrase} handleItemClick = {(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
                 case 'recoveryPhraseSeed': return <SignUpRecoveryPhrase seedPhrase = {this.seedPhrase}  handleItemClick = {(e, { name }) => this.setState({ onboardingActiveForm: name })} />;

@@ -111,7 +111,7 @@ class HeaderWithoutRouter extends React.Component {
       { key: 'profile', content: 'My Profile', name: 'profile', className: 'profile-nav', active: activeItem === 'profile', onClick: this.handleItemClick },
       { key: 'deposit', content: 'Deposit/Withdraw', name: 'deposit', className: 'deposit-nav', active: activeItem === 'deposit', onClick: this.handleItemClick },
       { key: 'settings', content: 'Account Settings', name: 'settings', className: 'settings-nav', active: activeItem === 'settings', onClick: this.handleItemClick },
-      { key: 'onboarding', content: 'Logout', name: 'logout', className: 'logout-nav', active: activeItem === 'onboarding', onClick: this.loginFunc },
+      { key: 'onboarding', content: 'Logout', name: 'logout', className: 'logout-nav', onClick: this.loginFunc },
     ]
 
     const options_notifications = [

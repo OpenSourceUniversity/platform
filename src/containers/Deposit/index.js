@@ -1,6 +1,6 @@
 import React from 'react';
-import { Segment, Container, Grid, Card, Image, Button, Table, Icon, Header, Divider, Statistic, Responsive, Input, Dropdown, Message, Form, Label } from 'semantic-ui-react'
-
+import { Segment, Container, Grid, Card, Image, Button, Table, Icon, Header, Divider, Statistic, Responsive, Input, Dropdown, Message, Form, Label, Modal } from 'semantic-ui-react'
+import TransactionHistoryItem from 'components/TransactionHistoryItem';
 let walletOptions = [
     {
       text: '0x849c2ea2a8f0ed0fe6d28b17fa0f779d6a45dff1',
@@ -8,11 +8,39 @@ let walletOptions = [
     },
 ]
 
+let options = [
+  '0x849c2ea2a8f0ed0fe6d28b17fa0f779d6a45dff1',
+  '0x849c2ea2a8f0ed0fe6d28b17fa0f779d6a45dff1',
+  '0x849c2ea2a8f0ed0fe6d28b17fa0f779d6a45dff1',
+]
+
+let eduBalance = '1000.000';
+let ethBalance = '0.000';
+
 export default class Deposit extends React.Component {
 
   state = { }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
+  renderAutocomplete() {
+    return options.map((wallet, index)=> (
+      <option value={wallet} key={index} />
+      ));
+  }
+
+  renderHistory() {
+    const history = [
+      { type: 'Deposit', value: 5, currency: 'ETH', date: '17/Apr/18 18:52:89', sentFrom: options[0], sentTo: walletOptions[0]['value'], transactionHash: '0x9c83816b9264bfc9ce28a1bf32847686ce262fde0a528ac08ef6902abd4da143' },
+      { type: 'Withdraw', value: 5, currency: 'ETH', date: '17/Apr/18 18:52:89', sentFrom: walletOptions[0]['value'], sentTo: options[0], transactionHash: '0x9c83816b9264bfc9ce28a1bf32847686ce262fde0a528ac08ef6902abd4da143' },
+      { type: 'Deposit', value: 6000, currency: 'EDU', date: '17/Apr/18 18:52:89', sentFrom: options[0], sentTo: walletOptions[0]['value'], transactionHash: '0x9c83816b9264bfc9ce28a1bf32847686ce262fde0a528ac08ef6902abd4da143' },
+      { type: 'Withdraw', value: 5000, currency: 'EDU', date: '17/Apr/18 18:52:89', sentFrom: walletOptions[0]['value'], sentTo: options[0], transactionHash: '0x9c83816b9264bfc9ce28a1bf32847686ce262fde0a528ac08ef6902abd4da143' },
+    ];
+
+    return history.map((history, index) => (
+      <TransactionHistoryItem historyDetails={history} key={index} />
+    ));
+  }
 
   render() {
 
@@ -49,13 +77,22 @@ export default class Deposit extends React.Component {
                         </Card.Meta>
                         <Card.Description>
                           <Form className='attached fluid segment'>
-                            <Form.Input readOnly label='ETH/EDU Deposit Address:' fluid value='0x849c2ea2a8f0ed0fe6d28b17fa0f779d6a45dff1' />
+                            <Form.Input readOnly label='ETH/EDU Deposit Address:' fluid value={walletOptions[0]['value']} />
                           </Form>
                         </Card.Description>
                       </Card.Content>
                       <Card.Content extra>
                         <div className='ui two buttons'>
-                          <Button basic color='grey'><Icon name='qrcode' /> Show QR Code</Button>
+                          <Modal style={{display: 'flex'+'!important', textAlign: 'center'}} trigger={<Button basic color='grey'><Icon name='qrcode' /> Show QR Code</Button>}>
+                            <Modal.Content>
+                              <Modal.Header>
+                                <Image style={{display: 'inline-block'}} src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/220px-QR_code_for_mobile_English_Wikipedia.svg.png' />
+                              </Modal.Header>
+                              <Modal.Description>
+                                <Header>ETH/EDU Deposit Address: {walletOptions[0]['text']}</Header>
+                              </Modal.Description>
+                            </Modal.Content>
+                          </Modal>
                           <Button basic color='grey'><Icon name='copy' /> Copy Address</Button>
                         </div>
                       </Card.Content>
@@ -79,7 +116,10 @@ export default class Deposit extends React.Component {
                         </Card.Meta>
                         <Card.Description>
                           <Form className='attached fluid segment'>
-                            <Form.Dropdown label='Choose withdraw wallet:' fluid placeholder='Choose a wallet' openOnFocus selection options={walletOptions} />
+                            <Form.Input list='wallets' label='Choose withdraw wallet:' fluid placeholder='Choose a wallet' />
+                              <datalist id='wallets'>
+                                {this.renderAutocomplete()}
+                              </datalist>
                             <Input fluid label='EDU' labelPosition='right' placeholder='0.0000' />
                           </Form>
                         </Card.Description>
@@ -100,7 +140,7 @@ export default class Deposit extends React.Component {
                     <svg width='24' height='24'> 
                       <image href={token}  x='0' y='0' width='100%' height='100%'></image>
                     </svg>
-                    1,000.000
+                    {eduBalance}
                   </Statistic.Value>
                   <Statistic.Label>EDU Balance</Statistic.Label>
                 </Statistic>
@@ -109,7 +149,7 @@ export default class Deposit extends React.Component {
                     <svg width='24' height='24'> 
                       <image href={ethereum}  x='0' y='0' width='100%' height='100%'></image>
                     </svg>
-                    0.000
+                    {ethBalance}
                   </Statistic.Value>
                   <Statistic.Label>ETH Balance</Statistic.Label>
                 </Statistic>
@@ -124,54 +164,7 @@ export default class Deposit extends React.Component {
                     </Table.Header>
 
                     <Table.Body>
-                      <Table.Row>
-                        <Table.Cell>
-                          <Icon name='arrow up' />
-                        </Table.Cell>
-                        <Table.Cell>Deposit</Table.Cell>
-                        <Table.Cell>5</Table.Cell>
-                        <Table.Cell>ETH</Table.Cell>
-                        <Table.Cell textAlign='right'>17/Apr/18 18:52:89</Table.Cell>
-                        <Table.Cell textAlign='center'>
-                          <Button size='tiny' icon='unordered list' />
-                        </Table.Cell>
-                      </Table.Row>
-                      <Table.Row>
-                        <Table.Cell>
-                          <Icon name='arrow down' />
-                        </Table.Cell>
-                        <Table.Cell>Withdraw</Table.Cell>
-                        <Table.Cell>5</Table.Cell>
-                        <Table.Cell>ETH</Table.Cell>
-                        <Table.Cell textAlign='right'>17/Apr/18 18:52:89</Table.Cell>
-                        <Table.Cell textAlign='center'>
-                          <Button size='tiny' icon='unordered list' />
-                        </Table.Cell>
-                      </Table.Row>
-                      <Table.Row>
-                        <Table.Cell>
-                          <Icon name='arrow up' />
-                        </Table.Cell>
-                        <Table.Cell>Deposit</Table.Cell>
-                        <Table.Cell>6,000</Table.Cell>
-                        <Table.Cell>EDU</Table.Cell>
-                        <Table.Cell textAlign='right'>17/Apr/18 18:52:89</Table.Cell>
-                        <Table.Cell textAlign='center'>
-                          <Button size='tiny' icon='unordered list' />
-                        </Table.Cell>
-                      </Table.Row>
-                      <Table.Row>
-                        <Table.Cell>
-                          <Icon name='arrow down' />
-                        </Table.Cell>
-                        <Table.Cell>Withdraw</Table.Cell>
-                        <Table.Cell>5,000</Table.Cell>
-                        <Table.Cell>EDU</Table.Cell>
-                        <Table.Cell textAlign='right'>17/Apr/18 18:52:89</Table.Cell>
-                        <Table.Cell textAlign='center'>
-                          <Button size='tiny' icon='unordered list' />
-                        </Table.Cell>
-                      </Table.Row>
+                     { this.renderHistory() }
                     </Table.Body>
                   </Table>
                 </Card.Content>

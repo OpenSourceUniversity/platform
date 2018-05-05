@@ -141,6 +141,10 @@ div.App {
 
 //***Main container***
 
+div.visible.transition {
+  display: flex!important;
+}
+
 div#Main {
     border-radius: 5px;
 

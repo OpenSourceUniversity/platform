@@ -21,7 +21,7 @@ class App extends React.Component {
     history: PropTypes.object.isRequired,
   }
 
-  state = {isLogged: false, createAccountActiveSlide: 'profile', activeAccount: 'Learner', secondaryNav: this.isCreateAccount}
+  state = {isLogged: true, createAccountActiveSlide: 'profile', activeAccount: 'Learner', secondaryNav: this.isCreateAccount}
 
   setActiveAccount = (e, { name }) => {
     this.setState({ activeAccount: name });
@@ -48,8 +48,8 @@ class App extends React.Component {
     const { isLogged, createAccountActiveSlide, activeAccount } = this.state
     return (
       <div className="App">
-        <Header 
-          isLogged={this.state.isLogged} 
+        <Header
+          isLogged={this.state.isLogged}
           createAccountActiveItem={this.state.createAccountActiveSlide}
           createAccountActiveItemFunc={this.setCreateAccountActiveItem}
           setSecondaryNav={this.setSecondaryNav}
@@ -58,9 +58,9 @@ class App extends React.Component {
         />
         <div style={{height: 170 + 'px'}} />
         <div id="Main">
-          <Main 
-            activeAccount={this.state.activeAccount} 
-            setActiveAccount={this.setActiveAccount} 
+          <Main
+            activeAccount={this.state.activeAccount}
+            setActiveAccount={this.setActiveAccount}
             setCreateAccountActiveItem={this.setCreateAccountActiveItem}
             createAccountActiveItem={this.state.createAccountActiveSlide}
             createAccountNav={this.createAccountNav}

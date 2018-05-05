@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Container, Header, Divider, Grid, Segment, Icon, Menu, Form } from 'semantic-ui-react';
 import LernersSettings from 'components/LernersSettings';
 import AcademiaSettings from 'components/AcademiaSettings';
+import BusinessesSettings from 'components/BusinessesSettings';
 
 export default class AccountSettings extends React.Component {
 
@@ -14,7 +15,7 @@ export default class AccountSettings extends React.Component {
       <div>
         <Container className='account-settings'>
           <Header size="huge">
-            <svg width='32' height='32' className='icon'> 
+            <svg width='32' height='32' className='icon'>
               <image href={settings}  x='0' y='0' width='100%' height='100%'></image>
             </svg>
             Account Settings
@@ -29,19 +30,19 @@ export default class AccountSettings extends React.Component {
                   </Header>
                   <Menu fluid vertical pointing>
                     <Menu.Item name='Learner' active={this.props.activeAccount === 'Learner'} onClick={this.props.setActiveAccount}>
-                    <svg width='16' height='16' className='cogs icon'> 
+                    <svg width='16' height='16' className='cogs icon'>
                       <image href={learners}  x='0' y='0' width='100%' height='100%'></image>
                     </svg>
                     Learner
                     </Menu.Item>
                     <Menu.Item name='Academy' active={this.props.activeAccount === 'Academy'} onClick={this.props.setActiveAccount}>
-                      <svg width='16' height='16' className='cogs icon'> 
+                      <svg width='16' height='16' className='cogs icon'>
                         <image href={academia}  x='0' y='0' width='100%' height='100%'></image>
                       </svg>
                       Academy
                     </Menu.Item>
                     <Menu.Item name='Business' active={this.props.activeAccount === 'Business'} onClick={this.props.setActiveAccount}>
-                      <svg width='16' height='16' className='cogs icon'> 
+                      <svg width='16' height='16' className='cogs icon'>
                         <image href={businesses}  x='0' y='0' width='100%' height='100%'></image>
                       </svg>
                       Business
@@ -52,7 +53,7 @@ export default class AccountSettings extends React.Component {
                   </Header>
                   <Divider clearing />
                   <Form >
-                    <Form.Field disabled label="Email" control="input" type='email' defaultValue='Email@gmail.com' style={{ opacity: 1, color: 'black'}} className='disabled-email' />
+                    <Form.Field disabled label="Passphrase" control="input" type='text' defaultValue='Passphrase' style={{ opacity: 1, color: 'black'}} />
                     <Form.Field label="Current Password" control="input" type='password' placeholder="Current Password" />
                     <Form.Field label="New Password" control="input" type='password' placeholder="New Password" />
                     <Divider hidden />
@@ -66,6 +67,7 @@ export default class AccountSettings extends React.Component {
                     switch(this.props.activeAccount) {
                     case 'Academy': return <AcademiaSettings />;
                     case 'Learner': return <LernersSettings />;
+                    case 'Business': return <BusinessesSettings />;
                     default: return null;
                     }
                   })()}

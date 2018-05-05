@@ -4,12 +4,12 @@ import Course from 'components/Course';
 
 export default class CoursePage extends React.Component {
   render() {
-  	return (
-			<div className ='course'>
-				<Container>
-					<Course />
-				</Container>
-	    </div>
-  	);
+    return (
+      <div className ='course'>
+        <Container>
+          <Course />
+        </Container>
+      </div>
+    );
   }
 }

@@ -5,7 +5,7 @@ import SubscriberItem from 'components/SubscriberItem';
 
 export default class Course extends React.Component {
 
-	renderSkills() {
+  renderSkills() {
     const skills = [
       { have_icon: false, check: true, name: 'Python', basic: false },
       { have_icon: false, check: false, name: 'Design', basic: false },
@@ -32,177 +32,177 @@ export default class Course extends React.Component {
   }
 
   renderRating(rating) {
-  	rating = Math.round(rating*2)/2;
-  	var stars = [];
-  	for (var i = 0; i < 5; i++) {
-  		if(rating - i == 0.5) {
-  			stars.push({name: 'star half full'});
-  		} else if (rating - i > 0) {
-  			stars.push({name: 'star'});
-  		} else {
-  			stars.push({name: 'empty star'});
-  		}
-  	}
+    rating = Math.round(rating*2)/2;
+    var stars = [];
+    for (var i = 0; i < 5; i++) {
+      if(rating - i == 0.5) {
+        stars.push({name: 'star half full'});
+      } else if (rating - i > 0) {
+        stars.push({name: 'star'});
+      } else {
+        stars.push({name: 'empty star'});
+      }
+    }
 
-  	return stars.map((star, index) => (
+    return stars.map((star, index) => (
         <Icon name={star.name} key={index} />
     ));
   }
 
-	state = { activeItem: 'about' }
-	handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  state = { activeItem: 'about' }
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
   render() {
-  	let review = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et egestas leo. Aliquam ultricies libero orci, quis malesuada massa posuere quis. Mauris eget ullamcorper elit, et faucibus sem. Aliquam maximus.';
-  	let vals = 
-  		{ course_title: 'Course name', review: review, interested: '12, 400 ', price: '1000 EDU', reviews: 1923, about: 'About blah blah blah', 
-  		e_req: 'Entry Requirements blah blah blah', reviews: 'Reviews blah blah blah', link: '#', icon: 'https://os.university/static/assets/icons/osu-logo.png', rating: 3.5, industry: 'IT & Design', dates: '23.05.2018 - 23.06.2018', 
-  		duration: '1 monnth and 2 week(s)', fee: '$250 or 1000 EDU tokens', tutor: 'blah blah', level: 'Beginer', lang: 'English', code: 'NF440F93Fkk34' };
-  	const { activeItem } = this.state;
-  	let link_plus = '#';
-  	let share = '#';
-  	return (
-			<div className ='course'>
-				<Header>
-					{vals.course_title}
-				</Header>
-				<Grid>
-					<Grid.Column width={11}>
-						<Segment>
-							<span style={{float: 'right'}}>
-								<a href={link_plus}>
-									<Icon color='black' name='plus' />
-								</a>
-								<a href={share}>
-									<Icon color='black' name='share alternate' />
-								</a>
-							</span>
-							<Header>
-								Reviews
-							</Header>
-							<span>
-								{vals.review}
-							</span>
-							<Header>
-								Skills
-							</Header>
-							<Label.Group size='medium'>
-						    {this.renderSkills()}
-						  </Label.Group>
-						  <Divider hidden />
-						  <Label.Group circular>
-					      {this.renderSubs()}
-					      <span>
-					      	<span>
-					      		{vals.interested}
-					      	</span>
-					      	students interested
-					      </span>
-					    </Label.Group>
-					    <Divider hidden />
-					    <Grid>
-					    	<Grid.Row>
-					    		<Grid.Column width={4}>
-					    			<span>
-					    				Price
-					    			</span>
-					    			<br/>
-					    			<span>
-					    				{vals.price}
-					    			</span>
-					    		</Grid.Column>
-					    		<Grid.Column width={6}>
-					    			<Button as='a' color='green'>BUY COURSE</Button>
-					    		</Grid.Column>
-					    		<Grid.Column width={6}>
-					    			Reviews (<span>{vals.reviews}</span> ratings) <br/>
-					    			{this.renderRating(vals.rating)}
-					    			<span>{vals.rating}</span>/5
-					    		</Grid.Column>
-					    	</Grid.Row>
-					    </Grid>
-					    <Divider hidden />
-					    <Menu pointing secondary color='orange'>
-		            <Menu.Item name='about' active={activeItem === 'about'} onClick={this.handleItemClick} />
-		            <Menu.Item name='entry requirements' active={activeItem === 'entry requirements'} onClick={this.handleItemClick} />
-		            <Menu.Item name='reviews' active={activeItem === 'reviews'} onClick={this.handleItemClick} />
-		          </Menu>
-		          <div>
-		           {(() => {
+    let review = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et egestas leo. Aliquam ultricies libero orci, quis malesuada massa posuere quis. Mauris eget ullamcorper elit, et faucibus sem. Aliquam maximus.';
+    let vals = 
+      { course_title: 'Course name', review: review, interested: '12, 400 ', price: '1000 EDU', reviews: 1923, about: 'About blah blah blah', 
+      e_req: 'Entry Requirements blah blah blah', reviews: 'Reviews blah blah blah', link: '#', icon: 'https://os.university/static/assets/icons/osu-logo.png', rating: 3.5, industry: 'IT & Design', dates: '23.05.2018 - 23.06.2018', 
+      duration: '1 monnth and 2 week(s)', fee: '$250 or 1000 EDU tokens', tutor: 'blah blah', level: 'Beginer', lang: 'English', code: 'NF440F93Fkk34' };
+    const { activeItem } = this.state;
+    let link_plus = '#';
+    let share = '#';
+    return (
+      <div className ='course'>
+        <Header>
+          {vals.course_title}
+        </Header>
+        <Grid>
+          <Grid.Column width={11}>
+            <Segment>
+              <span style={{float: 'right'}}>
+                <a href={link_plus}>
+                  <Icon color='black' name='plus' />
+                </a>
+                <a href={share}>
+                  <Icon color='black' name='share alternate' />
+                </a>
+              </span>
+              <Header>
+                Reviews
+              </Header>
+              <span>
+                {vals.review}
+              </span>
+              <Header>
+                Skills
+              </Header>
+              <Label.Group size='medium'>
+                {this.renderSkills()}
+              </Label.Group>
+              <Divider hidden />
+              <Label.Group circular>
+                {this.renderSubs()}
+                <span>
+                  <span>
+                    {vals.interested}
+                  </span>
+                  students interested
+                </span>
+              </Label.Group>
+              <Divider hidden />
+              <Grid>
+                <Grid.Row>
+                  <Grid.Column width={4}>
+                    <span>
+                      Price
+                    </span>
+                    <br/>
+                    <span>
+                      {vals.price}
+                    </span>
+                  </Grid.Column>
+                  <Grid.Column width={6}>
+                    <Button as='a' color='green'>BUY COURSE</Button>
+                  </Grid.Column>
+                  <Grid.Column width={6}>
+                    Reviews (<span>{vals.reviews}</span> ratings) <br/>
+                    {this.renderRating(vals.rating)}
+                    <span>{vals.rating}</span>/5
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
+              <Divider hidden />
+              <Menu pointing secondary color='orange'>
+                <Menu.Item name='about' active={activeItem === 'about'} onClick={this.handleItemClick} />
+                <Menu.Item name='entry requirements' active={activeItem === 'entry requirements'} onClick={this.handleItemClick} />
+                <Menu.Item name='reviews' active={activeItem === 'reviews'} onClick={this.handleItemClick} />
+              </Menu>
+              <div>
+               {(() => {
                 switch(this.state.activeItem) {
                 case 'entry requirements': return vals.e_req;
                 case 'reviews': return vals.reviews;
                 default: return vals.about;
                 }
               })()}
-		          </div>
-						</Segment>
-					</Grid.Column>
-					<Grid.Column width={5}>
-						<Segment>
-							<Header>
-								Provider
-							</Header>
-							<Divider hidden />
-								<Image src={vals.icon} as='a' href={vals.link} />
-							<Divider clearing />
-							<Header>
-								Course dates
-							</Header>
-							<Icon name='calendar' />
-							<span>
-								{vals.dates}
-							</span>
-							<Divider clearing />
-							<Header>
-								Course duration
-							</Header>
-							<Icon name='clock' />
-							<span>
-								{vals.duration}
-							</span>
-							<Divider clearing />
-							<Header>
-								Course fee
-							</Header>
-							<Icon name='rub' />
-							<span>
-								{vals.fee}
-							</span>
-							<Divider clearing />
-							<Header>
-								Tutor
-							</Header>
-							<Icon name='user outline' />
-							<span>
-								{vals.tutor}
-							</span>
-							<Divider clearing />
-							<Header>
-								Language
-							</Header>
-							<Icon name='world' />
-							<span>
-								{vals.lang}
-							</span>
-							<Divider clearing />
-							<Header>
-								Level
-							</Header>
-							<Icon name='signal' />
-							<span>
-								{vals.level}
-							</span>
-							<Divider clearing />
-							<Header>
-								Course code
-							</Header>
-							<span>
-								{vals.code}
-							</span>
-						</Segment>
-					</Grid.Column>
-				</Grid>
-	    </div>
-  	);
+              </div>
+            </Segment>
+          </Grid.Column>
+          <Grid.Column width={5}>
+            <Segment>
+              <Header>
+                Provider
+              </Header>
+              <Divider hidden />
+                <Image src={vals.icon} as='a' href={vals.link} />
+              <Divider clearing />
+              <Header>
+                Course dates
+              </Header>
+              <Icon name='calendar' />
+              <span>
+                {vals.dates}
+              </span>
+              <Divider clearing />
+              <Header>
+                Course duration
+              </Header>
+              <Icon name='clock' />
+              <span>
+                {vals.duration}
+              </span>
+              <Divider clearing />
+              <Header>
+                Course fee
+              </Header>
+              <Icon name='rub' />
+              <span>
+                {vals.fee}
+              </span>
+              <Divider clearing />
+              <Header>
+                Tutor
+              </Header>
+              <Icon name='user outline' />
+              <span>
+                {vals.tutor}
+              </span>
+              <Divider clearing />
+              <Header>
+                Language
+              </Header>
+              <Icon name='world' />
+              <span>
+                {vals.lang}
+              </span>
+              <Divider clearing />
+              <Header>
+                Level
+              </Header>
+              <Icon name='signal' />
+              <span>
+                {vals.level}
+              </span>
+              <Divider clearing />
+              <Header>
+                Course code
+              </Header>
+              <span>
+                {vals.code}
+              </span>
+            </Segment>
+          </Grid.Column>
+        </Grid>
+      </div>
+    );
   }
 }

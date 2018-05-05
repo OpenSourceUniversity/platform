@@ -3,7 +3,7 @@ import { Form, Button, Radio, Checkbox, Container, Header, Divider, Grid, Sticky
 
 export default class LernersSettings extends React.Component {
   render() {
-  	const skills = [
+    const skills = [
       { key: 'angular', text: 'Angular', value: 'angular' },
       { key: 'css', text: 'CSS', value: 'css' },
       { key: 'design', text: 'Graphic Design', value: 'design' },
@@ -268,34 +268,34 @@ export default class LernersSettings extends React.Component {
     { key: 'zw', value: 'zw', flag: 'zw', text: 'Zimbabwe' },
   ];
     return (
-    	<div>
-	      <Header>
-	        Personal Information
-	      </Header>
-	      <Divider clearing />
-	      <Form>
-	        <Form.Group widths="equal">
-	          <Form.Field label="First name" control="input" placeholder="First name" />
-	          <Form.Field label="Last name" control="input" placeholder="Last name" />
-	        </Form.Group>
-	        <Form.Dropdown label="Skills" placeholder='Select Skills' fluid multiple search selection options={skills} />
-	        <Form.TextArea label='About' placeholder='Tell us more about you...' />
-	        <Checkbox label="Make my profile paid" toggle defaultChecked />
-	      </Form>
-	      <Divider hidden />
-	      <Button>Connect LincedIn</Button>
-	      <Button>Connect GitHub</Button>
-	      <Header>
-	        Contact Information
-	      </Header>
-	      <Divider clearing />
-	      <Form>
-	        <Form.Field disabled label="Email" control="input" type='email' defaultValue='Email@gmail.com' style={{ opacity: 1, color: 'black'}} className='disabled-email' />
-	        <Form.Field label="Phone number" autoComplete='tel' control="input" type='tel' placeholder="Phone number" />
-	        <Form.Dropdown placeholder='Select Country' label="Country" fluid search selection options={countryOptions} />
-	        <Divider hidden />
-	        <Button type="submit">Save Profile Settings</Button>
-	      </Form>
+      <div>
+        <Header>
+          Personal Information
+        </Header>
+        <Divider clearing />
+        <Form>
+          <Form.Group widths="equal">
+            <Form.Field label="First name" control="input" placeholder="First name" />
+            <Form.Field label="Last name" control="input" placeholder="Last name" />
+          </Form.Group>
+          <Form.Dropdown label="Skills" placeholder='Select Skills' fluid multiple search selection options={skills} />
+          <Form.TextArea label='About' placeholder='Tell us more about you...' />
+          <Checkbox label="Make my profile paid" toggle defaultChecked />
+        </Form>
+        <Divider hidden />
+        <Button>Connect LincedIn</Button>
+        <Button>Connect GitHub</Button>
+        <Header>
+          Contact Information
+        </Header>
+        <Divider clearing />
+        <Form>
+          <Form.Field disabled label="Email" control="input" type='email' defaultValue='Email@gmail.com' style={{ opacity: 1, color: 'black'}} className='disabled-email' />
+          <Form.Field label="Phone number" autoComplete='tel' control="input" type='tel' placeholder="Phone number" />
+          <Form.Dropdown placeholder='Select Country' label="Country" fluid search selection options={countryOptions} />
+          <Divider hidden />
+          <Button type="submit">Save Profile Settings</Button>
+        </Form>
       </div>
     );
   }

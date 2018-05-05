@@ -20,7 +20,7 @@ export default class TransactionHistoryItem extends React.Component {
         <Table.Cell>{ this.props.historyDetails.currency }</Table.Cell>
         <Table.Cell textAlign='right'>{ this.props.historyDetails.date }</Table.Cell>
         <Table.Cell textAlign='center'>
-           <Modal style={{display: 'flex'+'!important', textAlign: 'center'}} trigger={<Button size='tiny' icon='unordered list' />}>
+           <Modal className='modalFix' style={{display: 'flex'+'!important', textAlign: 'center'}} trigger={<Button size='tiny' icon='unordered list' />}>
               <Modal.Content>
                 <Modal.Header>
                   Transaction Details

@@ -83,7 +83,7 @@ export default class Deposit extends React.Component {
                       </Card.Content>
                       <Card.Content extra>
                         <div className='ui two buttons'>
-                          <Modal style={{display: 'flex'+'!important', textAlign: 'center'}} trigger={<Button basic color='grey'><Icon name='qrcode' /> Show QR Code</Button>}>
+                          <Modal className='modalFix' style={{display: 'flex'+'!important', textAlign: 'center'}} trigger={<Button basic color='grey'><Icon name='qrcode' /> Show QR Code</Button>}>
                             <Modal.Content>
                               <Modal.Header>
                                 <Image style={{display: 'inline-block'}} src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/220px-QR_code_for_mobile_English_Wikipedia.svg.png' />

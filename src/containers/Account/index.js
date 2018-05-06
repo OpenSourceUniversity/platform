@@ -53,7 +53,7 @@ export default class AccountSettings extends React.Component {
                   </Header>
                   <Divider clearing />
                   <Form >
-                    <Form.Field disabled label="Passphrase" control="input" type='text' defaultValue='Passphrase' style={{ opacity: 1, color: 'black'}} />
+                    <Form.Field disabled label="Passphrase" control="input" type='password' defaultValue='Passphrase' style={{ opacity: 1, color: 'black'}} />
                     <Form.Field label="Current Password" control="input" type='password' placeholder="Current Password" />
                     <Form.Field label="New Password" control="input" type='password' placeholder="New Password" />
                     <Divider hidden />

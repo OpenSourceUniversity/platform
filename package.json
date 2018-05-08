@@ -16,6 +16,7 @@
     "buffer": "^5.1.0",
     "cross-env": "^5.0.5",
     "eth-ecies": "^1.0.1",
+    "eth-lightwallet": "^3.0.1",
     "ethereumjs-util": "^5.1.5",
     "ethereumjs-wallet": "^0.6.0",
     "ganache-cli": "^6.0.3",

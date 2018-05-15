@@ -18,6 +18,7 @@ import CreateProfile from 'containers/CreateProfile';
 import JobPage from 'containers/JobPage';
 import CreateJobPage from 'containers/CreateJobPage';
 import CreateCoursePage from 'containers/CreateCoursePage';
+import ProgramsPage from 'containers/ProgramsPage';
 
 class Main extends React.Component {
   state = {}
@@ -31,9 +32,10 @@ class Main extends React.Component {
         <Route exact path="/certificates/add" component={AddCertificatePage} />
         <Route exact path="/businesses/add" component={AddPositionToBusinessPage} />
         <Route path="/courses" component={CoursesPage} />
+        <Route path="/programs" component={ProgramsPage} />
         <Route path="/jobs" component={JobsPage} />
         <Route path="/business" component={BusinessPage} />
-        <Route path="/profile" 
+        <Route path="/profile"
           render={(props) => <ProfilePage {...props}
           activeAccount={this.props.activeAccount}
           />}
@@ -46,7 +48,7 @@ class Main extends React.Component {
         />
         setLogIn
 
-        <Route path="/onboarding" 
+        <Route path="/onboarding"
           render={(props) => <OnBoarding {...props}
           setLogInStatus={this.props.setLogInStatus}
           />}

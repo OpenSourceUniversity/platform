@@ -27,7 +27,8 @@ class StudentProgramItemWithoutRouter extends React.Component {
     const duration = this.props.programe.duration;
     const rating = this.props.programe.rating;
     const description = this.props.programe.location;
-    let profile = require('../../icons/account_profile.svg');
+    const overview_title = this.props.programe.overviewTitle;
+    // let profile = require('../../icons/account_profile.svg');
     return (
       <Card fluid>
         <Card.Content>
@@ -35,16 +36,14 @@ class StudentProgramItemWithoutRouter extends React.Component {
           <Icon name='world' /> {language}
           <Icon name='time' /> {duration}
           <Icon name='star' /> {rating}
+          <Icon name='briefcase' /> {description}
         </Card.Content>
         <Card.Content extra>
-          { description }
+          { overview_title }
         </Card.Content>
         <Card.Content extra>
-          <Button name='courses-page' onClick={this.handleItemClick}> Show courses </Button>
-          <Label as='a'>
-            <Image avatar spaced='right' src={profile} />
-            Title
-          </Label>
+          <Button name='program-page' onClick={this.handleItemClick}> Show courses </Button>
+
         </Card.Content>
       </Card>
     );

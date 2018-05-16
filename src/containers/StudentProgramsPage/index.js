@@ -49,7 +49,7 @@ export default class StudenProgramsPage extends React.Component {
       },
       {
         title: 'Master of Applied Data Science',
-        overviewTitle: 'A cutting-edge Computer Science Master’s degree from America’s most innovative university.',
+        overviewTitle: 'Computer Data Science Master’s degree from America’s most innovative university.',
         overviewDescription: 'The Master of Computer Science (MCS) degree program from Arizona State University provides high-quality computer science.',
         objectiveTitle: 'Who is this degree for:',
         objectiveText: 'The Master of Computer Science program is designed for students with undergraduate degrees in computing or related areas who seek a deeper understanding of computing fundamentals as ...',

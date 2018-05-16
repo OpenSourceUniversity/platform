@@ -14,6 +14,7 @@ import Inbox from 'containers/Inbox';
 import Network from 'containers/Network';
 import Deposit from 'containers/Deposit';
 import CoursePage from 'containers/CoursePage';
+import StudentProgramPage from 'containers/StudentProgramPage';
 import CreateProfile from 'containers/CreateProfile';
 import JobPage from 'containers/JobPage';
 import CreateJobPage from 'containers/CreateJobPage';
@@ -57,6 +58,7 @@ class Main extends React.Component {
         <Route path="/network" component={Network} />
         <Route path="/deposit" component={Deposit} />
         <Route path="/course-page" component={CoursePage} />
+        <Route path="/program-page" component={StudentProgramPage} />
         <Route path="/create-profile"
           render={(props) => <CreateProfile {...props}
           activeAccount={this.props.activeAccount}

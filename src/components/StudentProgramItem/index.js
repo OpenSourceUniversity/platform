@@ -28,7 +28,6 @@ class StudentProgramItemWithoutRouter extends React.Component {
     const rating = this.props.programe.rating;
     const description = this.props.programe.location;
     const overview_title = this.props.programe.overviewTitle;
-    // let profile = require('../../icons/account_profile.svg');
     return (
       <Card fluid>
         <Card.Content>

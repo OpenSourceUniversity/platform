@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { Card, Icon, Button, Label, Image } from 'semantic-ui-react';
 
 
-class ProgramItemWithoutRouter extends React.Component {
+class StudentProgramItemWithoutRouter extends React.Component {
 
   static propTypes = {
     history: PropTypes.object.isRequired,
@@ -51,6 +51,6 @@ class ProgramItemWithoutRouter extends React.Component {
   }
 }
 
-const ProgramItem = withRouter(ProgramItemWithoutRouter);
+const ProgramItem = withRouter(StudentProgramItemWithoutRouter);
 
 export default ProgramItem;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Header, Divider, Grid, Segment, Input, Button, Form, Accordion, Menu, Icon, Dropdown } from 'semantic-ui-react';
-import ProgramItem from 'components/ProgramItem';
-import TopCoursesItem from 'components/TopCoursesItem';
+import StudentProgramItem from 'components/StudentProgramItem';
+import TopProgramsItem from 'components/TopProgramsItem';
 import TopAcademiaItem from 'components/TopAcademiaItem';
 
 const FilterForm = (
@@ -21,7 +21,7 @@ const options = [
   { key: 'all', text: 'All programs', value: 'programs' },
 ]
 
-export default class ProgramsPage extends React.Component {
+export default class StudenProgramsPage extends React.Component {
   state = { activeIndex: 0, activeItem: 'trending' }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
@@ -68,7 +68,7 @@ export default class ProgramsPage extends React.Component {
         mobile={16}
         key={index}
       >
-        <ProgramItem programe={programs} key={index} />    // ??????
+        <StudentProgramItem programe={programs} key={index} />
       </Grid.Column>));
   }
 
@@ -101,7 +101,7 @@ export default class ProgramsPage extends React.Component {
        { title: 'Program Name 4', description: 'Description' },
        { title: 'Program Name 5', description: 'Description' },
     ];
-    return programs.map((course, index) => (
+    return programs.map((program, index) => (
       <Grid.Column
         computer={8}
         largeScreen={8}
@@ -110,7 +110,7 @@ export default class ProgramsPage extends React.Component {
         mobile={16}
         key={index}
       >
-        <TopCoursesItem course={course} key={index} />  // ?????????????
+        <TopProgramsItem program={program} key={index} />
       </Grid.Column>));
   }
 
@@ -119,7 +119,7 @@ export default class ProgramsPage extends React.Component {
     return (
       <Container>
         <Header>
-          Academic Programs
+          Student Programs
         </Header>
         <Grid>
           <Grid.Column width={3}>
@@ -246,7 +246,7 @@ export default class ProgramsPage extends React.Component {
               <Divider clearing />
               {this.renderTopAcademia()}
               <Header>
-                Top Courses
+                Top Programs
               </Header>
               <Divider clearing />
               {this.renderTopPrograms()}

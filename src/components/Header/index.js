@@ -35,7 +35,7 @@ class HeaderWithoutRouter extends React.Component {
   }
 
   createAccountRender() {
-    return <Step.Group size='mini'>
+    return <Step.Group size='mini' fluid>
             <Step
               active={this.props.createAccountActiveItem === 'profile'}
               icon='radio'

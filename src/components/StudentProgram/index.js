@@ -1,9 +1,9 @@
 import React from 'react';
-import { Button, List, Header, Divider, Label, Segment, Grid, Menu, Icon, Image } from 'semantic-ui-react';
+import { Button, List, Header, Divider, Label, Segment, Grid, Menu, Icon, Image, Sticky, Rail } from 'semantic-ui-react';
 import SkillItem from 'components/SkillItem';
 import SubscriberItem from 'components/SubscriberItem';
 
-export default class Course extends React.Component {
+export default class StudentProgram extends React.Component {
 
   renderSkills() {
     const skills = [
@@ -49,24 +49,165 @@ export default class Course extends React.Component {
     ));
   }
 
-  state = { activeItem: 'about' }
+  state = { activeItem: 'about', contextRef: ''}
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  handleContextRef = contextRef => this.setState({ contextRef })
   render() {
     let review = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et egestas leo. Aliquam ultricies libero orci, quis malesuada massa posuere quis. Mauris eget ullamcorper elit, et faucibus sem. Aliquam maximus.';
     let vals =
       { course_title: 'Course name', review: review, interested: '12, 400 ', price: '1000 EDU', reviews: 1923, about: 'About blah blah blah',
       e_req: 'Entry Requirements blah blah blah', reviews: 'Reviews blah blah blah', link: '#', icon: 'https://os.university/static/assets/icons/osu-logo.png', rating: 3.5, industry: 'IT & Design', dates: '23.05.2018 - 23.06.2018',
       duration: '1 monnth and 2 week(s)', fee: '$250 or 1000 EDU tokens', tutor: 'blah blah', level: 'Beginer', lang: 'English', code: 'NF440F93Fkk34' };
-    const { activeItem } = this.state;
+    const { activeItem, contextRef } = this.state;
     let link_plus = '#';
     let share = '#';
+    let header_img = require('../../img/programHeader.jpg');
     return (
-      <div className ='program'>
-        <Header>
-          {vals.course_title}
-        </Header>
-        <Grid>
-          <Grid.Column width={11}>
+      <div className ='program' ref={this.handleContextRef}>
+        <Grid columns={2}>
+
+          <Grid.Column width={13}>
+          <Image fluid src={header_img} />
+            <Segment>
+              <span style={{float: 'right'}}>
+                <a href={link_plus}>
+                  <Icon color='black' name='plus' />
+                </a>
+                <a href={share}>
+                  <Icon color='black' name='share alternate' />
+                </a>
+              </span>
+              <Header>
+                Reviews
+              </Header>
+              <span>
+                {vals.review}
+              </span>
+              <Header>
+                Skills
+              </Header>
+              <Label.Group size='medium'>
+                {this.renderSkills()}
+              </Label.Group>
+              <Divider hidden />
+              <Label.Group circular>
+                {this.renderSubs()}
+                <span>
+                  <span>
+                    {vals.interested}
+                  </span>
+                  students interested
+                </span>
+              </Label.Group>
+              <Divider hidden />
+              <Grid>
+                <Grid.Row>
+                  <Grid.Column width={4}>
+                    <span>
+                      Price
+                    </span>
+                    <br/>
+                    <span>
+                      {vals.price}
+                    </span>
+                  </Grid.Column>
+                  <Grid.Column width={6}>
+                    <Button as='a' color='green'>BUY COURSE</Button>
+                  </Grid.Column>
+                  <Grid.Column width={6}>
+                    Reviews (<span>{vals.reviews}</span> ratings) <br/>
+                    {this.renderRating(vals.rating)}
+                    <span>{vals.rating}</span>/5
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
+              <Divider hidden />
+              <Menu pointing secondary color='orange'>
+                <Menu.Item name='about' active={activeItem === 'about'} onClick={this.handleItemClick} />
+                <Menu.Item name='entry requirements' active={activeItem === 'entry requirements'} onClick={this.handleItemClick} />
+                <Menu.Item name='reviews' active={activeItem === 'reviews'} onClick={this.handleItemClick} />
+              </Menu>
+              <div>
+               {(() => {
+                switch(this.state.activeItem) {
+                case 'entry requirements': return vals.e_req;
+                case 'reviews': return vals.reviews;
+                default: return vals.about;
+                }
+              })()}
+              </div>
+            </Segment>
+
+            <Segment>
+              <span style={{float: 'right'}}>
+                <a href={link_plus}>
+                  <Icon color='black' name='plus' />
+                </a>
+                <a href={share}>
+                  <Icon color='black' name='share alternate' />
+                </a>
+              </span>
+              <Header>
+                Reviews
+              </Header>
+              <span>
+                {vals.review}
+              </span>
+              <Header>
+                Skills
+              </Header>
+              <Label.Group size='medium'>
+                {this.renderSkills()}
+              </Label.Group>
+              <Divider hidden />
+              <Label.Group circular>
+                {this.renderSubs()}
+                <span>
+                  <span>
+                    {vals.interested}
+                  </span>
+                  students interested
+                </span>
+              </Label.Group>
+              <Divider hidden />
+              <Grid>
+                <Grid.Row>
+                  <Grid.Column width={4}>
+                    <span>
+                      Price
+                    </span>
+                    <br/>
+                    <span>
+                      {vals.price}
+                    </span>
+                  </Grid.Column>
+                  <Grid.Column width={6}>
+                    <Button as='a' color='green'>BUY COURSE</Button>
+                  </Grid.Column>
+                  <Grid.Column width={6}>
+                    Reviews (<span>{vals.reviews}</span> ratings) <br/>
+                    {this.renderRating(vals.rating)}
+                    <span>{vals.rating}</span>/5
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
+              <Divider hidden />
+              <Menu pointing secondary color='orange'>
+                <Menu.Item name='about' active={activeItem === 'about'} onClick={this.handleItemClick} />
+                <Menu.Item name='entry requirements' active={activeItem === 'entry requirements'} onClick={this.handleItemClick} />
+                <Menu.Item name='reviews' active={activeItem === 'reviews'} onClick={this.handleItemClick} />
+              </Menu>
+              <div>
+               {(() => {
+                switch(this.state.activeItem) {
+                case 'entry requirements': return vals.e_req;
+                case 'reviews': return vals.reviews;
+                default: return vals.about;
+                }
+              })()}
+              </div>
+            </Segment>
+
             <Segment>
               <span style={{float: 'right'}}>
                 <a href={link_plus}>
@@ -137,7 +278,13 @@ export default class Course extends React.Component {
               </div>
             </Segment>
           </Grid.Column>
-          <Grid.Column width={5}>
+
+
+          <Grid.Column width={3}>
+          <Sticky context={contextRef}>
+            <Divider section hidden />
+            <Divider section hidden />
+            <Divider section hidden />
             <Segment>
               <Header>
                 Provider
@@ -146,7 +293,7 @@ export default class Course extends React.Component {
                 <Image src={vals.icon} as='a' href={vals.link} />
               <Divider clearing />
               <Header>
-                Course dates
+                Start dates
               </Header>
               <Icon name='calendar' />
               <span>
@@ -154,7 +301,7 @@ export default class Course extends React.Component {
               </span>
               <Divider clearing />
               <Header>
-                Course duration
+                Duration
               </Header>
               <Icon name='clock' />
               <span>
@@ -162,7 +309,7 @@ export default class Course extends React.Component {
               </span>
               <Divider clearing />
               <Header>
-                Course fee
+                Program fee
               </Header>
               <Icon name='rub' />
               <span>
@@ -186,21 +333,16 @@ export default class Course extends React.Component {
               </span>
               <Divider clearing />
               <Header>
-                Level
-              </Header>
-              <Icon name='signal' />
-              <span>
-                {vals.level}
-              </span>
-              <Divider clearing />
-              <Header>
-                Course code
+                Program code
               </Header>
               <span>
                 {vals.code}
               </span>
             </Segment>
+          </Sticky>
           </Grid.Column>
+
+
         </Grid>
       </div>
     );

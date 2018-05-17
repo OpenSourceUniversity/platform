@@ -4,7 +4,6 @@ import { Container, Header, Segment, Button, Divider, Form, Input, Breadcrumb } 
 
 
 export default class CreateJobPage extends React.Component {
-
   render() {
     const skills = [
       { key: 'angular', text: 'Angular', value: 'angular' },
@@ -25,7 +24,7 @@ export default class CreateJobPage extends React.Component {
       { key: 'ruby', text: 'Ruby', value: 'ruby' },
       { key: 'ui', text: 'UI Design', value: 'ui' },
       { key: 'ux', text: 'User Experience', value: 'ux' },
-  ];
+    ];
     return (
       <Container>
         <Breadcrumb>
@@ -155,22 +154,22 @@ export default class CreateJobPage extends React.Component {
               </label>
             </Form.Field>
             <Form.Field>
-              <Form.TextArea label='Overview' placeholder='Overview' />
+              <Form.TextArea label="Overview" placeholder="Overview" />
             </Form.Field>
             <Form.Field>
-              <Form.Dropdown label="Skills" placeholder='Select Skills' fluid multiple search selection options={skills} />
+              <Form.Dropdown label="Skills" placeholder="Select Skills" fluid multiple search selection options={skills} />
             </Form.Field>
             <Form.Field>
-              <Form.TextArea label='Job description' placeholder='Job description' />
+              <Form.TextArea label="Job description" placeholder="Job description" />
             </Form.Field>
             <Form.Field>
-              <Form.TextArea label='Responsobilities' placeholder='Responsobilities' />
+              <Form.TextArea label="Responsobilities" placeholder="Responsobilities" />
             </Form.Field>
             <Form.Field>
-              <Form.TextArea label='Qualifications' placeholder='Qualifications' />
+              <Form.TextArea label="Qualifications" placeholder="Qualifications" />
             </Form.Field>
             <Form.Field>
-              <Form.TextArea label='We offer' placeholder='We offer' />
+              <Form.TextArea label="We offer" placeholder="We offer" />
             </Form.Field>
             <Button type="submit" primary size="huge">Submit</Button>
           </Form>

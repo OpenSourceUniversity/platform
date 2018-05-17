@@ -4,19 +4,32 @@ import SkillItem from 'components/SkillItem';
 import SubscriberItem from 'components/SubscriberItem';
 
 export default class Course extends React.Component {
-
   renderSkills() {
     const skills = [
-      { have_icon: false, check: true, name: 'Python', basic: false },
-      { have_icon: false, check: false, name: 'Design', basic: false },
-      { have_icon: false, check: true, name: 'Software', basic: false },
-      { have_icon: false, check: true, name: 'Python', basic: false },
-      { have_icon: false, check: true, name: 'Python', basic: false },
-      { have_icon: false, check: true, name: 'Python', basic: false },
-      { have_icon: false, check: true, name: 'Python', basic: false },
+      {
+        have_icon: false, check: true, name: 'Python', basic: false,
+      },
+      {
+        have_icon: false, check: false, name: 'Design', basic: false,
+      },
+      {
+        have_icon: false, check: true, name: 'Software', basic: false,
+      },
+      {
+        have_icon: false, check: true, name: 'Python', basic: false,
+      },
+      {
+        have_icon: false, check: true, name: 'Python', basic: false,
+      },
+      {
+        have_icon: false, check: true, name: 'Python', basic: false,
+      },
+      {
+        have_icon: false, check: true, name: 'Python', basic: false,
+      },
     ];
     return skills.map((course, index) => (
-        <SkillItem skill={course} key={index} />
+      <SkillItem skill={course} key={index} />
     ));
   }
 
@@ -27,53 +40,71 @@ export default class Course extends React.Component {
       { profile_img: 'https://scontent-otp1-1.xx.fbcdn.net/v/t1.0-9/29496083_2072749406302649_5385916209195252970_n.jpg?_nc_cat=0&oh=9bd64cd534a9141a54cedbb90040f6d8&oe=5B59CE27', link: '#' },
     ];
     return subscribers.map((sub, index) => (
-        <SubscriberItem subs={sub} key={index} />
+      <SubscriberItem subs={sub} key={index} />
     ));
   }
 
   renderRating(rating) {
-    rating = Math.round(rating*2)/2;
-    var stars = [];
-    for (var i = 0; i < 5; i++) {
-      if(rating - i == 0.5) {
-        stars.push({name: 'star half full'});
+    rating = Math.round(rating * 2) / 2;
+    const stars = [];
+    for (let i = 0; i < 5; i++) {
+      if (rating - i == 0.5) {
+        stars.push({ name: 'star half full' });
       } else if (rating - i > 0) {
-        stars.push({name: 'star'});
+        stars.push({ name: 'star' });
       } else {
-        stars.push({name: 'empty star'});
+        stars.push({ name: 'empty star' });
       }
     }
 
     return stars.map((star, index) => (
-        <Icon name={star.name} key={index} />
+      <Icon name={star.name} key={index} />
     ));
   }
 
   state = { activeItem: 'about' }
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
   render() {
-    let review = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et egestas leo. Aliquam ultricies libero orci, quis malesuada massa posuere quis. Mauris eget ullamcorper elit, et faucibus sem. Aliquam maximus.';
-    let vals = 
-      { course_title: 'Course name', review: review, interested: '12, 400 ', price: '1000 EDU', reviews: 1923, about: 'About blah blah blah', 
-      e_req: 'Entry Requirements blah blah blah', reviews: 'Reviews blah blah blah', link: '#', icon: 'https://os.university/static/assets/icons/osu-logo.png', rating: 3.5, industry: 'IT & Design', dates: '23.05.2018 - 23.06.2018', 
-      duration: '1 monnth and 2 week(s)', fee: '$250 or 1000 EDU tokens', tutor: 'blah blah', level: 'Beginer', lang: 'English', code: 'NF440F93Fkk34' };
+    const review = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et egestas leo. Aliquam ultricies libero orci, quis malesuada massa posuere quis. Mauris eget ullamcorper elit, et faucibus sem. Aliquam maximus.';
+    const vals =
+      {
+        course_title: 'Course name',
+        review,
+        interested: '12, 400 ',
+        price: '1000 EDU',
+        reviews: 1923,
+        about: 'About blah blah blah',
+        e_req: 'Entry Requirements blah blah blah',
+        reviews: 'Reviews blah blah blah',
+        link: '#',
+        icon: 'https://os.university/static/assets/icons/osu-logo.png',
+        rating: 3.5,
+        industry: 'IT & Design',
+        dates: '23.05.2018 - 23.06.2018',
+        duration: '1 monnth and 2 week(s)',
+        fee: '$250 or 1000 EDU tokens',
+        tutor: 'blah blah',
+        level: 'Beginer',
+        lang: 'English',
+        code: 'NF440F93Fkk34',
+      };
     const { activeItem } = this.state;
-    let link_plus = '#';
-    let share = '#';
+    const link_plus = '#';
+    const share = '#';
     return (
-      <div className ='course'>
+      <div className="course">
         <Header>
           {vals.course_title}
         </Header>
         <Grid>
           <Grid.Column width={11}>
             <Segment>
-              <span style={{float: 'right'}}>
+              <span style={{ float: 'right' }}>
                 <a href={link_plus}>
-                  <Icon color='black' name='plus' />
+                  <Icon color="black" name="plus" />
                 </a>
                 <a href={share}>
-                  <Icon color='black' name='share alternate' />
+                  <Icon color="black" name="share alternate" />
                 </a>
               </span>
               <Header>
@@ -85,7 +116,7 @@ export default class Course extends React.Component {
               <Header>
                 Skills
               </Header>
-              <Label.Group size='medium'>
+              <Label.Group size="medium">
                 {this.renderSkills()}
               </Label.Group>
               <Divider hidden />
@@ -105,35 +136,35 @@ export default class Course extends React.Component {
                     <span>
                       Price
                     </span>
-                    <br/>
+                    <br />
                     <span>
                       {vals.price}
                     </span>
                   </Grid.Column>
                   <Grid.Column width={6}>
-                    <Button as='a' color='green'>BUY COURSE</Button>
+                    <Button as="a" color="green">BUY COURSE</Button>
                   </Grid.Column>
                   <Grid.Column width={6}>
-                    Reviews (<span>{vals.reviews}</span> ratings) <br/>
+                    Reviews (<span>{vals.reviews}</span> ratings) <br />
                     {this.renderRating(vals.rating)}
                     <span>{vals.rating}</span>/5
                   </Grid.Column>
                 </Grid.Row>
               </Grid>
               <Divider hidden />
-              <Menu pointing secondary color='orange'>
-                <Menu.Item name='about' active={activeItem === 'about'} onClick={this.handleItemClick} />
-                <Menu.Item name='entry requirements' active={activeItem === 'entry requirements'} onClick={this.handleItemClick} />
-                <Menu.Item name='reviews' active={activeItem === 'reviews'} onClick={this.handleItemClick} />
+              <Menu pointing secondary color="orange">
+                <Menu.Item name="about" active={activeItem === 'about'} onClick={this.handleItemClick} />
+                <Menu.Item name="entry requirements" active={activeItem === 'entry requirements'} onClick={this.handleItemClick} />
+                <Menu.Item name="reviews" active={activeItem === 'reviews'} onClick={this.handleItemClick} />
               </Menu>
               <div>
-               {(() => {
-                switch(this.state.activeItem) {
-                case 'entry requirements': return vals.e_req;
-                case 'reviews': return vals.reviews;
-                default: return vals.about;
-                }
-              })()}
+                {(() => {
+                  switch (this.state.activeItem) {
+                  case 'entry requirements': return vals.e_req;
+                  case 'reviews': return vals.reviews;
+                  default: return vals.about;
+                  }
+                })()}
               </div>
             </Segment>
           </Grid.Column>
@@ -143,12 +174,12 @@ export default class Course extends React.Component {
                 Provider
               </Header>
               <Divider hidden />
-                <Image src={vals.icon} as='a' href={vals.link} />
+              <Image src={vals.icon} as="a" href={vals.link} />
               <Divider clearing />
               <Header>
                 Course dates
               </Header>
-              <Icon name='calendar' />
+              <Icon name="calendar" />
               <span>
                 {vals.dates}
               </span>
@@ -156,7 +187,7 @@ export default class Course extends React.Component {
               <Header>
                 Course duration
               </Header>
-              <Icon name='clock' />
+              <Icon name="clock" />
               <span>
                 {vals.duration}
               </span>
@@ -164,7 +195,7 @@ export default class Course extends React.Component {
               <Header>
                 Course fee
               </Header>
-              <Icon name='rub' />
+              <Icon name="rub" />
               <span>
                 {vals.fee}
               </span>
@@ -172,7 +203,7 @@ export default class Course extends React.Component {
               <Header>
                 Tutor
               </Header>
-              <Icon name='user outline' />
+              <Icon name="user outline" />
               <span>
                 {vals.tutor}
               </span>
@@ -180,7 +211,7 @@ export default class Course extends React.Component {
               <Header>
                 Language
               </Header>
-              <Icon name='world' />
+              <Icon name="world" />
               <span>
                 {vals.lang}
               </span>
@@ -188,7 +219,7 @@ export default class Course extends React.Component {
               <Header>
                 Level
               </Header>
-              <Icon name='signal' />
+              <Icon name="signal" />
               <span>
                 {vals.level}
               </span>

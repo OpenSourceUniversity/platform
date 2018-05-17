@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom';
 import { Container, Image, Card, Form, Input, Grid, Button, Icon, Label } from 'semantic-ui-react';
 
 class WalletRecoverySuccessWithoutRouter extends React.Component {
-
   static propTypes = {
     history: PropTypes.object.isRequired,
   }
@@ -16,23 +15,22 @@ class WalletRecoverySuccessWithoutRouter extends React.Component {
     } else {
       newPath = `/${name}`;
     }
-      this.props.history.push(newPath);
-
+    this.props.history.push(newPath);
   }
 
   render() {
-    let logo = require('../../icons/edu-logo.png');
+    const logo = require('../../icons/edu-logo.png');
     return (
-      <div className='recovery'>
+      <div className="recovery">
         <Card.Header>
           <Grid centered>
             <Grid.Row>
-              <img className='logo' src={logo} />
-              <span className='osu-text-logo'>
-                <span className='bold'>
-                  OPEN SOURCE <br/>
+              <img className="logo" src={logo} />
+              <span className="osu-text-logo">
+                <span className="bold">
+                  OPEN SOURCE <br />
                 </span>
-                <span className='standard-logo'> 
+                <span className="standard-logo">
                   UNIVERSITY
                 </span>
               </span>
@@ -40,15 +38,15 @@ class WalletRecoverySuccessWithoutRouter extends React.Component {
           </Grid>
         </Card.Header>
         <Card.Description>
-          <span className='welcome'>
-            Success! <br/>
+          <span className="welcome">
+            Success! <br />
           </span>
-          <span className='orange'>
+          <span className="orange">
             Your wallet has been recovered!
           </span>
         </Card.Description>
-        <Card.Content style={{paddingTop: 0}}>
-             <Button color='orange' primary fluid className='button' name='home' onClick={this.handleButtonClick} >AWESOME!</Button>
+        <Card.Content style={{ paddingTop: 0 }}>
+          <Button color="orange" primary fluid className="button" name="home" onClick={this.handleButtonClick} >AWESOME!</Button>
         </Card.Content>
       </div>
     );

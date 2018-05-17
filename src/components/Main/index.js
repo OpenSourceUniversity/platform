@@ -33,37 +33,45 @@ class Main extends React.Component {
         <Route path="/courses" component={CoursesPage} />
         <Route path="/jobs" component={JobsPage} />
         <Route path="/business" component={BusinessPage} />
-        <Route path="/profile" 
-          render={(props) => <ProfilePage {...props}
-          activeAccount={this.props.activeAccount}
-          />}
+        <Route
+          path="/profile"
+          render={props => (<ProfilePage
+            {...props}
+            activeAccount={this.props.activeAccount}
+          />)}
         />
-        <Route path="/settings"
-          render={(props) => <Account {...props}
-          activeAccount={this.props.activeAccount}
-          setActiveAccount={this.props.setActiveAccount}
-          />}
+        <Route
+          path="/settings"
+          render={props => (<Account
+            {...props}
+            activeAccount={this.props.activeAccount}
+            setActiveAccount={this.props.setActiveAccount}
+          />)}
         />
         setLogIn
 
-        <Route path="/onboarding" 
-          render={(props) => <OnBoarding {...props}
-          setLogInStatus={this.props.setLogInStatus}
-          />}
+        <Route
+          path="/onboarding"
+          render={props => (<OnBoarding
+            {...props}
+            setLogInStatus={this.props.setLogInStatus}
+          />)}
         />
         <Route path="/inbox" component={Inbox} />
         <Route path="/network" component={Network} />
         <Route path="/deposit" component={Deposit} />
         <Route path="/course-page" component={CoursePage} />
-        <Route path="/create-profile"
-          render={(props) => <CreateProfile {...props}
-          activeAccount={this.props.activeAccount}
-          setActiveAccount={this.props.setActiveAccount}
-          setCreateAccountActiveItem={this.props.setCreateAccountActiveItem}
-          createAccountActiveItem={this.props.createAccountActiveItem}
-          setCreateAccountNav={this.props.setCreateAccountNav}
-          createAccountNav={this.props.createAccountNav}
-          />}
+        <Route
+          path="/create-profile"
+          render={props => (<CreateProfile
+            {...props}
+            activeAccount={this.props.activeAccount}
+            setActiveAccount={this.props.setActiveAccount}
+            setCreateAccountActiveItem={this.props.setCreateAccountActiveItem}
+            createAccountActiveItem={this.props.createAccountActiveItem}
+            setCreateAccountNav={this.props.setCreateAccountNav}
+            createAccountNav={this.props.createAccountNav}
+          />)}
         />
         <Route path="/job-page" component={JobPage} />
         <Route path="/create-job" component={CreateJobPage} />

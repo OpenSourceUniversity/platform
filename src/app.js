@@ -11,7 +11,6 @@ import Header from './components/Header';
 import Main from './components/Main';
 
 class App extends React.Component {
-
   constructor(props) {
     super(props);
     this.createAccountNav = this.createAccountNav.bind(this);
@@ -21,21 +20,23 @@ class App extends React.Component {
     history: PropTypes.object.isRequired,
   }
 
-  state = {isLogged: true, createAccountActiveSlide: 'profile', activeAccount: 'Learner', secondaryNav: this.isCreateAccount}
+  state = {
+    isLogged: true, createAccountActiveSlide: 'profile', activeAccount: 'Learner', secondaryNav: this.isCreateAccount,
+  }
 
   setActiveAccount = (e, { name }) => {
     this.setState({ activeAccount: name });
   }
 
   setLogInStatus = (e, { name }) => {
-    this.setState({ isLogged: name ==='login' ? true : false});
+    this.setState({ isLogged: name === 'login' });
   }
 
   setCreateAccountActiveItem = (e, { name }) => {
     this.setState({ createAccountActiveSlide: name });
   }
 
-  setSecondaryNav  = (e, { name }) => {
+  setSecondaryNav = (e, { name }) => {
     this.setState({ secondaryNav: name });
   }
 
@@ -45,7 +46,7 @@ class App extends React.Component {
 
 
   render() {
-    const { isLogged, createAccountActiveSlide, activeAccount } = this.state
+    const { isLogged, createAccountActiveSlide, activeAccount } = this.state;
     return (
       <div className="App">
         <Header
@@ -56,7 +57,7 @@ class App extends React.Component {
           secondaryNav={this.state.secondaryNav}
           setLogInStatus={this.setLogInStatus}
         />
-        <div style={{height: 170 + 'px'}} />
+        <div style={{ height: `${170}px` }} />
         <div id="Main">
           <Main
             activeAccount={this.state.activeAccount}

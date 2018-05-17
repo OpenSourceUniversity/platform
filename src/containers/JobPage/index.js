@@ -5,7 +5,7 @@ import Job from 'components/Job';
 export default class JobPage extends React.Component {
   render() {
     return (
-      <div className ='job'>
+      <div className="job">
         <Container>
           <Job />
         </Container>

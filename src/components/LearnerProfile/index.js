@@ -2,43 +2,55 @@ import React from 'react';
 import { Container, Header, Divider, Grid, Sticky, Segment, Image, Icon, List, Dropdown, Button, Statistic, Label } from 'semantic-ui-react';
 import SkillItem from 'components/SkillItem';
 
-const square = { width: 175, height: 175 }
+const square = { width: 175, height: 175 };
 
 export default class LearnerProfile extends React.Component {
-
   renderSkills() {
     const skills = [
-      { have_icon: true, check: true, name: 'Python', basic: true },
-      { have_icon: true, check: false, name: 'Design', basic: true },
-      { have_icon: true, check: true, name: 'Software', basic: true },
-      { have_icon: true, check: true, name: 'Python', basic: true },
-      { have_icon: true, check: true, name: 'Python', basic: true },
-      { have_icon: true, check: true, name: 'Python', basic: true },
-      { have_icon: true, check: true, name: 'Python', basic: true },
+      {
+        have_icon: true, check: true, name: 'Python', basic: true,
+      },
+      {
+        have_icon: true, check: false, name: 'Design', basic: true,
+      },
+      {
+        have_icon: true, check: true, name: 'Software', basic: true,
+      },
+      {
+        have_icon: true, check: true, name: 'Python', basic: true,
+      },
+      {
+        have_icon: true, check: true, name: 'Python', basic: true,
+      },
+      {
+        have_icon: true, check: true, name: 'Python', basic: true,
+      },
+      {
+        have_icon: true, check: true, name: 'Python', basic: true,
+      },
     ];
     return skills.map((course, index) => (
-        <SkillItem skill={course} key={index} />
+      <SkillItem skill={course} key={index} />
     ));
   }
 
   render() {
-
-    let profilePicture = this.props.learner.profile_src;
-    let token = require('../../icons/edu_token.svg');
+    const profilePicture = this.props.learner.profile_src;
+    const token = require('../../icons/edu_token.svg');
     const color = true ? 'green' : 'orange';
 
-    let email = 'mailto:' + this.props.learner.email;
-    let site = 'http://' + this.props.learner.site;
+    const email = `mailto:${this.props.learner.email}`;
+    const site = `http://${this.props.learner.site}`;
 
-    //name
-    //position
-    //email
-    //site
-    //certificates
-    //courses
-    //skills
-    //reviews
-    //introduction
+    // name
+    // position
+    // email
+    // site
+    // certificates
+    // courses
+    // skills
+    // reviews
+    // introduction
 
 
     return (
@@ -47,38 +59,40 @@ export default class LearnerProfile extends React.Component {
           <Grid.Column mobile={16} tablet={8} computer={5}>
             <Sticky offset={150}>
               <Segment.Group className="profileSegment">
-                <Segment textAlign='center'>
-                  <Segment textAlign='center' circular className="profilePicSegment" style={square}>
-                    <Image src={profilePicture} className='circular' />
+                <Segment textAlign="center">
+                  <Segment textAlign="center" circular className="profilePicSegment" style={square}>
+                    <Image src={profilePicture} className="circular" />
                   </Segment>
-                  <Header size='large'>
+                  <Header size="large">
                     {this.props.learner.name}
                   </Header>
-                  <Header size='small' color='grey'>
+                  <Header size="small" color="grey">
                     {this.props.learner.position}
                   </Header>
                 </Segment>
                 <Segment>
-                  <Button 
+                  <Button
                     primary
-                    size='large'
-                    className='fluid'
-                    content='Contact'
-                    icon='mail outline'
-                    label={{ image: token, as: 'a', basic: true, pointing: 'right', content: this.props.learner.edu + ' EDU' }}
-                    labelPosition='left'
+                    size="large"
+                    className="fluid"
+                    content="Contact"
+                    icon="mail outline"
+                    label={{
+                      image: token, as: 'a', basic: true, pointing: 'right', content: `${this.props.learner.edu} EDU`,
+                    }}
+                    labelPosition="left"
                   />
                 </Segment>
                 <Segment>
                   <List>
-                    <List.Item icon='users' content={this.props.learner.specialisation} />
-                    <List.Item icon='marker' content={this.props.learner.location} />
-                    <List.Item icon='mail' content={<a href={email}>{this.props.learner.email}</a>} />
-                    <List.Item icon='linkify' content={<a href={site}>{this.props.learner.site}</a>} />
+                    <List.Item icon="users" content={this.props.learner.specialisation} />
+                    <List.Item icon="marker" content={this.props.learner.location} />
+                    <List.Item icon="mail" content={<a href={email}>{this.props.learner.email}</a>} />
+                    <List.Item icon="linkify" content={<a href={site}>{this.props.learner.site}</a>} />
                   </List>
                 </Segment>
                 <Segment>
-                  <Statistic.Group size='tiny' color='orange' horizontal>
+                  <Statistic.Group size="tiny" color="orange" horizontal>
                     <Statistic>
                       <Statistic.Value>{this.props.learner.certificates}</Statistic.Value>
                       <Statistic.Label>Certificates</Statistic.Label>
@@ -96,12 +110,12 @@ export default class LearnerProfile extends React.Component {
                       <Statistic.Label>Reviews</Statistic.Label>
                     </Statistic>
                   </Statistic.Group>
-                </Segment>        
+                </Segment>
               </Segment.Group>
             </Sticky>
           </Grid.Column>
           <Grid.Column mobile={16} tablet={8} computer={11}>
-            <Segment size='large'>
+            <Segment size="large">
               <Header>
                 Introduction
               </Header>
@@ -116,11 +130,11 @@ export default class LearnerProfile extends React.Component {
                 Skills
               </Header>
               <Divider clearing />
-              <Label.Group size='large'>
+              <Label.Group size="large">
                 {this.renderSkills()}
               </Label.Group>
             </Segment>
-            <Segment.Group size='large'>
+            <Segment.Group size="large">
               <Segment>
                 <Header>
                   Experience
@@ -134,7 +148,7 @@ export default class LearnerProfile extends React.Component {
                 <Divider clearing />
               </Segment>
             </Segment.Group>
-            <Segment size='large'>
+            <Segment size="large">
               <Header>
                 Reviews
               </Header>

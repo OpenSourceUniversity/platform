@@ -3,18 +3,18 @@ import { Container, Image, Card, Form, Input, Grid, Button, Icon } from 'semanti
 
 export default class SignUp extends React.Component {
   render() {
-    let logo = require('../../icons/edu-logo.png');
+    const logo = require('../../icons/edu-logo.png');
     return (
       <div>
         <Card.Header>
           <Grid centered>
             <Grid.Row>
-              <img className='logo' src={logo} />
-              <span className='osu-text-logo'>
-                <span className='bold'>
-                  OPEN SOURCE <br/>
+              <img className="logo" src={logo} />
+              <span className="osu-text-logo">
+                <span className="bold">
+                  OPEN SOURCE <br />
                 </span>
-                <span className='standard-logo'> 
+                <span className="standard-logo">
                   UNIVERSITY
                 </span>
               </span>
@@ -22,36 +22,36 @@ export default class SignUp extends React.Component {
           </Grid>
         </Card.Header>
         <Card.Description>
-          <span className='welcome'>
-            New ERC20 Wallet <br/>
+          <span className="welcome">
+            New ERC20 Wallet <br />
           </span>
-          <span className='orange'>
+          <span className="orange">
             Please enter a passphrase to encrypt your wallet
           </span>
         </Card.Description>
         <Card.Content>
           <Form>
             <Form.Group inline>
-              <Form.Field inline width='16'>
+              <Form.Field inline width="16">
                 <label>
-                  <Icon name='user' />
+                  <Icon name="user" />
                 </label>
-                <Input type='password' placeholder='Set your passphrase' />
+                <Input type="password" placeholder="Set your passphrase" />
               </Form.Field>
             </Form.Group>
-            <Form.Field inline className='check-box'>
-              <Input  
-                type='checkbox'
+            <Form.Field inline className="check-box">
+              <Input
+                type="checkbox"
               />
               <span>
                 I agree with the Terms&Conditions
               </span>
             </Form.Field>
-            <Form.Button name='recoveryPhraseSeed' onClick={this.props.handleItemClick} className='orange-button'>CREATE MY WALLET</Form.Button>
+            <Form.Button name="recoveryPhraseSeed" onClick={this.props.handleItemClick} className="orange-button">CREATE MY WALLET</Form.Button>
           </Form>
-          <div className='sign-up'>
+          <div className="sign-up">
             <span> Already have a Wallet? </span>
-            <Button name='signin' style={{float: 'right'}} onClick={this.props.handleItemClick}>ACCESS MY WALLET</Button>
+            <Button name="signin" style={{ float: 'right' }} onClick={this.props.handleItemClick}>ACCESS MY WALLET</Button>
           </div>
         </Card.Content>
       </div>

@@ -3,9 +3,9 @@ import { Button, List, Header, Divider, Label, Segment, Grid, Menu, Icon } from 
 
 export default class ChooseAccount extends React.Component {
   render() {
-    let academia = require('../../icons/academia_hex.svg');
-    let learners = require('../../icons/learners_hex.svg');
-    let businesses = require('../../icons/businesses_hex.svg');
+    const academia = require('../../icons/academia_hex.svg');
+    const learners = require('../../icons/learners_hex.svg');
+    const businesses = require('../../icons/businesses_hex.svg');
     return (
       <div>
         <Header>
@@ -14,8 +14,8 @@ export default class ChooseAccount extends React.Component {
         <Divider clearing />
         <Grid columns={3}>
           <Grid.Column>
-            <Segment padded='very' className='padded-top-segment'>
-              <img className='hex-icon' src={academia} />
+            <Segment padded="very" className="padded-top-segment">
+              <img className="hex-icon" src={academia} />
               <Header>
                 ACADEMIA
               </Header>
@@ -31,8 +31,8 @@ export default class ChooseAccount extends React.Component {
           </Grid.Column>
 
           <Grid.Column>
-            <Segment padded='very' className='padded-top-segment'>
-              <img className='hex-icon' src={learners} />
+            <Segment padded="very" className="padded-top-segment">
+              <img className="hex-icon" src={learners} />
               <Header>
                 LEARNERS
               </Header>
@@ -48,8 +48,8 @@ export default class ChooseAccount extends React.Component {
           </Grid.Column>
 
           <Grid.Column>
-            <Segment padded='very' className='padded-top-segment'>
-              <img className='hex-icon' src={businesses} />
+            <Segment padded="very" className="padded-top-segment">
+              <img className="hex-icon" src={businesses} />
               <Header>
                 BUSINESSES
               </Header>

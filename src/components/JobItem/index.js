@@ -4,8 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { Card, Icon, Button, Label, Image } from 'semantic-ui-react';
 
 
- class JobItemWithoutRouter extends React.Component {
-
+class JobItemWithoutRouter extends React.Component {
   static propTypes = {
     history: PropTypes.object.isRequired,
   }
@@ -17,8 +16,7 @@ import { Card, Icon, Button, Label, Image } from 'semantic-ui-react';
     } else {
       newPath = `/${name}`;
     }
-      this.props.history.push(newPath);
-
+    this.props.history.push(newPath);
   }
 
   render() {
@@ -27,23 +25,23 @@ import { Card, Icon, Button, Label, Image } from 'semantic-ui-react';
     const duration = this.props.job.duration;
     const rating = this.props.job.rating;
     const description = this.props.job.description;
-    let profile = require('../../icons/account_profile.svg');
+    const profile = require('../../icons/account_profile.svg');
     return (
       <Card fluid>
         <Card.Content>
-          <Card.Header icon='ellipsis vertical'>{this.props.job.title}</Card.Header>
-          <Icon name='signal' /> {level}
-          <Icon name='world' /> {location}
-          <Icon name='time' /> {duration}
-          <Icon name='star' /> {rating}
+          <Card.Header icon="ellipsis vertical">{this.props.job.title}</Card.Header>
+          <Icon name="signal" /> {level}
+          <Icon name="world" /> {location}
+          <Icon name="time" /> {duration}
+          <Icon name="star" /> {rating}
         </Card.Content>
         <Card.Content extra>
           { description }
         </Card.Content>
         <Card.Content extra>
-          <Button name='job-page' onClick={this.handleItemClick}> Show job's details </Button>
-          <Label as='a'>
-            <Image avatar spaced='right' src={profile} />
+          <Button name="job-page" onClick={this.handleItemClick}> Show job's details </Button>
+          <Label as="a">
+            <Image avatar spaced="right" src={profile} />
             Title
           </Label>
         </Card.Content>

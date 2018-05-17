@@ -4,7 +4,6 @@ import { Container, Header, Segment, Button, Divider, Form, Input, Breadcrumb } 
 
 
 export default class CreateCoursePage extends React.Component {
-
   render() {
     const skills = [
       { key: 'angular', text: 'Angular', value: 'angular' },
@@ -25,7 +24,7 @@ export default class CreateCoursePage extends React.Component {
       { key: 'ruby', text: 'Ruby', value: 'ruby' },
       { key: 'ui', text: 'UI Design', value: 'ui' },
       { key: 'ux', text: 'User Experience', value: 'ux' },
-  ];
+    ];
     return (
       <Container>
         <Breadcrumb>
@@ -105,7 +104,7 @@ export default class CreateCoursePage extends React.Component {
                 />
               </label>
             </Form.Field>
-             <Form.Field>
+            <Form.Field>
               <label htmlFor="language">
                 Language
                 <Input
@@ -130,10 +129,10 @@ export default class CreateCoursePage extends React.Component {
               </label>
             </Form.Field>
             <Form.Field>
-              <Form.TextArea label='Reviews' placeholder='Reviews' />
+              <Form.TextArea label="Reviews" placeholder="Reviews" />
             </Form.Field>
             <Form.Field>
-              <Form.Dropdown label="Skills" placeholder='Select Skills' fluid multiple search selection options={skills} />
+              <Form.Dropdown label="Skills" placeholder="Select Skills" fluid multiple search selection options={skills} />
             </Form.Field>
             <Form.Field>
               <label htmlFor="price">
@@ -148,13 +147,13 @@ export default class CreateCoursePage extends React.Component {
               </label>
             </Form.Field>
             <Form.Field>
-              <Form.TextArea label='About' placeholder='About' />
+              <Form.TextArea label="About" placeholder="About" />
             </Form.Field>
             <Form.Field>
-              <Form.TextArea label='Entry Requirements' placeholder='Entry Requirements' />
+              <Form.TextArea label="Entry Requirements" placeholder="Entry Requirements" />
             </Form.Field>
             <Form.Field>
-              <Form.TextArea label='Reviews' placeholder='Reviews' />
+              <Form.TextArea label="Reviews" placeholder="Reviews" />
             </Form.Field>
             <Button type="submit" primary size="huge">Submit</Button>
           </Form>

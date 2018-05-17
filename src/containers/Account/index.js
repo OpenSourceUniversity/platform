@@ -5,45 +5,44 @@ import AcademiaSettings from 'components/AcademiaSettings';
 import BusinessesSettings from 'components/BusinessesSettings';
 
 export default class AccountSettings extends React.Component {
-
   render() {
-    let settings = require('../../icons/account_settings.svg');
-    let learners = require('../../icons/learners.svg');
-    let businesses = require('../../icons/businesses.svg');
-    let academia = require('../../icons/academia.svg');
+    const settings = require('../../icons/account_settings.svg');
+    const learners = require('../../icons/learners.svg');
+    const businesses = require('../../icons/businesses.svg');
+    const academia = require('../../icons/academia.svg');
     return (
       <div>
-        <Container className='account-settings'>
+        <Container className="account-settings">
           <Header size="huge">
-            <svg width='32' height='32' className='icon'>
-              <image href={settings}  x='0' y='0' width='100%' height='100%'></image>
+            <svg width="32" height="32" className="icon">
+              <image href={settings} x="0" y="0" width="100%" height="100%" />
             </svg>
             Account Settings
           </Header>
           <Divider clearing />
           <Grid reversed="mobile">
-            <Grid.Row className='double-form'>
+            <Grid.Row className="double-form">
               <Grid.Column width={6}>
                 <Segment>
                   <Header>
                     Set default profile:
                   </Header>
                   <Menu fluid vertical pointing>
-                    <Menu.Item name='Learner' active={this.props.activeAccount === 'Learner'} onClick={this.props.setActiveAccount}>
-                    <svg width='16' height='16' className='cogs icon'>
-                      <image href={learners}  x='0' y='0' width='100%' height='100%'></image>
-                    </svg>
+                    <Menu.Item name="Learner" active={this.props.activeAccount === 'Learner'} onClick={this.props.setActiveAccount}>
+                      <svg width="16" height="16" className="cogs icon">
+                        <image href={learners} x="0" y="0" width="100%" height="100%" />
+                      </svg>
                     Learner
                     </Menu.Item>
-                    <Menu.Item name='Academy' active={this.props.activeAccount === 'Academy'} onClick={this.props.setActiveAccount}>
-                      <svg width='16' height='16' className='cogs icon'>
-                        <image href={academia}  x='0' y='0' width='100%' height='100%'></image>
+                    <Menu.Item name="Academy" active={this.props.activeAccount === 'Academy'} onClick={this.props.setActiveAccount}>
+                      <svg width="16" height="16" className="cogs icon">
+                        <image href={academia} x="0" y="0" width="100%" height="100%" />
                       </svg>
                       Academy
                     </Menu.Item>
-                    <Menu.Item name='Business' active={this.props.activeAccount === 'Business'} onClick={this.props.setActiveAccount}>
-                      <svg width='16' height='16' className='cogs icon'>
-                        <image href={businesses}  x='0' y='0' width='100%' height='100%'></image>
+                    <Menu.Item name="Business" active={this.props.activeAccount === 'Business'} onClick={this.props.setActiveAccount}>
+                      <svg width="16" height="16" className="cogs icon">
+                        <image href={businesses} x="0" y="0" width="100%" height="100%" />
                       </svg>
                       Business
                     </Menu.Item>
@@ -53,18 +52,18 @@ export default class AccountSettings extends React.Component {
                   </Header>
                   <Divider clearing />
                   <Form >
-                    <Form.Field disabled label="Passphrase" control="input" type='password' defaultValue='Passphrase' style={{ opacity: 1, color: 'black'}} />
-                    <Form.Field label="Current Password" control="input" type='password' placeholder="Current Password" />
-                    <Form.Field label="New Password" control="input" type='password' placeholder="New Password" />
+                    <Form.Field disabled label="Passphrase" control="input" type="password" defaultValue="Passphrase" style={{ opacity: 1, color: 'black' }} />
+                    <Form.Field label="Current Password" control="input" type="password" placeholder="Current Password" />
+                    <Form.Field label="New Password" control="input" type="password" placeholder="New Password" />
                     <Divider hidden />
                     <Button type="submit">Change Password</Button>
                   </Form>
                 </Segment>
               </Grid.Column>
               <Grid.Column stretched width={10}>
-                <Segment className='settings'>
+                <Segment className="settings">
                   {(() => {
-                    switch(this.props.activeAccount) {
+                    switch (this.props.activeAccount) {
                     case 'Academy': return <AcademiaSettings />;
                     case 'Learner': return <LernersSettings />;
                     case 'Business': return <BusinessesSettings />;

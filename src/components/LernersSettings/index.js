@@ -1,6 +1,6 @@
 import React from 'react';
-import { Form, Button, Radio, Checkbox, Container, Header, Divider, Grid, Sticky, Segment, Icon, List, Dropdown, Menu } from 'semantic-ui-react';
-import StaticData from '../../data/staticdata.js';
+import { Form, Button, Checkbox, Header, Divider } from 'semantic-ui-react';
+import StaticData from '../../data/staticdata';
 
 export default class LernersSettings extends React.Component {
   render() {

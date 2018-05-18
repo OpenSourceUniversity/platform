@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Button, Label, Input, Menu, Segment, Grid, Comment, Item, Divider, Message, Card, Icon, Header } from 'semantic-ui-react';
+import { Container, Button, Label, Input, Menu, Segment, Grid, Comment, Item, Divider, Message, Icon, Header } from 'semantic-ui-react';
 
 const description = [
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet ante a sem eleifend bibendum. Aliquam ex lectus, volutpat et est nec, luctus cursus dui. In molestie dolor malesuada, varius sapien commodo, iaculis nulla. Nulla hendrerit nisi non nibh blandit, nec sollicitudin augue semper. In nulla arcu, lacinia ac eleifend non, venenatis ut nunc. Suspendisse accumsan libero a leo pretium porttitor. Praesent ornare, odio a eleifend egestas, mi felis ultrices sapien, a tincidunt nibh tortor sit amet mi. Nunc vehicula mi non pharetra ultricies. In finibus tempus sodales. Sed eu orci et mauris malesuada egestas. Sed maximus est eget ipsum condimentum consectetur. Curabitur gravida scelerisque posuere. Proin in commodo massa, eu fringilla libero. Sed posuere ultricies neque, quis vulputate erat commodo sit amet. Pellentesque at sem et massa ultrices lacinia. Suspendisse in dolor vel turpis mollis ornare. Aliquam tempus, justo nec mattis blandit, eros tellus semper leo, sed euismod nisi tellus in metus. Duis ipsum urna, dapibus molestie enim et, bibendum iaculis elit. Quisque molestie dignissim vehicula. Morbi eleifend ligula quam, in sodales felis convallis id. In iaculis porta tincidunt. Nunc imperdiet dui ut congue fringilla. Mauris interdum diam nec erat ultrices, ac condimentum velit ultricies.',
@@ -11,8 +11,10 @@ export default class Inbox extends React.Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   render() {
+    /* eslint-disable global-require */
     const messages = require('../../icons/nav_messages.svg');
-    const avatar_placeholder = require('../../icons/avatar_placeholder.svg');
+    const avatarPlaceholder = require('../../icons/avatar_placeholder.svg');
+    /* eslint-enable global-require */
 
     const { activeItem } = this.state;
 
@@ -81,7 +83,7 @@ export default class Inbox extends React.Component {
                   <Item.Group link>
                     <Item>
                       <Comment>
-                        <Comment.Avatar as="a" src={avatar_placeholder} />
+                        <Comment.Avatar as="a" src={avatarPlaceholder} />
                         <Comment.Content>
                           <Comment.Author as="a">Matt</Comment.Author>
                           <Comment.Metadata>
@@ -97,7 +99,7 @@ export default class Inbox extends React.Component {
                     <Divider />
                     <Item>
                       <Comment>
-                        <Comment.Avatar as="a" src={avatar_placeholder} />
+                        <Comment.Avatar as="a" src={avatarPlaceholder} />
                         <Comment.Content>
                           <Comment.Author as="a">Matt</Comment.Author>
                           <Comment.Metadata>
@@ -110,7 +112,7 @@ export default class Inbox extends React.Component {
                     <Divider />
                     <Item>
                       <Comment>
-                        <Comment.Avatar as="a" src={avatar_placeholder} />
+                        <Comment.Avatar as="a" src={avatarPlaceholder} />
                         <Comment.Content>
                           <Comment.Author as="a">Matt</Comment.Author>
                           <Comment.Metadata>
@@ -123,7 +125,7 @@ export default class Inbox extends React.Component {
                     <Divider />
                     <Item>
                       <Comment>
-                        <Comment.Avatar as="a" src={avatar_placeholder} />
+                        <Comment.Avatar as="a" src={avatarPlaceholder} />
                         <Comment.Content>
                           <Comment.Author as="a">Matt</Comment.Author>
                           <Comment.Metadata>
@@ -136,7 +138,7 @@ export default class Inbox extends React.Component {
                     <Divider />
                     <Item>
                       <Comment>
-                        <Comment.Avatar as="a" src={avatar_placeholder} />
+                        <Comment.Avatar as="a" src={avatarPlaceholder} />
                         <Comment.Content>
                           <Comment.Author as="a">Matt</Comment.Author>
                           <Comment.Metadata>
@@ -149,7 +151,7 @@ export default class Inbox extends React.Component {
                     <Divider />
                     <Item>
                       <Comment>
-                        <Comment.Avatar as="a" src={avatar_placeholder} />
+                        <Comment.Avatar as="a" src={avatarPlaceholder} />
                         <Comment.Content>
                           <Comment.Author as="a">Matt</Comment.Author>
                           <Comment.Metadata>
@@ -170,7 +172,7 @@ export default class Inbox extends React.Component {
                   <Menu.Item>
                     <Comment.Group>
                       <Comment>
-                        <Comment.Avatar as="a" src={avatar_placeholder} />
+                        <Comment.Avatar as="a" src={avatarPlaceholder} />
                         <Comment.Content>
                           <Comment.Author as="a">Matt</Comment.Author>
                           <Comment.Text>

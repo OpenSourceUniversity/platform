@@ -1,18 +1,12 @@
 import React from 'react';
-import { Container, Grid, Button, Image, Card, Header, Divider, Segment, Item } from 'semantic-ui-react';
-
-const square = { width: 100, height: 100 };
+import { Container, Grid, Button, Card, Header, Divider, Item } from 'semantic-ui-react';
 
 export default class Network extends React.Component {
-  state = { activeItem: '' }
-
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
-
   render() {
+    /* eslint-disable global-require */
     const network = require('../../icons/nav_network.svg');
-    const avatar_placeholder = require('../../img/jj.jpg');
-
-    const { activeItem } = this.state;
+    const avatarPlaceholder = require('../../img/jj.jpg');
+    /* eslint-enable global-require */
 
     return (
       <Container>
@@ -29,7 +23,7 @@ export default class Network extends React.Component {
               <Card.Content>
                 <Item.Group>
                   <Item>
-                    <Item.Image size="tiny" src={avatar_placeholder} />
+                    <Item.Image size="tiny" src={avatarPlaceholder} />
                     <Item.Content>
                       <Item.Header as="a">Steve Sanders</Item.Header>
                       <Item.Meta>Friends of Elliot</Item.Meta>
@@ -53,7 +47,7 @@ export default class Network extends React.Component {
               <Card.Content>
                 <Item.Group>
                   <Item>
-                    <Item.Image size="tiny" src={avatar_placeholder} />
+                    <Item.Image size="tiny" src={avatarPlaceholder} />
                     <Item.Content>
                       <Item.Header as="a">Steve Sanders</Item.Header>
                       <Item.Meta>Friends of Elliot</Item.Meta>
@@ -77,7 +71,7 @@ export default class Network extends React.Component {
               <Card.Content>
                 <Item.Group>
                   <Item>
-                    <Item.Image size="tiny" src={avatar_placeholder} />
+                    <Item.Image size="tiny" src={avatarPlaceholder} />
                     <Item.Content>
                       <Item.Header as="a">Steve Sanders</Item.Header>
                       <Item.Meta>Friends of Elliot</Item.Meta>
@@ -101,7 +95,7 @@ export default class Network extends React.Component {
               <Card.Content>
                 <Item.Group>
                   <Item>
-                    <Item.Image size="tiny" src={avatar_placeholder} />
+                    <Item.Image size="tiny" src={avatarPlaceholder} />
                     <Item.Content>
                       <Item.Header as="a">Steve Sanders</Item.Header>
                       <Item.Meta>Friends of Elliot</Item.Meta>

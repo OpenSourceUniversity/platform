@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Header, Divider, Grid, Segment, Input, Button, Form, Accordion, Menu, Icon, Dropdown } from 'semantic-ui-react';
+import { Container, Header, Divider, Grid, Segment, Input, Form, Accordion, Menu, Icon, Dropdown } from 'semantic-ui-react';
 import CourseItem from 'components/CourseItem';
 import TopCoursesItem from 'components/TopCoursesItem';
 import TopAcademiaItem from 'components/TopAcademiaItem';

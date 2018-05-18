@@ -1,15 +1,17 @@
 import React from 'react';
-import { Container, Image, Card, Form, Input, Grid, Button, Icon } from 'semantic-ui-react';
+import { Card, Form, Input, Grid } from 'semantic-ui-react';
 
 export default class PasswordRecovery extends React.Component {
   render() {
+    /* eslint-disable global-require */
     const logo = require('../../icons/edu-logo.png');
+    /* eslint-enable global-require */
     return (
       <div className="recovery">
         <Card.Header>
           <Grid centered>
             <Grid.Row>
-              <img className="logo" src={logo} />
+              <img alt="" className="logo" src={logo} />
               <span className="osu-text-logo">
                 <span className="bold">
                   OPEN SOURCE <br />
@@ -32,10 +34,7 @@ export default class PasswordRecovery extends React.Component {
         <Card.Content>
           <Form>
             <Form.Group inline>
-              <Form.Field inline width="16">
-                <label>
-                  <Icon name="user" />
-                </label>
+              <Form.Field control="input" inline width="16" label={{ icon: 'user' }}>
                 <Input type="password" placeholder="New passphrase" />
               </Form.Field>
             </Form.Group>

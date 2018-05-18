@@ -1,15 +1,17 @@
 import React from 'react';
-import { Container, Image, Card, Form, Input, Grid, Button, Icon } from 'semantic-ui-react';
+import { Card, Form, Input, Grid, Button } from 'semantic-ui-react';
 
 export default class WalletRecovery extends React.Component {
   render() {
+    /* eslint-disable global-require */
     const logo = require('../../icons/edu-logo.png');
+    /* eslint-enable global-require */
     return (
       <div className="recovery">
         <Card.Header>
           <Grid centered>
             <Grid.Row>
-              <img className="logo" src={logo} />
+              <img alt="" className="logo" src={logo} />
               <span className="osu-text-logo">
                 <span className="bold">
                   OPEN SOURCE <br />
@@ -26,16 +28,14 @@ export default class WalletRecovery extends React.Component {
             Wallet Recovery <br />
           </span>
           <span className="orange">
-            Enter your seed phrase. This is the 12 word phrase you were given when you first created your wallet
+            Enter your seed phrase. This is the 12 word phrase
+            you were given when you first created your wallet
           </span>
         </Card.Description>
         <Card.Content>
           <Form>
             <Form.Group inline>
-              <Form.Field inline width="16">
-                <label>
-                  <Icon name="user" />
-                </label>
+              <Form.Field inline width="16" label={{ icon: 'user' }}>
                 <Input type="text" placeholder="Seed phrase" />
               </Form.Field>
             </Form.Group>

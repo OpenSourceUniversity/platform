@@ -1,19 +1,21 @@
 import React from 'react';
-import { Container, Image, Card, Form, Input, Grid, Button, Icon, Label } from 'semantic-ui-react';
+import { Card, Grid, Button, Icon, Label } from 'semantic-ui-react';
 
 export default class SignUpRecoveryPhrase extends React.Component {
   seedPhrase() {
-    const seedPhrase = this.props.seedPhrase;
-    return seedPhrase;
+    return this.props.seedPhrase;
   }
   render() {
+    /* eslint-disable global-require */
     const logo = require('../../icons/edu-logo.png');
+    /* eslint-enable global-require */
+
     return (
       <div className="recovery">
         <Card.Header>
           <Grid centered>
             <Grid.Row>
-              <img className="logo" src={logo} />
+              <img alt="" className="logo" src={logo} />
               <span className="osu-text-logo">
                 <span className="bold">
                   OPEN SOURCE <br />
@@ -30,7 +32,8 @@ export default class SignUpRecoveryPhrase extends React.Component {
             Recovery Phrase <br />
           </span>
           <span className="orange">
-            Below is your recovery phrase which is used to generate the keys for your wallet. Please print or write it down and keep it in a secure place.
+            Below is your recovery phrase which is used to generate the keys
+            for your wallet. Please print or write it down and keep it in a secure place.
           </span>
         </Card.Description>
         <Card.Content>

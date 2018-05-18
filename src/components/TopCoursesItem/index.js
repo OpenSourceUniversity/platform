@@ -1,10 +1,12 @@
 import React from 'react';
-import { Card, Image } from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react';
 
 
 export default class TopCoursesItem extends React.Component {
   render() {
+    /* eslint-disable global-require */
     const profile = require('../../icons/account_profile.svg');
+    /* eslint-enable global-require */
     const link = '#';
     return (
       <a href={link}>
@@ -13,7 +15,7 @@ export default class TopCoursesItem extends React.Component {
             <Card.Header>
               {this.props.course.title}
             </Card.Header>
-            <img src={profile} />{this.props.course.description}
+            <img alt="" src={profile} />{this.props.course.description}
           </Card.Content>
         </Card>
       </a>

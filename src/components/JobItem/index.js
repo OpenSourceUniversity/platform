@@ -20,26 +20,26 @@ class JobItemWithoutRouter extends React.Component {
   }
 
   render() {
-    const level = this.props.job.level;
-    const location = this.props.job.location;
-    const duration = this.props.job.duration;
-    const rating = this.props.job.rating;
-    const description = this.props.job.description;
+    /* eslint-disable global-require */
+
     const profile = require('../../icons/account_profile.svg');
+
+    /* eslint-enable global-require */
+
     return (
       <Card fluid>
         <Card.Content>
           <Card.Header icon="ellipsis vertical">{this.props.job.title}</Card.Header>
-          <Icon name="signal" /> {level}
-          <Icon name="world" /> {location}
-          <Icon name="time" /> {duration}
-          <Icon name="star" /> {rating}
+          <Icon name="signal" /> {this.props.job.level}
+          <Icon name="world" /> {this.props.job.location}
+          <Icon name="time" /> {this.props.job.duration}
+          <Icon name="star" /> {this.props.job.rating}
         </Card.Content>
         <Card.Content extra>
-          { description }
+          { this.props.job.description }
         </Card.Content>
         <Card.Content extra>
-          <Button name="job-page" onClick={this.handleItemClick}> Show job's details </Button>
+          <Button name="job-page" onClick={this.handleItemClick}> Show job&apos;s details </Button>
           <Label as="a">
             <Image avatar spaced="right" src={profile} />
             Title

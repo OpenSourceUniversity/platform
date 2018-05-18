@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { Container, Image, Card, Form, Input, Grid, Button, Icon, Label } from 'semantic-ui-react';
+import { Card, Grid, Button } from 'semantic-ui-react';
 
 class WalletRecoverySuccessWithoutRouter extends React.Component {
   static propTypes = {
@@ -19,13 +19,15 @@ class WalletRecoverySuccessWithoutRouter extends React.Component {
   }
 
   render() {
+    /* eslint-disable global-require */
     const logo = require('../../icons/edu-logo.png');
+    /* eslint-enable global-require */
     return (
       <div className="recovery">
         <Card.Header>
           <Grid centered>
             <Grid.Row>
-              <img className="logo" src={logo} />
+              <img alt="" className="logo" src={logo} />
               <span className="osu-text-logo">
                 <span className="bold">
                   OPEN SOURCE <br />

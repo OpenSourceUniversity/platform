@@ -4,8 +4,6 @@ import { Table, Icon, Button, Modal } from 'semantic-ui-react';
 
 export default class TransactionHistoryItem extends React.Component {
   render() {
-    const sentFrom = this.props.historyDetails.sentFrom;
-    const sentTo = this.props.historyDetails.sentTo;
     return (
       <Table.Row>
         <Table.Cell>
@@ -19,10 +17,10 @@ export default class TransactionHistoryItem extends React.Component {
         <Table.Cell>{ this.props.historyDetails.currency }</Table.Cell>
         <Table.Cell textAlign="right">{ this.props.historyDetails.date }</Table.Cell>
         <Table.Cell textAlign="center">
-          <Modal className="modalFix" style={{ display: 'flex' + '!important', textAlign: 'center' }} trigger={<Button size="tiny" icon="unordered list" />}>
+          <Modal className="modalFix" style={{ display: 'flex!important', textAlign: 'center' }} trigger={<Button size="tiny" icon="unordered list" />}>
             <Modal.Content>
               <Modal.Header>
-                  Transaction Details
+                Transaction Details
               </Modal.Header>
               <Modal.Description>
                 <p>Type: { this.props.historyDetails.type }</p>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Segment, Container, Grid, Card, Image, Button, Table, Icon, Header, Divider, Statistic, Responsive, Input, Dropdown, Message, Form, Label, Modal } from 'semantic-ui-react';
+import { Segment, Container, Grid, Card, Image, Button, Table, Icon, Header, Divider, Statistic, Responsive, Input, Form, Modal } from 'semantic-ui-react';
 import TransactionHistoryItem from 'components/TransactionHistoryItem';
 
 const walletOptions = [
@@ -20,8 +20,6 @@ const ethBalance = '0.000';
 
 export default class Deposit extends React.Component {
   state = { }
-
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   renderAutocomplete() {
     return options.map((wallet, index) => (
@@ -45,18 +43,18 @@ export default class Deposit extends React.Component {
       },
     ];
 
-    return history.map((history, index) => (
-      <TransactionHistoryItem historyDetails={history} key={index} />
+    return history.map((historyDetails, index) => (
+      <TransactionHistoryItem historyDetails={historyDetails} key={index} />
     ));
   }
 
   render() {
-    const avatar_placeholder = require('../../icons/avatar_placeholder.svg');
+    /* eslint-disable global-require */
+    const avatarPlaceholder = require('../../icons/avatar_placeholder.svg');
     const settings = require('../../icons/account_deposit.svg');
     const token = require('../../icons/edu_token.svg');
     const ethereum = require('../../icons/ethereum.svg');
-
-    const { activeItem } = this.state;
+    /* eslint-enable global-require */
 
     return (
       <Container>
@@ -75,7 +73,7 @@ export default class Deposit extends React.Component {
                   <Grid.Column mobile={16} tablet={8} computer={8}>
                     <Card fluid>
                       <Card.Content>
-                        <Image floated="right" size="mini" src={avatar_placeholder} />
+                        <Image floated="right" size="mini" src={avatarPlaceholder} />
                         <Card.Header>
                           DEPOSIT
                         </Card.Header>
@@ -90,7 +88,7 @@ export default class Deposit extends React.Component {
                       </Card.Content>
                       <Card.Content extra>
                         <div className="ui two buttons">
-                          <Modal className="modalFix" style={{ display: 'flex' + '!important', textAlign: 'center' }} trigger={<Button basic color="grey"><Icon name="qrcode" /> Show QR Code</Button>}>
+                          <Modal className="modalFix" style={{ display: 'flex!important', textAlign: 'center' }} trigger={<Button basic color="grey"><Icon name="qrcode" /> Show QR Code</Button>}>
                             <Modal.Content>
                               <Modal.Header>
                                 <Image style={{ display: 'inline-block' }} src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/220px-QR_code_for_mobile_English_Wikipedia.svg.png" />
@@ -114,7 +112,7 @@ export default class Deposit extends React.Component {
                   <Grid.Column mobile={16} tablet={8} computer={8}>
                     <Card fluid>
                       <Card.Content>
-                        <Image floated="right" size="mini" src={avatar_placeholder} />
+                        <Image floated="right" size="mini" src={avatarPlaceholder} />
                         <Card.Header>
                           WITHDRAW
                         </Card.Header>

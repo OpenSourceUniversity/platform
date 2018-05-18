@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Header, Divider, Grid, Sticky, Segment, Image, Icon, List, Dropdown, Button, Statistic, Label } from 'semantic-ui-react';
+import { Header, Divider, Grid, Sticky, Segment, Image, List, Button, Statistic, Label } from 'semantic-ui-react';
 import SkillItem from 'components/SkillItem';
 
 const square = { width: 175, height: 175 };
@@ -36,8 +36,11 @@ export default class LearnerProfile extends React.Component {
 
   render() {
     const profilePicture = this.props.learner.profile_src;
+    /* eslint-disable global-require */
+
     const token = require('../../icons/edu_token.svg');
-    const color = true ? 'green' : 'orange';
+
+    /* eslint-enable global-require */
 
     const email = `mailto:${this.props.learner.email}`;
     const site = `http://${this.props.learner.site}`;

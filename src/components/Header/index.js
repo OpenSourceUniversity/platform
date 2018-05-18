@@ -9,7 +9,7 @@ class HeaderWithoutRouter extends React.Component {
     history: PropTypes.object.isRequired,
   }
 
-  state = { isLogged: this.props.isLogged, secondaryNav: this.isCreateAccount }
+  state = { }
 
   handleItemClick = (e, { name }) => {
     this.setState({ activeItem: name });
@@ -34,78 +34,81 @@ class HeaderWithoutRouter extends React.Component {
   }
 
   createAccountRender() {
-    return (<Step.Group size="mini" fluid>
-      <Step
-        active={this.props.createAccountActiveItem === 'profile'}
-        icon="radio"
-        link
-        onClick={this.props.createAccountActiveItemFunc}
-        title="CHOOSE PROFILE"
-        name="profile"
-      />
+    return (
+      <Step.Group size="mini" fluid>
+        <Step
+          active={this.props.createAccountActiveItem === 'profile'}
+          icon="radio"
+          link
+          onClick={this.props.createAccountActiveItemFunc}
+          title="CHOOSE PROFILE"
+          name="profile"
+        />
 
-      <Step
-        active={this.props.createAccountActiveItem === 'info'}
-        icon="radio"
-        link
-        onClick={this.props.createAccountActiveItemFunc}
-        title="ADDITIONAL INFO"
-        name="info"
-      />
+        <Step
+          active={this.props.createAccountActiveItem === 'info'}
+          icon="radio"
+          link
+          onClick={this.props.createAccountActiveItemFunc}
+          title="ADDITIONAL INFO"
+          name="info"
+        />
 
-      <Step
-        active={this.props.createAccountActiveItem === 'payment'}
-        icon="radio"
-        link
-        onClick={this.props.createAccountActiveItemFunc}
-        title="PAYMENT METNOD"
-        name="payment"
-      />
+        <Step
+          active={this.props.createAccountActiveItem === 'payment'}
+          icon="radio"
+          link
+          onClick={this.props.createAccountActiveItemFunc}
+          title="PAYMENT METNOD"
+          name="payment"
+        />
 
-      <Step
-        active={this.props.createAccountActiveItem === 'deposit'}
-        icon="radio"
-        link
-        onClick={this.props.createAccountActiveItemFunc}
-        title="DEPOSIT"
-        name="deposit"
-      />
-            </Step.Group>);
+        <Step
+          active={this.props.createAccountActiveItem === 'deposit'}
+          icon="radio"
+          link
+          onClick={this.props.createAccountActiveItemFunc}
+          title="DEPOSIT"
+          name="deposit"
+        />
+      </Step.Group>
+    );
   }
 
   render() {
-    const { activeItem, secondaryNav, isLogged } = this.state;
+    const { activeItem } = this.state;
+    /* eslint-disable global-require */
     const logo = require('../../icons/edu-logo.png');
     const profile = require('../../icons/account_profile.svg');
     const deposit = require('../../icons/account_deposit.svg');
     const settings = require('../../icons/account_settings.svg');
     const logout = require('../../icons/account_logout.svg');
-    const arrow = require('../../icons/arrow.svg');
-    const avatar_placeholder = require('../../icons/avatar_placeholder.svg');
+    const avatarPlaceholder = require('../../icons/avatar_placeholder.svg');
     const token = require('../../icons/edu_token.svg');
     const network = require('../../icons/nav_network.svg');
     const messages = require('../../icons/nav_messages.svg');
     const notifications = require('../../icons/nav_notifications.svg');
+    /* eslint-enable global-require */
 
-    const avatar_trigger = (
+    const avatarTrigger = (
       <span>
-        <Image className="avatar" avatar src={avatar_placeholder} />
+        <Image className="avatar" avatar src={avatarPlaceholder} />
       </span>
     );
 
-    const notifications_trigger = (
+    const notificationsTrigger = (
       <span>
         <Image className="notifications icon" src={notifications} />
       </span>
     );
 
-    const explore_trigger = (
+    const exploreTrigger = (
       <span className="explore-icon">
         <Icon name="grid layout" />Explore
       </span>
     );
 
-    const account_elements = [
+    const accountElements = [
       {
         key: 'profile', content: 'My Profile', name: 'profile', className: 'profile-nav', active: activeItem === 'profile', onClick: this.handleItemClick,
       },
@@ -120,21 +123,14 @@ class HeaderWithoutRouter extends React.Component {
       },
     ];
 
-    const options_notifications = [
+    const optionsNotifications = [
       { key: 'alarm1', text: 'First notification', icon: 'alarm' },
       { key: 'alarm2', text: 'Second  notification', icon: 'alarm' },
       { key: 'alarm3', text: 'Third  notification', icon: 'alarm' },
       { key: 'alarm4', text: 'etc', icon: 'alarm' },
     ];
 
-    const options_network = [
-      { key: 'user1', text: 'First notification', icon: 'user' },
-      { key: 'user2', text: 'Second  notification', icon: 'user' },
-      { key: 'user3', text: 'Third  notification', icon: 'user' },
-      { key: 'user4', text: 'etc', icon: 'user' },
-    ];
-
-    const learner_academia_dropdown_elements = [
+    const learnerAcademiaDropdownElements = [
       {
         key: 'academia', content: 'Academia', name: 'academia', className: 'academia', active: activeItem === 'academia', onClick: this.handleItemClick,
       },
@@ -155,7 +151,7 @@ class HeaderWithoutRouter extends React.Component {
       },
     ];
 
-    const learner_businesses_dropdown_elements = [
+    const learnerBusinessesDropdownElements = [
       {
         key: 'businesses', content: 'Businesses', name: 'businesses', className: 'businesses', active: activeItem === 'businesses', onClick: this.handleItemClick,
       },
@@ -181,112 +177,117 @@ class HeaderWithoutRouter extends React.Component {
         <Container fluid>
           <Grid divided="vertically">
             { this.props.isLogged ?
-              (<Grid.Row className="main-nav">
-                <Menu.Item name="home" onClick={this.handleItemClick}>
-                  <img className="main-nav-logo" src={logo} />
-                </Menu.Item>
-                <Dropdown className="explore-dropdown" item trigger={explore_trigger}>
-                  <Dropdown.Menu>
-                    <Dropdown.Item name="academia" className="nav-list" onClick={this.props.setSecondaryNav}>
-                      <List selection items={learner_academia_dropdown_elements} />
-
-                    </Dropdown.Item>
-                    <Dropdown.Item name="business" className="nav-list" onClick={this.props.setSecondaryNav}>
-                      <List selection items={learner_businesses_dropdown_elements} />
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-
-                <Input className="search-bar" icon="search" placeholder="Search..." />
-
-
-                <Menu.Menu position="right">
-                  <Menu.Item name="network" onClick={this.handleItemClick}>
-                    <svg width="20" height="20" className="network">
-                      <image href={network} x="0" y="0" width="100%" height="100%" />
-                    </svg>
+              (
+                <Grid.Row className="main-nav">
+                  <Menu.Item name="home" onClick={this.handleItemClick}>
+                    <img className="main-nav-logo" alt="" src={logo} />
                   </Menu.Item>
-
-                  <Menu.Item name="inbox" onClick={this.handleItemClick}>
-                    <svg width="20" height="20" className="inbox">
-                      <image href={messages} x="0" y="0" width="100%" height="100%" />
-                    </svg>
-                  </Menu.Item>
-
-                  <Dropdown item trigger={notifications_trigger} pointing="top right" options={options_notifications} icon={null} />
-
-                  <Dropdown item trigger={avatar_trigger} pointing="top right">
+                  <Dropdown className="explore-dropdown" item trigger={exploreTrigger}>
                     <Dropdown.Menu>
-                      <Dropdown.Item className="account-nav-setter" name="account" onClick={this.props.setSecondaryNav}>
-                        <Dropdown.Item name="balance" className="balance-nav" onClick={this.handleItemClick}>
-                        EDUx Balance:
-                          <span className="balance-nav">
-                            <svg width="16" height="16" className="edu-token">
-                              <image href={token} x="0" y="0" width="100%" height="100%" />
-                            </svg>
-                            <span className="integer">
-                            2,389
-                            </span>
-                          .
-                            <span className="fraction">
-                            071
-                            </span>
-                          </span>
-                        </Dropdown.Item>
-                        <Dropdown.Item name="profile" className="profile-nav" active={activeItem === 'profile'} onClick={this.handleItemClick}>
-                          <svg width="16" height="16">
-                            <image href={profile} x="0" y="0" width="100%" height="100%" />
-                          </svg>
-                        My Profile
-                        </Dropdown.Item>
-                        <Dropdown.Item name="deposit" className="deposit-nav" active={activeItem === 'deposit'} onClick={this.handleItemClick}>
-                          <svg width="16" height="16">
-                            <image href={deposit} x="0" y="0" width="100%" height="100%" />
-                          </svg>
-                        Deposit/Withdraw
-                        </Dropdown.Item>
-                        <Dropdown.Item name="settings" className="settings-nav" active={activeItem === 'settings'} onClick={this.handleItemClick}>
-                          <svg width="16" height="16">
-                            <image href={settings} x="0" y="0" width="100%" height="100%" />
-                          </svg>
-                        Account Settings
-                        </Dropdown.Item>
-                        <Dropdown.Item name="logout" className="logout-nav" onClick={this.loginFunc}>
-                          <svg width="16" height="16">
-                            <image href={logout} x="0" y="0" width="100%" height="100%" />
-                          </svg>
-                        Logout
-                        </Dropdown.Item>
+                      <Dropdown.Item name="academia" className="nav-list" onClick={this.props.setSecondaryNav}>
+                        <List selection items={learnerAcademiaDropdownElements} />
+
+                      </Dropdown.Item>
+                      <Dropdown.Item name="business" className="nav-list" onClick={this.props.setSecondaryNav}>
+                        <List selection items={learnerBusinessesDropdownElements} />
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
-                </Menu.Menu>
-              </Grid.Row>) :
 
-              (<Grid.Row className="main-nav">
-                <Menu.Item name="home" onClick={this.handleItemClick}>
-                  <img className="main-nav-logo" style={{ marginRight: `${15}px` }} src={logo} />
+                  <Input className="search-bar" icon="search" placeholder="Search..." />
+
+
+                  <Menu.Menu position="right">
+                    <Menu.Item name="network" onClick={this.handleItemClick}>
+                      <svg width="20" height="20" className="network">
+                        <image href={network} x="0" y="0" width="100%" height="100%" />
+                      </svg>
+                    </Menu.Item>
+
+                    <Menu.Item name="inbox" onClick={this.handleItemClick}>
+                      <svg width="20" height="20" className="inbox">
+                        <image href={messages} x="0" y="0" width="100%" height="100%" />
+                      </svg>
+                    </Menu.Item>
+
+                    <Dropdown item trigger={notificationsTrigger} pointing="top right" options={optionsNotifications} icon={null} />
+
+                    <Dropdown item trigger={avatarTrigger} pointing="top right">
+                      <Dropdown.Menu>
+                        <Dropdown.Item className="account-nav-setter" name="account" onClick={this.props.setSecondaryNav}>
+                          <Dropdown.Item name="balance" className="balance-nav" onClick={this.handleItemClick}>
+                        EDUx Balance:
+                            <span className="balance-nav">
+                              <svg width="16" height="16" className="edu-token">
+                                <image href={token} x="0" y="0" width="100%" height="100%" />
+                              </svg>
+                              <span className="integer">
+                            2,389
+                              </span>
+                          .
+                              <span className="fraction">
+                            071
+                              </span>
+                            </span>
+                          </Dropdown.Item>
+                          <Dropdown.Item name="profile" className="profile-nav" active={activeItem === 'profile'} onClick={this.handleItemClick}>
+                            <svg width="16" height="16">
+                              <image href={profile} x="0" y="0" width="100%" height="100%" />
+                            </svg>
+                        My Profile
+                          </Dropdown.Item>
+                          <Dropdown.Item name="deposit" className="deposit-nav" active={activeItem === 'deposit'} onClick={this.handleItemClick}>
+                            <svg width="16" height="16">
+                              <image href={deposit} x="0" y="0" width="100%" height="100%" />
+                            </svg>
+                        Deposit/Withdraw
+                          </Dropdown.Item>
+                          <Dropdown.Item name="settings" className="settings-nav" active={activeItem === 'settings'} onClick={this.handleItemClick}>
+                            <svg width="16" height="16">
+                              <image href={settings} x="0" y="0" width="100%" height="100%" />
+                            </svg>
+                        Account Settings
+                          </Dropdown.Item>
+                          <Dropdown.Item name="logout" className="logout-nav" onClick={this.loginFunc}>
+                            <svg width="16" height="16">
+                              <image href={logout} x="0" y="0" width="100%" height="100%" />
+                            </svg>
+                        Logout
+                          </Dropdown.Item>
+                        </Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
+                  </Menu.Menu>
+                </Grid.Row>
+              ) :
+
+              (
+                <Grid.Row className="main-nav">
+                  <Menu.Item name="home" onClick={this.handleItemClick}>
+                    <img className="main-nav-logo" alt="" style={{ marginRight: `${15}px` }} src={logo} />
                     Open Source <br /> University
-                </Menu.Item>
-                <Menu.Menu position="right">
-                  <Menu.Item name="network">
-                    <Button primary name="onboarding" onClick={this.handleItemClick} >LOGIN </Button>
                   </Menu.Item>
-                </Menu.Menu>
-              </Grid.Row>)
+                  <Menu.Menu position="right">
+                    <Menu.Item name="network">
+                      <Button primary name="onboarding" onClick={this.handleItemClick} >LOGIN </Button>
+                    </Menu.Item>
+                  </Menu.Menu>
+                </Grid.Row>
+              )
             }
 
             <Grid.Row className="secondary-nav">
               {(() => {
                 if (this.props.isLogged) {
                   switch (this.props.secondaryNav) {
-                  case 'business': return <Menu size="massive" items={learner_businesses_dropdown_elements} />;
-                  case 'academia': return <Menu size="massive" items={learner_academia_dropdown_elements} />;
-                  case 'account': return <Menu size="massive" items={account_elements} />;
+                  case 'business': return <Menu size="massive" items={learnerBusinessesDropdownElements} />;
+                  case 'academia': return <Menu size="massive" items={learnerAcademiaDropdownElements} />;
+                  case 'account': return <Menu size="massive" items={accountElements} />;
                   case 'createAccount': return this.createAccountRender();
                   default: return null;
                   }
                 }
+                return null;
               })()}
             </Grid.Row>
           </Grid>

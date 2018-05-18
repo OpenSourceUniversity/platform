@@ -1,15 +1,17 @@
 import React from 'react';
-import { Button, Container, Header, Divider, Grid, Segment, Icon, Menu, Form } from 'semantic-ui-react';
+import { Button, Container, Header, Divider, Grid, Segment, Menu, Form } from 'semantic-ui-react';
 import LernersSettings from 'components/LernersSettings';
 import AcademiaSettings from 'components/AcademiaSettings';
 import BusinessesSettings from 'components/BusinessesSettings';
 
 export default class AccountSettings extends React.Component {
   render() {
+    /* eslint-disable global-require */
     const settings = require('../../icons/account_settings.svg');
     const learners = require('../../icons/learners.svg');
     const businesses = require('../../icons/businesses.svg');
     const academia = require('../../icons/academia.svg');
+    /* eslint-enable global-require */
     return (
       <div>
         <Container className="account-settings">

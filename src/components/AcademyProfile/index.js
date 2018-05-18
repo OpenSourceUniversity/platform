@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Header, Divider, Grid, Sticky, Segment, Image, Icon, List, Dropdown, Button, Statistic, Label } from 'semantic-ui-react';
+import { Header, Divider, Grid, Sticky, Segment, Image, List, Button } from 'semantic-ui-react';
 import CourseItem from 'components/CourseItem';
 
 const square = { width: 175, height: 175 };
@@ -64,7 +64,6 @@ export default class AcademyProfile extends React.Component {
   }
 
   render() {
-    const profile = require('../../icons/account_profile.svg');
     // IMG SRC
     // academy name
     // Location
@@ -76,9 +75,12 @@ export default class AcademyProfile extends React.Component {
     // Socials (render)
     // Full description
     // Jobs Listing (Jobs Item?)
-    const token = require('../../icons/edu_token.svg');
+    /* eslint-disable global-require */
+
     const profilePicture = require('../../img/Udacity_logo.png');
-    const color = true ? 'green' : 'orange';
+
+    /* eslint-enable global-require */
+
     const email = `mailto:${this.props.academy.email}`;
     const link = `https://${this.props.academy.site}`;
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Header, Secondary } from 'semantic-ui-react';
+import { Container, Header } from 'semantic-ui-react';
 
 
 export default class HomePage extends React.Component {

@@ -1,16 +1,15 @@
 import React from 'react';
-import { Container, Image, Card, Form, Input, Grid, Button, Icon, Label } from 'semantic-ui-react';
+import { Card, Grid, Button } from 'semantic-ui-react';
 
 export default class SignUpRecoveryPhraseCheck extends React.Component {
+  state = {}
+
   seedPhraseButtons() {
-    const seedPhrase = this.props.seedPhrase;
-    const phrases = seedPhrase.split(' ');
+    const phrases = this.props.seedPhrase.split(' ');
     return phrases.map((phrase, index) => (
       <Button name={phrase} style={{ textTransform: 'uppercase', marginTop: `${5}px` }} key={index} onClick={this.phraseButtonClick} disabled={this.state[phrase]} > {phrase}</Button>
     ));
   }
-
- state = {}
 
  choosed = []
 
@@ -33,13 +32,15 @@ export default class SignUpRecoveryPhraseCheck extends React.Component {
 
 
   render() {
+    /* eslint-disable global-require */
     const logo = require('../../icons/edu-logo.png');
+    /* eslint-enable global-require */
     return (
       <div className="recovery">
         <Card.Header>
           <Grid centered>
             <Grid.Row>
-              <img className="logo" src={logo} />
+              <img alt="" className="logo" src={logo} />
               <span className="osu-text-logo">
                 <span className="bold">
                   OPEN SOURCE <br />
@@ -56,7 +57,8 @@ export default class SignUpRecoveryPhraseCheck extends React.Component {
             Recovery Phrase <br />
           </span>
           <span className="orange">
-            Please click/tap words in order to confirm that your recovery phrase is correctly written
+            Please click/tap words in order to confirm that
+            your recovery phrase is correctly written
           </span>
         </Card.Description>
         <Card.Content>

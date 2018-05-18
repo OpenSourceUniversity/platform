@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { Container, Image, Card, Form, Input, Grid, Button, Icon, Label } from 'semantic-ui-react';
+import { Card, Grid, Button, Input } from 'semantic-ui-react';
 
 class WalletCreatedWithoutRouter extends React.Component {
+  static propTypes = {
+    history: PropTypes.object.isRequired,
+  }
+
   constructor(props) {
     super(props);
     this.props.setLogInStatus(this, { name: 'login' });
   }
 
   walletAddress = '0x5e50703df199c351ffd92f2ab3fa4e9d5e1bbddf'
-
-  static propTypes = {
-    history: PropTypes.object.isRequired,
-  }
 
   handleButtonClick = (e, { name }) => {
     let newPath;
@@ -28,13 +28,15 @@ class WalletCreatedWithoutRouter extends React.Component {
   }
 
   render() {
+    /* eslint-disable global-require */
     const logo = require('../../icons/edu-logo.png');
+    /* eslint-enable global-require */
     return (
       <div className="recovery">
         <Card.Header>
           <Grid centered>
             <Grid.Row>
-              <img className="logo" src={logo} />
+              <img alt="" className="logo" src={logo} />
               <span className="osu-text-logo">
                 <span className="bold">
                   OPEN SOURCE <br />

@@ -1,9 +1,13 @@
 import React from 'react';
-import { Button, List, Header, Divider, Label, Segment, Grid, Menu, Icon, Card } from 'semantic-ui-react';
+import { Button, Header, Divider, Label, Segment, Grid, Menu, Icon } from 'semantic-ui-react';
 import JobItem from 'components/JobItem';
 import SkillItem from 'components/SkillItem';
 
 export default class Job extends React.Component {
+  state = { activeItem: 'desc' }
+
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
   renderSkills() {
     const skills = [
       {
@@ -67,9 +71,6 @@ export default class Job extends React.Component {
       </Grid.Column>));
   }
 
-  state = { activeItem: 'desc' }
-
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
   render() {
     const vals =
       {
@@ -168,7 +169,7 @@ export default class Job extends React.Component {
           </Grid.Column>
           <Grid.Column width={5}>
             <Segment textAlign="center">
-              <img src={vals.icon} />
+              <img alt="" src={vals.icon} />
               <Divider hidden />
               <span> {vals.company} </span>
               <br />

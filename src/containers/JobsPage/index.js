@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Header, Divider, Grid, Segment, Input, Button, Form, Accordion, Menu, Icon, Dropdown } from 'semantic-ui-react';
+import { Container, Header, Divider, Grid, Segment, Input, Form, Accordion, Menu, Icon, Dropdown } from 'semantic-ui-react';
 import JobItem from 'components/JobItem';
 import TopJobItem from 'components/TopJobItem';
 import TopCompanyItem from 'components/TopCompanyItem';
@@ -79,7 +79,7 @@ export default class JobsPage extends React.Component {
         title: 'Computer Vision', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
       },
     ];
-    return jobs.map((job, index) => (
+    return jobs.map((jobDetails, index) => (
       <Grid.Column
         computer={8}
         largeScreen={8}
@@ -88,7 +88,7 @@ export default class JobsPage extends React.Component {
         mobile={16}
         key={index}
       >
-        <JobItem job={job} key={index} />
+        <JobItem job={jobDetails} key={index} />
       </Grid.Column>));
   }
 
@@ -100,7 +100,7 @@ export default class JobsPage extends React.Component {
       { title: 'Company Name' },
       { title: 'Company Name' },
     ];
-    return companies.map((companies, index) => (
+    return companies.map((companiesList, index) => (
       <Grid.Column
         computer={8}
         largeScreen={8}
@@ -109,7 +109,7 @@ export default class JobsPage extends React.Component {
         mobile={16}
         key={index}
       >
-        <TopCompanyItem companies={companies} key={index} />
+        <TopCompanyItem companies={companiesList} key={index} />
       </Grid.Column>));
   }
 
@@ -121,7 +121,7 @@ export default class JobsPage extends React.Component {
       { title: 'Job Name', description: 'Description' },
       { title: 'Job Name', description: 'Description' },
     ];
-    return jobs.map((jobs, index) => (
+    return jobs.map((jobsList, index) => (
       <Grid.Column
         computer={8}
         largeScreen={8}
@@ -130,7 +130,7 @@ export default class JobsPage extends React.Component {
         mobile={16}
         key={index}
       >
-        <TopJobItem jobs={jobs} key={index} />
+        <TopJobItem jobs={jobsList} key={index} />
       </Grid.Column>));
   }
 

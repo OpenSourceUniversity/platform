@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Container } from 'semantic-ui-react';
 import React from 'react';
-import PropTypes from 'prop-types';
 import './util/web3/getWeb3';
 import './util/ipfs/getIpfs';
 
@@ -14,10 +13,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.createAccountNav = this.createAccountNav.bind(this);
-  }
-
-  static propTypes = {
-    history: PropTypes.object.isRequired,
   }
 
   state = {
@@ -40,7 +35,7 @@ class App extends React.Component {
     this.setState({ secondaryNav: name });
   }
 
-  createAccountNav(e) {
+  createAccountNav() {
     this.setState({ secondaryNav: 'createAccount' });
   }
 
@@ -50,8 +45,8 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header
-          isLogged={this.state.isLogged}
-          createAccountActiveItem={this.state.createAccountActiveSlide}
+          isLogged={isLogged}
+          createAccountActiveItem={createAccountActiveSlide}
           createAccountActiveItemFunc={this.setCreateAccountActiveItem}
           setSecondaryNav={this.setSecondaryNav}
           secondaryNav={this.state.secondaryNav}
@@ -60,10 +55,10 @@ class App extends React.Component {
         <div style={{ height: `${170}px` }} />
         <div id="Main">
           <Main
-            activeAccount={this.state.activeAccount}
+            activeAccount={activeAccount}
             setActiveAccount={this.setActiveAccount}
             setCreateAccountActiveItem={this.setCreateAccountActiveItem}
-            createAccountActiveItem={this.state.createAccountActiveSlide}
+            createAccountActiveItem={createAccountActiveSlide}
             createAccountNav={this.createAccountNav}
             setLogInStatus={this.setLogInStatus}
           />

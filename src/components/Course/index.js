@@ -1,9 +1,12 @@
 import React from 'react';
-import { Button, List, Header, Divider, Label, Segment, Grid, Menu, Icon, Image } from 'semantic-ui-react';
+import { Button, Header, Divider, Label, Segment, Grid, Menu, Icon, Image } from 'semantic-ui-react';
 import SkillItem from 'components/SkillItem';
 import SubscriberItem from 'components/SubscriberItem';
 
 export default class Course extends React.Component {
+  state = { activeItem: 'about' }
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
   renderSkills() {
     const skills = [
       {
@@ -44,11 +47,11 @@ export default class Course extends React.Component {
     ));
   }
 
-  renderRating(rating) {
-    rating = Math.round(rating * 2) / 2;
+  renderRating(ratingNumb) {
+    const rating = Math.round(ratingNumb * 2) / 2;
     const stars = [];
-    for (let i = 0; i < 5; i++) {
-      if (rating - i == 0.5) {
+    for (let i = 0; i < 5; i += 1) {
+      if (rating - i === 0.5) {
         stars.push({ name: 'star half full' });
       } else if (rating - i > 0) {
         stars.push({ name: 'star' });
@@ -62,8 +65,6 @@ export default class Course extends React.Component {
     ));
   }
 
-  state = { activeItem: 'about' }
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
   render() {
     const review = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et egestas leo. Aliquam ultricies libero orci, quis malesuada massa posuere quis. Mauris eget ullamcorper elit, et faucibus sem. Aliquam maximus.';
     const vals =
@@ -72,7 +73,7 @@ export default class Course extends React.Component {
         review,
         interested: '12, 400 ',
         price: '1000 EDU',
-        reviews: 1923,
+        reviews_numb: 1923,
         about: 'About blah blah blah',
         e_req: 'Entry Requirements blah blah blah',
         reviews: 'Reviews blah blah blah',
@@ -89,7 +90,7 @@ export default class Course extends React.Component {
         code: 'NF440F93Fkk34',
       };
     const { activeItem } = this.state;
-    const link_plus = '#';
+    const linkPlus = '#';
     const share = '#';
     return (
       <div className="course">
@@ -100,7 +101,7 @@ export default class Course extends React.Component {
           <Grid.Column width={11}>
             <Segment>
               <span style={{ float: 'right' }}>
-                <a href={link_plus}>
+                <a href={linkPlus}>
                   <Icon color="black" name="plus" />
                 </a>
                 <a href={share}>
@@ -145,7 +146,7 @@ export default class Course extends React.Component {
                     <Button as="a" color="green">BUY COURSE</Button>
                   </Grid.Column>
                   <Grid.Column width={6}>
-                    Reviews (<span>{vals.reviews}</span> ratings) <br />
+                    Reviews (<span>{vals.reviews_numb}</span> ratings) <br />
                     {this.renderRating(vals.rating)}
                     <span>{vals.rating}</span>/5
                   </Grid.Column>

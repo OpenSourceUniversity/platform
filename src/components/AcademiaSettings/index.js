@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Form, Button, Radio, Checkbox, Header, Divider, Label, Segment } from 'semantic-ui-react';
+import { Input, Form, Button, Radio, Header, Divider, Segment } from 'semantic-ui-react';
 
 export default class AcademiaSettings extends React.Component {
   state = {}
@@ -24,23 +24,20 @@ export default class AcademiaSettings extends React.Component {
               label="Authority website"
               control="input"
             />
-            <Form.Field>
-              <label>
-                  Upload authority logo
-                <Input
-                  id="file"
-                  type="file"
-                  name="file"
-                  placeholder="authority logo"
-                  onChange={this.handleInputChange}
-                  className="input-file"
-                  color="orange"
-                />
-              </label>
+            <Form.Field label="Upload authority logo" control="file">
+              <Input
+                id="file"
+                type="file"
+                name="file"
+                placeholder="authority logo"
+                onChange={this.handleInputChange}
+                className="input-file"
+                color="orange"
+              />
             </Form.Field>
             <Divider clearing />
             <Form.Group grouped>
-              <Form.Field>
+              <Form.Field control="radio">
                 <Radio
                   label="Create Ethereum wallet and take care of my private key"
                   name="take-care"
@@ -50,7 +47,7 @@ export default class AcademiaSettings extends React.Component {
                   color="orange"
                 />
               </Form.Field>
-              <Form.Field>
+              <Form.Field control="radio">
                 <Radio
                   label="I will use MetaMask and an existing Ethereum wallet"
                   name="my-wallet"
@@ -63,7 +60,8 @@ export default class AcademiaSettings extends React.Component {
             </Form.Group>
             <Divider clearing />
             <span>
-              Contact person on the authority side. Person should be entitled to add HTML file to verify website ownership.
+              Contact person on the authority side. Person should be entitled
+              to add HTML file to verify website ownership.
             </span>
             <Divider hidden />
             <Form.Field
@@ -82,7 +80,8 @@ export default class AcademiaSettings extends React.Component {
               <br />
             </span>
             <span>
-              &#42;&#42; It must contain at least 6 characters and must contain at least one capital letter, one small letter and one numeric character
+              &#42;&#42; It must contain at least 6 characters and must contain at
+              least one capital letter, one small letter and one numeric character
             </span>
             <Divider clearing />
             <Form.Field inline>
@@ -90,7 +89,10 @@ export default class AcademiaSettings extends React.Component {
                 type="checkbox"
               />
               <span>
-                I agree with the <a href="#">Terms&Conditions</a> and the <a href="#">Whitepaper</a>
+                I agree with the
+                <a href="https://os.university/static/open-source-university-edu-whitepaper.pdf" rel="noopener noreferrer" target="_blank"> Terms&Conditions </a>
+                and the
+                <a href="https://os.university/static/Terms-And-Conditions.pdf" rel="noopener noreferrer" target="_blank"> Whitepaper</a>
               </span>
             </Form.Field>
             <Divider clearing />

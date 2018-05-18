@@ -1,5 +1,5 @@
 import React from 'react';
-import { Step, Container, Icon } from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 import AcademiaSettings from 'components/AcademiaSettings';
 import ChooseAccount from 'components/ChooseAccount';
 

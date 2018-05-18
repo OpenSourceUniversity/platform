@@ -20,23 +20,23 @@ class CourseItemWithoutRouter extends React.Component {
   }
 
   render() {
-    const level = this.props.certificate.level;
-    const language = this.props.certificate.language;
-    const duration = this.props.certificate.duration;
-    const rating = this.props.certificate.rating;
-    const description = this.props.certificate.description;
+    /* eslint-disable global-require */
+
     const profile = require('../../icons/account_profile.svg');
+
+    /* eslint-enable global-require */
+
     return (
       <Card fluid>
         <Card.Content>
           <Card.Header icon="ellipsis vertical">{this.props.certificate.title}</Card.Header>
-          <Icon name="signal" /> {level}
-          <Icon name="world" /> {language}
-          <Icon name="time" /> {duration}
-          <Icon name="star" /> {rating}
+          <Icon name="signal" /> {this.props.certificate.level}
+          <Icon name="world" /> {this.props.certificate.language}
+          <Icon name="time" /> {this.props.certificate.duration}
+          <Icon name="star" /> {this.props.certificate.rating}
         </Card.Content>
         <Card.Content extra>
-          { description }
+          { this.props.certificate.description }
         </Card.Content>
         <Card.Content extra>
           <Button name="course-page" onClick={this.handleItemClick}> Show course </Button>

@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Container, Header, Segment, Button, Divider, Form, Input, Breadcrumb } from 'semantic-ui-react';
 
 

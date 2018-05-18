@@ -10,20 +10,18 @@ import PasswordRecovery from 'components/PasswordRecovery';
 import WalletRecoverySuccess from 'components/WalletRecoverySuccess';
 
 export default class OnBoarding extends React.Component {
-  state = { seedPhrase: this.seedPhrase }
+  state = { onboardingActiveForm: 'signin' }
 
   seedPhrase = 'fog prepare party warm tomorrow athlete equip elbow seven stool pet tent'
 
   render() {
-    const { onboardingActiveForm, seedPhrase } = this.state;
-
     return (
       <Container fluid className="onboarding" style={{ backgroundColor: 'white', marginTop: `${-95}px` }}>
         <Card className="onboarding-card">
           {(() => {
-            switch (onboardingActiveForm) {
-            case 'recoveryPhraseCheck': return <SignUpRecoveryPhraseCheck seedPhrase={seedPhrase} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
-            case 'recoveryPhraseSeed': return <SignUpRecoveryPhrase seedPhrase={seedPhrase} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
+            switch (this.state.onboardingActiveForm) {
+            case 'recoveryPhraseCheck': return <SignUpRecoveryPhraseCheck seedPhrase={this.seedPhrase} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
+            case 'recoveryPhraseSeed': return <SignUpRecoveryPhrase seedPhrase={this.seedPhrase} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
             case 'recovery': return <WalletRecovery handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
             case 'signup': return <SignUp handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
             case 'created': return <WalletCreated setLogInStatus={this.props.setLogInStatus} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;

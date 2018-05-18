@@ -34,9 +34,7 @@ export default class SignUp extends React.Component {
         <Card.Content>
           <Form>
             <Form.Group inline>
-              <Form.Field inline width="16" label={{ icon: 'user' }}>
-                <Input type="password" placeholder="Set your passphrase" />
-              </Form.Field>
+              <Form.Field inline width="16" label={{ icon: 'user' }} control="input" type="password" placeholder="Set your passphrase" />
             </Form.Group>
             <Form.Field inline className="check-box">
               <Input

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Form, Input, Grid } from 'semantic-ui-react';
+import { Card, Form, Grid } from 'semantic-ui-react';
 
 export default class PasswordRecovery extends React.Component {
   render() {
@@ -34,9 +34,7 @@ export default class PasswordRecovery extends React.Component {
         <Card.Content>
           <Form>
             <Form.Group inline>
-              <Form.Field control="input" inline width="16" label={{ icon: 'user' }}>
-                <Input type="password" placeholder="New passphrase" />
-              </Form.Field>
+              <Form.Field control="input" inline width="16" label={{ icon: 'user' }} type="password" placeholder="New passphrase" />
             </Form.Group>
             <Form.Button className="orange-button" name="walletrecoverysuccess" onClick={this.props.handleItemClick}>RECOVER MY WALLET</Form.Button>
           </Form>

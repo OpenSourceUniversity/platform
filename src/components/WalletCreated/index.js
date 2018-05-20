@@ -11,9 +11,12 @@ class WalletCreatedWithoutRouter extends React.Component {
   constructor(props) {
     super(props);
     this.props.setLogInStatus(this, { name: 'login' });
+    this.createHDWallet();
   }
 
-  walletAddress = '0x5e50703df199c351ffd92f2ab3fa4e9d5e1bbddf'
+  publicKey = ''
+
+  state = {walletAddress: this.publicKey}
 
   handleButtonClick = (e, { name }) => {
     let newPath;
@@ -25,6 +28,16 @@ class WalletCreatedWithoutRouter extends React.Component {
     if (this.props.history.location.pathname !== newPath) {
       this.props.history.push(newPath);
     }
+  }
+
+  createHDWallet() {
+    var hdkey = require('ethereumjs-wallet/hdkey');
+    var bip39 = require('bip39');
+    console.log("Function createHDWallet()");
+    console.log(this.props.seedPhrase.length);
+    var wallet = hdkey.fromMasterSeed(bip39.mnemonicToSeed(this.props.seedPhrase)).getWallet();
+    console.log(wallet.getChecksumAddressString());
+    this.publicKey = wallet.getChecksumAddressString();
   }
 
   render() {
@@ -60,7 +73,7 @@ class WalletCreatedWithoutRouter extends React.Component {
           <Input
             disabled
             fluid
-            defaultValue={this.walletAddress}
+            defaultValue={this.publicKey}
             action={{
               labelPosition: 'right', icon: 'copy', content: 'Copy', style: { marginTop: 0 },
             }}

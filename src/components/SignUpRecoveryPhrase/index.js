@@ -1,10 +1,23 @@
 import React from 'react';
+import bip39 from 'bip39';
 import { Card, Grid, Button, Icon, Label } from 'semantic-ui-react';
 
 export default class SignUpRecoveryPhrase extends React.Component {
+  constructor(props) {
+    super(props);
+    this.setBip39SeedPhrase();
+  }
+
   seedPhrase() {
     return this.props.seedPhrase;
   }
+
+  setBip39SeedPhrase() {
+    var mnemonic = bip39.generateMnemonic();
+    this.props.setSeedPhrase(mnemonic);
+    console.log(mnemonic);
+  }
+
   render() {
     /* eslint-disable global-require */
     const logo = require('../../icons/edu-logo.png');

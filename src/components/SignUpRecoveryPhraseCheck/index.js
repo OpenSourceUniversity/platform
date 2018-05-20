@@ -2,23 +2,56 @@ import React from 'react';
 import { Card, Grid, Button } from 'semantic-ui-react';
 
 export default class SignUpRecoveryPhraseCheck extends React.Component {
-  state = {}
+  state = {equalPhrases: false}
+
+  shuffle(array) {
+    for (let i = array.length - 1; i > 0; i-=1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
 
   seedPhraseButtons() {
-    const phrases = this.props.seedPhrase.split(' ');
+    const phrases = this.shuffledPhrases;
     return phrases.map((phrase, index) => (
       <Button name={phrase} style={{ textTransform: 'uppercase', marginTop: `${5}px` }} key={index} onClick={this.phraseButtonClick} disabled={this.state[phrase]} > {phrase}</Button>
     ));
   }
 
- choosed = []
+  shuffledPhrases = this.shuffle(this.props.seedPhrase.split(' '))
+
+  arraysEqual(a, b) {
+    if (a === b) return true;
+    if (a == null || b == null) return false;
+    if (a.length != b.length) return false;
+
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i] !== b[i]) return false;
+    }
+    return true;
+  }
+
+  choosed = []
+  checkArray = this.props.seedPhrase.split(' ')
 
   phraseButtonClick = (e, { name }) => {
     this.setState(prevState => ({ [name]: !prevState[name] }));
     if (this.choosed.indexOf(name) === -1) {
       this.choosed.push(name);
+      if(this.choosed.length === 12) {
+        console.log("12 words added");
+        console.log("checkArray: " + this.checkArray);
+        console.log("choosed: " + this.choosed);
+        if(this.arraysEqual(this.choosed, this.checkArray)) {
+          console.log("Arrays are equal");
+          this.setState({ equalPhrases: true });
+          return;
+        }
+      }
     } else {
       this.choosed.splice(this.choosed.indexOf(name), 1);
+      this.setState({ equalPhrases: false });
     }
   }
 
@@ -71,7 +104,7 @@ export default class SignUpRecoveryPhraseCheck extends React.Component {
         </Card.Content>
         <Card.Content>
           <Button style={{ float: 'left' }} className="button" name="recoveryPhraseSeed" onClick={this.props.handleItemClick} >BACK</Button>
-          <Button style={{ float: 'right' }} className="button" name="created" onClick={this.props.handleItemClick} >CONTINUE</Button>
+          <Button style={{ float: 'right' }} className="button" disabled={!this.state.equalPhrases} name="created" onClick={this.props.handleItemClick} >CONTINUE</Button>
         </Card.Content>
       </div>
     );

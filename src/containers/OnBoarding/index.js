@@ -10,9 +10,15 @@ import PasswordRecovery from 'components/PasswordRecovery';
 import WalletRecoverySuccess from 'components/WalletRecoverySuccess';
 
 export default class OnBoarding extends React.Component {
-  state = { onboardingActiveForm: 'signin' }
+  constructor(props) {
+    super(props);
+    this.setSeedPhrase = this.setSeedPhrase.bind(this);
+  }
+  state = { onboardingActiveForm: 'signin', seedPhrase: 'fog prepare party warm tomorrow athlete equip elbow seven stool pet tent' }
 
-  seedPhrase = 'fog prepare party warm tomorrow athlete equip elbow seven stool pet tent'
+  setSeedPhrase(phrase) {
+    this.setState({ seedPhrase: phrase });
+  }
 
   render() {
     return (
@@ -20,11 +26,11 @@ export default class OnBoarding extends React.Component {
         <Card className="onboarding-card">
           {(() => {
             switch (this.state.onboardingActiveForm) {
-            case 'recoveryPhraseCheck': return <SignUpRecoveryPhraseCheck seedPhrase={this.seedPhrase} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
-            case 'recoveryPhraseSeed': return <SignUpRecoveryPhrase seedPhrase={this.seedPhrase} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
+            case 'recoveryPhraseCheck': return <SignUpRecoveryPhraseCheck seedPhrase={this.state.seedPhrase} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
+            case 'recoveryPhraseSeed': return <SignUpRecoveryPhrase setSeedPhrase={this.setSeedPhrase} seedPhrase={this.state.seedPhrase} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
             case 'recovery': return <WalletRecovery handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
             case 'signup': return <SignUp handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
-            case 'created': return <WalletCreated setLogInStatus={this.props.setLogInStatus} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
+            case 'created': return <WalletCreated seedPhrase={this.state.seedPhrase} setLogInStatus={this.props.setLogInStatus} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
             case 'passwordrecovery': return <PasswordRecovery handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
             case 'walletrecoverysuccess': return <WalletRecoverySuccess handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
             default: return (<SignIn

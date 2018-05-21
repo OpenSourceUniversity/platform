@@ -3,6 +3,7 @@ import { Container, Header, Divider, Grid, Segment, Input, Form, Accordion, Menu
 import CourseItem from 'components/CourseItem';
 import TopCoursesItem from 'components/TopCoursesItem';
 import TopAcademiaItem from 'components/TopAcademiaItem';
+import CoursesFilterList from '../../data/filtersCourses';
 
 const FilterForm = (
   <Form>
@@ -21,6 +22,7 @@ const options = [
   { key: 'courses', text: 'Courses', value: 'courses' },
 ];
 
+
 export default class CoursesPage extends React.Component {
   state = { activeIndex: 0, activeItem: 'trending' }
 
@@ -30,53 +32,52 @@ export default class CoursesPage extends React.Component {
     const { index } = titleProps;
     const { activeIndex } = this.state;
     const newIndex = activeIndex === index ? -1 : index;
-
     this.setState({ activeIndex: newIndex });
   }
 
   renderCourses() {
     const courses = [
       {
-        title: 'Python Development', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
+        title: 'Python Development', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet vulputate risus. Suspendisse iaculis consectetur metus. Orci varius natoque penatibus et magnis dis parturient',
       },
       {
-        title: 'Scrum Master', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
+        title: 'Scrum Master', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet vulputate risus. Suspendisse iaculis consectetur metus. Orci varius natoque penatibus et magnis dis parturient',
       },
       {
-        title: 'Machine Learning', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
+        title: 'Machine Learning', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet vulputate risus. Suspendisse iaculis consectetur metus. Orci varius natoque penatibus et magnis dis parturient',
       },
       {
-        title: 'Solidity Development', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
+        title: 'Solidity Development', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet vulputate risus. Suspendisse iaculis consectetur metus. Orci varius natoque penatibus et magnis dis parturient',
       },
       {
-        title: 'Unit Testing', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
+        title: 'Unit Testing', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet vulputate risus. Suspendisse iaculis consectetur metus. Orci varius natoque penatibus et magnis dis parturient',
       },
       {
-        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
+        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet vulputate risus. Suspendisse iaculis consectetur metus. Orci varius natoque penatibus et magnis dis parturient',
       },
       {
-        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
+        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet vulputate risus. Suspendisse iaculis consectetur metus. Orci varius natoque penatibus et magnis dis parturient',
       },
       {
-        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
+        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet vulputate risus. Suspendisse iaculis consectetur metus. Orci varius natoque penatibus et magnis dis parturient',
       },
       {
-        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
+        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet vulputate risus. Suspendisse iaculis consectetur metus. Orci varius natoque penatibus et magnis dis parturient',
       },
       {
-        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
+        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet vulputate risus. Suspendisse iaculis consectetur metus. Orci varius natoque penatibus et magnis dis parturient',
       },
       {
-        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
+        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet vulputate risus. Suspendisse iaculis consectetur metus. Orci varius natoque penatibus et magnis dis parturient',
       },
       {
-        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
+        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet vulputate risus. Suspendisse iaculis consectetur metus. Orci varius natoque penatibus et magnis dis parturient',
       },
       {
-        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
+        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet vulputate risus. Suspendisse iaculis consectetur metus. Orci varius natoque penatibus et magnis dis parturient',
       },
       {
-        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
+        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet vulputate risus. Suspendisse iaculis consectetur metus. Orci varius natoque penatibus et magnis dis parturient',
       },
     ];
     return courses.map((certificate, index) => (
@@ -145,7 +146,7 @@ export default class CoursesPage extends React.Component {
           <Grid.Column width={3}>
             <Segment>
               <Accordion as={Menu} vertical>
-                <Header>
+                <Header style={{textAlign: 'center', 'paddingTop': '10px'}}>
                   Advanced filter
                 </Header>
                 <Menu.Item>
@@ -157,7 +158,7 @@ export default class CoursesPage extends React.Component {
                     <Icon name="block layout" />
                     Categories
                   </Accordion.Title>
-                  <Accordion.Content active={activeIndex === 0} content={FilterForm} />
+                  <Accordion.Content active={activeIndex === 0} content={CoursesFilterList.CoursesFilterList.categories} />
                 </Menu.Item>
 
                 <Menu.Item>
@@ -169,7 +170,7 @@ export default class CoursesPage extends React.Component {
                     <Icon name="graduation" />
                     Qualification
                   </Accordion.Title>
-                  <Accordion.Content active={activeIndex === 1} content={FilterForm} />
+                  <Accordion.Content active={activeIndex === 1} content={CoursesFilterList.CoursesFilterList.qualification} />
                 </Menu.Item>
 
                 <Menu.Item>
@@ -181,7 +182,7 @@ export default class CoursesPage extends React.Component {
                     <Icon name="home" />
                     Study type
                   </Accordion.Title>
-                  <Accordion.Content active={activeIndex === 2} content={FilterForm} />
+                  <Accordion.Content active={activeIndex === 2} content={CoursesFilterList.CoursesFilterList.studyType} />
                 </Menu.Item>
 
                 <Menu.Item>
@@ -193,7 +194,7 @@ export default class CoursesPage extends React.Component {
                     <Icon name="time" />
                     Duration
                   </Accordion.Title>
-                  <Accordion.Content active={activeIndex === 3} content={FilterForm} />
+                  <Accordion.Content active={activeIndex === 3} content={CoursesFilterList.CoursesFilterList.duration} />
                 </Menu.Item>
 
                 <Menu.Item>
@@ -205,7 +206,7 @@ export default class CoursesPage extends React.Component {
                     <Icon name="calendar" />
                     Dates
                   </Accordion.Title>
-                  <Accordion.Content active={activeIndex === 4} content={FilterForm} />
+                  <Accordion.Content active={activeIndex === 4} content={CoursesFilterList.CoursesFilterList.dates} />
                 </Menu.Item>
 
                 <Menu.Item>
@@ -217,7 +218,7 @@ export default class CoursesPage extends React.Component {
                     <Icon name="money" />
                     Price
                   </Accordion.Title>
-                  <Accordion.Content active={activeIndex === 5} content={FilterForm} />
+                  <Accordion.Content active={activeIndex === 5} content={CoursesFilterList.CoursesFilterList.price} />
                 </Menu.Item>
 
                 <Menu.Item>
@@ -229,7 +230,7 @@ export default class CoursesPage extends React.Component {
                     <Icon name="signal" />
                     Level
                   </Accordion.Title>
-                  <Accordion.Content active={activeIndex === 6} content={FilterForm} />
+                  <Accordion.Content active={activeIndex === 6} content={CoursesFilterList.CoursesFilterList.level} />
                 </Menu.Item>
 
                 <Menu.Item>
@@ -241,7 +242,7 @@ export default class CoursesPage extends React.Component {
                     <Icon name="world" />
                     Language
                   </Accordion.Title>
-                  <Accordion.Content active={activeIndex === 7} content={FilterForm} />
+                  <Accordion.Content active={activeIndex === 7} content={CoursesFilterList.CoursesFilterList.language} />
                 </Menu.Item>
               </Accordion>
             </Segment>

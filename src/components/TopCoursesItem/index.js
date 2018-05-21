@@ -9,16 +9,14 @@ export default class TopCoursesItem extends React.Component {
     /* eslint-enable global-require */
     const link = '#';
     return (
-      <a href={link}>
-        <Card fluid>
+        <Card fluid as='a' href={link} style={{'color': 'black'}}>
           <Card.Content>
             <Card.Header>
               {this.props.course.title}
             </Card.Header>
-            <img alt="" src={profile} />{this.props.course.description}
+            <img alt=""  style={{'width': '20px', 'marginRight': '7px', 'marginBottom': '3px'}} src={profile} /> <span>{this.props.course.description}</span>
           </Card.Content>
         </Card>
-      </a>
     );
   }
 }

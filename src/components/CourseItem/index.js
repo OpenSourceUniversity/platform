@@ -19,6 +19,24 @@ class CourseItemWithoutRouter extends React.Component {
     this.props.history.push(newPath);
   }
 
+  renderRating(ratingNumb) {
+    const rating = Math.round(ratingNumb * 2) / 2;
+    const stars = [];
+    for (let i = 0; i < 5; i += 1) {
+      if (rating - i === 0.5) {
+        stars.push({ name: 'star half full' });
+      } else if (rating - i > 0) {
+        stars.push({ name: 'star' });
+      } else {
+        stars.push({ name: 'empty star' });
+      }
+    }
+
+    return stars.map((star, index) => (
+      <Icon style={{'color': '#efce4a'}} name={star.name} key={index} />
+    ));
+  }
+
   render() {
     /* eslint-disable global-require */
 
@@ -29,21 +47,31 @@ class CourseItemWithoutRouter extends React.Component {
     return (
       <Card fluid>
         <Card.Content>
-          <Card.Header icon="ellipsis vertical">{this.props.certificate.title}</Card.Header>
-          <Icon name="signal" /> {this.props.certificate.level}
-          <Icon name="world" /> {this.props.certificate.language}
-          <Icon name="time" /> {this.props.certificate.duration}
-          <Icon name="star" /> {this.props.certificate.rating}
+          <Card.Header style={{color: 'black'}} icon="ellipsis vertical">{this.props.certificate.title}</Card.Header>
+          <span className="course-desc" >
+            <Icon name="signal" style={{color: '#c1c1c1'}} className="course-desc" /> {this.props.certificate.level}
+          </span>
+          <span className="course-desc" >
+            <Icon name="world" style={{color: '#c1c1c1'}} className="course-desc" /> {this.props.certificate.language}
+          </span>
+          <span className="course-desc" >
+            <Icon name="time" style={{color: '#c1c1c1'}} className="course-desc" /> {this.props.certificate.duration}
+          </span>
+          <span className="course-desc" >
+            {this.renderRating(this.props.certificate.rating)}
+          </span>
         </Card.Content>
         <Card.Content extra>
           { this.props.certificate.description }
         </Card.Content>
         <Card.Content extra>
-          <Button name="course-page" onClick={this.handleItemClick}> Show course </Button>
-          <Label as="a">
-            <Image avatar spaced="right" src={profile} />
-            Title
-          </Label>
+          <Button name="course-page" onClick={this.handleItemClick}>
+            Show Course
+          </Button>
+          <span className="course-desc" style={{'float': 'right', 'color': 'black'}}>
+            <Image style={{'width': '25px'}} spaced="right" src={profile} />
+            Lorem ipsum dolor sit
+          </span>
         </Card.Content>
       </Card>
     );

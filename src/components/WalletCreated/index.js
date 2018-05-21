@@ -33,8 +33,6 @@ class WalletCreatedWithoutRouter extends React.Component {
   createHDWallet() {
     var hdkey = require('ethereumjs-wallet/hdkey');
     var bip39 = require('bip39');
-    console.log("Function createHDWallet()");
-    console.log(this.props.seedPhrase.length);
     var wallet = hdkey.fromMasterSeed(bip39.mnemonicToSeed(this.props.seedPhrase)).getWallet();
     console.log(wallet.getChecksumAddressString());
     this.publicKey = wallet.getChecksumAddressString();

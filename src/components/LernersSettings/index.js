@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Button, Checkbox, Header, Divider } from 'semantic-ui-react';
-import StaticData from '../../data/staticdata';
+import Countries from '../../data/countriesList';
 
 export default class LernersSettings extends React.Component {
   render() {
@@ -50,7 +50,7 @@ export default class LernersSettings extends React.Component {
         <Form>
           <Form.Field disabled label="Email" control="input" type="email" defaultValue="Email@gmail.com" style={{ opacity: 1, color: 'black' }} className="disabled-email" />
           <Form.Field label="Phone number" autoComplete="tel" control="input" type="tel" placeholder="Phone number" />
-          <Form.Dropdown placeholder="Select Country" label="Country" fluid search selection options={StaticData.Countries} />
+          <Form.Dropdown placeholder="Select Country" label="Country" fluid search selection options={Countries.Countries} />
           <Divider hidden />
           <Button type="submit">Save Profile Settings</Button>
         </Form>

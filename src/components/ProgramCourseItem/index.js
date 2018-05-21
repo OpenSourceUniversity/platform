@@ -44,23 +44,20 @@ export default class ProgramCourseItem extends React.Component {
       { profile_img: 'https://scontent-otp1-1.xx.fbcdn.net/v/t1.0-9/22688522_10213663105509248_2925755588528489151_n.jpg?_nc_cat=0&oh=58a5f70ab63bc298d6bd64b0acd56762&oe=5B9449D0', link: '#' },
       { profile_img: 'https://scontent-otp1-1.xx.fbcdn.net/v/t1.0-9/29496083_2072749406302649_5385916209195252970_n.jpg?_nc_cat=0&oh=9bd64cd534a9141a54cedbb90040f6d8&oe=5B59CE27', link: '#' },
     ];
-    return subscribers.map((sub, index) => (
+    return subscribers.slice(0,3).map((sub, index) => (
         <SubscriberItem subs={sub} key={index} />
     ));
   }
 
 
-
   render() {
     return (
-
               <Segment>
-
                 <Grid.Row>
                   <Label color={ this.props.course.verified ? 'green' : 'orange' } ribbon>
                     { this.props.course.verified ? 'Verified' : 'Not verified' }
                   </Label>
-                  <Label color='blue' corner='right' icon='heart' />
+                  <Label as='a' color='teal' corner='right' icon='heart' />
                   <Header as='h2' textAlign='center' color='orange'>
                     { this.props.course.title }
                     <Divider fitted />
@@ -82,7 +79,7 @@ export default class ProgramCourseItem extends React.Component {
                 <br/>
                 <Grid>
                   <Grid.Row>
-                    <Grid.Column width={6} centered>
+                    <Grid.Column width={5} textAlign='left'>
                       <Header as='h5'>
                         Learners
                         { ' ( ' + this.props.course.nrOfLearners + ' )'}
@@ -91,7 +88,7 @@ export default class ProgramCourseItem extends React.Component {
                         { this.renderSubs() }
                       </Label.Group>
                     </Grid.Column>
-                    <Grid.Column width={6} >
+                    <Grid.Column width={5} textAlign='center'>
                       <Header as='h5'>
                         Reviews
                         { ' ( ' + this.props.course.reviewers + ' raitings) '}
@@ -99,7 +96,7 @@ export default class ProgramCourseItem extends React.Component {
                       {this.renderRating(this.props.course.rating)}
                       <span>{this.props.course.rating}</span>/5
                     </Grid.Column>
-                    <Grid.Column width={4} centered>
+                    <Grid.Column width={6} textAlign='right'>
                       <Header as='h5'>
                         Price
                       </Header>
@@ -109,102 +106,13 @@ export default class ProgramCourseItem extends React.Component {
                     </Grid.Column>
                   </Grid.Row>
                 </Grid>
-
-
-
-
+                <Divider fitted />
+                <Button icon labelPosition='left' compact>
+                  More info
+                  <Icon name='right arrow' />
+                </Button>
               </Segment>
-
 
     );
   }
 }
-
-// title: 'Algorithms, Part II',
-//         overview: 'Part II focuses on graph- and string-processing algorithms.',
-//         language: 'English',
-//         hours: '2',
-//         priceEDU: '52',
-//         nrOfLearners: '1322',
-//         rating: '4.1' ,
-//         reviewers: '33',
-//         courseID: 'saDfInvi&5w0Sg62'
-
-
-
-// class ProgramCourseItemWithoutRouter extends React.Component {
-//
-//   render() {
-//     // const level = this.props.certificate.level;
-//     // const language = this.props.certificate.language;
-//     // const duration = this.props.certificate.duration;
-//     // const rating = this.props.certificate.rating;
-//     // const description = this.props.certificate.description;
-//     // let profile = require('../../icons/account_profile.svg');
-//     return (
-//       // <Segment>
-//         <Header>
-//           Fucking shit
-//           // { this.props.course.title }
-//         </Header>
-//       //   <span>
-//       //     {vals.review}
-//       //   </span>
-//       //   <Header>
-//       //     Skills
-//       //   </Header>
-//       //   <Label.Group size='medium'>
-//       //     {this.renderSkills()}
-//       //   </Label.Group>
-//       //   <Divider hidden />
-//       //   <Label.Group circular>
-//       //     {this.renderSubs()}
-//       //     <span>
-//       //       <span>
-//       //         {vals.interested}
-//       //       </span>
-//       //       students interested
-//       //     </span>
-//       //   </Label.Group>
-//       //   <Divider hidden />
-//       //   <Grid>
-//       //     <Grid.Row>
-//       //       <Grid.Column width={4}>
-//       //         <span>
-//       //           Price
-//       //         </span>
-//       //         <br/>
-//       //         <span>
-//       //           {vals.price}
-//       //         </span>
-//       //       </Grid.Column>
-//       //       <Grid.Column width={6}>
-//       //         <Button as='a' color='green'>BUY COURSE</Button>
-//       //       </Grid.Column>
-//       //       <Grid.Column width={6}>
-//       //         Reviews (<span>{vals.reviews}</span> ratings) <br/>
-//       //         {this.renderRating(vals.rating)}
-//       //         <span>{vals.rating}</span>/5
-//       //       </Grid.Column>
-//       //     </Grid.Row>
-//       //   </Grid>
-//       //   <Divider hidden />
-//       //   <div>
-//       //    {(() => {
-//       //     switch(this.state.activeItem) {
-//       //     case 'entry requirements': return vals.e_req;
-//       //     case 'reviews': return vals.reviews;
-//       //     default: return vals.about;
-//       //     }
-//       //   })()}
-//       //   </div>
-//       // </Segment>
-//
-//
-//     );
-//   }
-// }
-//
-// const ProgramCourseItem = withRouter(ProgramCourseItemWithoutRouter);
-//
-// export default ProgramCourseItem;

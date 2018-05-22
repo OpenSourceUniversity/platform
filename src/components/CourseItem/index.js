@@ -20,21 +20,10 @@ class CourseItemWithoutRouter extends React.Component {
   }
 
   renderRating(ratingNumb) {
-    const rating = Math.round(ratingNumb * 2) / 2;
-    const stars = [];
-    for (let i = 0; i < 5; i += 1) {
-      if (rating - i === 0.5) {
-        stars.push({ name: 'star half full' });
-      } else if (rating - i > 0) {
-        stars.push({ name: 'star' });
-      } else {
-        stars.push({ name: 'empty star' });
-      }
-    }
-
-    return stars.map((star, index) => (
-      <Icon style={{'color': '#efce4a'}} name={star.name} key={index} />
-    ));
+    return (
+        <div className="ui accurate star widget inline" style={{marginRight: '10px'}}>
+          <div className="highlight" style={{width: ratingNumb/5*100 + '%'}}></div>
+        </div> );
   }
 
   render() {

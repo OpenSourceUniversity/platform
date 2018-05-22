@@ -275,12 +275,12 @@ export default class CoursesPage extends React.Component {
 
           <Grid.Column width={3}>
             <Segment>
-              <Header>
+              <Header style={{textAlign: 'center'}}>
                 Top Academia
               </Header>
               <Divider clearing />
               {this.renderTopAcademia()}
-              <Header>
+              <Header style={{textAlign: 'center'}}>
                 Top Courses
               </Header>
               <Divider clearing />

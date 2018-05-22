@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Header, Divider, Label, Segment, Grid, Menu, Icon, Image } from 'semantic-ui-react';
+import { Button, Header, Divider, Label, Segment, Grid, Menu, Icon, Image, Container } from 'semantic-ui-react';
 import SkillItem from 'components/SkillItem';
 import SubscriberItem from 'components/SubscriberItem';
 
@@ -59,13 +59,13 @@ export default class Course extends React.Component {
     const vals =
       {
         course_title: 'Course name',
-        review,
+        review: 'About Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas at est eleifend, aliquam mi non, consequat lacus. Duis eu nisi leo. Nullam consectetur sodales arcu vel egestas. In quis nulla vitae est tincidunt vehicula. Nulla vulputate ipsum nec elit accumsan, vitae bibendum nisi tempor. Nunc scelerisque justo arcu, in vestibulum.',
         interested: '12, 400 ',
         price: '1000 EDU',
         reviews_numb: 1923,
-        about: 'About blah blah blah',
-        e_req: 'Entry Requirements blah blah blah',
-        reviews: 'Reviews blah blah blah',
+        about: 'About Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas at est eleifend, aliquam mi non, consequat lacus. Duis eu nisi leo. Nullam consectetur sodales arcu vel egestas. In quis nulla vitae est tincidunt vehicula. Nulla vulputate ipsum nec elit accumsan, vitae bibendum nisi tempor. Nunc scelerisque justo arcu, in vestibulum.',
+        e_req: 'Entry Requirements Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas at est eleifend, aliquam mi non, consequat lacus. Duis eu nisi leo. Nullam consectetur sodales arcu vel egestas. In quis nulla vitae est tincidunt vehicula. Nulla vulputate ipsum nec elit accumsan, vitae bibendum nisi tempor. Nunc scelerisque justo arcu, in vestibulum.',
+        reviews: 'Reviews Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas at est eleifend, aliquam mi non, consequat lacus. Duis eu nisi leo. Nullam consectetur sodales arcu vel egestas. In quis nulla vitae est tincidunt vehicula. Nulla vulputate ipsum nec elit accumsan, vitae bibendum nisi tempor. Nunc scelerisque justo arcu, in vestibulum.',
         link: '#',
         icon: 'https://os.university/static/assets/icons/osu-logo.png',
         rating: 3.5,
@@ -83,22 +83,22 @@ export default class Course extends React.Component {
     const share = '#';
     return (
       <div className="course">
-        <Header>
+        <Header style={{fontSize: '1.7em'}}>
           {vals.course_title}
         </Header>
         <Grid>
           <Grid.Column width={11}>
-            <Segment>
-              <span style={{ float: 'right' }}>
-                <a href={linkPlus}>
-                  <Icon color="black" name="plus" />
-                </a>
-                <a href={share}>
-                  <Icon color="black" name="share alternate" />
-                </a>
-              </span>
+            <Segment style={{padding: '40px'}}>
               <Header>
                 Reviews
+                <span style={{ float: 'right' }}>
+                <a href={linkPlus}>
+                  <Icon color="grey" name="plus" />
+                </a>
+                <a href={share}>
+                  <Icon color="grey" name="share alternate" />
+                </a>
+              </span>
               </Header>
               <span>
                 {vals.review}
@@ -110,10 +110,10 @@ export default class Course extends React.Component {
                 {this.renderSkills()}
               </Label.Group>
               <Divider hidden />
-              <Label.Group circular>
+              <Label.Group>
                 {this.renderSubs()}
-                <span>
-                  <span>
+                <span style={{position: 'relative', top: '-1.4em', fontSize: '1.1rem', marginLeft: '1.3em'}}>
+                  <span style={{fontSize: '1.5rem'}}>
                     {vals.interested}
                   </span>
                   students interested
@@ -143,11 +143,11 @@ export default class Course extends React.Component {
               </Grid>
               <Divider hidden />
               <Menu pointing secondary color="orange">
-                <Menu.Item name="about" active={activeItem === 'about'} onClick={this.handleItemClick} />
-                <Menu.Item name="entry requirements" active={activeItem === 'entry requirements'} onClick={this.handleItemClick} />
-                <Menu.Item name="reviews" active={activeItem === 'reviews'} onClick={this.handleItemClick} />
+                <Menu.Item style={{fontSize: '1.3em'}} name="about" active={activeItem === 'about'} onClick={this.handleItemClick} />
+                <Menu.Item style={{fontSize: '1.3em'}} name="entry requirements" active={activeItem === 'entry requirements'} onClick={this.handleItemClick} />
+                <Menu.Item style={{fontSize: '1.3em'}} name="reviews" active={activeItem === 'reviews'} onClick={this.handleItemClick} />
               </Menu>
-              <div>
+              <Container style={{paddingLeft: '40px', paddingRight: '40px'}}>
                 {(() => {
                   switch (this.state.activeItem) {
                   case 'entry requirements': return vals.e_req;
@@ -155,69 +155,69 @@ export default class Course extends React.Component {
                   default: return vals.about;
                   }
                 })()}
-              </div>
+              </Container>
             </Segment>
           </Grid.Column>
           <Grid.Column width={5}>
-            <Segment>
-              <Header>
+            <Segment style={{padding: '40px'}}>
+              <Header style={{fontSize: '1.5em', marginBottom: '5px'}}>
                 Provider
               </Header>
               <Divider hidden />
               <Image src={vals.icon} as="a" href={vals.link} />
               <Divider clearing />
-              <Header>
+              <Header style={{fontSize: '1.5em', marginBottom: '5px'}}>
                 Course dates
               </Header>
               <Icon name="calendar" />
-              <span>
+              <span style={{color: 'grey'}} >
                 {vals.dates}
               </span>
               <Divider clearing />
-              <Header>
+              <Header style={{fontSize: '1.5em', marginBottom: '5px'}}>
                 Course duration
               </Header>
               <Icon name="clock" />
-              <span>
+              <span style={{color: 'grey'}} >
                 {vals.duration}
               </span>
               <Divider clearing />
-              <Header>
+              <Header style={{fontSize: '1.5em', marginBottom: '5px'}}>
                 Course fee
               </Header>
               <Icon name="rub" />
-              <span>
+              <span style={{color: 'grey'}} >
                 {vals.fee}
               </span>
               <Divider clearing />
-              <Header>
+              <Header style={{fontSize: '1.5em', marginBottom: '5px'}}>
                 Tutor
               </Header>
               <Icon name="user outline" />
-              <span>
+              <span style={{color: 'grey'}} >
                 {vals.tutor}
               </span>
               <Divider clearing />
-              <Header>
+              <Header style={{fontSize: '1.5em', marginBottom: '5px'}}>
                 Language
               </Header>
               <Icon name="world" />
-              <span>
+              <span style={{color: 'grey'}} >
                 {vals.lang}
               </span>
               <Divider clearing />
-              <Header>
+              <Header style={{fontSize: '1.5em', marginBottom: '5px'}}>
                 Level
               </Header>
               <Icon name="signal" />
-              <span>
+              <span style={{color: 'grey'}} >
                 {vals.level}
               </span>
               <Divider clearing />
-              <Header>
+              <Header style={{fontSize: '1.5em', marginBottom: '5px'}}>
                 Course code
               </Header>
-              <span>
+              <span style={{color: 'grey'}} >
                 {vals.code}
               </span>
             </Segment>

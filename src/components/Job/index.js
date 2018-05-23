@@ -106,7 +106,7 @@ class JobWithoutRouter extends React.Component {
         qual: 'Qualifications Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et egestas leo. Aliquam ultricies libero orci, quis malesuada massa posuere quis. Mauris eget ullamcorper elit, et faucibus sem. Aliquam maximus.',
         offer: 'We offer Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et egestas leo. Aliquam ultricies libero orci, quis malesuada massa posuere quis. Mauris eget ullamcorper elit, et faucibus sem. Aliquam maximus.',
         icon: 'https://era.io/static/img/logo-active-full.png',
-        rating: 5.0,
+        rating: 3.7,
         industry: 'IT & Design',
         posted: '23.05.2018',
         closes: '23.06.2018',
@@ -192,7 +192,7 @@ class JobWithoutRouter extends React.Component {
           <Grid.Column width={5}>
             <Segment style={{padding: '40px'}}>
               <div style={{textAlign: 'center'}}>
-                <Label circular style={{boxShadow: '2px 6px 20px 0 #bcbdbd, 0 1px 21px 1px #d4d4d5', width: '10em', height: '10em', backgroundColor: 'white', backgroundImage: 'url(' + vals.icon + ')', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: '80%'}}/>
+                <Label as="a" href={vals.link} circular style={{boxShadow: '2px 6px 20px 0 #bcbdbd, 0 1px 21px 1px #d4d4d5', width: '10em', height: '10em', backgroundColor: 'white', backgroundImage: 'url(' + vals.icon + ')', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: '80%'}}/>
                 <Divider hidden />
                 <span style={{fontSize: '1.5em', marginBottom: '5px'}}> {vals.company} </span>
                 <br />

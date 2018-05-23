@@ -128,14 +128,14 @@ export default class Course extends React.Component {
                     </span>
                     <br />
                     <span>
-                      {vals.price}
+                      <b>{vals.price}</b>
                     </span>
                   </Grid.Column>
                   <Grid.Column width={6}>
                     <Button as="a" color="green">BUY COURSE</Button>
                   </Grid.Column>
                   <Grid.Column width={6}>
-                    Reviews (<span>{vals.reviews_numb}</span> ratings) <br />
+                    Reviews (<span><b>{vals.reviews_numb}</b></span> ratings) <br />
                     {this.renderRating(vals.rating)}
                     <span>{vals.rating}</span>/5
                   </Grid.Column>
@@ -160,11 +160,12 @@ export default class Course extends React.Component {
           </Grid.Column>
           <Grid.Column width={5}>
             <Segment style={{padding: '40px'}}>
-              <Header style={{fontSize: '1.5em', marginBottom: '5px'}}>
-                Provider
-              </Header>
-              <Divider hidden />
-              <Image src={vals.icon} as="a" href={vals.link} />
+              <div style={{textAlign: 'center'}}>
+                <Header style={{fontSize: '1.5em'}}>
+                  Provider
+                </Header>
+                <Label as="a" href={vals.link} circular style={{boxShadow: '2px 6px 20px 0 #bcbdbd, 0 1px 21px 1px #d4d4d5', width: '8em', height: '8em', backgroundColor: 'white', backgroundImage: 'url(' + vals.icon + ')', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: '80%'}}/>
+              </div>
               <Divider clearing />
               <Header style={{fontSize: '1.5em', marginBottom: '5px'}}>
                 Course dates

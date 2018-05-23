@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { Card, Icon, Button, Label, Image } from 'semantic-ui-react';
+import { Card, Icon, Button } from 'semantic-ui-react';
 
 
 class StudentProgramItemWithoutRouter extends React.Component {

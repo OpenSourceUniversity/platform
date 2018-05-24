@@ -13,7 +13,7 @@ export default class SignUpRecoveryPhrase extends React.Component {
   }
 
   setBip39SeedPhrase() {
-    var mnemonic = bip39.generateMnemonic();
+    const mnemonic = bip39.generateMnemonic();
     this.props.setSeedPhrase(mnemonic);
     console.log(mnemonic);
   }

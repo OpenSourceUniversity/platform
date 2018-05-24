@@ -2,12 +2,12 @@ import React from 'react';
 import { Card, Grid, Button } from 'semantic-ui-react';
 
 export default class SignUpRecoveryPhraseCheck extends React.Component {
-  state = {equalPhrases: false}
+  state = { equalPhrases: false }
 
   shuffle(array) {
-    for (let i = array.length - 1; i > 0; i-=1) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
+    for (let i = array.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
   }
@@ -26,7 +26,7 @@ export default class SignUpRecoveryPhraseCheck extends React.Component {
     if (a == null || b == null) return false;
     if (a.length != b.length) return false;
 
-    for (var i = 0; i < a.length; ++i) {
+    for (let i = 0; i < a.length; ++i) {
       if (a[i] !== b[i]) return false;
     }
     return true;
@@ -39,14 +39,13 @@ export default class SignUpRecoveryPhraseCheck extends React.Component {
     this.setState(prevState => ({ [name]: !prevState[name] }));
     if (this.choosed.indexOf(name) === -1) {
       this.choosed.push(name);
-      if(this.choosed.length === 12) {
-        console.log("12 words added");
-        console.log("checkArray: " + this.checkArray);
-        console.log("choosed: " + this.choosed);
-        if(this.arraysEqual(this.choosed, this.checkArray)) {
-          console.log("***Arrays are equal - Continue button is active***");
+      if (this.choosed.length === 12) {
+        console.log('12 words added');
+        console.log(`checkArray: ${this.checkArray}`);
+        console.log(`choosed: ${this.choosed}`);
+        if (this.arraysEqual(this.choosed, this.checkArray)) {
+          console.log('***Arrays are equal - Continue button is active***');
           this.setState({ equalPhrases: true });
-          return;
         }
       }
     } else {

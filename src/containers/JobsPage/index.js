@@ -145,7 +145,7 @@ export default class JobsPage extends React.Component {
           <Grid.Column width={3}>
             <Segment>
               <Accordion as={Menu} vertical>
-                <Header style={{textAlign: 'center', 'paddingTop': '10px'}}>
+                <Header style={{ textAlign: 'center', paddingTop: '10px' }}>
                   Advanced filter
                 </Header>
                 <Menu.Item>
@@ -274,12 +274,12 @@ export default class JobsPage extends React.Component {
 
           <Grid.Column width={3}>
             <Segment>
-              <Header style={{textAlign: 'center'}}>
+              <Header style={{ textAlign: 'center' }}>
                 Top Companies
               </Header>
               <Divider clearing />
               {this.renderTopCompany()}
-              <Header style={{textAlign: 'center'}}>
+              <Header style={{ textAlign: 'center' }}>
                 Top Jobs
               </Header>
               <Divider clearing />

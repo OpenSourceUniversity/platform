@@ -9,10 +9,10 @@ export default class TopCompanyItem extends React.Component {
     /* eslint-enable global-require */
     const link = '#';
     return (
-      <Card fluid as='a' href={link}>
+      <Card fluid as="a" href={link}>
         <Card.Content>
           <Card.Header icon="ellipsis vertical">
-            <img alt="" style={{'width': '25px', 'marginRight': '10px', 'marginBottom': '3px'}} src={profile} />{this.props.companies.title}
+            <img alt="" style={{ width: '25px', marginRight: '10px', marginBottom: '3px' }} src={profile} />{this.props.companies.title}
           </Card.Header>
         </Card.Content>
       </Card>

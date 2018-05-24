@@ -146,7 +146,7 @@ export default class CoursesPage extends React.Component {
           <Grid.Column width={3}>
             <Segment>
               <Accordion as={Menu} vertical>
-                <Header style={{textAlign: 'center', 'paddingTop': '10px'}}>
+                <Header style={{ textAlign: 'center', paddingTop: '10px' }}>
                   Advanced filter
                 </Header>
                 <Menu.Item>
@@ -275,12 +275,12 @@ export default class CoursesPage extends React.Component {
 
           <Grid.Column width={3}>
             <Segment>
-              <Header style={{textAlign: 'center'}}>
+              <Header style={{ textAlign: 'center' }}>
                 Top Academia
               </Header>
               <Divider clearing />
               {this.renderTopAcademia()}
-              <Header style={{textAlign: 'center'}}>
+              <Header style={{ textAlign: 'center' }}>
                 Top Courses
               </Header>
               <Divider clearing />

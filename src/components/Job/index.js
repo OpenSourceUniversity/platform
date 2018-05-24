@@ -88,9 +88,9 @@ class JobWithoutRouter extends React.Component {
 
   renderRating(ratingNumb) {
     return (
-        <div className="ui accurate star widget inline" style={{marginRight: '10px'}}>
-          <div className="highlight" style={{width: ratingNumb/5*100 + '%'}}></div>
-        </div> );
+      <div className="ui accurate star widget inline" style={{ marginRight: '10px' }}>
+        <div className="highlight" style={{ width: `${ratingNumb / 5 * 100}%` }} />
+      </div>);
   }
 
   render() {
@@ -121,14 +121,14 @@ class JobWithoutRouter extends React.Component {
       <div className="course">
         <Grid>
           <Grid.Column width={11}>
-            <Segment style={{padding: '40px'}}>
+            <Segment style={{ padding: '40px' }}>
               <div>
-                <Header style={{fontSize: '1.7em'}}>
+                <Header style={{ fontSize: '1.7em' }}>
                   {vals.job_title}
                   <span className="label-status"> <Label basic color="green">New</Label> </span>
                 </Header>
-                <span style={{fontSize: '1.3em', color: 'gray'}}>
-                  Posted by {vals.company} <Icon name="point" style={{marginLeft: '10px', marginRight: 0}}/> {vals.location} <Icon name="dollar" style={{marginLeft: '10px', marginRight: 0}}/> {vals.salary}
+                <span style={{ fontSize: '1.3em', color: 'gray' }}>
+                  Posted by {vals.company} <Icon name="point" style={{ marginLeft: '10px', marginRight: 0 }} /> {vals.location} <Icon name="dollar" style={{ marginLeft: '10px', marginRight: 0 }} /> {vals.salary}
                 </span>
                 <Header>
                    Overview
@@ -143,20 +143,20 @@ class JobWithoutRouter extends React.Component {
                   {this.renderSkills()}
                 </Label.Group>
                 <Menu pointing secondary color="orange">
-                  <Menu.Item style={{fontSize: '1.3em'}} name="desc" active={activeItem === 'desc'} onClick={this.handleItemClick}>
+                  <Menu.Item style={{ fontSize: '1.3em' }} name="desc" active={activeItem === 'desc'} onClick={this.handleItemClick}>
                       Job Descriptions
                   </Menu.Item>
-                  <Menu.Item style={{fontSize: '1.3em'}} name="resp" active={activeItem === 'resp'} onClick={this.handleItemClick}>
+                  <Menu.Item style={{ fontSize: '1.3em' }} name="resp" active={activeItem === 'resp'} onClick={this.handleItemClick}>
                       Responsobilities
                   </Menu.Item>
-                  <Menu.Item style={{fontSize: '1.3em'}} name="qual" active={activeItem === 'qual'} onClick={this.handleItemClick}>
+                  <Menu.Item style={{ fontSize: '1.3em' }} name="qual" active={activeItem === 'qual'} onClick={this.handleItemClick}>
                       Qualifications
                   </Menu.Item>
-                  <Menu.Item style={{fontSize: '1.3em'}} name="offer" active={activeItem === 'offer'} onClick={this.handleItemClick}>
+                  <Menu.Item style={{ fontSize: '1.3em' }} name="offer" active={activeItem === 'offer'} onClick={this.handleItemClick}>
                       We offer
                   </Menu.Item>
                 </Menu>
-                <Container style={{paddingLeft: '40px', paddingRight: '40px'}}>
+                <Container style={{ paddingLeft: '40px', paddingRight: '40px' }}>
                   {(() => {
                     switch (this.state.activeItem) {
                     case 'resp': return vals.resp;
@@ -167,19 +167,19 @@ class JobWithoutRouter extends React.Component {
                   })()}
                 </Container>
                 <Menu pointing secondary color="orange">
-                  <Menu.Item style={{fontSize: '1.2em'}} name="resp" active >
+                  <Menu.Item style={{ fontSize: '1.2em' }} name="resp" active >
                       Responsobilities
                   </Menu.Item>
                 </Menu>
-                <Container style={{paddingLeft: '40px', paddingRight: '40px'}}>
+                <Container style={{ paddingLeft: '40px', paddingRight: '40px' }}>
                   {vals.resp}
                 </Container>
                 <Menu pointing secondary color="orange">
-                  <Menu.Item style={{fontSize: '1.2em'}} name="qual" active>
+                  <Menu.Item style={{ fontSize: '1.2em' }} name="qual" active>
                       Qualifications
                   </Menu.Item>
                 </Menu>
-                <Container style={{paddingLeft: '40px', paddingRight: '40px'}}>
+                <Container style={{ paddingLeft: '40px', paddingRight: '40px' }}>
                   {vals.qual}
                 </Container>
               </div>
@@ -190,11 +190,18 @@ class JobWithoutRouter extends React.Component {
             </Segment>
           </Grid.Column>
           <Grid.Column width={5}>
-            <Segment style={{padding: '40px'}}>
-              <div style={{textAlign: 'center'}}>
-                <Label as="a" href={vals.link} circular style={{boxShadow: '2px 6px 20px 0 #bcbdbd, 0 1px 21px 1px #d4d4d5', width: '10em', height: '10em', backgroundColor: 'white', backgroundImage: 'url(' + vals.icon + ')', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: '80%'}}/>
+            <Segment style={{ padding: '40px' }}>
+              <div style={{ textAlign: 'center' }}>
+                <Label
+                  as="a"
+                  href={vals.link}
+                  circular
+                  style={{
+                    boxShadow: '2px 6px 20px 0 #bcbdbd, 0 1px 21px 1px #d4d4d5', width: '10em', height: '10em', backgroundColor: 'white', backgroundImage: `url(${vals.icon})`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: '80%',
+                  }}
+                />
                 <Divider hidden />
-                <span style={{fontSize: '1.5em', marginBottom: '5px'}}> {vals.company} </span>
+                <span style={{ fontSize: '1.5em', marginBottom: '5px' }}> {vals.company} </span>
                 <br />
                 {this.renderRating(vals.rating)}
               </div>
@@ -220,12 +227,12 @@ class JobWithoutRouter extends React.Component {
                 <br />
               </div>
               <Divider hidden />
-              <div style={{textAlign: 'center'}}>
+              <div style={{ textAlign: 'center' }}>
                 <Button fluid color="green">APPLY NOW</Button>
               </div>
             </Segment>
             <Segment >
-              <Header  style={{fontSize: '1.5em'}} textAlign="center">
+              <Header style={{ fontSize: '1.5em' }} textAlign="center">
                 Similar positions
               </Header>
               {this.renderJobs()}

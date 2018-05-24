@@ -5,7 +5,6 @@ import { Card, Icon, Button, Label, Image } from 'semantic-ui-react';
 
 
 class StudentProgramItemWithoutRouter extends React.Component {
-
   static propTypes = {
     history: PropTypes.object.isRequired,
   }
@@ -17,8 +16,7 @@ class StudentProgramItemWithoutRouter extends React.Component {
     } else {
       newPath = `/${name}`;
     }
-      this.props.history.push(newPath);
-
+    this.props.history.push(newPath);
   }
 
   render() {
@@ -31,17 +29,17 @@ class StudentProgramItemWithoutRouter extends React.Component {
     return (
       <Card fluid>
         <Card.Content>
-          <Card.Header icon='ellipsis vertical'>{this.props.programe.title}</Card.Header>
-          <Icon name='world' /> {language}
-          <Icon name='time' /> {duration}
-          <Icon name='star' /> {rating}
-          <Icon name='briefcase' /> {description}
+          <Card.Header icon="ellipsis vertical">{this.props.programe.title}</Card.Header>
+          <Icon name="world" /> {language}
+          <Icon name="time" /> {duration}
+          <Icon name="star" /> {rating}
+          <Icon name="briefcase" /> {description}
         </Card.Content>
         <Card.Content extra>
           { overview_title }
         </Card.Content>
         <Card.Content extra>
-          <Button name='program-page' onClick={this.handleItemClick}> Show courses </Button>
+          <Button name="program-page" onClick={this.handleItemClick}> Show courses </Button>
 
         </Card.Content>
       </Card>

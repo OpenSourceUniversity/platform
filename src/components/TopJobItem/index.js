@@ -9,12 +9,12 @@ export default class TopJobItem extends React.Component {
     /* eslint-enable global-require */
     const link = '#';
     return (
-      <Card as="a" href={link} fluid style={{'color': 'black'}}>
+      <Card as="a" href={link} fluid style={{ color: 'black' }}>
         <Card.Content>
           <Card.Header>
             {this.props.jobs.title}
           </Card.Header>
-          <img alt="" style={{'width': '20px', 'marginRight': '7px', 'marginBottom': '3px'}} src={profile} />{this.props.jobs.description}
+          <img alt="" style={{ width: '20px', marginRight: '7px', marginBottom: '3px' }} src={profile} />{this.props.jobs.description}
         </Card.Content>
       </Card>
     );

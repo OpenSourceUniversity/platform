@@ -21,9 +21,9 @@ class JobItemWithoutRouter extends React.Component {
 
   renderRating(ratingNumb) {
     return (
-        <div className="ui accurate star widget inline" style={{marginRight: '10px'}}>
-          <div className="highlight" style={{width: ratingNumb/5*100 + '%'}}></div>
-        </div> );
+      <div className="ui accurate star widget inline" style={{ marginRight: '10px' }}>
+        <div className="highlight" style={{ width: `${ratingNumb / 5 * 100}%` }} />
+      </div>);
   }
 
   render() {
@@ -36,15 +36,15 @@ class JobItemWithoutRouter extends React.Component {
     return (
       <Card fluid>
         <Card.Content>
-          <Card.Header style={{color: 'black'}} icon="ellipsis vertical">{this.props.job.title}</Card.Header>
+          <Card.Header style={{ color: 'black' }} icon="ellipsis vertical">{this.props.job.title}</Card.Header>
           <span className="course-desc" >
-            <Icon name="signal" style={{color: '#c1c1c1'}} className="course-desc" /> {this.props.job.level}
+            <Icon name="signal" style={{ color: '#c1c1c1' }} className="course-desc" /> {this.props.job.level}
           </span>
           <span className="course-desc" >
-            <Icon name="world" style={{color: '#c1c1c1'}} className="course-desc" /> {this.props.job.location}
+            <Icon name="world" style={{ color: '#c1c1c1' }} className="course-desc" /> {this.props.job.location}
           </span>
           <span className="course-desc" >
-            <Icon name="time" style={{color: '#c1c1c1'}} className="course-desc" /> {this.props.job.duration}
+            <Icon name="time" style={{ color: '#c1c1c1' }} className="course-desc" /> {this.props.job.duration}
           </span>
           <span className="course-desc" >
             {this.renderRating(this.props.job.rating)}
@@ -57,8 +57,8 @@ class JobItemWithoutRouter extends React.Component {
           <Button name="job-page" onClick={this.handleItemClick}>
             Show job&apos;s details
           </Button>
-          <span className="course-desc" style={{'float': 'right', 'color': 'black'}}>
-            <Image style={{'width': '25px'}} spaced="right" src={profile} />
+          <span className="course-desc" style={{ float: 'right', color: 'black' }}>
+            <Image style={{ width: '25px' }} spaced="right" src={profile} />
             Lorem ipsum dolor sit
           </span>
         </Card.Content>

@@ -7,19 +7,19 @@ import TopAcademiaItem from 'components/TopAcademiaItem';
 const FilterForm = (
   <Form>
     <Form.Group grouped>
-      <Form.Checkbox label='One' name='filter' value='one' />
-      <Form.Checkbox label='Two' name='filter' value='two' />
-      <Form.Checkbox label='Three' name='filter' value='three' />
+      <Form.Checkbox label="One" name="filter" value="one" />
+      <Form.Checkbox label="Two" name="filter" value="two" />
+      <Form.Checkbox label="Three" name="filter" value="three" />
     </Form.Group>
   </Form>
-)
+);
 
 const options = [
   { key: 'one', text: 'One', value: '1' },
   { key: 'two', text: 'Two', value: '2' },
   { key: 'three', text: 'Three', value: '3' },
   { key: 'all', text: 'All programs', value: 'programs' },
-]
+];
 
 export default class StudenProgramsPage extends React.Component {
   state = { activeIndex: 0, activeItem: 'trending' }
@@ -27,12 +27,12 @@ export default class StudenProgramsPage extends React.Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   handleClick = (e, titleProps) => {
-      const { index } = titleProps
-      const { activeIndex } = this.state
-      const newIndex = activeIndex === index ? -1 : index
+    const { index } = titleProps;
+    const { activeIndex } = this.state;
+    const newIndex = activeIndex === index ? -1 : index;
 
-      this.setState({ activeIndex: newIndex })
-    }
+    this.setState({ activeIndex: newIndex });
+  }
 
   renderPrograms() {
     const programs = [
@@ -45,7 +45,7 @@ export default class StudenProgramsPage extends React.Component {
         language: 'English',
         duration: '4 weeks',
         rating: '4.5',
-        location: 'Compleately online'
+        location: 'Compleately online',
       },
       {
         title: 'Master of Applied Data Science',
@@ -56,7 +56,7 @@ export default class StudenProgramsPage extends React.Component {
         language: 'English',
         duration: '10 weeks',
         rating: '4.1',
-        location: 'Compleately online'
+        location: 'Compleately online',
       },
     ];
     return programs.map((programs, index) => (
@@ -74,11 +74,11 @@ export default class StudenProgramsPage extends React.Component {
 
   renderTopAcademia() {
     const academias = [
-       { title: 'Academy Name 1' },
-       { title: 'Academy Name 2' },
-       { title: 'Academy Name 3' },
-       { title: 'Academy Name 4' },
-       { title: 'Academy Name 5' },
+      { title: 'Academy Name 1' },
+      { title: 'Academy Name 2' },
+      { title: 'Academy Name 3' },
+      { title: 'Academy Name 4' },
+      { title: 'Academy Name 5' },
     ];
     return academias.map((academia, index) => (
       <Grid.Column
@@ -95,11 +95,11 @@ export default class StudenProgramsPage extends React.Component {
 
   renderTopPrograms() {
     const programs = [
-       { title: 'Program Name 1', description: 'Description' },
-       { title: 'Program Name 2', description: 'Description' },
-       { title: 'Program Name 3', description: 'Description' },
-       { title: 'Program Name 4', description: 'Description' },
-       { title: 'Program Name 5', description: 'Description' },
+      { title: 'Program Name 1', description: 'Description' },
+      { title: 'Program Name 2', description: 'Description' },
+      { title: 'Program Name 3', description: 'Description' },
+      { title: 'Program Name 4', description: 'Description' },
+      { title: 'Program Name 5', description: 'Description' },
     ];
     return programs.map((program, index) => (
       <Grid.Column
@@ -115,7 +115,7 @@ export default class StudenProgramsPage extends React.Component {
   }
 
   render() {
-    const { activeIndex, activeItem } = this.state
+    const { activeIndex, activeItem } = this.state;
     return (
       <Container>
         <Header>
@@ -134,7 +134,7 @@ export default class StudenProgramsPage extends React.Component {
                     index={0}
                     onClick={this.handleClick}
                   >
-                    <Icon name='block layout' />
+                    <Icon name="block layout" />
                     Categories
                   </Accordion.Title>
                   <Accordion.Content active={activeIndex === 0} content={FilterForm} />
@@ -146,7 +146,7 @@ export default class StudenProgramsPage extends React.Component {
                     index={1}
                     onClick={this.handleClick}
                   >
-                    <Icon name='graduation' />
+                    <Icon name="graduation" />
                     Qualification
                   </Accordion.Title>
                   <Accordion.Content active={activeIndex === 1} content={FilterForm} />
@@ -158,7 +158,7 @@ export default class StudenProgramsPage extends React.Component {
                     index={2}
                     onClick={this.handleClick}
                   >
-                    <Icon name='home' />
+                    <Icon name="home" />
                     Study type
                   </Accordion.Title>
                   <Accordion.Content active={activeIndex === 2} content={FilterForm} />
@@ -170,7 +170,7 @@ export default class StudenProgramsPage extends React.Component {
                     index={3}
                     onClick={this.handleClick}
                   >
-                    <Icon name='time' />
+                    <Icon name="time" />
                     Duration
                   </Accordion.Title>
                   <Accordion.Content active={activeIndex === 3} content={FilterForm} />
@@ -182,7 +182,7 @@ export default class StudenProgramsPage extends React.Component {
                     index={4}
                     onClick={this.handleClick}
                   >
-                    <Icon name='calendar' />
+                    <Icon name="calendar" />
                     Dates
                   </Accordion.Title>
                   <Accordion.Content active={activeIndex === 4} content={FilterForm} />
@@ -194,7 +194,7 @@ export default class StudenProgramsPage extends React.Component {
                     index={5}
                     onClick={this.handleClick}
                   >
-                    <Icon name='money' />
+                    <Icon name="money" />
                     Price
                   </Accordion.Title>
                   <Accordion.Content active={activeIndex === 5} content={FilterForm} />
@@ -206,7 +206,7 @@ export default class StudenProgramsPage extends React.Component {
                     index={7}
                     onClick={this.handleClick}
                   >
-                    <Icon name='world' />
+                    <Icon name="world" />
                     Language
                   </Accordion.Title>
                   <Accordion.Content active={activeIndex === 7} content={FilterForm} />
@@ -217,24 +217,26 @@ export default class StudenProgramsPage extends React.Component {
 
           <Grid.Column width={10}>
             <Segment>
-                <Input
-                  label={<Dropdown defaultValue='programs' options={options} />}
-                  labelPosition='left'
-                  placeholder='Search by keyword...'
-                  icon={{ name: 'search', circular: false, link: true, bordered: true }}
-                  fluid
-                />
-                <Divider clearing />
-                <Menu pointing secondary color='orange'>
-                  <Menu.Item name='trending' active={activeItem === 'trending'} onClick={this.handleItemClick} />
-                  <Menu.Item name='recommended' active={activeItem === 'recommended'} onClick={this.handleItemClick} />
-                </Menu>
-                {(() => {
-                  switch(this.state.activeItem) {
-                  case 'recommended': return 'Recommended page';
-                  default: return this.renderPrograms();
-                  }
-                })()}
+              <Input
+                label={<Dropdown defaultValue="programs" options={options} />}
+                labelPosition="left"
+                placeholder="Search by keyword..."
+                icon={{
+                  name: 'search', circular: false, link: true, bordered: true,
+                }}
+                fluid
+              />
+              <Divider clearing />
+              <Menu pointing secondary color="orange">
+                <Menu.Item name="trending" active={activeItem === 'trending'} onClick={this.handleItemClick} />
+                <Menu.Item name="recommended" active={activeItem === 'recommended'} onClick={this.handleItemClick} />
+              </Menu>
+              {(() => {
+                switch (this.state.activeItem) {
+                case 'recommended': return 'Recommended page';
+                default: return this.renderPrograms();
+                }
+              })()}
             </Segment>
           </Grid.Column>
 

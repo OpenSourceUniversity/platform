@@ -1,7 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
-import { Button, List, Header, Divider, Label, Segment, Grid, Menu, Icon, Image, Sticky, Rail, Container } from 'semantic-ui-react';
+import { Button, Header, Divider, Label, Segment, Grid, Icon } from 'semantic-ui-react';
 import SkillItem from 'components/SkillItem';
 import SubscriberItem from 'components/SubscriberItem';
 
@@ -28,12 +26,12 @@ export default class ProgramCourseItem extends React.Component {
   }
 
   renderRating(rating) {
-    rating = Math.round(rating * 2) / 2;
+    const ratingTemp = Math.round(rating * 2) / 2;
     const stars = [];
     for (let i = 0; i < 5; i++) {
-      if (rating - i == 0.5) {
+      if (ratingTemp - i === 0.5) {
         stars.push({ name: 'star half full' });
-      } else if (rating - i > 0) {
+      } else if (ratingTemp - i > 0) {
         stars.push({ name: 'star' });
       } else {
         stars.push({ name: 'empty star' });

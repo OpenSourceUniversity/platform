@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Header, Divider, Label, Segment, Grid, Menu, Icon, Image, Container } from 'semantic-ui-react';
+import { Button, Header, Divider, Label, Segment, Grid, Menu, Icon, Container } from 'semantic-ui-react';
 import SkillItem from 'components/SkillItem';
 import SubscriberItem from 'components/SubscriberItem';
 
@@ -50,12 +50,11 @@ export default class Course extends React.Component {
   renderRating(ratingNumb) {
     return (
       <div className="ui accurate star widget inline" style={{ marginRight: '10px' }}>
-        <div className="highlight" style={{ width: `${ratingNumb / 5 * 100}%` }} />
+        <div className="highlight" style={{ width: `${(ratingNumb / 5) * 100}%` }} />
       </div>);
   }
 
   render() {
-    const review = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et egestas leo. Aliquam ultricies libero orci, quis malesuada massa posuere quis. Mauris eget ullamcorper elit, et faucibus sem. Aliquam maximus.';
     const vals =
       {
         course_title: 'Course name',

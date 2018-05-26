@@ -1,19 +1,10 @@
 import React from 'react';
-import { Container, Header, Divider, Grid, Segment, Input, Form, Accordion, Menu, Icon, Dropdown } from 'semantic-ui-react';
+import { Container, Header, Divider, Grid, Segment, Input, Accordion, Menu, Icon, Dropdown } from 'semantic-ui-react';
 import CourseItem from 'components/CourseItem';
 import TopCoursesItem from 'components/TopCoursesItem';
 import TopAcademiaItem from 'components/TopAcademiaItem';
 import CoursesFilterList from '../../data/filtersCourses';
 
-const FilterForm = (
-  <Form>
-    <Form.Group grouped>
-      <Form.Checkbox label="One" name="filter" value="one" />
-      <Form.Checkbox label="Two" name="filter" value="two" />
-      <Form.Checkbox label="Three" name="filter" value="three" />
-    </Form.Group>
-  </Form>
-);
 
 const options = [
   { key: 'one', text: 'One', value: '1' },
@@ -158,7 +149,10 @@ export default class CoursesPage extends React.Component {
                     <Icon name="block layout" />
                     Categories
                   </Accordion.Title>
-                  <Accordion.Content active={activeIndex === 0} content={CoursesFilterList.CoursesFilterList.categories} />
+                  <Accordion.Content
+                    active={activeIndex === 0}
+                    content={CoursesFilterList.CoursesFilterList.categories}
+                  />
                 </Menu.Item>
 
                 <Menu.Item>
@@ -170,7 +164,10 @@ export default class CoursesPage extends React.Component {
                     <Icon name="graduation" />
                     Qualification
                   </Accordion.Title>
-                  <Accordion.Content active={activeIndex === 1} content={CoursesFilterList.CoursesFilterList.qualification} />
+                  <Accordion.Content
+                    active={activeIndex === 1}
+                    content={CoursesFilterList.CoursesFilterList.qualification}
+                  />
                 </Menu.Item>
 
                 <Menu.Item>
@@ -182,7 +179,10 @@ export default class CoursesPage extends React.Component {
                     <Icon name="home" />
                     Study type
                   </Accordion.Title>
-                  <Accordion.Content active={activeIndex === 2} content={CoursesFilterList.CoursesFilterList.studyType} />
+                  <Accordion.Content
+                    active={activeIndex === 2}
+                    content={CoursesFilterList.CoursesFilterList.studyType}
+                  />
                 </Menu.Item>
 
                 <Menu.Item>
@@ -194,19 +194,21 @@ export default class CoursesPage extends React.Component {
                     <Icon name="time" />
                     Duration
                   </Accordion.Title>
-                  <Accordion.Content active={activeIndex === 3} content={CoursesFilterList.CoursesFilterList.duration} />
+                  <Accordion.Content
+                    active={activeIndex === 3}
+                    content={CoursesFilterList.CoursesFilterList.duration}
+                  />
                 </Menu.Item>
 
                 <Menu.Item>
-                  <Accordion.Title
-                    active={activeIndex === 4}
-                    index={4}
-                    onClick={this.handleClick}
-                  >
+                  <Accordion.Title active={activeIndex === 4} index={4} onClick={this.handleClick} >
                     <Icon name="calendar" />
                     Dates
                   </Accordion.Title>
-                  <Accordion.Content active={activeIndex === 4} content={CoursesFilterList.CoursesFilterList.dates} />
+                  <Accordion.Content
+                    active={activeIndex === 4}
+                    content={CoursesFilterList.CoursesFilterList.dates}
+                  />
                 </Menu.Item>
 
                 <Menu.Item>
@@ -218,7 +220,10 @@ export default class CoursesPage extends React.Component {
                     <Icon name="money" />
                     Price
                   </Accordion.Title>
-                  <Accordion.Content active={activeIndex === 5} content={CoursesFilterList.CoursesFilterList.price} />
+                  <Accordion.Content
+                    active={activeIndex === 5}
+                    content={CoursesFilterList.CoursesFilterList.price}
+                  />
                 </Menu.Item>
 
                 <Menu.Item>
@@ -230,7 +235,10 @@ export default class CoursesPage extends React.Component {
                     <Icon name="signal" />
                     Level
                   </Accordion.Title>
-                  <Accordion.Content active={activeIndex === 6} content={CoursesFilterList.CoursesFilterList.level} />
+                  <Accordion.Content
+                    active={activeIndex === 6}
+                    content={CoursesFilterList.CoursesFilterList.level}
+                  />
                 </Menu.Item>
 
                 <Menu.Item>
@@ -242,7 +250,10 @@ export default class CoursesPage extends React.Component {
                     <Icon name="world" />
                     Language
                   </Accordion.Title>
-                  <Accordion.Content active={activeIndex === 7} content={CoursesFilterList.CoursesFilterList.language} />
+                  <Accordion.Content
+                    active={activeIndex === 7}
+                    content={CoursesFilterList.CoursesFilterList.language}
+                  />
                 </Menu.Item>
               </Accordion>
             </Segment>

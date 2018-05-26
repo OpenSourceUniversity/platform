@@ -1,12 +1,13 @@
 import React from 'react';
-import { Button, Header, Divider, Grid, Image, Sticky } from 'semantic-ui-react';
-import SkillItem from 'components/SkillItem';
-import SubscriberItem from 'components/SubscriberItem';
+import { Grid, Image, Sticky } from 'semantic-ui-react';
 import ProgramCourseItem from 'components/ProgramCourseItem';
 import ProgramOverview from 'components/StudentProgramOverview';
 import ProgramSlide from 'components/StudentProgramSlide';
 
 export default class StudentProgram extends React.Component {
+  state = { contextRef: '' }
+  handleContextRef = contextRef => this.setState({ contextRef })
+
   renderCourses() {
     const courses = [
       {
@@ -40,7 +41,7 @@ export default class StudentProgram extends React.Component {
   }
 
   renderProgramInfo() {
-    const program_vals = [{
+    const programVals = [{
       title: 'Master of Computer Science',
       secondaryTitle: 'A cutting-edge Computer Science Master’s degree from America’s most innovative university',
       overview: 'The Master of Computer Science (MCS) degree program from Arizona State University provides high-quality computer science instruction combined with real-world experience through applied projects. You’ll gain a deep understanding of cutting-edge topics like AI, cybersecurity, and big data while you develop interpersonal skills that help you succeed in any organization.',
@@ -48,13 +49,13 @@ export default class StudentProgram extends React.Component {
       objectiveText: 'The Master of Computer Science program is designed for students with undergraduate degrees in computing or related areas who seek a deeper understanding of computing fundamentals as well as practical experience through real-world projects. Ranked in the Top 5 for graduate employment by The Wall Street Journal, a Master of Computer Science from ASU gives you the edge you need to launch a new career or move ahead in your current organization.',
     }];
 
-    return program_vals.map((val, index) => (
+    return programVals.map((val, index) => (
       <ProgramOverview info={val} key={index} />
     ));
   }
 
   renderProgramRightSlide() {
-    const program_slide = [{
+    const programSlide = [{
       issuerIcon: ['https://os.university/static/assets/icons/osu-logo.png'],
       rating: 3.5,
       industry: 'IT & Design',
@@ -67,24 +68,22 @@ export default class StudentProgram extends React.Component {
       code: 'NF440F93Fkk34',
     }];
 
-    return program_slide.map((val, index) => (
+    return programSlide.map((val, index) => (
       <ProgramSlide info={val} key={index} />
     ));
   }
 
 
-  state = { activeItem: 'about', contextRef: '' }
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
-  handleContextRef = contextRef => this.setState({ contextRef })
-
-
   render() {
-    const { activeItem, contextRef, activeInde } = this.state;
-    const header_img = require('../../img/programHeader.jpg');
+    const { contextRef } = this.state;
+    /* eslint-disable global-require */
+    const headerImage = require('../../img/programHeader.jpg');
+    /* eslint-enable global-require */
+
     return (
       <div className="program" ref={this.handleContextRef}>
         <Grid columns={2}>
-          <Image fluid src={header_img} />
+          <Image fluid src={headerImage} />
           <Grid.Column width={13}>
             { this.renderProgramInfo() }
             { this.renderCourses() }

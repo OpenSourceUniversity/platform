@@ -21,11 +21,11 @@ class StudentProgramItemWithoutRouter extends React.Component {
 
   render() {
     // const level = this.props.certificate.level;
-    const language = this.props.programe.language;
-    const duration = this.props.programe.duration;
-    const rating = this.props.programe.rating;
-    const description = this.props.programe.location;
-    const overview_title = this.props.programe.overviewTitle;
+    const { language } = this.props.programe.language;
+    const { duration } = this.props.programe.duration;
+    const { rating } = this.props.programe.rating;
+    const { description } = this.props.programe.location;
+    const { overviewTitle } = this.props.programe.overviewTitle;
     return (
       <Card fluid>
         <Card.Content>
@@ -36,7 +36,7 @@ class StudentProgramItemWithoutRouter extends React.Component {
           <Icon name="briefcase" /> {description}
         </Card.Content>
         <Card.Content extra>
-          { overview_title }
+          { overviewTitle }
         </Card.Content>
         <Card.Content extra>
           <Button name="program-page" onClick={this.handleItemClick}> Show courses </Button>

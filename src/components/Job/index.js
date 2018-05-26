@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { Button, Header, Divider, Label, Segment, Grid, Menu, Icon, Container, Image } from 'semantic-ui-react';
+import { Button, Header, Divider, Label, Segment, Grid, Menu, Icon, Container } from 'semantic-ui-react';
 import JobItem from 'components/JobItem';
 import SkillItem from 'components/SkillItem';
 
@@ -9,6 +9,8 @@ class JobWithoutRouter extends React.Component {
   static propTypes = {
     history: PropTypes.object.isRequired,
   }
+
+  state = { activeItem: 'desc' }
 
   handleButtonClick = (e, { name }) => {
     let newPath;
@@ -19,6 +21,11 @@ class JobWithoutRouter extends React.Component {
     }
     this.props.history.push(newPath);
   }
+<<<<<<< HEAD
+
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+=======
+>>>>>>> c02060e822c59b6e440b3ec7c2d35d86969b7e27
 
   renderSkills() {
     const skills = [
@@ -86,7 +93,7 @@ class JobWithoutRouter extends React.Component {
   renderRating(ratingNumb) {
     return (
       <div className="ui accurate star widget inline" style={{ marginRight: '10px' }}>
-        <div className="highlight" style={{ width: `${ratingNumb / 5 * 100}%` }} />
+        <div className="highlight" style={{ width: `${(ratingNumb / 5) * 100}%` }} />
       </div>);
   }
 

@@ -1,14 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Header, Divider, Segment, Grid, Icon, Image} from 'semantic-ui-react';
+import { Button, Header, Divider, Segment, Grid, Icon, Image } from 'semantic-ui-react';
 
 export default class ProgramSlide extends React.Component {
-
-  state = {contextRef: ''}
+  state = { contextRef: '' }
   handleContextRef = contextRef => this.setState({ contextRef })
 
   render() {
-
     const { contextRef } = this.state;
 
     return (
@@ -20,20 +18,20 @@ export default class ProgramSlide extends React.Component {
         <Image centered src={this.props.info.issuerIcon[0]} />
         <Divider clearing />
         <span>
-        <Grid columns={2}>
-        <Grid.Column>
-          <Button as='a' color='yellow'>Subscribe</Button>
-        </Grid.Column>
-        <Grid.Column>
-          <Button as='a' color='green'>BUY</Button>
-        </Grid.Column>
-        </Grid>
+          <Grid columns={2}>
+            <Grid.Column>
+              <Button as="a" color="yellow">Subscribe</Button>
+            </Grid.Column>
+            <Grid.Column>
+              <Button as="a" color="green">BUY</Button>
+            </Grid.Column>
+          </Grid>
         </span>
         <Divider clearing />
         <Header>
           Start dates
         </Header>
-        <Icon name='calendar' />
+        <Icon name="calendar" />
         <span>
           { this.props.info.duration }
         </span>
@@ -41,7 +39,7 @@ export default class ProgramSlide extends React.Component {
         <Header>
           Duration
         </Header>
-        <Icon name='clock' />
+        <Icon name="clock" />
         <span>
           { this.props.info.durationInHours }
         </span>
@@ -49,16 +47,16 @@ export default class ProgramSlide extends React.Component {
         <Header>
           Program fee
         </Header>
-        <Icon name='rub' />
+        <Icon name="rub" />
         <span>
-          { this.props.info.priceEDU + ' EDU'}
+          { `${this.props.info.priceEDU} EDU`}
 
         </span>
         <Divider clearing />
         <Header>
           Tutor
         </Header>
-        <Icon name='user outline' />
+        <Icon name="user outline" />
         <span>
           { this.props.info.tutors[0] }
         </span>
@@ -66,7 +64,7 @@ export default class ProgramSlide extends React.Component {
         <Header>
           Language
         </Header>
-        <Icon name='world' />
+        <Icon name="world" />
         <span>
           { this.props.info.language }
         </span>
@@ -79,6 +77,6 @@ export default class ProgramSlide extends React.Component {
         </span>
       </Segment>
 
-    )
+    );
   }
 }

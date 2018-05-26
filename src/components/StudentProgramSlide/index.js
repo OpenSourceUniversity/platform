@@ -1,14 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Button, Header, Divider, Segment, Grid, Icon, Image } from 'semantic-ui-react';
 
 export default class ProgramSlide extends React.Component {
-  state = { contextRef: '' }
-  handleContextRef = contextRef => this.setState({ contextRef })
-
   render() {
-    const { contextRef } = this.state;
-
     return (
 
       <Segment>

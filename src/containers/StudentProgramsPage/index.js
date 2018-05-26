@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Header, Divider, Grid, Segment, Input, Button, Form, Accordion, Menu, Icon, Dropdown } from 'semantic-ui-react';
+import { Container, Header, Divider, Grid, Segment, Input, Form, Accordion, Menu, Icon, Dropdown } from 'semantic-ui-react';
 import StudentProgramItem from 'components/StudentProgramItem';
 import TopProgramsItem from 'components/TopProgramsItem';
 import TopAcademiaItem from 'components/TopAcademiaItem';
@@ -35,7 +35,7 @@ export default class StudenProgramsPage extends React.Component {
   }
 
   renderPrograms() {
-    const programs = [
+    const programsInfo = [
       {
         title: 'Bachalor in science in Computer Science',
         overviewTitle: 'A cutting-edge Computer Science Master’s degree from America’s most innovative university.',
@@ -59,7 +59,7 @@ export default class StudenProgramsPage extends React.Component {
         location: 'Compleately online',
       },
     ];
-    return programs.map((programs, index) => (
+    return programsInfo.map((programs, index) => (
       <Grid.Column
         computer={8}
         largeScreen={8}

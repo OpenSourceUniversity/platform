@@ -21,11 +21,6 @@ class JobWithoutRouter extends React.Component {
     }
     this.props.history.push(newPath);
   }
-<<<<<<< HEAD
-
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
-=======
->>>>>>> c02060e822c59b6e440b3ec7c2d35d86969b7e27
 
   renderSkills() {
     const skills = [

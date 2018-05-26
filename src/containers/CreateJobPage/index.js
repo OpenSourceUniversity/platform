@@ -8,7 +8,7 @@ import 'react-quill/dist/quill.snow.css';
 export default class CreateJobPage extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { textDescription: '', textResponsobilities: '', textQualifications: '', textOffer: '', } // You can also pass a Quill Delta here
+    this.state = { textDescription: '', textResponsobilities: '', textQualifications: '', textOffer: '', skillsArray: []} // You can also pass a Quill Delta here
     this.handleChangeDescription = this.handleChangeDescription.bind(this)
     this.handleChangeResponsobilities = this.handleChangeResponsobilities.bind(this)
     this.handleChangeQualifications = this.handleChangeQualifications.bind(this)
@@ -17,6 +17,7 @@ export default class CreateJobPage extends React.Component {
     this.reactResponsobilitiesRef = null;
     this.reactQualificationsRef = null;
     this.reactOfferRef = null;
+    this.skillsArray = [];
   }
   handleChangeDescription(value) {
     this.setState({ textDescription: value })
@@ -35,29 +36,15 @@ export default class CreateJobPage extends React.Component {
     this.setState({ offerHTML: this.reactOfferRef.editor.container.firstChild.innerHTML })
   }
   renderSkills() {
-    const skills = [
-      {
-        have_icon: false, check: true, name: 'Python', basic: false,
-      },
-      {
-        have_icon: false, check: false, name: 'Design', basic: false,
-      },
-      {
-        have_icon: false, check: true, name: 'Software', basic: false,
-      },
-      {
-        have_icon: false, check: true, name: 'Python', basic: false,
-      },
-      {
-        have_icon: false, check: true, name: 'Python', basic: false,
-      },
-      {
-        have_icon: false, check: true, name: 'Python', basic: false,
-      },
-      {
-        have_icon: false, check: true, name: 'Python', basic: false,
-      },
-    ];
+    var skills = [];
+    for(var i = 0; i < this.state.skillsArray.length; i+=1) {
+      skills.push({
+        have_icon: false, check: true, name: this.state.skillsArray[i], basic: false,
+      },);
+    }
+    console.log(this.skillsArray);
+    console.log(this.skills);
+    console.log(this.state.skillsArray)
     return skills.map((course, index) => (
       <SkillItem skill={course} key={index} />
     ));
@@ -120,6 +107,7 @@ export default class CreateJobPage extends React.Component {
                       iconPosition="left"
                       icon="address card outline"
                       placeholder="Job title"
+                      onChange={(e, {value})=>{this.setState( {job_title: value})}}
                     />
                   </label>
                 </Form.Field>
@@ -132,6 +120,7 @@ export default class CreateJobPage extends React.Component {
                       iconPosition="left"
                       icon="location arrow"
                       placeholder="Location"
+                      onChange={(e, {value})=>{this.setState( {location: value})}}
                     />
                   </label>
                 </Form.Field>
@@ -144,6 +133,7 @@ export default class CreateJobPage extends React.Component {
                       iconPosition="left"
                       icon="industry"
                       placeholder="Industry"
+                      onChange={(e, {value})=>{this.setState( {industry: value})}}
                     />
                   </label>
                 </Form.Field>
@@ -156,6 +146,7 @@ export default class CreateJobPage extends React.Component {
                       iconPosition="left"
                       icon="delete calendar"
                       placeholder="Closes"
+                      onChange={(e, {value})=>{this.setState( {closes: value})}}
                     />
                   </label>
                 </Form.Field>
@@ -168,6 +159,7 @@ export default class CreateJobPage extends React.Component {
                       iconPosition="left"
                       icon="book"
                       placeholder="Experience level"
+                      onChange={(e, {value})=>{this.setState( { exp: value })}}
                     />
                   </label>
                 </Form.Field>
@@ -180,6 +172,7 @@ export default class CreateJobPage extends React.Component {
                       iconPosition="left"
                       icon="hourglass full"
                       placeholder="Hours"
+                      onChange={(e, {value})=>{this.setState( { time: value })}}
                     />
                   </label>
                 </Form.Field>
@@ -192,6 +185,7 @@ export default class CreateJobPage extends React.Component {
                       iconPosition="left"
                       icon="lab"
                       placeholder="Job type"
+                      onChange={(e, {value})=>{this.setState( { job_type: value })}}
                     />
                   </label>
                 </Form.Field>
@@ -204,6 +198,7 @@ export default class CreateJobPage extends React.Component {
                       iconPosition="left"
                       icon="world"
                       placeholder="Language"
+                      onChange={(e, {value})=>{this.setState( { lang: value })}}
                     />
                   </label>
                 </Form.Field>
@@ -216,14 +211,15 @@ export default class CreateJobPage extends React.Component {
                       iconPosition="left"
                       icon="money"
                       placeholder="Salary"
+                      onChange={(e, {value})=>{this.setState( { salary: value })}}
                     />
                   </label>
                 </Form.Field>
                 <Form.Field>
-                  <Form.TextArea label="Overview" placeholder="Overview" />
+                  <Form.TextArea label="Overview" placeholder="Overview" onChange={(e, {value})=>{this.setState( { overview: value })}}/>
                 </Form.Field>
                 <Form.Field>
-                  <Form.Dropdown label="Skills" placeholder="Select Skills" fluid multiple search selection options={skills} />
+                  <Form.Dropdown label="Skills" placeholder="Select Skills" fluid multiple search selection options={skills} onChange={(e, {value})=>{this.setState({ skillsArray: value })}}/>
                 </Form.Field>
                 <Form.Field>
                   <label>

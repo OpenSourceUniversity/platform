@@ -13,18 +13,26 @@ export default class CreateJobPage extends React.Component {
     this.handleChangeResponsobilities = this.handleChangeResponsobilities.bind(this)
     this.handleChangeQualifications = this.handleChangeQualifications.bind(this)
     this.handleChangeOffer = this.handleChangeOffer.bind(this)
+    this.reactDescriptionRef = null;
+    this.reactResponsobilitiesRef = null;
+    this.reactQualificationsRef = null;
+    this.reactOfferRef = null;
   }
   handleChangeDescription(value) {
     this.setState({ textDescription: value })
+    this.setState({ descriptionHTML: this.reactDescriptionRef.editor.container.firstChild.innerHTML })
   }
   handleChangeResponsobilities(value) {
     this.setState({ textResponsobilities: value })
+    this.setState({ responsobilitiesHTML: this.reactResponsobilitiesRef.editor.container.firstChild.innerHTML })
   }
   handleChangeQualifications(value) {
     this.setState({ textQualifications: value })
+    this.setState({ qualificationsHTML: this.reactQualificationsRef.editor.container.firstChild.innerHTML })
   }
   handleChangeOffer(value) {
     this.setState({ textOffer: value })
+    this.setState({ offerHTML: this.reactOfferRef.editor.container.firstChild.innerHTML })
   }
   renderSkills() {
     const skills = [
@@ -221,25 +229,25 @@ export default class CreateJobPage extends React.Component {
                   <label>
                     Job description
                   </label>
-                  <ReactQuill style={{height: '130px', marginBottom: '50px'}} value={this.state.textDescription} onChange={this.handleChangeDescription} />
+                  <ReactQuill ref={(el) => { this.reactDescriptionRef = el }} style={{height: '130px', marginBottom: '50px'}} value={this.state.textDescription} onChange={this.handleChangeDescription} />
                 </Form.Field>
                 <Form.Field>
                   <label>
                     Responsobilities
                   </label>
-                  <ReactQuill style={{height: '130px', marginBottom: '50px'}} value={this.state.textResponsobilities} onChange={this.handleChangeResponsobilities} />
+                  <ReactQuill ref={(el) => { this.reactResponsobilitiesRef = el }} style={{height: '130px', marginBottom: '50px'}} value={this.state.textResponsobilities} onChange={this.handleChangeResponsobilities} />
                 </Form.Field>
                 <Form.Field>
                   <label>
                     Qualifications
                   </label>
-                  <ReactQuill style={{height: '130px', marginBottom: '50px'}} value={this.state.textQualifications} onChange={this.textQualifications} />
+                  <ReactQuill ref={(el) => { this.reactQualificationsRef = el }} style={{height: '130px', marginBottom: '50px'}} value={this.state.textQualifications} onChange={this.handleChangeQualifications} />
                 </Form.Field>
                 <Form.Field>
                   <label>
                     We offer
                   </label>
-                  <ReactQuill style={{height: '130px', marginBottom: '50px'}} value={this.state.textOffer} onChange={this.textOffer} />
+                  <ReactQuill ref={(el) => { this.reactOfferRef = el }} style={{height: '130px', marginBottom: '50px'}} value={this.state.textOffer} onChange={this.handleChangeOffer} />
                 </Form.Field>
                 <Button type="submit" primary size="huge">Submit</Button>
               </Form>
@@ -274,27 +282,27 @@ export default class CreateJobPage extends React.Component {
                           </Label.Group>
                           <Menu pointing secondary color="orange">
                             <Menu.Item style={{ fontSize: '1.3em' }} name="desc" active>
-                                Job Descriptions
+                              Job Descriptions
                             </Menu.Item>
                           </Menu>
                           <Container style={{ paddingLeft: '40px', paddingRight: '40px' }}>
-                            {this.state.description}
+                          <div dangerouslySetInnerHTML={{__html: this.state.descriptionHTML}} />
                           </Container>
                           <Menu pointing secondary color="orange">
                             <Menu.Item style={{ fontSize: '1.2em' }} name="resp" active >
-                                Responsibilities
+                              Responsibilities
                             </Menu.Item>
                           </Menu>
                           <Container style={{ paddingLeft: '40px', paddingRight: '40px' }}>
-                            {this.state.resp}
+                            <div dangerouslySetInnerHTML={{__html: this.state.responsobilitiesHTML}} />
                           </Container>
                           <Menu pointing secondary color="orange">
                             <Menu.Item style={{ fontSize: '1.2em' }} name="qual" active>
-                                Qualifications
+                              Qualifications
                             </Menu.Item>
                           </Menu>
                           <Container style={{ paddingLeft: '40px', paddingRight: '40px' }}>
-                            {this.state.qual}
+                            <div dangerouslySetInnerHTML={{__html: this.state.qualificationsHTML}} />
                           </Container>
                         </div>
                         <Divider hidden />

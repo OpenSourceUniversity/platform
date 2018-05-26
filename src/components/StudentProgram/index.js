@@ -7,7 +7,6 @@ import ProgramOverview from 'components/StudentProgramOverview';
 import ProgramSlide from 'components/StudentProgramSlide';
 
 export default class StudentProgram extends React.Component {
-
   renderCourses() {
     const courses = [
       {
@@ -29,10 +28,10 @@ export default class StudentProgram extends React.Component {
         hours: 2,
         priceEDU: 52,
         nrOfLearners: 1322,
-        rating: 4.1 ,
+        rating: 4.1,
         reviewers: 33,
         courseID: 's885nvi&5wfsa2',
-        verified: false
+        verified: false,
       },
     ];
     return courses.map((course, index) => (
@@ -41,48 +40,47 @@ export default class StudentProgram extends React.Component {
   }
 
   renderProgramInfo() {
-    const program_vals = [{ title: 'Master of Computer Science',
-                            secondaryTitle: 'A cutting-edge Computer Science Master’s degree from America’s most innovative university',
-                            overview: 'The Master of Computer Science (MCS) degree program from Arizona State University provides high-quality computer science instruction combined with real-world experience through applied projects. You’ll gain a deep understanding of cutting-edge topics like AI, cybersecurity, and big data while you develop interpersonal skills that help you succeed in any organization.',
-                            objectiveTitle: 'Who is this degree for',
-                            objectiveText: 'The Master of Computer Science program is designed for students with undergraduate degrees in computing or related areas who seek a deeper understanding of computing fundamentals as well as practical experience through real-world projects. Ranked in the Top 5 for graduate employment by The Wall Street Journal, a Master of Computer Science from ASU gives you the edge you need to launch a new career or move ahead in your current organization.'
-                         }];
+    const program_vals = [{
+      title: 'Master of Computer Science',
+      secondaryTitle: 'A cutting-edge Computer Science Master’s degree from America’s most innovative university',
+      overview: 'The Master of Computer Science (MCS) degree program from Arizona State University provides high-quality computer science instruction combined with real-world experience through applied projects. You’ll gain a deep understanding of cutting-edge topics like AI, cybersecurity, and big data while you develop interpersonal skills that help you succeed in any organization.',
+      objectiveTitle: 'Who is this degree for',
+      objectiveText: 'The Master of Computer Science program is designed for students with undergraduate degrees in computing or related areas who seek a deeper understanding of computing fundamentals as well as practical experience through real-world projects. Ranked in the Top 5 for graduate employment by The Wall Street Journal, a Master of Computer Science from ASU gives you the edge you need to launch a new career or move ahead in your current organization.',
+    }];
 
-      return program_vals.map((val, index) => (
-          <ProgramOverview info={val} key={index} />
-      ));
+    return program_vals.map((val, index) => (
+      <ProgramOverview info={val} key={index} />
+    ));
   }
 
   renderProgramRightSlide() {
     const program_slide = [{
-                           issuerIcon: ['https://os.university/static/assets/icons/osu-logo.png'],
-                           rating: 3.5,
-                           industry: 'IT & Design',
-                           duration: '23.05.2018 - 23.06.2018',
-                           priceEDU: 1200,
-                           hoursPerWeek: 'N/A',
-                           durationInHours: 122,
-                           language: 'English',
-                           tutors: ['John Doe'],
-                           code: 'NF440F93Fkk34'
-                       }];
+      issuerIcon: ['https://os.university/static/assets/icons/osu-logo.png'],
+      rating: 3.5,
+      industry: 'IT & Design',
+      duration: '23.05.2018 - 23.06.2018',
+      priceEDU: 1200,
+      hoursPerWeek: 'N/A',
+      durationInHours: 122,
+      language: 'English',
+      tutors: ['John Doe'],
+      code: 'NF440F93Fkk34',
+    }];
 
-      return program_slide.map((val, index) => (
-          <ProgramSlide info={val} key={index} />
-      ));
+    return program_slide.map((val, index) => (
+      <ProgramSlide info={val} key={index} />
+    ));
   }
 
 
-  state = { activeItem: 'about', contextRef: ''}
+  state = { activeItem: 'about', contextRef: '' }
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
   handleContextRef = contextRef => this.setState({ contextRef })
 
 
-
   render() {
-
     const { activeItem, contextRef, activeInde } = this.state;
-    let header_img = require('../../img/programHeader.jpg');
+    const header_img = require('../../img/programHeader.jpg');
     return (
       <div className="program" ref={this.handleContextRef}>
         <Grid columns={2}>
@@ -93,7 +91,7 @@ export default class StudentProgram extends React.Component {
           </Grid.Column>
           <Grid.Column width={3}>
             <Sticky context={contextRef} offset={140}>
-            { this.renderProgramRightSlide()}
+              { this.renderProgramRightSlide()}
             </Sticky>
           </Grid.Column>
         </Grid>

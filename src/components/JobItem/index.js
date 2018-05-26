@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { Card, Icon, Button, Label, Image } from 'semantic-ui-react';
+import { Card, Icon, Button, Image } from 'semantic-ui-react';
 
 
 class JobItemWithoutRouter extends React.Component {
@@ -22,7 +22,7 @@ class JobItemWithoutRouter extends React.Component {
   renderRating(ratingNumb) {
     return (
       <div className="ui accurate star widget inline" style={{ marginRight: '10px' }}>
-        <div className="highlight" style={{ width: `${ratingNumb / 5 * 100}%` }} />
+        <div className="highlight" style={{ width: `${(ratingNumb / 5) * 100}%` }} />
       </div>);
   }
 

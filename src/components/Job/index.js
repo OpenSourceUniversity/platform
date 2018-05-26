@@ -21,8 +21,11 @@ class JobWithoutRouter extends React.Component {
     }
     this.props.history.push(newPath);
   }
+<<<<<<< HEAD
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+=======
+>>>>>>> c02060e822c59b6e440b3ec7c2d35d86969b7e27
 
   renderSkills() {
     const skills = [
@@ -103,7 +106,7 @@ class JobWithoutRouter extends React.Component {
         salary: '2000 BGN',
         overview: 'Overview Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et egestas leo. Aliquam ultricies libero orci, quis malesuada massa posuere quis. Mauris eget ullamcorper elit, et faucibus sem. Aliquam maximus.',
         description: 'Descriptions Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et egestas leo. Aliquam ultricies libero orci, quis malesuada massa posuere quis. Mauris eget ullamcorper elit, et faucibus sem. Aliquam maximus.',
-        resp: 'Responsobilities Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et egestas leo. Aliquam ultricies libero orci, quis malesuada massa posuere quis. Mauris eget ullamcorper elit, et faucibus sem. Aliquam maximus.',
+        resp: 'Responsibilities Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et egestas leo. Aliquam ultricies libero orci, quis malesuada massa posuere quis. Mauris eget ullamcorper elit, et faucibus sem. Aliquam maximus.',
         qual: 'Qualifications Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et egestas leo. Aliquam ultricies libero orci, quis malesuada massa posuere quis. Mauris eget ullamcorper elit, et faucibus sem. Aliquam maximus.',
         offer: 'We offer Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et egestas leo. Aliquam ultricies libero orci, quis malesuada massa posuere quis. Mauris eget ullamcorper elit, et faucibus sem. Aliquam maximus.',
         icon: 'https://era.io/static/img/logo-active-full.png',
@@ -117,7 +120,6 @@ class JobWithoutRouter extends React.Component {
         lang: 'English, Bulgarian',
       };
 
-    const { activeItem } = this.state;
     return (
       <div className="course">
         <Grid>
@@ -144,17 +146,8 @@ class JobWithoutRouter extends React.Component {
                   {this.renderSkills()}
                 </Label.Group>
                 <Menu pointing secondary color="orange">
-                  <Menu.Item style={{ fontSize: '1.3em' }} name="desc" active={activeItem === 'desc'} onClick={this.handleItemClick}>
+                  <Menu.Item style={{ fontSize: '1.3em' }} name="desc">
                       Job Descriptions
-                  </Menu.Item>
-                  <Menu.Item style={{ fontSize: '1.3em' }} name="resp" active={activeItem === 'resp'} onClick={this.handleItemClick}>
-                      Responsobilities
-                  </Menu.Item>
-                  <Menu.Item style={{ fontSize: '1.3em' }} name="qual" active={activeItem === 'qual'} onClick={this.handleItemClick}>
-                      Qualifications
-                  </Menu.Item>
-                  <Menu.Item style={{ fontSize: '1.3em' }} name="offer" active={activeItem === 'offer'} onClick={this.handleItemClick}>
-                      We offer
                   </Menu.Item>
                 </Menu>
                 <Container style={{ paddingLeft: '40px', paddingRight: '40px' }}>
@@ -169,7 +162,7 @@ class JobWithoutRouter extends React.Component {
                 </Container>
                 <Menu pointing secondary color="orange">
                   <Menu.Item style={{ fontSize: '1.2em' }} name="resp" active >
-                      Responsobilities
+                      Responsibilities
                   </Menu.Item>
                 </Menu>
                 <Container style={{ paddingLeft: '40px', paddingRight: '40px' }}>

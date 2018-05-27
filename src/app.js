@@ -14,7 +14,7 @@ class App extends React.Component {
     super(props);
     this.createAccountNav = this.createAccountNav.bind(this);
     this.academyProfilePic = 'https://pp.userapi.com/c639323/v639323551/14808/qQwJ-ReMGrA.jpg';
-    this.learnerProfilePic = 'https://media.licdn.com/dms/image/C4D03AQGc-oNYLYVPVA/profile-displayphoto-shrink_800_800/0?e=1530021600&v=beta&t=STurHYsfGE6n-UIt9bRIDkUsgb0uhNKM0SgFTEmRJ5Y';
+    this.learnerProfilePic = 'http://img.rosbalt.ru/photobank/b/0/1/d/7vWgHh4P-580.jpg';
     this.businessProfilePic = 'https://pp.userapi.com/c834300/v834300467/28514/Lto-k9DQDto.jpg';
     this.state = {
       isLogged: true, createAccountActiveSlide: 'profile', activeAccount: 'Learner', secondaryNav: null, profilePic: this.learnerProfilePic,
@@ -23,7 +23,6 @@ class App extends React.Component {
 
   setActiveAccount = (e, { name }) => {
     this.setState({ activeAccount: name });
-    console.log(name);
     switch(name){
       case 'Academy': this.setState({ profilePic: this.academyProfilePic }); break;
       case 'Business': this.setState({ profilePic: this.businessProfilePic }); break;
@@ -70,6 +69,9 @@ class App extends React.Component {
             createAccountActiveItem={createAccountActiveSlide}
             createAccountNav={this.createAccountNav}
             setLogInStatus={this.setLogInStatus}
+            academyProfilePic={this.academyProfilePic}
+            learnerProfilePic={this.learnerProfilePic}
+            businessProfilePic={this.businessProfilePic}
           />
         </div>
 

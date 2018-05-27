@@ -75,7 +75,7 @@ export default class AcademyProfile extends React.Component {
     // Jobs Listing (Jobs Item?)
     /* eslint-disable global-require */
 
-    const profilePicture = require('../../img/Udacity_logo.png');
+    const profilePicture = this.props.academy.profile_src;
 
     /* eslint-enable global-require */
 

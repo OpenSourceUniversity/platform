@@ -90,8 +90,6 @@ class HeaderWithoutRouter extends React.Component {
     const notifications = require('../../icons/nav_notifications.svg');
     /* eslint-enable global-require */
 
-    console.log('trigger src '+ this.props.profilePic);
-
     const avatarTrigger = (
       <span>
         <Image className="avatar" avatar src={this.props.profilePic} />

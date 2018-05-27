@@ -5,17 +5,16 @@ import { Card, Grid, Button, Icon, Label } from 'semantic-ui-react';
 export default class SignUpRecoveryPhrase extends React.Component {
   constructor(props) {
     super(props);
-    this.setBip39SeedPhrase();
+    this.setBip39MnemonicPhrase();
   }
 
-  setBip39SeedPhrase() {
+  setBip39MnemonicPhrase() {
     const mnemonic = bip39.generateMnemonic();
-    this.props.setSeedPhrase(mnemonic);
-    console.log(mnemonic);
+    this.props.setMnemonicPhrase(mnemonic);
   }
 
-  seedPhrase() {
-    return this.props.seedPhrase;
+  mnemonicPhrase() {
+    return this.props.mnemonicPhrase;
   }
 
   render() {
@@ -51,7 +50,7 @@ export default class SignUpRecoveryPhrase extends React.Component {
         </Card.Description>
         <Card.Content>
           <div className="seedphrase">
-            {this.seedPhrase()}
+            {this.mnemonicPhrase()}
           </div>
           <Label basic className="warning-label">
             <Icon name="warning sign" color="red" /> <span style={{ paddingTop: 0, color: 'red', float: 'inherit' }}>If you loose your recovery phrase, your wallet cannot be recovered. </span>

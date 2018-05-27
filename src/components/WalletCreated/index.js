@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { Card, Grid, Button, Input } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import storeV3Wallet from '../../util/auth/storeV3Wallet';
 
 class WalletCreatedWithoutRouter extends React.Component {
   static propTypes = {
@@ -13,8 +15,6 @@ class WalletCreatedWithoutRouter extends React.Component {
     this.props.setLogInStatus(this, { name: 'login' });
     this.createHDWallet();
   }
-
-  state = { walletAddress: this.address }
 
   address = '';
 
@@ -35,7 +35,12 @@ class WalletCreatedWithoutRouter extends React.Component {
     const hdkey = require('ethereumjs-wallet/hdkey');
     const bip39 = require('bip39');
     /* eslint-enable global-require */
-    const wallet = hdkey.fromMasterSeed(bip39.mnemonicToSeed(this.props.mnemonicPhrase)).getWallet();
+
+    const seed = bip39.mnemonicToSeed(this.props.mnemonicPhrase);
+    const wallet = hdkey.fromMasterSeed(seed).getWallet();
+    const v3Wallet = wallet.toV3(this.props.passphrase);
+
+    this.props.storeV3Wallet(v3Wallet);
     this.address = wallet.getChecksumAddressString();
   }
 
@@ -93,6 +98,20 @@ class WalletCreatedWithoutRouter extends React.Component {
   }
 }
 
-const WalletCreated = withRouter(WalletCreatedWithoutRouter);
+function mapStateToProps(state) {
+  return {
+    loginError: state.auth.loginError,
+  };
+}
 
-export default WalletCreated;
+
+function mapDispatchToProps(dispatch) {
+  return {
+    storeV3Wallet(v3Wallet) {
+      dispatch(storeV3Wallet(v3Wallet));
+    },
+  };
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(WalletCreatedWithoutRouter));

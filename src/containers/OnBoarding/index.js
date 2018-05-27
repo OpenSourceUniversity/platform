@@ -13,11 +13,20 @@ export default class OnBoarding extends React.Component {
   constructor(props) {
     super(props);
     this.setMnemonicPhrase = this.setMnemonicPhrase.bind(this);
+    this.setPassphrase = this.setPassphrase.bind(this);
   }
-  state = { onboardingActiveForm: 'signin', mnemonicPhrase: 'fog prepare party warm tomorrow athlete equip elbow seven stool pet tent' }
+  state = {
+    onboardingActiveForm: 'signin',
+    mnemonicPhrase: null,
+    passphrase: null,
+  }
 
   setMnemonicPhrase(phrase) {
     this.setState({ mnemonicPhrase: phrase });
+  }
+
+  setPassphrase(passphrase) {
+    this.setState({ passphrase });
   }
 
   render() {
@@ -29,8 +38,8 @@ export default class OnBoarding extends React.Component {
             case 'recoveryPhraseCheck': return <SignUpRecoveryPhraseCheck mnemonicPhrase={this.state.mnemonicPhrase} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
             case 'recoveryPhraseSeed': return <SignUpRecoveryPhrase setMnemonicPhrase={this.setMnemonicPhrase} mnemonicPhrase={this.state.mnemonicPhrase} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
             case 'recovery': return <WalletRecovery handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
-            case 'signup': return <SignUp handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
-            case 'created': return <WalletCreated mnemonicPhrase={this.state.mnemonicPhrase} setLogInStatus={this.props.setLogInStatus} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
+            case 'signup': return <SignUp setPassphrase={this.setPassphrase} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
+            case 'created': return <WalletCreated passphrase={this.state.passphrase} mnemonicPhrase={this.state.mnemonicPhrase} setLogInStatus={this.props.setLogInStatus} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
             case 'passwordrecovery': return <PasswordRecovery handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
             case 'walletrecoverysuccess': return <WalletRecoverySuccess handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
             default: return (<SignIn

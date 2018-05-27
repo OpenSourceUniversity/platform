@@ -1,11 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Card, Form, Input, Grid, Button } from 'semantic-ui-react';
+import login from '../../util/auth/login';
+
 
 class SignInWithoutRouter extends React.Component {
   static propTypes = {
     history: PropTypes.object.isRequired,
+  }
+
+  constructor(props) {
+    super(props);
+    this.refPassphrase = null;
   }
 
   loginFunc = (e, { name }) => {
@@ -14,6 +22,12 @@ class SignInWithoutRouter extends React.Component {
     if (this.props.history.location.pathname !== newPath) {
       this.props.history.push(newPath);
     }
+  }
+
+  loginSubmit(event, component) {
+    console.log(event);
+    const passphrase = event.target.elements.passphrase.value;
+    component.props.login(passphrase);
   }
 
 
@@ -44,16 +58,19 @@ class SignInWithoutRouter extends React.Component {
           </span>
           <span className="orange">
             Please enter your encryption passphrase to access your wallet
+          </span><br />
+          <span style={{ color: 'red' }}>
+            {this.props.loginError}
           </span>
         </Card.Description>
         <Card.Content>
-          <Form>
+          <Form onSubmit={(event) => { this.loginSubmit(event, this); }}>
             <Form.Group inline>
               <Form.Field inline width="16" icon={{ icon: 'lock' }}>
-                <Input type="password" placeholder="Passphrase" />
+                <Input name="passphrase" type="password" placeholder="Passphrase" />
               </Form.Field>
             </Form.Group>
-            <Form.Button name="login" onClick={this.loginFunc} className="orange-button">ACCESS MY WALLET</Form.Button>
+            <Form.Button type="submit" name="login" className="orange-button">ACCESS MY WALLET</Form.Button>
           </Form>
           <Button fluid name="recovery" className="recovery-link" onClick={this.props.handleItemClick}>Wallet Recovery </Button> <br />
           <span> Don&apos;t have a wallet? </span>
@@ -64,7 +81,21 @@ class SignInWithoutRouter extends React.Component {
   }
 }
 
-const SignIn = withRouter(SignInWithoutRouter);
 
-export default SignIn;
+function mapStateToProps(state) {
+  return {
+    loginError: state.auth.loginError,
+  };
+}
 
+
+function mapDispatchToProps(dispatch) {
+  return {
+    login(passphrase) {
+      dispatch(login(passphrase));
+    },
+  };
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SignInWithoutRouter));

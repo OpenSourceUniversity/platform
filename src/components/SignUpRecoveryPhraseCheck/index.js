@@ -12,14 +12,14 @@ export default class SignUpRecoveryPhraseCheck extends React.Component {
     return array;
   }
 
-  seedPhraseButtons() {
+  mnemonicPhraseButtons() {
     const phrases = this.shuffledPhrases;
     return phrases.map((phrase, index) => (
       <Button name={phrase} style={{ textTransform: 'uppercase', marginTop: `${5}px` }} key={index} onClick={this.phraseButtonClick} disabled={this.state[phrase]} > {phrase}</Button>
     ));
   }
 
-  shuffledPhrases = this.shuffle(this.props.seedPhrase.split(' '))
+  shuffledPhrases = this.shuffle(this.props.mnemonicPhrase.split(' '))
 
   arraysEqual(a, b) {
     if (a === b) return true;
@@ -33,7 +33,7 @@ export default class SignUpRecoveryPhraseCheck extends React.Component {
   }
 
   choosed = []
-  checkArray = this.props.seedPhrase.split(' ')
+  checkArray = this.props.mnemonicPhrase.split(' ')
 
   phraseButtonClick = (e, { name }) => {
     this.setState(prevState => ({ [name]: !prevState[name] }));
@@ -98,7 +98,7 @@ export default class SignUpRecoveryPhraseCheck extends React.Component {
             {this.renderClickedButtons(this.choosed)}
           </div>
           <div>
-            {this.seedPhraseButtons()}
+            {this.mnemonicPhraseButtons()}
           </div>
         </Card.Content>
         <Card.Content>

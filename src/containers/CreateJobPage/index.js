@@ -5,6 +5,8 @@ import { Container, Header, Segment, Button, Divider, Form, Input, Breadcrumb, G
 import 'react-quill/dist/quill.snow.css';
 import Countries from '../../data/countriesList';
 import Languages from '../../data/languagesList';
+import jobParameters from '../../data/jobParameters';
+import Industries from '../../data/industryList';
 
 
 export default class CreateJobPage extends React.Component {
@@ -37,7 +39,10 @@ export default class CreateJobPage extends React.Component {
     this.setState({ textOffer: value })
     this.setState({ offerHTML: this.reactOfferRef.editor.container.firstChild.innerHTML })
   }
-  
+
+  state = { contextRef: '' }
+  handleContextRef = contextRef => this.setState({ contextRef })
+
   renderSkills() {
     var skills = [];
     for(var i = 0; i < this.state.skillsArray.length; i+=1) {
@@ -49,6 +54,7 @@ export default class CreateJobPage extends React.Component {
       <SkillItem skill={course} key={index} />
     ));
   }
+
   renderRating(ratingNumb) {
     return (
       <div className="ui accurate star widget inline" style={{ marginRight: '10px' }}>
@@ -56,7 +62,6 @@ export default class CreateJobPage extends React.Component {
       </div>);
   }
 
-  handleContextRef = contextRef => this.setState({ contextRef })
 
   render() {
     const skills = [
@@ -81,7 +86,7 @@ export default class CreateJobPage extends React.Component {
     ];
      const { contextRef } = this.state
     return (
-      <Container ref={this.handleContextRef}>
+      <div ref={this.handleContextRef}>
         <Breadcrumb>
           <Breadcrumb.Section href="/#/">Home</Breadcrumb.Section>
           <Breadcrumb.Divider icon="right angle" />
@@ -105,7 +110,7 @@ export default class CreateJobPage extends React.Component {
                     Job title
                     <Input
                       id="jobTitle"
-                      name="jobTitle"
+                      name="jobTiple"
                       iconPosition="left"
                       icon="address card outline"
                       placeholder="Job title"
@@ -126,26 +131,8 @@ export default class CreateJobPage extends React.Component {
                       labeled
                       button
                       className='icon'
-                      options={Countries.Countries}
+                      options={jobParameters.JobType}
                       onChange={(e, {value})=>{this.setState( {job_type: value})}}
-                    />
-                  </label>
-                </Form.Field>
-
-                <Form.Field>
-                  <label htmlFor="industry">
-                    Industry
-                    <Dropdown
-                      id="industry"
-                      name="industry"
-                      placeholder='Industry'
-                      icon='industry'
-                      fluid
-                      labeled
-                      button
-                      className='icon'
-                      options={Countries.Countries}
-                      onChange={(e, {value})=>{this.setState( {industry: value})}}
                     />
                   </label>
                 </Form.Field>
@@ -162,10 +149,23 @@ export default class CreateJobPage extends React.Component {
                       labeled
                       button
                       className='icon'
-                      options={Countries.Countries}
+                      options={jobParameters.ProficiencyLevel}
                       onChange={(e, {value})=>{this.setState( {experience: value})}}
                     />
                   </label>
+                </Form.Field>
+
+                <Form.Field>
+                  <Form.Dropdown
+                    label="Industry"
+                    placeholder="Industry"
+                    fluid
+                    multiple
+                    search
+                    selection
+                    options={Industries.Industries}
+                    onChange={(e, {value})=>{this.setState({ industry: value })}}
+                  />
                 </Form.Field>
 
                 <Form.Field>
@@ -218,15 +218,30 @@ export default class CreateJobPage extends React.Component {
                       iconPosition="left"
                       icon="money"
                       placeholder="Salary"
+                      type="number"
                       onChange={(e, {value})=>{this.setState( { salary: value })}}
                     />
                   </label>
                 </Form.Field>
+
                 <Form.Field>
-                  <Form.TextArea label="Overview" placeholder="Overview" onChange={(e, {value})=>{this.setState( { overview: value })}}/>
+                  <Form.TextArea
+                    label="Overview"
+                    placeholder="Overview"
+                    onChange={(e, {value})=>{this.setState( { overview: value })}}
+                  />
                 </Form.Field>
                 <Form.Field>
-                  <Form.Dropdown label="Skills" placeholder="Select Skills" fluid multiple search selection options={skills} onChange={(e, {value})=>{this.setState({ skillsArray: value })}}/>
+                  <Form.Dropdown
+                    label="Skills"
+                    placeholder="Select Skills"
+                    fluid
+                    multiple
+                    search
+                    selection
+                    options={skills}
+                    onChange={(e, {value})=>{this.setState({ skillsArray: value })}}
+                  />
                 </Form.Field>
                 <Form.Field>
                   <label>
@@ -256,8 +271,9 @@ export default class CreateJobPage extends React.Component {
               </Form>
             </Segment>
           </Grid.Column>
+
           <Grid.Column computer={10}>
-            <Sticky offset={150}>
+            <Sticky context={contextRef} offset={150}>
               <Segment>
                 <div className="course">
                   <Grid>
@@ -265,8 +281,8 @@ export default class CreateJobPage extends React.Component {
                       <Segment style={{ padding: '40px' }}>
                         <div>
                           <Header style={{ fontSize: '1.7em' }}>
+                            <span className="label-status"> <Label pointing='right' basic color="green">New</Label> </span>
                             {this.state.job_title}
-                            <span className="label-status"> <Label basic color="green">New</Label> </span>
                           </Header>
                           <span style={{ fontSize: '1.3em', color: 'gray' }}>
                             Posted by {this.state.company} <Icon name="point" style={{ marginLeft: '10px', marginRight: 0 }} /> {this.state.location} <Icon name="dollar" style={{ marginLeft: '10px', marginRight: 0 }} /> {this.state.salary}
@@ -314,14 +330,14 @@ export default class CreateJobPage extends React.Component {
                         <Button style={{ float: 'right' }}> Next </Button>
                       </Segment>
                     </Grid.Column>
-                   
+
                   </Grid>
                 </div>
               </Segment>
             </Sticky>
           </Grid.Column>
         </Grid>
-      </Container>
+      </div>
     );
   }
 }

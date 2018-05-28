@@ -125,11 +125,13 @@ export default class LearnerProfile extends React.Component {
               <Header>
                 Certificates
               </Header>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec scelerisque ut nunc sed aliquet. Integer tellus libero, condimentum ut tincidunt et, varius quis tortor. In in turpis vel velit porta semper id eget lorem. Sed in nisl sed augue ornare dignissim. Nunc quis laoreet est. Sed iaculis ut odio nec vestibulum. Vivamus at lorem sapien. Praesent aliquam, magna eu dapibus pharetra, arcu erat dictum mauris, quis malesuada nisl odio porta lorem. Integer vel odio vel metus mattis maximus. Quisque fringilla nisi lacus, id pretium est tristique feugiat. Duis faucibus mauris vitae tellus porta gravida. Aenean tristique nisi magna, laoreet porta justo scelerisque ut. Duis interdum augue purus, eu iaculis metus ultricies nec. Vestibulum aliquam vulputate nisl ac gravida.
               <Divider clearing />
 
               <Header>
                 Skills
               </Header>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec scelerisque ut nunc sed aliquet. Integer tellus libero, condimentum ut tincidunt et, varius quis tortor. In in turpis vel velit porta semper id eget lorem. Sed in nisl sed augue ornare dignissim. Nunc quis laoreet est. Sed iaculis ut odio nec vestibulum. Vivamus at lorem sapien. Praesent aliquam, magna eu dapibus pharetra, arcu erat dictum mauris, quis malesuada nisl odio porta lorem. Integer vel odio vel metus mattis maximus. Quisque fringilla nisi lacus, id pretium est tristique feugiat. Duis faucibus mauris vitae tellus porta gravida. Aenean tristique nisi magna, laoreet porta justo scelerisque ut. Duis interdum augue purus, eu iaculis metus ultricies nec. Vestibulum aliquam vulputate nisl ac gravida.
               <Divider clearing />
               <Label.Group size="large">
                 {this.renderSkills()}
@@ -140,12 +142,14 @@ export default class LearnerProfile extends React.Component {
                 <Header>
                   Experience
                 </Header>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec scelerisque ut nunc sed aliquet. Integer tellus libero, condimentum ut tincidunt et, varius quis tortor. In in turpis vel velit porta semper id eget lorem. Sed in nisl sed augue ornare dignissim. Nunc quis laoreet est. Sed iaculis ut odio nec vestibulum. Vivamus at lorem sapien. Praesent aliquam, magna eu dapibus pharetra, arcu erat dictum mauris, quis malesuada nisl odio porta lorem. Integer vel odio vel metus mattis maximus. Quisque fringilla nisi lacus, id pretium est tristique feugiat. Duis faucibus mauris vitae tellus porta gravida. Aenean tristique nisi magna, laoreet porta justo scelerisque ut. Duis interdum augue purus, eu iaculis metus ultricies nec. Vestibulum aliquam vulputate nisl ac gravida.
                 <Divider clearing />
               </Segment>
               <Segment>
                 <Header>
                   Education
                 </Header>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec scelerisque ut nunc sed aliquet. Integer tellus libero, condimentum ut tincidunt et, varius quis tortor. In in turpis vel velit porta semper id eget lorem. Sed in nisl sed augue ornare dignissim. Nunc quis laoreet est. Sed iaculis ut odio nec vestibulum. Vivamus at lorem sapien. Praesent aliquam, magna eu dapibus pharetra, arcu erat dictum mauris, quis malesuada nisl odio porta lorem. Integer vel odio vel metus mattis maximus. Quisque fringilla nisi lacus, id pretium est tristique feugiat. Duis faucibus mauris vitae tellus porta gravida. Aenean tristique nisi magna, laoreet porta justo scelerisque ut. Duis interdum augue purus, eu iaculis metus ultricies nec. Vestibulum aliquam vulputate nisl ac gravida.
                 <Divider clearing />
               </Segment>
             </Segment.Group>
@@ -153,6 +157,7 @@ export default class LearnerProfile extends React.Component {
               <Header>
                 Reviews
               </Header>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec scelerisque ut nunc sed aliquet. Integer tellus libero, condimentum ut tincidunt et, varius quis tortor. In in turpis vel velit porta semper id eget lorem. Sed in nisl sed augue ornare dignissim. Nunc quis laoreet est. Sed iaculis ut odio nec vestibulum. Vivamus at lorem sapien. Praesent aliquam, magna eu dapibus pharetra, arcu erat dictum mauris, quis malesuada nisl odio porta lorem. Integer vel odio vel metus mattis maximus. Quisque fringilla nisi lacus, id pretium est tristique feugiat. Duis faucibus mauris vitae tellus porta gravida. Aenean tristique nisi magna, laoreet porta justo scelerisque ut. Duis interdum augue purus, eu iaculis metus ultricies nec. Vestibulum aliquam vulputate nisl ac gravida.
               <Divider clearing />
             </Segment>
           </Grid.Column>

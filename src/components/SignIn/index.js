@@ -16,18 +16,13 @@ class SignInWithoutRouter extends React.Component {
     this.refPassphrase = null;
   }
 
-  loginFunc = (e, { name }) => {
-    this.props.setLogInStatus(e, { name });
-    const newPath = '/';
-    if (this.props.history.location.pathname !== newPath) {
-      this.props.history.push(newPath);
-    }
-  }
-
   loginSubmit(event, component) {
-    console.log(event);
     const passphrase = event.target.elements.passphrase.value;
     component.props.login(passphrase);
+    const newPath = '/';
+    if (component.props.history.location.pathname !== newPath) {
+      component.props.history.push(newPath);
+    }
   }
 
 
@@ -59,9 +54,6 @@ class SignInWithoutRouter extends React.Component {
           <span className="orange">
             Please enter your encryption passphrase to access your wallet
           </span><br />
-          <span style={{ color: 'red' }}>
-            {this.props.loginError}
-          </span>
         </Card.Description>
         <Card.Content>
           <Form onSubmit={(event) => { this.loginSubmit(event, this); }}>
@@ -70,7 +62,10 @@ class SignInWithoutRouter extends React.Component {
                 <Input name="passphrase" type="password" placeholder="Passphrase" />
               </Form.Field>
             </Form.Group>
-            <Form.Button type="submit" name="login" className="orange-button">ACCESS MY WALLET</Form.Button>
+            <span style={{ color: 'red' }}>
+              {this.props.loginError}
+            </span>
+            <Form.Button style={{marginTop: 0}} type="submit" name="login" className="orange-button">ACCESS MY WALLET</Form.Button>
           </Form>
           <Button fluid name="recovery" className="recovery-link" onClick={this.props.handleItemClick}>Wallet Recovery </Button> <br />
           <span> Don&apos;t have a wallet? </span>

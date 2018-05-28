@@ -16,8 +16,9 @@ class App extends React.Component {
     this.academyProfilePic = 'https://pp.userapi.com/c639323/v639323551/14808/qQwJ-ReMGrA.jpg';
     this.learnerProfilePic = 'http://img.rosbalt.ru/photobank/b/0/1/d/7vWgHh4P-580.jpg';
     this.businessProfilePic = 'https://pp.userapi.com/c834300/v834300467/28514/Lto-k9DQDto.jpg';
+    const devInDaHouse = false;
     this.state = {
-      isLogged: true, createAccountActiveSlide: 'profile', activeAccount: 'Learner', secondaryNav: null, profilePic: this.learnerProfilePic,
+      isLogged: (this.props.isLoggedIn || devInDaHouse), createAccountActiveSlide: 'profile', activeAccount: 'Learner', secondaryNav: null, profilePic: this.learnerProfilePic,
     };
   }
 
@@ -28,10 +29,6 @@ class App extends React.Component {
       case 'Business': this.setState({ profilePic: this.businessProfilePic }); break;
       default: this.setState({ profilePic: this.learnerProfilePic });
     }
-  }
-
-  setLogInStatus = (e, { name }) => {
-    this.setState({ isLogged: name === 'login' });
   }
 
   setCreateAccountActiveItem = (e, { name }) => {
@@ -48,16 +45,16 @@ class App extends React.Component {
 
 
   render() {
+    console.log('app.js ' + this.state.isLogged);
     const { isLogged, createAccountActiveSlide, activeAccount, profilePic } = this.state;
     return (
       <div className="App">
         <Header
-          isLogged={isLogged}
+          isLogged={this.props.isLoggedIn}
           createAccountActiveItem={createAccountActiveSlide}
           createAccountActiveItemFunc={this.setCreateAccountActiveItem}
           setSecondaryNav={this.setSecondaryNav}
           secondaryNav={this.state.secondaryNav}
-          setLogInStatus={this.setLogInStatus}
           profilePic={profilePic}
         />
         <div style={{ height: `${170}px` }} />
@@ -68,7 +65,6 @@ class App extends React.Component {
             setCreateAccountActiveItem={this.setCreateAccountActiveItem}
             createAccountActiveItem={createAccountActiveSlide}
             createAccountNav={this.createAccountNav}
-            setLogInStatus={this.setLogInStatus}
             academyProfilePic={this.academyProfilePic}
             learnerProfilePic={this.learnerProfilePic}
             businessProfilePic={this.businessProfilePic}
@@ -76,7 +72,7 @@ class App extends React.Component {
         </div>
 
         <Container className="footer" textAlign="center">
-          Coinbase: {this.props.coinbase}
+          Coinbase: {this.props.address}
         </Container>
       </div>
     );
@@ -86,7 +82,8 @@ class App extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    coinbase: state.web3.coinbase,
+    address: state.auth.address,
+    isLoggedIn: state.auth.isLoggedIn,
   };
 }
 

@@ -17,6 +17,9 @@ export default function login(passphrase) {
     } else {
       try {
         const wallet = Wallet.fromV3(v3Wallet, passphrase);
+        localStorage.setItem('isLoggedIn', true);
+        localStorage.setItem('address', wallet.getChecksumAddressString());
+        localStorage.setItem('publicKey', wallet.getPublicKey());
         dispatch({
           type: 'LOGGED_IN',
           payload: {

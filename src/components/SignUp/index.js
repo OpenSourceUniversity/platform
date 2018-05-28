@@ -4,8 +4,19 @@ import { Card, Form, Input, Grid, Button } from 'semantic-ui-react';
 export default class SignUp extends React.Component {
   passphraseSubmit(event, component) {
     const passphrase = event.target.elements.passphrase.value;
+    if(passphrase.length < 6) {
+      component.setState({ errorMessage: 'Passphrase shouldn\'t be shorter then 6 symbols' });
+      return;
+    } else if (!event.target.elements.agreement.checked) {
+      component.setState({ errorMessage: 'Please agree with our Terms&Conditions' });
+      return;
+    }
     component.props.setPassphrase(passphrase);
     component.props.handleItemClick(event, event.target.elements.recoveryPhraseSeed);
+  }
+
+  state = {
+    errorMessage: '',
   }
 
   render() {
@@ -44,12 +55,16 @@ export default class SignUp extends React.Component {
             </Form.Group>
             <Form.Field inline className="check-box">
               <Input
+                name="agreement"
                 type="checkbox"
               />
               <span>
-                I agree with the Terms&Conditions
+                I agree with the <a style={{color: 'orange'}} href="https://os.university/static/Terms-And-Conditions.pdf" target="_blank">Terms&Conditions</a>
               </span>
             </Form.Field>
+            <span style={{color: 'red'}}>
+              {this.state.errorMessage}
+            </span>
             <Form.Button type="submit" name="recoveryPhraseSeed" className="orange-button">CREATE MY WALLET</Form.Button>
           </Form>
           <div className="sign-up">

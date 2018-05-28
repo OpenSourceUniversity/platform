@@ -55,6 +55,9 @@ export default class CreateJobPage extends React.Component {
         <div className="highlight" style={{ width: `${ratingNumb / 5 * 100}%` }} />
       </div>);
   }
+
+  handleContextRef = contextRef => this.setState({ contextRef })
+
   render() {
     const skills = [
       { key: 'angular', text: 'Angular', value: 'angular' },
@@ -76,8 +79,9 @@ export default class CreateJobPage extends React.Component {
       { key: 'ui', text: 'UI Design', value: 'ui' },
       { key: 'ux', text: 'User Experience', value: 'ux' },
     ];
+     const { contextRef } = this.state
     return (
-      <Container fluid>
+      <Container ref={this.handleContextRef}>
         <Breadcrumb>
           <Breadcrumb.Section href="/#/">Home</Breadcrumb.Section>
           <Breadcrumb.Divider icon="right angle" />
@@ -93,9 +97,8 @@ export default class CreateJobPage extends React.Component {
 
         <Divider clearing />
         <Grid>
-          <Grid.Column computer={8}>
+          <Grid.Column computer={6}>
             <Segment>
-
               <Form size="huge">
                 <Form.Field>
                   <label htmlFor="jobTitle">
@@ -253,12 +256,12 @@ export default class CreateJobPage extends React.Component {
               </Form>
             </Segment>
           </Grid.Column>
-          <Grid.Column computer={8}>
-            <Sticky offset={250}>
+          <Grid.Column computer={10}>
+            <Sticky offset={150}>
               <Segment>
                 <div className="course">
                   <Grid>
-                    <Grid.Column width={11}>
+                    <Grid.Column width={16}>
                       <Segment style={{ padding: '40px' }}>
                         <div>
                           <Header style={{ fontSize: '1.7em' }}>
@@ -311,49 +314,7 @@ export default class CreateJobPage extends React.Component {
                         <Button style={{ float: 'right' }}> Next </Button>
                       </Segment>
                     </Grid.Column>
-                    <Grid.Column width={5}>
-                      <Segment style={{ padding: '40px' }}>
-                        <div style={{ textAlign: 'center' }}>
-                          <Label
-                            as="a"
-                            href={this.state.link}
-                            circular
-                            style={{
-                              boxShadow: '2px 6px 20px 0 #bcbdbd, 0 1px 21px 1px #d4d4d5', width: '10em', height: '10em', backgroundColor: 'white', backgroundImage: `url(${this.state.icon})`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: '80%',
-                            }}
-                          />
-                          <Divider hidden />
-                          <span style={{ fontSize: '1.5em', marginBottom: '5px' }}> {this.state.company} </span>
-                          <br />
-                          {this.renderRating(this.state.rating)}
-                        </div>
-                        <Divider hidden />
-                        <div style={{ textAlign: 'left' }}>
-                          <span style={{ fontWeight: 600, marginRight: '10px' }}> Location: </span> <span> {this.state.location} </span>
-                          <br />
-                          <span style={{ fontWeight: 600, marginRight: '10px' }}> Industry: </span> <span> {this.state.industry} </span>
-                          <Divider clearing />
-                          <span style={{ fontWeight: 600, marginRight: '10px' }}> Job title: </span> <span> {this.state.job_title} </span>
-                          <br />
-                          <span style={{ fontWeight: 600, marginRight: '10px' }}> Posted: </span> <span> {this.state.posted} </span>
-                          <br />
-                          <span style={{ fontWeight: 600, marginRight: '10px' }}> Closes: </span> <span> {this.state.closes} </span>
-                          <br />
-                          <span style={{ fontWeight: 600, marginRight: '10px' }}> Experience level: </span> <span> {this.state.exp} </span>
-                          <br />
-                          <span style={{ fontWeight: 600, marginRight: '10px' }}> Hours: </span> <span> {this.state.time} </span>
-                          <br />
-                          <span style={{ fontWeight: 600, marginRight: '10px' }}> Job type: </span> <span> {this.state.job_type} </span>
-                          <br />
-                          <span style={{ fontWeight: 600, marginRight: '10px' }}> Language: </span> <span> {this.state.lang} </span>
-                          <br />
-                        </div>
-                        <Divider hidden />
-                        <div style={{ textAlign: 'center' }}>
-                          <Button fluid color="green">APPLY NOW</Button>
-                        </div>
-                      </Segment>
-                    </Grid.Column>
+                   
                   </Grid>
                 </div>
               </Segment>

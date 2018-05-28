@@ -1,13 +1,7 @@
+import { connect } from 'react-redux';
 import React from 'react';
 import { Segment, Container, Grid, Card, Image, Button, Table, Icon, Header, Divider, Statistic, Responsive, Input, Form, Modal } from 'semantic-ui-react';
 import TransactionHistoryItem from 'components/TransactionHistoryItem';
-
-const walletOptions = [
-  {
-    text: '0x849c2ea2a8f0ed0fe6d28b17fa0f779d6a45dff1',
-    value: '0x849c2ea2a8f0ed0fe6d28b17fa0f779d6a45dff1',
-  },
-];
 
 const options = [
   '0x849c2ea2a8f0ed0fe6d28b17fa0f779d6a45dff1',
@@ -18,8 +12,11 @@ const options = [
 const eduBalance = '1000.000';
 const ethBalance = '0.000';
 
-export default class Deposit extends React.Component {
-  state = { }
+class Deposit extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { walletOptions: {text: this.props.address, value: this.props.address,}, }
+  }
 
   renderAutocomplete() {
     return options.map((wallet, index) => (
@@ -30,16 +27,16 @@ export default class Deposit extends React.Component {
   renderHistory() {
     const history = [
       {
-        type: 'Deposit', value: 5, currency: 'ETH', date: '17/Apr/18 18:52:89', sentFrom: options[0], sentTo: walletOptions[0].value, transactionHash: '0x9c83816b9264bfc9ce28a1bf32847686ce262fde0a528ac08ef6902abd4da143',
+        type: 'Deposit', value: 5, currency: 'ETH', date: '17/Apr/18 18:52:89', sentFrom: options[0], sentTo: this.props.address, transactionHash: '0x9c83816b9264bfc9ce28a1bf32847686ce262fde0a528ac08ef6902abd4da143',
       },
       {
-        type: 'Withdraw', value: 5, currency: 'ETH', date: '17/Apr/18 18:52:89', sentFrom: walletOptions[0].value, sentTo: options[0], transactionHash: '0x9c83816b9264bfc9ce28a1bf32847686ce262fde0a528ac08ef6902abd4da143',
+        type: 'Withdraw', value: 5, currency: 'ETH', date: '17/Apr/18 18:52:89', sentFrom: this.props.address, sentTo: options[0], transactionHash: '0x9c83816b9264bfc9ce28a1bf32847686ce262fde0a528ac08ef6902abd4da143',
       },
       {
-        type: 'Deposit', value: 6000, currency: 'EDU', date: '17/Apr/18 18:52:89', sentFrom: options[0], sentTo: walletOptions[0].value, transactionHash: '0x9c83816b9264bfc9ce28a1bf32847686ce262fde0a528ac08ef6902abd4da143',
+        type: 'Deposit', value: 6000, currency: 'EDU', date: '17/Apr/18 18:52:89', sentFrom: options[0], sentTo: this.props.address, transactionHash: '0x9c83816b9264bfc9ce28a1bf32847686ce262fde0a528ac08ef6902abd4da143',
       },
       {
-        type: 'Withdraw', value: 5000, currency: 'EDU', date: '17/Apr/18 18:52:89', sentFrom: walletOptions[0].value, sentTo: options[0], transactionHash: '0x9c83816b9264bfc9ce28a1bf32847686ce262fde0a528ac08ef6902abd4da143',
+        type: 'Withdraw', value: 5000, currency: 'EDU', date: '17/Apr/18 18:52:89', sentFrom: this.props.address, sentTo: options[0], transactionHash: '0x9c83816b9264bfc9ce28a1bf32847686ce262fde0a528ac08ef6902abd4da143',
       },
     ];
 
@@ -82,7 +79,7 @@ export default class Deposit extends React.Component {
                         </Card.Meta>
                         <Card.Description>
                           <Form className="attached fluid segment">
-                            <Form.Input readOnly label="ETH/EDU Deposit Address:" fluid value={walletOptions[0].value} />
+                            <Form.Input style={{ fontSize: '0.9em' }} readOnly label="ETH/EDU Deposit Address:" fluid value={this.props.address} />
                           </Form>
                         </Card.Description>
                       </Card.Content>
@@ -94,7 +91,7 @@ export default class Deposit extends React.Component {
                                 <Image style={{ display: 'inline-block' }} src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/220px-QR_code_for_mobile_English_Wikipedia.svg.png" />
                               </Modal.Header>
                               <Modal.Description>
-                                <Header>ETH/EDU Deposit Address: {walletOptions[0].text}</Header>
+                                <Header>ETH/EDU Deposit Address: {this.props.address}</Header>
                               </Modal.Description>
                             </Modal.Content>
                           </Modal>
@@ -182,3 +179,11 @@ export default class Deposit extends React.Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    address: state.auth.address,
+  };
+}
+
+export default connect(mapStateToProps)(Deposit);

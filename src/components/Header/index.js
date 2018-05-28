@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Container, Menu, Dropdown, Input, Grid, Image, Icon, List, Button, Step } from 'semantic-ui-react';
+import logout from '../../util/auth/logout';
 
 
 class HeaderWithoutRouter extends React.Component {
@@ -26,8 +28,8 @@ class HeaderWithoutRouter extends React.Component {
   }
 
   loginFunc = (e, { name }) => {
-    this.props.setLogInStatus(e, { name });
-    const newPath = '/';
+    this.props.logout();
+    const newPath = '/' + name;
     if (this.props.history.location.pathname !== newPath) {
       this.props.history.push(newPath);
     }
@@ -119,7 +121,7 @@ class HeaderWithoutRouter extends React.Component {
         key: 'settings', content: 'Account Settings', name: 'settings', className: 'settings-nav', active: activeItem === 'settings', onClick: this.handleItemClick,
       },
       {
-        key: 'onboarding', content: 'Logout', name: 'logout', className: 'logout-nav', onClick: this.loginFunc,
+        key: 'onboarding', content: 'Logout', name: 'onboarding', className: 'logout-nav', onClick: this.loginFunc,
       },
     ];
 
@@ -172,12 +174,13 @@ class HeaderWithoutRouter extends React.Component {
       },
     ];
 
+    console.log('Header ' + this.props.isLogged);
+
     return (
       <Menu size="massive" fixed="top">
         <Container fluid>
           <Grid divided="vertically">
-            { this.props.isLogged ?
-              (
+            { this.props.isLogged ? (
                 <Grid.Row className="main-nav">
                   <Menu.Item name="home" onClick={this.handleItemClick}>
                     <img className="main-nav-logo" alt="" src={logo} />
@@ -186,47 +189,40 @@ class HeaderWithoutRouter extends React.Component {
                     <Dropdown.Menu>
                       <Dropdown.Item name="academia" className="nav-list" onClick={this.props.setSecondaryNav}>
                         <List selection items={learnerAcademiaDropdownElements} />
-
                       </Dropdown.Item>
                       <Dropdown.Item name="business" className="nav-list" onClick={this.props.setSecondaryNav}>
                         <List selection items={learnerBusinessesDropdownElements} />
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
-
                   <Input className="search-bar" icon="search" placeholder="Search..." />
-
-
                   <Menu.Menu position="right">
                     <Menu.Item name="network" onClick={this.handleItemClick}>
                       <svg width="20" height="20" className="network">
                         <image href={network} x="0" y="0" width="100%" height="100%" />
                       </svg>
                     </Menu.Item>
-
                     <Menu.Item name="inbox" onClick={this.handleItemClick}>
                       <svg width="20" height="20" className="inbox">
                         <image href={messages} x="0" y="0" width="100%" height="100%" />
                       </svg>
                     </Menu.Item>
-
                     <Dropdown item trigger={notificationsTrigger} pointing="top right" options={optionsNotifications} icon={null} />
-
                     <Dropdown item trigger={avatarTrigger} pointing="top right">
                       <Dropdown.Menu>
                         <Dropdown.Item className="account-nav-setter" name="account" onClick={this.props.setSecondaryNav}>
                           <Dropdown.Item name="balance" className="balance-nav" onClick={this.handleItemClick}>
-                        EDUx Balance:
+                              EDUx Balance:
                             <span className="balance-nav">
                               <svg width="16" height="16" className="edu-token">
                                 <image href={token} x="0" y="0" width="100%" height="100%" />
                               </svg>
                               <span className="integer">
-                            2,389
+                                2,389
                               </span>
-                          .
+                              .
                               <span className="fraction">
-                            071
+                                071
                               </span>
                             </span>
                           </Dropdown.Item>
@@ -234,34 +230,32 @@ class HeaderWithoutRouter extends React.Component {
                             <svg width="16" height="16">
                               <image href={profile} x="0" y="0" width="100%" height="100%" />
                             </svg>
-                        My Profile
+                            My Profile
                           </Dropdown.Item>
                           <Dropdown.Item name="deposit" className="deposit-nav" active={activeItem === 'deposit'} onClick={this.handleItemClick}>
                             <svg width="16" height="16">
                               <image href={deposit} x="0" y="0" width="100%" height="100%" />
                             </svg>
-                        Deposit/Withdraw
+                            Deposit/Withdraw
                           </Dropdown.Item>
                           <Dropdown.Item name="settings" className="settings-nav" active={activeItem === 'settings'} onClick={this.handleItemClick}>
                             <svg width="16" height="16">
                               <image href={settings} x="0" y="0" width="100%" height="100%" />
                             </svg>
-                        Account Settings
+                            Account Settings
                           </Dropdown.Item>
-                          <Dropdown.Item name="logout" className="logout-nav" onClick={this.loginFunc}>
+                          <Dropdown.Item name="onboarding" className="logout-nav" onClick={this.loginFunc}>
                             <svg width="16" height="16">
                               <image href={logout} x="0" y="0" width="100%" height="100%" />
                             </svg>
-                        Logout
+                            Logout
                           </Dropdown.Item>
                         </Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
                   </Menu.Menu>
                 </Grid.Row>
-              ) :
-
-              (
+              ) : (
                 <Grid.Row className="main-nav">
                   <Menu.Item name="home" onClick={this.handleItemClick}>
                     <img className="main-nav-logo" alt="" style={{ marginRight: `${15}px` }} src={logo} />
@@ -298,6 +292,18 @@ class HeaderWithoutRouter extends React.Component {
   }
 }
 
-const Header = withRouter(HeaderWithoutRouter);
+function mapStateToProps(state) {
+  return {
+    loginError: state.auth.loginError,
+  };
+}
 
-export default Header;
+function mapDispatchToProps(dispatch) {
+  return {
+    logout() {
+      dispatch(logout());
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(HeaderWithoutRouter));

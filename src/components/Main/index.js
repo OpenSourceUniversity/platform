@@ -54,13 +54,10 @@ class Main extends React.Component {
             setActiveAccount={this.props.setActiveAccount}
           />)}
         />
-        setLogIn
-
         <Route
           path="/onboarding"
           render={props => (<OnBoarding
             {...props}
-            setLogInStatus={this.props.setLogInStatus}
           />)}
         />
         <Route path="/inbox" component={Inbox} />
@@ -81,8 +78,20 @@ class Main extends React.Component {
           />)}
         />
         <Route path="/job-page" component={JobPage} />
-        <Route path="/create-job" component={CreateJobPage} />
-        <Route path="/create-course" component={CreateCoursePage} />
+        <Route
+          path="/create-course"
+          render={props => (<CreateCoursePage
+            {...props}
+            academyProfilePic={this.props.academyProfilePic}
+          />)}
+        />
+        <Route
+          path="/create-job"
+          render={props => (<CreateJobPage
+            {...props}
+            businessProfilePic={this.props.businessProfilePic}
+          />)}
+        />
       </Switch>
     );
   }

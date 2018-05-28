@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
 import SkillItem from 'components/SkillItem';
-import { Container, Header, Segment, Button, Divider, Form, Input, Breadcrumb, Grid, Label, Icon, Menu, Sticky } from 'semantic-ui-react';
+import { Container, Header, Segment, Button, Divider, Form, Input, Breadcrumb, Grid, Label, Icon, Menu, Sticky, Dropdown } from 'semantic-ui-react';
 import 'react-quill/dist/quill.snow.css';
+import Countries from '../../data/countriesList';
+import Languages from '../../data/languagesList';
 
 
 export default class CreateJobPage extends React.Component {
@@ -111,97 +113,102 @@ export default class CreateJobPage extends React.Component {
                     />
                   </label>
                 </Form.Field>
+
                 <Form.Field>
-                  <label htmlFor="location">
-                    Location
-                    <Input
-                      id="location"
-                      name="location"
-                      iconPosition="left"
-                      icon="location arrow"
-                      placeholder="Location"
-                      onChange={(e, {value})=>{this.setState( {location: value})}}
+                  <label htmlFor="jobType">
+                    Job type
+                    <Dropdown
+                      id="jobType"
+                      name="jobType"
+                      placeholder='Job type'
+                      icon='travel'
+                      fluid
+                      labeled
+                      button
+                      className='icon'
+                      options={Countries.Countries}
+                      onChange={(e, {value})=>{this.setState( {job_type: value})}}
                     />
                   </label>
                 </Form.Field>
+
                 <Form.Field>
                   <label htmlFor="industry">
                     Industry
-                    <Input
+                    <Dropdown
                       id="industry"
                       name="industry"
-                      iconPosition="left"
-                      icon="industry"
-                      placeholder="Industry"
+                      placeholder='Industry'
+                      icon='industry'
+                      fluid
+                      labeled
+                      button
+                      className='icon'
+                      options={Countries.Countries}
                       onChange={(e, {value})=>{this.setState( {industry: value})}}
                     />
                   </label>
                 </Form.Field>
-                <Form.Field>
-                  <label htmlFor="closes">
-                    Closes
-                    <Input
-                      id="closes"
-                      name="closes"
-                      iconPosition="left"
-                      icon="delete calendar"
-                      placeholder="Closes"
-                      onChange={(e, {value})=>{this.setState( {closes: value})}}
-                    />
-                  </label>
-                </Form.Field>
+
                 <Form.Field>
                   <label htmlFor="experience">
                     Experience level
-                    <Input
+                    <Dropdown
                       id="experience"
                       name="experience"
-                      iconPosition="left"
-                      icon="book"
-                      placeholder="Experience level"
-                      onChange={(e, {value})=>{this.setState( { exp: value })}}
+                      placeholder='Experience level'
+                      icon='book'
+                      fluid
+                      labeled
+                      button
+                      className='icon'
+                      options={Countries.Countries}
+                      onChange={(e, {value})=>{this.setState( {experience: value})}}
                     />
                   </label>
                 </Form.Field>
+
                 <Form.Field>
-                  <label htmlFor="hours">
-                    Hours
+                  <label htmlFor="startDate">
+                    Start date
                     <Input
-                      id="hours"
-                      name="hours"
+                      id="startDate"
+                      name="startDate"
                       iconPosition="left"
-                      icon="hourglass full"
-                      placeholder="Hours"
-                      onChange={(e, {value})=>{this.setState( { time: value })}}
+                      icon="calendar outline"
+                      placeholder="Start"
+                      onChange={(e, {value})=>{this.setState( {startDate: value})}}
                     />
                   </label>
                 </Form.Field>
+
                 <Form.Field>
-                  <label htmlFor="type">
-                    Job type
+                  <label htmlFor="endDate">
+                    End date
                     <Input
-                      id="type"
-                      name="type"
+                      id="endDate"
+                      name="endDate"
                       iconPosition="left"
-                      icon="lab"
-                      placeholder="Job type"
-                      onChange={(e, {value})=>{this.setState( { job_type: value })}}
+                      icon="calendar outline"
+                      placeholder="End"
+                      onChange={(e, {value})=>{this.setState( {endDate: value})}}
                     />
                   </label>
                 </Form.Field>
+
                 <Form.Field>
-                  <label htmlFor="language">
-                    Language
-                    <Input
-                      id="language"
-                      name="language"
-                      iconPosition="left"
-                      icon="world"
-                      placeholder="Language"
-                      onChange={(e, {value})=>{this.setState( { lang: value })}}
-                    />
-                  </label>
+                  <Form.Dropdown
+                    label="Language"
+                    placeholder="Language required"
+                    fluid
+                    multiple
+                    search
+                    selection
+                    options={Languages.Languages}
+                    onChange={(e, {value})=>{this.setState({ lang: value })}}
+                  />
                 </Form.Field>
+
                 <Form.Field>
                   <label htmlFor="salary">
                     Salary

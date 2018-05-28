@@ -2,6 +2,12 @@ import React from 'react';
 import { Card, Form, Input, Grid, Button } from 'semantic-ui-react';
 
 export default class SignUp extends React.Component {
+  passphraseSubmit(event, component) {
+    const passphrase = event.target.elements.passphrase.value;
+    component.props.setPassphrase(passphrase);
+    component.props.handleItemClick(event, event.target.elements.recoveryPhraseSeed);
+  }
+
   render() {
     /* eslint-disable global-require */
     const logo = require('../../icons/edu-logo.png');
@@ -32,9 +38,9 @@ export default class SignUp extends React.Component {
           </span>
         </Card.Description>
         <Card.Content>
-          <Form>
+          <Form onSubmit={(event) => { this.passphraseSubmit(event, this); }}>
             <Form.Group inline>
-              <Form.Field inline width="16" label={{ icon: 'user' }} control="input" type="password" placeholder="Set your passphrase" />
+              <Form.Field name="passphrase" inline width="16" label={{ icon: 'user' }} control="input" type="password" placeholder="Set your passphrase" />
             </Form.Group>
             <Form.Field inline className="check-box">
               <Input
@@ -44,7 +50,7 @@ export default class SignUp extends React.Component {
                 I agree with the Terms&Conditions
               </span>
             </Form.Field>
-            <Form.Button name="recoveryPhraseSeed" onClick={this.props.handleItemClick} className="orange-button">CREATE MY WALLET</Form.Button>
+            <Form.Button type="submit" name="recoveryPhraseSeed" className="orange-button">CREATE MY WALLET</Form.Button>
           </Form>
           <div className="sign-up">
             <span> Already have a Wallet? </span>

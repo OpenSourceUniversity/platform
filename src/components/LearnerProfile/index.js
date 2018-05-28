@@ -63,9 +63,7 @@ export default class LearnerProfile extends React.Component {
             <Sticky offset={150}>
               <Segment.Group className="profileSegment">
                 <Segment textAlign="center">
-                  <Segment textAlign="center" circular className="profilePicSegment" style={square}>
-                    <Image src={profilePicture} className="circular" />
-                  </Segment>
+                  <Segment textAlign="center" circular className="profilePicSegment" style={{ width: 175, height: 175, backgroundImage: 'url(' + profilePicture + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center center' }}/>
                   <Header size="large">
                     {this.props.learner.name}
                   </Header>

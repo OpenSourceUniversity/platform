@@ -41,6 +41,9 @@ class Main extends React.Component {
           render={props => (<ProfilePage
             {...props}
             activeAccount={this.props.activeAccount}
+            academyProfilePic={this.props.academyProfilePic}
+            learnerProfilePic={this.props.learnerProfilePic}
+            businessProfilePic={this.props.businessProfilePic}
           />)}
         />
         <Route

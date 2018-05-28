@@ -52,7 +52,7 @@ export default class LernersSettings extends React.Component {
           <Form.Field label="Phone number" autoComplete="tel" control="input" type="tel" placeholder="Phone number" />
           <Form.Dropdown placeholder="Select Country" label="Country" fluid search selection options={Countries.Countries} />
           <Divider hidden />
-          <Button type="submit">Save Profile Settings</Button>
+          <Button primary type="submit">Save Profile Settings</Button>
         </Form>
       </div>
     );

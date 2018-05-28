@@ -92,7 +92,7 @@ class HeaderWithoutRouter extends React.Component {
 
     const avatarTrigger = (
       <span>
-        <Image className="avatar" avatar src={avatarPlaceholder} />
+        <Image className="avatar" avatar src={this.props.profilePic} />
       </span>
     );
 

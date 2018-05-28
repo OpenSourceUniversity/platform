@@ -37,6 +37,7 @@ export default class CreateJobPage extends React.Component {
     this.setState({ textOffer: value })
     this.setState({ offerHTML: this.reactOfferRef.editor.container.firstChild.innerHTML })
   }
+  
   renderSkills() {
     var skills = [];
     for(var i = 0; i < this.state.skillsArray.length; i+=1) {
@@ -44,9 +45,6 @@ export default class CreateJobPage extends React.Component {
         have_icon: false, check: true, name: this.state.skillsArray[i], basic: false,
       },);
     }
-    console.log(this.skillsArray);
-    console.log(this.skills);
-    console.log(this.state.skillsArray)
     return skills.map((course, index) => (
       <SkillItem skill={course} key={index} />
     ));
@@ -58,7 +56,6 @@ export default class CreateJobPage extends React.Component {
       </div>);
   }
   render() {
-    const { contextRef } = this.state
     const skills = [
       { key: 'angular', text: 'Angular', value: 'angular' },
       { key: 'css', text: 'CSS', value: 'css' },

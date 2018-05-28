@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { Card, Grid, Button, Input } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import storeV3Wallet from '../../util/auth/storeV3Wallet';
 
 class WalletCreatedWithoutRouter extends React.Component {
   static propTypes = {
@@ -14,9 +16,7 @@ class WalletCreatedWithoutRouter extends React.Component {
     this.createHDWallet();
   }
 
-  state = { walletAddress: this.publicKey }
-
-  publicKey = '';
+  address = '';
 
   handleButtonClick = (e, { name }) => {
     let newPath;
@@ -35,9 +35,13 @@ class WalletCreatedWithoutRouter extends React.Component {
     const hdkey = require('ethereumjs-wallet/hdkey');
     const bip39 = require('bip39');
     /* eslint-enable global-require */
-    const wallet = hdkey.fromMasterSeed(bip39.mnemonicToSeed(this.props.seedPhrase)).getWallet();
-    console.log(wallet.getChecksumAddressString());
-    this.publicKey = wallet.getChecksumAddressString();
+
+    const seed = bip39.mnemonicToSeed(this.props.mnemonicPhrase);
+    const wallet = hdkey.fromMasterSeed(seed).getWallet();
+    const v3Wallet = wallet.toV3(this.props.passphrase);
+
+    this.props.storeV3Wallet(v3Wallet);
+    this.address = wallet.getChecksumAddressString();
   }
 
   render() {
@@ -73,7 +77,7 @@ class WalletCreatedWithoutRouter extends React.Component {
           <Input
             disabled
             fluid
-            defaultValue={this.publicKey}
+            defaultValue={this.address}
             action={{
               labelPosition: 'right', icon: 'copy', content: 'Copy', style: { marginTop: 0 },
             }}
@@ -94,6 +98,20 @@ class WalletCreatedWithoutRouter extends React.Component {
   }
 }
 
-const WalletCreated = withRouter(WalletCreatedWithoutRouter);
+function mapStateToProps(state) {
+  return {
+    loginError: state.auth.loginError,
+  };
+}
 
-export default WalletCreated;
+
+function mapDispatchToProps(dispatch) {
+  return {
+    storeV3Wallet(v3Wallet) {
+      dispatch(storeV3Wallet(v3Wallet));
+    },
+  };
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(WalletCreatedWithoutRouter));

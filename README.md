@@ -1,3 +1,5 @@
+![logo.png](logo.png)
+
 # Open Source University Platform
 
 Empowering 7 billion learners to connect to world's top academic education and professional development opportunities on the Ethereum blockchain.
@@ -77,4 +79,3 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-

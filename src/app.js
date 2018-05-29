@@ -49,7 +49,7 @@ class App extends React.Component {
 
 
   render() {
-    const { isLogged, createAccountActiveSlide, activeAccount, profilePic } = this.state;
+    const { createAccountActiveSlide, activeAccount, profilePic } = this.state;
     return (
       <div className="App">
         <Header

@@ -16,9 +16,7 @@ class App extends React.Component {
     this.academyProfilePic = 'https://pp.userapi.com/c639323/v639323551/14808/qQwJ-ReMGrA.jpg';
     this.learnerProfilePic = 'http://img.rosbalt.ru/photobank/b/0/1/d/7vWgHh4P-580.jpg';
     this.businessProfilePic = 'https://pp.userapi.com/c834300/v834300467/28514/Lto-k9DQDto.jpg';
-    const devMode = false;
     this.state = {
-      isLogged: (this.props.isLoggedIn || devMode),
       createAccountActiveSlide: 'profile',
       activeAccount: 'Learner',
       secondaryNav: null,
@@ -53,7 +51,6 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header
-          isLogged={this.props.isLoggedIn}
           createAccountActiveItem={createAccountActiveSlide}
           createAccountActiveItemFunc={this.setCreateAccountActiveItem}
           setSecondaryNav={this.setSecondaryNav}

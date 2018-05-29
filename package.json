@@ -21,6 +21,7 @@
     "ethereumjs-util": "^5.1.5",
     "ethereumjs-wallet": "^0.6.0",
     "ganache-cli": "^6.0.3",
+    "history": "^4.7.2",
     "keythereum": "^1.0.2",
     "prop-types": "^15.6.0",
     "react": "^15.6.2",

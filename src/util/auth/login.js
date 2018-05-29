@@ -1,4 +1,3 @@
-import { browserHistory } from 'react-router';
 import { createHashHistory } from 'history';
 import store from '../../store';
 

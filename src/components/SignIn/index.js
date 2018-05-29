@@ -19,10 +19,6 @@ class SignInWithoutRouter extends React.Component {
   loginSubmit(event, component) {
     const passphrase = event.target.elements.passphrase.value;
     component.props.login(passphrase);
-    const newPath = '/';
-    if (component.props.history.location.pathname !== newPath) {
-      component.props.history.push(newPath);
-    }
   }
 
 

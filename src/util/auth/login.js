@@ -1,3 +1,5 @@
+import { browserHistory } from 'react-router';
+import { createHashHistory } from 'history';
 import store from '../../store';
 
 const Wallet = require('ethereumjs-wallet');
@@ -26,6 +28,9 @@ export default function login(passphrase) {
             wallet,
           },
         });
+        const newPath = '/';
+        const history = createHashHistory();
+        history.push(newPath);
       } catch (e) {
         dispatch({
           type: 'LOGIN_ERROR',

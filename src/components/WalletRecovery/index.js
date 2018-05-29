@@ -2,6 +2,12 @@ import React from 'react';
 import { Card, Form, Grid, Button } from 'semantic-ui-react';
 
 export default class WalletRecovery extends React.Component {
+  handleWalletRecovery(event, component) {
+    const mnemonicPhrase = event.target.elements.mnemonicPhrase.value;
+    component.props.setMnemonicPhrase(mnemonicPhrase.toLowerCase());
+    component.props.handleItemClick(event, event.target.elements.passwordrecovery);
+  }
+
   render() {
     /* eslint-disable global-require */
     const logo = require('../../icons/edu-logo.png');
@@ -33,11 +39,11 @@ export default class WalletRecovery extends React.Component {
           </span>
         </Card.Description>
         <Card.Content>
-          <Form>
+          <Form onSubmit={(event) => { this.handleWalletRecovery(event, this); }}>
             <Form.Group inline>
-              <Form.Field inline width="16" label={{ icon: 'user' }} type="text" control="input" placeholder="Seed phrase" />
+              <Form.Field name="mnemonicPhrase" inline width="16" label={{ icon: 'user' }} type="text" control="input" placeholder="Seed phrase" />
             </Form.Group>
-            <Form.Button className="orange-button" name="passwordrecovery" onClick={this.props.handleItemClick}>Continue</Form.Button>
+            <Form.Button className="orange-button" name="passwordrecovery" type="submit">Continue</Form.Button>
           </Form>
           <Button style={{ float: 'left' }} className="button" name="signip" onClick={this.props.handleItemClick} >BACK TO SIGN IN</Button>
           <Button style={{ float: 'right' }} className="button" name="signup" onClick={this.props.handleItemClick} >NEW WALLET</Button>

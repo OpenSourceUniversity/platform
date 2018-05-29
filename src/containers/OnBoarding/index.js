@@ -37,11 +37,11 @@ export default class OnBoarding extends React.Component {
             switch (this.state.onboardingActiveForm) {
             case 'recoveryPhraseCheck': return <SignUpRecoveryPhraseCheck mnemonicPhrase={this.state.mnemonicPhrase} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
             case 'recoveryPhraseSeed': return <SignUpRecoveryPhrase setMnemonicPhrase={this.setMnemonicPhrase} mnemonicPhrase={this.state.mnemonicPhrase} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
-            case 'recovery': return <WalletRecovery handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
+            case 'recovery': return <WalletRecovery handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} setMnemonicPhrase={this.setMnemonicPhrase} />;
             case 'signup': return <SignUp setPassphrase={this.setPassphrase} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
             case 'created': return <WalletCreated passphrase={this.state.passphrase} mnemonicPhrase={this.state.mnemonicPhrase} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
-            case 'passwordrecovery': return <PasswordRecovery handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
-            case 'walletrecoverysuccess': return <WalletRecoverySuccess handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
+            case 'passwordrecovery': return <PasswordRecovery handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} setPassphrase={this.setPassphrase} />;
+            case 'walletrecoverysuccess': return <WalletRecoverySuccess passphrase={this.state.passphrase} mnemonicPhrase={this.state.mnemonicPhrase} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
             default: return (<SignIn
               handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })}
             />);

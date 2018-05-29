@@ -2,10 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { Card, Grid, Button } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import storeV3Wallet from '../../util/auth/storeV3Wallet';
 
 class WalletRecoverySuccessWithoutRouter extends React.Component {
   static propTypes = {
     history: PropTypes.object.isRequired,
+  }
+
+  constructor(props) {
+    super(props);
+    this.createHDWallet();
   }
 
   handleButtonClick = (e, { name }) => {
@@ -16,6 +23,20 @@ class WalletRecoverySuccessWithoutRouter extends React.Component {
       newPath = `/${name}`;
     }
     this.props.history.push(newPath);
+  }
+
+  createHDWallet() {
+    /* eslint-disable global-require */
+    const hdkey = require('ethereumjs-wallet/hdkey');
+    const bip39 = require('bip39');
+    /* eslint-enable global-require */
+
+    const seed = bip39.mnemonicToSeed(this.props.mnemonicPhrase);
+    const wallet = hdkey.fromMasterSeed(seed).getWallet();
+    const v3Wallet = wallet.toV3(this.props.passphrase);
+
+    this.props.storeV3Wallet(v3Wallet, wallet.getChecksumAddressString(), wallet.getPublicKey());
+    this.address = wallet.getChecksumAddressString();
   }
 
   render() {
@@ -55,6 +76,20 @@ class WalletRecoverySuccessWithoutRouter extends React.Component {
   }
 }
 
-const WalletRecoverySuccess = withRouter(WalletRecoverySuccessWithoutRouter);
 
-export default WalletRecoverySuccess;
+function mapStateToProps() {
+  return {};
+}
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+    storeV3Wallet(v3Wallet, checksumAddress, publicKey) {
+      dispatch(storeV3Wallet(v3Wallet, checksumAddress, publicKey));
+    },
+  };
+}
+
+
+const WalletRecoverySuccess = withRouter(WalletRecoverySuccessWithoutRouter);
+export default connect(mapStateToProps, mapDispatchToProps)(WalletRecoverySuccess);

@@ -2,6 +2,12 @@ import React from 'react';
 import { Card, Form, Grid } from 'semantic-ui-react';
 
 export default class PasswordRecovery extends React.Component {
+  handleSubmit(event, component) {
+    const passphrase = event.target.elements.passphrase.value;
+    component.props.setPassphrase(passphrase);
+    component.props.handleItemClick(event, event.target.elements.walletrecoverysuccess);
+  }
+
   render() {
     /* eslint-disable global-require */
     const logo = require('../../icons/edu-logo.png');
@@ -32,11 +38,11 @@ export default class PasswordRecovery extends React.Component {
           </span>
         </Card.Description>
         <Card.Content>
-          <Form>
+          <Form onSubmit={(event) => { this.handleSubmit(event, this); }}>
             <Form.Group inline>
-              <Form.Field control="input" inline width="16" label={{ icon: 'user' }} type="password" placeholder="New passphrase" />
+              <Form.Field name="passphrase" control="input" inline width="16" label={{ icon: 'user' }} type="password" placeholder="New passphrase" />
             </Form.Group>
-            <Form.Button className="orange-button" name="walletrecoverysuccess" onClick={this.props.handleItemClick}>RECOVER MY WALLET</Form.Button>
+            <Form.Button className="orange-button" name="walletrecoverysuccess" type="submit">RECOVER MY WALLET</Form.Button>
           </Form>
         </Card.Content>
       </div>

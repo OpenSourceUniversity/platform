@@ -18,16 +18,20 @@ class App extends React.Component {
     this.businessProfilePic = 'https://pp.userapi.com/c834300/v834300467/28514/Lto-k9DQDto.jpg';
     const devInDaHouse = false;
     this.state = {
-      isLogged: (this.props.isLoggedIn || devInDaHouse), createAccountActiveSlide: 'profile', activeAccount: 'Learner', secondaryNav: null, profilePic: this.learnerProfilePic,
+      isLogged: (this.props.isLoggedIn || devInDaHouse),
+      createAccountActiveSlide: 'profile',
+      activeAccount: 'Learner',
+      secondaryNav: null,
+      profilePic: this.learnerProfilePic,
     };
   }
 
   setActiveAccount = (e, { name }) => {
     this.setState({ activeAccount: name });
-    switch(name){
-      case 'Academy': this.setState({ profilePic: this.academyProfilePic }); break;
-      case 'Business': this.setState({ profilePic: this.businessProfilePic }); break;
-      default: this.setState({ profilePic: this.learnerProfilePic });
+    switch (name) {
+    case 'Academy': this.setState({ profilePic: this.academyProfilePic }); break;
+    case 'Business': this.setState({ profilePic: this.businessProfilePic }); break;
+    default: this.setState({ profilePic: this.learnerProfilePic });
     }
   }
 
@@ -45,7 +49,6 @@ class App extends React.Component {
 
 
   render() {
-    console.log('app.js ' + this.state.isLogged);
     const { isLogged, createAccountActiveSlide, activeAccount, profilePic } = this.state;
     return (
       <div className="App">

@@ -174,13 +174,11 @@ class HeaderWithoutRouter extends React.Component {
       },
     ];
 
-    console.log('Header ' + this.props.isLogged);
-
     return (
       <Menu size="massive" fixed="top">
         <Container fluid>
           <Grid divided="vertically">
-            { this.props.isLogged ? (
+            { this.props.isLoggedIn ? (
                 <Grid.Row className="main-nav">
                   <Menu.Item name="home" onClick={this.handleItemClick}>
                     <img className="main-nav-logo" alt="" src={logo} />
@@ -272,7 +270,7 @@ class HeaderWithoutRouter extends React.Component {
 
             <Grid.Row className="secondary-nav">
               {(() => {
-                if (this.props.isLogged) {
+                if (this.props.isLoggedIn) {
                   switch (this.props.secondaryNav) {
                   case 'business': return <Menu size="massive" items={learnerBusinessesDropdownElements} />;
                   case 'academia': return <Menu size="massive" items={learnerAcademiaDropdownElements} />;
@@ -295,6 +293,7 @@ class HeaderWithoutRouter extends React.Component {
 function mapStateToProps(state) {
   return {
     loginError: state.auth.loginError,
+    isLoggedIn: state.auth.isLoggedIn,
   };
 }
 

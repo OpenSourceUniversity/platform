@@ -1,8 +1,6 @@
 import React from 'react';
-import { Header, Divider, Grid, Sticky, Segment, Image, List, Button } from 'semantic-ui-react';
+import { Header, Divider, Grid, Sticky, Segment, List, Button } from 'semantic-ui-react';
 import JobItem from 'components/JobItem';
-
-const square = { width: 175, height: 175 };
 
 export default class BusinessProfile extends React.Component {
   renderJobs() {
@@ -91,7 +89,14 @@ export default class BusinessProfile extends React.Component {
             <Sticky offset={150}>
               <Segment.Group className="profileSegment">
                 <Segment textAlign="center">
-                  <Segment textAlign="center" circular className="profilePicSegment" style={{ width: 175, height: 175, backgroundImage: 'url(' + profilePicture + ')', backgroundRepeat: 'no-repeat', backgroundSize: '90%', backgroundPosition: 'center center' }}/>
+                  <Segment
+                    textAlign="center"
+                    circular
+                    className="profilePicSegment"
+                    style={{
+                      width: 175, height: 175, backgroundImage: `url(${profilePicture})`, backgroundRepeat: 'no-repeat', backgroundSize: '90%', backgroundPosition: 'center center',
+                    }}
+                  />
                   <Header size="large">
                     {this.props.company.name}
                   </Header>

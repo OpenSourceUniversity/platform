@@ -28,7 +28,7 @@ export default class ProgramCourseItem extends React.Component {
   renderRating(rating) {
     const ratingTemp = Math.round(rating * 2) / 2;
     const stars = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 5; i += 1) {
       if (ratingTemp - i === 0.5) {
         stars.push({ name: 'star half full' });
       } else if (ratingTemp - i > 0) {

@@ -1,16 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Card, Form, Input, Grid, Button } from 'semantic-ui-react';
 import login from '../../util/auth/login';
 
-
 class SignInWithoutRouter extends React.Component {
-  static propTypes = {
-    history: PropTypes.object.isRequired,
-  }
-
   constructor(props) {
     super(props);
     this.refPassphrase = null;
@@ -65,7 +59,7 @@ class SignInWithoutRouter extends React.Component {
             <span style={{ color: 'red' }}>
               {this.props.loginError}
             </span>
-            <Form.Button style={{marginTop: 0}} type="submit" name="login" className="orange-button">ACCESS MY WALLET</Form.Button>
+            <Form.Button style={{ marginTop: 0 }} type="submit" name="login" className="orange-button">ACCESS MY WALLET</Form.Button>
           </Form>
           <Button fluid name="recovery" className="recovery-link" onClick={this.props.handleItemClick}>Wallet Recovery </Button> <br />
           <span> Don&apos;t have a wallet? </span>

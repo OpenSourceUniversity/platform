@@ -2,9 +2,13 @@ import React from 'react';
 import { Card, Form, Input, Grid, Button } from 'semantic-ui-react';
 
 export default class SignUp extends React.Component {
+  state = {
+    errorMessage: '',
+  }
+
   passphraseSubmit(event, component) {
     const passphrase = event.target.elements.passphrase.value;
-    if(passphrase.length < 6) {
+    if (passphrase.length < 6) {
       component.setState({ errorMessage: 'Passphrase shouldn\'t be shorter then 6 symbols' });
       return;
     } else if (!event.target.elements.agreement.checked) {
@@ -13,10 +17,6 @@ export default class SignUp extends React.Component {
     }
     component.props.setPassphrase(passphrase);
     component.props.handleItemClick(event, event.target.elements.recoveryPhraseSeed);
-  }
-
-  state = {
-    errorMessage: '',
   }
 
   render() {
@@ -59,10 +59,10 @@ export default class SignUp extends React.Component {
                 type="checkbox"
               />
               <span>
-                I agree with the <a style={{color: 'orange'}} href="https://os.university/static/Terms-And-Conditions.pdf" target="_blank">Terms&Conditions</a>
+                I agree with the <a style={{ color: 'orange' }} href="https://os.university/static/Terms-And-Conditions.pdf" rel="noopener noreferrer" target="_blank">Terms&Conditions</a>
               </span>
             </Form.Field>
-            <span style={{color: 'red'}}>
+            <span style={{ color: 'red' }}>
               {this.state.errorMessage}
             </span>
             <Form.Button type="submit" name="recoveryPhraseSeed" className="orange-button">CREATE MY WALLET</Form.Button>

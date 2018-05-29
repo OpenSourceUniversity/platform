@@ -13,11 +13,6 @@ const eduBalance = '1000.000';
 const ethBalance = '0.000';
 
 class Deposit extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { walletOptions: {text: this.props.address, value: this.props.address,}, }
-  }
-
   renderAutocomplete() {
     return options.map((wallet, index) => (
       <option value={wallet} key={index} />

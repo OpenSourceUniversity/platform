@@ -16,7 +16,7 @@ export default class TopProgramsItem extends React.Component {
             <Card.Header>
               {this.props.program.title}
             </Card.Header>
-            <img src={profile} />{this.props.program.description}
+            <img alt="Program provider" src={profile} />{this.props.program.description}
           </Card.Content>
         </Card>
       </a>

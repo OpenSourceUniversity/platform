@@ -4,7 +4,7 @@ export default {
       value: 'abk', text: 'Abkhazian',
     },
     {
-      value: 'aar', text: '	Afar',
+      value: 'aar', text: 'Afar',
     },
     {
       value: 'afr', text: 'Afrikaans',
@@ -31,7 +31,7 @@ export default {
       value: 'asm', text: 'Assamese',
     },
     {
-      value: 'ara', text: 'Avaric',
+      value: 'ava', text: 'Avaric',
     },
     {
       value: 'ave', text: 'Avestan',
@@ -100,7 +100,7 @@ export default {
       value: 'cos', text: 'Corsican',
     },
     {
-      value: 'cre', text: '	Cree',
+      value: 'cre', text: 'Cree',
     },
     {
       value: 'hrv', text: 'Croatian',

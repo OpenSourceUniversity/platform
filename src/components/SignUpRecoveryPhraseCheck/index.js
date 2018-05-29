@@ -5,11 +5,12 @@ export default class SignUpRecoveryPhraseCheck extends React.Component {
   state = { equalPhrases: false }
 
   shuffle(array) {
-    for (let i = array.length - 1; i > 0; i -= 1) {
+    const initialArray = array;
+    for (let i = initialArray.length - 1; i > 0; i -= 1) {
       const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+      [initialArray[i], initialArray[j]] = [initialArray[j], initialArray[i]];
     }
-    return array;
+    return initialArray;
   }
 
   mnemonicPhraseButtons() {
@@ -26,7 +27,7 @@ export default class SignUpRecoveryPhraseCheck extends React.Component {
     if (a == null || b == null) return false;
     if (a.length !== b.length) return false;
 
-    for (let i = 0; i < a.length; ++i) {
+    for (let i = 0; i < a.length; i += 1) {
       if (a[i] !== b[i]) return false;
     }
     return true;

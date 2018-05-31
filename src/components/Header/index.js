@@ -4,11 +4,17 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Container, Menu, Dropdown, Input, Grid, Image, Icon, List, Button, Step } from 'semantic-ui-react';
 import logout from '../../util/auth/logout';
+import getBalances from '../../util/web3/getBalances';
 
 
 class HeaderWithoutRouter extends React.Component {
   static propTypes = {
     history: PropTypes.object.isRequired,
+  }
+
+  constructor(props) {
+    super(props);
+    this.props.getBalances();
   }
 
   state = { }
@@ -209,19 +215,20 @@ class HeaderWithoutRouter extends React.Component {
                     <Dropdown.Menu>
                       <Dropdown.Item className="account-nav-setter" name="account" onClick={this.props.setSecondaryNav}>
                         <Dropdown.Item name="balance" className="balance-nav" onClick={this.handleItemClick}>
-                            EDUx Balance:
-                          <span className="balance-nav">
-                            <svg width="16" height="16" className="edu-token">
-                              <image href={token} x="0" y="0" width="100%" height="100%" />
-                            </svg>
-                            <span className="integer">
-                              2,389
+                          EDUx Balance:
+                          {this.props.balancesError ? (this.props.balancesError) : (
+                            <span className="balance-nav">
+                              <svg width="16" height="16" className="edu-token">
+                                <image href={token} x="0" y="0" width="100%" height="100%" />
+                              </svg>
+                              <span className="integer">
+                                {this.props.eduBalance.toString().split('.')[0]}
+                              </span>
+                              <span className="fraction">
+                                .{this.props.eduBalance.toString().split('.')[1]}
+                              </span>
                             </span>
-                            .
-                            <span className="fraction">
-                              071
-                            </span>
-                          </span>
+                          )}
                         </Dropdown.Item>
                         <Dropdown.Item name="profile" className="profile-nav" active={activeItem === 'profile'} onClick={this.handleItemClick}>
                           <svg width="16" height="16">
@@ -293,6 +300,8 @@ function mapStateToProps(state) {
   return {
     loginError: state.auth.loginError,
     isLoggedIn: state.auth.isLoggedIn,
+    eduBalance: state.web3.eduBalance,
+    balancesError: state.web3.web3Error,
   };
 }
 
@@ -300,6 +309,9 @@ function mapDispatchToProps(dispatch) {
   return {
     logout() {
       dispatch(logout());
+    },
+    getBalances() {
+      dispatch(getBalances());
     },
   };
 }

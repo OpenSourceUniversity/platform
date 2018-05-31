@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import React from 'react';
 import { Segment, Container, Grid, Card, Image, Button, Table, Icon, Header, Divider, Statistic, Responsive, Input, Form, Modal } from 'semantic-ui-react';
 import TransactionHistoryItem from 'components/TransactionHistoryItem';
+import getBalances from '../../util/web3/getBalances';
 
 const options = [
   '0x849c2ea2a8f0ed0fe6d28b17fa0f779d6a45dff1',
@@ -9,10 +10,11 @@ const options = [
   '0x849c2ea2a8f0ed0fe6d28b17fa0f779d6a45dff1',
 ];
 
-const eduBalance = '1000.000';
-const ethBalance = '0.000';
-
 class Deposit extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props.getBalances();
+  }
   renderAutocomplete() {
     return options.map((wallet, index) => (
       <option value={wallet} key={index} />
@@ -137,7 +139,9 @@ class Deposit extends React.Component {
                     <svg width="24" height="24">
                       <image href={token} x="0" y="0" width="100%" height="100%" />
                     </svg>
-                    {eduBalance}
+                    {this.props.balancesError ? (this.props.balancesError) :
+                      (this.props.eduBalance.toFixed(2))
+                    }
                   </Statistic.Value>
                   <Statistic.Label>EDU Balance</Statistic.Label>
                 </Statistic>
@@ -146,7 +150,9 @@ class Deposit extends React.Component {
                     <svg width="24" height="24">
                       <image href={ethereum} x="0" y="0" width="100%" height="100%" />
                     </svg>
-                    {ethBalance}
+                    {this.props.balancesError ? (this.props.balancesError) :
+                      (this.props.ethBalance.toFixed(4))
+                    }
                   </Statistic.Value>
                   <Statistic.Label>ETH Balance</Statistic.Label>
                 </Statistic>
@@ -177,8 +183,19 @@ class Deposit extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    eduBalance: state.web3.eduBalance,
+    ethBalance: state.web3.ethBalance,
+    balancesError: state.web3.web3Error,
     address: state.auth.address,
   };
 }
 
-export default connect(mapStateToProps)(Deposit);
+function mapDispatchToProps(dispatch) {
+  return {
+    getBalances() {
+      dispatch(getBalances());
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Deposit);

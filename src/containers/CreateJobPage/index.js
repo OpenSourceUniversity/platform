@@ -7,6 +7,7 @@ import 'react-quill/dist/quill.snow.css';
 import Languages from '../../data/languagesList';
 import jobParameters from '../../data/jobParameters';
 import Industries from '../../data/industryList';
+import WalletUnlocker from 'components/WalletUnlocker';
 
 
 export default class CreateJobPage extends React.Component {

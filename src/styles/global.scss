@@ -102,7 +102,7 @@ div.App {
               margin-left: 30px;
             }
           }
-        } 
+        }
       }
     }
     div.row.secondary-nav {
@@ -123,6 +123,42 @@ div.App {
         a:hover {
           background-color: transparent !important;
           color: rgba(0,0,0,.9);
+        }
+        a.secondary-nav-disabled-beta {
+          position: relative;
+          color: rgba(0,0,0,.15);
+        }
+        a.secondary-nav-disabled-customer {
+          position: relative;
+          color: rgba(0,0,0,.15);
+        }
+        a.secondary-nav-disabled-beta:hover:after {
+          content: 'Coming in Beta';
+          position: absolute;
+          background: #7f8fa6;
+          border-radius: 30px;
+          font-size: 11px;
+          white-space: nowrap;
+          color: #fff;
+          top: 20px;
+          left: 50%;
+          -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+          padding: 2px 5px;
+        }
+        a.secondary-nav-disabled-customer:hover:after {
+          content: 'Coming in Customer';
+          position: absolute;
+          background: #7f8fa6;
+          border-radius: 30px;
+          font-size: 11px;
+          white-space: nowrap;
+          color: #fff;
+          top: 20px;
+          left: 50%;
+          -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+          padding: 2px 5px;
         }
         a.item.active {
           color: #f39c12 !important;
@@ -280,7 +316,7 @@ div#Main {
           background-color: #b6b5b5;
           color: white;
         }
-      } 
+      }
     }
   }
 // ***Onboarding page END***

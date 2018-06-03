@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Container, Menu, Dropdown, Input, Grid, Image, Icon, List, Button, Step } from 'semantic-ui-react';
+import { Container, Menu, Dropdown, Input, Grid, Image, Icon, List, Button, Step, Divider } from 'semantic-ui-react';
 import logout from '../../util/auth/logout';
 import getBalances from '../../util/web3/getBalances';
 
@@ -139,7 +139,7 @@ class HeaderWithoutRouter extends React.Component {
 
     const learnerAcademiaDropdownElements = [
       {
-        key: 'academia', content: 'Academia', name: 'academia', className: 'academia', active: activeItem === 'academia', onClick: this.handleItemClick,
+        key: 'academia', content: 'Academia', name: 'courses', className: 'academia', active: activeItem === 'academia', onClick: this.handleItemClick,
       },
       {
         key: 'courses', content: 'Browse courses', name: 'courses', active: activeItem === 'courses', onClick: this.handleItemClick,
@@ -151,31 +151,31 @@ class HeaderWithoutRouter extends React.Component {
         key: 'programs', content: 'Student Programs', name: 'programs', active: activeItem === 'programs', onClick: this.handleItemClick,
       },
       {
-        key: 'scholarships', content: 'Scholarships', name: 'scholarships', active: activeItem === 'scholarships', onClick: this.handleItemClick,
+        key: 'scholarships', content: 'Scholarships', name: 'scholarships', active: false, className: "secondary-nav-disabled-beta",
       },
       {
-        key: 'challenges', content: 'Academic Challenges', name: 'challenges', active: activeItem === 'challenges', onClick: this.handleItemClick,
+        key: 'challenges', content: 'Academic Challenges', name: 'challenges', active: false, className: "secondary-nav-disabled-customer",
       },
     ];
 
     const learnerBusinessesDropdownElements = [
       {
-        key: 'businesses', content: 'Businesses', name: 'businesses', className: 'businesses', active: activeItem === 'businesses', onClick: this.handleItemClick,
+        key: 'businesses', content: 'Businesses', name: 'jobs', className: 'businesses', active: activeItem === 'businesses', onClick: this.handleItemClick,
       },
       {
         key: 'jobs', content: 'Browse jobs', name: 'jobs', active: activeItem === 'jobs', onClick: this.handleItemClick,
       },
       {
-        key: 'interviews', content: 'My Interviews', name: 'interviews', active: activeItem === 'interviews', onClick: this.handleItemClick,
+        key: 'interviews', content: 'My Interviews', name: 'interviews', active: false, className: "secondary-nav-disabled-beta",
       },
       {
-        key: 'career', content: 'Career Paths', name: 'career', active: activeItem === 'career', onClick: this.handleItemClick,
+        key: 'career', content: 'Career Paths', name: 'career', active: false, className: "secondary-nav-disabled-beta",
       },
       {
-        key: 'interships', content: 'Interships', name: 'interships', active: activeItem === 'interships', onClick: this.handleItemClick,
+        key: 'interships', content: 'Interships', name: 'interships', active: false, className: "secondary-nav-disabled-beta",
       },
       {
-        key: 'business-challenges', content: 'Business challenges', name: 'business-challenges', active: activeItem === 'business-challenges', onClick: this.handleItemClick,
+        key: 'business-challenges', content: 'Business challenges', name: 'business-challenges', active: false, className: "secondary-nav-disabled-customer",
       },
     ];
 
@@ -278,8 +278,8 @@ class HeaderWithoutRouter extends React.Component {
               {(() => {
                 if (this.props.isLoggedIn) {
                   switch (this.props.secondaryNav) {
-                  case 'business': return <Menu size="massive" items={learnerBusinessesDropdownElements} />;
-                  case 'academia': return <Menu size="massive" items={learnerAcademiaDropdownElements} />;
+                  case 'business': return <Menu size="massive" items={learnerBusinessesDropdownElements.slice(1)} />;
+                  case 'academia': return <Menu size="massive" items={learnerAcademiaDropdownElements.slice(1)} />;
                   case 'account': return <Menu size="massive" items={accountElements} />;
                   case 'createAccount': return this.createAccountRender();
                   default: return null;

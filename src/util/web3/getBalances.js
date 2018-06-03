@@ -1,5 +1,6 @@
 import Web3 from 'web3';
 import store from '../../store';
+import Config from '../../config';
 
 export default function getBalances() {
   return function action(dispatch) {
@@ -105,13 +106,13 @@ export default function getBalances() {
     }, {
       anonymous: false, inputs: [{ indexed: true, name: '_owner', type: 'address' }, { indexed: true, name: '_spender', type: 'address' }, { indexed: false, name: '_value', type: 'uint256' }], name: 'Approval', type: 'event',
     }];
-    const nodeUrl = 'https://mainnet.infura.io/NJzKz6LAvwG7gOfqEMQv';
+    const { nodeUrl } = Config.network;
     try {
       const web3 = new Web3();
       web3.setProvider(new web3.providers.HttpProvider(nodeUrl));
       const contract = web3.eth.contract(ABI);
-      const contractInstance = contract.at('0x849c2EA2A8f0ED0fe6D28B17Fa0f779d6a45dFf1');
-      const eduBalance = contractInstance.balanceOf.call(address) / (10 ** 4);
+      const contractInstance = contract.at(Config.token.contractAddress);
+      const eduBalance = contractInstance.balanceOf.call(address) / (10 ** 18);
       const ethBalance = contract.eth.getBalance(address) / (10 ** 18);
       dispatch({
         type: 'GET_BALANCES',
@@ -121,7 +122,6 @@ export default function getBalances() {
         },
       });
     } catch (e) {
-      console.log(e);
       dispatch({
         type: 'BALANCES_ERROR',
         payload: {

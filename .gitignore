@@ -64,3 +64,6 @@ public
 
 # Python
 env
+
+# Application
+src/config.js

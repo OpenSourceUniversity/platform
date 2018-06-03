@@ -215,7 +215,7 @@ class HeaderWithoutRouter extends React.Component {
                     <Dropdown.Menu>
                       <Dropdown.Item className="account-nav-setter" name="account" onClick={this.props.setSecondaryNav}>
                         <Dropdown.Item name="balance" className="balance-nav" onClick={this.handleItemClick}>
-                          EDUx Balance:
+                          EDU Balance
                           {this.props.balancesError ? (this.props.balancesError) : (
                             <span className="balance-nav">
                               <svg width="16" height="16" className="edu-token">

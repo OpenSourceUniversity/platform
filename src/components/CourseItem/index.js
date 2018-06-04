@@ -38,13 +38,15 @@ class CourseItemWithoutRouter extends React.Component {
         <Card.Content>
           <Card.Header style={{ color: 'black' }} icon="ellipsis vertical">{this.props.certificate.title}</Card.Header>
           <span className="course-desc" >
-            <Icon name="signal" style={{ color: '#c1c1c1' }} className="course-desc" /> {this.props.certificate.level}
+            <Icon name="signal" style={{ color: '#c1c1c1' }} className="course-desc" />
+            {this.props.certificate.categories[0].name}
           </span>
           <span className="course-desc" >
             <Icon name="world" style={{ color: '#c1c1c1' }} className="course-desc" /> {this.props.certificate.language}
           </span>
           <span className="course-desc" >
-            <Icon name="time" style={{ color: '#c1c1c1' }} className="course-desc" /> {this.props.certificate.duration}
+            <Icon name="time" style={{ color: '#c1c1c1' }} className="course-desc" />
+            {this.props.certificate.duration}
           </span>
           <span className="course-desc" >
             {this.renderRating(this.props.certificate.rating)}
@@ -54,12 +56,12 @@ class CourseItemWithoutRouter extends React.Component {
           { this.props.certificate.description }
         </Card.Content>
         <Card.Content extra>
-          <Button name="course-page" onClick={this.handleItemClick}>
+          <Button name="course-page" onClick={() => { this.props.history.push(`/courses/${this.props.certificate.id}/`); }}>
             Show Course
           </Button>
           <span className="course-desc" style={{ float: 'right', color: 'black' }}>
             <Image style={{ width: '25px' }} spaced="right" src={profile} />
-            Lorem ipsum dolor sit
+            {this.props.certificate.tutor}
           </span>
         </Card.Content>
       </Card>

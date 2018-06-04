@@ -1,21 +1,23 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Container, Header, Divider, Grid, Segment, Input, Accordion, Menu, Icon, Dropdown, Form } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { Dimmer, Loader, Button, Container, Header, Divider, Grid, Segment, Input, Accordion, Menu, Icon, Dropdown } from 'semantic-ui-react';
 import CourseItem from 'components/CourseItem';
 import TopCoursesItem from 'components/TopCoursesItem';
 import TopAcademiaItem from 'components/TopAcademiaItem';
 import CoursesFilterList from '../../data/filtersCourses';
+import { fetchCourses } from './actions';
 
 const options = [
-  { key: 'one', text: 'One', value: '1' },
-  { key: 'two', text: 'Two', value: '2' },
-  { key: 'three', text: 'Three', value: '3' },
   { key: 'courses', text: 'Courses', value: 'courses' },
 ];
 
 
-export default class CoursesPage extends React.Component {
+class CoursesPage extends React.Component {
   state = { activeIndex: 0, activeItem: 'trending' }
+
+  componentDidMount() {
+    this.props.fetchCourses();
+  }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
@@ -27,72 +29,32 @@ export default class CoursesPage extends React.Component {
   }
 
   renderCourses() {
-    const courses = [
-      {
-        title: 'Python Development', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet vulputate risus. Suspendisse iaculis consectetur metus. Orci varius natoque penatibus et magnis dis parturient',
-      },
-      {
-        title: 'Scrum Master', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet vulputate risus. Suspendisse iaculis consectetur metus. Orci varius natoque penatibus et magnis dis parturient',
-      },
-      {
-        title: 'Machine Learning', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet vulputate risus. Suspendisse iaculis consectetur metus. Orci varius natoque penatibus et magnis dis parturient',
-      },
-      {
-        title: 'Solidity Development', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet vulputate risus. Suspendisse iaculis consectetur metus. Orci varius natoque penatibus et magnis dis parturient',
-      },
-      {
-        title: 'Unit Testing', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet vulputate risus. Suspendisse iaculis consectetur metus. Orci varius natoque penatibus et magnis dis parturient',
-      },
-      {
-        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet vulputate risus. Suspendisse iaculis consectetur metus. Orci varius natoque penatibus et magnis dis parturient',
-      },
-      {
-        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet vulputate risus. Suspendisse iaculis consectetur metus. Orci varius natoque penatibus et magnis dis parturient',
-      },
-      {
-        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet vulputate risus. Suspendisse iaculis consectetur metus. Orci varius natoque penatibus et magnis dis parturient',
-      },
-      {
-        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet vulputate risus. Suspendisse iaculis consectetur metus. Orci varius natoque penatibus et magnis dis parturient',
-      },
-      {
-        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet vulputate risus. Suspendisse iaculis consectetur metus. Orci varius natoque penatibus et magnis dis parturient',
-      },
-      {
-        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet vulputate risus. Suspendisse iaculis consectetur metus. Orci varius natoque penatibus et magnis dis parturient',
-      },
-      {
-        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet vulputate risus. Suspendisse iaculis consectetur metus. Orci varius natoque penatibus et magnis dis parturient',
-      },
-      {
-        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet vulputate risus. Suspendisse iaculis consectetur metus. Orci varius natoque penatibus et magnis dis parturient',
-      },
-      {
-        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet vulputate risus. Suspendisse iaculis consectetur metus. Orci varius natoque penatibus et magnis dis parturient',
-      },
-    ];
-    return courses.map((certificate, index) => (
-
-      <Grid.Column
-        computer={8}
-        largeScreen={8}
-        widescreen={8}
-        tablet={8}
-        mobile={16}
-        key={index}
-      >
-
-        <CourseItem certificate={certificate} key={index} />
-      </Grid.Column>));
+    return (
+      this.props.courses.map((certificate, index) => (
+        <Grid.Column
+          computer={8}
+          largeScreen={8}
+          widescreen={8}
+          tablet={8}
+          mobile={16}
+          key={index}
+        >
+          <CourseItem certificate={certificate} key={index} />
+        </Grid.Column>))
+    );
   }
 
   renderTopAcademia() {
     const academias = [
+<<<<<<< HEAD
       { title: 'Academy Name 1' },
       { title: 'Academy Name 2' },
       { title: 'Academy Name 3' },
       { title: 'Academy Name 4' },
       { title: 'Academy Name 5' },
+=======
+      { title: 'Academy Name' },
+>>>>>>> master
     ];
     return academias.map((academia, index) => (
       <Grid.Column
@@ -130,10 +92,6 @@ export default class CoursesPage extends React.Component {
 
   renderTopCourses() {
     const courses = [
-      { title: 'Academy Name', description: 'Description' },
-      { title: 'Academy Name', description: 'Description' },
-      { title: 'Academy Name', description: 'Description' },
-      { title: 'Academy Name', description: 'Description' },
       { title: 'Academy Name', description: 'Description' },
     ];
     return courses.map((course, index) => (
@@ -288,21 +246,46 @@ export default class CoursesPage extends React.Component {
               {this.renderSearch()}
 
               <Divider clearing />
+              {/*
               <Menu pointing secondary color="orange">
-                <Menu.Item name="trending" active={activeItem === 'trending'} onClick={this.handleItemClick} />
-                <Menu.Item name="recommended" active={activeItem === 'recommended'} onClick={this.handleItemClick} />
+                <Menu.Item name="trending" active={activeItem === 'trending'}
+                  onClick={this.handleItemClick} />
+                <Menu.Item name="recommended" active={activeItem === 'recommended'}
+                  onClick={this.handleItemClick} />
               </Menu>
+              */}
+
               {(() => {
                 switch (this.state.activeItem) {
                 case 'recommended': return 'Recommended page';
                 default: return this.renderCourses();
                 }
               })()}
+
+              <Dimmer active={this.props.isFetching} inverted>
+                <Loader size="large">Loading</Loader>
+              </Dimmer>
+
+              <div style={{ marginTop: '20px', textAlign: 'center' }}>
+                <Button
+                  hidden={!this.props.next}
+                  onClick={() => { this.props.fetchCourses(this.props.next); }}
+                  icon
+                  labelPosition="left"
+                >
+                  <Icon
+                    name={!this.props.isFetching ? 'arrow down' : 'spinner'}
+                    loading={this.props.isFetching}
+                  />
+                  Load More
+                </Button>
+              </div>
+
             </Segment>
           </Grid.Column>
 
           <Grid.Column width={3}>
-            <Segment>
+            <Segment hidden>
               <Header style={{ textAlign: 'center' }}>
                 Top Academia
               </Header>
@@ -321,3 +304,25 @@ export default class CoursesPage extends React.Component {
     );
   }
 }
+
+
+function mapStateToProps(state) {
+  return {
+    courses: state.courses.courses,
+    isFetching: state.courses.isFetching,
+    error: state.courses.error,
+    next: state.courses.next,
+  };
+}
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchCourses(url) {
+      dispatch(fetchCourses(url));
+    },
+  };
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage);

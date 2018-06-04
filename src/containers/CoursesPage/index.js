@@ -46,15 +46,7 @@ class CoursesPage extends React.Component {
 
   renderTopAcademia() {
     const academias = [
-<<<<<<< HEAD
-      { title: 'Academy Name 1' },
-      { title: 'Academy Name 2' },
-      { title: 'Academy Name 3' },
-      { title: 'Academy Name 4' },
-      { title: 'Academy Name 5' },
-=======
       { title: 'Academy Name' },
->>>>>>> master
     ];
     return academias.map((academia, index) => (
       <Grid.Column

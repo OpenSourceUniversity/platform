@@ -266,9 +266,8 @@ class CoursesPage extends React.Component {
                 <Loader size="large">Loading</Loader>
               </Dimmer>
 
-              <div style={{ marginTop: '20px', textAlign: 'center' }}>
+              <div style={{ display: !this.props.next ? 'none' : 'block', marginTop: '20px', textAlign: 'center' }}>
                 <Button
-                  hidden={!this.props.next}
                   onClick={() => { this.props.fetchCourses(this.props.next); }}
                   icon
                   labelPosition="left"

@@ -214,6 +214,7 @@ class HeaderWithoutRouter extends React.Component {
                   <Dropdown item trigger={avatarTrigger} pointing="top right">
                     <Dropdown.Menu>
                       <Dropdown.Item className="account-nav-setter" name="account" onClick={this.props.setSecondaryNav}>
+
                         <Dropdown.Item name="balance" className="balance-nav" onClick={this.handleItemClick}>
                           EDU Balance
                           {this.props.balancesError ? (this.props.balancesError) : (
@@ -230,6 +231,7 @@ class HeaderWithoutRouter extends React.Component {
                             </span>
                           )}
                         </Dropdown.Item>
+
                         <Dropdown.Item name="profile" className="profile-nav" active={activeItem === 'profile'} onClick={this.handleItemClick}>
                           <svg width="16" height="16">
                             <image href={profile} x="0" y="0" width="100%" height="100%" />

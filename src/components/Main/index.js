@@ -24,7 +24,6 @@ import StudentProgramsPage from 'containers/StudentProgramsPage';
 class Main extends React.Component {
   state = {}
 
-
   render() {
     return (
       <Switch>

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Container, Header, Divider, Grid, Segment, Input, Accordion, Menu, Icon, Dropdown } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
+import { Container, Header, Divider, Grid, Segment, Input, Accordion, Menu, Icon, Dropdown, Form } from 'semantic-ui-react';
 import CourseItem from 'components/CourseItem';
 import TopCoursesItem from 'components/TopCoursesItem';
 import TopAcademiaItem from 'components/TopAcademiaItem';
 import CoursesFilterList from '../../data/filtersCourses';
-
 
 const options = [
   { key: 'one', text: 'One', value: '1' },
@@ -72,6 +72,7 @@ export default class CoursesPage extends React.Component {
       },
     ];
     return courses.map((certificate, index) => (
+
       <Grid.Column
         computer={8}
         largeScreen={8}
@@ -80,17 +81,18 @@ export default class CoursesPage extends React.Component {
         mobile={16}
         key={index}
       >
+
         <CourseItem certificate={certificate} key={index} />
       </Grid.Column>));
   }
 
   renderTopAcademia() {
     const academias = [
-      { title: 'Academy Name' },
-      { title: 'Academy Name' },
-      { title: 'Academy Name' },
-      { title: 'Academy Name' },
-      { title: 'Academy Name' },
+      { title: 'Academy Name 1' },
+      { title: 'Academy Name 2' },
+      { title: 'Academy Name 3' },
+      { title: 'Academy Name 4' },
+      { title: 'Academy Name 5' },
     ];
     return academias.map((academia, index) => (
       <Grid.Column
@@ -103,6 +105,27 @@ export default class CoursesPage extends React.Component {
       >
         <TopAcademiaItem academia={academia} key={index} />
       </Grid.Column>));
+  }
+
+  renderSearch() {
+    const courses = [
+      { value: '1', text: 'Course title 1' },
+      { value: '2', text: 'Course title 2' },
+    ];
+
+    return (
+       <Form.Field>
+         <Form.Dropdown
+         label="Serch"
+         placeholder="Search by keyword ..."
+         fluid
+         multiple
+         search
+         selection
+         options={courses}
+         />
+       </Form.Field>
+    );
   }
 
   renderTopCourses() {
@@ -261,15 +284,9 @@ export default class CoursesPage extends React.Component {
 
           <Grid.Column width={10}>
             <Segment>
-              <Input
-                label={<Dropdown defaultValue="courses" options={options} />}
-                labelPosition="left"
-                placeholder="Search by keyword..."
-                icon={{
-                  name: 'search', circular: false, link: true, bordered: true,
-                }}
-                fluid
-              />
+
+              {this.renderSearch()}
+
               <Divider clearing />
               <Menu pointing secondary color="orange">
                 <Menu.Item name="trending" active={activeItem === 'trending'} onClick={this.handleItemClick} />

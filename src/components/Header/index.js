@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Container, Menu, Dropdown, Input, Grid, Image, Icon, List, Button, Step, Divider } from 'semantic-ui-react';
+import HeaderSearchComponent from '../HeaderSearchComponent';
 import logout from '../../util/auth/logout';
 import getBalances from '../../util/web3/getBalances';
 
@@ -198,7 +199,9 @@ class HeaderWithoutRouter extends React.Component {
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
-                <Input className="search-bar" icon="search" placeholder="Search..." />
+
+                <HeaderSearchComponent />
+
                 <Menu.Menu position="right">
                   <Menu.Item name="network" onClick={this.handleItemClick}>
                     <svg width="20" height="20" className="network">

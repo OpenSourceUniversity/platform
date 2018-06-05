@@ -30,12 +30,14 @@ class CourseItemWithoutRouter extends React.Component {
     /* eslint-disable global-require */
 
     const profile = require('../../icons/account_profile.svg');
+    const cardImageSrc = 'https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera.s3.amazonaws.com/topics/ml/large-icon.png?auto=format%2Ccompress&dpr=1&fit=crop&w=225&h=130';
 
     /* eslint-enable global-require */
 
     return (
       <Card fluid>
         <Card.Content>
+          <img alt="" src={this.props.certificate.isList ? null : cardImageSrc} />
           <Card.Header style={{ color: 'black' }} icon="ellipsis vertical">{this.props.certificate.title}</Card.Header>
           <span className="course-desc" >
             <Icon name="signal" style={{ color: '#c1c1c1' }} className="course-desc" />
@@ -52,9 +54,12 @@ class CourseItemWithoutRouter extends React.Component {
             {this.renderRating(this.props.certificate.rating)}
           </span>
         </Card.Content>
-        <Card.Content extra>
-          { this.props.certificate.description }
-        </Card.Content>
+        {this.props.certificate.isList ?
+          (<Card.Content extra>
+            { this.props.certificate.description }
+          </Card.Content>) :
+          (null)
+        }
         <Card.Content extra>
           <Button name="course-page" onClick={() => { this.props.history.push(`/courses/${this.props.certificate.id}/`); }}>
             Show Course

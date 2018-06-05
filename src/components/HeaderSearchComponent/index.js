@@ -1,14 +1,20 @@
 import React from 'react';
 import { Form } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import autocomplete from '../../util/search/autocomplete';
 
 
 class HeaderSearchComponent extends Form {
+  search(query) {
+    this.props.history.push(`/courses/?q=${query}`);
+  }
+
   render() {
     return (
-      <Form>
+      <Form onSubmit={event => this.search(event.currentTarget.elements.query.value)}>
         <Form.Input
+          name="query"
           list="suggestions"
           placeholder="Search"
           className="search-bar"
@@ -47,4 +53,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderSearchComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(HeaderSearchComponent));

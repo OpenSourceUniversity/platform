@@ -1,5 +1,7 @@
 const initialState = {
   suggestions: [],
+  categories: [],
+  filteredCategories: [],
 };
 
 
@@ -8,6 +10,18 @@ const authReducer = (state = initialState, action) => {
   case 'AUTOCOMPLETE_SUCCESS':
     return Object.assign({}, state, {
       suggestions: action.suggestions,
+    });
+  case 'FETCH_CATEGORIES_SUCCESS':
+    return Object.assign({}, state, {
+      categories: action.categories,
+    });
+  case 'FILTER_CATEGORY_ADDED':
+    return Object.assign({}, state, {
+      filteredCategories: [...state.filteredCategories, action.id],
+    });
+  case 'FILTER_CATEGORY_REMOVED':
+    return Object.assign({}, state, {
+      filteredCategories: state.filteredCategories.filter(item => item !== action.id),
     });
   default:
     return state;

@@ -22,6 +22,13 @@ export default function certificatesReducer(state = INITIAL_STATE, action) {
       isFetching: false,
       error: action.error.message,
     });
+  case 'RESET_FETCHED_COURSES':
+    return Object.assign({}, state, {
+      isFetching: false,
+      courses: [],
+      next: null,
+      error: null,
+    });
   default:
     return state;
   }

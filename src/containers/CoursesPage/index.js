@@ -4,12 +4,8 @@ import { Form, Dimmer, Loader, Button, Container, Header, Divider, Grid, Segment
 import CourseItem from 'components/CourseItem';
 import TopCoursesItem from 'components/TopCoursesItem';
 import TopAcademiaItem from 'components/TopAcademiaItem';
-import CoursesFilterList from '../../data/filtersCourses';
+import CoursesCategoryFilter from 'components/CoursesCategoryFilter';
 import { fetchCourses } from './actions';
-
-const options = [
-  { key: 'courses', text: 'Courses', value: 'courses' },
-];
 
 
 class CoursesPage extends React.Component {
@@ -124,108 +120,7 @@ class CoursesPage extends React.Component {
                   </Accordion.Title>
                   <Accordion.Content
                     active={activeIndex === 0}
-                    content={CoursesFilterList.CoursesFilterList.categories}
-                  />
-                </Menu.Item>
-
-                <Menu.Item>
-                  <Accordion.Title
-                    active={activeIndex === 1}
-                    index={1}
-                    onClick={this.handleClick}
-                  >
-                    <Icon name="graduation" />
-                    Qualification
-                  </Accordion.Title>
-                  <Accordion.Content
-                    active={activeIndex === 1}
-                    content={CoursesFilterList.CoursesFilterList.qualification}
-                  />
-                </Menu.Item>
-
-                <Menu.Item>
-                  <Accordion.Title
-                    active={activeIndex === 2}
-                    index={2}
-                    onClick={this.handleClick}
-                  >
-                    <Icon name="home" />
-                    Study type
-                  </Accordion.Title>
-                  <Accordion.Content
-                    active={activeIndex === 2}
-                    content={CoursesFilterList.CoursesFilterList.studyType}
-                  />
-                </Menu.Item>
-
-                <Menu.Item>
-                  <Accordion.Title
-                    active={activeIndex === 3}
-                    index={3}
-                    onClick={this.handleClick}
-                  >
-                    <Icon name="time" />
-                    Duration
-                  </Accordion.Title>
-                  <Accordion.Content
-                    active={activeIndex === 3}
-                    content={CoursesFilterList.CoursesFilterList.duration}
-                  />
-                </Menu.Item>
-
-                <Menu.Item>
-                  <Accordion.Title active={activeIndex === 4} index={4} onClick={this.handleClick} >
-                    <Icon name="calendar" />
-                    Dates
-                  </Accordion.Title>
-                  <Accordion.Content
-                    active={activeIndex === 4}
-                    content={CoursesFilterList.CoursesFilterList.dates}
-                  />
-                </Menu.Item>
-
-                <Menu.Item>
-                  <Accordion.Title
-                    active={activeIndex === 5}
-                    index={5}
-                    onClick={this.handleClick}
-                  >
-                    <Icon name="money" />
-                    Price
-                  </Accordion.Title>
-                  <Accordion.Content
-                    active={activeIndex === 5}
-                    content={CoursesFilterList.CoursesFilterList.price}
-                  />
-                </Menu.Item>
-
-                <Menu.Item>
-                  <Accordion.Title
-                    active={activeIndex === 6}
-                    index={6}
-                    onClick={this.handleClick}
-                  >
-                    <Icon name="signal" />
-                    Level
-                  </Accordion.Title>
-                  <Accordion.Content
-                    active={activeIndex === 6}
-                    content={CoursesFilterList.CoursesFilterList.level}
-                  />
-                </Menu.Item>
-
-                <Menu.Item>
-                  <Accordion.Title
-                    active={activeIndex === 7}
-                    index={7}
-                    onClick={this.handleClick}
-                  >
-                    <Icon name="world" />
-                    Language
-                  </Accordion.Title>
-                  <Accordion.Content
-                    active={activeIndex === 7}
-                    content={CoursesFilterList.CoursesFilterList.language}
+                    content={<CoursesCategoryFilter />}
                   />
                 </Menu.Item>
               </Accordion>

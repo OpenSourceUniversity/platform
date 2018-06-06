@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Header, Grid, Dimmer, Loader, Segment, Message } from 'semantic-ui-react';
 import CourseItem from 'components/CourseItem';
-import { fetchCourses } from './actions';
+import { fetchCourses } from '../CoursesPage/actions';
 import { fetchCertificates } from '../CertificatesPage/actions';
 
 
@@ -23,7 +23,7 @@ class HomePage extends React.Component {
           mobile={16}
           key={index}
         >
-          <CourseItem certificate={certificate} isNotList={true} key={index} />
+          <CourseItem certificate={certificate} isNotList key={index} />
         </Grid.Column>))
     );
   }
@@ -46,7 +46,7 @@ class HomePage extends React.Component {
   render() {
     return (
       <Container>
-        <Segment>
+        <Segment style={{ padding: '20px' }} >
           <Header style={{ textAlign: 'center' }} size="huge">Courses</Header>
           <Grid width={16}>
             { this.renderCourses() }
@@ -55,7 +55,7 @@ class HomePage extends React.Component {
             </Dimmer>
           </Grid>
         </Segment>
-        <Segment>
+        <Segment style={{ padding: '20px', minHeight: '300px' }} >
           <Header style={{ textAlign: 'center' }} size="huge">Certificates</Header>
           <Dimmer active={this.props.isFetching} inverted>
             <Loader size="large">Loading</Loader>
@@ -97,7 +97,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchCourses(url) {
-      dispatch(fetchCourses(url));
+      dispatch(fetchCourses('http://localhost:8000/api/v1/courses/?offset=4&limit=4'));
     },
     fetchCertificates() {
       dispatch(fetchCertificates());

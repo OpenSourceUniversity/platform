@@ -37,8 +37,8 @@ class CourseItemWithoutRouter extends React.Component {
     return (
       <Card fluid>
         <Card.Content>
-          <img alt="" src={this.props.isNotList ? cardImageSrc : null} />
-          <Card.Header style={{ color: 'black' }} icon="ellipsis vertical">{this.props.certificate.title}</Card.Header>
+          <img alt="" style={{ marginBottom: '20px' }} src={this.props.isNotList ? cardImageSrc : null} />
+          <Card.Header style={{ color: 'black', marginBottom: '20px' }} icon="ellipsis vertical">{this.props.certificate.title}</Card.Header>
           <span className="course-desc" >
             <Icon name="signal" style={{ color: '#c1c1c1' }} className="course-desc" />
             {this.props.certificate.categories[0].name}

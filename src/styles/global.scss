@@ -6,6 +6,24 @@ div.App {
     .item:before {
       background: none;
     }
+    .nav-disabled-beta {
+      position: relative;
+      color: rgba(0,0,0,.15);
+    }
+    .nav-disabled-beta:hover:after {
+      content: 'Coming in Beta';
+      position: absolute;
+      background: #7f8fa6;
+      border-radius: 30px;
+      font-size: 11px;
+      white-space: nowrap;
+      color: #fff;
+      top: 20px;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+      transform: translateX(-50%);
+      padding: 2px 5px;
+    }
     img.main-nav-logo {
       width: 3em !important;
       margin-left: 0.7em !important;
@@ -56,6 +74,9 @@ div.App {
         }
         input:focus {
           border-color: #f39c12;
+        }
+        .ui.icon.input>i.icon {
+          top: 8px;
         }
       }
       div.right.menu {

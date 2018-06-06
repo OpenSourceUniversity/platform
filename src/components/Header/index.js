@@ -203,22 +203,24 @@ class HeaderWithoutRouter extends React.Component {
                 <HeaderSearchComponent />
 
                 <Menu.Menu position="right">
-                  <Menu.Item name="network" onClick={this.handleItemClick}>
-                    <svg width="20" height="20" className="network">
+                  <Menu.Item disabled className="nav-disabled-beta" name="network" onClick={this.handleItemClick}>
+                    <svg width="20" height="20" className="network" style={{ opacity: 0.5 }} >
                       <image href={network} x="0" y="0" width="100%" height="100%" />
                     </svg>
                   </Menu.Item>
-                  <Menu.Item name="inbox" onClick={this.handleItemClick}>
-                    <svg width="20" height="20" className="inbox">
+                  <Menu.Item disabled className="nav-disabled-beta" name="inbox" onClick={this.handleItemClick}>
+                    <svg width="20" height="20" className="inbox" style={{ opacity: 0.5 }} >
                       <image href={messages} x="0" y="0" width="100%" height="100%" />
                     </svg>
                   </Menu.Item>
-                  <Dropdown item trigger={notificationsTrigger} pointing="top right" options={optionsNotifications} icon={null} />
+                  <Menu.Item disabled className="nav-disabled-beta">
+                    <Dropdown style={{ padding: 0 }} disabled className="nav-disabled-beta" item trigger={notificationsTrigger} pointing="top right" options={optionsNotifications} icon={null} />
+                  </Menu.Item>
                   <Dropdown item trigger={avatarTrigger} pointing="top right">
                     <Dropdown.Menu>
                       <Dropdown.Item className="account-nav-setter" name="account" onClick={this.props.setSecondaryNav}>
 
-                        <Dropdown.Item name="balance" className="balance-nav" onClick={this.handleItemClick}>
+                        <Dropdown.Item style={{ cursor: 'default' }} name="balance" className="balance-nav">
                           EDU Balance
                           {this.props.balancesError ? (this.props.balancesError) : (
                             <span className="balance-nav">

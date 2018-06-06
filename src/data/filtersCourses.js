@@ -4,41 +4,6 @@ import { Form } from 'semantic-ui-react';
 export default {
 
   CoursesFilterList: {
-    categories: (
-      <Form>
-        <Form.Group grouped>
-          <Form.Checkbox label="All" name="filter" value="All-categories" />
-          <Form.Checkbox label="Architecture" name="filter" value="Architecture" />
-          <Form.Checkbox label="Art &amp; Culture" name="filter" value="Art & Culture" />
-          <Form.Checkbox label="Biology &amp; Life Sciences" name="filter" value="Biology & Life Sciences" />
-          <Form.Checkbox label="Business & Management" name="filter" value="Business & Management" />
-          <Form.Checkbox label="Chemistry" name="filter" value="Chemistry" />
-          <Form.Checkbox label="Communication" name="filter" value="Communication" />
-          <Form.Checkbox label="Computer Science" name="filter" value="Computer Science" />
-          <Form.Checkbox label="Creative Arts & Media" name="filter" value="Creative Arts & Media" />
-          <Form.Checkbox label="Data Science" name="filter" value="Data Science" />
-          <Form.Checkbox label="Economics & Finance" name="filter" value="Economics & Finance" />
-          <Form.Checkbox label="Education" name="filter" value="Education" />
-          <Form.Checkbox label="Engineering" name="filter" value="Engineering" />
-          <Form.Checkbox label="Food &amp; Nutrition" name="filter" value="Food & Nutrition" />
-          <Form.Checkbox label="Health &amp; Fitness" name="filter" value="Health & Fitness" />
-          <Form.Checkbox label="History" name="filter" value="History" />
-          <Form.Checkbox label="IT" name="filter" value="IT" />
-          <Form.Checkbox label="Languages" name="filter" value="Languages" />
-          <Form.Checkbox label="Law" name="filter" value="Law" />
-          <Form.Checkbox label="Literature" name="filter" value="Literature" />
-          <Form.Checkbox label="Math and Logic" name="filter" value="Math and Logic" />
-          <Form.Checkbox label="Medicine" name="filter" value="Medicine" />
-          <Form.Checkbox label="Music" name="filter" value="Music" />
-          <Form.Checkbox label="Nature &amp; Environment" name="filter" value="Nature & Environment" />
-          <Form.Checkbox label="Philosophy" name="filter" value="Philosophy" />
-          <Form.Checkbox label="Physics" name="filter" value="Physics" />
-          <Form.Checkbox label="Politics" name="filter" value="Politics" />
-          <Form.Checkbox label="Science" name="filter" value="Science" />
-          <Form.Checkbox label="Social Sciences" name="filter" value="Social Sciences" />
-        </Form.Group>
-      </Form>
-    ),
 
     qualification: (
       <Form>

@@ -37,7 +37,7 @@ class CourseItemWithoutRouter extends React.Component {
     return (
       <Card fluid>
         <Card.Content>
-          <img alt="" src={this.props.certificate.isList ? null : cardImageSrc} />
+          <img alt="" src={this.props.isNotList ? cardImageSrc : null} />
           <Card.Header style={{ color: 'black' }} icon="ellipsis vertical">{this.props.certificate.title}</Card.Header>
           <span className="course-desc" >
             <Icon name="signal" style={{ color: '#c1c1c1' }} className="course-desc" />
@@ -54,11 +54,11 @@ class CourseItemWithoutRouter extends React.Component {
             {this.renderRating(this.props.certificate.rating)}
           </span>
         </Card.Content>
-        {this.props.certificate.isList ?
+        {this.props.isNotList ?
+          (null) :
           (<Card.Content extra>
             { this.props.certificate.description }
-          </Card.Content>) :
-          (null)
+          </Card.Content>)
         }
         <Card.Content extra>
           <Button name="course-page" onClick={() => { this.props.history.push(`/courses/${this.props.certificate.id}/`); }}>

@@ -8,6 +8,9 @@ export default function login(passphrase) {
   const { v3Wallet } = store.getState().auth;
 
   return function action(dispatch) {
+    dispatch({
+      type: 'LOGGING_IN',
+    });
     if (!v3Wallet) {
       dispatch({
         type: 'LOGIN_ERROR',

@@ -4,6 +4,7 @@ const initialState = {
   publicKey: localStorage.getItem('publicKey'),
   isLoggedIn: JSON.parse(localStorage.getItem('isLoggedIn')),
   loginError: null,
+  isLoggingIn: false,
 };
 
 
@@ -15,6 +16,10 @@ const authReducer = (state = initialState, action) => {
       loginError: null,
       isLoggedIn: true,
     });
+  case 'LOGGING_IN':
+    return Object.assign({}, state, {
+      isLoggingIn: true,
+    });
   case 'LOGGED_OUT':
     return Object.assign({}, state, {
       isLoggedIn: false,
@@ -23,11 +28,13 @@ const authReducer = (state = initialState, action) => {
     return Object.assign({}, state, {
       loginError: action.payload.loginError,
       isLoggedIn: false,
+      isLoggingIn: false,
     });
   case 'LOGGED_IN':
     return Object.assign({}, state, {
       loginError: null,
       isLoggedIn: true,
+      isLoggingIn: false,
       address: action.payload.wallet.getChecksumAddressString(),
       publicKey: action.payload.wallet.getPublicKey(),
     });

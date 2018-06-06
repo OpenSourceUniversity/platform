@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Card, Form, Input, Grid, Button } from 'semantic-ui-react';
+import { Card, Form, Input, Grid, Button, Loader, Dimmer } from 'semantic-ui-react';
 import login from '../../util/auth/login';
+
 
 class SignInWithoutRouter extends React.Component {
   constructor(props) {
@@ -11,10 +12,10 @@ class SignInWithoutRouter extends React.Component {
   }
 
   loginSubmit(event, component) {
+    event.preventDefault();
     const passphrase = event.target.elements.passphrase.value;
     component.props.login(passphrase);
   }
-
 
   render() {
     /* eslint-disable global-require */
@@ -22,6 +23,9 @@ class SignInWithoutRouter extends React.Component {
     /* eslint-enable global-require */
     return (
       <div>
+        <Dimmer active={this.props.isLoggingIn} inverted>
+          <Loader size="large">Loading</Loader>
+        </Dimmer>
         <Card.Header>
           <Grid centered>
             <Grid.Row>
@@ -70,6 +74,7 @@ class SignInWithoutRouter extends React.Component {
 function mapStateToProps(state) {
   return {
     loginError: state.auth.loginError,
+    isLoggingIn: state.auth.isLoggingIn,
   };
 }
 

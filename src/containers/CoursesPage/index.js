@@ -68,17 +68,17 @@ class CoursesPage extends React.Component {
     ];
 
     return (
-       <Form.Field>
-         <Form.Dropdown
-         label="Serch"
-         placeholder="Search by keyword ..."
-         fluid
-         multiple
-         search
-         selection
-         options={courses}
-         />
-       </Form.Field>
+      <Form.Field>
+        <Form.Dropdown
+          label="Serch"
+          placeholder="Search by keyword ..."
+          fluid
+          multiple
+          search
+          selection
+          options={courses}
+        />
+      </Form.Field>
     );
   }
 

@@ -5,7 +5,7 @@ import authReducer from './util/auth/authReducer';
 import searchReducer from './util/search/searchReducer';
 import certificatesReducer from './containers/CertificatesPage/certificatesReducer';
 import coursesReducer from './containers/CoursesPage/coursesReducer';
-import courseReducer from './components/Course/courseReducer';
+import courseReducer from './containers/CoursePAge/courseReducer';
 import addCertificateReducer from './containers/AddCertificatePage/addCertificateReducer';
 
 const reducer = combineReducers({

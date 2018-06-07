@@ -30,43 +30,39 @@ class CourseItemWithoutRouter extends React.Component {
     /* eslint-disable global-require */
 
     const profile = require('../../icons/account_profile.svg');
-    const cardImageSrc = 'https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera.s3.amazonaws.com/topics/ml/large-icon.png?auto=format%2Ccompress&dpr=1&fit=crop&w=225&h=130';
 
     /* eslint-enable global-require */
 
     return (
-      <Card fluid>
+      <Card fluid style={this.props.isNotList ? { height: '400px' } : null}>
         <Card.Content>
-          <img alt="" style={{ marginBottom: '20px' }} src={this.props.isNotList ? cardImageSrc : null} />
-          <Card.Header style={{ color: 'black', marginBottom: '20px' }} icon="ellipsis vertical">{this.props.certificate.title}</Card.Header>
+          <img alt="" style={{ marginBottom: '20px', width: '100%' }} src={this.props.isNotList ? this.props.course.imgSrc : null} />
+          <Card.Header style={{ color: 'black', marginBottom: '20px' }} icon="ellipsis vertical">{this.props.course.title}</Card.Header>
           <span className="course-desc" >
             <Icon name="signal" style={{ color: '#c1c1c1' }} className="course-desc" />
-            {this.props.certificate.categories[0].name}
+            {this.props.course.categories[0].name}
           </span>
           <span className="course-desc" >
-            <Icon name="world" style={{ color: '#c1c1c1' }} className="course-desc" /> {this.props.certificate.language}
+            <Icon name="world" style={{ color: '#c1c1c1' }} className="course-desc" /> {this.props.course.language}
           </span>
           <span className="course-desc" >
             <Icon name="time" style={{ color: '#c1c1c1' }} className="course-desc" />
-            {this.props.certificate.duration}
-          </span>
-          <span className="course-desc" >
-            {this.renderRating(this.props.certificate.rating)}
+            {this.props.course.duration}
           </span>
         </Card.Content>
         {this.props.isNotList ?
           (null) :
           (<Card.Content extra>
-            { this.props.certificate.description }
+            { this.props.course.description }
           </Card.Content>)
         }
         <Card.Content extra>
-          <Button name="course-page" onClick={() => { this.props.history.push(`/courses/${this.props.certificate.id}/`); }}>
+          <Button name="course-page" onClick={() => { this.props.history.push(`/course-page/${this.props.course.id}/`); }}>
             Show Course
           </Button>
           <span className="course-desc" style={{ float: 'right', color: 'black' }}>
-            <Image style={{ width: '25px' }} spaced="right" src={profile} />
-            {this.props.certificate.tutor}
+            <Image style={{ width: '25px', borderRadius: '50%', marginTop: '5px' }} spaced="right" src={!this.props.course.avatarSrc ? profile : this.props.course.avatarSrc} />
+            <span style={{ top: '3px', position: 'relative' }}>{this.props.course.tutor}</span>
           </span>
         </Card.Content>
       </Card>

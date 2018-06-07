@@ -26,7 +26,7 @@ class CoursesPage extends React.Component {
 
   renderCourses() {
     return (
-      this.props.courses.map((certificate, index) => (
+      this.props.courses.map((course, index) => (
         <Grid.Column
           computer={8}
           largeScreen={8}
@@ -35,7 +35,7 @@ class CoursesPage extends React.Component {
           mobile={16}
           key={index}
         >
-          <CourseItem certificate={certificate} key={index} />
+          <CourseItem course={course} key={index} />
         </Grid.Column>))
     );
   }
@@ -96,9 +96,9 @@ class CoursesPage extends React.Component {
   }
 
   render() {
-    const { activeIndex, activeItem } = this.state;
+    const { activeIndex } = this.state;
     return (
-      <Container>
+      <Container className="courses-page">
         <Header>
           Courses
         </Header>

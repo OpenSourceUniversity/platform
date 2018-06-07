@@ -62,7 +62,7 @@ class Main extends React.Component {
         <Route path="/inbox" component={Inbox} />
         <Route path="/network" component={Network} />
         <Route path="/deposit" component={Deposit} />
-        <Route path="/course-page" component={CoursePage} />
+        <Route path="/course-page/:id/" component={CoursePage} />
         <Route path="/program-page" component={StudentProgramPage} />
         <Route
           path="/create-profile"

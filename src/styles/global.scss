@@ -2,6 +2,41 @@ body {
   background: #ecf0f1;
 }
 div.App {
+  div.ui.fluid.card {
+    -webkit-box-shadow: 0 10px 40px 0 rgba(28,45,65,.25);
+    -moz-box-shadow: 0 10px 40px 0 rgba(28,45,65,.25);
+    box-shadow: 0 10px 40px 0 rgba(28,45,65,.25);
+    transition: all .3s ease-in-out;
+  }
+  div.ui.fluid.card:hover {
+    -webkit-box-shadow: 0 15px 40px 0 rgba(28,45,65,.5);
+    -moz-box-shadow: 0 15px 40px 0 rgba(28,45,65,.5);
+    box-shadow: 0 15px 40px 0 rgba(28,45,65,.5);
+  }
+  .disabled-beta {
+      position: relative;
+      color: rgba(0,0,0,.15);
+    }
+  .disabled-beta:hover:after {
+    content: 'Coming in Beta';
+    position: absolute;
+    background: #7f8fa6;
+    border-radius: 30px;
+    font-size: 11px;
+    white-space: nowrap;
+    color: #fff;
+    top: 20px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    padding: 2px 5px;
+  }
+  div.courses-page {
+    div.ui.fluid.card {
+      margin-bottom: 1em;
+    }
+  }
+
   div.menu.massive.top  {
     .item:before {
       background: none;

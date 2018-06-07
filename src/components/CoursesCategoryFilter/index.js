@@ -22,7 +22,6 @@ class CoursesCategoryFilter extends Form {
   }
 
   render() {
-    console.log(this.props.filteredCategories);
     return (
       <Form>
         <Form.Group grouped>

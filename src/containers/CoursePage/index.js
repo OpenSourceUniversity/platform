@@ -7,7 +7,7 @@ export default class CoursePage extends React.Component {
     return (
       <div className="course">
         <Container>
-          <Course />
+          <Course id={this.props.match.params.id} />
         </Container>
       </div>
     );

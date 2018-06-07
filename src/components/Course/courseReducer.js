@@ -1,32 +1,29 @@
 const INITIAL_STATE = {
   isFetching: false,
   error: null,
-  courses: [],
-  next: null,
+  course: null,
 };
 
-export default function coursesReducer(state = INITIAL_STATE, action) {
+export default function courseReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-  case 'FETCH_COURSES_REQUEST':
+  case 'FETCH_COURSE_REQUEST':
     return Object.assign({}, state, {
       isFetching: true,
     });
-  case 'FETCH_COURSES_SUCCESS':
+  case 'FETCH_COURSE_SUCCESS':
     return Object.assign({}, state, {
       isFetching: false,
-      courses: state.courses.concat(action.results),
-      next: action.next,
+      course: action.result,
     });
-  case 'FETCH_COURSES_FAILURE':
+  case 'FETCH_COURSE_FAILURE':
     return Object.assign({}, state, {
       isFetching: false,
       error: action.error.message,
     });
-  case 'RESET_FETCHED_COURSES':
+  case 'RESET_FETCHED_COURSE':
     return Object.assign({}, state, {
       isFetching: false,
-      courses: [],
-      next: null,
+      course: 'null',
       error: null,
     });
   default:

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, Header, Divider, Label, Segment, Grid, Menu, Icon, Container, Dimmer, Loader } from 'semantic-ui-react';
+import { Button, Header, Divider, Label, Segment, Grid, Menu, Icon, Container, Dimmer, Loader, Breadcrumb } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import SkillItem from 'components/SkillItem';
 import { fetchCourse } from './actions';
@@ -53,6 +53,14 @@ class CoursePage extends React.Component {
     return (
       <div className="course">
         <Container>
+            <Breadcrumb>
+              <Breadcrumb.Section href="/#/">Home</Breadcrumb.Section>
+              <Breadcrumb.Divider icon="right angle" />
+              <Breadcrumb.Section href="/#/courses">Courses</Breadcrumb.Section>
+              <Breadcrumb.Divider icon="right angle" />
+              <Breadcrumb.Section active>Courses Description</Breadcrumb.Section>
+            </Breadcrumb>
+            <Divider clearing />
         	<div className="course">
         	  <Dimmer active={this.props.course.isFetching} inverted>
         	    <Loader size="large">Loading</Loader>

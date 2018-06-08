@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Container, Menu, Dropdown, Input, Grid, Image, Icon, List, Button, Step, Divider } from 'semantic-ui-react';
+import { Container, Menu, Dropdown, Grid, Image, Icon, List, Button, Step } from 'semantic-ui-react';
 import HeaderSearchComponent from '../HeaderSearchComponent';
 import logout from '../../util/auth/logout';
 import getBalances from '../../util/web3/getBalances';
@@ -106,7 +106,7 @@ class HeaderWithoutRouter extends React.Component {
 
     const notificationsTrigger = (
       <span>
-        <Image className="notifications icon" src={notifications} />
+        <Image style={{ cursor: 'pointer' }} className="notifications icon" src={notifications} />
       </span>
     );
 
@@ -203,17 +203,17 @@ class HeaderWithoutRouter extends React.Component {
                 <HeaderSearchComponent />
 
                 <Menu.Menu position="right">
-                  <Menu.Item disabled className="nav-disabled-beta" name="network" onClick={this.handleItemClick}>
-                    <svg width="20" height="20" className="network" style={{ opacity: 0.5 }} >
+                  <Menu.Item disabled style={{ cursor: 'pointer!important' }} className="nav-disabled-beta" name="network" onClick={this.handleItemClick}>
+                    <svg width="20" height="20" className="network" style={{ opacity: 0.5, cursor: 'pointer' }} >
                       <image href={network} x="0" y="0" width="100%" height="100%" />
                     </svg>
                   </Menu.Item>
-                  <Menu.Item disabled className="nav-disabled-beta" name="inbox" onClick={this.handleItemClick}>
-                    <svg width="20" height="20" className="inbox" style={{ opacity: 0.5 }} >
+                  <Menu.Item disabled style={{ cursor: 'pointer!important' }} className="nav-disabled-beta" name="inbox" onClick={this.handleItemClick}>
+                    <svg width="20" height="20" className="inbox" style={{ opacity: 0.5, cursor: 'pointer' }} >
                       <image href={messages} x="0" y="0" width="100%" height="100%" />
                     </svg>
                   </Menu.Item>
-                  <Menu.Item disabled className="nav-disabled-beta">
+                  <Menu.Item disabled style={{ cursor: 'pointer!important' }} className="nav-disabled-beta">
                     <Dropdown style={{ padding: 0 }} disabled className="nav-disabled-beta" item trigger={notificationsTrigger} pointing="top right" options={optionsNotifications} icon={null} />
                   </Menu.Item>
                   <Dropdown item trigger={avatarTrigger} pointing="top right">

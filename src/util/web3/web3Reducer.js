@@ -1,6 +1,5 @@
 const initialState = {
   web3Instance: null,
-  coinbase: '0x0000000000000000000000000000000000000000',
   ethBalance: 0.0,
   balancesError: null,
   eduBalance: 0.0,
@@ -12,10 +11,6 @@ const web3Reducer = (state = initialState, action) => {
   case 'WEB3_INITIALIZED':
     return Object.assign({}, state, {
       web3Instance: action.payload.web3Instance,
-    });
-  case 'GET_COINBASE_SUCCESS':
-    return Object.assign({}, state, {
-      coinbase: action.payload.coinbase,
     });
   case 'GET_BALANCES':
     return Object.assign({}, state, {

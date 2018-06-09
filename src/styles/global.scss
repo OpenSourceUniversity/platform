@@ -90,6 +90,10 @@ div.App {
           div.item.active {
             font-weight: 400 !important;
           }
+          div.item.secondary-nav-disabled-beta, div.item.secondary-nav-disabled-customer {
+            position: relative;
+            color: rgba(0,0,0,.15);
+          }
           div.academia, div.businesses {
               border-bottom: 1px solid rgba(34, 36, 38, 0.1);
               color: black;
@@ -97,7 +101,42 @@ div.App {
               font-weight: 700;
               font-size: 1.1em;
               padding-bottom: 10px;
-            }
+          }
+          .ui.list>.item.secondary-nav-disabled-beta:hover ,.ui.list>.item.secondary-nav-disabled-customer:hover {
+              color: rgba(0,0,0,.15) !important;
+          }
+          .ui.list>.item.secondary-nav-disabled-beta:hover:after {
+              content: 'Coming in Beta';
+              position: absolute;
+              background: #7f8fa6;
+              border-radius: 30px;
+              font-size: 11px;
+              white-space: nowrap;
+              color: #fff;
+              height: auto;
+              top: 7px;
+              left: 50%;
+              visibility: visible;
+              -webkit-transform: translateX(-50%);
+              transform: translateX(-50%);
+              padding: 2px 5px;
+          }
+          .ui.list>.item.secondary-nav-disabled-customer:hover:after {
+              content: 'Coming in Customer';
+              position: absolute;
+              background: #7f8fa6;
+              border-radius: 30px;
+              font-size: 11px;
+              white-space: nowrap;
+              color: #fff;
+              height: auto;
+              top: 7px;
+              left: 50%;
+              visibility: visible;
+              -webkit-transform: translateX(-50%);
+              transform: translateX(-50%);
+              padding: 2px 5px;
+          }
         }
       }
       div.search-bar {
@@ -123,12 +162,16 @@ div.App {
       div.text {
         font-weight: 600;
       }
+
+
       div.dropdown {
         div.transition {
           div.item:hover {
             background-color: white;
             color: #f39c12 !important;
+
           }
+
           div.account-nav-setter {
            padding: 0 !important;
           }

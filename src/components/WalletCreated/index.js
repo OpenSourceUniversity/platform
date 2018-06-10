@@ -43,6 +43,12 @@ class WalletCreatedWithoutRouter extends React.Component {
     this.address = wallet.getChecksumAddressString();
   }
 
+  copyAddress() {
+    const copyText = document.getElementById("WalletAddress");
+    copyText.select();
+    document.execCommand("Copy");
+  }
+
   render() {
     /* eslint-disable global-require */
     const logo = require('../../icons/edu-logo.png');
@@ -74,11 +80,12 @@ class WalletCreatedWithoutRouter extends React.Component {
         </Card.Description>
         <Card.Content>
           <Input
+            id="WalletAddress"
             readOnly
             fluid
             value={this.address}
             action={{
-              labelPosition: 'right', icon: 'copy', content: 'Copy', style: { marginTop: 0 },
+              labelPosition: 'right', icon: 'copy', content: 'Copy', style: { marginTop: 0 }, onClick: this.copyAddress,
             }}
             style={{ opacity: 1 }}
           />

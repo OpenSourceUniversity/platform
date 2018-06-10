@@ -42,13 +42,6 @@ class CourseItemWithoutRouter extends React.Component {
             <Icon name="signal" style={{ color: '#c1c1c1' }} className="course-desc" />
             {this.props.course.categories[0].name}
           </span>
-          <span className="course-desc" >
-            <Icon name="world" style={{ color: '#c1c1c1' }} className="course-desc" /> {this.props.course.language}
-          </span>
-          <span className="course-desc" >
-            <Icon name="time" style={{ color: '#c1c1c1' }} className="course-desc" />
-            {this.props.course.duration}
-          </span>
         </Card.Content>
         {this.props.isNotList ?
           (null) :

@@ -10,13 +10,13 @@ export default class ProfilePage extends React.Component {
   setProfile() {
     switch (this.props.activeAccount) {
     case 'Academy': return {
-      profile_src: this.props.academyProfilePic, name: 'Udacity', location: 'U.S.', short_desc: 'blah blah blah blah', learners: '9000 ppl', email: 'support@udacity.com', site: 'eu.udacity.com', full_desc: 'blah blah desc',
+      profile_src: this.props.academyProfilePic, name: 'Academy name', location: 'Location', short_desc: 'Short description', employees: 'Number', email: 'email@mail.com', site: 'site.com', full_desc: 'Full descriprion',
     };
     case 'Business': return {
-      profile_src: this.props.businessProfilePic, name: 'Open Source University', location: 'Sofia, Bulgaria', short_desc: 'blah blah blah blah', employees: '100500 ppl', email: 'support@os.university', site: 'os.university', full_desc: 'blah blah desc',
+      profile_src: this.props.businessProfilePic, name: 'Business name', location: 'Location', short_desc: 'Short description', employees: 'Number', email: 'email@mail.com', site: 'site.com', full_desc: 'Full descriprion',
     };
     default: return {
-      profile_src: this.props.learnerProfilePic, name: 'Jordan Jambazov', position: 'Technology Lead in Open Source University', edu: 11, specialisation: 'Semantic UI', location: 'New York, NY', email: 'support@os.university', site: 'os.university', certificates: 15, courses: 30, skills: 128, reviews: 0, introduction: '“I am a non-accredited, overly logical psychologist, therapist, mechanic, diplomat, businessman, and Teacher working in an industry that is still defining itself each and every day."',
+      profile_src: this.props.learnerProfilePic, name: 'Name Surname', position: 'Position', edu: 11, specialisation: 'Specialisation', location: 'Location', email: 'email@mail.com', site: 'site.com', certificates: 15, courses: 30, skills: 128, reviews: 0, introduction: '“Introdaction"',
     };
     }
   }

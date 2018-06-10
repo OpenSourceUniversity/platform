@@ -49,17 +49,6 @@ export default class AccountSettings extends React.Component {
                       Business
                     </Menu.Item>
                   </Menu>
-                  <Header>
-                    Change Account Password
-                  </Header>
-                  <Divider clearing />
-                  <Form >
-                    <Form.Field disabled label="Passphrase" control="input" type="password" defaultValue="Passphrase" style={{ opacity: 1, color: 'black' }} />
-                    <Form.Field label="Current Password" control="input" type="password" placeholder="Current Password" />
-                    <Form.Field label="New Password" control="input" type="password" placeholder="New Password" />
-                    <Divider hidden />
-                    <Button type="submit">Change Password</Button>
-                  </Form>
                 </Segment>
               </Grid.Column>
               <Grid.Column stretched width={10}>

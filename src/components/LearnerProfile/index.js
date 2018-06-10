@@ -19,34 +19,6 @@ class LearnerProfile extends React.Component {
   componentDidMount() {
     this.props.fetchCertificates();
   }
-  renderSkills() {
-    const skills = [
-      {
-        have_icon: true, check: true, name: 'Python', basic: true,
-      },
-      {
-        have_icon: true, check: false, name: 'Design', basic: true,
-      },
-      {
-        have_icon: true, check: true, name: 'Software', basic: true,
-      },
-      {
-        have_icon: true, check: true, name: 'Python', basic: true,
-      },
-      {
-        have_icon: true, check: true, name: 'Python', basic: true,
-      },
-      {
-        have_icon: true, check: true, name: 'Python', basic: true,
-      },
-      {
-        have_icon: true, check: true, name: 'Python', basic: true,
-      },
-    ];
-    return skills.map((course, index) => (
-      <SkillItem skill={course} key={index} />
-    ));
-  }
 
   renderCertificates() {
     return this.props.certificates.map((certificate, index) => (
@@ -144,19 +116,6 @@ class LearnerProfile extends React.Component {
                   </Header>
                 </Segment>
                 <Segment>
-                  <Button
-                    primary
-                    size="large"
-                    className="fluid disabled-beta"
-                    content="Contact"
-                    icon="mail outline"
-                    label={{
-                      image: token, as: 'a', basic: true, pointing: 'right', content: `${this.props.learner.edu} EDU`,
-                    }}
-                    labelPosition="left"
-                  />
-                </Segment>
-                <Segment>
                   <List>
                     <List.Item icon="users" content={this.props.learner.specialisation} />
                     <List.Item icon="marker" content={this.props.learner.location} />
@@ -175,10 +134,6 @@ class LearnerProfile extends React.Component {
                       <Statistic.Label>Courses</Statistic.Label>
                     </Statistic>
                     <Statistic>
-                      <Statistic.Value>{this.props.learner.skills}</Statistic.Value>
-                      <Statistic.Label>Skills</Statistic.Label>
-                    </Statistic>
-                    <Statistic>
                       <Statistic.Value>{this.props.learner.reviews}</Statistic.Value>
                       <Statistic.Label>Reviews</Statistic.Label>
                     </Statistic>
@@ -188,7 +143,7 @@ class LearnerProfile extends React.Component {
             </Sticky>
           </Grid.Column>
           <Grid.Column mobile={16} tablet={8} computer={11}>
-            <Segment size="large">
+            <Segment style={{paddingBottom: '2em'}} size="large">
               <Header>
                 Introduction
               </Header>
@@ -220,13 +175,6 @@ class LearnerProfile extends React.Component {
                 {this.renderCertificates()}
               </Grid>
 
-              <Header>
-                Skills
-              </Header>
-              <Divider clearing />
-              <Label.Group size="large">
-                {this.renderSkills()}
-              </Label.Group>
             </Segment>
             <Segment.Group size="large">
               <Segment>

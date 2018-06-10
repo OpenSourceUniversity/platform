@@ -105,8 +105,6 @@ class CoursePage extends React.Component {
         	        <Divider hidden />
         	        <Menu pointing secondary color="orange">
         	          <Menu.Item style={{ fontSize: '1.3em' }} name="about" active={activeItem === 'about'} onClick={this.handleItemClick} />
-        	          <Menu.Item style={{ fontSize: '1.3em' }} className="disabled-beta" disabled name="entry requirements" active={activeItem === 'entry requirements'} onClick={this.handleItemClick} />
-        	          <Menu.Item style={{ fontSize: '1.3em' }} className="disabled-beta" disabled name="reviews" active={activeItem === 'reviews'} onClick={this.handleItemClick} />
         	        </Menu>
         	        <Container style={{ paddingLeft: '40px', paddingRight: '40px' }}>
         	          {(() => {
@@ -140,7 +138,7 @@ class CoursePage extends React.Component {
         	        </div>
         	        <Divider clearing />
         	        <Header style={{ fontSize: '1.5em', marginBottom: '5px' }}>
-        	          Industry
+        	          Category
         	        </Header>
         	        <Icon name="industry" />
         	        <span style={{ color: 'grey' }} >

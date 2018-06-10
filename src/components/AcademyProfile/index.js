@@ -1,65 +1,7 @@
 import React from 'react';
-import { Header, Divider, Grid, Sticky, Segment, List, Button } from 'semantic-ui-react';
-import CourseItem from 'components/CourseItem';
+import { Header, Divider, Grid, Sticky, Segment, List, Button, Modal, Form, Input } from 'semantic-ui-react';
 
 export default class AcademyProfile extends React.Component {
-  renderCourses() {
-    const courses = [
-      {
-        title: 'Python Development', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
-      },
-      {
-        title: 'Scrum Master', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
-      },
-      {
-        title: 'Machine Learning', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
-      },
-      {
-        title: 'Solidity Development', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
-      },
-      {
-        title: 'Unit Testing', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
-      },
-      {
-        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
-      },
-      {
-        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
-      },
-      {
-        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
-      },
-      {
-        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
-      },
-      {
-        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
-      },
-      {
-        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
-      },
-      {
-        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
-      },
-      {
-        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
-      },
-      {
-        title: 'Computer Vision', level: 'Beginer', language: 'English', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
-      },
-    ];
-    return courses.map((certificate, index) => (
-      <Grid.Column
-        computer={8}
-        largeScreen={8}
-        widescreen={8}
-        tablet={8}
-        mobile={16}
-        key={index}
-      >
-        <CourseItem certificate={certificate} key={index} />
-      </Grid.Column>));
-  }
 
   render() {
     // IMG SRC
@@ -89,14 +31,39 @@ export default class AcademyProfile extends React.Component {
             <Sticky offset={150}>
               <Segment.Group className="profileSegment">
                 <Segment textAlign="center">
-                  <Segment
+                  <Modal trigger={<Segment
                     textAlign="center"
                     circular
                     className="profilePicSegment"
                     style={{
-                      width: 175, height: 175, backgroundImage: `url(${profilePicture})`, backgroundRepeat: 'no-repeat', backgroundSize: '90%', backgroundPosition: 'center center',
+                      width: 175, height: 175, backgroundImage: `url(${profilePicture})`, backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center center',
                     }}
-                  />
+                  />}>
+                    <Modal.Header>Select a Photo</Modal.Header>
+                    <Modal.Content image>
+                      <Image style={{ borderRadius: '50%', width: '200px', height: '200px' }} size="medium" src={profilePicture} />
+                      <Modal.Description style={{ width: '100%', paddingLeft: '4em', textAlign: 'center' }}>
+                        <Header>Default Profile Image</Header>
+                        <Form>
+                          <Form.Field style={{ paddingTop: '1em' }}>
+                            <label style={{ lineHeight: '2.3' }} htmlFor="LernerAvatar">
+                              Profile photo
+                              <Input
+                                id="LernerAvatar"
+                                iconPosition="left"
+                                icon="address card"
+                                type="file"
+                                name="LernerAvatar"
+                                placeholder="Profile Photo"
+                                onChange={this.handleInputChange}
+                              />
+                            </label>
+                          </Form.Field>
+                          <Button type="submit" primary size="huge">Save</Button>
+                        </Form>
+                      </Modal.Description>
+                    </Modal.Content>
+                  </Modal>
                   <Header size="large">
                     {this.props.academy.name}
                   </Header>
@@ -141,7 +108,6 @@ export default class AcademyProfile extends React.Component {
                 Courses
               </Header>
               <Divider clearing />
-              {this.renderCourses()}
             </Segment>
           </Grid.Column>
         </Grid>

@@ -41,11 +41,7 @@ export default class SignUpRecoveryPhraseCheck extends React.Component {
     if (this.choosed.indexOf(name) === -1) {
       this.choosed.push(name);
       if (this.choosed.length === 12) {
-        console.log('12 words added');
-        console.log(`checkArray: ${this.checkArray}`);
-        console.log(`choosed: ${this.choosed}`);
         if (this.arraysEqual(this.choosed, this.checkArray)) {
-          console.log('***Arrays are equal - Continue button is active***');
           this.setState({ equalPhrases: true });
         }
       }

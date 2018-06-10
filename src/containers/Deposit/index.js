@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import React from 'react';
-import { Segment, Container, Grid, Card, Image, Button, Table, Icon, Header, Divider, Statistic, Responsive, Input, Form, Modal } from 'semantic-ui-react';
+import { Segment, Container, Grid, Card, Image, Button, Table, Icon, Header, Divider, Statistic, Responsive, Input, Form, Modal, Dropdown } from 'semantic-ui-react';
 import TransactionHistoryItem from 'components/TransactionHistoryItem';
 import getBalances from '../../util/web3/getBalances';
 
@@ -42,6 +42,12 @@ class Deposit extends React.Component {
     ));
   }
 
+  copyAddress() {
+    const copyText = document.getElementById("WalletAddress");
+    copyText.select();
+    document.execCommand("Copy");
+  }
+
   render() {
     /* eslint-disable global-require */
     const avatarPlaceholder = require('../../icons/avatar_placeholder.svg');
@@ -76,23 +82,13 @@ class Deposit extends React.Component {
                         </Card.Meta>
                         <Card.Description>
                           <Form className="attached fluid segment">
-                            <Form.Input style={{ fontSize: '0.9em' }} readOnly label="ETH/EDU Deposit Address:" fluid value={this.props.address} />
+                            <Form.Input id="WalletAddress" style={{ fontSize: '0.9em' }} readOnly label="ETH/EDU Deposit Address:" fluid value={this.props.address} />
                           </Form>
                         </Card.Description>
                       </Card.Content>
                       <Card.Content extra>
-                        <div className="ui two buttons">
-                          <Modal className="modalFix" style={{ display: 'flex!important', textAlign: 'center' }} trigger={<Button basic color="grey"><Icon name="qrcode" /> Show QR Code</Button>}>
-                            <Modal.Content>
-                              <Modal.Header>
-                                <Image style={{ display: 'inline-block' }} src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/220px-QR_code_for_mobile_English_Wikipedia.svg.png" />
-                              </Modal.Header>
-                              <Modal.Description>
-                                <Header>ETH/EDU Deposit Address: {this.props.address}</Header>
-                              </Modal.Description>
-                            </Modal.Content>
-                          </Modal>
-                          <Button basic color="grey"><Icon name="copy" /> Copy Address</Button>
+                        <div>
+                          <Button basic color="grey" onClick={this.copyAddress}><Icon name="copy" /> Copy Address</Button>
                         </div>
                       </Card.Content>
                     </Card>
@@ -119,7 +115,13 @@ class Deposit extends React.Component {
                             <datalist id="wallets">
                               {this.renderAutocomplete()}
                             </datalist>
-                            <Input fluid label="EDU" labelPosition="right" placeholder="0.0000" />
+                            <Input
+                              fluid
+                              label={<Dropdown defaultValue='edu' options={[{ key: 'edu', text: 'EDU', value: 'edu' },{ key: 'eth', text: 'ETH', value: 'eth' }]} />}
+                              labelPosition="right"
+                              placeholder="0.0000"
+
+                            />
                           </Form>
                         </Card.Description>
                       </Card.Content>
@@ -157,21 +159,6 @@ class Deposit extends React.Component {
                   <Statistic.Label>ETH Balance</Statistic.Label>
                 </Statistic>
               </Segment>
-              <Card fluid>
-                <Card.Content>
-                  <Table celled striped>
-                    <Table.Header>
-                      <Table.Row>
-                        <Table.HeaderCell colSpan="6">Transaction History</Table.HeaderCell>
-                      </Table.Row>
-                    </Table.Header>
-
-                    <Table.Body>
-                      { this.renderHistory() }
-                    </Table.Body>
-                  </Table>
-                </Card.Content>
-              </Card>
             </Grid.Column>
           </Grid.Row>
         </Grid>

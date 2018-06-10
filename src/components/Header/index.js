@@ -288,7 +288,7 @@ class HeaderWithoutRouter extends React.Component {
                   case 'business': return <Menu size="massive" items={learnerBusinessesDropdownElements.slice(1)} />;
                   case 'academia': return <Menu size="massive" items={learnerAcademiaDropdownElements.slice(1)} />;
                   case 'account': return <Menu size="massive" items={accountElements} />;
-                  case 'createAccount': return this.createAccountRender();
+                  case 'createAccount': return <Menu size="massive" items={accountElements} />;
                   default: return null;
                   }
                 }

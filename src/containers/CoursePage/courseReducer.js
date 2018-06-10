@@ -2,16 +2,16 @@ const INITIAL_STATE = {
   isFetching: false,
   error: null,
   course: {
-    'external_link': 'https://os.university/',
-    'provider': {
-      'name': null,
+    external_link: 'https://os.university/',
+    provider: {
+      name: null,
     },
-    'categories': [
+    categories: [
       {
-        'name': null,
+        name: null,
       },
     ],
-    'skills': [
+    skills: [
     ],
   },
 };

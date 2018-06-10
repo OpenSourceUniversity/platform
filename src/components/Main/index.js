@@ -57,6 +57,7 @@ class Main extends React.Component {
           path="/onboarding"
           render={props => (<OnBoarding
             {...props}
+            setSecondaryNav={this.props.setSecondaryNav}
           />)}
         />
         <Route path="/inbox" component={Inbox} />
@@ -73,7 +74,7 @@ class Main extends React.Component {
             setCreateAccountActiveItem={this.props.setCreateAccountActiveItem}
             createAccountActiveItem={this.props.createAccountActiveItem}
             setCreateAccountNav={this.props.setCreateAccountNav}
-            createAccountNav={this.props.createAccountNav}
+            setSecondaryNav={this.props.setSecondaryNav}
           />)}
         />
         <Route path="/job-page" component={JobPage} />

@@ -4,7 +4,6 @@ import Countries from '../../data/countriesList';
 
 export default class LernersSettings extends React.Component {
   render() {
-
     return (
       <div>
         <Header>
@@ -22,7 +21,7 @@ export default class LernersSettings extends React.Component {
             Contact Information
           </Header>
           <Divider clearing />
-          <Form.Field disabled label="Email" control="input" type="email" defaultValue="Email@gmail.com" style={{ opacity: 1, color: 'black' }} className="disabled-email" />
+          <Form.Field label="Email" control="input" type="email" defaultValue="Email@gmail.com" style={{ opacity: 1, color: 'black' }} className="disabled-email" />
           <Form.Field label="Phone number" autoComplete="tel" control="input" type="tel" placeholder="Phone number" />
           <Form.Dropdown placeholder="Select Country" label="Country" fluid search selection options={Countries.Countries} />
           <Divider hidden />

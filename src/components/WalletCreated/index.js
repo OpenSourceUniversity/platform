@@ -13,6 +13,7 @@ class WalletCreatedWithoutRouter extends React.Component {
   constructor(props) {
     super(props);
     this.createHDWallet();
+    this.props.setSecondaryNav(null, { name: 'null' });
   }
 
   address = '';
@@ -44,9 +45,9 @@ class WalletCreatedWithoutRouter extends React.Component {
   }
 
   copyAddress() {
-    const copyText = document.getElementById("WalletAddress");
+    const copyText = document.getElementById('WalletAddress');
     copyText.select();
-    document.execCommand("Copy");
+    document.execCommand('Copy');
   }
 
   render() {

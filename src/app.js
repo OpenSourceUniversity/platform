@@ -60,6 +60,7 @@ class App extends React.Component {
         <div style={{ height: `${170}px` }} />
         <div id="Main">
           <Main
+            setSecondaryNav={this.setSecondaryNav}
             activeAccount={activeAccount}
             setActiveAccount={this.setActiveAccount}
             setCreateAccountActiveItem={this.setCreateAccountActiveItem}

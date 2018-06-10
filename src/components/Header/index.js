@@ -18,6 +18,18 @@ class HeaderWithoutRouter extends React.Component {
     this.props.getBalances();
   }
 
+  componentDidMount() {
+    if( this.props.location.pathname.includes('course') || this.props.location.pathname.includes('certificates') ) {
+      this.props.setSecondaryNav(null, { name: 'academia' });
+    } else if ( this.props.location.pathname.includes('job')) {
+      this.props.setSecondaryNav(null, { name: 'business' });
+    } else if ( this.props.location.pathname === '/profile' || this.props.location.pathname.includes('deposit') || this.props.location.pathname.includes('settings') ) {
+      this.props.setSecondaryNav(null, { name: 'account' });
+    } else {
+      this.props.setSecondaryNav(null, { name: 'null' });
+    }
+  }
+
   state = { }
 
   handleItemClick = (e, { name }) => {
@@ -149,13 +161,13 @@ class HeaderWithoutRouter extends React.Component {
         key: 'certificates', content: 'My certificates', name: 'certificates', active: activeItem === 'certificates', onClick: this.handleItemClick,
       },
       {
-        key: 'programs', content: 'Student Programs', name: 'programs', active: false, className: "secondary-nav-disabled-beta",
+        key: 'programs', content: 'Student Programs', name: 'programs', active: false, className: 'secondary-nav-disabled-beta',
       },
       {
-        key: 'scholarships', content: 'Scholarships', name: 'scholarships', active: false, className: "secondary-nav-disabled-beta",
+        key: 'scholarships', content: 'Scholarships', name: 'scholarships', active: false, className: 'secondary-nav-disabled-beta',
       },
       {
-        key: 'challenges', content: 'Academic Challenges', name: 'challenges', active: false, className: "secondary-nav-disabled-customer",
+        key: 'challenges', content: 'Academic Challenges', name: 'challenges', active: false, className: 'secondary-nav-disabled-customer',
       },
     ];
 
@@ -167,16 +179,16 @@ class HeaderWithoutRouter extends React.Component {
         key: 'jobs', content: 'Browse jobs', name: 'jobs', active: activeItem === 'jobs', onClick: this.handleItemClick,
       },
       {
-        key: 'interviews', content: 'My Interviews', name: 'interviews', active: false, className: "secondary-nav-disabled-beta",
+        key: 'interviews', content: 'My Interviews', name: 'interviews', active: false, className: 'secondary-nav-disabled-beta',
       },
       {
-        key: 'career', content: 'Career Paths', name: 'career', active: false, className: "secondary-nav-disabled-beta",
+        key: 'career', content: 'Career Paths', name: 'career', active: false, className: 'secondary-nav-disabled-beta',
       },
       {
-        key: 'interships', content: 'Interships', name: 'interships', active: false, className: "secondary-nav-disabled-beta",
+        key: 'interships', content: 'Interships', name: 'interships', active: false, className: 'secondary-nav-disabled-beta',
       },
       {
-        key: 'business-challenges', content: 'Business challenges', name: 'business-challenges', active: false, className: "secondary-nav-disabled-customer",
+        key: 'business-challenges', content: 'Business challenges', name: 'business-challenges', active: false, className: 'secondary-nav-disabled-customer',
       },
     ];
 
@@ -231,7 +243,7 @@ class HeaderWithoutRouter extends React.Component {
                                 {this.props.eduBalance.toString().split('.')[0]}
                               </span>
                               <span className="fraction">
-                                .{this.props.eduBalance.toString().split('.')[1]}
+                                {this.props.eduBalance.toString().split('.')[0] === '0' && !this.props.eduBalance.toString().split('.')[1] ? null : '.'}{this.props.eduBalance.toString().split('.')[1]}
                               </span>
                             </span>
                           )}
@@ -288,7 +300,6 @@ class HeaderWithoutRouter extends React.Component {
                   case 'business': return <Menu size="massive" items={learnerBusinessesDropdownElements.slice(1)} />;
                   case 'academia': return <Menu size="massive" items={learnerAcademiaDropdownElements.slice(1)} />;
                   case 'account': return <Menu size="massive" items={accountElements} />;
-                  case 'createAccount': return <Menu size="massive" items={accountElements} />;
                   default: return null;
                   }
                 }

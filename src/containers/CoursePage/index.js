@@ -7,8 +7,8 @@ import { fetchCourse } from './actions';
 
 class CoursePage extends React.Component {
 	state = { activeItem: 'about' }
-	componentDidMount(){
-		this.props.fetchCourse(`http://localhost:8000/api/v1/courses/${this.props.match.params.id}/`);
+	componentDidMount() {
+	  this.props.fetchCourse(`http://localhost:8000/api/v1/courses/${this.props.match.params.id}/`);
 	}
 	setIcon(provider) {
 	  switch (provider) {
@@ -48,133 +48,133 @@ class CoursePage extends React.Component {
 	//     </div>);
 	// }
 
-  render() {
+	render() {
   	const { activeItem } = this.state;
-    return (
+	  return (
+  <div className="course">
+  <Container>
+      <Breadcrumb>
+  <Breadcrumb.Section href="/#/">Home</Breadcrumb.Section>
+  <Breadcrumb.Divider icon="right angle" />
+  <Breadcrumb.Section href="/#/courses">Courses</Breadcrumb.Section>
+	          <Breadcrumb.Divider icon="right angle" />
+  <Breadcrumb.Section active>Courses Description</Breadcrumb.Section>
+         </Breadcrumb>
+	        <Divider clearing />
       <div className="course">
-        <Container>
-            <Breadcrumb>
-              <Breadcrumb.Section href="/#/">Home</Breadcrumb.Section>
-              <Breadcrumb.Divider icon="right angle" />
-              <Breadcrumb.Section href="/#/courses">Courses</Breadcrumb.Section>
-              <Breadcrumb.Divider icon="right angle" />
-              <Breadcrumb.Section active>Courses Description</Breadcrumb.Section>
-            </Breadcrumb>
-            <Divider clearing />
-        	<div className="course">
-        	  <Dimmer active={this.props.course.isFetching} inverted>
-        	    <Loader size="large">Loading</Loader>
-        	  </Dimmer>
-        	  <Header style={{ fontSize: '1.7em' }}>
-        	    {this.props.course.title}
-        	  </Header>
-        	  <Grid>
-        	    <Grid.Column width={11}>
-        	      <Segment style={{ padding: '40px' }}>
-        	        <Header>
+	          <Dimmer active={this.props.course.isFetching} inverted>
+          <Loader size="large">Loading</Loader>
+	          </Dimmer>
+  <Header style={{ fontSize: '1.7em' }}>
+  {this.props.course.title}
+           </Header>
+  <Grid>
+  <Grid.Column width={11}>
+          <Segment style={{ padding: '40px' }}>
+  <Header>
         	          Reviews
-        	          <span style={{ float: 'right' }}>
-        	            <span style={{ cursor: 'pointer' }} className="disabled-beta">
-        	              <Icon color="grey" name="plus" />
-        	            </span>
-        	            <span style={{ cursor: 'pointer' }} className="disabled-beta">
-        	              <Icon color="grey" name="share alternate" />
-        	            </span>
-        	          </span>
-        	        </Header>
-        	        <span>
-        	          {this.props.course.description}
-        	        </span>
-        	        <Header>
+  <span style={{ float: 'right' }}>
+  <span style={{ cursor: 'pointer' }} className="disabled-beta">
+  <Icon color="grey" name="plus" />
+</span>
+	                    <span style={{ cursor: 'pointer' }} className="disabled-beta">
+      <Icon color="grey" name="share alternate" />
+    </span>
+                   </span>
+</Header>
+  <span>
+        {this.props.course.description}
+	                </span>
+  <Header>
         	          Skills
-        	        </Header>
-        	        <Label.Group size="medium">
-        	          {this.renderSkills()}
-        	        </Label.Group>
-        	        <Divider hidden />
-        	        <Grid>
-        	          <Grid.Row>
-        	            <Grid.Column width={4}>
-        	              <Button as="a" target="_blank" href={this.props.course.external_link}>SHOW COURSE</Button>
-        	            </Grid.Column>
-        	            <Grid.Column width={6}>
-        	              <Button as={Link} to="/certificates/add" color="green">REGISTER CERTIFICATE</Button>
-        	            </Grid.Column>
-        	          </Grid.Row>
-        	        </Grid>
-        	        <Divider hidden />
-        	        <Menu pointing secondary color="orange">
-        	          <Menu.Item style={{ fontSize: '1.3em' }} name="about" active={activeItem === 'about'} onClick={this.handleItemClick} />
-        	        </Menu>
-        	        <Container style={{ paddingLeft: '40px', paddingRight: '40px' }}>
-        	          {(() => {
+	                </Header>
+  <Label.Group size="medium">
+  {this.renderSkills()}
+	                </Label.Group>
+  <Divider hidden />
+  <Grid>
+	                  <Grid.Row>
+      <Grid.Column width={4}>
+	                      <Button as="a" target="_blank" href={this.props.course.external_link}>SHOW COURSE</Button>
+	                    </Grid.Column>
+      <Grid.Column width={6}>
+    <Button as={Link} to="/certificates/add" color="green">REGISTER CERTIFICATE</Button>
+  </Grid.Column>
+    </Grid.Row>
+                 </Grid>
+  <Divider hidden />
+  <Menu pointing secondary color="orange">
+  <Menu.Item style={{ fontSize: '1.3em' }} name="about" active={activeItem === 'about'} onClick={this.handleItemClick} />
+	                </Menu>
+  <Container style={{ paddingLeft: '40px', paddingRight: '40px' }}>
+	                  {(() => {
         	            switch (this.state.activeItem) {
         	            case 'entry requirements': return this.props.course.e_req;
         	            case 'reviews': return this.props.course.reviews;
         	            default: return this.props.course.description;
         	            }
         	          })()}
-        	        </Container>
-        	      </Segment>
-        	    </Grid.Column>
-        	    <Grid.Column width={5}>
-        	      <Segment style={{ padding: '40px' }}>
-        	        <div style={{ textAlign: 'center' }}>
-        	          <Header style={{ fontSize: '1.5em' }}>
+</Container>
+               </Segment>
+        </Grid.Column>
+	            <Grid.Column width={5}>
+          <Segment style={{ padding: '40px' }}>
+  <div style={{ textAlign: 'center' }}>
+  <Header style={{ fontSize: '1.5em' }}>
         	            Provider
-        	          </Header>
-        	          <Label
-        	            as="a"
-        	            href={!this.props.course.external_link ? '#' : (this.props.course.external_link.split('/')[0] + this.props.course.external_link.split('/')[2]).toString()}
-        	            target="_blank"
-        	            circular
-        	            style={{
+                   </Header>
+	                  <Label
+	                    as="a"
+      href={!this.props.course.external_link ? '#' : (this.props.course.external_link.split('/')[0] + this.props.course.external_link.split('/')[2]).toString()}
+      target="_blank"
+      circular
+      style={{
         	              boxShadow: '2px 6px 20px 0 #bcbdbd, 0 1px 21px 1px #d4d4d5', width: '8em', height: '8em', backgroundColor: 'white', backgroundImage: `url(${this.setIcon(this.props.course.provider.name)})`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: '80%',
         	            }}
-        	          />
-        	          <Header>
-        	            {this.props.course.provider.name}
-        	          </Header>
-        	        </div>
-        	        <Divider clearing />
-        	        <Header style={{ fontSize: '1.5em', marginBottom: '5px' }}>
+    />
+	                  <Header>
+	                    {this.props.course.provider.name}
+    </Header>
+	                </div>
+	                <Divider clearing />
+  <Header style={{ fontSize: '1.5em', marginBottom: '5px' }}>
         	          Category
-        	        </Header>
-        	        <Icon name="industry" />
-        	        <span style={{ color: 'grey' }} >
-        	          {this.props.course.categories[0].name}
-        	        </span>
-        	        <Divider clearing />
-        	        <Header style={{ fontSize: '1.5em', marginBottom: '5px' }}>
+	                </Header>
+  <Icon name="industry" />
+	                <span style={{ color: 'grey' }} >
+        {this.props.course.categories[0].name}
+      </span>
+  <Divider clearing />
+	                <Header style={{ fontSize: '1.5em', marginBottom: '5px' }}>
         	          Tutor
-        	        </Header>
-        	        <Icon name="user outline" />
-        	        <span style={{ color: 'grey' }} >
-        	          {this.props.course.tutor}
-        	        </span>
-        	        <Divider clearing />
-        	        <Header style={{ fontSize: '1.5em', marginBottom: '5px' }}>
+      </Header>
+  <Icon name="user outline" />
+  <span style={{ color: 'grey' }} >
+  {this.props.course.tutor}
+	                </span>
+  <Divider clearing />
+	                <Header style={{ fontSize: '1.5em', marginBottom: '5px' }}>
         	          Language
-        	        </Header>
-        	        <Icon name="world" />
-        	        <span style={{ color: 'grey' }} >
+      </Header>
+  <Icon name="world" />
+	                <span style={{ color: 'grey' }} >
         	          English
-        	        </span>
-        	        <Divider clearing />
-        	        <Header style={{ fontSize: '1.5em', marginBottom: '5px' }}>
+      </span>
+	                <Divider clearing />
+  <Header style={{ fontSize: '1.5em', marginBottom: '5px' }}>
         	          Course code
-        	        </Header>
-        	        <span style={{ color: 'grey' }} >
-        	          {this.props.course.id}
-        	        </span>
-        	      </Segment>
-        	    </Grid.Column>
-        	  </Grid>
-        	</div>
-        </Container>
-      </div>
-    );
-  }
+</Header>
+	                <span style={{ color: 'grey' }} >
+	                  {this.props.course.id}
+      </span>
+	              </Segment>
+        </Grid.Column>
+	          </Grid>
+	        </div>
+	      </Container>
+	    </div>
+	  );
+	}
 }
 
 function mapStateToProps(state) {

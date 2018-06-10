@@ -2,7 +2,6 @@ import React from 'react';
 import { Header, Divider, Grid, Sticky, Segment, List, Button, Modal, Form, Input } from 'semantic-ui-react';
 
 export default class AcademyProfile extends React.Component {
-
   render() {
     // IMG SRC
     // academy name
@@ -38,7 +37,8 @@ export default class AcademyProfile extends React.Component {
                     style={{
                       width: 175, height: 175, backgroundImage: `url(${profilePicture})`, backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center center',
                     }}
-                  />}>
+                  />}
+                  >
                     <Modal.Header>Select a Photo</Modal.Header>
                     <Modal.Content image>
                       <Image style={{ borderRadius: '50%', width: '200px', height: '200px' }} size="medium" src={profilePicture} />

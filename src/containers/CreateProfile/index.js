@@ -7,21 +7,14 @@ import ChooseAccount from 'components/ChooseAccount';
 export default class CreateAccount extends React.Component {
   constructor(props) {
     super(props);
-    this.props.createAccountNav();
+    this.props.setSecondaryNav(null, { name: 'null' });
   }
 
   render() {
     return (
       <div className="course">
         <Container textAlign="center">
-          {(() => {
-            switch (this.props.createAccountActiveItem) {
-            case 'info': return <AcademiaSettings />;
-            case 'payment': return null;
-            case 'deposit': return null;
-            default: return <ChooseAccount />;
-            }
-          })()}
+          <ChooseAccount setActiveAccount={this.props.setActiveAccount} />
         </Container>
       </div>
     );

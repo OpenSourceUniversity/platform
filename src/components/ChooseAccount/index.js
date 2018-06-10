@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Header, Divider, Segment, Grid } from 'semantic-ui-react';
 
 export default class ChooseAccount extends React.Component {
@@ -19,7 +20,7 @@ export default class ChooseAccount extends React.Component {
         <Divider clearing />
         <Grid columns={3}>
           <Grid.Column>
-            <Segment padded="very" className="padded-top-segment">
+            <Segment style={{ minHeight: '400px' }} padded="very" className="padded-top-segment">
               <img className="hex-icon" alt="" src={academia} />
               <Header>
                 ACADEMIA
@@ -33,12 +34,11 @@ export default class ChooseAccount extends React.Component {
               <span>
                 Are you an academic or a training provider?
               </span>
-              <Button fluid> SELECT </Button>
+              <Button style={{ marginTop: '30px' }} name="Academy" as={Link} to="/settings" onClick={this.props.setActiveAccount} fluid> SELECT </Button>
             </Segment>
           </Grid.Column>
-
           <Grid.Column>
-            <Segment padded="very" className="padded-top-segment">
+            <Segment style={{ minHeight: '400px' }} padded="very" className="padded-top-segment">
               <img className="hex-icon" alt="" src={learners} />
               <Header>
                 LEARNERS
@@ -52,12 +52,11 @@ export default class ChooseAccount extends React.Component {
               <span>
                 Are you pursuing learning and development opportunities?
               </span>
-              <Button fluid primary> SELECT </Button>
+              <Button style={{ marginTop: '30px' }} primary name="Lerner" as={Link} to="/settings" onClick={this.props.setActiveAccount} fluid> SELECT </Button>
             </Segment>
           </Grid.Column>
-
           <Grid.Column>
-            <Segment padded="very" className="padded-top-segment">
+            <Segment style={{ minHeight: '400px' }} padded="very" className="padded-top-segment">
               <img className="hex-icon" alt="" src={businesses} />
               <Header>
                 BUSINESSES
@@ -71,7 +70,7 @@ export default class ChooseAccount extends React.Component {
               <span>
                 Are you a company or an organization representative?
               </span>
-              <Button fluid> SELECT </Button>
+              <Button style={{ marginTop: '30px' }} name="Business" as={Link} to="/settings" onClick={this.props.setActiveAccount} fluid> SELECT </Button>
             </Segment>
           </Grid.Column>
         </Grid>

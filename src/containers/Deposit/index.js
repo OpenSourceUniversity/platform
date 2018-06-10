@@ -43,9 +43,9 @@ class Deposit extends React.Component {
   }
 
   copyAddress() {
-    const copyText = document.getElementById("WalletAddress");
+    const copyText = document.getElementById('WalletAddress');
     copyText.select();
-    document.execCommand("Copy");
+    document.execCommand('Copy');
   }
 
   render() {
@@ -117,7 +117,7 @@ class Deposit extends React.Component {
                             </datalist>
                             <Input
                               fluid
-                              label={<Dropdown defaultValue='edu' options={[{ key: 'edu', text: 'EDU', value: 'edu' },{ key: 'eth', text: 'ETH', value: 'eth' }]} />}
+                              label={<Dropdown defaultValue="edu" options={[{ key: 'edu', text: 'EDU', value: 'edu' }, { key: 'eth', text: 'ETH', value: 'eth' }]} />}
                               labelPosition="right"
                               placeholder="0.0000"
 

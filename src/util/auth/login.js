@@ -1,5 +1,6 @@
 import { createHashHistory } from 'history';
 import store from '../../store';
+import storeSignedAddress from './storeSignedAddress';
 
 const Wallet = require('ethereumjs-wallet');
 
@@ -21,8 +22,11 @@ export default function login(passphrase) {
     } else {
       try {
         const wallet = Wallet.fromV3(v3Wallet, passphrase);
+        const address = wallet.getChecksumAddressString();
+        const privateKey = wallet.getPrivateKey();
+        dispatch(storeSignedAddress(address, privateKey));
         localStorage.setItem('isLoggedIn', true);
-        localStorage.setItem('address', wallet.getChecksumAddressString());
+        localStorage.setItem('address', address);
         localStorage.setItem('publicKey', wallet.getPublicKey());
         dispatch({
           type: 'LOGGED_IN',

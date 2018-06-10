@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Container, Header, Grid, Dimmer, Loader, Segment, Message, Button, Icon, Divider } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import CourseItem from 'components/CourseItem';
+import CertificateItem from 'components/CertificateItem';
 import { fetchCertificates } from '../CertificatesPage/actions';
 
 

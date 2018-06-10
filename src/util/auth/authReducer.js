@@ -1,6 +1,7 @@
 const initialState = {
   v3Wallet: JSON.parse(localStorage.getItem('v3Wallet')),
   address: localStorage.getItem('address'),
+  signedAddress: localStorage.getItem('signedAddress'),
   publicKey: localStorage.getItem('publicKey'),
   isLoggedIn: JSON.parse(localStorage.getItem('isLoggedIn')),
   loginError: null,
@@ -15,6 +16,10 @@ const authReducer = (state = initialState, action) => {
       v3Wallet: action.payload.v3Wallet,
       loginError: null,
       isLoggedIn: true,
+    });
+  case 'SIGNED_ADDRESS_STORED':
+    return Object.assign({}, state, {
+      signedAddress: action.payload.signedAddress,
     });
   case 'LOGGING_IN':
     return Object.assign({}, state, {

@@ -1,10 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { Button, Container, Header, Divider, Grid, Segment, Menu, Form } from 'semantic-ui-react';
 import LernersSettings from 'components/LernersSettings';
 import AcademiaSettings from 'components/AcademiaSettings';
 import BusinessesSettings from 'components/BusinessesSettings';
+import setActiveAccount from '../../util/activeAccount/setActiveAccount';
+import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 
-export default class AccountSettings extends React.Component {
+class AccountSettings extends React.Component {
+  componentDidMount() {
+    this.props.setSecondaryNav('account');
+  }
+
   render() {
     /* eslint-disable global-require */
     const settings = require('../../icons/account_settings.svg');
@@ -30,19 +38,19 @@ export default class AccountSettings extends React.Component {
                     Set default profile:
                   </Header>
                   <Menu fluid vertical pointing>
-                    <Menu.Item name="Learner" active={this.props.activeAccount === 'Learner'} onClick={this.props.setActiveAccount}>
+                    <Menu.Item name="Learner" active={this.props.activeAccount === 'Learner'} onClick={(e, { name }) => this.props.setActiveAccount(name)}>
                       <svg width="16" height="16" className="cogs icon">
                         <image href={learners} x="0" y="0" width="100%" height="100%" />
                       </svg>
                     Learner
                     </Menu.Item>
-                    <Menu.Item name="Academy" active={this.props.activeAccount === 'Academy'} onClick={this.props.setActiveAccount}>
+                    <Menu.Item name="Academy" active={this.props.activeAccount === 'Academy'} onClick={(e, { name }) => this.props.setActiveAccount(name)}>
                       <svg width="16" height="16" className="cogs icon">
                         <image href={academia} x="0" y="0" width="100%" height="100%" />
                       </svg>
                       Academy
                     </Menu.Item>
-                    <Menu.Item name="Business" active={this.props.activeAccount === 'Business'} onClick={this.props.setActiveAccount}>
+                    <Menu.Item name="Business" active={this.props.activeAccount === 'Business'} onClick={(e, { name }) => this.props.setActiveAccount(name)}>
                       <svg width="16" height="16" className="cogs icon">
                         <image href={businesses} x="0" y="0" width="100%" height="100%" />
                       </svg>
@@ -70,3 +78,22 @@ export default class AccountSettings extends React.Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    activeAccount: state.activeAccount.activeAccount,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setActiveAccount(activeAccount) {
+      dispatch(setActiveAccount(activeAccount));
+    },
+    setSecondaryNav(secondaryNav) {
+      dispatch(setSecondaryNav(secondaryNav));
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AccountSettings));

@@ -1,8 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Container, Header, Segment, Button, Divider, Form, Input, Breadcrumb } from 'semantic-ui-react';
+import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 
 
-export default class CreateCoursePage extends React.Component {
+class CreateCoursePage extends React.Component {
+  componentDidMount() {
+    this.props.setSecondaryNav('academia');
+  }
+
   render() {
     const skills = [
       { key: 'angular', text: 'Angular', value: 'angular' },
@@ -161,3 +167,13 @@ export default class CreateCoursePage extends React.Component {
     );
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setSecondaryNav(secondaryNav) {
+      dispatch(setSecondaryNav(secondaryNav));
+    },
+  };
+}
+
+export default connect(mapDispatchToProps)(CreateCoursePage);

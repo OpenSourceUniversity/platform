@@ -76,18 +76,20 @@ export default class AcademyProfile extends React.Component {
                 </Segment>
                 <Segment>
                   <Button
+                    as="a"
                     primary
                     size="large"
                     className="fluid"
                     content="MESSAGE US"
                     icon="mail outline"
+                    href={email}
                   />
                 </Segment>
                 <Segment>
                   <List>
-                    <List.Item icon="users" content={<span>{this.props.academy.learners}</span>} />
-                    <List.Item icon="mail" content={<a href={email}>{this.props.academy.email}</a>} />
-                    <List.Item icon="linkify" content={<a href={link}>{this.props.academy.site}</a>} />
+                    <List.Item icon={{ name: 'users', style: { width: '22px' } }} content={<span>{this.props.academy.learners}</span>} />
+                    <List.Item icon={{ name: 'mail', style: { width: '22px' } }} content={<a href={email}>{this.props.academy.email}</a>} />
+                    <List.Item icon={{ name: 'linkify', style: { width: '22px' } }} content={<a href={link}>{this.props.academy.site}</a>} />
                   </List>
                 </Segment>
                 <Segment />

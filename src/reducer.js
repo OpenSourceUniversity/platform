@@ -7,6 +7,8 @@ import certificatesReducer from './containers/CertificatesPage/certificatesReduc
 import coursesReducer from './containers/CoursesPage/coursesReducer';
 import courseReducer from './containers/CoursePage/courseReducer';
 import addCertificateReducer from './containers/AddCertificatePage/addCertificateReducer';
+import activeAccountReducer from './util/activeAccount/activeAccountReducer';
+import secondaryNavReducer from './util/secondaryNav/secondaryNavReducer';
 
 const reducer = combineReducers({
   web3: web3Reducer,
@@ -17,6 +19,8 @@ const reducer = combineReducers({
   courses: coursesReducer,
   course: courseReducer,
   search: searchReducer,
+  activeAccount: activeAccountReducer,
+  secondaryNav: secondaryNavReducer,
 });
 
 export default reducer;

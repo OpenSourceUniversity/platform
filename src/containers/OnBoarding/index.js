@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Container, Card } from 'semantic-ui-react';
 import SignIn from 'components/SignIn';
 import SignUp from 'components/SignUp';
@@ -9,11 +10,14 @@ import WalletCreated from 'components/WalletCreated';
 import PasswordRecovery from 'components/PasswordRecovery';
 import WalletRecoverySuccess from 'components/WalletRecoverySuccess';
 
-export default class OnBoarding extends React.Component {
+class OnBoarding extends React.Component {
   constructor(props) {
     super(props);
     this.setMnemonicPhrase = this.setMnemonicPhrase.bind(this);
     this.setPassphrase = this.setPassphrase.bind(this);
+  }
+  componentDidMount() {
+    this.props.setSecondaryNav(null);
   }
   state = {
     onboardingActiveForm: 'signin',
@@ -52,3 +56,13 @@ export default class OnBoarding extends React.Component {
     );
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setSecondaryNav(secondaryNav) {
+      dispatch(setSecondaryNav(secondaryNav));
+    },
+  };
+}
+
+export default connect(mapDispatchToProps)(OnBoarding);

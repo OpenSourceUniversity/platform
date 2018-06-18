@@ -1,8 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Button, Header, Divider, Segment, Grid } from 'semantic-ui-react';
+import setActiveAccount from '../../util/activeAccount/setActiveAccount';
 
-export default class ChooseAccount extends React.Component {
+class ChooseAccount extends React.Component {
   render() {
     /* eslint-disable global-require */
 
@@ -34,7 +37,7 @@ export default class ChooseAccount extends React.Component {
               <span>
                 Are you an academic or a training provider?
               </span>
-              <Button style={{ marginTop: '30px' }} name="Academy" as={Link} to="/settings" onClick={this.props.setActiveAccount} fluid> SELECT </Button>
+              <Button style={{ marginTop: '30px' }} name="Academy" as={Link} to="/settings" onClick={(e, { name }) => this.props.setActiveAccount(name)} fluid> SELECT </Button>
             </Segment>
           </Grid.Column>
           <Grid.Column>
@@ -52,7 +55,7 @@ export default class ChooseAccount extends React.Component {
               <span>
                 Are you pursuing learning and development opportunities?
               </span>
-              <Button style={{ marginTop: '30px' }} primary name="Lerner" as={Link} to="/settings" onClick={this.props.setActiveAccount} fluid> SELECT </Button>
+              <Button style={{ marginTop: '30px' }} primary name="Lerner" as={Link} to="/settings" onClick={(e, { name }) => this.props.setActiveAccount(name)} fluid> SELECT </Button>
             </Segment>
           </Grid.Column>
           <Grid.Column>
@@ -70,7 +73,7 @@ export default class ChooseAccount extends React.Component {
               <span>
                 Are you a company or an organization representative?
               </span>
-              <Button style={{ marginTop: '30px' }} name="Business" as={Link} to="/settings" onClick={this.props.setActiveAccount} fluid> SELECT </Button>
+              <Button style={{ marginTop: '30px' }} name="Business" as={Link} to="/settings" onClick={(e, { name }) => this.props.setActiveAccount(name)} fluid> SELECT </Button>
             </Segment>
           </Grid.Column>
         </Grid>
@@ -79,3 +82,13 @@ export default class ChooseAccount extends React.Component {
     );
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setActiveAccount(activeAccount) {
+      dispatch(setActiveAccount(activeAccount));
+    },
+  };
+}
+
+export default connect(mapDispatchToProps)(withRouter(ChooseAccount));

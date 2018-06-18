@@ -18,18 +18,6 @@ class HeaderWithoutRouter extends React.Component {
     this.props.getBalances();
   }
 
-  componentDidMount() {
-    if( this.props.location.pathname.includes('course') || this.props.location.pathname.includes('certificates') ) {
-      this.props.setSecondaryNav(null, { name: 'academia' });
-    } else if ( this.props.location.pathname.includes('job')) {
-      this.props.setSecondaryNav(null, { name: 'business' });
-    } else if ( this.props.location.pathname === '/profile' || this.props.location.pathname.includes('deposit') || this.props.location.pathname.includes('settings') ) {
-      this.props.setSecondaryNav(null, { name: 'account' });
-    } else {
-      this.props.setSecondaryNav(null, { name: 'null' });
-    }
-  }
-
   state = { }
 
   handleItemClick = (e, { name }) => {
@@ -173,10 +161,10 @@ class HeaderWithoutRouter extends React.Component {
 
     const learnerBusinessesDropdownElements = [
       {
-        key: 'businesses', content: 'Businesses', name: 'jobs', className: 'businesses', active: activeItem === 'businesses', onClick: this.handleItemClick,
+        key: 'businesses', content: 'Businesses', name: 'jobs', className: 'businesses', active: activeItem === 'businesses',
       },
       {
-        key: 'jobs', content: 'Browse jobs', name: 'jobs', active: activeItem === 'jobs', onClick: this.handleItemClick,
+        key: 'jobs', content: 'Browse jobs', name: 'jobs', active: false, className: 'secondary-nav-disabled-beta',
       },
       {
         key: 'interviews', content: 'My Interviews', name: 'interviews', active: false, className: 'secondary-nav-disabled-beta',
@@ -206,7 +194,7 @@ class HeaderWithoutRouter extends React.Component {
                     <Dropdown.Item name="academia" className="nav-list" onClick={this.props.setSecondaryNav}>
                       <List selection items={learnerAcademiaDropdownElements} />
                     </Dropdown.Item>
-                    <Dropdown.Item name="business" className="nav-list" onClick={this.props.setSecondaryNav}>
+                    <Dropdown.Item name="business" className="nav-list secondary-nav-disabled-beta">
                       <List selection items={learnerBusinessesDropdownElements} />
                     </Dropdown.Item>
                   </Dropdown.Menu>
@@ -320,6 +308,7 @@ function mapStateToProps(state) {
     isLoggedIn: state.auth.isLoggedIn,
     eduBalance: state.web3.eduBalance,
     balancesError: state.web3.web3Error,
+    secondaryNav: state.secondaryNav.secondaryNav,
   };
 }
 

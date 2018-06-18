@@ -1,8 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Container } from 'semantic-ui-react';
 import StudentProgram from 'components/StudentProgram';
+import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 
-export default class StudentProgramPage extends React.Component {
+class StudentProgramPage extends React.Component {
+  componentDidMount() {
+    this.props.setSecondaryNav('academia');
+  }
+
   render() {
     return (
       <div className="program">
@@ -13,3 +19,14 @@ export default class StudentProgramPage extends React.Component {
     );
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setSecondaryNav(secondaryNav) {
+      dispatch(setSecondaryNav(secondaryNav));
+    },
+  };
+}
+
+
+export default connect(mapDispatchToProps)(StudentProgramPage);

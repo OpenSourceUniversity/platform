@@ -39,20 +39,12 @@ class Main extends React.Component {
           path="/profile"
           render={props => (<ProfilePage
             {...props}
-            activeAccount={this.props.activeAccount}
             academyProfilePic={this.props.academyProfilePic}
             learnerProfilePic={this.props.learnerProfilePic}
             businessProfilePic={this.props.businessProfilePic}
           />)}
         />
-        <Route
-          path="/settings"
-          render={props => (<Account
-            {...props}
-            activeAccount={this.props.activeAccount}
-            setActiveAccount={this.props.setActiveAccount}
-          />)}
-        />
+        <Route path="/settings" component={Account} />
         <Route
           path="/onboarding"
           render={props => (<OnBoarding
@@ -69,8 +61,6 @@ class Main extends React.Component {
           path="/create-profile"
           render={props => (<CreateProfile
             {...props}
-            activeAccount={this.props.activeAccount}
-            setActiveAccount={this.props.setActiveAccount}
             setCreateAccountActiveItem={this.props.setCreateAccountActiveItem}
             createAccountActiveItem={this.props.createAccountActiveItem}
             setCreateAccountNav={this.props.setCreateAccountNav}

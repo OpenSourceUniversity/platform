@@ -5,11 +5,13 @@ import { Link } from 'react-router-dom';
 import CourseItem from 'components/CourseItem';
 import CertificateItem from 'components/CertificateItem';
 import { fetchCertificates } from '../CertificatesPage/actions';
+import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 
 
 class HomePage extends React.Component {
   componentDidMount() {
     this.props.fetchCertificates();
+    this.props.setSecondaryNav(null);
   }
 
   renderCourses() {
@@ -190,6 +192,9 @@ function mapDispatchToProps(dispatch) {
   return {
     fetchCertificates() {
       dispatch(fetchCertificates());
+    },
+    setSecondaryNav(secondaryNav) {
+      dispatch(setSecondaryNav(secondaryNav));
     },
   };
 }

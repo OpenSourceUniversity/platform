@@ -6,6 +6,7 @@ import TopCoursesItem from 'components/TopCoursesItem';
 import TopAcademiaItem from 'components/TopAcademiaItem';
 import CoursesCategoryFilter from 'components/CoursesCategoryFilter';
 import { fetchCourses } from './actions';
+import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 
 
 class CoursesPage extends React.Component {
@@ -13,6 +14,7 @@ class CoursesPage extends React.Component {
 
   componentDidMount() {
     this.props.fetchCourses();
+    this.props.setSecondaryNav('academia');
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
@@ -206,6 +208,9 @@ function mapDispatchToProps(dispatch) {
   return {
     fetchCourses(url) {
       dispatch(fetchCourses(url));
+    },
+    setSecondaryNav(secondaryNav) {
+      dispatch(setSecondaryNav(secondaryNav));
     },
   };
 }

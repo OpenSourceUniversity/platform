@@ -47,7 +47,7 @@ class CourseItemWithoutRouter extends React.Component {
           (null) :
           (<Card.Content extra>
             { this.props.course.description }
-          </Card.Content>)
+           </Card.Content>)
         }
         <Card.Content extra>
           <Button name="course-page" onClick={() => { this.props.history.push(`/course-page/${this.props.course.id}/`); }}>

@@ -5,7 +5,7 @@ import { Button, Header, Divider, Label, Segment, Grid, Menu, Icon, Container } 
 import JobItem from 'components/JobItem';
 import SkillItem from 'components/SkillItem';
 
-class JobWithoutRouter extends React.Component {
+class Job extends React.Component {
   static propTypes = {
     history: PropTypes.object.isRequired,
   }
@@ -233,6 +233,4 @@ class JobWithoutRouter extends React.Component {
   }
 }
 
-const Job = withRouter(JobWithoutRouter);
-
-export default Job;
+export default withRouter(Job);

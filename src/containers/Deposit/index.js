@@ -3,6 +3,7 @@ import React from 'react';
 import { Segment, Container, Grid, Card, Image, Button, Table, Icon, Header, Divider, Statistic, Responsive, Input, Form, Modal, Dropdown } from 'semantic-ui-react';
 import TransactionHistoryItem from 'components/TransactionHistoryItem';
 import getBalances from '../../util/web3/getBalances';
+import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 
 const options = [
   '0x849c2ea2a8f0ed0fe6d28b17fa0f779d6a45dff1',
@@ -14,6 +15,9 @@ class Deposit extends React.Component {
   constructor(props) {
     super(props);
     this.props.getBalances();
+  }
+  componentDidMount() {
+    this.props.setSecondaryNav('account');
   }
   renderAutocomplete() {
     return options.map((wallet, index) => (
@@ -181,6 +185,9 @@ function mapDispatchToProps(dispatch) {
   return {
     getBalances() {
       dispatch(getBalances());
+    },
+    setSecondaryNav(secondaryNav) {
+      dispatch(setSecondaryNav(secondaryNav));
     },
   };
 }

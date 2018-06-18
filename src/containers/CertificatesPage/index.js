@@ -4,11 +4,13 @@ import { Container, Header, Grid, Button, Icon, Divider, Breadcrumb, Loader, Mes
 import { Link } from 'react-router-dom';
 import CertificateItem from 'components/CertificateItem';
 import { fetchCertificates } from './actions';
+import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 
 
 class CertificatesPage extends React.Component {
   componentDidMount() {
     this.props.fetchCertificates();
+    this.props.setSecondaryNav('academia');
   }
 
   renderCertificates() {
@@ -85,6 +87,9 @@ function mapDispatchToProps(dispatch) {
   return {
     fetchCertificates() {
       dispatch(fetchCertificates());
+    },
+    setSecondaryNav(secondaryNav) {
+      dispatch(setSecondaryNav(secondaryNav));
     },
   };
 }

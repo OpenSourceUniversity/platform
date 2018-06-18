@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Header, Segment, Button, Message, Divider, Breadcrumb, Form, Input, Dimmer, Loader } from 'semantic-ui-react';
 import { addCertificate } from './actions';
+import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 
 
 class AddCertificatePage extends React.Component {
@@ -19,6 +20,10 @@ class AddCertificatePage extends React.Component {
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.setSecondaryNav('academia');
   }
 
   handleInputChange(event) {
@@ -157,6 +162,9 @@ function mapDispatchToProps(dispatch) {
   return {
     addCertificate(state) {
       dispatch(addCertificate(state));
+    },
+    setSecondaryNav(secondaryNav) {
+      dispatch(setSecondaryNav(secondaryNav));
     },
   };
 }

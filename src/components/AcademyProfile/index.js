@@ -1,27 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Header, Divider, Grid, Sticky, Segment, List, Button, Modal, Form, Input } from 'semantic-ui-react';
+import academyProfile from '../../util/profile/academyProfile';
 
-export default class AcademyProfile extends React.Component {
+class AcademyProfile extends React.Component {
+  componentWillMount() {
+    this.props.academyProfile();
+  }
   render() {
-    // IMG SRC
-    // academy name
-    // Location
-    // Short description
-    // Employees
-    // Email
-    // academy type
-    // Site (+ render site link)
-    // Socials (render)
-    // Full description
-    // Jobs Listing (Jobs Item?)
-    /* eslint-disable global-require */
 
-    const profilePicture = this.props.academy.profile_src;
-
-    /* eslint-enable global-require */
-
-    const email = `mailto:${this.props.academy.email}`;
-    const link = `https://${this.props.academy.site}`;
+    const email = `mailto:${this.props.profile.email}`;
+    const link = `https://${this.props.profile.site}`;
 
     return (
       <div>
@@ -35,13 +24,13 @@ export default class AcademyProfile extends React.Component {
                     circular
                     className="profilePicSegment"
                     style={{
-                      width: 175, height: 175, backgroundImage: `url(${profilePicture})`, backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center center',
+                      width: 175, height: 175, backgroundImage: `url(${this.props.profile.profilePic})`, backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center center',
                     }}
                   />}
                   >
                     <Modal.Header>Select a Photo</Modal.Header>
                     <Modal.Content image>
-                      <Image style={{ borderRadius: '50%', width: '200px', height: '200px' }} size="medium" src={profilePicture} />
+                      <Image style={{ borderRadius: '50%', width: '200px', height: '200px' }} size="medium" src={this.props.profile.profilePic} />
                       <Modal.Description style={{ width: '100%', paddingLeft: '4em', textAlign: 'center' }}>
                         <Header>Default Profile Image</Header>
                         <Form>
@@ -65,13 +54,10 @@ export default class AcademyProfile extends React.Component {
                     </Modal.Content>
                   </Modal>
                   <Header size="large">
-                    {this.props.academy.name}
-                  </Header>
-                  <Header size="small" color="grey">
-                    {this.props.academy.location}
+                      {this.props.profile.name}
                   </Header>
                   <span>
-                    {this.props.academy.short_desc}
+                    {this.props.profile.shortDescription}
                   </span>
                 </Segment>
                 <Segment>
@@ -87,9 +73,10 @@ export default class AcademyProfile extends React.Component {
                 </Segment>
                 <Segment>
                   <List>
-                    <List.Item icon={{ name: 'users', style: { width: '22px' } }} content={<span>{this.props.academy.learners}</span>} />
-                    <List.Item icon={{ name: 'mail', style: { width: '22px' } }} content={<a href={email}>{this.props.academy.email}</a>} />
-                    <List.Item icon={{ name: 'linkify', style: { width: '22px' } }} content={<a href={link}>{this.props.academy.site}</a>} />
+                    <List.Item icon={{ name: 'users', style: { width: '22px' } }} content={<span>{this.props.profile.students}</span>} />
+                    <List.Item icon={{ name: 'marker', style: { width: '22px' } }} content={this.props.profile.location} />
+                    <List.Item icon={{ name: 'mail', style: { width: '22px' } }} content={<a href={email}>{this.props.profile.email}</a>} />
+                    <List.Item icon={{ name: 'linkify', style: { width: '22px' } }} content={<a href={link}>{this.props.profile.site}</a>} />
                   </List>
                 </Segment>
                 <Segment />
@@ -102,7 +89,7 @@ export default class AcademyProfile extends React.Component {
                 About
               </Header>
               <Divider clearing />
-              {this.props.academy.full_desc}
+              {this.props.profile.fullDescription}
               <Divider clearing />
             </Segment>
             <Segment size="large">
@@ -117,3 +104,19 @@ export default class AcademyProfile extends React.Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    profile: state.profile,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    academyProfile() {
+      dispatch(academyProfile());
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AcademyProfile);

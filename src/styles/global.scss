@@ -95,12 +95,12 @@ div.App {
             color: rgba(0,0,0,.15);
           }
           div.academia, div.businesses {
-              border-bottom: 1px solid rgba(34, 36, 38, 0.1);
+              border-bottom: 1px solid rgba(34, 36, 38, 0.1)!important;
               color: black;
-              margin-bottom: 10px;
-              font-weight: 700;
-              font-size: 1.1em;
-              padding-bottom: 10px;
+              margin-bottom: 10px!important;
+              font-weight: 700!important;
+              font-size: 1.1em!important;
+              padding-bottom: 10px!important;
           }
           .ui.list>.item.secondary-nav-disabled-beta:hover ,.ui.list>.item.secondary-nav-disabled-customer:hover {
               color: rgba(0,0,0,.15) !important;

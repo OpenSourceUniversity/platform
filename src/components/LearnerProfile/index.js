@@ -5,16 +5,16 @@ import { Link } from 'react-router-dom';
 import SkillItem from 'components/SkillItem';
 import CertificateItem from 'components/CertificateItem';
 import { fetchCertificates } from '../../containers/CertificatesPage/actions';
+import learnerProfile from '../../util/profile/learnerProfile';
 
 
 class LearnerProfile extends React.Component {
   constructor(props) {
     super(props);
-
-    /* eslint-disable */
-    /* eslint-enable */
-
     this.handleInputChange = this.handleInputChange.bind(this);
+  }
+  componentWillMount() {
+    this.props.learnerProfile();
   }
   componentDidMount() {
     this.props.fetchCertificates();
@@ -48,25 +48,14 @@ class LearnerProfile extends React.Component {
   }
 
   render() {
-    const profilePicture = this.props.learner.profile_src;
     /* eslint-disable global-require */
 
     const token = require('../../icons/edu_token.svg');
 
     /* eslint-enable global-require */
 
-    const email = `mailto:${this.props.learner.email}`;
-    const site = `http://${this.props.learner.site}`;
-
-    // name
-    // position
-    // email
-    // site
-    // certificates
-    // courses
-    // skills
-    // reviews
-    // introduction
+    const email = `mailto:${this.props.profile.email}`;
+    const site = `http://${this.props.profile.site}`;
 
     return (
       <div>
@@ -80,13 +69,13 @@ class LearnerProfile extends React.Component {
                     circular
                     className="profilePicSegment"
                     style={{
-                      width: 175, height: 175, backgroundImage: `url(${profilePicture})`, backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center center',
+                      width: 175, height: 175, backgroundImage: `url(${this.props.profile.profilePic})`, backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center center',
                     }}
                   />}
                   >
                     <Modal.Header>Select a Photo</Modal.Header>
                     <Modal.Content image>
-                      <Image style={{ borderRadius: '50%', width: '200px', height: '200px' }} size="medium" src={profilePicture} />
+                      <Image style={{ borderRadius: '50%', width: '200px', height: '200px' }} size="medium" src={this.props.profile.profilePic} />
                       <Modal.Description style={{ width: '100%', paddingLeft: '4em', textAlign: 'center' }}>
                         <Header>Default Profile Image</Header>
                         <Form>
@@ -110,32 +99,32 @@ class LearnerProfile extends React.Component {
                     </Modal.Content>
                   </Modal>
                   <Header size="large">
-                    {this.props.learner.name}
+                    {this.props.profile.names}
                   </Header>
                   <Header size="small" color="grey">
-                    {this.props.learner.position}
+                    {this.props.profile.position}
                   </Header>
                 </Segment>
                 <Segment>
                   <List>
-                    <List.Item icon={{ name: 'users', style: { width: '22px' } }} content={this.props.learner.specialisation} />
-                    <List.Item icon={{ name: 'marker', style: { width: '22px' } }} content={this.props.learner.location} />
-                    <List.Item icon={{ name: 'mail', style: { width: '22px' } }} content={<a href={email}>{this.props.learner.email}</a>} />
-                    <List.Item icon={{ name: 'linkify', style: { width: '22px' } }} content={<a href={site}>{this.props.learner.site}</a>} />
+                    <List.Item icon={{ name: 'users', style: { width: '22px' } }} content={this.props.profile.specialisation} />
+                    <List.Item icon={{ name: 'marker', style: { width: '22px' } }} content={this.props.profile.location} />
+                    <List.Item icon={{ name: 'mail', style: { width: '22px' } }} content={<a href={email}>{this.props.profile.email}</a>} />
+                    <List.Item icon={{ name: 'linkify', style: { width: '22px' } }} content={<a href={site}>{this.props.profile.site}</a>} />
                   </List>
                 </Segment>
                 <Segment>
                   <Statistic.Group size="tiny" color="orange" horizontal>
                     <Statistic>
-                      <Statistic.Value>{this.props.learner.certificates}</Statistic.Value>
+                      <Statistic.Value>{this.props.profile.certificates}</Statistic.Value>
                       <Statistic.Label>Certificates</Statistic.Label>
                     </Statistic>
                     <Statistic>
-                      <Statistic.Value>{this.props.learner.courses}</Statistic.Value>
+                      <Statistic.Value>{this.props.profile.courses}</Statistic.Value>
                       <Statistic.Label>Courses</Statistic.Label>
                     </Statistic>
                     <Statistic>
-                      <Statistic.Value>{this.props.learner.reviews}</Statistic.Value>
+                      <Statistic.Value>{this.props.profile.reviews}</Statistic.Value>
                       <Statistic.Label>Reviews</Statistic.Label>
                     </Statistic>
                   </Statistic.Group>
@@ -153,7 +142,7 @@ class LearnerProfile extends React.Component {
                 textAlign: 'center', background: '#7f8fa6', color: '#fff', borderRadius: '10px', opacity: 0.7,
               }}
               >
-                {this.props.learner.introduction}
+                Coming in Beta
               </Segment>
               <Header>
                 Certificates
@@ -233,6 +222,7 @@ function mapStateToProps(state) {
     certificates: state.certificates.certificates,
     isFetchingCertificate: state.certificates.isFetching,
     errorCertificate: state.certificates.error,
+    profile: state.profile,
   };
 }
 
@@ -241,6 +231,9 @@ function mapDispatchToProps(dispatch) {
   return {
     fetchCertificates() {
       dispatch(fetchCertificates());
+    },
+    learnerProfile() {
+      dispatch(learnerProfile());
     },
   };
 }

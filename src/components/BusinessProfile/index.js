@@ -1,64 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Header, Divider, Grid, Sticky, Segment, List, Button, Modal, Form, Input } from 'semantic-ui-react';
-import JobItem from 'components/JobItem';
+import businessProfile from '../../util/profile/businessProfile';
 
-export default class BusinessProfile extends React.Component {
-  renderJobs() {
-    const jobs = [
-      {
-        title: 'Python Development', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
-      },
-      {
-        title: 'Scrum Master', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
-      },
-      {
-        title: 'Machine Learning', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
-      },
-      {
-        title: 'Solidity Development', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
-      },
-      {
-        title: 'Unit Testing', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
-      },
-      {
-        title: 'Computer Vision', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
-      },
-      {
-        title: 'Computer Vision', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
-      },
-      {
-        title: 'Computer Vision', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
-      },
-      {
-        title: 'Computer Vision', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
-      },
-      {
-        title: 'Computer Vision', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
-      },
-      {
-        title: 'Computer Vision', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
-      },
-      {
-        title: 'Computer Vision', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
-      },
-      {
-        title: 'Computer Vision', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
-      },
-      {
-        title: 'Computer Vision', level: 'Beginer', location: 'UK', duration: '4 weeks', rating: '4.5', description: 'blahblahblah',
-      },
-    ];
-    return jobs.map((job, index) => (
-      <Grid.Column
-        computer={8}
-        largeScreen={8}
-        widescreen={8}
-        tablet={8}
-        mobile={16}
-        key={index}
-      >
-        <JobItem job={job} key={index} />
-      </Grid.Column>));
+class BusinessProfile extends React.Component {
+  componentWillMount() {
+    this.props.businessProfile();
   }
 
   render() {
@@ -73,14 +20,10 @@ export default class BusinessProfile extends React.Component {
     // Socials (render)
     // Full description
     // Jobs Listing (Jobs Item?)
-    /* eslint-disable global-require */
 
-    const profilePicture = this.props.company.profile_src;
 
-    /* eslint-enable global-require */
-
-    const email = `mailto:${this.props.company.email}`;
-    const link = `https://${this.props.company.site}`;
+    const email = `mailto:${this.props.profile.email}`;
+    const link = `https://${this.props.profile.site}`;
 
     return (
       <div>
@@ -94,13 +37,13 @@ export default class BusinessProfile extends React.Component {
                     circular
                     className="profilePicSegment"
                     style={{
-                      width: 175, height: 175, backgroundImage: `url(${profilePicture})`, backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center center',
+                      width: 175, height: 175, backgroundImage: `url(${this.props.profile.profilePic})`, backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center center',
                     }}
                   />}
                   >
                     <Modal.Header>Select a Photo</Modal.Header>
                     <Modal.Content image>
-                      <Image style={{ borderRadius: '50%', width: '200px', height: '200px' }} size="medium" src={profilePicture} />
+                      <Image style={{ borderRadius: '50%', width: '200px', height: '200px' }} size="medium" src={this.props.profile.profilePic} />
                       <Modal.Description style={{ width: '100%', paddingLeft: '4em', textAlign: 'center' }}>
                         <Header>Default Profile Image</Header>
                         <Form>
@@ -124,13 +67,13 @@ export default class BusinessProfile extends React.Component {
                     </Modal.Content>
                   </Modal>
                   <Header size="large">
-                    {this.props.company.name}
+                    {this.props.profile.name}
                   </Header>
                   <Header size="small" color="grey">
-                    {this.props.company.location}
+                    {this.props.profile.location}
                   </Header>
                   <span>
-                    {this.props.company.short_desc}
+                    {this.props.profile.shortDescription}
                   </span>
                 </Segment>
                 <Segment>
@@ -144,9 +87,9 @@ export default class BusinessProfile extends React.Component {
                 </Segment>
                 <Segment>
                   <List>
-                    <List.Item icon="users" content={this.props.company.employees} />
-                    <List.Item icon="mail" content={<a href={email}>{this.props.company.email}</a>} />
-                    <List.Item icon="linkify" content={<a href={link}>{this.props.company.site}</a>} />
+                    <List.Item icon="users" content={this.props.profile.employees} />
+                    <List.Item icon="mail" content={<a href={email}>{this.props.profile.email}</a>} />
+                    <List.Item icon="linkify" content={<a href={link}>{this.props.profile.site}</a>} />
                   </List>
                 </Segment>
                 <Segment />
@@ -159,15 +102,8 @@ export default class BusinessProfile extends React.Component {
                 About
               </Header>
               <Divider clearing />
-              {this.props.company.full_desc}
+              {this.props.profile.fullDescription}
               <Divider clearing />
-            </Segment>
-            <Segment size="large">
-              <Header>
-                Jobs
-              </Header>
-              <Divider clearing />
-              {this.renderJobs()}
             </Segment>
           </Grid.Column>
         </Grid>
@@ -175,3 +111,19 @@ export default class BusinessProfile extends React.Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    profile: state.profile,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    businessProfile() {
+      dispatch(businessProfile());
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BusinessProfile);

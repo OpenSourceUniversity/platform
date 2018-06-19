@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { Container, Card } from 'semantic-ui-react';
 import SignIn from 'components/SignIn';
 import SignUp from 'components/SignUp';
@@ -9,6 +10,7 @@ import SignUpRecoveryPhraseCheck from 'components/SignUpRecoveryPhraseCheck';
 import WalletCreated from 'components/WalletCreated';
 import PasswordRecovery from 'components/PasswordRecovery';
 import WalletRecoverySuccess from 'components/WalletRecoverySuccess';
+import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 
 class OnBoarding extends React.Component {
   constructor(props) {
@@ -17,7 +19,7 @@ class OnBoarding extends React.Component {
     this.setPassphrase = this.setPassphrase.bind(this);
   }
   componentDidMount() {
-    this.props.setSecondaryNav(null);
+    this.props.setSecondaryNav;
   }
   state = {
     onboardingActiveForm: 'signin',
@@ -43,7 +45,7 @@ class OnBoarding extends React.Component {
             case 'recoveryPhraseSeed': return <SignUpRecoveryPhrase setMnemonicPhrase={this.setMnemonicPhrase} mnemonicPhrase={this.state.mnemonicPhrase} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
             case 'recovery': return <WalletRecovery handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} setMnemonicPhrase={this.setMnemonicPhrase} />;
             case 'signup': return <SignUp setPassphrase={this.setPassphrase} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
-            case 'created': return <WalletCreated setSecondaryNav={this.props.setSecondaryNav} passphrase={this.state.passphrase} mnemonicPhrase={this.state.mnemonicPhrase} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
+            case 'created': return <WalletCreated passphrase={this.state.passphrase} mnemonicPhrase={this.state.mnemonicPhrase} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
             case 'passwordrecovery': return <PasswordRecovery handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} setPassphrase={this.setPassphrase} />;
             case 'walletrecoverysuccess': return <WalletRecoverySuccess passphrase={this.state.passphrase} mnemonicPhrase={this.state.mnemonicPhrase} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
             default: return (<SignIn
@@ -65,4 +67,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapDispatchToProps)(OnBoarding);
+export default connect(mapDispatchToProps)(withRouter(OnBoarding));

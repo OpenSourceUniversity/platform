@@ -1,5 +1,7 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import HomePage from 'containers/HomePage';
 import CertificatesPage from 'containers/CertificatesPage';
 import AddCertificatePage from 'containers/AddCertificatePage';
@@ -21,70 +23,49 @@ import CreateJobPage from 'containers/CreateJobPage';
 import CreateCoursePage from 'containers/CreateCoursePage';
 import StudentProgramsPage from 'containers/StudentProgramsPage';
 
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={(props) => (
+    rest.isLoggedIn === true
+      ? <Component {...props} />
+      : <Redirect to='/onboarding' />
+  )} />
+)
+
 class Main extends React.Component {
   state = {}
 
   render() {
     return (
       <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/certificates" component={CertificatesPage} />
-        <Route exact path="/certificates/add" component={AddCertificatePage} />
-        <Route exact path="/businesses/add" component={AddPositionToBusinessPage} />
-        <Route path="/courses" component={CoursesPage} />
-        <Route path="/programs" component={StudentProgramsPage} />
-        <Route path="/jobs" component={JobsPage} />
-        <Route path="/business" component={BusinessPage} />
-        <Route
-          path="/profile"
-          render={props => (<ProfilePage
-            {...props}
-            academyProfilePic={this.props.academyProfilePic}
-            learnerProfilePic={this.props.learnerProfilePic}
-            businessProfilePic={this.props.businessProfilePic}
-          />)}
-        />
-        <Route path="/settings" component={Account} />
-        <Route
-          path="/onboarding"
-          render={props => (<OnBoarding
-            {...props}
-            setSecondaryNav={this.props.setSecondaryNav}
-          />)}
-        />
-        <Route path="/inbox" component={Inbox} />
-        <Route path="/network" component={Network} />
-        <Route path="/deposit" component={Deposit} />
-        <Route path="/course-page/:id/" component={CoursePage} />
-        <Route path="/program-page" component={StudentProgramPage} />
-        <Route
-          path="/create-profile"
-          render={props => (<CreateProfile
-            {...props}
-            setCreateAccountActiveItem={this.props.setCreateAccountActiveItem}
-            createAccountActiveItem={this.props.createAccountActiveItem}
-            setCreateAccountNav={this.props.setCreateAccountNav}
-            setSecondaryNav={this.props.setSecondaryNav}
-          />)}
-        />
-        <Route path="/job-page" component={JobPage} />
-        <Route
-          path="/create-course"
-          render={props => (<CreateCoursePage
-            {...props}
-            academyProfilePic={this.props.academyProfilePic}
-          />)}
-        />
-        <Route
-          path="/create-job"
-          render={props => (<CreateJobPage
-            {...props}
-            businessProfilePic={this.props.businessProfilePic}
-          />)}
-        />
+        <PrivateRoute isLoggedIn={this.props.isLoggedIn} exact path="/" component={HomePage} />
+        <PrivateRoute isLoggedIn={this.props.isLoggedIn} exact path="/certificates" component={CertificatesPage} />
+        <PrivateRoute isLoggedIn={this.props.isLoggedIn} exact path="/certificates/add" component={AddCertificatePage} />
+        <PrivateRoute isLoggedIn={this.props.isLoggedIn} exact path="/businesses/add" component={AddPositionToBusinessPage} />
+        <PrivateRoute isLoggedIn={this.props.isLoggedIn} path="/courses" component={CoursesPage} />
+        <PrivateRoute isLoggedIn={this.props.isLoggedIn} path="/programs" component={StudentProgramsPage} />
+        <PrivateRoute isLoggedIn={this.props.isLoggedIn} path="/jobs" component={JobsPage} />
+        <PrivateRoute isLoggedIn={this.props.isLoggedIn} path="/business" component={BusinessPage} />
+        <PrivateRoute isLoggedIn={this.props.isLoggedIn} path="/profile" component={ProfilePage} />
+        <PrivateRoute isLoggedIn={this.props.isLoggedIn} path="/settings" component={Account} />
+        <Route path="/onboarding" component={OnBoarding} />
+        <PrivateRoute isLoggedIn={this.props.isLoggedIn} path="/inbox" component={Inbox} />
+        <PrivateRoute isLoggedIn={this.props.isLoggedIn} path="/network" component={Network} />
+        <PrivateRoute isLoggedIn={this.props.isLoggedIn} path="/deposit" component={Deposit} />
+        <PrivateRoute isLoggedIn={this.props.isLoggedIn} path="/course-page/:id/" component={CoursePage} />
+        <PrivateRoute isLoggedIn={this.props.isLoggedIn} path="/program-page" component={StudentProgramPage} />
+        <PrivateRoute isLoggedIn={this.props.isLoggedIn} path="/create-profile" component={CreateProfile} />
+        <PrivateRoute isLoggedIn={this.props.isLoggedIn} path="/job-page" component={JobPage} />
+        <PrivateRoute isLoggedIn={this.props.isLoggedIn} path="/create-course" component={CreateCoursePage} />
+        <PrivateRoute isLoggedIn={this.props.isLoggedIn} path="/create-job" component={CreateJobPage} />
       </Switch>
     );
   }
 }
 
-export default Main;
+function mapStateToProps(state) {
+  return {
+    isLoggedIn: state.auth.isLoggedIn,
+  };
+}
+
+export default withRouter(connect(mapStateToProps)(Main));

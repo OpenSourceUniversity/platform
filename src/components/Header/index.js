@@ -9,10 +9,6 @@ import getBalances from '../../util/web3/getBalances';
 
 
 class HeaderWithoutRouter extends React.Component {
-  static propTypes = {
-    history: PropTypes.object.isRequired,
-  }
-
   constructor(props) {
     super(props);
     this.props.getBalances();
@@ -24,7 +20,6 @@ class HeaderWithoutRouter extends React.Component {
     this.setState({ activeItem: name });
     let newPath;
     if (name === 'home') {
-      this.props.setSecondaryNav(e, { name });
       newPath = '/';
     } else {
       newPath = `/${name}`;
@@ -161,7 +156,7 @@ class HeaderWithoutRouter extends React.Component {
 
     const learnerBusinessesDropdownElements = [
       {
-        key: 'businesses', content: 'Businesses', name: 'jobs', className: 'businesses', active: activeItem === 'businesses',
+        key: 'businesses', content: 'Businesses', name: 'jobs', active: false, className: 'businesses secondary-nav-disabled-beta',
       },
       {
         key: 'jobs', content: 'Browse jobs', name: 'jobs', active: false, className: 'secondary-nav-disabled-beta',
@@ -191,7 +186,7 @@ class HeaderWithoutRouter extends React.Component {
                 </Menu.Item>
                 <Dropdown className="explore-dropdown" item trigger={exploreTrigger}>
                   <Dropdown.Menu>
-                    <Dropdown.Item name="academia" className="nav-list" onClick={this.props.setSecondaryNav}>
+                    <Dropdown.Item name="academia" className="nav-list">
                       <List selection items={learnerAcademiaDropdownElements} />
                     </Dropdown.Item>
                     <Dropdown.Item name="business" className="nav-list secondary-nav-disabled-beta">
@@ -218,7 +213,7 @@ class HeaderWithoutRouter extends React.Component {
                   </Menu.Item>
                   <Dropdown item trigger={avatarTrigger} pointing="top right">
                     <Dropdown.Menu>
-                      <Dropdown.Item className="account-nav-setter" name="account" onClick={this.props.setSecondaryNav}>
+                      <Dropdown.Item className="account-nav-setter" name="account">
 
                         <Dropdown.Item style={{ cursor: 'default' }} name="balance" className="balance-nav">
                           EDU Balance
@@ -309,6 +304,7 @@ function mapStateToProps(state) {
     eduBalance: state.web3.eduBalance,
     balancesError: state.web3.web3Error,
     secondaryNav: state.secondaryNav.secondaryNav,
+    profilePic: state.profile.profilePic,
   };
 }
 

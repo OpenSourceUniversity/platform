@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Header, Divider, Grid, Sticky, Segment, List, Button, Statistic, Label, Modal, Image, Form, Input, Dimmer, Loader, Message, Icon } from 'semantic-ui-react';
+import { Header, Divider, Grid, Sticky, Segment, List, Button, Statistic, Modal, Image, Form, Input, Dimmer, Loader, Message, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import SkillItem from 'components/SkillItem';
 import CertificateItem from 'components/CertificateItem';
 import { fetchCertificates } from '../../containers/CertificatesPage/actions';
 import learnerProfile from '../../util/profile/learnerProfile';
@@ -20,6 +19,17 @@ class LearnerProfile extends React.Component {
     this.props.fetchCertificates();
   }
 
+  handleInputChange(event) {
+    event.preventDefault();
+    const { target } = event;
+    const { name } = target;
+    const value = target.files;
+
+    this.setState({
+      [name]: value,
+    });
+  }
+
   renderCertificates() {
     return this.props.certificates.map((certificate, index) => (
       <Grid.Column
@@ -35,25 +45,7 @@ class LearnerProfile extends React.Component {
     ));
   }
 
-  handleInputChange(event) {
-    event.preventDefault();
-    const { target } = event;
-    const { name } = target;
-    let value;
-    [value] = target.files;
-
-    this.setState({
-      [name]: value,
-    });
-  }
-
   render() {
-    /* eslint-disable global-require */
-
-    const token = require('../../icons/edu_token.svg');
-
-    /* eslint-enable global-require */
-
     const email = `mailto:${this.props.profile.email}`;
     const site = `http://${this.props.profile.site}`;
 

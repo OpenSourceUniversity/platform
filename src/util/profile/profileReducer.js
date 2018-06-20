@@ -1,5 +1,5 @@
 const initialState = {
-	address: localStorage.getItem('address'),
+  address: localStorage.getItem('address'),
   profilePic: localStorage.getItem('profilePic'),
   names: null,
   location: null,
@@ -11,7 +11,7 @@ const initialState = {
   certificates: null,
   courses: null,
   reviews: null,
-  //Organisations
+  // Organisations
   shortDescription: null,
   fullDescription: null,
   // Academy

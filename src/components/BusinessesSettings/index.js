@@ -1,9 +1,9 @@
 import React from 'react';
-import { Input, Form, Button, Radio, Header, Divider, Segment } from 'semantic-ui-react';
+import { Input, Form, Button, Header, Divider, Segment } from 'semantic-ui-react';
 
 export default class BusinessSettings extends React.Component {
   state = {}
-  handleChange = (e, { value }) => this.setState({ value })
+  // handleInputChange = (e, { value }) => this.setState({ value })
   render() {
     return (
       <div className="business-settings">
@@ -30,7 +30,7 @@ export default class BusinessSettings extends React.Component {
                 type="file"
                 name="file"
                 placeholder="business logo"
-                onChange={this.handleInputChange}
+                // onChange={this.handleInputChange}
                 className="input-file"
                 color="orange"
               />

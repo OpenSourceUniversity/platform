@@ -1,6 +1,5 @@
 import React from 'react';
-import { Switch, Route, Redirect, Link } from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import HomePage from 'containers/HomePage';
 import CertificatesPage from 'containers/CertificatesPage';
@@ -24,12 +23,15 @@ import CreateCoursePage from 'containers/CreateCoursePage';
 import StudentProgramsPage from 'containers/StudentProgramsPage';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={(props) => (
-    rest.isLoggedIn === true
-      ? <Component {...props} />
-      : <Redirect to='/onboarding' />
-  )} />
-)
+  <Route
+    {...rest}
+    render={props => (
+      rest.isLoggedIn === true
+        ? <Component {...props} />
+        : <Redirect to="/onboarding" />
+    )}
+  />
+);
 
 class Main extends React.Component {
   state = {}

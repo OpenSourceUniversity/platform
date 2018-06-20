@@ -67,3 +67,4 @@ env
 
 # Application
 src/config.js
+vim.exe.stackdump

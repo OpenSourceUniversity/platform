@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { Button, Header, Divider, Segment, Grid } from 'semantic-ui-react';
 import setActiveAccount from '../../util/activeAccount/setActiveAccount';
 

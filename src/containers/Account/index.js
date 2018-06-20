@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Button, Container, Header, Divider, Grid, Segment, Menu, Form } from 'semantic-ui-react';
+import { Container, Header, Divider, Grid, Segment, Menu } from 'semantic-ui-react';
 import LernersSettings from 'components/LernersSettings';
 import AcademiaSettings from 'components/AcademiaSettings';
 import BusinessesSettings from 'components/BusinessesSettings';

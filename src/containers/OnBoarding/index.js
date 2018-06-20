@@ -18,13 +18,13 @@ class OnBoarding extends React.Component {
     this.setMnemonicPhrase = this.setMnemonicPhrase.bind(this);
     this.setPassphrase = this.setPassphrase.bind(this);
   }
-  componentDidMount() {
-    this.props.setSecondaryNav;
-  }
   state = {
     onboardingActiveForm: 'signin',
     mnemonicPhrase: null,
     passphrase: null,
+  }
+  componentDidMount() {
+    this.props.setSecondaryNav('null');
   }
 
   setMnemonicPhrase(phrase) {

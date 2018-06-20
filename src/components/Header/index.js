@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Container, Menu, Dropdown, Grid, Image, Icon, List, Button, Step } from 'semantic-ui-react';

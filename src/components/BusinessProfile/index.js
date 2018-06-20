@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Header, Divider, Grid, Sticky, Segment, List, Button, Modal, Form, Input } from 'semantic-ui-react';
+import { Header, Divider, Grid, Sticky, Segment, List, Button, Modal, Form, Input, Image } from 'semantic-ui-react';
 import businessProfile from '../../util/profile/businessProfile';
 
 class BusinessProfile extends React.Component {

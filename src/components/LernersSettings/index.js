@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, Checkbox, Header, Divider } from 'semantic-ui-react';
+import { Form, Button, Header, Divider } from 'semantic-ui-react';
 import Countries from '../../data/countriesList';
 
 export default class LernersSettings extends React.Component {

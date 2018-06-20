@@ -1,6 +1,5 @@
 import React from 'react';
 import { Container } from 'semantic-ui-react';
-import AcademiaSettings from 'components/AcademiaSettings';
 import ChooseAccount from 'components/ChooseAccount';
 
 

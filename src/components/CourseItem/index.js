@@ -34,7 +34,7 @@ class CourseItemWithoutRouter extends React.Component {
     /* eslint-enable global-require */
 
     return (
-      <Card fluid style={this.props.isNotList ? { height: '400px' } : null}>
+      <Card fluid style={this.props.isNotList ? { height: '400px' } : null} onClick={() => { this.props.history.push(`/course-page/${this.props.course.id}/`); }}>
         <Card.Content>
           <img alt="" style={{ marginBottom: '20px', width: '100%' }} src={this.props.isNotList ? this.props.course.imgSrc : null} />
           <Card.Header style={{ color: 'black', marginBottom: '20px' }} icon="ellipsis vertical">{this.props.course.title}</Card.Header>
@@ -45,9 +45,11 @@ class CourseItemWithoutRouter extends React.Component {
         </Card.Content>
         {this.props.isNotList ?
           (null) :
-          (<Card.Content extra>
-            { this.props.course.description }
-           </Card.Content>)
+          (
+            <Card.Content extra>
+              { this.props.course.description }
+            </Card.Content>
+          )
         }
         <Card.Content extra>
           <Button name="course-page" onClick={() => { this.props.history.push(`/course-page/${this.props.course.id}/`); }}>

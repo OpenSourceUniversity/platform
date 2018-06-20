@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import React from 'react';
-import { Segment, Container, Grid, Card, Image, Button, Table, Icon, Header, Divider, Statistic, Responsive, Input, Form, Modal, Dropdown } from 'semantic-ui-react';
+import { Segment, Container, Grid, Card, Image, Button, Icon, Header, Divider, Statistic, Responsive, Input, Form, Dropdown } from 'semantic-ui-react';
 import TransactionHistoryItem from 'components/TransactionHistoryItem';
 import getBalances from '../../util/web3/getBalances';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
@@ -19,10 +19,11 @@ class Deposit extends React.Component {
   componentDidMount() {
     this.props.setSecondaryNav('account');
   }
-  renderAutocomplete() {
-    return options.map((wallet, index) => (
-      <option value={wallet} key={index} />
-    ));
+
+  copyAddress() {
+    const copyText = document.getElementById('WalletAddress');
+    copyText.select();
+    document.execCommand('Copy');
   }
 
   renderHistory() {
@@ -46,10 +47,10 @@ class Deposit extends React.Component {
     ));
   }
 
-  copyAddress() {
-    const copyText = document.getElementById('WalletAddress');
-    copyText.select();
-    document.execCommand('Copy');
+  renderAutocomplete() {
+    return options.map((wallet, index) => (
+      <option value={wallet} key={index} />
+    ));
   }
 
   render() {

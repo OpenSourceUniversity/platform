@@ -67,7 +67,7 @@
     "start": "webpack-dev-server --progress --inline --watch --hot --content-base ./public/",
     "watch": "webpack --progress --colors --watch",
     "lint": "eslint src/",
-    "fix": "eslint src/ --fix",
+    "fix": "eslint --fix src/",
     "analyze": "cross-env ANALYZE_ENV=true yarn build",
     "analyze:production": "cross-env ANALYZE_ENV=true yarn build:production",
     "build": "webpack",

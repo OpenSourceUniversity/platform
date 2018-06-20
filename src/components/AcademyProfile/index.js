@@ -8,7 +8,6 @@ class AcademyProfile extends React.Component {
     this.props.academyProfile();
   }
   render() {
-
     const email = `mailto:${this.props.profile.email}`;
     const link = `https://${this.props.profile.site}`;
 
@@ -54,7 +53,7 @@ class AcademyProfile extends React.Component {
                     </Modal.Content>
                   </Modal>
                   <Header size="large">
-                      {this.props.profile.name}
+                    {this.props.profile.name}
                   </Header>
                   <span>
                     {this.props.profile.shortDescription}

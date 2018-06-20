@@ -24,12 +24,15 @@ import CreateCoursePage from 'containers/CreateCoursePage';
 import StudentProgramsPage from 'containers/StudentProgramsPage';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={(props) => (
-    rest.isLoggedIn === true
-      ? <Component {...props} />
-      : <Redirect to='/onboarding' />
-  )} />
-)
+  <Route
+    {...rest}
+    render={props => (
+      rest.isLoggedIn === true
+        ? <Component {...props} />
+        : <Redirect to="/onboarding" />
+    )}
+  />
+);
 
 class Main extends React.Component {
   state = {}

@@ -11,6 +11,7 @@ import WalletCreated from 'components/WalletCreated';
 import PasswordRecovery from 'components/PasswordRecovery';
 import WalletRecoverySuccess from 'components/WalletRecoverySuccess';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
+import setOnBoardingActiveElement from '../../util/auth/setOnBoardingActiveElement';
 
 class OnBoarding extends React.Component {
   constructor(props) {
@@ -19,7 +20,6 @@ class OnBoarding extends React.Component {
     this.setPassphrase = this.setPassphrase.bind(this);
   }
   state = {
-    onboardingActiveForm: 'signin',
     mnemonicPhrase: null,
     passphrase: null,
   }
@@ -40,16 +40,16 @@ class OnBoarding extends React.Component {
       <Container fluid className="onboarding" style={{ backgroundColor: 'white', marginTop: `${-95}px` }}>
         <Card className="onboarding-card">
           {(() => {
-            switch (this.state.onboardingActiveForm) {
-            case 'recoveryPhraseCheck': return <SignUpRecoveryPhraseCheck mnemonicPhrase={this.state.mnemonicPhrase} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
-            case 'recoveryPhraseSeed': return <SignUpRecoveryPhrase setMnemonicPhrase={this.setMnemonicPhrase} mnemonicPhrase={this.state.mnemonicPhrase} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
-            case 'recovery': return <WalletRecovery handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} setMnemonicPhrase={this.setMnemonicPhrase} />;
-            case 'signup': return <SignUp setPassphrase={this.setPassphrase} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
-            case 'created': return <WalletCreated passphrase={this.state.passphrase} mnemonicPhrase={this.state.mnemonicPhrase} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
-            case 'passwordrecovery': return <PasswordRecovery handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} setPassphrase={this.setPassphrase} />;
-            case 'walletrecoverysuccess': return <WalletRecoverySuccess passphrase={this.state.passphrase} mnemonicPhrase={this.state.mnemonicPhrase} handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })} />;
+            switch (this.props.onBoardingActiveElement) {
+            case 'recoveryPhraseCheck': return <SignUpRecoveryPhraseCheck mnemonicPhrase={this.state.mnemonicPhrase} handleItemClick={(e, { name }) => this.props.setOnBoardingActiveElement(name)} />;
+            case 'recoveryPhraseSeed': return <SignUpRecoveryPhrase setMnemonicPhrase={this.setMnemonicPhrase} mnemonicPhrase={this.state.mnemonicPhrase} handleItemClick={(e, { name }) => this.props.setOnBoardingActiveElement(name)} />;
+            case 'recovery': return <WalletRecovery handleItemClick={(e, { name }) => this.props.setOnBoardingActiveElement(name)} setMnemonicPhrase={this.setMnemonicPhrase} />;
+            case 'signup': return <SignUp setPassphrase={this.setPassphrase} handleItemClick={(e, { name }) => this.props.setOnBoardingActiveElement(name)} />;
+            case 'created': return <WalletCreated passphrase={this.state.passphrase} mnemonicPhrase={this.state.mnemonicPhrase} handleItemClick={(e, { name }) => this.props.setOnBoardingActiveElement(name)} />;
+            case 'passwordrecovery': return <PasswordRecovery handleItemClick={(e, { name }) => this.props.setOnBoardingActiveElement(name)} setPassphrase={this.setPassphrase} />;
+            case 'walletrecoverysuccess': return <WalletRecoverySuccess passphrase={this.state.passphrase} mnemonicPhrase={this.state.mnemonicPhrase} handleItemClick={(e, { name }) => this.props.setOnBoardingActiveElement(name)} />;
             default: return (<SignIn
-              handleItemClick={(e, { name }) => this.setState({ onboardingActiveForm: name })}
+              handleItemClick={(e, { name }) => this.props.setOnBoardingActiveElement(name)}
             />);
             }
           })()}
@@ -64,7 +64,16 @@ function mapDispatchToProps(dispatch) {
     setSecondaryNav(secondaryNav) {
       dispatch(setSecondaryNav(secondaryNav));
     },
+    setOnBoardingActiveElement(activeElement) {
+      dispatch(setOnBoardingActiveElement(activeElement));
+    },
   };
 }
 
-export default connect(mapDispatchToProps)(withRouter(OnBoarding));
+function mapStateToProps(state) {
+  return {
+    onBoardingActiveElement: state.auth.onBoardingActiveElement,
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(OnBoarding));

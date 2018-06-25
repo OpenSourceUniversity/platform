@@ -5,6 +5,7 @@ import { Container, Menu, Dropdown, Grid, Image, Icon, List, Button, Step } from
 import HeaderSearchComponent from '../HeaderSearchComponent';
 import logout from '../../util/auth/logout';
 import getBalances from '../../util/web3/getBalances';
+import setOnBoardingActiveElement from '../../util/auth/setOnBoardingActiveElement';
 
 
 class HeaderWithoutRouter extends React.Component {
@@ -20,6 +21,8 @@ class HeaderWithoutRouter extends React.Component {
     let newPath;
     if (name === 'home') {
       newPath = '/';
+    } else if (name === 'onboarding') {
+      this.props.setOnBoardingActiveElement('signin');
     } else {
       newPath = `/${name}`;
     }
@@ -30,6 +33,7 @@ class HeaderWithoutRouter extends React.Component {
 
   loginFunc = (e, { name }) => {
     this.props.logout();
+    this.props.setOnBoardingActiveElement('signin');
     const newPath = `/${name}`;
     if (this.props.history.location.pathname !== newPath) {
       this.props.history.push(newPath);
@@ -304,6 +308,7 @@ function mapStateToProps(state) {
     balancesError: state.web3.web3Error,
     secondaryNav: state.secondaryNav.secondaryNav,
     profilePic: state.profile.profilePic,
+    onBoardingActiveElement: state.auth.onBoardingActiveElement,
   };
 }
 
@@ -314,6 +319,9 @@ function mapDispatchToProps(dispatch) {
     },
     getBalances() {
       dispatch(getBalances());
+    },
+    setOnBoardingActiveElement(activeElement) {
+      dispatch(setOnBoardingActiveElement(activeElement));
     },
   };
 }

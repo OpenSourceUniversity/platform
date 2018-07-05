@@ -21,6 +21,7 @@ import JobPage from 'containers/JobPage';
 import CreateJobPage from 'containers/CreateJobPage';
 import CreateCoursePage from 'containers/CreateCoursePage';
 import StudentProgramsPage from 'containers/StudentProgramsPage';
+import CertificatePage from 'containers/CertificatePage';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -42,6 +43,7 @@ class Main extends React.Component {
         <PrivateRoute isLoggedIn={this.props.isLoggedIn} exact path="/" component={HomePage} />
         <PrivateRoute isLoggedIn={this.props.isLoggedIn} exact path="/certificates" component={CertificatesPage} />
         <PrivateRoute isLoggedIn={this.props.isLoggedIn} exact path="/certificates/add" component={AddCertificatePage} />
+        <PrivateRoute isLoggedIn={this.props.isLoggedIn} path="/certificate/:id/" component={CertificatePage} />
         <PrivateRoute isLoggedIn={this.props.isLoggedIn} exact path="/businesses/add" component={AddPositionToBusinessPage} />
         <PrivateRoute isLoggedIn={this.props.isLoggedIn} path="/courses" component={CoursesPage} />
         <PrivateRoute isLoggedIn={this.props.isLoggedIn} path="/programs" component={StudentProgramsPage} />

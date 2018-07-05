@@ -6,6 +6,7 @@ import searchReducer from './util/search/searchReducer';
 import certificatesReducer from './containers/CertificatesPage/certificatesReducer';
 import coursesReducer from './containers/CoursesPage/coursesReducer';
 import courseReducer from './containers/CoursePage/courseReducer';
+import certificateReducer from './containers/CertificatePage/certificateReducer';
 import addCertificateReducer from './containers/AddCertificatePage/addCertificateReducer';
 import activeAccountReducer from './util/activeAccount/activeAccountReducer';
 import secondaryNavReducer from './util/secondaryNav/secondaryNavReducer';
@@ -19,6 +20,7 @@ const reducer = combineReducers({
   addCertificate: addCertificateReducer,
   courses: coursesReducer,
   course: courseReducer,
+  certificate: certificateReducer,
   search: searchReducer,
   activeAccount: activeAccountReducer,
   secondaryNav: secondaryNavReducer,

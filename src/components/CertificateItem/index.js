@@ -1,12 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { Card, Icon } from 'semantic-ui-react';
 
 
-export default class CertificateItem extends React.Component {
+class CertificateItemWithoutRouter extends React.Component {
+  static propTypes = {
+    history: PropTypes.object.isRequired,
+  }
   render() {
     const color = this.props.certificate.verified ? 'green' : 'yellow';
     return (
-      <Card color={color}>
+      <Card color={color} onClick={() => { this.props.history.push(`/certificate/${this.props.certificate.uid}/`); }}>
         <Card.Content>
           <Card.Header>{this.props.certificate.name}</Card.Header>
         </Card.Content>
@@ -23,3 +28,7 @@ export default class CertificateItem extends React.Component {
     );
   }
 }
+
+const CertificateItem = withRouter(CertificateItemWithoutRouter);
+
+export default CertificateItem;

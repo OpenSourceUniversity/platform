@@ -42,13 +42,13 @@ export function unlockWallet(passphrase) {
 
     try {
       const wallet = Wallet.fromV3(v3Wallet, passphrase);
-      callback(wallet);
       dispatch({
         type: 'WALLET_UNLOCKER_MODAL_OPEN',
         payload: {
           open: false,
         },
       });
+      callback(wallet);
     } catch (e) {
       dispatch({
         type: 'WALLET_UNLOCKER_ERROR',

@@ -38,7 +38,7 @@ class CertificatePage extends React.Component {
   render() {
     const { activeItem } = this.state;
     return (
-      <div className="course">
+      <div className="certificate">
         <Container>
           <Breadcrumb>
             <Breadcrumb.Section href="/#/">Home</Breadcrumb.Section>
@@ -47,38 +47,53 @@ class CertificatePage extends React.Component {
             <Breadcrumb.Divider icon="right angle" />
             <Breadcrumb.Section active>Certificate Description</Breadcrumb.Section>
           </Breadcrumb>
-          <Divider clearing />
+          <Divider hidden />
           <div className="course">
-            <Dimmer active={this.props.certificate.isFetching} inverted>
-              <Loader size="large">Loading</Loader>
-            </Dimmer>
-            <Header style={{ fontSize: '1.7em', textAlign: 'center' }}>
-              {this.props.certificate.name}
-            </Header>
-            <Header style={{ fontSize: '1.7em', textAlign: 'center' }}>
-              {this.props.certificate.academy}
-            </Header>
-            <Header style={{ fontSize: '1.7em', textAlign: 'center' }}>
-              {this.props.certificate.course}
-            </Header>
-            <Header style={{ fontSize: '1.7em', textAlign: 'center' }}>
-              {this.props.certificate.learner}
-            </Header>
-            <Header style={{ fontSize: '1.7em', textAlign: 'center' }}>
-              {this.props.certificate.subject}
-            </Header>
-            <Header style={{ fontSize: '1.7em', textAlign: 'center' }}>
-              {this.props.certificate.verified ? ('Verified') : ('Not Verified')}
-            </Header>
-            <Header style={{ fontSize: '1.7em', textAlign: 'center' }}>
-              {this.props.certificate.score}
-            </Header>
-            <Header style={{ fontSize: '1.7em', textAlign: 'center' }}>
-              {this.props.certificate.creator}
-            </Header>
-            <Header style={{ fontSize: '1.7em', textAlign: 'center' }}>
-              {this.props.certificate.expiration_date}
-            </Header>
+            <Segment style={{ textAlign: 'center' }}>
+              <Dimmer active={this.props.certificate.isFetching} inverted>
+                <Loader size="large">Loading</Loader>
+              </Dimmer>
+              <Header style={{ fontSize: '1.7em' }}>
+                Certificate Information
+              </Header>
+              <Divider clearing />
+              <Header style={{ fontSize: '1.7em' }}>
+                {this.props.certificate.name}
+              </Header>
+              <Header style={{ fontSize: '1.7em' }}>
+                Academy:
+              </Header>
+              <span>{this.props.certificate.academy}</span>
+              <Header style={{ fontSize: '1.7em' }}>
+                Course: 
+              </Header>
+              <span>{this.props.certificate.course}</span>
+              <Header style={{ fontSize: '1.7em' }}>
+                Learner: 
+              </Header>
+              <a target="_blank" href={'https://etherscan.io/address/' + this.props.certificate.learner}>{this.props.certificate.learner}</a>
+              <Header style={{ fontSize: '1.7em' }}>
+                Subject: 
+              </Header>
+              <span>{this.props.certificate.subject}</span>
+              <Header style={{ fontSize: '1.7em' }}>
+                {this.props.certificate.verified ?
+                  (<a target="_blank" href={'https://etherscan.io/tx/' + this.props.certificate.tx}>Verified</a>)
+                : ('Not Verified')}
+              </Header>
+              <Header style={{ fontSize: '1.7em' }}>
+                Score: 
+              </Header>
+              <span>{this.props.certificate.score}</span>
+              <Header style={{ fontSize: '1.7em' }}>
+                Creator: 
+              </Header>
+              <a target="_blank" href={'https://etherscan.io/address/' + this.props.certificate.creator}>{this.props.certificate.creator}</a>
+              <Header style={{ fontSize: '1.7em' }}>
+                Expiration date: 
+              </Header>
+              <span>{this.props.certificate.expiration_date}</span>
+            </Segment>
           </div>
         </Container>
       </div>

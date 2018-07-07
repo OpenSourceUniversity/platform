@@ -1,9 +1,16 @@
+import store from '../../store';
+
+
 export function fetchCertificates() {
   return function dispatcher(dispatch) {
     dispatch({
       type: 'FETCH_CERTIFICATES_REQUEST',
     });
-    return fetch('http://localhost:8000/api/v1/certificates/')
+    const headers = new Headers({
+      'Auth-Signature': store.getState().auth.signedAddress,
+      'Auth-Eth-Address': store.getState().auth.address.slice(2),
+    });
+    return fetch('http://localhost:8000/api/v1/certificates/', { headers })
       .then(response => response.json().then(body => ({ response, body })))
       .then(({ response, body }) => {
         if (!response.ok) {

@@ -2,8 +2,10 @@ import { connect } from 'react-redux';
 import React from 'react';
 import { Segment, Container, Grid, Card, Image, Button, Icon, Header, Divider, Statistic, Responsive, Input, Form, Dropdown } from 'semantic-ui-react';
 import TransactionHistoryItem from 'components/TransactionHistoryItem';
+import { initWalletUnlocker } from '../../util/auth/walletUnlocker';
 import getBalances from '../../util/web3/getBalances';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
+import store from '../../store';
 
 const options = [
   '0x849c2ea2a8f0ed0fe6d28b17fa0f779d6a45dff1',
@@ -24,6 +26,12 @@ class Deposit extends React.Component {
     const copyText = document.getElementById('WalletAddress');
     copyText.select();
     document.execCommand('Copy');
+  }
+
+  showPrivateKey() {
+    store.dispatch(initWalletUnlocker((wallet) => {
+      prompt('Copy your private key', wallet.getPrivateKeyString());
+    }));
   }
 
   renderHistory() {
@@ -94,6 +102,10 @@ class Deposit extends React.Component {
                       <Card.Content extra>
                         <div>
                           <Button basic color="grey" onClick={this.copyAddress}><Icon name="copy" /> Copy Address</Button>
+                          <Button basic color="grey" onClick={this.showPrivateKey}>
+                            <Icon name="copy" />
+                            Show Private Key
+                          </Button>
                         </div>
                       </Card.Content>
                     </Card>

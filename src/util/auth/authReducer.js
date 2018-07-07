@@ -7,6 +7,9 @@ const initialState = {
   loginError: null,
   isLoggingIn: false,
   onBoardingActiveElement: 'signin',
+  walletUnlockerModalOpen: false,
+  walletUnlockerError: null,
+  walletUnlockerCallback: () => {},
 };
 
 
@@ -48,6 +51,19 @@ const authReducer = (state = initialState, action) => {
   case 'ACTIVE_ELEMENT_CHANGED':
     return Object.assign({}, state, {
       onBoardingActiveElement: action.payload.onBoardingActiveElement,
+    });
+  case 'WALLET_UNLOCKER_MODAL_OPEN':
+    return Object.assign({}, state, {
+      walletUnlockerModalOpen: action.payload.open,
+      walletUnlockerError: null,
+    });
+  case 'WALLET_UNLOCKER_MODAL_CALLBACK':
+    return Object.assign({}, state, {
+      walletUnlockerCallback: action.payload.callback,
+    });
+  case 'WALLET_UNLOCKER_ERROR':
+    return Object.assign({}, state, {
+      walletUnlockerError: action.payload.error,
     });
   default:
     return state;

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Container } from 'semantic-ui-react';
+import WalletUnlocker from 'components/WalletUnlocker';
 import React from 'react';
 import './util/web3/getWeb3';
 import './util/ipfs/getIpfs';
@@ -21,6 +22,8 @@ class App extends React.Component {
         <Container className="footer" textAlign="center">
           Coinbase: {this.props.address}
         </Container>
+
+        <WalletUnlocker />
       </div>
     );
   }

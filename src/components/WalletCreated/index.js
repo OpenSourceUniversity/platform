@@ -13,7 +13,7 @@ class WalletCreatedWithoutRouter extends React.Component {
   constructor(props) {
     super(props);
     this.createHDWallet();
-    this.props.setSecondaryNav(null, { name: 'null' });
+    // this.props.setSecondaryNav(null, { name: 'null' });
   }
 
   address = '';

@@ -16,7 +16,7 @@ export default class SignUpRecoveryPhraseCheck extends React.Component {
   mnemonicPhraseButtons() {
     const phrases = this.shuffledPhrases;
     return phrases.map((phrase, index) => (
-      <Button name={phrase} style={{ textTransform: 'uppercase', marginTop: `${5}px` }} key={index} onClick={this.phraseButtonClick} disabled={this.state[phrase]} > {phrase}</Button>
+      <Button id={phrase + index} name={phrase} style={{ textTransform: 'uppercase', marginTop: `${5}px` }} key={index} onClick={this.phraseButtonClick} disabled={this.state[phrase + index]} > {phrase}</Button>
     ));
   }
 
@@ -34,12 +34,14 @@ export default class SignUpRecoveryPhraseCheck extends React.Component {
   }
 
   choosed = []
+  clicked = []
   checkArray = this.props.mnemonicPhrase.split(' ')
 
-  phraseButtonClick = (e, { name }) => {
-    this.setState(prevState => ({ [name]: !prevState[name] }));
-    if (this.choosed.indexOf(name) === -1) {
+  phraseButtonClick = (e, { name, id }) => {
+    this.setState(prevState => ({ [id]: !prevState[id] }));
+    if (this.clicked.indexOf(id) === -1) {
       this.choosed.push(name);
+      this.clicked.push(id);
       if (this.choosed.length === 12) {
         if (this.arraysEqual(this.choosed, this.checkArray)) {
           this.setState({ equalPhrases: true });
@@ -47,15 +49,14 @@ export default class SignUpRecoveryPhraseCheck extends React.Component {
       }
     } else {
       this.choosed.splice(this.choosed.indexOf(name), 1);
+      this.clicked.splice(this.clicked.indexOf(id), 1);
       this.setState({ equalPhrases: false });
     }
   }
 
   renderClickedButtons(choosed) {
-    const clicked = choosed;
-
-    return clicked.map((phrase, index) => (
-      <Button primary name={phrase} style={{ textTransform: 'uppercase', marginTop: `${5}px` }} onClick={this.phraseButtonClick} key={index} > {phrase}</Button>
+    return choosed.map((phrase, index) => (
+      <Button primary id={this.clicked[index]} name={phrase} style={{ textTransform: 'uppercase', marginTop: `${5}px` }} onClick={this.phraseButtonClick} key={index} > {phrase}</Button>
     ));
   }
 

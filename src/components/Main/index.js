@@ -9,7 +9,7 @@ import CoursesPage from 'containers/CoursesPage';
 import JobsPage from 'containers/JobsPage';
 import BusinessPage from 'containers/BusinessPage';
 import ProfilePage from 'containers/ProfilePage';
-import Account from 'containers/Account';
+import AccountSettings from 'containers/AccountSettings';
 import OnBoarding from 'containers/OnBoarding';
 import Inbox from 'containers/Inbox';
 import Network from 'containers/Network';
@@ -50,7 +50,7 @@ class Main extends React.Component {
         <PrivateRoute isLoggedIn={this.props.isLoggedIn} path="/jobs" component={JobsPage} />
         <PrivateRoute isLoggedIn={this.props.isLoggedIn} path="/business" component={BusinessPage} />
         <PrivateRoute isLoggedIn={this.props.isLoggedIn} path="/profile" component={ProfilePage} />
-        <PrivateRoute isLoggedIn={this.props.isLoggedIn} path="/settings" component={Account} />
+        <PrivateRoute isLoggedIn={this.props.isLoggedIn} path="/settings" component={AccountSettings} />
         <Route path="/onboarding" component={OnBoarding} />
         <PrivateRoute isLoggedIn={this.props.isLoggedIn} path="/inbox" component={Inbox} />
         <PrivateRoute isLoggedIn={this.props.isLoggedIn} path="/network" component={Network} />

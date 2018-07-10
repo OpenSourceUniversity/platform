@@ -3,14 +3,16 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Container, Header, Divider, Grid, Segment, Menu } from 'semantic-ui-react';
 import LernersSettings from 'components/LernersSettings';
-import AcademiaSettings from 'components/AcademiaSettings';
+import AcademySettings from 'components/AcademySettings';
 import BusinessesSettings from 'components/BusinessesSettings';
 import setActiveAccount from '../../util/activeAccount/setActiveAccount';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
+import getDefaultValues from '../../util/accountSettings/getDefaultValues';
 
 class AccountSettings extends React.Component {
   componentDidMount() {
     this.props.setSecondaryNav('account');
+    this.props.getDefaultValues();
   }
 
   render() {
@@ -63,7 +65,7 @@ class AccountSettings extends React.Component {
                 <Segment className="settings">
                   {(() => {
                     switch (this.props.activeAccount) {
-                    case 'Academy': return <AcademiaSettings />;
+                    case 'Academy': return <AcademySettings />;
                     case 'Learner': return <LernersSettings />;
                     case 'Business': return <BusinessesSettings />;
                     default: return null;
@@ -92,6 +94,9 @@ function mapDispatchToProps(dispatch) {
     },
     setSecondaryNav(secondaryNav) {
       dispatch(setSecondaryNav(secondaryNav));
+    },
+    getDefaultValues() {
+      dispatch(getDefaultValues());
     },
   };
 }

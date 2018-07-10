@@ -11,6 +11,7 @@ import addCertificateReducer from './containers/AddCertificatePage/addCertificat
 import activeAccountReducer from './util/activeAccount/activeAccountReducer';
 import secondaryNavReducer from './util/secondaryNav/secondaryNavReducer';
 import profileReducer from './util/profile/profileReducer';
+import accountSettingsReducer from './util/accountSettings/accountSettingsReducer';
 
 const reducer = combineReducers({
   web3: web3Reducer,
@@ -25,6 +26,7 @@ const reducer = combineReducers({
   activeAccount: activeAccountReducer,
   secondaryNav: secondaryNavReducer,
   profile: profileReducer,
+  accounts: accountSettingsReducer,
 });
 
 export default reducer;

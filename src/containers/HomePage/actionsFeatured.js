@@ -4,8 +4,11 @@ import store from '../../store';
 const START_URL = 'http://localhost:8000/api/v1/courses/?is_featured=1&offset=0&limit=4';
 
 
-export function fetchCourses(url = START_URL) {
+export function fetchFeaturedCourses(url = START_URL) {
   return function dispatcher(dispatch) {
+    dispatch({
+      type: 'RESET_FETCHED_COURSES',
+    });
     dispatch({
       type: 'FETCH_COURSES_REQUEST',
     });

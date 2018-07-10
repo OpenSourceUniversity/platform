@@ -4,15 +4,16 @@ import { Container, Header, Grid, Dimmer, Loader, Segment, Message, Button, Icon
 import { Link } from 'react-router-dom';
 import CourseItem from 'components/CourseItem';
 import CertificateItem from 'components/CertificateItem';
-import { fetchCourses } from '../CoursesPage/actionsFeatured';
+import { fetchFeaturedCourses } from './actionsFeatured';
 import { fetchCertificates } from '../CertificatesPage/actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 
 
 class HomePage extends React.Component {
+
   componentDidMount() {
     this.props.fetchCertificates();
-    this.props.fetchCourses();
+    this.props.fetchFeaturedCourses();
     this.props.setSecondaryNav(null);
   }
 
@@ -25,7 +26,7 @@ class HomePage extends React.Component {
           widescreen={4}
           tablet={4}
           mobile={16}
-          key={index}
+          key={course.id}
         >
           <CourseItem course={course} isNotList key={index} />
         </Grid.Column>))
@@ -111,8 +112,8 @@ function mapDispatchToProps(dispatch) {
     fetchCertificates() {
       dispatch(fetchCertificates());
     },
-	  fetchCourses() {
-      dispatch(fetchCourses());
+    fetchFeaturedCourses() {
+      dispatch(fetchFeaturedCourses());
     },
     setSecondaryNav(secondaryNav) {
       dispatch(setSecondaryNav(secondaryNav));

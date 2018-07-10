@@ -82,6 +82,12 @@ class ChooseAccount extends React.Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    activeAccount: state.activeAccount.activeAccount,
+  };
+}
+
 function mapDispatchToProps(dispatch) {
   return {
     setActiveAccount(activeAccount) {
@@ -90,4 +96,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapDispatchToProps)(withRouter(ChooseAccount));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ChooseAccount));

@@ -10,7 +10,6 @@ import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 
 
 class HomePage extends React.Component {
-
   componentDidMount() {
     this.props.fetchCertificates();
     this.props.fetchFeaturedCourses();
@@ -26,7 +25,8 @@ class HomePage extends React.Component {
           widescreen={4}
           tablet={4}
           mobile={16}
-          key={course.id}
+          key={index}
+
         >
           <CourseItem course={course} isNotList key={index} />
         </Grid.Column>))

@@ -25,12 +25,10 @@ contract TokenSettings is Ownable {
     /**
     * @dev Events related to EDU token circulation settings on the platform
     */
-    event TokenSettingsOwnerChanged(address indexed ownerOLD, address indexed ownerNEW);
     event TokenAddressChanged(address indexed tokenAddress);
     event TokenFeeChanged(uint256 feeInEDUValue);
-    event SpecialCustomerAdded(address indexed customerAddress, uint256 preferenceFee);
-    event SpecialCustomerFeeUpdate(address indexed customerAddress, uint256 preferenceFee);
-    event SpecialCustomerRemoved(address indexed customerAddress);
+    event CustomFeeSet(address indexed customerAddress, uint256 preferenceFee);
+    event CustomFeeRemoved(address indexed customerAddress);
 
     /**
     * @dev The Ownable constructor sets the original `owner` of the contract to the sender account.
@@ -41,16 +39,23 @@ contract TokenSettings is Ownable {
         feeInEDU = 10 * 10**18;
     }
 
-
+    /**
+    * @dev Add or update custom fee
+    */
     function setCustomFee(address customer, uint256 customFee) public onlyOwner {
         require(customer == address(0));
         customersWithPreferences[customer].allowance = true;
         customersWithPreferences[customer].customFee = customFee;
+        emit CustomFeeSet(customer, customersWithPreferences[customer].customFee);
     }
 
+    /**
+    * @dev Remove custome fee
+    */
     function removeCustomFee(address customer) public onlyOwner {
         require(customer == address(0));
         customersWithPreferences[customer].allowance = false;
+        emit CustomFeeRemoved(customer);
     }
 
     /**
@@ -60,6 +65,14 @@ contract TokenSettings is Ownable {
         tokenContractAddress = newTokenContractAddress;
         emit TokenAddressChanged(tokenContractAddress);
         return tokenContractAddress;
+    }
+
+    /**
+    * @dev Set token address
+    */
+    function setGeneralTokenFee(uint256 _tokenFee) public onlyOwner {
+        feeInEDU = _tokenFee;
+        emit TokenFeeChanged(feeInEDU);
     }
 
 }

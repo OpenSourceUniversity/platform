@@ -16,7 +16,7 @@ contract RevokableDocument is BasicDocument {
         require(documents[document].recipient == recipient);
         documents[document].recipient = address(0);
 
-        DocumentRevoked(recipient, document);
+        emit DocumentRevoked(recipient, document);
 
         return true;
     }

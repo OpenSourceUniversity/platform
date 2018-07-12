@@ -26,7 +26,7 @@ contract AuthorizedAccess is Ownable {
      */
     function authorize(address issuer) onlyOwner external returns (bool) {
         issuers[issuer] = true;
-        Authorized(msg.sender, issuer);
+        emit Authorized(msg.sender, issuer);
 
         return true;
     }
@@ -36,7 +36,7 @@ contract AuthorizedAccess is Ownable {
      */
     function deauthorize(address issuer) onlyOwner external returns (bool) {
         issuers[issuer] = false;
-        Deathorized(msg.sender, issuer);
+        emit Deathorized(msg.sender, issuer);
 
         return true;
     }

@@ -27,7 +27,7 @@ contract BasicDocument is Ownable {
         documents[document].recipient = recipient;
         documents[document].block = block.number;
 
-        DocumentIssued(recipient, document);
+        emit DocumentIssued(recipient, document);
 
         return true;
     }

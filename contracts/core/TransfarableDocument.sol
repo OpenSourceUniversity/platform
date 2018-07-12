@@ -17,8 +17,8 @@ contract TransfarableDocument is BasicDocument {
         require(documents[document].recipient == owner);
         documents[document].recipient = recipient;
 
-        DocumentTransfered(owner, recipient, document);
-        
+        emit DocumentTransfered(owner, recipient, document);
+
         return true;
     }
 }

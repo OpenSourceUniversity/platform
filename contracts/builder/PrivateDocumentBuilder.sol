@@ -7,10 +7,10 @@ contract PrivateDocumentBuilder is Builder {
     function create() payable external {
         require(msg.value >= buildingCostWei);
 
-        PrivateDocument documentStorage = new PrivateDocument();        
+        PrivateDocument documentStorage = new PrivateDocument();
         documentStorage.transferOwnership(msg.sender);
 
-        ContractCreated(documentStorage);
+        emit ContractCreated(documentStorage);
         super.processPayment();
     }
 }

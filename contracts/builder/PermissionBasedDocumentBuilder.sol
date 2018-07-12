@@ -7,10 +7,10 @@ contract PermissionBasedDocumentBuilder is Builder {
     function create() payable external {
         require(msg.value >= buildingCostWei);
 
-        PermissionBasedDocument documentStorage = new PermissionBasedDocument();        
+        PermissionBasedDocument documentStorage = new PermissionBasedDocument();
         documentStorage.transferOwnership(msg.sender);
 
-        ContractCreated(documentStorage);
+        emit ContractCreated(documentStorage);
         super.processPayment();
     }
 }

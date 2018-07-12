@@ -8,11 +8,11 @@ contract PublicPayableDocumentBuilder is Builder {
         require(msg.value >= buildingCostWei);
         require(issuePrice > 0);
 
-        PublicPayableDocument documentStorage = new PublicPayableDocument();     
+        PublicPayableDocument documentStorage = new PublicPayableDocument();
         documentStorage.setIssuePrice(issuePrice);
-        documentStorage.transferOwnership(msg.sender);      
+        documentStorage.transferOwnership(msg.sender);
 
-        ContractCreated(documentStorage);
+        emit ContractCreated(documentStorage);
         super.processPayment();
     }
 }

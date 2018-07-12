@@ -8,11 +8,11 @@ contract PermissionBasedPayableDocumentBuilder is Builder {
         require(msg.value >= buildingCostWei);
         require(issuePrice > 0);
 
-        PermissionBasedPayableDocument documentStorage = new PermissionBasedPayableDocument();  
+        PermissionBasedPayableDocument documentStorage = new PermissionBasedPayableDocument();
         documentStorage.setIssuePrice(issuePrice);
-        documentStorage.transferOwnership(msg.sender);      
+        documentStorage.transferOwnership(msg.sender);
 
-        ContractCreated(documentStorage);
+        emit ContractCreated(documentStorage);
         super.processPayment();
     }
 }

@@ -1,7 +1,8 @@
-pragma solidity ^0.4.16;
+pragma solidity ^0.4.23;
 
 import "../math/SafeMath.sol";
 import "../ownership/Ownable.sol";
+import "../tokenParameters/TokenSettings.sol";
 
 contract Builder is Ownable {
     using SafeMath for uint256;
@@ -9,9 +10,9 @@ contract Builder is Ownable {
     address beneficiary;
     uint256 buildingCostWei;
 
-    event ContractCreated(address contractAddress);
+    event ContractCreated(address contractAddress, address beneficiaryAddress);
 
-    function Builder() public {
+    constructor() {
         beneficiary = msg.sender;
         buildingCostWei = 1 * 10**17;
     }
@@ -21,8 +22,8 @@ contract Builder is Ownable {
         if (msg.value > buildingCostWei)
             msg.sender.transfer(msg.value.sub(buildingCostWei));
     }
-    
-    function setBeneficiary(address _beneficiary) external onlyOwner { 
+
+    function setBeneficiary(address _beneficiary) external onlyOwner {
         beneficiary = _beneficiary;
     }
 
@@ -32,5 +33,9 @@ contract Builder is Ownable {
 
     function () payable public {
         beneficiary.transfer(msg.value);
+    }
+
+    function () {
+
     }
 }

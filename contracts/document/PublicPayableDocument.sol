@@ -5,14 +5,14 @@ import "./PublicDocument.sol";
 
 /**
  * @title PublicPayableDocument
- * @dev Charges a fixed fee (goes to the contract's owner) for document issue. 
+ * @dev Charges a fixed fee (goes to the contract's owner) for document issue.
  *      Anyone who knows the contract address can issue and revoke documents.
  */
 contract PublicPayableDocument is PublicDocument {
     using SafeMath for uint256;
-    
+
     event NewPriceSet(uint256 newPrice);
-    
+
     uint256 public issuePrice;
 
     /**
@@ -35,8 +35,8 @@ contract PublicPayableDocument is PublicDocument {
      */
     function setIssuePrice(uint256 newPrice) onlyOwner external {
         require(newPrice >= 0);
-        
+
         issuePrice = newPrice;
-        NewPriceSet(newPrice);
+        emit NewPriceSet(newPrice);
     }
 }

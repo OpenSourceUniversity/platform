@@ -27,17 +27,16 @@ contract BasicCertificate is Ownable {
      */
     function issueCertificate(
         address _course,
-        address _recipient,
         bytes32[] _skills
     )
         payable
         public
         returns (bool)
     {
-        require(msg.sender != address(0) || recipient != address(0));
+        require(msg.sender != address(0));
         uint256 i = 0;
         certificates[_course].issuer = msg.sender;
-        certificates[_course].recipient = recipient;
+        certificates[_course].recipient = owner;
         delete certificates[_course].skills;
         while (i < _skills.length) {
             if (i > 4) { continue; }

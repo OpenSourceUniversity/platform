@@ -11,8 +11,6 @@ import "../tokenStandard/ERC20.sol";
 contract EDUcirculation is TokenSettings, ERC20 {
     using SafeMath for uint256;
 
-    event uploadCertificateFee(address learner, address issuer, );
-
     modifier doPlatformFee(address _initiator, uint256 _valueEDU = feeInEDU, uint256 _valueETH = feeInETH) {
         if (customersWithPreferences[_initiator].allowance) {
             // Customers with preferential price

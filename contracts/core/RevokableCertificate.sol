@@ -12,7 +12,14 @@ contract RevokableCertificate is BasicCertificate {
     /**
      * @dev Revokes existing certificate and sets the recipient to 0x0.
      */
-    function revokeCertificate(address course) public onlyOwner returns (bool) {
+    function revokeCertificate(
+        address course
+    )
+        public 
+        onlyOwner
+        doPlatformFee(msg.sender)
+        returns (bool)
+    {
         certificates[course].recipient = address(0);
         emit CertificateRevoked(course);
         return true;

@@ -1,13 +1,15 @@
 pragma solidity ^0.4.24;
 
 import "../ownership/Ownable.sol";
+import "../tokenCirculation/EDUcirculation.sol";
+
 
 /**
  * @title Basic Certificate
  * @dev This basic contract allows to issue certificates along with
  *      skills gained in the certification process.
  */
-contract BasicCertificate is Ownable {
+contract BasicCertificate is Ownable, EDUcirculation {
     event CertificateIssued(address issuer, address recipient, bytes32[] skillsVerified);
     event CertificateUploaded(address issuer, address recipient, bytes32[] skills, bytes certificateHash);
 
@@ -61,6 +63,7 @@ contract BasicCertificate is Ownable {
     )
         payable
         public
+        doPlatformFee(msg.sender)
         returns (bool)
     {
         require(_certificateHash);

@@ -58,18 +58,18 @@ class AcademySettings extends React.Component {
             control="input"
             name="academy_name"
             placeholder="Your academy name"
-            value={this.props.accounts.academy_name ? this.props.accounts.academy_name : ''}
+            defaultValue={this.props.accounts.academy_name ? this.props.accounts.academy_name : ''}
           />
           <Form.Field
             label="Academy website"
             control="input"
             name="academy_website"
             placeholder="Your academy website"
-            value={this.props.accounts.academy_website ? this.props.accounts.academy_website : ''}
+            defaultValue={this.props.accounts.academy_website ? this.props.accounts.academy_website : ''}
           />
-          <Form.Field name="academy_email" label="Email" value={this.props.accounts.academy_email ? this.props.accounts.academy_email : ''} control="input" type="email" placeholder="Your email" />
-          <Form.Dropdown id="Country" name="academy_country" placeholder="Select Country" label="Country" value={this.props.accounts.academy_country ? this.props.accounts.academy_country : this.value} fluid search selection options={Countries.Countries} />
-          <Form.TextArea name="academy_about" label="About" value={this.props.accounts.academy_about ? this.props.accounts.academy_about : ''} placeholder="Tell us more about your academy..." />
+          <Form.Field name="academy_email" label="Email" defaultValue={this.props.accounts.academy_email ? this.props.accounts.academy_email : ''} control="input" type="email" placeholder="Your email" />
+          <Form.Dropdown id="Country" name="academy_country" placeholder="Select Country" label="Country" defaultValue={this.props.accounts.academy_country ? this.props.accounts.academy_country : this.value} fluid search selection options={Countries.Countries} />
+          <Form.TextArea name="academy_about" label="About" defaultValue={this.props.accounts.academy_about ? this.props.accounts.academy_about : ''} placeholder="Tell us more about your academy..." />
           <Form.Field label="Upload academy logo" control="file">
             <Input
               id="file"
@@ -78,7 +78,7 @@ class AcademySettings extends React.Component {
               placeholder="Academy logo"
               className="input-file"
               color="orange"
-              value={this.props.accounts.academy_logo ? this.props.accounts.academy_logo : ''}
+              defaultValue={this.props.accounts.academy_logo ? this.props.accounts.academy_logo : ''}
             />
           </Form.Field>
           <Divider clearing />

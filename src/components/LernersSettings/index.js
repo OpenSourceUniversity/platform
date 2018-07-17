@@ -46,7 +46,7 @@ class LernersSettings extends React.Component {
         <Divider clearing />
         <Form onSubmit={(event) => { this.saveSettings(event, this); }}>
           <Form.Group widths="equal">
-            <Form.Field name="first_name" label="First name" defaultValue={!!this.props.accounts.first_name ? this.props.accounts.first_name : ''} control="input" placeholder="First name" />
+            <Form.Field name="first_name" label="First name" defaultValue={this.props.accounts.first_name ? this.props.accounts.first_name : ''} control="input" placeholder="First name" />
             <Form.Field name="last_name" label="Last name" defaultValue={this.props.accounts.last_name ? this.props.accounts.last_name : ''} control="input" placeholder="Last name" />
           </Form.Group>
           <Form.Field name="learner_position" label="Current position" defaultValue={this.props.accounts.learner_position ? this.props.accounts.learner_position : ''} control="input" placeholder="Your current position" />

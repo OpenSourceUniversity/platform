@@ -32,16 +32,16 @@ contract TokenSettings is Ownable {
     event WalletChanged(address indexed walletAddress);
     event TokenFeeChanged(uint256 feeInEDUValue);
     event ETHFeeChanged(uint256 feeInETHValue);
-    event CustomFeeSet(address indexed customerAddress, uint256 preferenceFee);
+    event CustomFeeSet(address indexed customerAddress, uint256 preferenceFeeEDU, uint256 preferenceFeeETH);
     event CustomFeeRemoved(address indexed customerAddress);
 
     /**
     * @dev The Ownable constructor sets the original `owner` of the contract to the sender account.
     */
-    constructor() {
+    constructor() public {
         owner = msg.sender;
         tokenContractAddress = 0x2A22e5cCA00a3D63308fa39f29202eB1b39eEf52;
-        walletForFees = 0x269d55ef8acfdf0b83ccd08278ab440f87f9e9d8;
+        walletForFees = 0x269D55Ef8AcFdf0B83cCd08278ab440f87f9E9D8;
         feeInEDU = 10 * 10**18;
         feeInETH = 1 * 10**15;
     }
@@ -54,7 +54,7 @@ contract TokenSettings is Ownable {
         customersWithPreferences[customer].allowance = true;
         customersWithPreferences[customer].customFeeInEDU = customFeeEDU;
         customersWithPreferences[customer].customFeeInETH = customFeeETH;
-        emit CustomFeeSet(customer, customersWithPreferences[customer].customFee);
+        emit CustomFeeSet(customer, customersWithPreferences[customer].customFeeInEDU, customersWithPreferences[customer].customFeeInETH);
     }
 
     /**

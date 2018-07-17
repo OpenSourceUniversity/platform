@@ -24,7 +24,7 @@ contract AuthorizedAccess is Ownable {
      * @notice Owner is not authorized by default.
     */
     function authorizedCall() internal constant returns (bool) {
-        require(isAuthorized(msg.sender));
+        require(this.isAuthorized(msg.sender));
         return true;
     }
 
@@ -44,7 +44,7 @@ contract AuthorizedAccess is Ownable {
      */
     function deauthorize(address _issuer) onlyOwner external returns (bool) {
         issuers[_issuer].active = false;
-        emit Deathorized(msg.sender, _issuer);
+        emit Deathorized(msg.sender, _issuer, issuers[_issuer].academyTitle, issuers[_issuer].authorityHash);
         return true;
     }
 

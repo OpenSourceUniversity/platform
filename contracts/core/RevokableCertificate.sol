@@ -7,21 +7,23 @@ import "./BasicCertificate.sol";
  * @dev This contract supports revokable certificates.
  */
 contract RevokableCertificate is BasicCertificate {
-    event CertificateRevoked(address course);
+    event CertificateRevoked(uint256 id);
 
     /**
      * @dev Revokes existing certificate and sets the recipient to 0x0.
      */
     function revokeCertificate(
-        address course
+        uint256 _id
     )
-        public 
+        payable
+        public
         onlyOwner
         doPlatformFee(msg.sender)
         returns (bool)
     {
-        certificates[course].recipient = address(0);
-        emit CertificateRevoked(course);
+        require(_id >= 0 && _id < iCertificates);
+        certificates[_id].recipient = address(0);
+        emit CertificateRevoked(_id);
         return true;
     }
 }

@@ -23,6 +23,7 @@ class LernersSettings extends React.Component {
   }
 
   render() {
+    console.log(this.props.accounts)
     return (
       <div>
         {this.props.isSaved && this.state.visible ? (
@@ -45,21 +46,21 @@ class LernersSettings extends React.Component {
         <Divider clearing />
         <Form onSubmit={(event) => { this.saveSettings(event, this); }}>
           <Form.Group widths="equal">
-            <Form.Field name="first_name" label="First name" value={this.props.accounts.first_name ? this.props.accounts.first_name : ''} control="input" placeholder="First name" />
-            <Form.Field name="last_name" label="Last name" value={this.props.accounts.last_name ? this.props.accounts.last_name : ''} control="input" placeholder="Last name" />
+            <Form.Field name="first_name" label="First name" defaultValue={!!this.props.accounts.first_name ? this.props.accounts.first_name : ''} control="input" placeholder="First name" />
+            <Form.Field name="last_name" label="Last name" defaultValue={this.props.accounts.last_name ? this.props.accounts.last_name : ''} control="input" placeholder="Last name" />
           </Form.Group>
-          <Form.Field name="learner_position" label="Current position" value={this.props.accounts.learner_position ? this.props.accounts.learner_position : ''} control="input" placeholder="Your current position" />
-          <Form.Field name="learner_specialisation" label="Your specialisation" value={this.props.accounts.learner_specialisation ? this.props.accounts.learner_specialisation : ''} control="input" placeholder="Your specialisation" />
-          <Form.TextArea name="learner_about" label="About" value={this.props.accounts.learner_about ? this.props.accounts.learner_about : ''} placeholder="Tell us more about you..." />
+          <Form.Field name="learner_position" label="Current position" defaultValue={this.props.accounts.learner_position ? this.props.accounts.learner_position : ''} control="input" placeholder="Your current position" />
+          <Form.Field name="learner_specialisation" label="Your specialisation" defaultValue={this.props.accounts.learner_specialisation ? this.props.accounts.learner_specialisation : ''} control="input" placeholder="Your specialisation" />
+          <Form.TextArea name="learner_about" label="About" defaultValue={this.props.accounts.learner_about ? this.props.accounts.learner_about : ''} placeholder="Tell us more about you..." />
           <Divider hidden />
           <Header>
             Contact Information
           </Header>
           <Divider clearing />
-          <Form.Field name="learner_email" label="Email" value={this.props.accounts.learner_email ? this.props.accounts.learner_email : ''} control="input" type="email" placeholder="Your email" />
-          <Form.Field name="phone_number" label="Phone number" value={this.props.accounts.phone_number ? this.props.accounts.phone_number : ''} autoComplete="tel" control="input" type="tel" placeholder="Phone number" />
-          <Form.Field name="learner_site" label="My site" value={this.props.accounts.learner_site ? this.props.accounts.learner_site : ''} control="input" placeholder="Link to your site" />
-          <Form.Dropdown id="Country" name="learner_country" placeholder="Select Country" label="Country" value={this.props.accounts.learner_country ? this.props.accounts.learner_country : this.value} fluid search selection options={Countries.Countries} />
+          <Form.Field name="learner_email" label="Email" defaultValue={this.props.accounts.learner_email ? this.props.accounts.learner_email : ''} control="input" type="email" placeholder="Your email" />
+          <Form.Field name="phone_number" label="Phone number" defaultValue={this.props.accounts.phone_number ? this.props.accounts.phone_number : ''} autoComplete="tel" control="input" type="tel" placeholder="Phone number" />
+          <Form.Field name="learner_site" label="My site" defaultValue={this.props.accounts.learner_site ? this.props.accounts.learner_site : ''} control="input" placeholder="Link to your site" />
+          <Form.Dropdown id="Country" name="learner_country" placeholder="Select Country" label="Country" defaultValue={this.props.accounts.learner_country ? this.props.accounts.learner_country : this.value} fluid search selection options={Countries.Countries} />
           <Form.Field label="Upload your avatar" control="file">
             <Input
               id="file"
@@ -68,7 +69,7 @@ class LernersSettings extends React.Component {
               placeholder="My avatar"
               className="input-file"
               color="orange"
-              value={this.props.accounts.lerner_avatar ? this.props.accounts.lerner_avatar : ''}
+              defaultValue={this.props.accounts.lerner_avatar ? this.props.accounts.lerner_avatar : ''}
             />
           </Form.Field>
           <Divider hidden />

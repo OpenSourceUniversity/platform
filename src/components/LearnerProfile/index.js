@@ -31,7 +31,7 @@ class LearnerProfile extends React.Component {
     const email = `mailto:${this.props.accounts.learner_email}`;
     const site = `http://${this.props.accounts.learner_site}`;
     const phoneNumber = `tel:${this.props.accounts.phone_number}`;
-
+    console.log(this.props.accounts)
     return (
       <div>
         <Grid>

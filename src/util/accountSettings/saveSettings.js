@@ -16,9 +16,10 @@ export default function saveSettings(profileData, account) {
       'Auth-Eth-Address': store.getState().auth.address.slice(2),
     });
     const method = 'POST';
-    fetch('url', {
+    fetch('http://localhost:8000/api/v1/profiles', {
       method,
       account: STATES[account],
+      address: store.getState().auth.address,
       headers,
       data: {
         first_name: profileData.first_name ? profileData.first_name : null,

@@ -22,6 +22,7 @@ const authReducer = (state = initialState, action) => {
       v3Wallet: action.payload.v3Wallet,
       loginError: null,
       isLoggedIn: true,
+      address: localStorage.getItem('address'),
     });
   case 'SIGNED_ADDRESS_STORED':
     return Object.assign({}, state, {

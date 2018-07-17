@@ -1,6 +1,6 @@
 import store from '../../store';
 
-const START_URL = '';
+const START_URL = 'http://localhost:8000/api/profile/';
 
 export default function getDefaultValues(url = START_URL) {
   return function dispatcher(dispatch) {
@@ -22,7 +22,7 @@ export default function getDefaultValues(url = START_URL) {
         } else {
           dispatch({
             type: 'SETTINGS_GET_SUCCESS',
-            result: body,
+            result: JSON.parse( body ),
           });
         }
       })

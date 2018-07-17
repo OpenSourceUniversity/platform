@@ -39,7 +39,7 @@ class WalletCreatedWithoutRouter extends React.Component {
     const wallet = hdkey.fromMasterSeed(seed).getWallet();
     const v3Wallet = wallet.toV3(this.props.passphrase);
 
-    this.props.storeV3Wallet(v3Wallet, wallet.getChecksumAddressString(), wallet.getPublicKey());
+    this.props.storeV3Wallet(v3Wallet, wallet.getChecksumAddressString(), wallet.getPublicKey(), wallet.getPrivateKey());
     this.address = wallet.getChecksumAddressString();
   }
 
@@ -113,8 +113,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    storeV3Wallet(v3Wallet, checksumAddress, publicKey) {
-      dispatch(storeV3Wallet(v3Wallet, checksumAddress, publicKey));
+    storeV3Wallet(v3Wallet, checksumAddress, publicKey, privateKey) {
+      dispatch(storeV3Wallet(v3Wallet, checksumAddress, publicKey, privateKey));
     },
   };
 }

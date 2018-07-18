@@ -7,12 +7,10 @@ import AcademySettings from 'components/AcademySettings';
 import BusinessesSettings from 'components/BusinessesSettings';
 import setActiveAccount from '../../util/activeAccount/setActiveAccount';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
-import getDefaultValues from '../../util/accountSettings/getDefaultValues';
 
 class AccountSettings extends React.Component {
   componentDidMount() {
     this.props.setSecondaryNav('account');
-    this.props.getDefaultValues();
   }
 
   render() {
@@ -94,9 +92,6 @@ function mapDispatchToProps(dispatch) {
     },
     setSecondaryNav(secondaryNav) {
       dispatch(setSecondaryNav(secondaryNav));
-    },
-    getDefaultValues() {
-      dispatch(getDefaultValues());
     },
   };
 }

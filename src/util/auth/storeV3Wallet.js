@@ -1,4 +1,5 @@
 import storeSignedAddress from './storeSignedAddress';
+import getDefaultValues from '../accountSettings/getDefaultValues';
 
 export default function storeV3Wallet(v3Wallet, checksumAddress, publicKey, privateKey) {
   return function action(dispatch) {
@@ -7,6 +8,7 @@ export default function storeV3Wallet(v3Wallet, checksumAddress, publicKey, priv
     localStorage.setItem('address', checksumAddress);
     localStorage.setItem('publicKey', publicKey);
     dispatch(storeSignedAddress(checksumAddress.slice(2), privateKey));
+    dispatch(getDefaultValues());
     dispatch({
       type: 'V3_WALLET_STORED',
       payload: {

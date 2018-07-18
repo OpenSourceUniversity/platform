@@ -26,9 +26,12 @@ const INITIAL_STATE = {
     company_logo: null,
   },
   isSaved: false,
+  lernerIsCreated: JSON.parse(localStorage.getItem('lernerIsCreated')),
+  academyIsCreated: JSON.parse(localStorage.getItem('academyIsCreated')),
+  businessIsCreated: JSON.parse(localStorage.getItem('businessIsCreated')),
 };
 
-export default function certificateReducer(state = INITIAL_STATE, action) {
+export default function accountSettingsReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
   case 'SETTINGS_GET_REQUEST':
     return Object.assign({}, state, {
@@ -56,6 +59,12 @@ export default function certificateReducer(state = INITIAL_STATE, action) {
       isFetching: false,
       isSaved: false,
       error: null,
+    });
+  case 'ACCOUNTS_VALIDATED':
+    return Object.assign({}, state, {
+      lernerIsCreated: action.lernerAccount,
+      academyIsCreated: action.academyAccount,
+      businessIsCreated: action.businessAccount,
     });
   default:
     return state;

@@ -3,6 +3,7 @@ import { withRouter } from 'react-router';
 import { Container } from 'semantic-ui-react';
 import WalletUnlocker from 'components/WalletUnlocker';
 import React from 'react';
+import getDefaultValues from './util/accountSettings/getDefaultValues';
 import './util/web3/getWeb3';
 import './util/ipfs/getIpfs';
 
@@ -37,5 +38,13 @@ function mapStateToProps(state) {
   };
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    getDefaultValues() {
+      dispatch(getDefaultValues());
+    },
+  };
+}
 
-export default withRouter(connect(mapStateToProps)(App));
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

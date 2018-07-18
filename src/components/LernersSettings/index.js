@@ -23,7 +23,7 @@ class LernersSettings extends React.Component {
   }
 
   render() {
-    console.log(this.props.accounts)
+    console.log(this.props.accounts);
     return (
       <div>
         {this.props.isSaved && this.state.visible ? (

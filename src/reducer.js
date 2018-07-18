@@ -10,7 +10,6 @@ import certificateReducer from './containers/CertificatePage/certificateReducer'
 import addCertificateReducer from './containers/AddCertificatePage/addCertificateReducer';
 import activeAccountReducer from './util/activeAccount/activeAccountReducer';
 import secondaryNavReducer from './util/secondaryNav/secondaryNavReducer';
-import profileReducer from './util/profile/profileReducer';
 import accountSettingsReducer from './util/accountSettings/accountSettingsReducer';
 
 const reducer = combineReducers({
@@ -25,7 +24,6 @@ const reducer = combineReducers({
   search: searchReducer,
   activeAccount: activeAccountReducer,
   secondaryNav: secondaryNavReducer,
-  profile: profileReducer,
   accounts: accountSettingsReducer,
 });
 

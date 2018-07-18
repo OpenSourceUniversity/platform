@@ -39,7 +39,10 @@ class WalletCreatedWithoutRouter extends React.Component {
     const wallet = hdkey.fromMasterSeed(seed).getWallet();
     const v3Wallet = wallet.toV3(this.props.passphrase);
 
-    this.props.storeV3Wallet(v3Wallet, wallet.getChecksumAddressString(), wallet.getPublicKey(), wallet.getPrivateKey());
+    this.props.storeV3Wallet(
+      v3Wallet, wallet.getChecksumAddressString(),
+      wallet.getPublicKey(), wallet.getPrivateKey(),
+    );
     this.address = wallet.getChecksumAddressString();
   }
 
@@ -96,7 +99,8 @@ class WalletCreatedWithoutRouter extends React.Component {
           </span>
         </Card.Description>
         <Card.Content style={{ paddingTop: 0 }}>
-          <Button style={{ float: 'left' }} className="button" name="home" onClick={this.handleButtonClick} >DISCOVER PLATFORM</Button>
+          {/* <Button style={{ float: 'left' }} className="button"
+        name="home" onClick={this.handleButtonClick} >DISCOVER PLATFORM</Button> */}
           <Button primary style={{ float: 'right' }} className="button" name="create-profile" onClick={this.handleButtonClick} >CREATE MY ACCOUNT</Button>
         </Card.Content>
       </div>

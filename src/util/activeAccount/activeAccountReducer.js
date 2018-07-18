@@ -1,5 +1,5 @@
 const initialState = {
-  activeAccount: localStorage.getItem('activeAccount'),
+  activeAccount: localStorage.getItem('activeAccount') ? localStorage.getItem('activeAccount') : 'Learner',
 };
 
 

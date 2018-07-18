@@ -1,4 +1,5 @@
 import store from '../../store';
+import validateAccounts from './validateAccounts';
 
 const START_URL = 'http://localhost:8000/api/v1/profile/';
 
@@ -11,6 +12,7 @@ export default function getDefaultValues(url = START_URL) {
       'Auth-Signature': store.getState().auth.signedAddress,
       'Auth-Eth-Address': store.getState().auth.address.slice(2),
     });
+
     return fetch(url, { headers })
       .then(response => response.json().then(body => ({ response, body })))
       .then(({ response, body }) => {
@@ -20,11 +22,11 @@ export default function getDefaultValues(url = START_URL) {
             error: body.error,
           });
         } else {
-          console.log(body)
           dispatch({
             type: 'SETTINGS_GET_SUCCESS',
             result: body,
           });
+          dispatch(validateAccounts());
         }
       })
       .catch((error) => {

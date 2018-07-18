@@ -1,6 +1,7 @@
 import { createHashHistory } from 'history';
 import store from '../../store';
 import storeSignedAddress from './storeSignedAddress';
+import getDefaultValues from '../accountSettings/getDefaultValues';
 
 const Wallet = require('ethereumjs-wallet');
 
@@ -28,6 +29,7 @@ export default function login(passphrase) {
         localStorage.setItem('isLoggedIn', true);
         localStorage.setItem('address', address);
         localStorage.setItem('publicKey', wallet.getPublicKey());
+        dispatch(getDefaultValues());
         dispatch({
           type: 'LOGGED_IN',
           payload: {

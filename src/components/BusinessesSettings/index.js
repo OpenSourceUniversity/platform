@@ -18,6 +18,15 @@ class BusinessSettings extends React.Component {
     component.props.saveSettings(profileData, 'business');
   }
 
+  getCountry(obj) {
+    const needle = this.props.accounts.company_country
+    for (var i = 0; i < obj.length; i++) {
+      if (obj[i].text == needle) {
+         return obj[i].value;
+      }
+    }
+  }
+
   render() {
     return (
       <div className="business-settings">
@@ -48,18 +57,18 @@ class BusinessSettings extends React.Component {
             control="input"
             name="company_name"
             placeholder="Your company name"
-            value={this.props.accounts.company_name ? this.props.accounts.company_name : ''}
+            defaultValue={this.props.accounts.company_name ? this.props.accounts.company_name : ''}
           />
           <Form.Field
             label="Official website"
             control="input"
             placeholder="Your website without http://"
             name="company_website"
-            value={this.props.accounts.company_website ? this.props.accounts.company_website : ''}
+            defaultValue={this.props.accounts.company_website ? this.props.accounts.company_website : ''}
           />
-          <Form.Field name="company_email" label="Email" value={this.props.accounts.company_email ? this.props.accounts.company_email : ''} control="input" type="email" placeholder="Your email" />
-          <Form.Dropdown id="Country" name="company_country" placeholder="Select Country" label="Country" value={this.props.accounts.company_country ? this.props.accounts.company_country : this.value} fluid search selection options={Countries.Countries} />
-          <Form.TextArea name="company_about" label="About" value={this.props.accounts.company_about ? this.props.accounts.company_about : ''} placeholder="Tell us more about your company..." />
+          <Form.Field name="company_email" label="Email" defaultValue={this.props.accounts.company_email ? this.props.accounts.company_email : ''} control="input" type="email" placeholder="Your email" />
+          <Form.Dropdown id="Country" name="company_country" placeholder="Select Country" label="Country" defaultValue={this.getCountry(Countries.Countries)} fluid search selection options={Countries.Countries} />
+          <Form.TextArea name="company_about" label="About" defaultValue={this.props.accounts.company_about ? this.props.accounts.company_about : ''} placeholder="Tell us more about your company..." />
           <Form.Field label="Upload logo" control="file">
             <Input
               id="file"
@@ -68,7 +77,7 @@ class BusinessSettings extends React.Component {
               placeholder="Company logo"
               className="input-file"
               color="orange"
-              value={this.props.accounts.company_logo ? this.props.accounts.company_logo : ''}
+              defaultValue={this.props.accounts.company_logo ? this.props.accounts.company_logo : ''}
             />
           </Form.Field>
           <Divider clearing />

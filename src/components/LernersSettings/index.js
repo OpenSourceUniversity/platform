@@ -22,8 +22,16 @@ class LernersSettings extends React.Component {
     component.props.saveSettings(profileData, 'learner');
   }
 
+  getCountry(obj) {
+    const needle = this.props.accounts.learner_country
+    for (var i = 0; i < obj.length; i++) {
+      if (obj[i].text == needle) {
+         return obj[i].value;
+      }
+    }
+  }
+
   render() {
-    console.log(this.props.accounts);
     return (
       <div>
         {this.props.isSaved && this.state.visible ? (
@@ -60,7 +68,7 @@ class LernersSettings extends React.Component {
           <Form.Field name="learner_email" label="Email" defaultValue={this.props.accounts.learner_email ? this.props.accounts.learner_email : ''} control="input" type="email" placeholder="Your email" />
           <Form.Field name="phone_number" label="Phone number" defaultValue={this.props.accounts.phone_number ? this.props.accounts.phone_number : ''} autoComplete="tel" control="input" type="tel" placeholder="Phone number" />
           <Form.Field name="learner_site" label="My site" defaultValue={this.props.accounts.learner_site ? this.props.accounts.learner_site : ''} control="input" placeholder="Link to your site" />
-          <Form.Dropdown id="Country" name="learner_country" placeholder="Select Country" label="Country" defaultValue={this.props.accounts.learner_country ? this.props.accounts.learner_country : this.value} fluid search selection options={Countries.Countries} />
+          <Form.Dropdown id="Country" name="learner_country" placeholder="Select Country" label="Country" defaultValue={this.getCountry(Countries.Countries)} fluid search selection options={Countries.Countries} />
           <Form.Field label="Upload your avatar" control="file">
             <Input
               id="file"

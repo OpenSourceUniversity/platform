@@ -27,6 +27,14 @@ class AcademySettings extends React.Component {
     };
     component.props.saveSettings(profileData, 'academy');
   }
+  getCountry(obj) {
+    const needle = this.props.accounts.academy_country
+    for (var i = 0; i < obj.length; i++) {
+      if (obj[i].text == needle) {
+         return obj[i].value;
+      }
+    }
+  }
 
   render() {
     return (
@@ -68,7 +76,7 @@ class AcademySettings extends React.Component {
             defaultValue={this.props.accounts.academy_website ? this.props.accounts.academy_website : ''}
           />
           <Form.Field name="academy_email" label="Email" defaultValue={this.props.accounts.academy_email ? this.props.accounts.academy_email : ''} control="input" type="email" placeholder="Your email" />
-          <Form.Dropdown id="Country" name="academy_country" placeholder="Select Country" label="Country" defaultValue={this.props.accounts.academy_country ? this.props.accounts.academy_country : this.value} fluid search selection options={Countries.Countries} />
+          <Form.Dropdown id="Country" name="academy_country" placeholder="Select Country" label="Country" defaultValue={this.getCountry(Countries.Countries)} fluid search selection options={Countries.Countries} />
           <Form.TextArea name="academy_about" label="About" defaultValue={this.props.accounts.academy_about ? this.props.accounts.academy_about : ''} placeholder="Tell us more about your academy..." />
           <Form.Field label="Upload academy logo" control="file">
             <Input

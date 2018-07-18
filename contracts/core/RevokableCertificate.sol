@@ -18,10 +18,11 @@ contract RevokableCertificate is BasicCertificate {
         payable
         public
         onlyOwner
-        doPlatformFee(msg.sender)
+        doFee
         returns (bool)
     {
         require(_id >= 0 && _id < iCertificates);
+
         certificates[_id].recipient = address(0);
         emit CertificateRevoked(_id);
         return true;

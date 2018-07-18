@@ -1,12 +1,13 @@
 pragma solidity ^0.4.24;
 
 import "../ownership/Ownable.sol";
+import "../tokenCirculation/EDUcirculation.sol";
 
 /**
  * @title AuthorizedAccess
  * @dev This contract allows to organise a permission based access.
  */
-contract AuthorizedAccess is Ownable {
+contract AuthorizedAccess is Ownable, EDUcirculation {
     event Authorized(address sender, address issuer, bytes32 title, bytes hash);
     event Deathorized(address sender, address issuer, bytes32 title, bytes hash);
 

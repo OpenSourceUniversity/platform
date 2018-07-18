@@ -68,4 +68,14 @@ contract StandardCertification is BasicCertificate, RevokableCertificate, Transf
         super.transferCertificate(_id, recipient);
     }
 
+    function changeControlingAddresses(
+        address _authorityContractAddress,
+        address _tokenSettingsAddress,
+        address _eduCirculationAddress
+    )
+        public
+    {
+        super.changeControlingAddresses(_authorityContractAddress, _tokenSettingsAddress, _eduCirculationAddress);
+    }
+
 }

@@ -1,17 +1,20 @@
 pragma solidity ^0.4.24;
 
 import "../ownership/Ownable.sol";
-import "../tokenCirculation/EDUcirculation.sol";
+import "../abstracts/EDUcirculationAbstract.sol";
+import "../abstracts/TokenSettingsAbstract.sol";
 import "../abstracts/AuthorizedAccessAbstract.sol";
+import "../abstracts/tokenStandards/ERC20.sol";
 
 /**
  * @title Basic Certificate
  * @dev This basic contract allows to issue certificates along with
  *      skills gained in the certification process.
  */
-contract BasicCertificate is Ownable, EDUcirculation {
+contract BasicCertificate is Ownable {
     event CertificateIssued(uint256 id, address issuer, address recipient, bytes32[] skillsVerified);
     event CertificateUploaded(uint256 id, address issuer, address recipient, bytes32[] skills, bytes certificateHash);
+    event InitiateControllingAddresses(address AuthorityAddr, address TokenSettingsAddr, address EDUCurculationAddr);
 
     struct CertificateBody {
         address issuer;
@@ -24,15 +27,33 @@ contract BasicCertificate is Ownable, EDUcirculation {
     // addresses are related to address of every course
     mapping (uint256 => CertificateBody) certificates;
     address public authorityAddress;
+    address public tokenSettingsAddress;
+    address public eduCirculationAddress;
+    address public tokenAddress;
 
     // global counter
     uint256 public iCertificates;
+    uint256 public feeEDU;
+    uint256 public feeETH;
+
+    modifier doFee {
+        (feeEDU, feeETH) = EDUcirculation(eduCirculationAddress).getFee(msg.sender);
+        require(msg.value >= feeETH);
+        tokenAddress = TokenSettings(tokenSettingsAddress).tokenContractAddress();
+        require(ERC20(tokenAddress).balanceOf(msg.sender) >= feeEDU);
+        EDUcirculation(eduCirculationAddress).getWalletFees().transfer(feeETH);
+        ERC20(tokenAddress).transfer(EDUcirculation(eduCirculationAddress).getWalletFees(), feeEDU);
+        _;
+    }
 
     // Constructor of the smart contract which has been executed only once
     // with the deploiment of the smart contract
-    constructor(address _authorityContractAddress) public {
+    constructor(address _authorityContractAddress, address _tokenSettingsAddress, address _eduCirculationAddress) public {
         iCertificates = 0;
         authorityAddress = _authorityContractAddress;
+        tokenSettingsAddress = _tokenSettingsAddress;
+        eduCirculationAddress = _eduCirculationAddress;
+        emit InitiateControllingAddresses(authorityAddress, tokenSettingsAddress, eduCirculationAddress);
     }
 
     /**
@@ -75,12 +96,19 @@ contract BasicCertificate is Ownable, EDUcirculation {
         bytes32[] _skills
     )
         payable
+        doFee
         public
-        doPlatformFee(msg.sender)
         returns (bool)
     {
         require(_certificateHash[0] != 0);
         require(iCertificates >= 0);
+        /* // Platform fee
+        (feeEDU, feeETH) = EDUcirculation(eduCirculationAddress).getFee(msg.sender);
+        require(msg.value >= feeETH);
+        tokenAddress = TokenSettings(tokenSettingsAddress).tokenContractAddress();
+        require(ERC20(tokenAddress).balanceOf(msg.sender) >= feeEDU);
+        EDUcirculation(eduCirculationAddress).getWalletFees().transfer(feeETH);
+        ERC20(tokenAddress).transfer(EDUcirculation(eduCirculationAddress).getWalletFees(), feeEDU); */
 
         if (_issuer != address(0)) {
             certificates[iCertificates].issuer = _issuer;
@@ -100,4 +128,20 @@ contract BasicCertificate is Ownable, EDUcirculation {
         iCertificates ++;
         return true;
     }
+
+    function changeControlingAddresses(
+        address _authorityContractAddress,
+        address _tokenSettingsAddress,
+        address _eduCirculationAddress
+    )
+        onlyOwner
+        public
+    {
+        authorityAddress = _authorityContractAddress;
+        tokenSettingsAddress = _tokenSettingsAddress;
+        eduCirculationAddress = _eduCirculationAddress;
+        emit InitiateControllingAddresses(authorityAddress, tokenSettingsAddress, eduCirculationAddress);
+    }
+
+
 }

@@ -12,10 +12,11 @@ contract TransfarableCertificate is BasicCertificate {
     /**
      * @dev Transfers existing certificate to another account.
      */
-    function transferCertificate(uint256 _id, address recipient) payable onlyOwner public returns (bool) {
+    function transferCertificate(uint256 _id, address recipient) payable onlyOwner doFee public returns (bool) {
         require(recipient != address(0));
         require(_id >= 0 && _id < iCertificates);
         require(certificates[_id].recipient == owner);
+
         bool verifyCertificateTransfer;
         bytes storage emptyHash;
         verifyCertificateTransfer = BasicCertificate(recipient).uploadCertificate(certificates[_id].issuer, certificates[_id].certificateHash, certificates[_id].skills);

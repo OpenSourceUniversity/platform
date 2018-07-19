@@ -38,10 +38,9 @@ class WalletCreatedWithoutRouter extends React.Component {
     const seed = bip39.mnemonicToSeed(this.props.mnemonicPhrase);
     const wallet = hdkey.fromMasterSeed(seed).getWallet();
     const v3Wallet = wallet.toV3(this.props.passphrase);
-
     this.props.storeV3Wallet(
       v3Wallet, wallet.getChecksumAddressString(),
-      wallet.getPublicKey(), wallet.getPrivateKey(),
+      wallet.getPublicKey(), wallet.getPrivateKey()
     );
     this.address = wallet.getChecksumAddressString();
   }

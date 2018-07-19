@@ -13,7 +13,9 @@ import Main from './components/Main';
 
 class App extends React.Component {
   componentDidMount() {
-    this.props.getDefaultValues();
+    if(this.props.isLoggedIn) {
+      this.props.getDefaultValues();
+    }
   }
   render() {
     return (

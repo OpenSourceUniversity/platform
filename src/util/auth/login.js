@@ -29,13 +29,13 @@ export default function login(passphrase) {
         localStorage.setItem('isLoggedIn', true);
         localStorage.setItem('address', address);
         localStorage.setItem('publicKey', wallet.getPublicKey());
-        dispatch(getDefaultValues());
         dispatch({
           type: 'LOGGED_IN',
           payload: {
             wallet,
           },
         });
+        dispatch(getDefaultValues());
         const newPath = '/';
         const history = createHashHistory();
         history.push(newPath);

@@ -35,7 +35,7 @@ class AccountSettings extends React.Component {
               <Grid.Column width={6}>
                 <Segment>
                   <Header>
-                    Set default profile:
+                    Set active profile:
                   </Header>
                   <Menu fluid vertical pointing>
                     <Menu.Item name="Learner" active={this.props.activeAccount === 'Learner'} onClick={(e, { name }) => this.props.setActiveAccount(name)}>

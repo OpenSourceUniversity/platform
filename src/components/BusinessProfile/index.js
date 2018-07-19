@@ -27,7 +27,7 @@ class BusinessProfile extends React.Component {
                     {this.props.accounts.company_name}
                   </Header>
                   <Header size="small" color="grey">
-                    {this.props.accounts.company_country}
+                    {this.props.accounts.company_country ? this.props.accounts.company_country : '-'}
                   </Header>
                 </Segment>
                 <Segment>
@@ -56,7 +56,7 @@ class BusinessProfile extends React.Component {
                 About
               </Header>
               <Divider clearing />
-              {this.props.accounts.company_about}
+              {this.props.accounts.company_about ? this.props.accounts.company_about : '-'}
               <Divider clearing />
             </Segment>
           </Grid.Column>

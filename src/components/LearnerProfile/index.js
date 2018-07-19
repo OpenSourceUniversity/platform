@@ -50,16 +50,16 @@ class LearnerProfile extends React.Component {
                     {this.props.accounts.first_name} {this.props.accounts.last_name}
                   </Header>
                   <Header size="small" color="grey">
-                    {this.props.accounts.learner_position}
+                    {this.props.accounts.learner_position ? this.props.accounts.learner_position : '-'}
                   </Header>
                 </Segment>
                 <Segment>
                   <List>
-                    <List.Item icon={{ name: 'users', style: { width: '22px' } }} content={this.props.accounts.learner_specialisation} />
-                    <List.Item icon={{ name: 'marker', style: { width: '22px' } }} content={this.props.accounts.learner_country} />
-                    <List.Item icon={{ name: 'mail', style: { width: '22px' } }} content={<a href={email}>{this.props.accounts.learner_email}</a>} />
-                    <List.Item icon={{ name: 'linkify', style: { width: '22px' } }} content={<a href={site}>{this.props.accounts.learner_site}</a>} />
-                    <List.Item icon={{ name: 'phone', style: { width: '22px' } }} content={<a href={phoneNumber}>{this.props.accounts.phone_number}</a>} />
+                    <List.Item icon={{ name: 'users', style: { width: '22px' } }} content={this.props.accounts.learner_specialisation ? this.props.accounts.learner_specialisation : '-'} />
+                    <List.Item icon={{ name: 'marker', style: { width: '22px' } }} content={this.props.accounts.learner_country ? this.props.accounts.learner_country : '-'} />
+                    <List.Item icon={{ name: 'mail', style: { width: '22px' } }} content={<a target="_blank" href={email}>{this.props.accounts.learner_email ? this.props.accounts.learner_email : '-'}</a>} />
+                    <List.Item icon={{ name: 'linkify', style: { width: '22px' } }} content={<a target="_blank" href={site}>{this.props.accounts.learner_site ? this.props.accounts.learner_site : '-'}</a>} />
+                    <List.Item icon={{ name: 'phone', style: { width: '22px' } }} content={<a target="_blank" href={phoneNumber}>{this.props.accounts.phone_number ? this.props.accounts.phone_number : '-'}</a>} />
                   </List>
                 </Segment>
                 <Segment>
@@ -79,12 +79,7 @@ class LearnerProfile extends React.Component {
                 Introduction
               </Header>
               <Divider clearing />
-              <Segment style={{
-                textAlign: 'center', background: '#7f8fa6', color: '#fff', borderRadius: '10px', opacity: 0.7,
-              }}
-              >
-                Coming in Beta
-              </Segment>
+              {this.props.accounts.learner_about ? this.props.accounts.learner_about : '-'}
               <Header>
                 Certificates
               </Header>

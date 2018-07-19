@@ -42,7 +42,7 @@ class AcademyProfile extends React.Component {
                   <List>
                     {/* <List.Item icon={{ name: 'users', style: { width: '22px' } }}
                   content={<span>{this.props.accounts.students}</span>} /> */}
-                    <List.Item icon={{ name: 'marker', style: { width: '22px' } }} content={this.props.accounts.academy_country} />
+                    <List.Item icon={{ name: 'marker', style: { width: '22px' } }} content={this.props.accounts.academy_country ? this.props.accounts.academy_country : '-'} />
                     <List.Item icon={{ name: 'mail', style: { width: '22px' } }} content={<a href={email}>{this.props.accounts.academy_email}</a>} />
                     <List.Item icon={{ name: 'linkify', style: { width: '22px' } }} content={<a href={link}>{this.props.accounts.academy_website}</a>} />
                   </List>
@@ -57,7 +57,7 @@ class AcademyProfile extends React.Component {
                 About
               </Header>
               <Divider clearing />
-              {this.props.accounts.academy_about}
+              {this.props.accounts.academy_about ? this.props.accounts.academy_about : '-'}
               <Divider clearing />
             </Segment>
             <Segment size="large">

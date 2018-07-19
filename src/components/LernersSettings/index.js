@@ -5,6 +5,8 @@ import Countries from '../../data/countriesList';
 import saveSettings from '../../util/accountSettings/saveSettings';
 
 class LernersSettings extends React.Component {
+  state = { visible: true }
+
   saveSettings(event, component) {
     event.preventDefault();
     const profileData = {
@@ -16,19 +18,20 @@ class LernersSettings extends React.Component {
       learner_email: event.target.elements.learner_email.value,
       phone_number: event.target.elements.phone_number.value,
       learner_site: event.target.elements.learner_site.value,
-      learner_country: event.target.elements[8].parentElement.children[1].textContent,
+      learner_country: event.target.elements[8].parentElement.children[1].textContent === 'Select Country' ? null : event.target.elements[8].parentElement.children[1].textContent,
       lerner_avatar: event.target.elements.lerner_avatar.value,
     };
     component.props.saveSettings(profileData, 'learner');
   }
 
   getCountry(obj) {
-    const needle = this.props.accounts.learner_country
-    for (var i = 0; i < obj.length; i++) {
-      if (obj[i].text == needle) {
-         return obj[i].value;
+    const needle = this.props.accounts.learner_country;
+    for (let i = 0; i < obj.length; i += 1) {
+      if (obj[i].text === needle) {
+        return obj[i].value;
       }
     }
+    return null;
   }
 
   render() {
@@ -54,21 +57,21 @@ class LernersSettings extends React.Component {
         <Divider clearing />
         <Form onSubmit={(event) => { this.saveSettings(event, this); }}>
           <Form.Group widths="equal">
-            <Form.Field name="first_name" label="First name" defaultValue={this.props.accounts.first_name ? this.props.accounts.first_name : ''} control="input" placeholder="First name" />
-            <Form.Field name="last_name" label="Last name" defaultValue={this.props.accounts.last_name ? this.props.accounts.last_name : ''} control="input" placeholder="Last name" />
+            <Form.Field name="first_name"label="First name" key={`first_name:${this.props.accounts.first_name || ''}`} defaultValue={this.props.accounts.first_name ? this.props.accounts.first_name : ''} control="input" placeholder="First name" />
+            <Form.Field name="last_name" label="Last name" key={`last_name:${this.props.accounts.last_name || ''}`} defaultValue={this.props.accounts.last_name ? this.props.accounts.last_name : ''} control="input" placeholder="Last name" />
           </Form.Group>
-          <Form.Field name="learner_position" label="Current position" defaultValue={this.props.accounts.learner_position ? this.props.accounts.learner_position : ''} control="input" placeholder="Your current position" />
-          <Form.Field name="learner_specialisation" label="Your specialisation" defaultValue={this.props.accounts.learner_specialisation ? this.props.accounts.learner_specialisation : ''} control="input" placeholder="Your specialisation" />
-          <Form.TextArea name="learner_about" label="About" defaultValue={this.props.accounts.learner_about ? this.props.accounts.learner_about : ''} placeholder="Tell us more about you..." />
+          <Form.Field name="learner_position" label="Current position" key={`learner_position:${this.props.accounts.learner_position || ''}`} defaultValue={this.props.accounts.learner_position ? this.props.accounts.learner_position : ''} control="input" placeholder="Your current position" />
+          <Form.Field name="learner_specialisation" label="Your specialisation" key={`learner_specialisation:${this.props.accounts.learner_specialisation || ''}`} defaultValue={this.props.accounts.learner_specialisation ? this.props.accounts.learner_specialisation : ''} control="input" placeholder="Your specialisation" />
+          <Form.TextArea name="learner_about" label="About" key={`learner_about:${this.props.accounts.learner_about || ''}`} defaultValue={this.props.accounts.learner_about ? this.props.accounts.learner_about : ''} placeholder="Tell us more about you..." />
           <Divider hidden />
           <Header>
             Contact Information
           </Header>
           <Divider clearing />
-          <Form.Field name="learner_email" label="Email" defaultValue={this.props.accounts.learner_email ? this.props.accounts.learner_email : ''} control="input" type="email" placeholder="Your email" />
-          <Form.Field name="phone_number" label="Phone number" defaultValue={this.props.accounts.phone_number ? this.props.accounts.phone_number : ''} autoComplete="tel" control="input" type="tel" placeholder="Phone number" />
-          <Form.Field name="learner_site" label="My site" defaultValue={this.props.accounts.learner_site ? this.props.accounts.learner_site : ''} control="input" placeholder="Link to your site" />
-          <Form.Dropdown id="Country" name="learner_country" placeholder="Select Country" label="Country" defaultValue={this.getCountry(Countries.Countries)} fluid search selection options={Countries.Countries} />
+          <Form.Field name="learner_email" label="Email" key={`learner_email:${this.props.accounts.learner_email || ''}`} defaultValue={this.props.accounts.learner_email ? this.props.accounts.learner_email : ''} control="input" type="email" placeholder="Your email" />
+          <Form.Field name="phone_number" label="Phone number" key={`phone_number:${this.props.accounts.phone_number || ''}`} defaultValue={this.props.accounts.phone_number ? this.props.accounts.phone_number : ''} autoComplete="tel" control="input" type="tel" placeholder="Phone number" />
+          <Form.Field name="learner_site" label="My site" key={`learner_site:${this.props.accounts.learner_site || ''}`} defaultValue={this.props.accounts.learner_site ? this.props.accounts.learner_site : ''} control="input" placeholder="Link to your site" />
+          <Form.Dropdown id="Country" name="learner_country" key={`learner_country:${this.props.accounts.learner_country || ''}`} placeholder="Select Country" label="Country" defaultValue={this.getCountry(Countries.Countries)} fluid search selection options={Countries.Countries} />
           <Form.Field label="Upload your avatar" control="file">
             <Input
               id="file"

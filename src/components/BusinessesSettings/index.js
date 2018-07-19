@@ -5,13 +5,15 @@ import Countries from '../../data/countriesList';
 import saveSettings from '../../util/accountSettings/saveSettings';
 
 class BusinessSettings extends React.Component {
+  state = { visible: true }
+
   saveSettings(event, component) {
     event.preventDefault();
     const profileData = {
       company_name: event.target.elements.company_name.value,
       company_website: event.target.elements.company_website.value,
       company_email: event.target.elements.company_email.value,
-      company_country: event.target.elements[3].parentElement.children[1].textContent,
+      company_country: event.target.elements[3].parentElement.children[1].textContent === 'Select Country' ? null : event.target.elements[3].parentElement.children[1].textContent,
       company_about: event.target.elements.company_about.value,
       company_logo: event.target.elements.company_logo.value,
     };
@@ -19,12 +21,21 @@ class BusinessSettings extends React.Component {
   }
 
   getCountry(obj) {
-    const needle = this.props.accounts.company_country
-    for (var i = 0; i < obj.length; i++) {
-      if (obj[i].text == needle) {
-         return obj[i].value;
+    const needle = this.props.accounts.company_country;
+    for (let i = 0; i < obj.length; i += 1) {
+      if (obj[i].text === needle) {
+        return obj[i].value;
       }
     }
+    return null;
+  }
+
+  handleDismiss = () => {
+    this.setState({ visible: false });
+
+    setTimeout(() => {
+      this.setState({ visible: true });
+    }, 2000);
   }
 
   render() {
@@ -57,6 +68,7 @@ class BusinessSettings extends React.Component {
             control="input"
             name="company_name"
             placeholder="Your company name"
+            key={`company_name:${this.props.accounts.company_name || ''}`}
             defaultValue={this.props.accounts.company_name ? this.props.accounts.company_name : ''}
           />
           <Form.Field
@@ -64,11 +76,12 @@ class BusinessSettings extends React.Component {
             control="input"
             placeholder="Your website without http://"
             name="company_website"
+            key={`company_website:${this.props.accounts.company_website || ''}`}
             defaultValue={this.props.accounts.company_website ? this.props.accounts.company_website : ''}
           />
-          <Form.Field name="company_email" label="Email" defaultValue={this.props.accounts.company_email ? this.props.accounts.company_email : ''} control="input" type="email" placeholder="Your email" />
-          <Form.Dropdown id="Country" name="company_country" placeholder="Select Country" label="Country" defaultValue={this.getCountry(Countries.Countries)} fluid search selection options={Countries.Countries} />
-          <Form.TextArea name="company_about" label="About" defaultValue={this.props.accounts.company_about ? this.props.accounts.company_about : ''} placeholder="Tell us more about your company..." />
+          <Form.Field name="company_email" label="Email" key={`company_email:${this.props.accounts.company_email || ''}`} defaultValue={this.props.accounts.company_email ? this.props.accounts.company_email : ''} control="input" type="email" placeholder="Your email" />
+          <Form.Dropdown id="Country" name="company_country" key={`company_country:${this.props.accounts.company_country || ''}`} placeholder="Select Country" label="Country" defaultValue={this.getCountry(Countries.Countries)} fluid search selection options={Countries.Countries} />
+          <Form.TextArea name="company_about" label="About" key={`company_about:${this.props.accounts.company_about || ''}`} defaultValue={this.props.accounts.company_about ? this.props.accounts.company_about : ''} placeholder="Tell us more about your company..." />
           <Form.Field label="Upload logo" control="file">
             <Input
               id="file"

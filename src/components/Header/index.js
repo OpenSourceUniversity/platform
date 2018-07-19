@@ -104,10 +104,10 @@ class HeaderWithoutRouter extends React.Component {
           avatar
           src={(() => {
             if (this.props.isLoggedIn) {
-              switch (this.props.secondaryNav) {
-              case 'business': return this.props.accounts.company_logo ? this.props.accounts.company_logo : avatarPlaceholder;
-              case 'academia': return this.props.accounts.academy_logo ? this.props.accounts.academy_logo : avatarPlaceholder;
-              case 'account': return this.props.accounts.lerner_avatar ? this.props.accounts.lerner_avatar : avatarPlaceholder;
+              switch (this.props.activeAccount) {
+              case 'Business': return this.props.accounts.company_logo ? this.props.accounts.company_logo : avatarPlaceholder;
+              case 'Academy': return this.props.accounts.academy_logo ? this.props.accounts.academy_logo : avatarPlaceholder;
+              case 'Learner': return this.props.accounts.lerner_avatar ? this.props.accounts.lerner_avatar : avatarPlaceholder;
               default: return null;
               }
             }
@@ -324,6 +324,7 @@ function mapStateToProps(state) {
     secondaryNav: state.secondaryNav.secondaryNav,
     accounts: state.accounts.accounts,
     onBoardingActiveElement: state.auth.onBoardingActiveElement,
+    activeAccount: state.activeAccount.activeAccount,
   };
 }
 

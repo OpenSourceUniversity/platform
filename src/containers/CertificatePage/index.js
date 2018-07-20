@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Header, Divider, Segment, Container, Dimmer, Loader, Breadcrumb } from 'semantic-ui-react';
+import { Header, Divider, Segment, Container, Dimmer, Loader, Breadcrumb, Grid } from 'semantic-ui-react';
 import SkillItem from 'components/SkillItem';
 import { fetchCertificate } from './actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
@@ -12,18 +12,33 @@ class CertificatePage extends React.Component {
   }
 
   renderSkills() {
-    const skillsJSON = this.props.course.skills;
-    let skillsJSONLength = 0;
-    skillsJSONLength = !skillsJSON ? 0 : skillsJSON.length;
+    const skillsArr = this.props.certificate.skills;
     const skills = [];
-    for (let i = 0; i < skillsJSONLength; i += 1) {
-      skills.push({
-        have_icon: false, check: true, name: skillsJSON[i].name, basic: false,
-      });
+    try {
+      for (let i = 0; i < skillsArr.length; i += 1) {
+        skills.push({
+          have_icon: false, check: true, name: skillsArr[i], basic: false,
+        });
+      }
+      return skills.map((skill, index) => (
+        <SkillItem skill={skill} key={index} />
+      ));
+    } catch(e) {
+      return null;
     }
-    return skills.map((skill, index) => (
-      <SkillItem skill={skill} key={index} />
-    ));
+  }
+
+  renderSubjects() {
+    const subjectsArr = this.props.certificate.subject;
+    let subjectsStr = "";
+    try {
+      for (let i = 0; i < subjectsArr.length; i += 1) {
+        subjectsStr += subjectsArr[i] + ' ';
+      }
+      return subjectsStr;
+    } catch(e) {
+      return null;
+    }
   }
   // renderRating(ratingNumb) {
   //   return (
@@ -52,43 +67,97 @@ class CertificatePage extends React.Component {
               <Header style={{ fontSize: '1.7em' }}>
                 Certificate Information
               </Header>
+              <Header style={{ fontSize: '1.7em' }}>
+                {this.props.certificate.course_title}
+              </Header>
               <Divider clearing />
-              <Header style={{ fontSize: '1.7em' }}>
-                {this.props.certificate.name}
-              </Header>
-              <Header style={{ fontSize: '1.7em' }}>
-                Academy:
-              </Header>
-              <span>{this.props.certificate.academy}</span>
-              <Header style={{ fontSize: '1.7em' }}>
-                Course:
-              </Header>
-              <span>{this.props.certificate.course}</span>
-              <Header style={{ fontSize: '1.7em' }}>
-                Learner:
-              </Header>
-              <a target="_blank" href={`https://etherscan.io/address/${this.props.certificate.learner}`}>{this.props.certificate.learner}</a>
-              <Header style={{ fontSize: '1.7em' }}>
-                Subject:
-              </Header>
-              <span>{this.props.certificate.subject}</span>
-              <Header style={{ fontSize: '1.7em' }}>
-                {this.props.certificate.verified ?
-                  (<a target="_blank" href={`https://etherscan.io/tx/${this.props.certificate.tx}`}>Verified</a>)
-                  : ('Not Verified')}
-              </Header>
-              <Header style={{ fontSize: '1.7em' }}>
-                Score:
-              </Header>
-              <span>{this.props.certificate.score}</span>
-              <Header style={{ fontSize: '1.7em' }}>
-                Creator:
-              </Header>
-              <a target="_blank" href={`https://etherscan.io/address/${this.props.certificate.creator}`}>{this.props.certificate.creator}</a>
-              <Header style={{ fontSize: '1.7em' }}>
-                Expiration date:
-              </Header>
-              <span>{this.props.certificate.expiration_date}</span>
+              <Grid>
+                <Grid.Column width={8}>
+                  <Segment color='orange' className="certificateCard">
+                    <Header style={{ fontSize: '1.7em' }}>
+                      Academy Information
+                    </Header>
+                    <Divider clearing />
+                    <Header style={{ fontSize: '1.7em' }}>
+                      Academy Title:
+                    </Header>
+                    <span>{this.props.certificate.academy_title}</span>
+                    <Header style={{ fontSize: '1.7em' }}>
+                      Academy ETH Address:
+                    </Header>
+                    <a target="_blank" href={`https://etherscan.io/address/${this.props.certificate.academy_address}`}>{this.props.certificate.academy_address}</a>
+                    <Header style={{ fontSize: '1.7em' }}>
+                      Academy Site:
+                    </Header>
+                    <a target="_blank" href={this.props.certificate.academy_link}>{this.props.certificate.academy_link}</a>
+                  </Segment>
+                </Grid.Column>
+                <Grid.Column width={8}>
+                  <Segment color='orange' className="certificateCard">
+                    <Header style={{ fontSize: '1.7em' }}>
+                      Course Information
+                    </Header>
+                    <Divider clearing />
+                    <Header style={{ fontSize: '1.7em' }}>
+                      Program Title:
+                    </Header>
+                    <span>{this.props.certificate.program_title}</span>
+                    <Header style={{ fontSize: '1.7em' }}>
+                      Course Link:
+                    </Header>
+                    <a target="_blank" href={this.props.certificate.course_link}>{this.props.certificate.course_link}</a>
+                    <Header style={{ fontSize: '1.7em' }}>
+                      Subject:
+                    </Header>
+                    <span>
+                      {this.renderSubjects()}
+                    </span>
+                  </Segment>
+                </Grid.Column>
+                <Grid.Column width={8}>
+                  <Segment color='orange' className="certificateCard">
+                    <Header style={{ fontSize: '1.7em' }}>
+                      Learner Information
+                    </Header>
+                    <Divider clearing />
+                    <Header style={{ fontSize: '1.7em' }}>
+                      Skills:
+                    </Header>
+                    <span>
+                      {this.renderSkills()}
+                    </span>
+                    <Header style={{ fontSize: '1.7em' }}>
+                      Learner ETH Address:
+                    </Header>
+                    <a target="_blank" href={`https://etherscan.io/address/${this.props.certificate.learner_eth_address}`}>{this.props.certificate.learner_eth_address}</a>
+                    <Header style={{ fontSize: '1.7em' }}>
+                      Score:
+                    </Header>
+                    <span>{this.props.certificate.score}</span>
+                  </Segment>
+                </Grid.Column>
+                <Grid.Column width={8}>
+                  <Segment color={this.props.certificate.verified ? 'green' : 'red'} className="certificateCard">
+                    <Header style={{ fontSize: '1.7em' }}>
+                      Certificate Status
+                    </Header>
+                    <Divider clearing />
+                    <Header style={{ fontSize: '1.7em' }}>
+                      {this.props.certificate.verified ?
+                        (<a target="_blank" href={`https://etherscan.io/tx/${this.props.certificate.ipfs_hash}`}>Verified</a>)
+                        : ('Not Verified')}
+                    </Header>
+                    <Header style={{ fontSize: '1.7em' }}>
+                      Duration:
+                    </Header>
+                    <span>{this.props.certificate.duration}</span>
+                    <Header style={{ fontSize: '1.7em' }}>
+                      Expiration date:
+                    </Header>
+                    <span>{this.props.certificate.expiration_date ? this.props.certificate.expiration_date : '-'}</span>
+                  </Segment>
+                </Grid.Column>
+              </Grid>
             </Segment>
           </div>
         </Container>

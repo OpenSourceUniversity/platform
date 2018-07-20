@@ -41,10 +41,10 @@ class AcademySettings extends React.Component {
   render() {
     return (
       <div className="academia-settings">
-        {this.props.accounts.academyIsCreated ? (
+        {!this.props.accounts.academyIsCreated ? (
           <Message
             warning
-            header="Account is not setuped yet!"
+            header="Profile is not created yet!"
             content="You can't explore the platform with this active account, please, submit this form with yor information, or chose another setuped account."
           />
         ) : null}

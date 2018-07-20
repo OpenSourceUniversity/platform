@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Container, Header, Divider, Grid, Segment, Menu } from 'semantic-ui-react';
-import LernersSettings from 'components/LernersSettings';
+import LearnerSettings from 'components/LearnerSettings';
 import AcademySettings from 'components/AcademySettings';
-import BusinessesSettings from 'components/BusinessesSettings';
+import BusinessSettings from 'components/BusinessSettings';
 import setActiveAccount from '../../util/activeAccount/setActiveAccount';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 
@@ -64,8 +64,8 @@ class AccountSettings extends React.Component {
                   {(() => {
                     switch (this.props.activeAccount) {
                     case 'Academy': return <AcademySettings />;
-                    case 'Learner': return <LernersSettings />;
-                    case 'Business': return <BusinessesSettings />;
+                    case 'Learner': return <LearnerSettings />;
+                    case 'Business': return <BusinessSettings />;
                     default: return null;
                     }
                   })()}

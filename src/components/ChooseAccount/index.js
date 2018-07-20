@@ -54,7 +54,7 @@ class ChooseAccount extends React.Component {
               <span>
                 Are you pursuing learning and development opportunities?
               </span>
-              <Button style={{ marginTop: '30px' }} primary name="Lerner" as={Link} to="/settings" onClick={(e, { name }) => this.props.setActiveAccount(name)} fluid> SELECT </Button>
+              <Button style={{ marginTop: '30px' }} primary name="Learner" as={Link} to="/settings" onClick={(e, { name }) => this.props.setActiveAccount(name)} fluid> SELECT </Button>
             </Segment>
           </Grid.Column>
           <Grid.Column>

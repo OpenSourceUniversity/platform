@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Countries from '../../data/countriesList';
 import saveSettings from '../../util/accountSettings/saveSettings';
 
-class LernersSettings extends React.Component {
+class LearnerSettings extends React.Component {
   state = { visible: true }
 
   getCountry(obj) {
@@ -37,10 +37,10 @@ class LernersSettings extends React.Component {
   render() {
     return (
       <div>
-        {this.props.accounts.lernerIsCreated ? (
+        {!this.props.accounts.lernerIsCreated ? (
           <Message
             warning
-            header="Account is not setuped yet!"
+            header="Profile is not created yet!"
             content="You can't explore the platform with this active account, please, submit this form with yor information, or chose another setuped account."
           />
         ) : null}
@@ -187,4 +187,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LernersSettings);
+export default connect(mapStateToProps, mapDispatchToProps)(LearnerSettings);

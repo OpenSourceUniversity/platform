@@ -41,10 +41,10 @@ class BusinessSettings extends React.Component {
   render() {
     return (
       <div className="business-settings">
-        {this.props.accounts.businessIsCreated ? (
+        {!this.props.accounts.businessIsCreated ? (
           <Message
             warning
-            header="Account is not setuped yet!"
+            header="Profile is not created yet!"
             content="You can't explore the platform with this active account, please, submit this form with yor information, or chose another setuped account."
           />
         ) : null}

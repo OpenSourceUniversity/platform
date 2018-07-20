@@ -11,7 +11,7 @@ const INITIAL_STATE = {
     learner_site: null,
     phone_number: null,
     learner_country: null,
-    lerner_avatar: null,
+    learner_avatar: null,
     academy_name: null,
     academy_website: null,
     academy_email: null,
@@ -26,7 +26,7 @@ const INITIAL_STATE = {
     company_logo: null,
   },
   isSaved: false,
-  lernerIsCreated: JSON.parse(localStorage.getItem('lernerIsCreated')),
+  learnerIsCreated: JSON.parse(localStorage.getItem('learnerIsCreated')),
   academyIsCreated: JSON.parse(localStorage.getItem('academyIsCreated')),
   businessIsCreated: JSON.parse(localStorage.getItem('businessIsCreated')),
 };
@@ -62,7 +62,7 @@ export default function accountSettingsReducer(state = INITIAL_STATE, action) {
     });
   case 'ACCOUNTS_VALIDATED':
     return Object.assign({}, state, {
-      lernerIsCreated: action.lernerAccount,
+      learnerIsCreated: action.learnerAccount,
       academyIsCreated: action.academyAccount,
       businessIsCreated: action.businessAccount,
     });

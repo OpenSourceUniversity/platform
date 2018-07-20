@@ -29,7 +29,7 @@ class LearnerSettings extends React.Component {
       phone_number: event.target.elements.phone_number.value,
       learner_site: event.target.elements.learner_site.value,
       learner_country: event.target.elements[8].parentElement.children[1].textContent === 'Select Country' ? null : event.target.elements[8].parentElement.children[1].textContent,
-      lerner_avatar: event.target.elements.lerner_avatar.value,
+      learner_avatar: event.target.elements.learner_avatar.value,
     };
     component.props.saveSettings(profileData, 'learner');
   }
@@ -37,7 +37,7 @@ class LearnerSettings extends React.Component {
   render() {
     return (
       <div>
-        {!this.props.accounts.lernerIsCreated ? (
+        {!this.props.learnerIsCreated ? (
           <Message
             warning
             header="Profile is not created yet!"
@@ -155,11 +155,11 @@ class LearnerSettings extends React.Component {
             <Input
               id="file"
               type="file"
-              name="lerner_avatar"
+              name="learner_avatar"
               placeholder="My avatar"
               className="input-file"
               color="orange"
-              defaultValue={this.props.accounts.lerner_avatar ? this.props.accounts.lerner_avatar : ''}
+              defaultValue={this.props.accounts.learner_avatar ? this.props.accounts.learner_avatar : ''}
             />
           </Form.Field>
           <Divider hidden />
@@ -175,6 +175,7 @@ function mapStateToProps(state) {
     accounts: state.accounts.accounts,
     isSaved: state.accounts.isSaved,
     error: state.accounts.error,
+    learnerIsCreated: state.accounts.learnerIsCreated,
   };
 }
 

@@ -41,7 +41,7 @@ class AcademySettings extends React.Component {
   render() {
     return (
       <div className="academia-settings">
-        {!this.props.accounts.academyIsCreated ? (
+        {!this.props.academyIsCreated ? (
           <Message
             warning
             header="Profile is not created yet!"
@@ -141,6 +141,7 @@ function mapStateToProps(state) {
     accounts: state.accounts.accounts,
     isSaved: state.accounts.isSaved,
     error: state.accounts.error,
+    academyIsCreated: state.accounts.academyIsCreated,
   };
 }
 

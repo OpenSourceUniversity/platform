@@ -41,7 +41,7 @@ class BusinessSettings extends React.Component {
   render() {
     return (
       <div className="business-settings">
-        {!this.props.accounts.businessIsCreated ? (
+        {!this.props.businessIsCreated ? (
           <Message
             warning
             header="Profile is not created yet!"
@@ -141,6 +141,7 @@ function mapStateToProps(state) {
     accounts: state.accounts.accounts,
     isSaved: state.accounts.isSaved,
     error: state.accounts.error,
+    businessIsCreated: state.accounts.businessIsCreated,
   };
 }
 

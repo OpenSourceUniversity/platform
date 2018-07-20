@@ -15,15 +15,15 @@ export default function validateAccounts() {
   } = store.getState().accounts.accounts;
 
   return function dispatcher(dispatch) {
-    const lernerAccountCreated = !!first_name && !!last_name && !!learner_email;
+    const learnerAccountCreated = !!first_name && !!last_name && !!learner_email;
     const academyAccountCreated = !!academy_name && !!academy_website && !!academy_email;
     const businessAccountCreated = !!company_name && !!company_website && !!company_email;
-    localStorage.setItem('lernerIsCreated', lernerAccountCreated);
+    localStorage.setItem('learnerIsCreated', learnerAccountCreated);
     localStorage.setItem('academyIsCreated', academyAccountCreated);
     localStorage.setItem('businessIsCreated', businessAccountCreated);
     dispatch({
       type: 'ACCOUNTS_VALIDATED',
-      lernerAccount: lernerAccountCreated,
+      learnerAccount: learnerAccountCreated,
       academyAccount: academyAccountCreated,
       businessAccount: businessAccountCreated,
     });

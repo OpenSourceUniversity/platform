@@ -23,20 +23,24 @@ class CertificatePage extends React.Component {
       return skills.map((skill, index) => (
         <SkillItem skill={skill} key={index} />
       ));
-    } catch(e) {
+    } catch (e) {
       return null;
     }
   }
 
   renderSubjects() {
     const subjectsArr = this.props.certificate.subject;
-    let subjectsStr = "";
+    const subjects = [];
     try {
       for (let i = 0; i < subjectsArr.length; i += 1) {
-        subjectsStr += subjectsArr[i] + ' ';
+        subjects.push({
+          have_icon: false, check: true, name: subjectsArr[i], basic: false,
+        });
       }
-      return subjectsStr;
-    } catch(e) {
+      return subjects.map((subject, index) => (
+        <SkillItem skill={subject} key={index} />
+      ));
+    } catch (e) {
       return null;
     }
   }
@@ -73,7 +77,7 @@ class CertificatePage extends React.Component {
               <Divider clearing />
               <Grid>
                 <Grid.Column width={8}>
-                  <Segment color='orange' className="certificateCard">
+                  <Segment color="orange" className="certificateCard">
                     <Header style={{ fontSize: '1.7em' }}>
                       Academy Information
                     </Header>
@@ -93,7 +97,7 @@ class CertificatePage extends React.Component {
                   </Segment>
                 </Grid.Column>
                 <Grid.Column width={8}>
-                  <Segment color='orange' className="certificateCard">
+                  <Segment color="orange" className="certificateCard">
                     <Header style={{ fontSize: '1.7em' }}>
                       Course Information
                     </Header>
@@ -115,7 +119,7 @@ class CertificatePage extends React.Component {
                   </Segment>
                 </Grid.Column>
                 <Grid.Column width={8}>
-                  <Segment color='orange' className="certificateCard">
+                  <Segment color="orange" className="certificateCard">
                     <Header style={{ fontSize: '1.7em' }}>
                       Learner Information
                     </Header>

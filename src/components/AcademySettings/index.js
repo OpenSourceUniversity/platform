@@ -7,6 +7,16 @@ import saveSettings from '../../util/accountSettings/saveSettings';
 class AcademySettings extends React.Component {
   state = { visible: true }
 
+  getCountry(obj) {
+    const needle = this.props.accounts.academy_country;
+    for (let i = 0; i < obj.length; i += 1) {
+      if (obj[i].text === needle) {
+        return obj[i].value;
+      }
+    }
+    return null;
+  }
+
   saveSettings(event, component) {
     event.preventDefault();
     const profileData = {
@@ -20,16 +30,6 @@ class AcademySettings extends React.Component {
     component.props.saveSettings(profileData, 'academy');
   }
 
-  getCountry(obj) {
-    const needle = this.props.accounts.academy_country;
-    for (let i = 0; i < obj.length; i += 1) {
-      if (obj[i].text === needle) {
-        return obj[i].value;
-      }
-    }
-    return null;
-  }
-
   handleDismiss = () => {
     this.setState({ visible: false });
 
@@ -41,6 +41,13 @@ class AcademySettings extends React.Component {
   render() {
     return (
       <div className="academia-settings">
+        {this.props.accounts.academyIsCreated ? (
+          <Message
+            warning
+            header="Account is not setuped yet!"
+            content="You can't explore the platform with this active account, please, submit this form with yor information, or chose another setuped account."
+          />
+        ) : null}
         {this.props.isSaved && this.state.visible ? (
           <Message
             positive
@@ -64,6 +71,7 @@ class AcademySettings extends React.Component {
         <Divider clearing />
         <Form onSubmit={(event) => { this.saveSettings(event, this); }}>
           <Form.Field
+            required
             label="Academy name"
             control="input"
             name="academy_name"
@@ -72,6 +80,7 @@ class AcademySettings extends React.Component {
             defaultValue={this.props.accounts.academy_name ? this.props.accounts.academy_name : ''}
           />
           <Form.Field
+            required
             label="Academy website"
             control="input"
             name="academy_website"
@@ -79,9 +88,35 @@ class AcademySettings extends React.Component {
             key={`academy_website:${this.props.accounts.academy_website || ''}`}
             defaultValue={this.props.accounts.academy_website ? this.props.accounts.academy_website : ''}
           />
-          <Form.Field name="academy_email" label="Email" key={`academy_email:${this.props.accounts.academy_email || ''}`} defaultValue={this.props.accounts.academy_email ? this.props.accounts.academy_email : ''} control="input" type="email" placeholder="Your email" />
-          <Form.Dropdown id="Country" name="academy_country" key={`academy_country:${this.props.accounts.academy_country || ''}`} placeholder="Select Country" label="Country" defaultValue={this.getCountry(Countries.Countries)} fluid search selection options={Countries.Countries} />
-          <Form.TextArea name="academy_about" label="About" key={`academy_about:${this.props.accounts.academy_about || ''}`} defaultValue={this.props.accounts.academy_about ? this.props.accounts.academy_about : ''} placeholder="Tell us more about your academy..." />
+          <Form.Field
+            required
+            name="academy_email"
+            label="Email"
+            key={`academy_email:${this.props.accounts.academy_email || ''}`}
+            defaultValue={this.props.accounts.academy_email ? this.props.accounts.academy_email : ''}
+            control="input"
+            type="email"
+            placeholder="Your email"
+          />
+          <Form.Dropdown
+            id="Country"
+            name="academy_country"
+            key={`academy_country:${this.props.accounts.academy_country || ''}`}
+            placeholder="Select Country"
+            label="Country"
+            defaultValue={this.getCountry(Countries.Countries)}
+            fluid
+            search
+            selection
+            options={Countries.Countries}
+          />
+          <Form.TextArea
+            name="academy_about"
+            label="About"
+            key={`academy_about:${this.props.accounts.academy_about || ''}`}
+            defaultValue={this.props.accounts.academy_about ? this.props.accounts.academy_about : ''}
+            placeholder="Tell us more about your academy..."
+          />
           <Form.Field label="Upload academy logo" control="file">
             <Input
               id="file"

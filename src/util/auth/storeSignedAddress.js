@@ -7,7 +7,7 @@ export default function storeSignedAddress(address, privateKey) {
     dispatch({
       type: 'SIGNED_ADDRESS_STORED',
       payload: {
-        signedAddress: signedAddress,
+        signedAddress,
       },
     });
   };

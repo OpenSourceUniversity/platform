@@ -40,7 +40,7 @@ class WalletCreatedWithoutRouter extends React.Component {
     const v3Wallet = wallet.toV3(this.props.passphrase);
     this.props.storeV3Wallet(
       v3Wallet, wallet.getChecksumAddressString(),
-      wallet.getPublicKey(), wallet.getPrivateKey()
+      wallet.getPublicKey(), wallet.getPrivateKey(),
     );
     this.address = wallet.getChecksumAddressString();
   }

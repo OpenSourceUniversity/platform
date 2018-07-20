@@ -7,6 +7,16 @@ import saveSettings from '../../util/accountSettings/saveSettings';
 class BusinessSettings extends React.Component {
   state = { visible: true }
 
+  getCountry(obj) {
+    const needle = this.props.accounts.company_country;
+    for (let i = 0; i < obj.length; i += 1) {
+      if (obj[i].text === needle) {
+        return obj[i].value;
+      }
+    }
+    return null;
+  }
+
   saveSettings(event, component) {
     event.preventDefault();
     const profileData = {
@@ -20,16 +30,6 @@ class BusinessSettings extends React.Component {
     component.props.saveSettings(profileData, 'business');
   }
 
-  getCountry(obj) {
-    const needle = this.props.accounts.company_country;
-    for (let i = 0; i < obj.length; i += 1) {
-      if (obj[i].text === needle) {
-        return obj[i].value;
-      }
-    }
-    return null;
-  }
-
   handleDismiss = () => {
     this.setState({ visible: false });
 
@@ -41,6 +41,13 @@ class BusinessSettings extends React.Component {
   render() {
     return (
       <div className="business-settings">
+        {this.props.accounts.businessIsCreated ? (
+          <Message
+            warning
+            header="Account is not setuped yet!"
+            content="You can't explore the platform with this active account, please, submit this form with yor information, or chose another setuped account."
+          />
+        ) : null}
         {this.props.isSaved && this.state.visible ? (
           <Message
             positive
@@ -64,6 +71,7 @@ class BusinessSettings extends React.Component {
         <Divider clearing />
         <Form onSubmit={(event) => { this.saveSettings(event, this); }}>
           <Form.Field
+            required
             label="Company name"
             control="input"
             name="company_name"
@@ -72,6 +80,7 @@ class BusinessSettings extends React.Component {
             defaultValue={this.props.accounts.company_name ? this.props.accounts.company_name : ''}
           />
           <Form.Field
+            required
             label="Official website"
             control="input"
             placeholder="Your website without http://"
@@ -79,9 +88,35 @@ class BusinessSettings extends React.Component {
             key={`company_website:${this.props.accounts.company_website || ''}`}
             defaultValue={this.props.accounts.company_website ? this.props.accounts.company_website : ''}
           />
-          <Form.Field name="company_email" label="Email" key={`company_email:${this.props.accounts.company_email || ''}`} defaultValue={this.props.accounts.company_email ? this.props.accounts.company_email : ''} control="input" type="email" placeholder="Your email" />
-          <Form.Dropdown id="Country" name="company_country" key={`company_country:${this.props.accounts.company_country || ''}`} placeholder="Select Country" label="Country" defaultValue={this.getCountry(Countries.Countries)} fluid search selection options={Countries.Countries} />
-          <Form.TextArea name="company_about" label="About" key={`company_about:${this.props.accounts.company_about || ''}`} defaultValue={this.props.accounts.company_about ? this.props.accounts.company_about : ''} placeholder="Tell us more about your company..." />
+          <Form.Field
+            required
+            name="company_email"
+            label="Email"
+            key={`company_email:${this.props.accounts.company_email || ''}`}
+            defaultValue={this.props.accounts.company_email ? this.props.accounts.company_email : ''}
+            control="input"
+            type="email"
+            placeholder="Your email"
+          />
+          <Form.Dropdown
+            id="Country"
+            name="company_country"
+            key={`company_country:${this.props.accounts.company_country || ''}`}
+            placeholder="Select Country"
+            label="Country"
+            defaultValue={this.getCountry(Countries.Countries)}
+            fluid
+            search
+            selection
+            options={Countries.Countries}
+          />
+          <Form.TextArea
+            name="company_about"
+            label="About"
+            key={`company_about:${this.props.accounts.company_about || ''}`}
+            defaultValue={this.props.accounts.company_about ? this.props.accounts.company_about : ''}
+            placeholder="Tell us more about your company..."
+          />
           <Form.Field label="Upload logo" control="file">
             <Input
               id="file"

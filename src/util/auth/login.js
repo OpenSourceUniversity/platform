@@ -1,7 +1,7 @@
 import { createHashHistory } from 'history';
 import store from '../../store';
 import storeSignedAddress from './storeSignedAddress';
-import getDefaultValues from '../accountSettings/getDefaultValues';
+import getDefaultValues from '../profiles/getDefaultValues';
 
 const Wallet = require('ethereumjs-wallet');
 

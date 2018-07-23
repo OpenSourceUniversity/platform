@@ -12,7 +12,7 @@ export default function validateAccounts() {
     company_name,
     company_website,
     company_email,
-  } = store.getState().accounts.accounts;
+  } = store.getState().profiles.profiles;
 
   return function dispatcher(dispatch) {
     const learnerAccountCreated = !!first_name && !!last_name && !!learner_email;

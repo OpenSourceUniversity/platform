@@ -9,6 +9,7 @@ import CoursesPage from 'containers/CoursesPage';
 import JobsPage from 'containers/JobsPage';
 import BusinessPage from 'containers/BusinessPage';
 import ProfilePage from 'containers/ProfilePage';
+import ViewProfile from 'containers/ViewProfile';
 import AccountSettings from 'containers/AccountSettings';
 import OnBoarding from 'containers/OnBoarding';
 import Inbox from 'containers/Inbox';
@@ -87,6 +88,7 @@ class Main extends React.Component {
         <PrivateRoute activeAccount={this.props.activeAccount} isLoggedIn={this.props.isLoggedIn} learnerIsCreated={this.props.learnerIsCreated} academyIsCreated={this.props.academyIsCreated} businessIsCreated={this.props.businessIsCreated} path="/jobs" component={JobsPage} />
         <PrivateRoute activeAccount={this.props.activeAccount} isLoggedIn={this.props.isLoggedIn} learnerIsCreated={this.props.learnerIsCreated} academyIsCreated={this.props.academyIsCreated} businessIsCreated={this.props.businessIsCreated} path="/business" component={BusinessPage} />
         <PrivateRoute activeAccount={this.props.activeAccount} isLoggedIn={this.props.isLoggedIn} learnerIsCreated={this.props.learnerIsCreated} academyIsCreated={this.props.academyIsCreated} businessIsCreated={this.props.businessIsCreated} path="/profile" component={ProfilePage} />
+        <PrivateRoute activeAccount={this.props.activeAccount} isLoggedIn={this.props.isLoggedIn} learnerIsCreated={this.props.learnerIsCreated} academyIsCreated={this.props.academyIsCreated} businessIsCreated={this.props.businessIsCreated} path="/view-profile/:type/:eth_address/" component={ViewProfile} />
         <PrivateRouteCreateProfile isLoggedIn={this.props.isLoggedIn} path="/settings" component={AccountSettings} />
         <Route path="/onboarding" component={OnBoarding} />
         <PrivateRoute activeAccount={this.props.activeAccount} isLoggedIn={this.props.isLoggedIn} learnerIsCreated={this.props.learnerIsCreated} academyIsCreated={this.props.academyIsCreated} businessIsCreated={this.props.businessIsCreated} path="/inbox" component={Inbox} />
@@ -107,9 +109,9 @@ function mapStateToProps(state) {
   return {
     isLoggedIn: state.auth.isLoggedIn,
     activeAccount: state.activeAccount.activeAccount,
-    learnerIsCreated: state.accounts.learnerIsCreated,
-    academyIsCreated: state.accounts.academyIsCreated,
-    businessIsCreated: state.accounts.businessIsCreated,
+    learnerIsCreated: state.profiles.learnerIsCreated,
+    academyIsCreated: state.profiles.academyIsCreated,
+    businessIsCreated: state.profiles.businessIsCreated,
 
   };
 }

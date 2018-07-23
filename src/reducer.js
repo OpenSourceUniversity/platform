@@ -10,7 +10,8 @@ import certificateReducer from './containers/CertificatePage/certificateReducer'
 import addCertificateReducer from './containers/AddCertificatePage/addCertificateReducer';
 import activeAccountReducer from './util/activeAccount/activeAccountReducer';
 import secondaryNavReducer from './util/secondaryNav/secondaryNavReducer';
-import accountSettingsReducer from './util/accountSettings/accountSettingsReducer';
+import profilesReducer from './util/profiles/profilesReducer';
+import departmentCoursesReducer from './components/ViewAcademyProfile/departmentCoursesReducer';
 
 const reducer = combineReducers({
   web3: web3Reducer,
@@ -24,7 +25,8 @@ const reducer = combineReducers({
   search: searchReducer,
   activeAccount: activeAccountReducer,
   secondaryNav: secondaryNavReducer,
-  accounts: accountSettingsReducer,
+  profiles: profilesReducer,
+  departmentCourses: departmentCoursesReducer,
 });
 
 export default reducer;

@@ -1,7 +1,7 @@
 const INITIAL_STATE = {
   isFetching: false,
   error: null,
-  accounts: {
+  profiles: {
     first_name: null,
     last_name: null,
     learner_position: null,
@@ -25,13 +25,40 @@ const INITIAL_STATE = {
     company_about: null,
     company_logo: null,
   },
+  profileView: {
+    first_name: null,
+    last_name: null,
+    learner_position: null,
+    learner_specialisation: null,
+    learner_about: null,
+    learner_email: null,
+    learner_site: null,
+    phone_number: null,
+    learner_country: null,
+    learner_avatar: null,
+    academy_name: null,
+    academy_website: null,
+    academy_email: null,
+    academy_country: null,
+    academy_about: null,
+    academy_logo: null,
+    company_name: null,
+    company_website: null,
+    company_email: null,
+    company_country: null,
+    company_about: null,
+    company_logo: null,
+  },
+  certificates_count: null,
+  profileViewIsFetching: false,
+  profileViewError: null,
   isSaved: false,
   learnerIsCreated: JSON.parse(localStorage.getItem('learnerIsCreated')),
   academyIsCreated: JSON.parse(localStorage.getItem('academyIsCreated')),
   businessIsCreated: JSON.parse(localStorage.getItem('businessIsCreated')),
 };
 
-export default function accountSettingsReducer(state = INITIAL_STATE, action) {
+export default function profilesReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
   case 'SETTINGS_GET_REQUEST':
     return Object.assign({}, state, {
@@ -40,7 +67,7 @@ export default function accountSettingsReducer(state = INITIAL_STATE, action) {
   case 'SETTINGS_GET_SUCCESS':
     return Object.assign({}, state, {
       isFetching: false,
-      accounts: action.result,
+      profiles: action.result,
       error: null,
     });
   case 'SETTINGS_GET_FAILURE':
@@ -65,6 +92,23 @@ export default function accountSettingsReducer(state = INITIAL_STATE, action) {
       learnerIsCreated: action.learnerAccount,
       academyIsCreated: action.academyAccount,
       businessIsCreated: action.businessAccount,
+    });
+  case 'PROFILE_GET_REQUEST':
+    return Object.assign({}, state, {
+      academyIsFetching: true,
+      academyGetError: null,
+    });
+  case 'PROFILE_GET_FAILURE':
+    return Object.assign({}, state, {
+      academyIsFetching: false,
+      academyGetError: action.error.message,
+    });
+  case 'PROFILE_GET_SUCCESS':
+    return Object.assign({}, state, {
+      profileViewIsFetching: false,
+      profileView: action.result,
+      profileViewError: null,
+      certificates_count: action.certificates_count,
     });
   default:
     return state;

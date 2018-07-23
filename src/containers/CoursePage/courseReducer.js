@@ -6,6 +6,9 @@ const INITIAL_STATE = {
     provider: {
       name: null,
     },
+    department: {
+      eth_address: null,
+    },
     categories: [
       {
         name: null,

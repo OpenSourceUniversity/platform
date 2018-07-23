@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Input, Form, Button, Header, Divider, Message } from 'semantic-ui-react';
 import Countries from '../../data/countriesList';
-import saveSettings from '../../util/accountSettings/saveSettings';
+import saveSettings from '../../util/profiles/saveSettings';
 
 class BusinessSettings extends React.Component {
   state = { visible: true }
 
   getCountry(obj) {
-    const needle = this.props.accounts.company_country;
+    const needle = this.props.profiles.company_country;
     for (let i = 0; i < obj.length; i += 1) {
       if (obj[i].text === needle) {
         return obj[i].value;
@@ -76,24 +76,24 @@ class BusinessSettings extends React.Component {
             control="input"
             name="company_name"
             placeholder="Your company name"
-            key={`company_name:${this.props.accounts.company_name || ''}`}
-            defaultValue={this.props.accounts.company_name ? this.props.accounts.company_name : ''}
+            key={`company_name:${this.props.profiles.company_name || ''}`}
+            defaultValue={this.props.profiles.company_name ? this.props.profiles.company_name : ''}
           />
           <Form.Field
             required
             label="Official website"
             control="input"
-            placeholder="Your website without http://"
+            placeholder="Your website"
             name="company_website"
-            key={`company_website:${this.props.accounts.company_website || ''}`}
-            defaultValue={this.props.accounts.company_website ? this.props.accounts.company_website : ''}
+            key={`company_website:${this.props.profiles.company_website || ''}`}
+            defaultValue={this.props.profiles.company_website ? this.props.profiles.company_website : ''}
           />
           <Form.Field
             required
             name="company_email"
             label="Email"
-            key={`company_email:${this.props.accounts.company_email || ''}`}
-            defaultValue={this.props.accounts.company_email ? this.props.accounts.company_email : ''}
+            key={`company_email:${this.props.profiles.company_email || ''}`}
+            defaultValue={this.props.profiles.company_email ? this.props.profiles.company_email : ''}
             control="input"
             type="email"
             placeholder="Your email"
@@ -101,7 +101,7 @@ class BusinessSettings extends React.Component {
           <Form.Dropdown
             id="Country"
             name="company_country"
-            key={`company_country:${this.props.accounts.company_country || ''}`}
+            key={`company_country:${this.props.profiles.company_country || ''}`}
             placeholder="Select Country"
             label="Country"
             defaultValue={this.getCountry(Countries.Countries)}
@@ -113,8 +113,8 @@ class BusinessSettings extends React.Component {
           <Form.TextArea
             name="company_about"
             label="About"
-            key={`company_about:${this.props.accounts.company_about || ''}`}
-            defaultValue={this.props.accounts.company_about ? this.props.accounts.company_about : ''}
+            key={`company_about:${this.props.profiles.company_about || ''}`}
+            defaultValue={this.props.profiles.company_about ? this.props.profiles.company_about : ''}
             placeholder="Tell us more about your company..."
           />
           <Form.Field label="Upload logo" control="file">
@@ -125,7 +125,7 @@ class BusinessSettings extends React.Component {
               placeholder="Company logo"
               className="input-file"
               color="orange"
-              defaultValue={this.props.accounts.company_logo ? this.props.accounts.company_logo : ''}
+              defaultValue={this.props.profiles.company_logo ? this.props.profiles.company_logo : ''}
             />
           </Form.Field>
           <Divider clearing />
@@ -138,10 +138,10 @@ class BusinessSettings extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    accounts: state.accounts.accounts,
-    isSaved: state.accounts.isSaved,
-    error: state.accounts.error,
-    businessIsCreated: state.accounts.businessIsCreated,
+    profiles: state.profiles.profiles,
+    isSaved: state.profiles.isSaved,
+    error: state.profiles.error,
+    businessIsCreated: state.profiles.businessIsCreated,
   };
 }
 

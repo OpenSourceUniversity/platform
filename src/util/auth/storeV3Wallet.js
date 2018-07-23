@@ -1,5 +1,5 @@
 import storeSignedAddress from './storeSignedAddress';
-import getDefaultValues from '../accountSettings/getDefaultValues';
+import getDefaultValues from '../profiles/getDefaultValues';
 
 export default function storeV3Wallet(v3Wallet, checksumAddress, publicKey, privateKey) {
   return function action(dispatch) {

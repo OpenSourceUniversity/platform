@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 import { Container } from 'semantic-ui-react';
 import WalletUnlocker from 'components/WalletUnlocker';
 import React from 'react';
-import getDefaultValues from './util/accountSettings/getDefaultValues';
+import getDefaultValues from './util/profiles/getDefaultValues';
 import './util/web3/getWeb3';
 import './util/ipfs/getIpfs';
 

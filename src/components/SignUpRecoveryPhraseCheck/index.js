@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Grid, Button } from 'semantic-ui-react';
 
 export default class SignUpRecoveryPhraseCheck extends React.Component {
-  state = { equalPhrases: false }
+  state = { equalPhrases: false, errorMessage: null, }
 
   shuffle(array) {
     const initialArray = array;
@@ -45,12 +45,15 @@ export default class SignUpRecoveryPhraseCheck extends React.Component {
       if (this.choosed.length === 12) {
         if (this.arraysEqual(this.choosed, this.checkArray)) {
           this.setState({ equalPhrases: true });
+        } else {
+          this.setState({ errorMessage: 'Recovery seed phrase entered incorrectly' });
         }
       }
     } else {
       this.choosed.splice(this.choosed.indexOf(name), 1);
       this.clicked.splice(this.clicked.indexOf(id), 1);
       this.setState({ equalPhrases: false });
+      this.setState({ errorMessage: null });
     }
   }
 
@@ -99,6 +102,9 @@ export default class SignUpRecoveryPhraseCheck extends React.Component {
             {this.mnemonicPhraseButtons()}
           </div>
         </Card.Content>
+        <span style={{ color: 'red' }}>
+          {this.state.errorMessage}
+        </span>
         <Card.Content>
           <Button style={{ float: 'left' }} className="button" name="recoveryPhraseSeed" onClick={this.props.handleItemClick} >BACK</Button>
           <Button style={{ float: 'right' }} className="button" disabled={!this.state.equalPhrases} name="created" onClick={this.props.handleItemClick} >CONTINUE</Button>

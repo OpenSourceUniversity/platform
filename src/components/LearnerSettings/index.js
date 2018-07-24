@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, Header, Divider, Input, Message } from 'semantic-ui-react';
+import { Form, Button, Header, Divider, Input, Message, Checkbox } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import Countries from '../../data/countriesList';
 import saveSettings from '../../util/profiles/saveSettings';
@@ -25,10 +25,11 @@ class LearnerSettings extends React.Component {
       learner_position: event.target.elements.learner_position.value,
       learner_specialisation: event.target.elements.learner_specialisation.value,
       learner_about: event.target.elements.learner_about.value,
+      public_profile: event.target.elements.public_profile.checked,
       learner_email: event.target.elements.learner_email.value,
       phone_number: event.target.elements.phone_number.value,
       learner_site: event.target.elements.learner_site.value,
-      learner_country: event.target.elements[8].parentElement.children[1].textContent === 'Select Country' ? null : event.target.elements[8].parentElement.children[1].textContent,
+      learner_country: event.target.elements[9].parentElement.children[1].textContent === 'Select Country' ? null : event.target.elements[9].parentElement.children[1].textContent,
       learner_avatar: event.target.elements.learner_avatar.value,
     };
     component.props.saveSettings(profileData, 'learner');
@@ -106,6 +107,18 @@ class LearnerSettings extends React.Component {
             defaultValue={this.props.profiles.learner_about ? this.props.profiles.learner_about : ''}
             placeholder="Tell us more about you..."
           />
+          <Divider clearing />
+          <Checkbox
+            name="public_profile"
+            label="Make my profile public"
+            toggle
+            key={`public_profile:${this.props.profiles.public_profile || ''}`}
+            defaultChecked={!!this.props.profiles.public_profile}
+          />
+          <p>
+            By clicking this checkbox you agree with the <a style={{ color: 'orange' }} href="https://os.university/static/Terms-And-Conditions.pdf" rel="noopener noreferrer" target="_blank">Terms&Conditions</a>
+          </p>
+          <Divider clearing />
           <Divider hidden />
           <Header>
             Contact Information

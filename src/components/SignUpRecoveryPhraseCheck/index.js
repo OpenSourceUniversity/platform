@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Grid, Button } from 'semantic-ui-react';
 
 export default class SignUpRecoveryPhraseCheck extends React.Component {
-  state = { equalPhrases: false, errorMessage: null, }
+  state = { equalPhrases: false, errorMessage: null }
 
   shuffle(array) {
     const initialArray = array;

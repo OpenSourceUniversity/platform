@@ -8,17 +8,17 @@ export default class SignUpRecoveryPhrase extends React.Component {
     this.setBip39MnemonicPhrase();
   }
 
-  downloadSeedAsTxtFile = () => {
-    var element = document.createElement("a");
-    var file = new Blob([this.mnemonicPhrase()], {type: 'text/plain'});
-    element.href = URL.createObjectURL(file);
-    element.download = "OSUniSeedPhrase.txt";
-    element.click();
-  }
-
   setBip39MnemonicPhrase() {
     const mnemonic = bip39.generateMnemonic();
     this.props.setMnemonicPhrase(mnemonic);
+  }
+
+  downloadSeedAsTxtFile = () => {
+    const element = document.createElement('a');
+    const file = new Blob([this.mnemonicPhrase()], { type: 'text/plain' });
+    element.href = URL.createObjectURL(file);
+    element.download = 'OSUniSeedPhrase.txt';
+    element.click();
   }
 
   mnemonicPhrase() {

@@ -46,6 +46,7 @@ export default function getProfileView(type, eth_address) {
           dispatch({
             type: 'PROFILE_GET_SUCCESS',
             result: body,
+            isPublic: body.is_public,
             certificates_count,
           });
         }

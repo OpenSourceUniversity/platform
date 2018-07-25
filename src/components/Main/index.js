@@ -23,6 +23,7 @@ import CreateJobPage from 'containers/CreateJobPage';
 import CreateCoursePage from 'containers/CreateCoursePage';
 import StudentProgramsPage from 'containers/StudentProgramsPage';
 import CertificatePage from 'containers/CertificatePage';
+import AcademiesPage from 'containers/Academies';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -84,6 +85,7 @@ class Main extends React.Component {
         <PrivateRoute activeAccount={this.props.activeAccount} isLoggedIn={this.props.isLoggedIn} learnerIsCreated={this.props.learnerIsCreated} academyIsCreated={this.props.academyIsCreated} businessIsCreated={this.props.businessIsCreated} path="/certificate/:id/" component={CertificatePage} />
         <PrivateRoute activeAccount={this.props.activeAccount} isLoggedIn={this.props.isLoggedIn} learnerIsCreated={this.props.learnerIsCreated} academyIsCreated={this.props.academyIsCreated} businessIsCreated={this.props.businessIsCreated} exact path="/businesses/add" component={AddPositionToBusinessPage} />
         <PrivateRoute activeAccount={this.props.activeAccount} isLoggedIn={this.props.isLoggedIn} learnerIsCreated={this.props.learnerIsCreated} academyIsCreated={this.props.academyIsCreated} businessIsCreated={this.props.businessIsCreated} path="/courses" component={CoursesPage} />
+        <PrivateRoute activeAccount={this.props.activeAccount} isLoggedIn={this.props.isLoggedIn} learnerIsCreated={this.props.learnerIsCreated} academyIsCreated={this.props.academyIsCreated} businessIsCreated={this.props.businessIsCreated} path="/academies" component={AcademiesPage} />
         <PrivateRoute activeAccount={this.props.activeAccount} isLoggedIn={this.props.isLoggedIn} learnerIsCreated={this.props.learnerIsCreated} academyIsCreated={this.props.academyIsCreated} businessIsCreated={this.props.businessIsCreated} path="/programs" component={StudentProgramsPage} />
         <PrivateRoute activeAccount={this.props.activeAccount} isLoggedIn={this.props.isLoggedIn} learnerIsCreated={this.props.learnerIsCreated} academyIsCreated={this.props.academyIsCreated} businessIsCreated={this.props.businessIsCreated} path="/jobs" component={JobsPage} />
         <PrivateRoute activeAccount={this.props.activeAccount} isLoggedIn={this.props.isLoggedIn} learnerIsCreated={this.props.learnerIsCreated} academyIsCreated={this.props.academyIsCreated} businessIsCreated={this.props.businessIsCreated} path="/business" component={BusinessPage} />

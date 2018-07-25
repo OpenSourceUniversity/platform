@@ -12,6 +12,7 @@ import activeAccountReducer from './util/activeAccount/activeAccountReducer';
 import secondaryNavReducer from './util/secondaryNav/secondaryNavReducer';
 import profilesReducer from './util/profiles/profilesReducer';
 import departmentCoursesReducer from './components/ViewAcademyProfile/departmentCoursesReducer';
+import academiesReducer from './containers/Academies/academiesReducer';
 
 const reducer = combineReducers({
   web3: web3Reducer,
@@ -27,6 +28,7 @@ const reducer = combineReducers({
   secondaryNav: secondaryNavReducer,
   profiles: profilesReducer,
   departmentCourses: departmentCoursesReducer,
+  academies: academiesReducer,
 });
 
 export default reducer;

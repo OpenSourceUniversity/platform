@@ -5,8 +5,6 @@ const INITIAL_STATE = {
     external_link: 'https://os.university/',
     provider: {
       name: null,
-    },
-    department: {
       eth_address: null,
     },
     categories: [

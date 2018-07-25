@@ -4,7 +4,7 @@ import { Header, Divider, Grid, Sticky, Segment, List, Statistic, Dimmer, Loader
 import getProfileView from '../../util/profiles/getProfileView';
 
 /* eslint-disable camelcase */
-class LearnerProfile extends React.Component {
+class ViewLearnerProfile extends React.Component {
   componentDidMount() {
     this.props.getProfileView('learner', this.props.eth_address);
   }
@@ -23,10 +23,19 @@ class LearnerProfile extends React.Component {
           active={!!(this.props.profileViewError) || !(this.props.learner.first_name)}
           inverted
         >
-          <Message negative>
-            <Message.Header>Can&apos;t load this profile</Message.Header>
-            <p>Please, check the ETH address</p>
-          </Message>
+          {this.props.isPublic ?
+            (
+              <Message negative>
+                <Message.Header>Can&apos;t load this profile</Message.Header>
+                <p>Please, check the ETH address</p>
+              </Message>)
+            :
+            (
+              <Message warning>
+                <Message.Header>This profile is private</Message.Header>
+                <p>*Some info*</p>
+              </Message>)
+          }
         </Dimmer>
         <Grid>
           <Grid.Column mobile={16} tablet={8} computer={5}>
@@ -47,14 +56,18 @@ class LearnerProfile extends React.Component {
                   <Header size="small" color="grey">
                     {this.props.learner.learner_position ? this.props.learner.learner_position : '-'}
                   </Header>
+                  <Header size="small" color="grey">
+                    ETH Address:
+                  </Header>
+                  <p>{this.props.eth_address}</p>
                 </Segment>
                 <Segment>
                   <List>
                     <List.Item icon={{ name: 'users', style: { width: '22px' } }} content={this.props.learner.learner_specialisation ? this.props.learner.learner_specialisation : '-'} />
                     <List.Item icon={{ name: 'marker', style: { width: '22px' } }} content={this.props.learner.learner_country ? this.props.learner.learner_country : '-'} />
-                    <List.Item icon={{ name: 'mail', style: { width: '22px' } }} content={<a target="_blank" href={email}>{this.props.learner.learner_email ? this.props.profiles.learner_email : '-'}</a>} />
-                    <List.Item icon={{ name: 'linkify', style: { width: '22px' } }} content={<a target="_blank" href={site}>{this.props.learner.learner_site ? this.props.profiles.learner_site : '-'}</a>} />
-                    <List.Item icon={{ name: 'phone', style: { width: '22px' } }} content={<a target="_blank" href={phoneNumber}>{this.props.learner.phone_number ? this.props.profiles.phone_number : '-'}</a>} />
+                    <List.Item icon={{ name: 'mail', style: { width: '22px' } }} content={<a target="_blank" href={email}>{this.props.learner.learner_email ? this.props.learner.learner_email : '-'}</a>} />
+                    <List.Item icon={{ name: 'linkify', style: { width: '22px' } }} content={<a target="_blank" href={site}>{this.props.learner.learner_site ? this.props.learner.learner_site : '-'}</a>} />
+                    <List.Item icon={{ name: 'phone', style: { width: '22px' } }} content={<a target="_blank" href={phoneNumber}>{this.props.learner.phone_number ? this.props.learner.phone_number : '-'}</a>} />
                   </List>
                 </Segment>
                 <Segment>
@@ -127,6 +140,7 @@ function mapStateToProps(state) {
     certificates_count: state.profiles.certificates_count,
     profileViewIsFetching: state.profiles.profileViewIsFetching,
     profileViewError: state.profiles.profileViewError,
+    isPublic: state.profiles.isPublic,
   };
 }
 
@@ -140,4 +154,4 @@ function mapDispatchToProps(dispatch) {
 }
 /* eslint-enable camelcase */
 
-export default connect(mapStateToProps, mapDispatchToProps)(LearnerProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(ViewLearnerProfile);

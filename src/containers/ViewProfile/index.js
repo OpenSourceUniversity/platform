@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Container } from 'semantic-ui-react';
-import LearnerProfile from 'components/ViewLearnerProfile';
-import AcademyProfile from 'components/ViewAcademyProfile';
-import BusinessProfile from 'components/ViewBusinessProfile';
+import ViewLearnerProfile from 'components/ViewLearnerProfile';
+import ViewAcademyProfile from 'components/ViewAcademyProfile';
+import ViewBusinessProfile from 'components/ViewBusinessProfile';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 
 class ViewProfile extends React.Component {
@@ -16,9 +16,10 @@ class ViewProfile extends React.Component {
       <Container>
         {(() => {
           switch (this.props.match.params.type) {
-          case 'academy': return <AcademyProfile eth_address={this.props.match.params.eth_address} />;
-          case 'business': return <BusinessProfile eth_address={this.props.match.params.eth_address} />;
-          default: return <LearnerProfile eth_address={this.props.match.params.eth_address} />;
+          case 'academy': return <ViewAcademyProfile eth_address={this.props.match.params.eth_address} />;
+          case 'business': return <ViewBusinessProfile eth_address={this.props.match.params.eth_address} />;
+          case 'learner': return <ViewLearnerProfile eth_address={this.props.match.params.eth_address} />;
+          default: return null;
           }
         })()}
       </Container>

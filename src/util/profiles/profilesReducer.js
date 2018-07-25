@@ -32,6 +32,7 @@ const INITIAL_STATE = {
     learner_position: null,
     learner_specialisation: null,
     learner_about: null,
+    public_profile: null,
     learner_email: null,
     learner_site: null,
     phone_number: null,
@@ -50,6 +51,7 @@ const INITIAL_STATE = {
     company_about: null,
     company_logo: null,
   },
+  isPublic: false,
   certificates_count: null,
   profileViewIsFetching: false,
   profileViewError: null,
@@ -98,11 +100,13 @@ export default function profilesReducer(state = INITIAL_STATE, action) {
     return Object.assign({}, state, {
       academyIsFetching: true,
       academyGetError: null,
+      isPublicLearner: true,
     });
   case 'PROFILE_GET_FAILURE':
     return Object.assign({}, state, {
       academyIsFetching: false,
       academyGetError: action.error.message,
+      isPublicLearnerLearner: true,
     });
   case 'PROFILE_GET_SUCCESS':
     return Object.assign({}, state, {
@@ -110,6 +114,7 @@ export default function profilesReducer(state = INITIAL_STATE, action) {
       profileView: action.result,
       profileViewError: null,
       certificates_count: action.certificates_count,
+      isPublic: action.isPublic,
     });
   default:
     return state;

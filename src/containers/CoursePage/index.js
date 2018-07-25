@@ -127,7 +127,7 @@ class CoursePage extends React.Component {
                     </Header>
                     <Label
                       circular
-                      onClick={this.props.course.department ? () => { this.props.history.push(`/view-profile/academy/${this.props.course.department.eth_address}/`); } : null}
+                      onClick={this.props.course.provider.eth_address ? () => { this.props.history.push(`/view-profile/academy/${this.props.course.provider.eth_address}/`); } : null}
                       style={{
                         boxShadow: '2px 6px 20px 0 #bcbdbd, 0 1px 21px 1px #d4d4d5', width: '8em', height: '8em', backgroundColor: 'white', backgroundImage: `url(${this.setIcon(this.props.course.provider.name)})`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: '80%', cursor: 'pointer',
                       }}
@@ -138,7 +138,7 @@ class CoursePage extends React.Component {
                   </div>
                   <br />
                   <span>
-                    {this.props.course.department ? this.props.course.department.eth_address : ''}
+                    {this.props.course.provider.eth_address ? this.props.course.provider.eth_address : ''}
                   </span>
                   <Divider clearing />
                   <Header style={{ fontSize: '1.5em', marginBottom: '5px' }}>

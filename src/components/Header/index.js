@@ -153,7 +153,7 @@ class HeaderWithoutRouter extends React.Component {
 
     const learnerAcademiaDropdownElements = [
       {
-        key: 'academia', content: 'Academia', name: 'courses', className: 'academia', active: activeItem === 'academia', onClick: this.handleItemClick,
+        key: 'academies', content: 'Academia', name: 'academies', className: 'academia', active: activeItem === 'academies', onClick: this.handleItemClick,
       },
       {
         key: 'courses', content: 'Browse courses', name: 'courses', active: activeItem === 'courses', onClick: this.handleItemClick,

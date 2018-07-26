@@ -12,6 +12,7 @@ const INITIAL_STATE = {
       academy_email: null,
       academy_country: null,
       academy_about: null,
+      courses_count: null,
     },
   ],
   next: null,

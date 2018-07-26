@@ -1,22 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { Card, Button, Grid, Segment, Header } from 'semantic-ui-react';
+import { Card, Button, Grid, Segment, Header, Divider } from 'semantic-ui-react';
 
 
 class AcademyItemWithoutRouter extends React.Component {
   static propTypes = {
     history: PropTypes.object.isRequired,
-  }
-
-  handleItemClick = (e, { name }) => {
-    let newPath;
-    if (name === 'home') {
-      newPath = '/';
-    } else {
-      newPath = `/${name}`;
-    }
-    this.props.history.push(newPath);
   }
 
   renderRating(ratingNumb) {
@@ -47,6 +37,13 @@ class AcademyItemWithoutRouter extends React.Component {
               <Header size="large" style={{ textAlign: 'center' }}>
                 {this.props.academy.academy_name}
               </Header>
+              <p>
+              Courses: {this.props.academy.courses_count}
+              </p>
+              <Divider clearing />
+              <p>
+                {this.props.academy.academy_about ? `${this.props.academy.academy_about.substring(0, 100)}...` : '-'}
+              </p>
             </Grid.Column>
           </Grid>
         </Card.Content>

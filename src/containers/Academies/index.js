@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Form, Dimmer, Loader, Button, Container, Header, Divider, Grid, Segment, Accordion, Menu, Icon } from 'semantic-ui-react';
 import AcademyItem from 'components/AcademyItem';
-import CoursesCategoryFilter from 'components/CoursesCategoryFilter';
 import { fetchAcademies } from './actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 
@@ -15,6 +14,17 @@ class AcademiesPage extends React.Component {
     this.props.setSecondaryNav('academia');
   }
 
+  categories = [
+    {
+      name: 'Academy',
+      id: '1',
+    },
+    {
+      name: 'Lector',
+      id: '2',
+    },
+  ]
+
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   handleClick = (e, titleProps) => {
@@ -22,6 +32,26 @@ class AcademiesPage extends React.Component {
     const { activeIndex } = this.state;
     const newIndex = activeIndex === index ? -1 : index;
     this.setState({ activeIndex: newIndex });
+  }
+
+  renderCategories() {
+    return this.categories.map(category => (
+      <Form.Checkbox
+        label={category.name}
+        name={category.id}
+        key={category.id}
+        value={category.name}
+      />));
+  }
+
+  renderCategoryGroup() {
+    return (
+      <Form>
+        <Form.Group grouped>
+          {this.renderCategories()}
+        </Form.Group>
+      </Form>
+    );
   }
 
   renderAcademies() {
@@ -82,11 +112,11 @@ class AcademiesPage extends React.Component {
                     onClick={this.handleClick}
                   >
                     <Icon name="block layout" />
-                    Categories
+                    Type
                   </Accordion.Title>
                   <Accordion.Content
                     active={activeIndex === 0}
-                    content={<CoursesCategoryFilter />}
+                    content={this.renderCategoryGroup()}
                   />
                 </Menu.Item>
               </Accordion>

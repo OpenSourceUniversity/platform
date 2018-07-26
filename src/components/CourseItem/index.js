@@ -9,15 +9,6 @@ class CourseItemWithoutRouter extends React.Component {
     history: PropTypes.object.isRequired,
   }
 
-  handleItemClick = (e, { name }) => {
-    let newPath;
-    if (name === 'home') {
-      newPath = '/';
-    } else {
-      newPath = `/${name}`;
-    }
-    this.props.history.push(newPath);
-  }
 
   renderRating(ratingNumb) {
     return (

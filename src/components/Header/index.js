@@ -174,10 +174,10 @@ class HeaderWithoutRouter extends React.Component {
 
     const learnerBusinessesDropdownElements = [
       {
-        key: 'businesses', content: 'Businesses', name: 'jobs', active: false, className: 'businesses secondary-nav-disabled-beta',
+        key: 'businesses', content: 'Businesses', name: 'businesses', className: 'businesses', active: activeItem === 'businesses', onClick: this.handleItemClick,
       },
       {
-        key: 'jobs', content: 'Browse jobs', name: 'jobs', active: false, className: 'secondary-nav-disabled-beta',
+        key: 'jobs', content: 'Browse jobs', name: 'jobs', active: activeItem === 'jobs', onClick: this.handleItemClick,
       },
       {
         key: 'interviews', content: 'My Interviews', name: 'interviews', active: false, className: 'secondary-nav-disabled-beta',

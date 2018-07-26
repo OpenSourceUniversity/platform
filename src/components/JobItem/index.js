@@ -9,16 +9,6 @@ class JobItemWithoutRouter extends React.Component {
     history: PropTypes.object.isRequired,
   }
 
-  handleItemClick = (e, { name }) => {
-    let newPath;
-    if (name === 'home') {
-      newPath = '/';
-    } else {
-      newPath = `/${name}`;
-    }
-    this.props.history.push(newPath);
-  }
-
   renderRating(ratingNumb) {
     return (
       <div className="ui accurate star widget inline" style={{ marginRight: '10px' }}>
@@ -34,27 +24,24 @@ class JobItemWithoutRouter extends React.Component {
     /* eslint-enable global-require */
 
     return (
-      <Card fluid>
-        <Card.Content>
+      <Card fluid style={this.props.isNotList ? { height: '400px' } : null} onClick={() => { this.props.history.push(`/job-page/${this.props.job.id}/`); }} >
+        <Card.Content extra>
           <Card.Header style={{ color: 'black' }} icon="ellipsis vertical">{this.props.job.title}</Card.Header>
           <span className="course-desc" >
-            <Icon name="signal" style={{ color: '#c1c1c1' }} className="course-desc" /> {this.props.job.level}
+            <Icon name="signal" style={{ color: '#c1c1c1' }} className="course-desc" /> {this.props.job.job_type}
           </span>
           <span className="course-desc" >
             <Icon name="world" style={{ color: '#c1c1c1' }} className="course-desc" /> {this.props.job.location}
           </span>
           <span className="course-desc" >
-            <Icon name="time" style={{ color: '#c1c1c1' }} className="course-desc" /> {this.props.job.duration}
-          </span>
-          <span className="course-desc" >
-            {this.renderRating(this.props.job.rating)}
+            <Icon name="time" style={{ color: '#c1c1c1' }} className="course-desc" /> {this.props.job.hours}
           </span>
         </Card.Content>
-        <Card.Content extra>
-          { this.props.job.description }
+        <Card.Content>
+          { this.props.job.overview ? `${this.props.job.overview.substr(0, 100)}...` : '-' }
         </Card.Content>
         <Card.Content extra>
-          <Button name="job-page" onClick={this.handleItemClick}>
+          <Button name="job-page" onClick={() => { this.props.history.push(`/job-page/${this.props.job.id}/`); }} >
             Show job&apos;s details
           </Button>
           <span className="course-desc" style={{ float: 'right', color: 'black' }}>

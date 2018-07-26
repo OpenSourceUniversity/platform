@@ -38,6 +38,7 @@
     "semantic-ui-calendar": "0.0.8",
     "semantic-ui-react": "^0.74.2",
     "truffle-contract": "^3.0.2",
+    "truffle-ledger-provider": "0.0.3",
     "web3": "^0.20.4",
     "webpack": "^2.7.0",
     "webpack-dev-server": "^2.11.1"

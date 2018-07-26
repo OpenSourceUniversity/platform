@@ -16,6 +16,7 @@ contract TokenSettings is Ownable {
         bool allowance;
         uint256 customFeeInEDU;
         uint256 customFeeInETH;
+        bool inEDU;
     }
 
     address public owner;
@@ -23,6 +24,7 @@ contract TokenSettings is Ownable {
     uint256 public feeInEDU;
     uint256 public feeInETH;
     address public walletForFees;
+    bool public feeInTokens;
     mapping (address => CustomerPreferencesStruct) public customersWithPreferences;
 
     /**
@@ -40,8 +42,9 @@ contract TokenSettings is Ownable {
     */
     constructor() public {
         owner = msg.sender;
-        tokenContractAddress = 0x2A22e5cCA00a3D63308fa39f29202eB1b39eEf52;
-        walletForFees = 0x269D55Ef8AcFdf0B83cCd08278ab440f87f9E9D8;
+        tokenContractAddress = 0x3d673460b18378af8f7d82f64ee6dfc9467554ae; // MAINNET 0x2A22e5cCA00a3D63308fa39f29202eB1b39eEf52;
+        walletForFees = 0x8262a610c0b25cfbaa4eb41f30d320c05bf4cc70; //MAINNET 0x269D55Ef8AcFdf0B83cCd08278ab440f87f9E9D8;
+        feeInTokens = true;
         feeInEDU = 10 * 10**18;
         feeInETH = 1 * 10**15;
     }
@@ -49,11 +52,12 @@ contract TokenSettings is Ownable {
     /**
     * @dev Add or update custom fee
     */
-    function setCustomFee(address customer, uint256 customFeeEDU, uint256 customFeeETH) onlyOwner external {
-        require(customer == address(0));
+    function setCustomFee(address customer, uint256 customFeeEDU, uint256 customFeeETH, bool _inEDU) onlyOwner external {
+        require(customer != address(0));
         customersWithPreferences[customer].allowance = true;
         customersWithPreferences[customer].customFeeInEDU = customFeeEDU;
         customersWithPreferences[customer].customFeeInETH = customFeeETH;
+        customersWithPreferences[customer].inEDU = _inEDU;
         emit CustomFeeSet(customer, customersWithPreferences[customer].customFeeInEDU, customersWithPreferences[customer].customFeeInETH);
     }
 
@@ -61,7 +65,7 @@ contract TokenSettings is Ownable {
     * @dev Remove custome fee
     */
     function removeCustomFee(address customer) onlyOwner external {
-        require(customer == address(0));
+        require(customer != address(0));
         customersWithPreferences[customer].allowance = false;
         emit CustomFeeRemoved(customer);
     }

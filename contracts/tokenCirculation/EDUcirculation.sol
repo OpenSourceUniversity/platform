@@ -7,11 +7,11 @@ import "../abstracts/tokenStandards/ERC20.sol";
  * @title Token Circulation
  * @dev Manage all circulation fees related to blockchain functionality
  */
-contract EDUcirculation is TokenSettings, ERC20 {
+contract EDUcirculation is TokenSettings {
     using SafeMath for uint256;
 
-    function getFee(address _initiator) public returns (uint256 inEDU, uint256 inETH) {
-      if (customersWithPreferences[_initiator].allowance) {
+    function getFee(address _initiator) payable public returns (uint256, uint256) {
+      /* if (customersWithPreferences[_initiator].allowance) {
           // Customers with preferential price
           return (customersWithPreferences[_initiator].customFeeInEDU, customersWithPreferences[_initiator].customFeeInETH);
       } else if (ERC20(tokenContractAddress).balanceOf(_initiator) >= feeInEDU) {
@@ -20,30 +20,14 @@ contract EDUcirculation is TokenSettings, ERC20 {
       } else {
           // With standart platform fee
           return (0.0, feeInETH);
-      }
+      } */
+      return (200, 3000);
     }
 
-    function getWalletFees() public returns (address) {
-        return walletForFees;
+    function getWalletFees() public view returns (address) {
+        return address(walletForFees);
     }
 
-
-    /* function doPlatformFee(address _initiator) {
-        if (customersWithPreferences[_initiator].allowance) {
-            // Customers with preferential price
-            require(ERC20(tokenContractAddress).balanceOf(_initiator) >= customersWithPreferences[_initiator].customFeeInEDU);
-            require(msg.value >= customersWithPreferences[_initiator].customFeeInETH);
-            walletForFees.transfer(customersWithPreferences[_initiator].customFeeInETH);
-            ERC20(tokenContractAddress).transfer(walletForFees, customersWithPreferences[_initiator].customFeeInEDU);
-        } else if (ERC20(tokenContractAddress).balanceOf(_initiator) >= feeInEDU) {
-            // Without platform fee (customer has enough EDU tokens)
-            ERC20(tokenContractAddress).transfer(walletForFees, feeInEDU);
-        } else {
-            // With standart platform fee
-            require(msg.value >= feeInETH);
-            walletForFees.transfer(feeInETH);
-        }
-    } */
 
 
 }

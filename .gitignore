@@ -67,4 +67,5 @@ env
 
 # Application
 src/config.js
+contracts/testToken
 vim.exe.stackdump

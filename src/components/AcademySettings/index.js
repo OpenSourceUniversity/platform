@@ -2,10 +2,33 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Input, Form, Button, Header, Divider, Message } from 'semantic-ui-react';
 import Countries from '../../data/countriesList';
-import saveSettings from '../../util/accountSettings/saveSettings';
+import saveSettings from '../../util/profiles/saveSettings';
 
 class AcademySettings extends React.Component {
   state = { visible: true }
+
+  getCountry(obj) {
+    const needle = this.props.profiles.academy_country;
+    for (let i = 0; i < obj.length; i += 1) {
+      if (obj[i].text === needle) {
+        return obj[i].value;
+      }
+    }
+    return null;
+  }
+
+  saveSettings(event, component) {
+    event.preventDefault();
+    const profileData = {
+      academy_name: event.target.elements.academy_name.value,
+      academy_website: event.target.elements.academy_website.value,
+      academy_email: event.target.elements.academy_email.value,
+      academy_country: event.target.elements[3].parentElement.children[1].textContent === 'Select Country' ? null : event.target.elements[3].parentElement.children[1].textContent,
+      academy_about: event.target.elements.academy_about.value,
+      academy_logo: event.target.elements.academy_logo.value,
+    };
+    component.props.saveSettings(profileData, 'academy');
+  }
 
   handleDismiss = () => {
     this.setState({ visible: false });
@@ -15,22 +38,16 @@ class AcademySettings extends React.Component {
     }, 2000);
   }
 
-  saveSettings(event, component) {
-    event.preventDefault();
-    const profileData = {
-      academy_name: event.target.elements.academy_name.value,
-      academy_website: event.target.elements.academy_website.value,
-      academy_email: event.target.elements.academy_email.value,
-      academy_country: event.target.elements[3].parentElement.children[1].textContent,
-      academy_about: event.target.elements.academy_about.value,
-      academy_logo: event.target.elements.academy_logo.value,
-    };
-    component.props.saveSettings(profileData, 'academy');
-  }
-
   render() {
     return (
       <div className="academia-settings">
+        {!this.props.academyIsCreated ? (
+          <Message
+            warning
+            header="Profile is not created yet!"
+            content="You can't explore the platform with this active account, please, submit this form with yor information, or chose another setuped account."
+          />
+        ) : null}
         {this.props.isSaved && this.state.visible ? (
           <Message
             positive
@@ -54,22 +71,52 @@ class AcademySettings extends React.Component {
         <Divider clearing />
         <Form onSubmit={(event) => { this.saveSettings(event, this); }}>
           <Form.Field
+            required
             label="Academy name"
             control="input"
             name="academy_name"
             placeholder="Your academy name"
-            value={this.props.accounts.academy_name ? this.props.accounts.academy_name : ''}
+            key={`academy_name:${this.props.profiles.academy_name || ''}`}
+            defaultValue={this.props.profiles.academy_name ? this.props.profiles.academy_name : ''}
           />
           <Form.Field
+            required
             label="Academy website"
             control="input"
             name="academy_website"
             placeholder="Your academy website"
-            value={this.props.accounts.academy_website ? this.props.accounts.academy_website : ''}
+            key={`academy_website:${this.props.profiles.academy_website || ''}`}
+            defaultValue={this.props.profiles.academy_website ? this.props.profiles.academy_website : ''}
           />
-          <Form.Field name="academy_email" label="Email" value={this.props.accounts.academy_email ? this.props.accounts.academy_email : ''} control="input" type="email" placeholder="Your email" />
-          <Form.Dropdown id="Country" name="academy_country" placeholder="Select Country" label="Country" value={this.props.accounts.academy_country ? this.props.accounts.academy_country : this.value} fluid search selection options={Countries.Countries} />
-          <Form.TextArea name="academy_about" label="About" value={this.props.accounts.academy_about ? this.props.accounts.academy_about : ''} placeholder="Tell us more about your academy..." />
+          <Form.Field
+            required
+            name="academy_email"
+            label="Email"
+            key={`academy_email:${this.props.profiles.academy_email || ''}`}
+            defaultValue={this.props.profiles.academy_email ? this.props.profiles.academy_email : ''}
+            control="input"
+            type="email"
+            placeholder="Your email"
+          />
+          <Form.Dropdown
+            id="Country"
+            name="academy_country"
+            key={`academy_country:${this.props.profiles.academy_country || ''}`}
+            placeholder="Select Country"
+            label="Country"
+            defaultValue={this.getCountry(Countries.Countries)}
+            fluid
+            search
+            selection
+            options={Countries.Countries}
+          />
+          <Form.TextArea
+            name="academy_about"
+            label="About"
+            key={`academy_about:${this.props.profiles.academy_about || ''}`}
+            defaultValue={this.props.profiles.academy_about ? this.props.profiles.academy_about : ''}
+            placeholder="Tell us more about your academy..."
+          />
           <Form.Field label="Upload academy logo" control="file">
             <Input
               id="file"
@@ -78,7 +125,7 @@ class AcademySettings extends React.Component {
               placeholder="Academy logo"
               className="input-file"
               color="orange"
-              value={this.props.accounts.academy_logo ? this.props.accounts.academy_logo : ''}
+              defaultValue={this.props.profiles.academy_logo ? this.props.profiles.academy_logo : ''}
             />
           </Form.Field>
           <Divider clearing />
@@ -91,9 +138,10 @@ class AcademySettings extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    accounts: state.accounts.accounts,
-    isSaved: state.accounts.isSaved,
-    error: state.accounts.error,
+    profiles: state.profiles.profiles,
+    isSaved: state.profiles.isSaved,
+    error: state.profiles.error,
+    academyIsCreated: state.profiles.academyIsCreated,
   };
 }
 

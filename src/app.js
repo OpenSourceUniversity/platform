@@ -3,6 +3,7 @@ import { withRouter } from 'react-router';
 import { Container } from 'semantic-ui-react';
 import WalletUnlocker from 'components/WalletUnlocker';
 import React from 'react';
+import getDefaultValues from './util/profiles/getDefaultValues';
 import './util/web3/getWeb3';
 import './util/ipfs/getIpfs';
 
@@ -11,6 +12,11 @@ import Header from './components/Header';
 import Main from './components/Main';
 
 class App extends React.Component {
+  componentDidMount() {
+    if (this.props.isLoggedIn) {
+      this.props.getDefaultValues();
+    }
+  }
   render() {
     return (
       <div className="App">
@@ -37,5 +43,13 @@ function mapStateToProps(state) {
   };
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    getDefaultValues() {
+      dispatch(getDefaultValues());
+    },
+  };
+}
 
-export default withRouter(connect(mapStateToProps)(App));
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

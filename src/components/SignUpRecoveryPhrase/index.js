@@ -13,6 +13,14 @@ export default class SignUpRecoveryPhrase extends React.Component {
     this.props.setMnemonicPhrase(mnemonic);
   }
 
+  downloadSeedAsTxtFile = () => {
+    const element = document.createElement('a');
+    const file = new Blob([this.mnemonicPhrase()], { type: 'text/plain' });
+    element.href = URL.createObjectURL(file);
+    element.download = 'OSUniSeedPhrase.txt';
+    element.click();
+  }
+
   mnemonicPhrase() {
     return this.props.mnemonicPhrase;
   }
@@ -57,7 +65,7 @@ export default class SignUpRecoveryPhrase extends React.Component {
           </Label>
         </Card.Content>
         <Card.Content>
-          <Button style={{ float: 'left' }} className="button" name="download" >DOWNLOAD SEED PHRASE</Button>
+          <Button style={{ float: 'left' }} onClick={this.downloadSeedAsTxtFile} className="button" name="download" >DOWNLOAD SEED PHRASE</Button>
           <Button style={{ float: 'right' }} className="button" name="recoveryPhraseCheck" onClick={this.props.handleItemClick} >CONTINUE</Button>
         </Card.Content>
       </div>

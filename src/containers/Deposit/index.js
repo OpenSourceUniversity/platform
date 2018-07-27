@@ -7,11 +7,7 @@ import getBalances from '../../util/web3/getBalances';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import store from '../../store';
 
-const options = [
-  '0x849c2ea2a8f0ed0fe6d28b17fa0f779d6a45dff1',
-  '0x849c2ea2a8f0ed0fe6d28b17fa0f779d6a45dff1',
-  '0x849c2ea2a8f0ed0fe6d28b17fa0f779d6a45dff1',
-];
+const options = JSON.parse(localStorage.getItem('withdrawWallets')) ? JSON.parse(localStorage.getItem('withdrawWallets')) : [];
 
 class Deposit extends React.Component {
   constructor(props) {
@@ -32,6 +28,18 @@ class Deposit extends React.Component {
     store.dispatch(initWalletUnlocker((wallet) => {
       prompt('Copy your private key', wallet.getPrivateKeyString());
     }));
+  }
+
+  submitWithdraw(event, component) {
+    event.preventDefault();
+    component.props.getBalances(); // lint no unused vars
+    const wallet = event.target.elements.wallet.value;
+    // const amount = event.target.elements.amount.value;
+    const withdrawWallets = JSON.parse(localStorage.getItem('withdrawWallets')) ? JSON.parse(localStorage.getItem('withdrawWallets')) : [];
+    if (withdrawWallets.indexOf(wallet) === -1) {
+      withdrawWallets.push(wallet);
+    }
+    localStorage.setItem('withdrawWallets', JSON.stringify(withdrawWallets));
   }
 
   renderHistory() {
@@ -127,13 +135,14 @@ class Deposit extends React.Component {
                           Select
                         </Card.Meta>
                         <Card.Description>
-                          <Form className="attached fluid segment">
-                            <Form.Input list="wallets" label="Choose withdraw wallet:" fluid placeholder="Choose a wallet" />
+                          <Form id="withdrawForm" className="attached fluid segment" onSubmit={(event) => { this.submitWithdraw(event, this); }}>
+                            <Form.Input list="wallets" name="wallet" label="Choose withdraw wallet:" fluid placeholder="Choose a wallet" />
                             <datalist id="wallets">
                               {this.renderAutocomplete()}
                             </datalist>
                             <Input
                               fluid
+                              name="amount"
                               label={<Dropdown defaultValue="edu" options={[{ key: 'edu', text: 'EDU', value: 'edu' }, { key: 'eth', text: 'ETH', value: 'eth' }]} />}
                               labelPosition="right"
                               placeholder="0.0000"
@@ -143,7 +152,7 @@ class Deposit extends React.Component {
                         </Card.Description>
                       </Card.Content>
                       <Card.Content extra>
-                        <Button primary fluid>Submit Withdraw</Button>
+                        <Button form="withdrawForm" type="submit" primary fluid>Submit Withdraw</Button>
                       </Card.Content>
                     </Card>
                   </Grid.Column>

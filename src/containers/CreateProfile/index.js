@@ -4,10 +4,6 @@ import ChooseAccount from 'components/ChooseAccount';
 
 
 export default class CreateAccount extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="course">

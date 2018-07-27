@@ -13,6 +13,12 @@ div.App {
     -moz-box-shadow: 0 15px 40px 0 rgba(28,45,65,.5);
     box-shadow: 0 15px 40px 0 rgba(28,45,65,.5);
   }
+  .certificateCard:hover {
+    transition: all .3s ease-in-out;
+    -webkit-box-shadow: 0 15px 40px 0 rgba(28,45,65,.5);
+    -moz-box-shadow: 0 15px 40px 0 rgba(28,45,65,.5);
+    box-shadow: 0 15px 40px 0 rgba(28,45,65,.5);
+  }
   .disabled-beta {
       position: relative;
       color: rgba(0,0,0,.15);

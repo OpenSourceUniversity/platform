@@ -10,8 +10,13 @@ import certificateReducer from './containers/CertificatePage/certificateReducer'
 import addCertificateReducer from './containers/AddCertificatePage/addCertificateReducer';
 import activeAccountReducer from './util/activeAccount/activeAccountReducer';
 import secondaryNavReducer from './util/secondaryNav/secondaryNavReducer';
-import profileReducer from './util/profile/profileReducer';
-import accountSettingsReducer from './util/accountSettings/accountSettingsReducer';
+import profilesReducer from './util/profiles/profilesReducer';
+import departmentCoursesReducer from './components/ViewAcademyProfile/departmentCoursesReducer';
+import academiesReducer from './containers/Academies/academiesReducer';
+import jobsReducer from './containers/JobsPage/jobsReducer';
+import jobReducer from './containers/JobPage/jobReducer';
+import companyJobsReducer from './components/ViewBusinessProfile/companyJobsReducer';
+import businessesReducer from './containers/Businesses/businessesReducer';
 
 const reducer = combineReducers({
   web3: web3Reducer,
@@ -25,8 +30,13 @@ const reducer = combineReducers({
   search: searchReducer,
   activeAccount: activeAccountReducer,
   secondaryNav: secondaryNavReducer,
-  profile: profileReducer,
-  accounts: accountSettingsReducer,
+  profiles: profilesReducer,
+  departmentCourses: departmentCoursesReducer,
+  academies: academiesReducer,
+  jobs: jobsReducer,
+  job: jobReducer,
+  companyJobs: companyJobsReducer,
+  businesses: businessesReducer,
 });
 
 export default reducer;

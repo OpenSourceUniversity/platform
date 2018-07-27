@@ -1,36 +1,42 @@
 import store from '../../store';
 
-const START_URL = '';
 
-export default function getDefaultValues(url = START_URL) {
+/* eslint-disable camelcase */
+export function fetchCompanyJobs(eth_address) {
   return function dispatcher(dispatch) {
     dispatch({
-      type: 'SETTINGS_GET_REQUEST',
+      type: 'RESET_COMPANY_JOBS',
+    });
+    dispatch({
+      type: 'FETCH_COMPANY_JOBS_REQUEST',
     });
     const headers = new Headers({
       'Auth-Signature': store.getState().auth.signedAddress,
       'Auth-Eth-Address': store.getState().auth.address.slice(2),
     });
+    const url = `http://localhost:8000/api/v1/jobs/get_by_company/?eth_address=${eth_address}`;
     return fetch(url, { headers })
       .then(response => response.json().then(body => ({ response, body })))
       .then(({ response, body }) => {
         if (!response.ok) {
           dispatch({
-            type: 'SETTINGS_GET_FAILURE',
+            type: 'FETCH_COMPANY_JOBS_FAILURE',
             error: body.error,
           });
         } else {
           dispatch({
-            type: 'SETTINGS_GET_SUCCESS',
-            result: body,
+            type: 'FETCH_COMPANY_JOBS_SUCCESS',
+            results: body,
+            next: body.next,
           });
         }
       })
       .catch((error) => {
         dispatch({
-          type: 'SETTINGS_GET_FAILURE',
+          type: 'FETCH_COMPANY_JOBS_FAILURE',
           error,
         });
       });
   };
 }
+/* eslint-enable camelcase */

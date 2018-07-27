@@ -104,10 +104,10 @@ class HeaderWithoutRouter extends React.Component {
           avatar
           src={(() => {
             if (this.props.isLoggedIn) {
-              switch (this.props.secondaryNav) {
-              case 'business': return this.props.accounts.company_logo ? this.props.accounts.company_logo : avatarPlaceholder;
-              case 'academia': return this.props.accounts.academy_logo ? this.props.accounts.academy_logo : avatarPlaceholder;
-              case 'account': return this.props.accounts.lerner_avatar ? this.props.accounts.lerner_avatar : avatarPlaceholder;
+              switch (this.props.activeAccount) {
+              case 'Business': return this.props.profiles.company_logo ? this.props.profiles.company_logo : avatarPlaceholder;
+              case 'Academy': return this.props.profiles.academy_logo ? this.props.profiles.academy_logo : avatarPlaceholder;
+              case 'Learner': return this.props.profiles.lerner_avatar ? this.props.profiles.lerner_avatar : avatarPlaceholder;
               default: return null;
               }
             }
@@ -153,7 +153,7 @@ class HeaderWithoutRouter extends React.Component {
 
     const learnerAcademiaDropdownElements = [
       {
-        key: 'academia', content: 'Academia', name: 'courses', className: 'academia', active: activeItem === 'academia', onClick: this.handleItemClick,
+        key: 'academies', content: 'Academia', name: 'academies', className: 'academia', active: activeItem === 'academies', onClick: this.handleItemClick,
       },
       {
         key: 'courses', content: 'Browse courses', name: 'courses', active: activeItem === 'courses', onClick: this.handleItemClick,
@@ -174,10 +174,10 @@ class HeaderWithoutRouter extends React.Component {
 
     const learnerBusinessesDropdownElements = [
       {
-        key: 'businesses', content: 'Businesses', name: 'jobs', active: false, className: 'businesses secondary-nav-disabled-beta',
+        key: 'businesses', content: 'Businesses', name: 'businesses', className: 'businesses', active: activeItem === 'businesses', onClick: this.handleItemClick,
       },
       {
-        key: 'jobs', content: 'Browse jobs', name: 'jobs', active: false, className: 'secondary-nav-disabled-beta',
+        key: 'jobs', content: 'Browse jobs', name: 'jobs', active: activeItem === 'jobs', onClick: this.handleItemClick,
       },
       {
         key: 'interviews', content: 'My Interviews', name: 'interviews', active: false, className: 'secondary-nav-disabled-beta',
@@ -322,8 +322,9 @@ function mapStateToProps(state) {
     eduBalance: state.web3.eduBalance,
     balancesError: state.web3.web3Error,
     secondaryNav: state.secondaryNav.secondaryNav,
-    accounts: state.accounts.accounts,
+    profiles: state.profiles.profiles,
     onBoardingActiveElement: state.auth.onBoardingActiveElement,
+    activeAccount: state.activeAccount.activeAccount,
   };
 }
 

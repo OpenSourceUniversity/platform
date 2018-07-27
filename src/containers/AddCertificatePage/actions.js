@@ -1,4 +1,5 @@
-import { Buffer } from 'buffer';
+// import { Buffer } from 'buffer';
+import axios from 'axios';
 import store from '../../store';
 // const contract = require('truffle-contract');
 
@@ -15,43 +16,42 @@ export function storeProofOfExistance(/* state , hash */) {
 }
 
 
-export function addCertificate(state) {
+export function addCertificate(certificateData) {
   return function action(dispatch) {
-    if (!state.certificateName || !state.issuer || !state.recipient || !state.file) {
-      dispatch({
-        type: 'ADD_CERTIFICATE_FAILURE',
-        error: { message: 'Fill in all fields.' },
-      });
-      return;
-    }
-
     dispatch({
       type: 'ADD_CERTIFICATE_REQUEST',
     });
-
-    const ipfs = store.getState().ipfs.ipfsInstance;
-    const reader = new FileReader();
-
-    reader.onloadend = (event) => {
-      const { result } = event.target;
-      ipfs.files.add(Buffer.from(result), (error, hash) => {
-        if (error) {
-          dispatch({
-            type: 'ADD_CERTIFICATE_FAILURE',
-            error,
-          });
-        }
-        if (hash) {
-          dispatch(storeProofOfExistance(/* state , hash */));
-        }
-      });
+    const axiosConfig = {
+      headers: {
+        'Auth-Signature': store.getState().auth.signedAddress,
+        'Auth-Eth-Address': store.getState().auth.address.slice(2),
+      },
     };
-    reader.onerror = (error) => {
+    const postData = {
+      academy_title: certificateData.academy_title ? certificateData.academy_title : null,
+      academy_address: certificateData.academy_address ? certificateData.academy_address : null,
+      academy_link: certificateData.academy_link ? certificateData.academy_link : null,
+      program_title: certificateData.program_title ?
+        certificateData.program_title : null,
+      course_title: certificateData.course_title ? certificateData.course_title : null,
+      course_link: certificateData.course_link ? certificateData.course_link : null,
+      subject: certificateData.subject ? certificateData.subject : null,
+      skills: certificateData.skills ? certificateData.skills : null,
+      learner_eth_address: certificateData.learner_eth_address ?
+        certificateData.learner_eth_address : null,
+      score: certificateData.score ? certificateData.score : null,
+      duration: certificateData.duration ? certificateData.duration : null,
+      expiration_date: certificateData.expiration_date ? certificateData.expiration_date : null,
+    };
+    axios.post('http://localhost:8000/api/v1/certificates/', postData, axiosConfig).then(() => {
+      dispatch({
+        type: 'ADD_CERTIFICATE_SUCCESS',
+      });
+    }).catch(() => {
       dispatch({
         type: 'ADD_CERTIFICATE_FAILURE',
-        error,
+        error: 'Fail',
       });
-    };
-    reader.readAsArrayBuffer(state.file);
+    });
   };
 }

@@ -1,5 +1,3 @@
-import getDefaultValues from '../accountSettings/getDefaultValues';
-
 const initialState = {
   v3Wallet: JSON.parse(localStorage.getItem('v3Wallet')),
   address: localStorage.getItem('address'),
@@ -22,6 +20,7 @@ const authReducer = (state = initialState, action) => {
       v3Wallet: action.payload.v3Wallet,
       loginError: null,
       isLoggedIn: true,
+      address: localStorage.getItem('address'),
     });
   case 'SIGNED_ADDRESS_STORED':
     return Object.assign({}, state, {
@@ -43,7 +42,6 @@ const authReducer = (state = initialState, action) => {
       isLoggingIn: false,
     });
   case 'LOGGED_IN':
-    getDefaultValues();
     return Object.assign({}, state, {
       loginError: null,
       isLoggedIn: true,

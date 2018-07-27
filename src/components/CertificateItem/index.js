@@ -11,9 +11,9 @@ class CertificateItemWithoutRouter extends React.Component {
   render() {
     const color = this.props.certificate.verified ? 'green' : 'yellow';
     return (
-      <Card color={color} onClick={() => { this.props.history.push(`/certificate/${this.props.certificate.uid}/`); }}>
+      <Card color={color} onClick={() => { this.props.history.push(`/certificate/${this.props.certificate.id}/`); }}>
         <Card.Content>
-          <Card.Header>{this.props.certificate.name}</Card.Header>
+          <Card.Header>{this.props.certificate.course_title}</Card.Header>
         </Card.Content>
         <Card.Content extra>
           <Icon name={this.props.certificate.verified ? 'check' : 'warning sign'} color={color} />

@@ -11,17 +11,13 @@ contract EDUcirculation is TokenSettings {
     using SafeMath for uint256;
 
     function getFee(address _initiator) payable public returns (uint256, uint256) {
-      /* if (customersWithPreferences[_initiator].allowance) {
+      if (customersWithPreferences[_initiator].allowance) {
           // Customers with preferential price
           return (customersWithPreferences[_initiator].customFeeInEDU, customersWithPreferences[_initiator].customFeeInETH);
-      } else if (ERC20(tokenContractAddress).balanceOf(_initiator) >= feeInEDU) {
-          // Without platform fee (customer has enough EDU tokens)
-          return (feeInEDU, 0.0);
       } else {
           // With standart platform fee
-          return (0.0, feeInETH);
-      } */
-      return (200, 3000);
+          return (feeInEDU, feeInETH);
+      }
     }
 
     function getWalletFees() public view returns (address) {

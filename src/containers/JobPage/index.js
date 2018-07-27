@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom'
 import { Button, Header, Divider, Label, Segment, Grid, Menu, Icon, Container, Breadcrumb } from 'semantic-ui-react';
 import SkillItem from 'components/SkillItem';
 import { fetchJob } from './actions';
@@ -18,8 +19,8 @@ class JobPage extends React.Component {
   }
 
   renderIndustries() {
-    return this.props.job.industries.map((industry, index) => (
-      <SkillItem skill={industry} key={index} />
+    return this.props.job.categories.map((category, index) => (
+      <SkillItem skill={category} key={index} />
     ));
   }
 
@@ -61,12 +62,20 @@ class JobPage extends React.Component {
           <Divider clearing />
           <div className="course">
             <Grid>
+            {this.props.address.toLowerCase() === this.props.job.company.eth_address ? 
+              <Grid.Column width={16}>
+              <Segment clearing floated="right">
+                <Button as="a" target="_blank" href={this.props.history.push(`/businesses/edit/${this.props.match.params.id}/`);} color="yellow">Edit</Button>
+                <Button as="a" target="_blank" href="#" color="red">Delete</Button>
+                </Segment>
+              </Grid.Column> :
+              null
+            }
               <Grid.Column width={11}>
                 <Segment style={{ padding: '40px' }}>
                   <div>
                     <Header style={{ fontSize: '1.7em' }}>
                       {this.props.job.title}
-                      <span className="label-status"> <Label basic color="green">New</Label> </span>
                     </Header>
                     <span style={{ fontSize: '1.3em', color: 'gray' }}>
                       Posted by {this.props.job.company.name} <Icon name="point" style={{ marginLeft: '10px', marginRight: 0 }} /> {this.props.job.location} <Icon name="dollar" style={{ marginLeft: '10px', marginRight: 0 }} /> {this.props.job.salary}
@@ -148,6 +157,7 @@ function mapStateToProps(state) {
     job: state.job.job,
     isFetching: state.job.isFetching,
     error: state.job.error,
+    address: state.auth.address,
   };
 }
 

@@ -7,7 +7,7 @@ import fetchCategories from '../../util/search/fetchCategories';
 
 class CoursesCategoryFilter extends Form {
   componentDidMount() {
-    this.props.fetchCategories();
+    this.props.fetchCategories(this.props.filterType);
   }
 
   toggle(event) {
@@ -53,8 +53,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchCategories() {
-      dispatch(fetchCategories());
+    fetchCategories(filterType) {
+      dispatch(fetchCategories(filterType));
     },
     addCategoryToFilter(id) {
       dispatch(addCategoryToFilter(id));

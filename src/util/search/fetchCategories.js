@@ -1,4 +1,4 @@
-export default function fetchCategories() {
+export default function fetchCategories(filterType) {
   return function action(dispatch) {
     dispatch({
       type: 'FETCH_CATEGORIES_REQUEST',
@@ -16,6 +16,7 @@ export default function fetchCategories() {
           dispatch({
             type: 'FETCH_CATEGORIES_SUCCESS',
             categories: body,
+            filterType: filterType,
           });
         }
       });

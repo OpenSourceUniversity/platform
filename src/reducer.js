@@ -17,6 +17,7 @@ import jobsReducer from './containers/JobsPage/jobsReducer';
 import jobReducer from './containers/JobPage/jobReducer';
 import companyJobsReducer from './components/ViewBusinessProfile/companyJobsReducer';
 import businessesReducer from './containers/Businesses/businessesReducer';
+import addJobReducer from './containers/addJobPosition/addJobReducer';
 
 const reducer = combineReducers({
   web3: web3Reducer,
@@ -37,6 +38,7 @@ const reducer = combineReducers({
   job: jobReducer,
   companyJobs: companyJobsReducer,
   businesses: businessesReducer,
+  addJob: addJobReducer,
 });
 
 export default reducer;

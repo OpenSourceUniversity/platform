@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { Button, Header, Divider, Label, Segment, Grid, Menu, Icon, Container, Breadcrumb } from 'semantic-ui-react';
 import SkillItem from 'components/SkillItem';
 import { fetchJob } from './actions';
@@ -62,15 +62,15 @@ class JobPage extends React.Component {
           <Divider clearing />
           <div className="course">
             <Grid>
-            {this.props.address.toLowerCase() === this.props.job.company.eth_address ? 
-              <Grid.Column width={16}>
-              <Segment clearing floated="right">
-                <Button as="a" target="_blank" href={this.props.history.push(`/businesses/edit/${this.props.match.params.id}/`);} color="yellow">Edit</Button>
-                <Button as="a" target="_blank" href="#" color="red">Delete</Button>
-                </Segment>
-              </Grid.Column> :
-              null
-            }
+              {this.props.address.toLowerCase() === this.props.job.company.eth_address ?
+                <Grid.Column width={16}>
+                  <Segment clearing floated="right">
+                    <Button as="a" target="_blank" href={this.props.history.push(`/businesses/edit/${this.props.match.params.id}/`)} color="yellow">Edit</Button>
+                    <Button as="a" target="_blank" href="#" color="red">Delete</Button>
+                  </Segment>
+                </Grid.Column> :
+                null
+              }
               <Grid.Column width={11}>
                 <Segment style={{ padding: '40px' }}>
                   <div>

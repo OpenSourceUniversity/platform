@@ -195,7 +195,7 @@ class AddCertificatePage extends React.Component {
                 <Input
                   id="duration"
                   name="duration"
-                  type="time"
+                  type="number"
                   iconPosition="left"
                   icon="address card"
                   placeholder="Course duration"

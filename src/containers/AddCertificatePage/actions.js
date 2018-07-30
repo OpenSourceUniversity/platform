@@ -39,10 +39,11 @@ export function addCertificate(certificateData) {
       skills: certificateData.skills ? certificateData.skills : null,
       learner_eth_address: certificateData.learner_eth_address ?
         certificateData.learner_eth_address : null,
-      score: certificateData.score ? certificateData.score : null,
-      duration: certificateData.duration ? certificateData.duration : null,
+      score: certificateData.score ? certificateData.score : 0,
+      duration: certificateData.duration ? certificateData.duration * 3600 : null,
       expiration_date: certificateData.expiration_date ? certificateData.expiration_date : null,
     };
+    console.log(postData);
     axios.post('http://localhost:8000/api/v1/certificates/', postData, axiosConfig).then(() => {
       dispatch({
         type: 'ADD_CERTIFICATE_SUCCESS',

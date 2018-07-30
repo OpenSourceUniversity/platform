@@ -1,3 +1,4 @@
+import axios from 'axios';
 import store from '../../store';
 
 
@@ -34,5 +35,34 @@ export function fetchJob(url = START_URL) {
           error,
         });
       });
+  };
+}
+
+export function deleteJobPosition(id) {
+  return function action(dispatch) {
+    dispatch({
+      type: 'FETCH_JOB_REQUEST',
+    });
+    const axiosConfig = {
+      headers: {
+        'Auth-Signature': store.getState().auth.signedAddress,
+        'Auth-Eth-Address': store.getState().auth.address.slice(2),
+      },
+    };
+    const postData = {
+      id,
+    };
+    const url = 'http://localhost:8000/api/v1/jobs/methods/delete_by_id/';
+    axios.post(url, postData, axiosConfig).then(() => {
+      dispatch({
+        type: 'FETCH_JOB_SUCCESS',
+        result: 'ok',
+      });
+    }).catch(() => {
+      dispatch({
+        type: 'FETCH_JOB_FAILURE',
+        error: 'Fail',
+      });
+    });
   };
 }

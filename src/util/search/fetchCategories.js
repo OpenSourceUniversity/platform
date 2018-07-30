@@ -16,7 +16,7 @@ export default function fetchCategories(filterType) {
           dispatch({
             type: 'FETCH_CATEGORIES_SUCCESS',
             categories: body,
-            filterType: filterType,
+            filterType,
           });
         }
       });

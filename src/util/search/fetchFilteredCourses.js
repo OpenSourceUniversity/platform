@@ -13,7 +13,7 @@ export default function fetchFilteredCourses() {
     dispatch({
       type: 'RESET_FETCHED_COURSES',
     });
-    if(filterType === 'jobs') {
+    if (filterType === 'jobs') {
       dispatch(fetchJobs(url));
     } else {
       dispatch(fetchCourses(url));

@@ -12,14 +12,14 @@ function IPFSinitialized(results) {
 }
 
 const getIPFS = new Promise(((resolve, reject) => {
-    const { host, port, protocol } = Config.ipfs;
-    const ipfs = new ipfs(host, port, protocol);
+  const { host, port, protocol } = Config.ipfs;
+  const ipfs = new ipfs(host, port, protocol);
 
-    const results = {
-        IPFSinstance: ipfs,
-    };
+  const results = {
+    IPFSinstance: ipfs,
+  };
 
-    resolve(store.dispatch(IPFSinitialized(results)));
+  resolve(store.dispatch(IPFSinitialized(results)));
 }));
 
 export default getIPFS;

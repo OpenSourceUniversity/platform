@@ -65,7 +65,7 @@ class JobPage extends React.Component {
             {this.props.address.toLowerCase() === this.props.job.company.eth_address ? 
               <Grid.Column width={16}>
               <Segment clearing floated="right">
-                <Button as="a" target="_blank" href={this.props.history.push(`/businesses/edit/${this.props.match.params.id}/`);} color="yellow">Edit</Button>
+                <Button as="a" target="_blank" href={this.props.history.push(`/businesses/edit/${this.props.match.params.id}/`)} color="yellow">Edit</Button>
                 <Button as="a" target="_blank" href="#" color="red">Delete</Button>
                 </Segment>
               </Grid.Column> :

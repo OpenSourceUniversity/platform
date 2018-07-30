@@ -20,6 +20,7 @@ import businessesReducer from './containers/Businesses/businessesReducer';
 import addJobReducer from './containers/AddJobPosition/addJobReducer';
 import addCourseReducer from './containers/AddCourse/addCourseReducer';
 
+
 const reducer = combineReducers({
   web3: web3Reducer,
   ipfs: ipfsReducer,

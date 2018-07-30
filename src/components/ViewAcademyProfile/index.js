@@ -79,8 +79,8 @@ class ViewAcademyProfile extends React.Component {
                   <List>
                     { <List.Item icon={{ name: 'users', style: { width: '22px' } }} content={<span>{this.props.eth_address}</span>} /> }
                     <List.Item icon={{ name: 'marker', style: { width: '22px' } }} content={this.props.academy.academy_country ? this.props.academy.academy_country : '-'} />
-                    <List.Item icon={{ name: 'mail', style: { width: '22px' } }} content={<a target="_blank" href={email}>{this.props.academy.academy_email}</a>} />
-                    <List.Item icon={{ name: 'linkify', style: { width: '22px' } }} content={<a target="_blank" href={link}>{this.props.academy.academy_website}</a>} />
+                    <List.Item icon={{ name: 'mail', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={email}>{this.props.academy.academy_email}</a>} />
+                    <List.Item icon={{ name: 'linkify', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={link}>{this.props.academy.academy_website}</a>} />
                   </List>
                 </Segment>
                 <Segment />

@@ -42,8 +42,8 @@ class BusinessProfile extends React.Component {
                 <Segment>
                   <List>
                     {/* <List.Item icon="users" content={this.props.profiles.employees} /> */}
-                    <List.Item icon="mail" content={<a target="_blank" href={email}>{this.props.profiles.company_email}</a>} />
-                    <List.Item icon="linkify" content={<a target="_blank" href={link}>{this.props.profiles.company_website}</a>} />
+                    <List.Item icon="mail" content={<a target="_blank" rel="noopener noreferrer" href={email}>{this.props.profiles.company_email}</a>} />
+                    <List.Item icon="linkify" content={<a target="_blank" rel="noopener noreferrer" href={link}>{this.props.profiles.company_website}</a>} />
                   </List>
                 </Segment>
                 <Segment />

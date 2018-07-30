@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { Button, Header, Divider, Label, Segment, Grid, Menu, Icon, Container, Breadcrumb } from 'semantic-ui-react';
 import SkillItem from 'components/SkillItem';
 import { fetchJob } from './actions';

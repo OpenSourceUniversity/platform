@@ -57,9 +57,9 @@ class LearnerProfile extends React.Component {
                   <List>
                     <List.Item icon={{ name: 'users', style: { width: '22px' } }} content={this.props.profiles.learner_specialisation ? this.props.profiles.learner_specialisation : '-'} />
                     <List.Item icon={{ name: 'marker', style: { width: '22px' } }} content={this.props.profiles.learner_country ? this.props.profiles.learner_country : '-'} />
-                    <List.Item icon={{ name: 'mail', style: { width: '22px' } }} content={<a target="_blank" href={email}>{this.props.profiles.learner_email ? this.props.profiles.learner_email : '-'}</a>} />
-                    <List.Item icon={{ name: 'linkify', style: { width: '22px' } }} content={<a target="_blank" href={site}>{this.props.profiles.learner_site ? this.props.profiles.learner_site : '-'}</a>} />
-                    <List.Item icon={{ name: 'phone', style: { width: '22px' } }} content={<a target="_blank" href={phoneNumber}>{this.props.profiles.phone_number ? this.props.profiles.phone_number : '-'}</a>} />
+                    <List.Item icon={{ name: 'mail', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={email}>{this.props.profiles.learner_email ? this.props.profiles.learner_email : '-'}</a>} />
+                    <List.Item icon={{ name: 'linkify', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={site}>{this.props.profiles.learner_site ? this.props.profiles.learner_site : '-'}</a>} />
+                    <List.Item icon={{ name: 'phone', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={phoneNumber}>{this.props.profiles.phone_number ? this.props.profiles.phone_number : '-'}</a>} />
                   </List>
                 </Segment>
                 <Segment>

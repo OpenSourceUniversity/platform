@@ -43,8 +43,8 @@ class AcademyProfile extends React.Component {
                     {/* <List.Item icon={{ name: 'users', style: { width: '22px' } }}
                   content={<span>{this.props.profiles.students}</span>} /> */}
                     <List.Item icon={{ name: 'marker', style: { width: '22px' } }} content={this.props.profiles.academy_country ? this.props.profiles.academy_country : '-'} />
-                    <List.Item icon={{ name: 'mail', style: { width: '22px' } }} content={<a target="_blank" href={email}>{this.props.profiles.academy_email}</a>} />
-                    <List.Item icon={{ name: 'linkify', style: { width: '22px' } }} content={<a target="_blank" href={link}>{this.props.profiles.academy_website}</a>} />
+                    <List.Item icon={{ name: 'mail', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={email}>{this.props.profiles.academy_email}</a>} />
+                    <List.Item icon={{ name: 'linkify', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={link}>{this.props.profiles.academy_website}</a>} />
                   </List>
                 </Segment>
                 <Segment />

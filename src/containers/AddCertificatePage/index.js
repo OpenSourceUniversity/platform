@@ -34,7 +34,26 @@ class AddCertificatePage extends React.Component {
       expiration_date: event.target.elements.expiration_date.value,
     };
     component.props.addCertificate(certificateData);
+    // Store the certificate in IPFS
+    const accounts = getWeb3.eth.getAccounts();
+    console.log('Sending from Metamask account: ' + accounts[0]);
   }
+
+  captureFile =(event) => {
+      event.stopPropagation();
+      event.preventDefault();
+      const file = event.target.files[0];
+      let reader = new window.FileReader();
+      reader.readAsArrayBuffer(file);
+      reader.onloadend = () => this.convertToBuffer(reader);
+  }
+
+  convertToBuffer = (reader) => {
+      //file is converted to a buffer to prepare for uploading to IPFS
+      const buffer = Buffer.from(reader.result);
+      this.setState({buffer});
+      console.log(buffer);
+  };
 
   render() {
     return (
@@ -224,6 +243,7 @@ class AddCertificatePage extends React.Component {
                   type="file"
                   name="certificate_file"
                   placeholder="Certificate File"
+                  onChange={this.captureFile}
                 />
               </label>
             </Form.Field>

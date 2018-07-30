@@ -72,7 +72,7 @@ class JobsPage extends React.Component {
                   </Accordion.Title>
                   <Accordion.Content
                     active={activeIndex === 0}
-                    content={<CoursesCategoryFilter />}
+                    content={<CoursesCategoryFilter filterType = 'jobs' />}
                   />
                 </Menu.Item>
               </Accordion>

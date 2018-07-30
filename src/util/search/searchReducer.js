@@ -2,6 +2,7 @@ const initialState = {
   suggestions: [],
   categories: [],
   filteredCategories: [],
+  filterType: null,
 };
 
 
@@ -14,6 +15,7 @@ const authReducer = (state = initialState, action) => {
   case 'FETCH_CATEGORIES_SUCCESS':
     return Object.assign({}, state, {
       categories: action.categories,
+      filterType: action.filterType,
     });
   case 'FILTER_CATEGORY_ADDED':
     return Object.assign({}, state, {

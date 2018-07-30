@@ -1,5 +1,5 @@
 const initialState = {
-  ipfsInstance: null,
+  IPFSinstance: null,
 };
 
 
@@ -7,7 +7,7 @@ const ipfsReducer = (state = initialState, action) => {
   switch (action.type) {
   case 'IPFS_INITIALIZED':
     return Object.assign({}, state, {
-      ipfsInstance: action.payload.ipfsInstance,
+      IPFSinstance: action.payload.IPFSinstance,
     });
   default:
     return state;

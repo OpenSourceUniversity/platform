@@ -11,7 +11,7 @@ function IPFSinitialized(results) {
   };
 }
 
-const getIPFS = new Promise(((resolve, reject) => {
+const getIpfs = new Promise(((resolve, reject) => {
   const { host, port, protocol } = Config.ipfs;
   const ipfs = new ipfs(host, port, protocol);
 
@@ -22,4 +22,4 @@ const getIPFS = new Promise(((resolve, reject) => {
   resolve(store.dispatch(IPFSinitialized(results)));
 }));
 
-export default getIPFS;
+export default getIpfs;

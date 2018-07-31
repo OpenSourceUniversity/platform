@@ -36,23 +36,23 @@ class AddCertificatePage extends React.Component {
     component.props.addCertificate(certificateData);
     // Store the certificate in IPFS
     const accounts = getWeb3.eth.getAccounts();
-    console.log('Sending from Metamask account: ' + accounts[0]);
+    console.log(`Sending from Metamask account: ${accounts[0]}`);
   }
 
   captureFile =(event) => {
-      event.stopPropagation();
-      event.preventDefault();
-      const file = event.target.files[0];
-      let reader = new window.FileReader();
-      reader.readAsArrayBuffer(file);
-      reader.onloadend = () => this.convertToBuffer(reader);
+    event.stopPropagation();
+    event.preventDefault();
+    const file = event.target.files[0];
+    const reader = new window.FileReader();
+    reader.readAsArrayBuffer(file);
+    reader.onloadend = () => this.convertToBuffer(reader);
   }
 
   convertToBuffer = (reader) => {
-      //file is converted to a buffer to prepare for uploading to IPFS
-      const buffer = Buffer.from(reader.result);
-      this.setState({buffer});
-      console.log(buffer);
+    // file is converted to a buffer to prepare for uploading to IPFS
+    const buffer = Buffer.from(reader.result);
+    this.setState({ buffer });
+    console.log(buffer);
   };
 
   render() {
@@ -229,6 +229,7 @@ class AddCertificatePage extends React.Component {
                   name="expiration_date"
                   iconPosition="left"
                   icon="address card"
+                  type="date"
                   placeholder="Certificate expiration date"
                 />
               </label>

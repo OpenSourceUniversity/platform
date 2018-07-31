@@ -116,7 +116,7 @@ class JobPage extends React.Component {
                       {this.renderSkills()}
                     </Label.Group>
                     <Menu pointing secondary color="orange">
-                      <Menu.Item style={{ fontSize: '1.3em' }} name="desc">
+                      <Menu.Item style={{ fontSize: '1.3em' }} name="desc" active>
                           Job Descriptions
                       </Menu.Item>
                     </Menu>

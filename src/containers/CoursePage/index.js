@@ -116,7 +116,7 @@ class CoursePage extends React.Component {
                       </span>
                     </span>
                   </Header>
-                  <span>
+                  <span style={{ whiteSpace: 'pre-line' }}>
                     {this.props.course.description}
                   </span>
                   <Header>
@@ -138,9 +138,9 @@ class CoursePage extends React.Component {
                   </Grid>
                   <Divider hidden />
                   <Menu pointing secondary color="orange">
-                    <Menu.Item style={{ fontSize: '1.3em' }} name="about" active={activeItem === 'about'} onClick={this.handleItemClick} />
+                    <Menu.Item style={{ fontSize: '1.3em' }} name="about" active />
                   </Menu>
-                  <Container style={{ paddingLeft: '40px', paddingRight: '40px' }}>
+                  <Container style={{ paddingLeft: '40px', paddingRight: '40px', whiteSpace: 'pre-line' }}>
                     {(() => {
                       switch (this.state.activeItem) {
                       case 'entry requirements': return this.props.course.e_req;

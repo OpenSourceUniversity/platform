@@ -5,6 +5,7 @@ import { addCertificate } from './actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import Industries from '../../data/industryList';
 import Skills from '../../data/skillsList';
+import getWeb3 from '../../util/web3/getWeb3';
 
 
 class AddCertificatePage extends React.Component {
@@ -272,6 +273,12 @@ function mapDispatchToProps(dispatch) {
     },
     setSecondaryNav(secondaryNav) {
       dispatch(setSecondaryNav(secondaryNav));
+    },
+    getWeb3() {
+      dispatch(getWeb3());
+    },
+    getIpfs() {
+      dispatch(getIpfs());
     },
   };
 }

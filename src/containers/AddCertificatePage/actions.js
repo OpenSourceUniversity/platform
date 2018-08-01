@@ -1,12 +1,12 @@
 // import { Buffer } from 'buffer';
 import axios from 'axios';
 import store from '../../store';
-// const contract = require('truffle-contract');
+const contract = require('truffle-contract');
 
 
 export function storeProofOfExistance(/* state , hash */) {
   return function action(dispatch) {
-    // const web3 = store.getState().web3.web3Instance;
+    const web3 = store.getState().web3.web3Instance;
     setTimeout(() => {
       dispatch({
         type: 'ADD_CERTIFICATE_SUCCESS',

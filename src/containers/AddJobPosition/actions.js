@@ -1,8 +1,9 @@
 // import { Buffer } from 'buffer';
 import axios from 'axios';
 import store from '../../store';
+import Config from '../../config';
 // const contract = require('truffle-contract');
-
+const { bdnUrl } = Config.network;
 
 export function storeProofOfExistance(/* state , hash */) {
   return function action(dispatch) {
@@ -24,7 +25,7 @@ export function getDefaultValues(id) {
       'Auth-Signature': store.getState().auth.signedAddress,
       'Auth-Eth-Address': store.getState().auth.address.slice(2),
     });
-    const url = `http://localhost:8000/api/v1/jobs/methods/get_by_id/?id=${id}`;
+    const url = `${bdnUrl}api/v1/jobs/methods/get_by_id/?id=${id}`;
 
     return fetch(url, { headers })
       .then(response => response.json().then(body => ({ response, body })))
@@ -77,7 +78,7 @@ export function addJobPosition(jobData) {
       job_type: jobData.job_type ? jobData.job_type : null,
       languages: jobData.languages ? jobData.languages : null,
     };
-    axios.post('http://localhost:8000/api/v1/jobs/', postData, axiosConfig).then(() => {
+    axios.post(`${bdnUrl}api/v1/jobs/`, postData, axiosConfig).then(() => {
       dispatch({
         type: 'ADD_JOB_SUCCESS',
       });
@@ -117,7 +118,7 @@ export function editJobPosition(id, jobData) {
       job_type: jobData.job_type ? jobData.job_type : null,
       languages: jobData.languages ? jobData.languages : null,
     };
-    const url = 'http://localhost:8000/api/v1/jobs/methods/edit_by_id/';
+    const url = `${bdnUrl}api/v1/jobs/methods/edit_by_id/`;
     axios.post(url, postData, axiosConfig).then(() => {
       dispatch({
         type: 'ADD_JOB_SUCCESS',

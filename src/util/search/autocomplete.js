@@ -1,4 +1,7 @@
 import store from '../../store';
+import Config from '../../config';
+
+const { bdnUrl } = Config.network;
 
 
 export default function autocomplete(query) {
@@ -6,7 +9,7 @@ export default function autocomplete(query) {
     dispatch({
       type: 'AUTOCOMPLETE_REQUEST',
     });
-    const url = `http://localhost:8000/api/v1/courses/autocomplete/?q=${query}`;
+    const url = `${bdnUrl}api/v1/courses/autocomplete/?q=${query}`;
     const headers = new Headers({
       'Auth-Signature': store.getState().auth.signedAddress,
       'Auth-Eth-Address': store.getState().auth.address.slice(2),

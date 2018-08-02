@@ -5,11 +5,13 @@ import { Link } from 'react-router-dom';
 import SkillItem from 'components/SkillItem';
 import { fetchCourse, deleteCourse } from './actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
+import Config from '../../config';
 
 class CoursePage extends React.Component {
   state = { activeItem: 'about', modalOpen: false }
   componentDidMount() {
-    this.props.fetchCourse(`http://localhost:8000/api/v1/courses/${this.props.match.params.id}/`);
+    const { bdnUrl } = Config.network;
+    this.props.fetchCourse(`${bdnUrl}api/v1/courses/${this.props.match.params.id}/`);
     this.props.setSecondaryNav('academia');
   }
 

@@ -1,7 +1,9 @@
 import store from '../../store';
+import Config from '../../config';
 
 
-const START_URL = 'http://localhost:8000/api/v1/courses/?is_featured=1&offset=0&limit=4';
+const { bdnUrl } = Config.network;
+const START_URL = `${bdnUrl}api/v1/courses/?is_featured=1&offset=0&limit=4`;
 
 
 export function fetchFeaturedCourses(url = START_URL) {

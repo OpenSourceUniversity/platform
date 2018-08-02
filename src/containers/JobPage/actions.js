@@ -1,8 +1,10 @@
 import axios from 'axios';
 import store from '../../store';
+import Config from '../../config';
 
 
-const START_URL = 'http://localhost:8000/api/v1/jobs/fc01f5ba-c59f-49a2-b75b-4cd9f0d86b02';
+const { bdnUrl } = Config.network;
+const START_URL = `${bdnUrl}api/v1/jobs/fc01f5ba-c59f-49a2-b75b-4cd9f0d86b02`;
 
 
 export function fetchJob(url = START_URL) {
@@ -52,7 +54,7 @@ export function deleteJobPosition(id) {
     const postData = {
       id,
     };
-    const url = 'http://localhost:8000/api/v1/jobs/methods/delete_by_id/';
+    const url = `${bdnUrl}api/v1/jobs/methods/delete_by_id/`;
     axios.post(url, postData, axiosConfig).then(() => {
       dispatch({
         type: 'FETCH_JOB_SUCCESS',

@@ -1,6 +1,7 @@
 // import { Buffer } from 'buffer';
 import axios from 'axios';
 import store from '../../store';
+import Config from '../../config';
 // const contract = require('truffle-contract');
 
 
@@ -24,7 +25,8 @@ export function getDefaultValues(id) {
       'Auth-Signature': store.getState().auth.signedAddress,
       'Auth-Eth-Address': store.getState().auth.address.slice(2),
     });
-    const url = `http://localhost:8000/api/v1/courses/methods/get_by_id/?id=${id}`;
+    const { bdnUrl } = Config.network;
+    const url = `${bdnUrl}api/v1/courses/methods/get_by_id/?id=${id}`;
 
     return fetch(url, { headers })
       .then(response => response.json().then(body => ({ response, body })))
@@ -70,7 +72,8 @@ export function addCourse(courseData) {
       external_link: courseData.external_link ? courseData.external_link : null,
       categories: courseData.categories ? courseData.categories : null,
     };
-    axios.post('http://localhost:8000/api/v1/courses/', postData, axiosConfig).then(() => {
+    const { bdnUrl } = Config.network;
+    axios.post(`${bdnUrl}api/v1/courses/`, postData, axiosConfig).then(() => {
       dispatch({
         type: 'ADD_COURSE_SUCCESS',
       });
@@ -103,7 +106,8 @@ export function editCourse(id, courseData) {
       external_link: courseData.external_link ? courseData.external_link : null,
       categories: courseData.categories ? courseData.categories : null,
     };
-    const url = 'http://localhost:8000/api/v1/courses/methods/edit_by_id/';
+    const { bdnUrl } = Config.network;
+    const url = `${bdnUrl}api/v1/courses/methods/edit_by_id/`;
     axios.post(url, postData, axiosConfig).then(() => {
       dispatch({
         type: 'ADD_COURSE_SUCCESS',

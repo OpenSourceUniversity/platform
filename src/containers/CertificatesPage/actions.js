@@ -1,6 +1,8 @@
 import store from '../../store';
+import Config from '../../config';
 
-const START_URL = 'http://localhost:8000/api/v1/certificates/';
+const { bdnUrl } = Config.network;
+const START_URL = `${bdnUrl}api/v1/certificates/`;
 
 export function fetchCertificates(url=START_URL) {
   return function dispatcher(dispatch) {

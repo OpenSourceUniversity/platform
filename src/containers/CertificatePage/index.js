@@ -4,10 +4,12 @@ import { Header, Divider, Segment, Container, Dimmer, Loader, Breadcrumb, Grid }
 import SkillItem from 'components/SkillItem';
 import { fetchCertificate } from './actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
+import Config from '../../config';
 
 class CertificatePage extends React.Component {
   componentWillMount() {
-    this.props.fetchCertificate(`http://localhost:8000/api/v1/certificates/${this.props.match.params.id}/`);
+    const { bdnUrl } = Config.network;
+    this.props.fetchCertificate(`${bdnUrl}api/v1/certificates/${this.props.match.params.id}/`);
     this.props.setSecondaryNav('academia');
   }
 

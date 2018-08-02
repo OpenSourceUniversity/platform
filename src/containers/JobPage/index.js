@@ -1,16 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Button, Header, Divider, Label, Segment, Grid, Menu, Icon, Container, Breadcrumb } from 'semantic-ui-react';
+import { Button, Header, Divider, Label, Segment, Grid, Menu, Icon, Container, Breadcrumb, Modal } from 'semantic-ui-react';
 import SkillItem from 'components/SkillItem';
-import { fetchJob } from './actions';
+import { fetchJob, deleteJobPosition } from './actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 
 class JobPage extends React.Component {
+  state = { modalOpen: false }
+
   componentDidMount() {
     this.props.fetchJob(`http://localhost:8000/api/v1/jobs/${this.props.match.params.id}/`);
     this.props.setSecondaryNav('business');
   }
+
+  handleOpen = () => this.setState({ modalOpen: true })
+
+  handleClose = () => this.setState({ modalOpen: false })
 
   renderSkills() {
     return this.props.job.skills.map((skill, index) => (
@@ -62,15 +67,33 @@ class JobPage extends React.Component {
           <Divider clearing />
           <div className="course">
             <Grid>
-            {this.props.address.toLowerCase() === this.props.job.company.eth_address ? 
-              <Grid.Column width={16}>
-              <Segment clearing floated="right">
-                <Button as="a" target="_blank" href={this.props.history.push(`/businesses/edit/${this.props.match.params.id}/`)} color="yellow">Edit</Button>
-                <Button as="a" target="_blank" href="#" color="red">Delete</Button>
-                </Segment>
-              </Grid.Column> :
-              null
-            }
+              {this.props.address.toLowerCase() === this.props.job.company.eth_address ?
+                <Grid.Column width={16}>
+                  <Segment clearing floated="right">
+                    <Button as="a" target="_blank" onClick={() => { this.props.history.push(`/businesses/edit/${this.props.match.params.id}/`); }} color="yellow">Edit</Button>
+                    <Modal open={this.state.modalOpen} onClose={this.handleClose} trigger={<Button onClick={this.handleOpen} color="red">Delete</Button>} basic size="small">
+                      <Header icon="archive" content="Delete course confirmation" />
+                      <Modal.Content>
+                        <p>
+                        You want to delete youre job position, named: {this.props.job.title}.
+                        </p>
+                        <p>
+                        Please, confirm this action.
+                        </p>
+                      </Modal.Content>
+                      <Modal.Actions>
+                        <Button onClick={this.handleOpen} basic color="grey" inverted>
+                          <Icon name="remove" /> Cancel
+                        </Button>
+                        <Button basic color="red" inverted onClick={() => { this.props.deleteJobPosition(this.props.match.params.id); }}>
+                          <Icon name="remove" /> Delete
+                        </Button>
+                      </Modal.Actions>
+                    </Modal>
+                  </Segment>
+                </Grid.Column> :
+                null
+              }
               <Grid.Column width={11}>
                 <Segment style={{ padding: '40px' }}>
                   <div>
@@ -83,7 +106,7 @@ class JobPage extends React.Component {
                     <Header>
                        Overview
                     </Header>
-                    <span>
+                    <span style={{ whiteSpace: 'pre-line' }}>
                       {this.props.job.overview}
                     </span>
                     <Header>
@@ -93,11 +116,11 @@ class JobPage extends React.Component {
                       {this.renderSkills()}
                     </Label.Group>
                     <Menu pointing secondary color="orange">
-                      <Menu.Item style={{ fontSize: '1.3em' }} name="desc">
+                      <Menu.Item style={{ fontSize: '1.3em' }} name="desc" active>
                           Job Descriptions
                       </Menu.Item>
                     </Menu>
-                    <Container style={{ paddingLeft: '40px', paddingRight: '40px' }}>
+                    <Container style={{ paddingLeft: '40px', paddingRight: '40px', whiteSpace: 'pre-line' }}>
                       {this.props.job.description}
                     </Container>
                   </div>
@@ -169,6 +192,9 @@ function mapDispatchToProps(dispatch) {
     },
     setSecondaryNav(secondaryNav) {
       dispatch(setSecondaryNav(secondaryNav));
+    },
+    deleteJobPosition(id) {
+      dispatch(deleteJobPosition(id));
     },
   };
 }

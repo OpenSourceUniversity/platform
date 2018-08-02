@@ -40,12 +40,12 @@ class AddCertificatePage extends React.Component {
   }
 
   captureFile =(event) => {
-      event.stopPropagation();
-      event.preventDefault();
-      const file = event.target.files[0];
-      let reader = new window.FileReader();
-      reader.readAsArrayBuffer(file);
-      reader.onloadend = () => this.convertToBuffer(reader);
+    event.stopPropagation();
+    event.preventDefault();
+    const file = event.target.files[0];
+    const reader = new window.FileReader();
+    reader.readAsArrayBuffer(file);
+    reader.onloadend = () => this.convertToBuffer(reader);
   }
 
   convertToBuffer = (reader) => {
@@ -213,7 +213,7 @@ class AddCertificatePage extends React.Component {
                 <Input
                   id="duration"
                   name="duration"
-                  type="time"
+                  type="number"
                   iconPosition="left"
                   icon="address card"
                   placeholder="Course duration"
@@ -228,6 +228,7 @@ class AddCertificatePage extends React.Component {
                   name="expiration_date"
                   iconPosition="left"
                   icon="address card"
+                  type="date"
                   placeholder="Certificate expiration date"
                 />
               </label>

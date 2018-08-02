@@ -1,17 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, Header, Divider, Label, Segment, Grid, Menu, Icon, Container, Dimmer, Loader, Breadcrumb } from 'semantic-ui-react';
+import { Button, Header, Divider, Label, Segment, Grid, Menu, Icon, Container, Dimmer, Loader, Breadcrumb, Modal } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import SkillItem from 'components/SkillItem';
-import { fetchCourse } from './actions';
+import { fetchCourse, deleteCourse } from './actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 
 class CoursePage extends React.Component {
-  state = { activeItem: 'about' }
+  state = { activeItem: 'about', modalOpen: false }
   componentDidMount() {
     this.props.fetchCourse(`http://localhost:8000/api/v1/courses/${this.props.match.params.id}/`);
     this.props.setSecondaryNav('academia');
   }
+
   setIcon(provider) {
     switch (provider) {
     case 'MongoDB University': return 'http://www.johncanessa.com/wp-content/uploads/2018/04/mongodb_logo_1-300x300.png';
@@ -27,6 +28,10 @@ class CoursePage extends React.Component {
     default: return 'http://shackmanlab.org/wp-content/uploads/2013/07/person-placeholder.jpg';
     }
   }
+  handleOpen = () => this.setState({ modalOpen: true })
+
+  handleClose = () => this.setState({ modalOpen: false })
+
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   renderSkills() {
@@ -71,6 +76,33 @@ class CoursePage extends React.Component {
               {this.props.course.title}
             </Header>
             <Grid>
+              {this.props.address.toLowerCase() === this.props.course.provider.eth_address ?
+                <Grid.Column width={16}>
+                  <Segment clearing floated="right">
+                    <Button as="a" target="_blank" onClick={() => { this.props.history.push(`/academies/edit/${this.props.match.params.id}/`); }} color="yellow">Edit</Button>
+                    <Modal open={this.state.modalOpen} onClose={this.handleClose} trigger={<Button onClick={this.handleOpen} color="red">Delete</Button>} basic size="small">
+                      <Header icon="archive" content="Delete course confirmation" />
+                      <Modal.Content>
+                        <p>
+                        You want to delete youre course, named: {this.props.course.title}.
+                        </p>
+                        <p>
+                        Please, confirm this action.
+                        </p>
+                      </Modal.Content>
+                      <Modal.Actions>
+                        <Button onClick={this.handleOpen} basic color="grey" inverted>
+                          <Icon name="remove" /> Cancel
+                        </Button>
+                        <Button basic color="red" inverted onClick={() => { this.props.deleteCourse(this.props.match.params.id); }}>
+                          <Icon name="remove" /> Delete
+                        </Button>
+                      </Modal.Actions>
+                    </Modal>
+                  </Segment>
+                </Grid.Column> :
+                null
+              }
               <Grid.Column width={11}>
                 <Segment style={{ padding: '40px' }}>
                   <Header>
@@ -84,7 +116,7 @@ class CoursePage extends React.Component {
                       </span>
                     </span>
                   </Header>
-                  <span>
+                  <span style={{ whiteSpace: 'pre-line' }}>
                     {this.props.course.description}
                   </span>
                   <Header>
@@ -106,9 +138,9 @@ class CoursePage extends React.Component {
                   </Grid>
                   <Divider hidden />
                   <Menu pointing secondary color="orange">
-                    <Menu.Item style={{ fontSize: '1.3em' }} name="about" active={activeItem === 'about'} onClick={this.handleItemClick} />
+                    <Menu.Item style={{ fontSize: '1.3em' }} name="about" active />
                   </Menu>
-                  <Container style={{ paddingLeft: '40px', paddingRight: '40px' }}>
+                  <Container style={{ paddingLeft: '40px', paddingRight: '40px', whiteSpace: 'pre-line' }}>
                     {(() => {
                       switch (this.state.activeItem) {
                       case 'entry requirements': return this.props.course.e_req;
@@ -127,7 +159,7 @@ class CoursePage extends React.Component {
                     </Header>
                     <Label
                       circular
-                      onClick={this.props.course.provider.eth_address ? () => { this.props.history.push(`/view-profile/academy/${this.props.course.provider.eth_address}/`); } : null}
+                      onClick={this.props.course.provider ? () => { this.props.history.push(`/view-profile/academy/${this.props.course.provider.eth_address}/`); } : null}
                       style={{
                         boxShadow: '2px 6px 20px 0 #bcbdbd, 0 1px 21px 1px #d4d4d5', width: '8em', height: '8em', backgroundColor: 'white', backgroundImage: `url(${this.setIcon(this.props.course.provider.name)})`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: '80%', cursor: 'pointer',
                       }}
@@ -186,6 +218,7 @@ function mapStateToProps(state) {
     course: state.course.course,
     isFetching: state.course.isFetching,
     error: state.course.error,
+    address: state.auth.address,
   };
 }
 
@@ -194,6 +227,9 @@ function mapDispatchToProps(dispatch) {
   return {
     fetchCourse(url) {
       dispatch(fetchCourse(url));
+    },
+    deleteCourse(id) {
+      dispatch(deleteCourse(id));
     },
     setSecondaryNav(secondaryNav) {
       dispatch(setSecondaryNav(secondaryNav));

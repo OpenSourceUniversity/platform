@@ -5,7 +5,7 @@ import WalletUnlocker from 'components/WalletUnlocker';
 import React from 'react';
 import getDefaultValues from './util/profiles/getDefaultValues';
 import './util/web3/getWeb3';
-import './util/ipfs/getIpfs';
+// import './util/ipfs/getIpfs';
 
 // Layouts
 import Header from './components/Header';

@@ -67,8 +67,8 @@ export function addCertificate(certificateData) {
       skills: certificateData.skills ? certificateData.skills : null,
       learner_eth_address: certificateData.learner_eth_address ?
         certificateData.learner_eth_address : null,
-      score: certificateData.score ? certificateData.score : null,
-      duration: certificateData.duration ? certificateData.duration : null,
+      score: certificateData.score ? certificateData.score : 0,
+      duration: certificateData.duration ? certificateData.duration * 3600 : null,
       expiration_date: certificateData.expiration_date ? certificateData.expiration_date : null,
     };
 

@@ -1,7 +1,7 @@
 const INITIAL_STATE = {
   isAdding: false,
   isAdded: false,
-  jobDefault: {
+  courseDefault: {
     skills: [],
     categories: [],
     languages: [],
@@ -9,41 +9,41 @@ const INITIAL_STATE = {
 };
 
 
-export default function addJobReducer(state = INITIAL_STATE, action) {
+export default function addCourseReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-  case 'ADD_JOB_REQUEST':
+  case 'ADD_COURSE_REQUEST':
     return Object.assign({}, state, {
       isAdding: true,
       error: null,
     });
-  case 'ADD_JOB_SUCCESS':
+  case 'ADD_COURSE_SUCCESS':
     return Object.assign({}, state, {
       isAdded: true,
       isAdding: false,
       error: null,
     });
-  case 'ADD_JOB_FAILURE':
+  case 'ADD_COURSE_FAILURE':
     return Object.assign({}, state, {
       isAdding: false,
       error: action.error.message,
     });
-  case 'RESET_JOB_VALUES':
+  case 'RESET_COURSE_VALUES':
     return Object.assign({}, state, {
       isAdding: false,
       error: null,
-      jobDefault: {},
+      courseDefault: {},
     });
-  case 'JOB_GET_FAILURE':
+  case 'COURSE_GET_FAILURE':
     return Object.assign({}, state, {
       isAdding: false,
       error: action.error.message,
-      jobDefault: {},
+      courseDefault: {},
     });
-  case 'JOB_GET_SUCCESS':
+  case 'COURSE_GET_SUCCESS':
     return Object.assign({}, state, {
       isAdding: false,
       error: null,
-      jobDefault: action.result,
+      courseDefault: action.result,
     });
   default:
     return state;

@@ -122,7 +122,7 @@ class CoursesPage extends React.Component {
                   </Accordion.Title>
                   <Accordion.Content
                     active={activeIndex === 0}
-                    content={<CoursesCategoryFilter filterType = 'courses' />}
+                    content={<CoursesCategoryFilter filterType="courses" />}
                   />
                 </Menu.Item>
               </Accordion>

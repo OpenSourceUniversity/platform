@@ -1,18 +1,23 @@
 import store from '../../store';
+import Config from '../../config';
+
+const { bdnUrl } = Config.network;
+
+
 /* eslint-disable camelcase */
 export default function getProfileView(type, eth_address) {
   return function dispatcher(dispatch) {
     dispatch({
       type: 'PROFILE_GET_REQUEST',
     });
-    const url = `http://localhost:8000/api/v1/profile/method/get_${type}/?eth_address=${eth_address}`;
+    const url = `${bdnUrl}api/v1/profile/method/get_${type}/?eth_address=${eth_address}`;
     const headers = new Headers({
       'Auth-Signature': store.getState().auth.signedAddress,
       'Auth-Eth-Address': store.getState().auth.address.slice(2),
     });
     let certificates_count = null;
     if (type === 'learner') {
-      fetch(`http://localhost:8000/api/v1/certificates/method/get_certificates_count/?eth_address=${eth_address}`, { headers })
+      fetch(`${bdnUrl}api/v1/certificates/method/get_certificates_count/?eth_address=${eth_address}`, { headers })
         .then(response => response.json().then(body => ({ response, body })))
         .then(({ response, body }) => {
           if (!response.ok) {

@@ -6,6 +6,7 @@ import TopCoursesItem from 'components/TopCoursesItem';
 import TopAcademiaItem from 'components/TopAcademiaItem';
 import CoursesCategoryFilter from 'components/CoursesCategoryFilter';
 import { fetchCourses } from './actions';
+import search from '../../util/search/search';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 
 
@@ -13,8 +14,14 @@ class CoursesPage extends React.Component {
   state = { activeIndex: 0, activeItem: 'trending' }
 
   componentDidMount() {
-    this.props.fetchCourses();
     this.props.setSecondaryNav('academia');
+    const params = new URLSearchParams(this.props.location.search);
+    const searchQuery = params.get('q');
+    if (searchQuery) {
+      this.props.search(searchQuery);
+    } else {
+      this.props.fetchCourses();
+    }
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
@@ -69,7 +76,7 @@ class CoursesPage extends React.Component {
       <Form.Field>
         <Form.Dropdown
           label="Serch"
-          placeholder="Search by keyword ..."
+          placeholder="Search courses"
           fluid
           multiple
           search
@@ -211,6 +218,9 @@ function mapDispatchToProps(dispatch) {
     },
     setSecondaryNav(secondaryNav) {
       dispatch(setSecondaryNav(secondaryNav));
+    },
+    search(query) {
+      dispatch(search(query));
     },
   };
 }

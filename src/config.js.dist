@@ -1,6 +1,7 @@
 const Config = {
   network: {
     nodeUrl: 'https://mainnet.infura.io/',
+    bdnUrl: 'http://localhost:8000/',
   },
   token: {
     contractAddress: '0x2A22e5cCA00a3D63308fa39f29202eB1b39eEf52',

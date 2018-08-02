@@ -1,10 +1,8 @@
 import { Buffer } from 'buffer';
 import axios from 'axios';
 import store from '../../store';
-// import web3 from '../../util/web3/getWeb3';
-// import ipfs from '../../util/ipfs/getIpfs';
-// import storeHash from '../../util/ipfs/storeHash';
-const contract = require('truffle-contract');
+import Config from '../../config';
+// const contract = require('truffle-contract');
 
 
 export function storeProofOfExistance(state) {
@@ -71,8 +69,13 @@ export function addCertificate(certificateData) {
       duration: certificateData.duration ? certificateData.duration * 3600 : null,
       expiration_date: certificateData.expiration_date ? certificateData.expiration_date : null,
     };
+<<<<<<< b9a560171b6c5a9128687b95c53fe15a0b69d4c6
 
     axios.post('http://localhost:8000/api/v1/certificates/', postData, axiosConfig).then(() => {
+=======
+    const { bdnUrl } = Config.network;
+    axios.post(`${bdnUrl}api/v1/certificates/`, postData, axiosConfig).then(() => {
+>>>>>>> Move BDN URL to a separate config file
       dispatch({
         type: 'ADD_CERTIFICATE_SUCCESS',
       });

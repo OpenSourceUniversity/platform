@@ -4,12 +4,14 @@ import { Button, Header, Divider, Label, Segment, Grid, Menu, Icon, Container, B
 import SkillItem from 'components/SkillItem';
 import { fetchJob, deleteJobPosition } from './actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
+import Config from '../../config';
 
 class JobPage extends React.Component {
   state = { modalOpen: false }
 
   componentDidMount() {
-    this.props.fetchJob(`http://localhost:8000/api/v1/jobs/${this.props.match.params.id}/`);
+    const { bdnUrl } = Config.network;
+    this.props.fetchJob(`${bdnUrl}api/v1/jobs/${this.props.match.params.id}/`);
     this.props.setSecondaryNav('business');
   }
 

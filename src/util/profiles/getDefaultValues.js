@@ -1,7 +1,9 @@
 import store from '../../store';
+import Config from '../../config';
 import validateAccounts from './validateAccounts';
 
-const START_URL = 'http://localhost:8000/api/v1/profile/';
+const { bdnUrl } = Config.network;
+const START_URL = `${bdnUrl}api/v1/profile/`;
 
 export default function getDefaultValues(url = START_URL) {
   return function dispatcher(dispatch) {

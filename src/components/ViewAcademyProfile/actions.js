@@ -1,4 +1,5 @@
 import store from '../../store';
+import Config from '../../config';
 
 
 /* eslint-disable camelcase */
@@ -14,7 +15,8 @@ export function fetchDepartmentCourses(eth_address) {
       'Auth-Signature': store.getState().auth.signedAddress,
       'Auth-Eth-Address': store.getState().auth.address.slice(2),
     });
-    const url = `http://localhost:8000/api/v1/courses/get_by_provider/?eth_address=${eth_address}`;
+    const { bdnUrl } = Config.network;
+    const url = `${bdnUrl}api/v1/courses/get_by_provider/?eth_address=${eth_address}`;
     return fetch(url, { headers })
       .then(response => response.json().then(body => ({ response, body })))
       .then(({ response, body }) => {

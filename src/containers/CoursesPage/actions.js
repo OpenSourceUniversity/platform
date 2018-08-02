@@ -1,7 +1,9 @@
 import store from '../../store';
+import Config from '../../config';
 
 
-const START_URL = 'http://localhost:8000/api/v1/courses/?offset=0&limit=40';
+const { bdnUrl } = Config.network;
+const START_URL = `${bdnUrl}api/v1/courses/?offset=0&limit=40`;
 
 
 export function fetchCourses(url = START_URL) {

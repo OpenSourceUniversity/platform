@@ -1,7 +1,8 @@
 import store from '../../store';
 
+const START_URL = 'http://localhost:8000/api/v1/certificates/';
 
-export function fetchCertificates() {
+export function fetchCertificates(url=START_URL) {
   return function dispatcher(dispatch) {
     dispatch({
       type: 'FETCH_CERTIFICATES_REQUEST',
@@ -10,7 +11,7 @@ export function fetchCertificates() {
       'Auth-Signature': store.getState().auth.signedAddress,
       'Auth-Eth-Address': store.getState().auth.address.slice(2),
     });
-    return fetch('http://localhost:8000/api/v1/certificates/', { headers })
+    return fetch(url, { headers })
       .then(response => response.json().then(body => ({ response, body })))
       .then(({ response, body }) => {
         if (!response.ok) {

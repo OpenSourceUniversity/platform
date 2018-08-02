@@ -79,6 +79,11 @@ class BusinessProfile extends React.Component {
               </Header>
               <Divider clearing />
               {this.props.profiles.company_about ? this.props.profiles.company_about : '-'}
+            </Segment>
+            <Segment size="large">
+              <Header>
+                Job positions
+              </Header>
               <Divider clearing />
               {this.renderJobs()}
             </Segment>

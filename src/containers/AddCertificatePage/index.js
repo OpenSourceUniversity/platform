@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Header, Segment, Button, Message, Divider, Breadcrumb, Form, Input, Dimmer, Loader } from 'semantic-ui-react';
-import { addCertificate } from './actions';
+import { addCertificate, storeProofOfExistance } from './actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
+import getIpfs from '../../util/ipfs/getIpfs';
 import Industries from '../../data/industryList';
 import Skills from '../../data/skillsList';
-import getWeb3 from '../../util/web3/getWeb3';
 
 
 class AddCertificatePage extends React.Component {
@@ -35,9 +35,8 @@ class AddCertificatePage extends React.Component {
       expiration_date: event.target.elements.expiration_date.value,
     };
     component.props.addCertificate(certificateData);
-    // Store the certificate in IPFS
-    const accounts = getWeb3.eth.getAccounts();
-    console.log('Sending from Metamask account: ' + accounts[0]);
+    // component.props.getIpfs();
+    // component.props.storeProofOfExistance(this.state.buffer);
   }
 
   captureFile =(event) => {
@@ -53,7 +52,6 @@ class AddCertificatePage extends React.Component {
       //file is converted to a buffer to prepare for uploading to IPFS
       const buffer = Buffer.from(reader.result);
       this.setState({buffer});
-      console.log(buffer);
   };
 
   render() {
@@ -274,11 +272,8 @@ function mapDispatchToProps(dispatch) {
     setSecondaryNav(secondaryNav) {
       dispatch(setSecondaryNav(secondaryNav));
     },
-    getWeb3() {
-      dispatch(getWeb3());
-    },
-    getIpfs() {
-      dispatch(getIpfs());
+    storeProofOfExistance(state) {
+      dispatch(storeProofOfExistance(state));
     },
   };
 }

@@ -26,7 +26,7 @@ export function getDefaultValues(id) {
       'Auth-Eth-Address': store.getState().auth.address.slice(2),
     });
     const { bdnUrl } = Config.network;
-    const url = `${bdnUrl}api/v1/courses/methods/get_by_id/?id=${id}`;
+    const url = `${bdnUrl}api/v1/courses/${id}/get_by_id/`;
 
     return fetch(url, { headers })
       .then(response => response.json().then(body => ({ response, body })))
@@ -98,7 +98,6 @@ export function editCourse(id, courseData) {
       },
     };
     const postData = {
-      id,
       title: courseData.title ? courseData.title : null,
       tutor: courseData.tutor ? courseData.tutor : null,
       skills: courseData.skills ? courseData.skills : null,
@@ -107,7 +106,7 @@ export function editCourse(id, courseData) {
       categories: courseData.categories ? courseData.categories : null,
     };
     const { bdnUrl } = Config.network;
-    const url = `${bdnUrl}api/v1/courses/methods/edit_by_id/`;
+    const url = `${bdnUrl}api/v1/courses/${id}/edit_by_id/`;
     axios.post(url, postData, axiosConfig).then(() => {
       dispatch({
         type: 'ADD_COURSE_SUCCESS',

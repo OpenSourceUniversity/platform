@@ -54,7 +54,7 @@ export function deleteJobPosition(id) {
     const postData = {
       id,
     };
-    const url = `${bdnUrl}api/v1/jobs/methods/delete_by_id/`;
+    const url = `${bdnUrl}api/v1/jobs/${id}/delete_by_id/`;
     axios.post(url, postData, axiosConfig).then(() => {
       dispatch({
         type: 'FETCH_JOB_SUCCESS',

@@ -31,7 +31,7 @@ class CourseItemWithoutRouter extends React.Component {
           <Card.Header style={{ color: 'black', marginBottom: '20px' }} icon="ellipsis vertical">{this.props.course.title}</Card.Header>
           <span className="course-desc" >
             <Icon name="signal" style={{ color: '#c1c1c1' }} className="course-desc" />
-            {this.props.course.categories[0].name}
+            {this.props.course.categories[0] ? this.props.course.categories[0].name : null}
           </span>
         </Card.Content>
         {this.props.isNotList ?

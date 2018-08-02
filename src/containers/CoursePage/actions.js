@@ -54,7 +54,7 @@ export function deleteCourse(id) {
     const postData = {
       id,
     };
-    const url = `${bdnUrl}api/v1/courses/methods/delete_by_id/`;
+    const url = `${bdnUrl}api/v1/courses/${id}/delete_by_id/`;
     axios.post(url, postData, axiosConfig).then(() => {
       dispatch({
         type: 'FETCH_COURSE_SUCCESS',

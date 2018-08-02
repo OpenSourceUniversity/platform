@@ -180,7 +180,7 @@ class CoursePage extends React.Component {
                   </Header>
                   <Icon name="industry" />
                   <span style={{ color: 'grey' }} >
-                    {this.props.course.categories[0].name}
+                    {this.props.course.categories[0] ? this.props.course.categories[0].name : null}
                   </span>
                   <Divider clearing />
                   <Header style={{ fontSize: '1.5em', marginBottom: '5px' }}>

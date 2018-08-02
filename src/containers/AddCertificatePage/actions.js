@@ -172,7 +172,7 @@ export function rejectCertificate(id) {
     const postData = {
       id: id,
     };
-    axios.post('http://localhost:8000/api/v1/certificates/delete_by_id/', postData, axiosConfig).then(() => {
+    axios.post(`http://localhost:8000/api/v1/certificates/${id}/delete_by_id/`, postData, axiosConfig).then(() => {
       dispatch({
         type: 'ADD_CERTIFICATE_SUCCESS',
       });

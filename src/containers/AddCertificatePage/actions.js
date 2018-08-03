@@ -6,18 +6,17 @@ import Config from '../../config';
 // const contract = require('truffle-contract');
 
 
-export function storeProofOfExistance(buffer) {
+export function storeProofOfExistance(buffer, certificateData) {
   return function dispatcher(dispatch) {
     const web3 = store.getState().web3.web3Instance;
     const ipfs = store.getState().ipfs.IPFSinstance;
     dispatch({
       type: 'IPFS_GET_REQUEST',
     });
-
-    console.log(ipfs);
-
+    dispatch({
+      type: 'ADD_CERTIFICATE_REQUEST',
+    });
     ipfs.add(buffer, (err, ipfsHash) => {
-      console.log(err,ipfsHash);
       //setState by setting ipfsHash to ipfsHash[0].hash
       dispatch({
         type: 'IPFS_GET_SUCCESS',
@@ -25,7 +24,7 @@ export function storeProofOfExistance(buffer) {
           ipfsHash: ipfsHash[0].hash,
         },
       });
-      console.log(ipfsHash[0].hash)
+      dispatch(addCertificate(certificateData, ipfsHash[0].hash));
     });
 
   };
@@ -34,11 +33,12 @@ export function storeProofOfExistance(buffer) {
 const START_URL = 'http://localhost:8000/api/v1/certificates/'
 
 
-export function addCertificate(certificateData, url=START_URL) {
+export function addCertificate(certificateData, ipfsHash, url=START_URL) {
   return function action(dispatch) {
     dispatch({
       type: 'ADD_CERTIFICATE_REQUEST',
     });
+    console.log(ipfsHash);
     const axiosConfig = {
       headers: {
         'Auth-Signature': store.getState().auth.signedAddress,
@@ -56,6 +56,7 @@ export function addCertificate(certificateData, url=START_URL) {
       course_link: certificateData.course_link ? certificateData.course_link : null,
       subject: certificateData.subject ? certificateData.subject : null,
       skills: certificateData.skills ? certificateData.skills : null,
+      ipfs_hash: ipfsHash,
       learner_eth_address: certificateData.learner_eth_address ?
         certificateData.learner_eth_address : null,
       score: certificateData.score ? certificateData.score : 0,
@@ -174,17 +175,3 @@ export function rejectCertificate(id) {
     });
   };
 }
-
-
-// await ipfs.add(this.state.buffer, (err, ipfsHash) => {
-//         console.log(err,ipfsHash);
-//         //setState by setting ipfsHash to ipfsHash[0].hash
-//         this.setState({ ipfsHash:ipfsHash[0].hash });
-//
-//         storehash.methods.sendHash(this.state.ipfsHash).send({
-//           from: accounts[0]
-//         }, (error, transactionHash) => {
-//           console.log(transactionHash);
-//           this.setState({transactionHash});
-//         });
-//       })

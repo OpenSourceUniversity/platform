@@ -37,8 +37,7 @@ class AddCertificatePage extends React.Component {
       duration: event.target.elements.duration.value,
       expiration_date: event.target.elements.expiration_date.value,
     };
-    //component.props.addCertificate(certificateData);
-    component.props.storeProofOfExistance(component.state.buffer);
+    component.props.storeProofOfExistance(component.state.buffer, certificateData);
   }
 
   captureFile =(event) => {
@@ -172,6 +171,7 @@ class AddCertificatePage extends React.Component {
               fluid
               search
               multiple
+              required
               options={Industries.Industries}
             />
             <Form.Dropdown
@@ -182,6 +182,7 @@ class AddCertificatePage extends React.Component {
               fluid
               search
               multiple
+              required
               options={Skills.Skills}
             />
             <Form.Field required>
@@ -235,7 +236,7 @@ class AddCertificatePage extends React.Component {
                 />
               </label>
             </Form.Field>
-            <Form.Field>
+            <Form.Field required>
               <label htmlFor="certificate_file">
                 Certificate file in PDF
                 <Input
@@ -275,8 +276,8 @@ function mapDispatchToProps(dispatch) {
     setSecondaryNav(secondaryNav) {
       dispatch(setSecondaryNav(secondaryNav));
     },
-    storeProofOfExistance(buffer) {
-      dispatch(storeProofOfExistance(buffer));
+    storeProofOfExistance(buffer, certificateData) {
+      dispatch(storeProofOfExistance(buffer, certificateData));
     },
     getIpfs() {
       dispatch(getIpfs());

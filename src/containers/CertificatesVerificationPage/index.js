@@ -122,7 +122,7 @@ class CertificatesVerificationPage extends React.Component {
     if(component.state.verification) {
       component.props.verifyCertificate(certificateData, 'http://localhost:8000/api/v1/certificates/update_certificate_by_id/');
     } else {
-      component.props.addCertificate(certificateData, 'http://localhost:8000/api/v1/certificates/update_certificate_by_id/');
+      component.props.addCertificate(certificateData, null, 'http://localhost:8000/api/v1/certificates/update_certificate_by_id/');
     }
     component.setState({verification: false})
     component.setState({ activeItem: null });
@@ -447,8 +447,8 @@ function mapDispatchToProps(dispatch) {
     fetchCertificate(url) {
       dispatch(fetchCertificate(url));
     },
-    addCertificate(data, url) {
-      dispatch(addCertificate(data, url));
+    addCertificate(data, IPFShash, url) {
+      dispatch(addCertificate(data, IPFShash, url));
     },
     verifyCertificate(data, url) {
       dispatch(verifyCertificate(data, url));

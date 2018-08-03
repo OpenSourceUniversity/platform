@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Header, Divider, Grid, Sticky, Segment, List, Button, Statistic, Dimmer, Loader, Message, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import SkillItem from 'components/SkillItem';
 import CertificateItem from 'components/CertificateItem';
 import { fetchCertificates } from '../../containers/CertificatesPage/actions';
 
@@ -23,6 +24,45 @@ class LearnerProfile extends React.Component {
       >
         <CertificateItem certificate={certificate} key={index} />
       </Grid.Column>
+    ));
+  }
+  // .push({
+  //         have_icon: true, check: certificates[i].verified, name: certificates[i].skills[j], basic: true,
+  //       });
+
+   renderSkills() {
+    const certificates = this.props.certificates;
+    certificates.sort(function(a, b){return b.verified})
+    let verifiedSkills = [];
+    let notVerifiedSkills = [];
+    const skills = [];
+    for (var i = 0; i < certificates.length; i +=1 ) {
+      if(certificates[i].verified) {
+        verifiedSkills = verifiedSkills.concat(certificates[i].skills)
+      } else {
+        notVerifiedSkills = notVerifiedSkills.concat(certificates[i].skills)
+      }
+    }
+    verifiedSkills = verifiedSkills.filter(function(item, pos) {
+        return verifiedSkills.indexOf(item) === pos;
+    })
+    notVerifiedSkills = notVerifiedSkills.filter(function(item, pos) {
+        return notVerifiedSkills.indexOf(item) === pos;
+    })
+    notVerifiedSkills = notVerifiedSkills.filter(
+     ( el ) => !verifiedSkills.includes( el ) );
+    for(var i = 0; i < verifiedSkills.length; i += 1) {
+      skills.push({
+           have_icon: true, check: true, name: verifiedSkills[i], basic: true,
+         });
+    }
+    for(var i = 0; i < notVerifiedSkills.length; i += 1) {
+      skills.push({
+           have_icon: true, check: false, name: notVerifiedSkills[i], basic: true,
+         });
+    }
+    return skills.map((skill, index) => (
+      <SkillItem skill={skill} key={index} />
     ));
   }
 
@@ -125,12 +165,7 @@ class LearnerProfile extends React.Component {
                 <Header>
                   Education
                 </Header>
-                <Segment style={{
-                  textAlign: 'center', background: '#7f8fa6', color: '#fff', borderRadius: '10px', opacity: 0.7,
-                }}
-                >
-                    Coming in Beta
-                </Segment>
+                {this.renderSkills()}
                 <Divider clearing />
               </Segment>
             </Segment.Group>

@@ -508,3 +508,20 @@ div#Main {
   display: inline-block;
   margin-left: 0.3em;
 }
+.ui.loader {
+  padding-top: 0;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #565656;
+}
+.ui.loader::after,
+.ui.loader::before {
+  display: none;
+}
+.form .ui.dropdown {
+  border: 1px solid rgba(34,36,38,.15);
+  border-radius: .28571429rem;
+}
+.ui.field label {
+  margin-bottom: 8px;
+}

@@ -525,3 +525,14 @@ div#Main {
 .ui.field label {
   margin-bottom: 8px;
 }
+.form .ui.dropdown >.dropdown.icon {
+  top: 12px;
+  right: -25px;
+}
+.form .ui.multiple.dropdown .menu,
+.ui.vertical.accordion.menu {
+  width: 100%;
+}
+input[type="file"] {
+  cursor: pointer;
+}

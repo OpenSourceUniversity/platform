@@ -93,7 +93,7 @@ class AddCertificatePage extends React.Component {
             </Loader>
           </Dimmer>
 
-          <Form size="huge" onSubmit={(event) => { this.handleSubmit(event, this); }}>
+          <Form size="large" onSubmit={(event) => { this.handleSubmit(event, this); }}>
             <Grid divided='vertically'>
               <Grid.Row columns={1}>
                 <Grid.Column>
@@ -104,12 +104,11 @@ class AddCertificatePage extends React.Component {
                     <Input
                       id="certificate_file"
                       iconPosition="left"
-                      icon="address card"
+                      icon="upload"
                       type="file"
                       name="certificate_file"
                       placeholder="Certificate File"
                       onChange={this.captureFile}
-                      size='huge'
                     />
                   </Form.Field>
                 </Grid.Column>
@@ -124,7 +123,7 @@ class AddCertificatePage extends React.Component {
                       id="course_title"
                       name="course_title"
                       iconPosition="left"
-                      icon="address card"
+                      icon="file alternate"
                       placeholder="Oficial course title"
                     />
                   </Form.Field>
@@ -157,7 +156,7 @@ class AddCertificatePage extends React.Component {
                       name="course_link"
                       type="url"
                       iconPosition="left"
-                      icon="address card"
+                      icon="chain"
                       placeholder="Link to your course"
                     />
                   </Form.Field>
@@ -170,7 +169,7 @@ class AddCertificatePage extends React.Component {
                       name="duration"
                       type="number"
                       iconPosition="left"
-                      icon="address card"
+                      icon="time"
                       placeholder="Course duration"
                     />
                   </Form.Field>
@@ -182,7 +181,7 @@ class AddCertificatePage extends React.Component {
                       id="expiration_date"
                       name="expiration_date"
                       iconPosition="left"
-                      icon="address card"
+                      icon="calendar check"
                       type="date"
                       placeholder="Certificate expiration date"
                     />
@@ -197,7 +196,7 @@ class AddCertificatePage extends React.Component {
                       id="learner_eth_address"
                       name="learner_eth_address"
                       iconPosition="left"
-                      icon="address card"
+                      icon="globe"
                       placeholder="ETH address of learner"
                     />
                   </Form.Field>
@@ -209,9 +208,12 @@ class AddCertificatePage extends React.Component {
                       id="score"
                       name="score"
                       type="number"
+                      min="0" 
+                      max="100"
+                      step="1"
                       iconPosition="left"
-                      icon="address card"
-                      placeholder="Your score"
+                      icon="graduation cap"
+                      placeholder="Your score (from 0 to 100)"
                     />
                   </Form.Field>
                   <Form.Field required>
@@ -222,7 +224,7 @@ class AddCertificatePage extends React.Component {
                       id="academy_title"
                       name="academy_title"
                       iconPosition="left"
-                      icon="certificate"
+                      icon="university"
                       placeholder="Oficial name of your academy"
                     />
                   </Form.Field>
@@ -234,7 +236,7 @@ class AddCertificatePage extends React.Component {
                       id="academy_address"
                       name="academy_address"
                       iconPosition="left"
-                      icon="address card"
+                      icon="globe"
                       placeholder="ETH address of your academy"
                     />
                   </Form.Field>
@@ -242,12 +244,12 @@ class AddCertificatePage extends React.Component {
                     <label htmlFor="academy_link">
                       Academy site
                     </label>
-                    <Input
+                    <Input 
                       id="academy_link"
                       name="academy_link"
-                      type="url"
                       iconPosition="left"
-                      icon="address card"
+                      icon="chain"
+                      type="url"
                       placeholder="Site of academy"
                     />
                   </Form.Field>
@@ -259,7 +261,7 @@ class AddCertificatePage extends React.Component {
                       id="program_title"
                       name="program_title"
                       iconPosition="left"
-                      icon="address card"
+                      icon="list"
                       placeholder="Name of program"
                     />
                   </Form.Field>

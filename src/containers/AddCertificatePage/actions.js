@@ -1,43 +1,32 @@
 import { Buffer } from 'buffer';
 import axios from 'axios';
-import {fetchCertificates} from '../CertificatesPage/actions';
+import { fetchCertificates } from '../CertificatesPage/actions';
 import store from '../../store';
 import Config from '../../config';
 // const contract = require('truffle-contract');
 
 
-export function storeProofOfExistance(state) {
-  return function action(dispatch) {
+export function storeProofOfExistance(buffer) {
+  return function dispatcher(dispatch) {
     const web3 = store.getState().web3.web3Instance;
-    const ipfs = store.getState().ipfs.IPFSinitialized;
+    const ipfs = store.getState().ipfs.IPFSinstance;
     dispatch({
       type: 'IPFS_GET_REQUEST',
-      payload:{
-        IPFSinstance: ipfs,
-      },
     });
-    // setTimeout(() => {
-    //   dispatch({
-    //     type: 'IPFS_GET_REQUEST',
-    //   });
-    // }, 1500);
 
     console.log(ipfs);
 
-    // ipfs.add(this.state.buffer, (err, ipfsHash) => {
-    //         // console.log(err,ipfsHash);
-    //         //setState by setting ipfsHash to ipfsHash[0].hash
-    //
-    //         // this.setState({ ipfsHash:ipfsHash[0].hash });
-    //
-    //         // storeHash.methods.sendHash(this.state.ipfsHash).send({
-    //         //   from: accounts[0]
-    //         // }, (error, transactionHash) => {
-    //         //   console.log(transactionHash);
-    //         //   this.setState({transactionHash});
-    //         // });
-    //         console.log(ipfsHash);
-    //       });
+    ipfs.add(buffer, (err, ipfsHash) => {
+      console.log(err,ipfsHash);
+      //setState by setting ipfsHash to ipfsHash[0].hash
+      dispatch({
+        type: 'IPFS_GET_SUCCESS',
+        payload: {
+          ipfsHash: ipfsHash[0].hash,
+        },
+      });
+      console.log(ipfsHash[0].hash)
+    });
 
   };
 }

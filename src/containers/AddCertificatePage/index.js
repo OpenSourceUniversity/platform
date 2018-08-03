@@ -3,12 +3,15 @@ import { connect } from 'react-redux';
 import { Container, Header, Segment, Button, Message, Divider, Breadcrumb, Form, Input, Dimmer, Loader } from 'semantic-ui-react';
 import { addCertificate, storeProofOfExistance } from './actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
-import getIpfs from '../../util/ipfs/getIpfs';
+import { getIpfs } from '../../util/ipfs/getIpfs';
 import Industries from '../../data/industryList';
 import Skills from '../../data/skillsList';
 
 
 class AddCertificatePage extends React.Component {
+  componentDidMount() {
+    this.props.getIpfs();
+  }
   handleSubmit(event, component) {
     event.preventDefault();
     const subjects = [];
@@ -34,9 +37,8 @@ class AddCertificatePage extends React.Component {
       duration: event.target.elements.duration.value,
       expiration_date: event.target.elements.expiration_date.value,
     };
-    component.props.addCertificate(certificateData);
-    // component.props.getIpfs();
-    // component.props.storeProofOfExistance(this.state.buffer);
+    //component.props.addCertificate(certificateData);
+    component.props.storeProofOfExistance(component.state.buffer);
   }
 
   captureFile =(event) => {
@@ -273,8 +275,11 @@ function mapDispatchToProps(dispatch) {
     setSecondaryNav(secondaryNav) {
       dispatch(setSecondaryNav(secondaryNav));
     },
-    storeProofOfExistance(state) {
-      dispatch(storeProofOfExistance(state));
+    storeProofOfExistance(buffer) {
+      dispatch(storeProofOfExistance(buffer));
+    },
+    getIpfs() {
+      dispatch(getIpfs());
     },
   };
 }

@@ -5,7 +5,7 @@ import Config from '../../config';
 export const IPFS_INITIALIZED = 'IPFS_INITIALIZED';
 
 export function getIpfs() {
-  return function dispatcher(dispatch) {
+  return function action(dispatch) {
     getIpfsPromise
     .then(
       result => {

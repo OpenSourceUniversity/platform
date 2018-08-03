@@ -11,26 +11,32 @@ class WalletUnlocker extends React.Component {
 
   render() {
     return (
-      <Modal open={this.props.open} onClose={() => this.handleClose()} basic size="small">
-        <Header icon="unlock" content={this.props.btnName} inverted />
+      <Modal open={this.props.open} onClose={() => this.handleClose()} size="small">
+        <Modal.Header>
+          <Icon name="unlock" />
+          Enter passphrase to unlock your wallet
+        </Modal.Header>
         <Modal.Content>
-          <Message error hidden={!this.props.error}>
+          <Message error hidden={!this.props.error} fluid>
             {this.props.error}
           </Message>
-          <Input label="Passphrase" placeholder="enter your passphrase..." type="password" id="passphrase" />
+          <Input fluid label="Passphrase" placeholder="enter your passphrase..." type="password" id="passphrase" />
         </Modal.Content>
         <br />
         <Modal.Actions>
+          <Button 
+            labelPosition="left"
+            icon="cancel"
+            onClick={() => this.handleClose()}
+            content="Cancel"
+          />
           <Button
-            color="green"
+            positive
+            labelPosition="left"
+            icon="checkmark"
             onClick={() => this.props.unlockWallet(document.getElementById('passphrase').value)}
-            inverted
-          >
-            <Icon name="checkmark" /> Yes
-          </Button>
-          <Button basic color="red" onClick={() => this.handleClose()} inverted>
-            <Icon name="cancel" /> No
-          </Button>
+            content="Confirm unlock"
+          />
         </Modal.Actions>
       </Modal>
 

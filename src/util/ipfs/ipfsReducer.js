@@ -11,7 +11,7 @@ const ipfsReducer = (state = initialState, action) => {
   switch (action.type) {
   case 'IPFS_INITIALIZED':
     return Object.assign({}, state, {
-      IPFSinstance: action.payload.IPFSinstance,
+      IPFSinstance: action.payload.result,
       ipfsHash: null,
       isUploading: false,
       isUploaded: false,

@@ -56,27 +56,25 @@ class JobsPage extends React.Component {
         </Header>
         <Grid>
           <Grid.Column width={3}>
-            <Segment>
-              <Accordion as={Menu} vertical>
-                <Header style={{ textAlign: 'center', paddingTop: '10px' }}>
-                  Idustries
-                </Header>
-                <Menu.Item>
-                  <Accordion.Title
-                    active={activeIndex === 0}
-                    index={0}
-                    onClick={this.handleClick}
-                  >
-                    <Icon name="block layout" />
-                    Industry
-                  </Accordion.Title>
-                  <Accordion.Content
-                    active={activeIndex === 0}
-                    content={<CoursesCategoryFilter filterType="jobs" />}
-                  />
-                </Menu.Item>
-              </Accordion>
-            </Segment>
+            <Accordion as={Menu} vertical>
+              <Header style={{ textAlign: 'center', paddingTop: '10px' }}>
+                Idustries
+              </Header>
+              <Menu.Item>
+                <Accordion.Title
+                  active={activeIndex === 0}
+                  index={0}
+                  onClick={this.handleClick}
+                >
+                  <Icon name="block layout" />
+                  Industry
+                </Accordion.Title>
+                <Accordion.Content
+                  active={activeIndex === 0}
+                  content={<CoursesCategoryFilter filterType="jobs" />}
+                />
+              </Menu.Item>
+            </Accordion>
           </Grid.Column>
 
           <Grid.Column width={10}>

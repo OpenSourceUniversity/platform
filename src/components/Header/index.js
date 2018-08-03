@@ -105,9 +105,9 @@ class HeaderWithoutRouter extends React.Component {
           src={(() => {
             if (this.props.isLoggedIn) {
               switch (this.props.activeAccount) {
-              case 'Business': return this.props.profiles.company_logo ? this.props.profiles.company_logo : avatarPlaceholder;
-              case 'Academy': return this.props.profiles.academy_logo ? this.props.profiles.academy_logo : avatarPlaceholder;
-              case 'Learner': return this.props.profiles.lerner_avatar ? this.props.profiles.lerner_avatar : avatarPlaceholder;
+              case 'Business': return this.props.profiles.company_logo ? `https://ipfs.io/ipfs/${this.props.profiles.company_logo}` : avatarPlaceholder;
+              case 'Academy': return this.props.profiles.academy_logo ? `https://ipfs.io/ipfs/${this.props.profiles.academy_logo}` : avatarPlaceholder;
+              case 'Learner': return this.props.profiles.learner_avatar ? `https://ipfs.io/ipfs/${this.props.profiles.learner_avatar}` : avatarPlaceholder;
               default: return null;
               }
             }
@@ -125,7 +125,7 @@ class HeaderWithoutRouter extends React.Component {
 
     const exploreTrigger = (
       <span className="explore-icon">
-        <Icon name="compass outline" />Explore
+        <Icon name="compass" />Explore
       </span>
     );
 

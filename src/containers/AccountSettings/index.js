@@ -7,10 +7,12 @@ import AcademySettings from 'components/AcademySettings';
 import BusinessSettings from 'components/BusinessSettings';
 import setActiveAccount from '../../util/activeAccount/setActiveAccount';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
+import { getIpfs } from '../../util/ipfs/getIpfs';
 
 class AccountSettings extends React.Component {
   componentDidMount() {
     this.props.setSecondaryNav('account');
+    this.props.getIpfs();
   }
 
   render() {
@@ -92,6 +94,9 @@ function mapDispatchToProps(dispatch) {
     },
     setSecondaryNav(secondaryNav) {
       dispatch(setSecondaryNav(secondaryNav));
+    },
+    getIpfs() {
+      dispatch(getIpfs());
     },
   };
 }

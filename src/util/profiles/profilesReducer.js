@@ -79,9 +79,14 @@ export default function profilesReducer(state = INITIAL_STATE, action) {
       isSaved: false,
       error: action.error.message,
     });
+  case 'SETTINGS_SAVE_REQUEST':
+    return Object.assign({}, state, {
+      isFetching: true,
+    });
   case 'SETTINGS_SAVE_SUCCESS':
     return Object.assign({}, state, {
       isSaved: true,
+      isFetching: false,
       error: null,
     });
   case 'RESET_STATES':

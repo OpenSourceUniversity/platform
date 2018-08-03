@@ -37,7 +37,11 @@ class AddCertificatePage extends React.Component {
       duration: event.target.elements.duration.value,
       expiration_date: event.target.elements.expiration_date.value,
     };
-    component.props.storeProofOfExistance(component.state.buffer, certificateData);
+    if(component.state.buffer) {
+      component.props.storeProofOfExistance(component.state.buffer, certificateData);
+    } else {
+      component.setState({fileIsMissing: true})
+    }
   }
 
   captureFile =(event) => {
@@ -53,6 +57,7 @@ class AddCertificatePage extends React.Component {
     // file is converted to a buffer to prepare for uploading to IPFS
     const buffer = Buffer.from(reader.result);
     this.setState({ buffer });
+    this.setState({fileIsMissing: false})
   };
 
   render() {
@@ -103,6 +108,7 @@ class AddCertificatePage extends React.Component {
                       iconPosition="left"
                       icon="upload"
                       type="file"
+                      error={this.state.fileIsMissing}
                       name="certificate_file"
                       placeholder="Certificate File"
                       onChange={this.captureFile}

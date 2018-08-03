@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, Header, Divider, Input, Message, Checkbox } from 'semantic-ui-react';
+import { Form, Button, Header, Divider, Input, Message, Checkbox, Dimmer, Loader } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import Countries from '../../data/countriesList';
 import saveSettings from '../../util/profiles/saveSettings';
@@ -30,14 +30,38 @@ class LearnerSettings extends React.Component {
       phone_number: event.target.elements.phone_number.value,
       learner_site: event.target.elements.learner_site.value,
       learner_country: event.target.elements[9].parentElement.children[1].textContent === 'Select Country' ? null : event.target.elements[9].parentElement.children[1].textContent,
-      learner_avatar: event.target.elements.learner_avatar.value,
     };
-    component.props.saveSettings(profileData, 'learner');
+    component.props.saveSettings(profileData, 'learner', component.state.buffer);
   }
 
+  captureFile =(event) => {
+    event.stopPropagation();
+    event.preventDefault();
+    const file = event.target.files[0];
+    const reader = new window.FileReader();
+    reader.readAsArrayBuffer(file);
+    reader.onloadend = () => this.convertToBuffer(reader);
+  }
+
+  convertToBuffer = (reader) => {
+    // file is converted to a buffer to prepare for uploading to IPFS
+    const buffer = Buffer.from(reader.result);
+    this.setState({ buffer });
+    this.setState({fileIsMissing: false})
+  };
+
   render() {
+    const loader = require('../../icons/osu-loader.svg');
     return (
       <div>
+        <Dimmer active={this.props.isFetching} inverted>
+          <Loader size="medium">
+            <svg width="96" height="96" style={{display:'block', margin:'0 auto 10px auto'}}>
+              <image href={loader} x="0" y="0" width="100%" height="100%" />
+            </svg>
+            Saving information...
+          </Loader>
+        </Dimmer>
         {!this.props.learnerIsCreated ? (
           <Message
             warning
@@ -172,7 +196,7 @@ class LearnerSettings extends React.Component {
               placeholder="My avatar"
               className="input-file"
               color="orange"
-              defaultValue={this.props.profiles.learner_avatar ? this.props.profiles.learner_avatar : ''}
+              onChange={this.captureFile}
             />
           </Form.Field>
           <Divider hidden />
@@ -187,6 +211,7 @@ function mapStateToProps(state) {
   return {
     profiles: state.profiles.profiles,
     isSaved: state.profiles.isSaved,
+    isFetching: state.profiles.isFetching,
     error: state.profiles.error,
     learnerIsCreated: state.profiles.learnerIsCreated,
   };
@@ -195,8 +220,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    saveSettings(profileData, account) {
-      dispatch(saveSettings(profileData, account));
+    saveSettings(profileData, account, buffer) {
+      dispatch(saveSettings(profileData, account, buffer));
     },
   };
 }

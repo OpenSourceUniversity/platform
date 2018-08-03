@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Input, Form, Button, Header, Divider, Message } from 'semantic-ui-react';
+import { Input, Form, Button, Header, Divider, Message, Dimmer, Loader } from 'semantic-ui-react';
 import Countries from '../../data/countriesList';
 import saveSettings from '../../util/profiles/saveSettings';
 
@@ -25,10 +25,25 @@ class AcademySettings extends React.Component {
       academy_email: event.target.elements.academy_email.value,
       academy_country: event.target.elements[3].parentElement.children[1].textContent === 'Select Country' ? null : event.target.elements[3].parentElement.children[1].textContent,
       academy_about: event.target.elements.academy_about.value,
-      academy_logo: event.target.elements.academy_logo.value,
     };
-    component.props.saveSettings(profileData, 'academy');
+    component.props.saveSettings(profileData, 'academy', component.state.buffer);
   }
+
+  captureFile =(event) => {
+    event.stopPropagation();
+    event.preventDefault();
+    const file = event.target.files[0];
+    const reader = new window.FileReader();
+    reader.readAsArrayBuffer(file);
+    reader.onloadend = () => this.convertToBuffer(reader);
+  }
+
+  convertToBuffer = (reader) => {
+    // file is converted to a buffer to prepare for uploading to IPFS
+    const buffer = Buffer.from(reader.result);
+    this.setState({ buffer });
+    this.setState({fileIsMissing: false})
+  };
 
   handleDismiss = () => {
     this.setState({ visible: false });
@@ -39,8 +54,17 @@ class AcademySettings extends React.Component {
   }
 
   render() {
+    const loader = require('../../icons/osu-loader.svg');
     return (
       <div className="academia-settings">
+        <Dimmer active={this.props.isFetching} inverted>
+          <Loader size="medium">
+            <svg width="96" height="96" style={{display:'block', margin:'0 auto 10px auto'}}>
+              <image href={loader} x="0" y="0" width="100%" height="100%" />
+            </svg>
+            Saving information...
+          </Loader>
+        </Dimmer>
         {!this.props.academyIsCreated ? (
           <Message
             warning
@@ -125,7 +149,7 @@ class AcademySettings extends React.Component {
               placeholder="Academy logo"
               className="input-file"
               color="orange"
-              defaultValue={this.props.profiles.academy_logo ? this.props.profiles.academy_logo : ''}
+              onChange={this.captureFile}
             />
           </Form.Field>
           <Divider clearing />
@@ -140,6 +164,7 @@ function mapStateToProps(state) {
   return {
     profiles: state.profiles.profiles,
     isSaved: state.profiles.isSaved,
+    isFetching: state.profiles.isFetching,
     error: state.profiles.error,
     academyIsCreated: state.profiles.academyIsCreated,
   };
@@ -148,8 +173,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    saveSettings(profileData, account) {
-      dispatch(saveSettings(profileData, account));
+    saveSettings(profileData, account, buffer) {
+      dispatch(saveSettings(profileData, account, buffer));
     },
   };
 }

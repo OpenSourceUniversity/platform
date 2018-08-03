@@ -71,6 +71,7 @@ class LearnerProfile extends React.Component {
     const email = `mailto:${this.props.profiles.learner_email}`;
     const site = `${this.props.profiles.learner_site}`;
     const phoneNumber = `tel:${this.props.profiles.phone_number}`;
+    console.log(this.props.profiles)
     return (
       <div>
         <Grid>
@@ -83,7 +84,7 @@ class LearnerProfile extends React.Component {
                     circular
                     className="profilePicSegment"
                     style={{
-                      width: 175, height: 175, backgroundImage: `url(${this.props.profiles.lerner_avatar ? this.props.profiles.lerner_avatar : avatarPlaceholder})`, backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center center',
+                      width: 175, height: 175, backgroundImage: `url(${this.props.profiles.learner_avatar ? `https://ipfs.io/ipfs/${this.props.profiles.learner_avatar}` : avatarPlaceholder})`, backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center center',
                     }}
                   />
                   <Header size="large">
@@ -119,7 +120,9 @@ class LearnerProfile extends React.Component {
                 Introduction
               </Header>
               <Divider clearing />
-              {this.props.profiles.learner_about ? this.props.profiles.learner_about : '-'}
+              <div style={{ whiteSpace: 'pre-line' }}>
+                {this.props.profiles.learner_about ? this.props.profiles.learner_about : '-'}
+              </div>
               <Header>
                 Certificates
               </Header>
@@ -151,6 +154,13 @@ class LearnerProfile extends React.Component {
             <Segment.Group size="large">
               <Segment>
                 <Header>
+                  Education
+                </Header>
+                {this.renderSkills()}
+                <Divider clearing />
+              </Segment>
+              <Segment>
+                <Header>
                   Experience
                 </Header>
                 <Segment style={{
@@ -159,13 +169,6 @@ class LearnerProfile extends React.Component {
                 >
                     Coming in Beta
                 </Segment>
-                <Divider clearing />
-              </Segment>
-              <Segment>
-                <Header>
-                  Education
-                </Header>
-                {this.renderSkills()}
                 <Divider clearing />
               </Segment>
             </Segment.Group>

@@ -26,7 +26,7 @@ class App extends React.Component {
           <Main />
         </div>
         <Container className="footer" textAlign="center">
-          Coinbase: {this.props.address}
+          Account: {this.props.address}
         </Container>
 
         <WalletUnlocker />

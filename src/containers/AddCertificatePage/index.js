@@ -69,11 +69,10 @@ class AddCertificatePage extends React.Component {
         </Breadcrumb>
 
         <Divider clearing />
-        <Header size="large" floated="left">
+
+        <Header size="large">
           Add certificate
         </Header>
-
-        <Divider clearing />
 
         <Message success hidden={!this.props.isAdded}>
           <p>Certificate added successfully.</p>

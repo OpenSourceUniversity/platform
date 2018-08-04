@@ -17,7 +17,7 @@ class WalletUnlocker extends React.Component {
           Enter passphrase to unlock your wallet
         </Modal.Header>
         <Modal.Content>
-          <Message error hidden={!this.props.error} fluid>
+          <Message error hidden={!this.props.error}>
             {this.props.error}
           </Message>
           <Input fluid label="Passphrase" placeholder="enter your passphrase..." type="password" id="passphrase" />

@@ -78,7 +78,9 @@ class BusinessProfile extends React.Component {
                 About
               </Header>
               <Divider clearing />
-              {this.props.profiles.company_about ? this.props.profiles.company_about : '-'}
+              <div style={{ whiteSpace: 'pre-line' }}>
+                {this.props.profiles.company_about ? this.props.profiles.company_about : '-'}
+              </div>
             </Segment>
             <Segment size="large">
               <Header>

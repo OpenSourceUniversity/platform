@@ -23,7 +23,7 @@ import StudentProgramsPage from 'containers/StudentProgramsPage';
 import CertificatePage from 'containers/CertificatePage';
 import AcademiesPage from 'containers/Academies';
 import BusinessesPage from 'containers/Businesses';
-import CertificatesVerificationPage from 'containers/CertificatesVerificationPage'
+import CertificatesVerificationPage from 'containers/CertificatesVerificationPage';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route

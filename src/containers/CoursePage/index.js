@@ -58,7 +58,6 @@ class CoursePage extends React.Component {
   // }
 
   render() {
-    const { activeItem } = this.state;
     return (
       <div className="course">
         <Container>

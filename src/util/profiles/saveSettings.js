@@ -9,13 +9,12 @@ const LEARNER = 1;
 const ACADEMY = 2;
 const BUSINESS = 3;
 const STATES = { learner: LEARNER, academy: ACADEMY, business: BUSINESS };
-
+/* eslint-disable camelcase */
 export default function saveSettings(profileData, account, buffer) {
   return function dispatcher(dispatch) {
     dispatch({
       type: 'SETTINGS_SAVE_REQUEST',
     });
-    const web3 = store.getState().web3.web3Instance;
     const ipfs = store.getState().ipfs.IPFSinstance;
     const axiosConfig = {
       headers: {
@@ -27,17 +26,17 @@ export default function saveSettings(profileData, account, buffer) {
     let learner_ipfs_hash = null;
     let academy_ipfs_hash = null;
     let company_ipfs_hash = null;
-    if(buffer) {
+    if (buffer) {
       ipfs.add(buffer, (err, ipfsHash) => {
-        switch(STATES[account]) {
-          case 1:
-            learner_ipfs_hash = ipfsHash[0].hash;
-          case 2:
-            academy_ipfs_hash = ipfsHash[0].hash;
-          case 3:
-            company_ipfs_hash = ipfsHash[0].hash;
-          default:
-            null;
+        switch (STATES[account]) {
+        case 1:
+          learner_ipfs_hash = ipfsHash[0].hash;
+          break;
+        case 2:
+          academy_ipfs_hash = ipfsHash[0].hash;
+          break;
+        default:
+          company_ipfs_hash = ipfsHash[0].hash;
         }
         const postData = {
           first_name: profileData.first_name,
@@ -81,8 +80,7 @@ export default function saveSettings(profileData, account, buffer) {
           });
         });
       });
-    }
-    else {
+    } else {
       const postData = {
         first_name: profileData.first_name,
         last_name: profileData.last_name,
@@ -127,3 +125,4 @@ export default function saveSettings(profileData, account, buffer) {
     }
   };
 }
+/* eslint-enable camelcase */

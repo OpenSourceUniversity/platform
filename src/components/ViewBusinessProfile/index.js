@@ -56,7 +56,7 @@ class ViewBusinessProfile extends React.Component {
                     circular
                     className="profilePicSegment"
                     style={{
-                      width: 175, height: 175, backgroundImage: `url(${this.props.company.company_logo ? this.props.company.company_logo : avatarPlaceholder})`, backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center center',
+                      width: 175, height: 175, backgroundImage: `url(${this.props.company.company_logo ? `https://ipfs.io/ipfs/${this.props.company.company_logo}` : avatarPlaceholder})`, backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center center',
                     }}
                   />
                   <Header size="large">
@@ -92,7 +92,9 @@ class ViewBusinessProfile extends React.Component {
                 About
               </Header>
               <Divider clearing />
-              {this.props.company.company_about ? this.props.company.company_about : '-'}
+              <div style={{ whiteSpace: 'pre-line' }}>
+                {this.props.company.company_about ? this.props.company.company_about : '-'}
+              </div>
               <Divider clearing />
             </Segment>
             <Segment size="large">

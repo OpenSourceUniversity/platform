@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Header, Divider, Grid, Sticky, Segment, List, Statistic, Dimmer, Loader, Message } from 'semantic-ui-react';
+import SkillItem from 'components/SkillItem';
+import CertificateItem from 'components/CertificateItem';
 import getProfileView from '../../util/profiles/getProfileView';
 
 /* eslint-disable camelcase */
@@ -9,7 +11,54 @@ class ViewLearnerProfile extends React.Component {
     this.props.getProfileView('learner', this.props.eth_address);
   }
 
+  renderCertificates() {
+    return this.props.certificates.map((certificate, index) => (
+      <Grid.Column
+        computer={4}
+        largeScreen={4}
+        widescreen={4}
+        tablet={8}
+        mobile={16}
+        key={index}
+      >
+        <CertificateItem certificate={certificate} key={index} />
+      </Grid.Column>
+    ));
+  }
+
+  renderSkills() {
+    const certificates = this.props.certificates;
+    certificates.sort((a, b) => b.verified);
+    let verifiedSkills = [];
+    let notVerifiedSkills = [];
+    const skills = [];
+    for (var i = 0; i < certificates.length; i += 1) {
+      if (certificates[i].verified) {
+        verifiedSkills = verifiedSkills.concat(certificates[i].skills);
+      } else {
+        notVerifiedSkills = notVerifiedSkills.concat(certificates[i].skills);
+      }
+    }
+    verifiedSkills = verifiedSkills.filter((item, pos) => verifiedSkills.indexOf(item) === pos);
+    notVerifiedSkills = notVerifiedSkills.filter((item, pos) => notVerifiedSkills.indexOf(item) === pos);
+    notVerifiedSkills = notVerifiedSkills.filter(el => !verifiedSkills.includes(el));
+    for (var i = 0; i < verifiedSkills.length; i += 1) {
+      skills.push({
+        have_icon: true, check: true, name: verifiedSkills[i], basic: true,
+      });
+    }
+    for (var i = 0; i < notVerifiedSkills.length; i += 1) {
+      skills.push({
+        have_icon: true, check: false, name: notVerifiedSkills[i], basic: true,
+      });
+    }
+    return skills.map((skill, index) => (
+      <SkillItem skill={skill} key={index} />
+    ));
+  }
+
   render() {
+    console.log(this.props.certificates);
     const avatarPlaceholder = 'data:image/jpeg;base64,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';
     const email = `mailto:${this.props.learner.learner_email}`;
     const site = `${this.props.learner.learner_site}`;
@@ -47,7 +96,7 @@ class ViewLearnerProfile extends React.Component {
                     circular
                     className="profilePicSegment"
                     style={{
-                      width: 175, height: 175, backgroundImage: `url(${this.props.learner.lerner_avatar ? this.props.learner.lerner_avatar : avatarPlaceholder})`, backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center center',
+                      width: 175, height: 175, backgroundImage: `url(${this.props.learner.learner_avatar ? `https://ipfs.io/ipfs/${this.props.learner.learner_avatar}` : avatarPlaceholder})`, backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center center',
                     }}
                   />
                   <Header size="large">
@@ -73,7 +122,7 @@ class ViewLearnerProfile extends React.Component {
                 <Segment>
                   <Statistic.Group size="tiny" color="orange" horizontal>
                     <Statistic>
-                      <Statistic.Value>{this.props.certificates_count}</Statistic.Value>
+                      <Statistic.Value>{this.props.certificates ? this.props.certificates.length : 0}</Statistic.Value>
                       <Statistic.Label>Certificates</Statistic.Label>
                     </Statistic>
                   </Statistic.Group>
@@ -87,24 +136,27 @@ class ViewLearnerProfile extends React.Component {
                 Introduction
               </Header>
               <Divider clearing />
-              {this.props.learner.learner_about ? this.props.learner.learner_about : '-'}
+              <div style={{ whiteSpace: 'pre-line' }}>
+                {this.props.learner.learner_about ? this.props.learner.learner_about : '-'}
+              </div>
+              <Header>
+                Certificates
+              </Header>
+              <Grid width={16}>
+                {this.renderCertificates()}
+              </Grid>
             </Segment>
             <Segment.Group size="large">
               <Segment>
                 <Header>
-                  Experience
+                  Education
                 </Header>
-                <Segment style={{
-                  textAlign: 'center', background: '#7f8fa6', color: '#fff', borderRadius: '10px', opacity: 0.7,
-                }}
-                >
-                    Coming in Beta
-                </Segment>
+                {this.renderSkills()}
                 <Divider clearing />
               </Segment>
               <Segment>
                 <Header>
-                  Education
+                  Experience
                 </Header>
                 <Segment style={{
                   textAlign: 'center', background: '#7f8fa6', color: '#fff', borderRadius: '10px', opacity: 0.7,
@@ -141,6 +193,7 @@ function mapStateToProps(state) {
     profileViewIsFetching: state.profiles.profileViewIsFetching,
     profileViewError: state.profiles.profileViewError,
     isPublic: state.profiles.isPublic,
+    certificates: state.profiles.certificates,
   };
 }
 

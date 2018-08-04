@@ -24,7 +24,7 @@ class WalletUnlocker extends React.Component {
         </Modal.Content>
         <br />
         <Modal.Actions>
-          <Button 
+          <Button
             labelPosition="left"
             icon="cancel"
             onClick={() => this.handleClose()}

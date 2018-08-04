@@ -52,7 +52,7 @@ const INITIAL_STATE = {
     company_logo: null,
   },
   isPublic: false,
-  certificates_count: null,
+  certificates: [],
   profileViewIsFetching: false,
   profileViewError: null,
   isSaved: false,
@@ -118,8 +118,11 @@ export default function profilesReducer(state = INITIAL_STATE, action) {
       profileViewIsFetching: false,
       profileView: action.result,
       profileViewError: null,
-      certificates_count: action.certificates_count,
       isPublic: action.isPublic,
+    });
+  case 'VIEW_CERTIFICATES_GET_SUCCESS':
+    return Object.assign({}, state, {
+      certificates: action.certificates,
     });
   default:
     return state;

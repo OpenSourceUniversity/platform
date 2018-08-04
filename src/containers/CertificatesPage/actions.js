@@ -4,7 +4,7 @@ import Config from '../../config';
 const { bdnUrl } = Config.network;
 const START_URL = `${bdnUrl}api/v1/certificates/`;
 
-export function fetchCertificates(url=START_URL) {
+export function fetchCertificates(url = START_URL) {
   return function dispatcher(dispatch) {
     dispatch({
       type: 'FETCH_CERTIFICATES_REQUEST',

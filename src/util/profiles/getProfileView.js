@@ -15,9 +15,8 @@ export default function getProfileView(type, eth_address) {
       'Auth-Signature': store.getState().auth.signedAddress,
       'Auth-Eth-Address': store.getState().auth.address.slice(2),
     });
-    let certificates_count = null;
     if (type === 'learner') {
-      fetch(`${bdnUrl}api/v1/certificates/${eth_address}/get_certificates_count/`, { headers })
+      fetch(`${bdnUrl}api/v1/certificates/get_certificates_by_learner/?eth_address=${eth_address}`, { headers })
         .then(response => response.json().then(body => ({ response, body })))
         .then(({ response, body }) => {
           if (!response.ok) {
@@ -26,9 +25,10 @@ export default function getProfileView(type, eth_address) {
               error: body.error,
             });
           } else {
-            /* eslint-disable prefer-destructuring */
-            certificates_count = body.certificates_count;
-            /* eslint-enable prefer-destructuring */
+            dispatch({
+              type: 'VIEW_CERTIFICATES_GET_SUCCESS',
+              certificates: body,
+            });
           }
         })
         .catch((error) => {
@@ -38,7 +38,6 @@ export default function getProfileView(type, eth_address) {
           });
         });
     }
-
     return fetch(url, { headers })
       .then(response => response.json().then(body => ({ response, body })))
       .then(({ response, body }) => {
@@ -51,8 +50,7 @@ export default function getProfileView(type, eth_address) {
           dispatch({
             type: 'PROFILE_GET_SUCCESS',
             result: body,
-            isPublic: body.is_public,
-            certificates_count,
+            isPublic: body.public_profile,
           });
         }
       })

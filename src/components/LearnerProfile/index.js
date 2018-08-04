@@ -26,40 +26,32 @@ class LearnerProfile extends React.Component {
       </Grid.Column>
     ));
   }
-  // .push({
-  //         have_icon: true, check: certificates[i].verified, name: certificates[i].skills[j], basic: true,
-  //       });
 
-   renderSkills() {
+  renderSkills() {
     const certificates = this.props.certificates;
-    certificates.sort(function(a, b){return b.verified})
+    certificates.sort((a, b) => b.verified);
     let verifiedSkills = [];
     let notVerifiedSkills = [];
     const skills = [];
-    for (var i = 0; i < certificates.length; i +=1 ) {
-      if(certificates[i].verified) {
-        verifiedSkills = verifiedSkills.concat(certificates[i].skills)
+    for (var i = 0; i < certificates.length; i += 1) {
+      if (certificates[i].verified) {
+        verifiedSkills = verifiedSkills.concat(certificates[i].skills);
       } else {
-        notVerifiedSkills = notVerifiedSkills.concat(certificates[i].skills)
+        notVerifiedSkills = notVerifiedSkills.concat(certificates[i].skills);
       }
     }
-    verifiedSkills = verifiedSkills.filter(function(item, pos) {
-        return verifiedSkills.indexOf(item) === pos;
-    })
-    notVerifiedSkills = notVerifiedSkills.filter(function(item, pos) {
-        return notVerifiedSkills.indexOf(item) === pos;
-    })
-    notVerifiedSkills = notVerifiedSkills.filter(
-     ( el ) => !verifiedSkills.includes( el ) );
-    for(var i = 0; i < verifiedSkills.length; i += 1) {
+    verifiedSkills = verifiedSkills.filter((item, pos) => verifiedSkills.indexOf(item) === pos);
+    notVerifiedSkills = notVerifiedSkills.filter((item, pos) => notVerifiedSkills.indexOf(item) === pos);
+    notVerifiedSkills = notVerifiedSkills.filter(el => !verifiedSkills.includes(el));
+    for (var i = 0; i < verifiedSkills.length; i += 1) {
       skills.push({
-           have_icon: true, check: true, name: verifiedSkills[i], basic: true,
-         });
+        have_icon: true, check: true, name: verifiedSkills[i], basic: true,
+      });
     }
-    for(var i = 0; i < notVerifiedSkills.length; i += 1) {
+    for (var i = 0; i < notVerifiedSkills.length; i += 1) {
       skills.push({
-           have_icon: true, check: false, name: notVerifiedSkills[i], basic: true,
-         });
+        have_icon: true, check: false, name: notVerifiedSkills[i], basic: true,
+      });
     }
     return skills.map((skill, index) => (
       <SkillItem skill={skill} key={index} />
@@ -71,7 +63,6 @@ class LearnerProfile extends React.Component {
     const email = `mailto:${this.props.profiles.learner_email}`;
     const site = `${this.props.profiles.learner_site}`;
     const phoneNumber = `tel:${this.props.profiles.phone_number}`;
-    console.log(this.props.profiles)
     return (
       <div>
         <Grid>

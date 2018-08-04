@@ -42,7 +42,7 @@ class AcademySettings extends React.Component {
     // file is converted to a buffer to prepare for uploading to IPFS
     const buffer = Buffer.from(reader.result);
     this.setState({ buffer });
-    this.setState({fileIsMissing: false})
+    this.setState({ fileIsMissing: false });
   };
 
   handleDismiss = () => {
@@ -59,7 +59,7 @@ class AcademySettings extends React.Component {
       <div className="academia-settings">
         <Dimmer active={this.props.isFetching} inverted>
           <Loader size="medium">
-            <svg width="96" height="96" style={{display:'block', margin:'0 auto 10px auto'}}>
+            <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
               <image href={loader} x="0" y="0" width="100%" height="100%" />
             </svg>
             Saving information...
@@ -149,6 +149,7 @@ class AcademySettings extends React.Component {
               placeholder="Academy logo"
               className="input-file"
               color="orange"
+              accept=".png,.gif,.jpg,.jpeg"
               onChange={this.captureFile}
             />
           </Form.Field>

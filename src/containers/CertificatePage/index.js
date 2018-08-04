@@ -91,11 +91,11 @@ class CertificatePage extends React.Component {
                     <Header style={{ fontSize: '1.7em' }}>
                       Academy ETH Address:
                     </Header>
-                    <a target="_blank" href={`https://etherscan.io/address/${this.props.certificate.academy_address}`}>{this.props.certificate.academy_address}</a>
+                    <a rel="noopener noreferrer" target="_blank" href={`https://etherscan.io/address/${this.props.certificate.academy_address}`}>{this.props.certificate.academy_address}</a>
                     <Header style={{ fontSize: '1.7em' }}>
                       Academy Site:
                     </Header>
-                    <a target="_blank" href={this.props.certificate.academy_link}>{this.props.certificate.academy_link}</a>
+                    <a rel="noopener noreferrer" target="_blank" href={this.props.certificate.academy_link}>{this.props.certificate.academy_link}</a>
                   </Segment>
                 </Grid.Column>
                 <Grid.Column width={8}>
@@ -111,7 +111,7 @@ class CertificatePage extends React.Component {
                     <Header style={{ fontSize: '1.7em' }}>
                       Course Link:
                     </Header>
-                    <a target="_blank" href={this.props.certificate.course_link}>{this.props.certificate.course_link}</a>
+                    <a rel="noopener noreferrer" target="_blank" href={this.props.certificate.course_link}>{this.props.certificate.course_link}</a>
                     <Header style={{ fontSize: '1.7em' }}>
                       Subject:
                     </Header>
@@ -135,7 +135,7 @@ class CertificatePage extends React.Component {
                     <Header style={{ fontSize: '1.7em' }}>
                       Learner ETH Address:
                     </Header>
-                    <a target="_blank" href={`https://etherscan.io/address/${this.props.certificate.learner_eth_address}`}>{this.props.certificate.learner_eth_address}</a>
+                    <a rel="noopener noreferrer" target="_blank" href={`https://etherscan.io/address/${this.props.certificate.learner_eth_address}`}>{this.props.certificate.learner_eth_address}</a>
                     <Header style={{ fontSize: '1.7em' }}>
                       Score:
                     </Header>
@@ -150,7 +150,7 @@ class CertificatePage extends React.Component {
                     <Divider clearing />
                     <Header style={{ fontSize: '1.7em' }}>
                       {this.props.certificate.verified ?
-                        (<a target="_blank" href={`https://etherscan.io/tx/${this.props.certificate.ipfs_hash}`}>Verified</a>)
+                        (<a rel="noopener noreferrer" target="_blank" href={`https://etherscan.io/tx/${this.props.certificate.ipfs_hash}`}>Verified</a>)
                         : ('Not Verified')}
                     </Header>
                     <Header style={{ fontSize: '1.7em' }}>

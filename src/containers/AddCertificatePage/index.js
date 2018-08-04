@@ -89,14 +89,14 @@ class AddCertificatePage extends React.Component {
         <Segment style={{ display: this.props.isAdded ? 'none' : 'block' }}>
           <Dimmer active={this.props.isAdding} inverted>
             <Loader size="medium">
-              <svg width="96" height="96" style={{display:'block', margin:'0 auto 10px auto'}}>
+              <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
                 <image href={loader} x="0" y="0" width="100%" height="100%" />
               </svg>
               Adding certificate...
             </Loader>
           </Dimmer>
           <Form size="large" onSubmit={(event) => { this.handleSubmit(event, this); }}>
-            <Grid divided='vertically'>
+            <Grid divided="vertically">
               <Grid.Row columns={1}>
                 <Grid.Column>
                   <Form.Field required>
@@ -213,7 +213,7 @@ class AddCertificatePage extends React.Component {
                       id="score"
                       name="score"
                       type="number"
-                      min="0" 
+                      min="0"
                       max="100"
                       step="1"
                       iconPosition="left"
@@ -249,7 +249,7 @@ class AddCertificatePage extends React.Component {
                     <label htmlFor="academy_link">
                       Academy site
                     </label>
-                    <Input 
+                    <Input
                       id="academy_link"
                       name="academy_link"
                       iconPosition="left"
@@ -274,11 +274,11 @@ class AddCertificatePage extends React.Component {
               </Grid.Row>
 
               <Grid.Row columns={1} >
-                <Grid.Column textAlign='center'>
+                <Grid.Column textAlign="center">
                   <Button type="submit" primary size="huge">Upload Certificate</Button>
                 </Grid.Column>
               </Grid.Row>
-            </Grid>            
+            </Grid>
           </Form>
         </Segment>
       </Container>

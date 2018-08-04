@@ -17,7 +17,7 @@ export function storeProofOfExistance(buffer, certificateData) {
       type: 'ADD_CERTIFICATE_REQUEST',
     });
     ipfs.add(buffer, (err, ipfsHash) => {
-      //setState by setting ipfsHash to ipfsHash[0].hash
+      console.log(err, ipfsHash);
       dispatch({
         type: 'IPFS_GET_SUCCESS',
         payload: {
@@ -26,11 +26,10 @@ export function storeProofOfExistance(buffer, certificateData) {
       });
       dispatch(addCertificate(certificateData, ipfsHash[0].hash));
     });
-
   };
 }
 
-const START_URL = 'http://localhost:8000/api/v1/certificates/'
+const START_URL = 'http://localhost:8000/api/v1/certificates/';
 
 
 export function addCertificate(certificateData, ipfsHash, url=START_URL) {
@@ -76,7 +75,7 @@ export function addCertificate(certificateData, ipfsHash, url=START_URL) {
   };
 }
 
-export function verifyCertificate(certificateData, url=START_URL) {
+export function verifyCertificate(certificateData, url = START_URL) {
   return function action(dispatch) {
     dispatch({
       type: 'ADD_CERTIFICATE_REQUEST',
@@ -160,7 +159,7 @@ export function rejectCertificate(id) {
       },
     };
     const postData = {
-      id: id,
+      id,
     };
     axios.post(`http://localhost:8000/api/v1/certificates/${id}/delete_by_id/`, postData, axiosConfig).then(() => {
       dispatch({

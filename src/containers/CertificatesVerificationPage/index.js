@@ -119,12 +119,12 @@ class CertificatesVerificationPage extends React.Component {
       duration: event.target.elements.duration.value,
       expiration_date: event.target.elements.expiration_date.value,
     };
-    if(component.state.verification) {
+    if (component.state.verification) {
       component.props.verifyCertificate(certificateData, 'http://localhost:8000/api/v1/certificates/update_certificate_by_id/');
     } else {
       component.props.addCertificate(certificateData, null, 'http://localhost:8000/api/v1/certificates/update_certificate_by_id/');
     }
-    component.setState({verification: false})
+    component.setState({ verification: false });
     component.setState({ activeItem: null });
   }
 
@@ -134,8 +134,8 @@ class CertificatesVerificationPage extends React.Component {
   }
 
   handleCheckboxClick =(e, { name }) => {
-    if(e.target.parentElement.children[0].checked) {
-      this.massVerifyIds.splice(name, 1)
+    if (e.target.parentElement.children[0].checked) {
+      this.massVerifyIds.splice(name, 1);
     } else {
       this.massVerifyIds.push(name);
     }
@@ -143,12 +143,12 @@ class CertificatesVerificationPage extends React.Component {
 
   renderCertificatesMenu() {
     return this.props.certificates.map((certificate, index) => (
-      <Menu.Item style={{color: certificate.verified ? "green" : "orange"}} key={index} name={certificate.id} active={this.state.activeItem === certificate.id} onClick={this.handleItemClick}>
+      <Menu.Item style={{ color: certificate.verified ? 'green' : 'orange' }} key={index} name={certificate.id} active={this.state.activeItem === certificate.id} onClick={this.handleItemClick}>
         {certificate.course_title}
         { certificate.verified ? null :
-          <div style={{float: "right"}}>
-            <Checkbox onChange={this.handleCheckboxClick} name={certificate.id} label='to verify' />
-          </div>
+          <div style={{ float: 'right' }}>
+          <Checkbox onChange={this.handleCheckboxClick} name={certificate.id} label="to verify" />
+        </div>
         }
       </Menu.Item>
     ));
@@ -167,7 +167,7 @@ class CertificatesVerificationPage extends React.Component {
         <Header size="large" floated="left">
           Certificates verification list
         </Header>
-        <Button icon labelPosition="left" positive floated="right" onClick={() => { this.massVerification() }} disabled={!this.massVerifyIds.length}>
+        <Button icon labelPosition="left" positive floated="right" onClick={() => { this.massVerification(); }} disabled={!this.massVerifyIds.length}>
           <Icon name="checkmark" />
           Verify all selected certificates
         </Button>
@@ -193,7 +193,7 @@ class CertificatesVerificationPage extends React.Component {
             </Menu>
           </Grid.Column>
           <Grid.Column width={12}>
-            <Segment style={{display: this.state.activeItem ? null : "none", borderColor: this.props.certificate.verified ? "green" : "orange"}}>
+            <Segment style={{ display: this.state.activeItem ? null : 'none', borderColor: this.props.certificate.verified ? 'green' : 'orange' }}>
               <Dimmer active={this.props.isFetching} inverted>
                 <Loader size="large">Loading</Loader>
               </Dimmer>
@@ -290,13 +290,13 @@ class CertificatesVerificationPage extends React.Component {
                     />
                   </label>
                 </Form.Field>
-                {this.props.certificate.verified ? 
+                {this.props.certificate.verified ?
                   <div>
                     <label>
-                      <b>Course subjects</b> <br/><br/>
+                      <b>Course subjects</b> <br /><br />
                     </label>
                     {this.renderSubjects()}
-                    <br/><br/>
+                    <br /><br />
                   </div> :
                   <Form.Dropdown
                     id="subject"
@@ -315,10 +315,10 @@ class CertificatesVerificationPage extends React.Component {
                 {this.props.certificate.verified ?
                   <div>
                     <label>
-                      <b>Recieved skills</b> <br/><br/>
+                      <b>Recieved skills</b> <br /><br />
                     </label>
                     {this.renderSkills()}
-                    <br/><br/>
+                    <br /><br />
                   </div> :
                   <Form.Dropdown
                     id="skills"
@@ -410,8 +410,8 @@ class CertificatesVerificationPage extends React.Component {
                     />
                   </label>
                 </Form.Field>
-                <div style={{display: this.props.certificate.verified ? "none" : null}}>
-                  <Button type="submit" color="green" size="huge" onClick={() => this.setState({verification: true})}>Verify</Button>
+                <div style={{ display: this.props.certificate.verified ? 'none' : null }}>
+                  <Button type="submit" color="green" size="huge" onClick={() => this.setState({ verification: true })}>Verify</Button>
                   <Button type="submit" primary size="huge">Save changed data</Button>
                   <Button color="red" floated="right" size="huge" onClick={() => this.rejectCertificate()}>Reject</Button>
                 </div>

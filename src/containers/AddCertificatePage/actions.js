@@ -17,7 +17,6 @@ export function storeProofOfExistance(buffer, certificateData) {
       type: 'ADD_CERTIFICATE_REQUEST',
     });
     ipfs.add(buffer, (err, ipfsHash) => {
-      // setState by setting ipfsHash to ipfsHash[0].hash
       dispatch({
         type: 'IPFS_GET_SUCCESS',
         payload: {

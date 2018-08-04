@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Header, Divider, Grid, Sticky, Segment, List, Button } from 'semantic-ui-react';
 import { fetchCompanyJobs } from '../ViewBusinessProfile/actions';
 import JobItem from '../../components/JobItem';
-
+/* eslint-disable camelcase */
 class BusinessProfile extends React.Component {
   componentDidMount() {
     this.props.fetchCompanyJobs(this.props.eth_address.toLowerCase());
@@ -111,5 +111,5 @@ function mapDispatchToProps(dispatch) {
     },
   };
 }
-
+/* eslint-enable camelcase */
 export default connect(mapStateToProps, mapDispatchToProps)(BusinessProfile);

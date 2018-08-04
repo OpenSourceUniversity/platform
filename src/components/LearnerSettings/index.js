@@ -46,12 +46,15 @@ class LearnerSettings extends React.Component {
   convertToBuffer = (reader) => {
     // file is converted to a buffer to prepare for uploading to IPFS
     const buffer = Buffer.from(reader.result);
+    /* eslint-disable react/no-unused-state */
     this.setState({ buffer });
-    this.setState({ fileIsMissing: false });
+    /* eslint-enable react/no-unused-state */
   };
 
   render() {
+    /* eslint-disable global-require */
     const loader = require('../../icons/osu-loader.svg');
+    /* eslint-enable global-require */
     return (
       <div>
         <Dimmer active={this.props.isFetching} inverted>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Header, Button, Message, Modal, Icon, Input } from 'semantic-ui-react';
+import { Button, Message, Modal, Icon, Input } from 'semantic-ui-react';
 import { closeUnlocker, unlockWallet } from '../../util/auth/walletUnlocker';
 
 

@@ -28,12 +28,14 @@ class LearnerProfile extends React.Component {
   }
 
   renderSkills() {
+    /* eslint-disable prefer-destructuring */
     const certificates = this.props.certificates;
+    /* eslint-enable prefer-destructuring */
     certificates.sort((a, b) => b.verified);
     let verifiedSkills = [];
     let notVerifiedSkills = [];
     const skills = [];
-    for (var i = 0; i < certificates.length; i += 1) {
+    for (let i = 0; i < certificates.length; i += 1) {
       if (certificates[i].verified) {
         verifiedSkills = verifiedSkills.concat(certificates[i].skills);
       } else {
@@ -41,14 +43,15 @@ class LearnerProfile extends React.Component {
       }
     }
     verifiedSkills = verifiedSkills.filter((item, pos) => verifiedSkills.indexOf(item) === pos);
-    notVerifiedSkills = notVerifiedSkills.filter((item, pos) => notVerifiedSkills.indexOf(item) === pos);
+    notVerifiedSkills = notVerifiedSkills.filter((item, pos) =>
+      notVerifiedSkills.indexOf(item) === pos);
     notVerifiedSkills = notVerifiedSkills.filter(el => !verifiedSkills.includes(el));
-    for (var i = 0; i < verifiedSkills.length; i += 1) {
+    for (let i = 0; i < verifiedSkills.length; i += 1) {
       skills.push({
         have_icon: true, check: true, name: verifiedSkills[i], basic: true,
       });
     }
-    for (var i = 0; i < notVerifiedSkills.length; i += 1) {
+    for (let i = 0; i < notVerifiedSkills.length; i += 1) {
       skills.push({
         have_icon: true, check: false, name: notVerifiedSkills[i], basic: true,
       });

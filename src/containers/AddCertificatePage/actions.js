@@ -1,32 +1,7 @@
-import { Buffer } from 'buffer';
 import axios from 'axios';
 import { fetchCertificates } from '../CertificatesPage/actions';
 import store from '../../store';
-import Config from '../../config';
 // const contract = require('truffle-contract');
-
-
-export function storeProofOfExistance(buffer, certificateData) {
-  return function dispatcher(dispatch) {
-    const web3 = store.getState().web3.web3Instance;
-    const ipfs = store.getState().ipfs.IPFSinstance;
-    dispatch({
-      type: 'IPFS_GET_REQUEST',
-    });
-    dispatch({
-      type: 'ADD_CERTIFICATE_REQUEST',
-    });
-    ipfs.add(buffer, (err, ipfsHash) => {
-      dispatch({
-        type: 'IPFS_GET_SUCCESS',
-        payload: {
-          ipfsHash: ipfsHash[0].hash,
-        },
-      });
-      dispatch(addCertificate(certificateData, ipfsHash[0].hash));
-    });
-  };
-}
 
 const START_URL = 'http://localhost:8000/api/v1/certificates/';
 
@@ -70,6 +45,27 @@ export function addCertificate(certificateData, ipfsHash, url = START_URL) {
         type: 'ADD_CERTIFICATE_FAILURE',
         error: 'Fail',
       });
+    });
+  };
+}
+
+export function storeProofOfExistance(buffer, certificateData) {
+  return function dispatcher(dispatch) {
+    const ipfs = store.getState().ipfs.IPFSinstance;
+    dispatch({
+      type: 'IPFS_GET_REQUEST',
+    });
+    dispatch({
+      type: 'ADD_CERTIFICATE_REQUEST',
+    });
+    ipfs.add(buffer, (err, ipfsHash) => {
+      dispatch({
+        type: 'IPFS_GET_SUCCESS',
+        payload: {
+          ipfsHash: ipfsHash[0].hash,
+        },
+      });
+      dispatch(addCertificate(certificateData, ipfsHash[0].hash));
     });
   };
 }

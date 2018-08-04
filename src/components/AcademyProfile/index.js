@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Header, Divider, Grid, Sticky, Segment, List, Button } from 'semantic-ui-react';
 import { fetchDepartmentCourses } from '../ViewAcademyProfile/actions';
 import CourseItem from '../../components/CourseItem';
-
+/* eslint-disable camelcase */
 class AcademyProfile extends React.Component {
   componentDidMount() {
     this.props.fetchDepartmentCourses(this.props.eth_address.toLowerCase());
@@ -113,5 +113,5 @@ function mapDispatchToProps(dispatch) {
     },
   };
 }
-
+/* eslint-enable camelcase */
 export default connect(mapStateToProps, mapDispatchToProps)(AcademyProfile);

@@ -9,9 +9,12 @@ import Skills from '../../data/skillsList';
 
 
 class AddCertificatePage extends React.Component {
+  state = { fileIsMissing: false }
+
   componentDidMount() {
     this.props.getIpfs();
   }
+
   handleSubmit(event, component) {
     event.preventDefault();
     const subjects = [];
@@ -56,12 +59,17 @@ class AddCertificatePage extends React.Component {
   convertToBuffer = (reader) => {
     // file is converted to a buffer to prepare for uploading to IPFS
     const buffer = Buffer.from(reader.result);
+    /* eslint-disable prefer-destructuring */
+    /* eslint-disable react/no-unused-state */
     this.setState({ buffer });
     this.setState({ fileIsMissing: false });
+    /* eslint-enable react/no-unused-state */
   };
-
+  /* eslint-disable jsx-a11y/label-has-for */
   render() {
+    /* eslint-disable global-require */
     const loader = require('../../icons/osu-loader.svg');
+    /* eslint-enable global-require */
     return (
       <Container>
         <Breadcrumb>

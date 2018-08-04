@@ -70,7 +70,7 @@ class AddCourse extends React.Component {
       component.props.addCourse(courseData);
     }
   }
-
+  /* eslint-disable jsx-a11y/label-has-for */
   render() {
     return (
       <Container>

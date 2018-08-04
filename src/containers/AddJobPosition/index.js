@@ -77,7 +77,7 @@ class AddJobPosition extends React.Component {
       component.props.addJobPosition(jobData);
     }
   }
-
+  /* eslint-disable jsx-a11y/label-has-for */
   render() {
     return (
       <Container>

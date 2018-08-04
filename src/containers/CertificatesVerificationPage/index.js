@@ -11,6 +11,7 @@ import Skills from '../../data/skillsList';
 
 
 class CertificatesVerificationPage extends React.Component {
+  /* eslint-disable react/no-unused-state */
   state = { activeItem: null, verification: false }
 
   componentDidMount() {
@@ -51,23 +52,6 @@ class CertificatesVerificationPage extends React.Component {
   massVerification() {
     this.props.massVerification(this.massVerifyIds);
     this.setState({ activeItem: null });
-  }
-
-  renderSubjects() {
-    const subjectsArr = this.props.certificate.subject;
-    const subjects = [];
-    try {
-      for (let i = 0; i < subjectsArr.length; i += 1) {
-        subjects.push({
-          have_icon: false, check: true, name: subjectsArr[i], basic: false,
-        });
-      }
-      return subjects.map((subject, index) => (
-        <SkillItem skill={subject} key={index} />
-      ));
-    } catch (e) {
-      return null;
-    }
   }
 
   rejectCertificate() {
@@ -123,6 +107,23 @@ class CertificatesVerificationPage extends React.Component {
     }
   }
 
+  renderSubjects() {
+    const subjectsArr = this.props.certificate.subject;
+    const subjects = [];
+    try {
+      for (let i = 0; i < subjectsArr.length; i += 1) {
+        subjects.push({
+          have_icon: false, check: true, name: subjectsArr[i], basic: false,
+        });
+      }
+      return subjects.map((subject, index) => (
+        <SkillItem skill={subject} key={index} />
+      ));
+    } catch (e) {
+      return null;
+    }
+  }
+
   renderSkills() {
     const skillsArr = this.props.certificate.skills;
     const skills = [];
@@ -142,17 +143,24 @@ class CertificatesVerificationPage extends React.Component {
 
   renderCertificatesMenu() {
     return this.props.certificates.map((certificate, index) => (
-      <Menu.Item style={{ color: certificate.verified ? 'green' : 'orange' }} key={index} name={certificate.id} active={this.state.activeItem === certificate.id} onClick={this.handleItemClick}>
+      <Menu.Item
+        style={{ color: certificate.verified ? 'green' : 'orange' }}
+        key={index}
+        name={certificate.id}
+        active={this.state.activeItem === certificate.id}
+        onClick={this.handleItemClick}
+      >
         {certificate.course_title}
-        { certificate.verified ? null :
-        <div style={{ float: 'right' }}>
+        {certificate.verified ?
+          null :
+          <div style={{ float: 'right' }}>
             <Checkbox onChange={this.handleCheckboxClick} name={certificate.id} label="to verify" />
           </div>
         }
       </Menu.Item>
     ));
   }
-
+  /* eslint-disable jsx-a11y/label-has-for */
   render() {
     return (
       <Container>
@@ -166,7 +174,14 @@ class CertificatesVerificationPage extends React.Component {
         <Header size="large" floated="left">
           Certificates verification list
         </Header>
-        <Button icon labelPosition="left" positive floated="right" onClick={() => { this.massVerification(); }} disabled={!this.massVerifyIds.length}>
+        <Button
+          icon
+          labelPosition="left"
+          positive
+          floated="right"
+          onClick={() => { this.massVerification(); }}
+          disabled={!this.massVerifyIds.length}
+        >
           <Icon name="checkmark" />
           Verify all selected certificates
         </Button>

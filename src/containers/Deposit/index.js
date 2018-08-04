@@ -6,6 +6,7 @@ import { initWalletUnlocker } from '../../util/auth/walletUnlocker';
 import getBalances from '../../util/web3/getBalances';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import store from '../../store';
+import { withdraw } from './actions';
 
 const options = JSON.parse(localStorage.getItem('withdrawWallets')) ? JSON.parse(localStorage.getItem('withdrawWallets')) : [];
 
@@ -14,8 +15,30 @@ class Deposit extends React.Component {
     super(props);
     this.props.getBalances();
   }
+
+  state = {
+    coin: 'edu',
+  }
+
   componentDidMount() {
     this.props.setSecondaryNav('account');
+  }
+
+  onCoinChange(event, data) {
+    this.setState({
+      coin: data.value,
+    });
+  }
+
+  submitWithdraw(event, component) {
+    event.preventDefault();
+    component.props.getBalances(); // lint no unused vars
+    const recipient = event.target.elements.wallet.value;
+    const amount = event.target.elements.amount.value;
+    const { coin } = this.state;
+    store.dispatch(initWalletUnlocker((wallet) => {
+      this.props.withdraw(wallet, recipient, amount, coin);
+    }));
   }
 
   copyAddress() {
@@ -28,18 +51,6 @@ class Deposit extends React.Component {
     store.dispatch(initWalletUnlocker((wallet) => {
       prompt('Copy your private key', wallet.getPrivateKeyString());
     }));
-  }
-
-  submitWithdraw(event, component) {
-    event.preventDefault();
-    component.props.getBalances(); // lint no unused vars
-    const wallet = event.target.elements.wallet.value;
-    // const amount = event.target.elements.amount.value;
-    const withdrawWallets = JSON.parse(localStorage.getItem('withdrawWallets')) ? JSON.parse(localStorage.getItem('withdrawWallets')) : [];
-    if (withdrawWallets.indexOf(wallet) === -1) {
-      withdrawWallets.push(wallet);
-    }
-    localStorage.setItem('withdrawWallets', JSON.stringify(withdrawWallets));
   }
 
   renderHistory() {
@@ -60,12 +71,6 @@ class Deposit extends React.Component {
 
     return history.map((historyDetails, index) => (
       <TransactionHistoryItem historyDetails={historyDetails} key={index} />
-    ));
-  }
-
-  renderAutocomplete() {
-    return options.map((wallet, index) => (
-      <option value={wallet} key={index} />
     ));
   }
 
@@ -136,17 +141,29 @@ class Deposit extends React.Component {
                         </Card.Meta>
                         <Card.Description>
                           <Form id="withdrawForm" className="attached fluid segment" onSubmit={(event) => { this.submitWithdraw(event, this); }}>
-                            <Form.Input list="wallets" name="wallet" label="Choose withdraw wallet:" fluid placeholder="Choose a wallet" />
-                            <datalist id="wallets">
-                              {this.renderAutocomplete()}
-                            </datalist>
+                            <Form.Input
+                              list="wallets"
+                              name="wallet"
+                              label="Choose withdraw wallet:"
+                              fluid
+                              placeholder="Enter ETH address:"
+                            />
                             <Input
                               fluid
                               name="amount"
-                              label={<Dropdown defaultValue="edu" options={[{ key: 'edu', text: 'EDU', value: 'edu' }, { key: 'eth', text: 'ETH', value: 'eth' }]} />}
+                              label={
+                                <Dropdown
+                                  defaultValue="edu"
+                                  onChange={(event, data) => { this.onCoinChange(event, data); }}
+                                  options={
+                                    [
+                                      { key: 'edu', text: 'EDU', value: 'edu' },
+                                      { key: 'eth', text: 'ETH', value: 'eth' },
+                                    ]}
+                                />
+                              }
                               labelPosition="right"
                               placeholder="0.0000"
-
                             />
                           </Form>
                         </Card.Description>
@@ -207,6 +224,9 @@ function mapDispatchToProps(dispatch) {
   return {
     getBalances() {
       dispatch(getBalances());
+    },
+    withdraw(wallet, recipient, amount, coin) {
+      dispatch(withdraw(wallet, recipient, amount, coin));
     },
     setSecondaryNav(secondaryNav) {
       dispatch(setSecondaryNav(secondaryNav));

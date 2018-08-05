@@ -1,45 +1,47 @@
 const INITIAL_STATE = {
   isFetching: false,
   error: null,
-  academies: [
+  learners: [
     {
       user:
       {
         username: null,
       },
-      academy_name: null,
-      academy_website: null,
-      academy_email: null,
-      academy_country: null,
-      academy_about: null,
-      academy_logo: null,
-      courses_count: null,
+      first_name: null,
+      last_name: null,
+      learner_email: null,
+      learner_position: null,
+      learner_specialisation: null,
+      learner_about: null,
+      learner_country: null,
+      learner_avatar: null,
+      certificates_count: null,
     },
   ],
   next: null,
 };
 
-export default function academiesReducer(state = INITIAL_STATE, action) {
+export default function learnersReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-  case 'FETCH_ACADEMIES_REQUEST':
+  case 'FETCH_LEARNERS_REQUEST':
     return Object.assign({}, state, {
       isFetching: true,
     });
-  case 'FETCH_ACADEMIES_SUCCESS':
+  case 'FETCH_LEARNERS_SUCCESS':
     return Object.assign({}, state, {
       isFetching: false,
-      academies: action.results,
+      learners: action.results,
       next: action.next,
     });
-  case 'FETCH_ACADEMIES_FAILURE':
+  case 'FETCH_LEARNERS_FAILURE':
     return Object.assign({}, state, {
       isFetching: false,
       error: action.error.message,
     });
-  case 'RESET_FETCHED_ACADEMIES':
+  case 'RESET_FETCHED_LEARNERS':
     return Object.assign({}, state, {
       isFetching: false,
-      academies: [],
+      learners: [],
       next: null,
       error: null,
     });

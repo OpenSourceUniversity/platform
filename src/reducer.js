@@ -13,6 +13,7 @@ import secondaryNavReducer from './util/secondaryNav/secondaryNavReducer';
 import profilesReducer from './util/profiles/profilesReducer';
 import departmentCoursesReducer from './components/ViewAcademyProfile/departmentCoursesReducer';
 import academiesReducer from './containers/Academies/academiesReducer';
+import learnersReducer from './containers/Learners/learnersReducer';
 import jobsReducer from './containers/JobsPage/jobsReducer';
 import jobReducer from './containers/JobPage/jobReducer';
 import companyJobsReducer from './components/ViewBusinessProfile/companyJobsReducer';
@@ -42,6 +43,7 @@ const reducer = combineReducers({
   businesses: businessesReducer,
   addJob: addJobReducer,
   addCourse: addCourseReducer,
+  learners: learnersReducer,
 });
 
 export default reducer;

@@ -12,6 +12,7 @@ const INITIAL_STATE = {
       company_email: null,
       company_country: null,
       company_about: null,
+      company_logo: null,
       jobs_count: null,
     },
   ],

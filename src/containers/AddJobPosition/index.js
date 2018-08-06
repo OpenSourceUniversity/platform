@@ -13,6 +13,7 @@ class AddJobPosition extends React.Component {
     if (this.props.match.params.id) {
       this.props.getDefaultValues(this.props.match.params.id);
     }
+    document.title = 'Add Job Position | OS.University';
   }
 
   getSkills(obj) {

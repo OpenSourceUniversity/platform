@@ -13,6 +13,7 @@ class AccountSettings extends React.Component {
   componentDidMount() {
     this.props.setSecondaryNav('account');
     this.props.getIpfs();
+    document.title = 'Account Settings | OS.University';
   }
 
   render() {

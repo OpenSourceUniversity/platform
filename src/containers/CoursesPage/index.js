@@ -22,6 +22,7 @@ class CoursesPage extends React.Component {
     } else {
       this.props.fetchCourses();
     }
+    document.title = 'Courses | OS.University';
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })

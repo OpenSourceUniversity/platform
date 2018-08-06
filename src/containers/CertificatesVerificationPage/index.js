@@ -17,6 +17,7 @@ class CertificatesVerificationPage extends React.Component {
   componentDidMount() {
     this.props.fetchCertificates('http://localhost:8000/api/v1/certificates/get_certificates_by_academy');
     this.props.setSecondaryNav('academia');
+    document.title = 'Certificates Validation | OS.University';
   }
 
   getSkills(obj) {

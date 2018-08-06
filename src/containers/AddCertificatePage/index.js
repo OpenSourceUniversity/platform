@@ -13,6 +13,7 @@ class AddCertificatePage extends React.Component {
 
   componentDidMount() {
     this.props.getIpfs();
+    document.title = 'Add Certificate | OS.University';
   }
 
   handleSubmit(event, component) {

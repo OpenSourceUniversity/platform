@@ -25,6 +25,7 @@ class OnBoarding extends React.Component {
   }
   componentDidMount() {
     this.props.setSecondaryNav('null');
+    document.title = 'OS.University';
   }
 
   setMnemonicPhrase(phrase) {

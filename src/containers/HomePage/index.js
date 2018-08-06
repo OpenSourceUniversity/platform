@@ -14,6 +14,7 @@ class HomePage extends React.Component {
     this.props.fetchCertificates();
     this.props.fetchFeaturedCourses();
     this.props.setSecondaryNav(null);
+    document.title = 'Home | OS.University';
   }
 
   renderFeaturedCourses() {

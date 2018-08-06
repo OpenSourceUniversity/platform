@@ -75,7 +75,7 @@ class LearnersPage extends React.Component {
     return (
       <Form.Field>
         <Form.Dropdown
-          label="Serch"
+          label="Search"
           placeholder="Search by keyword ..."
           fluid
           multiple

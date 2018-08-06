@@ -3,16 +3,13 @@ import { Form } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import autocomplete from '../../util/search/autocomplete';
+import search from '../../util/search/search';
 
 
 class HeaderSearchComponent extends Form {
-  search(query) {
-    this.props.history.push(`/courses/?q=${query}`);
-  }
-
   render() {
     return (
-      <Form onSubmit={event => this.search(event.currentTarget.elements.query.value)}>
+      <Form onSubmit={event => this.props.search(event.currentTarget.elements.query.value)}>
         <Form.Input
           name="query"
           list="suggestions"
@@ -48,6 +45,9 @@ function mapDispatchToProps(dispatch) {
   return {
     autocomplete(query) {
       dispatch(autocomplete(query));
+    },
+    search(query) {
+      dispatch(search(query));
     },
   };
 }

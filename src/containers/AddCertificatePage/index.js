@@ -1,15 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Grid, Header, Segment, Button, Message, Divider, Breadcrumb, Form, Input, Dimmer, Loader } from 'semantic-ui-react';
+import SkillsInput from 'components/SkillsInput';
 import { addCertificate, storeProofOfExistance } from './actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import { getIpfs } from '../../util/ipfs/getIpfs';
 import Industries from '../../data/industryList';
-import Skills from '../../data/skillsList';
 
 
 class AddCertificatePage extends React.Component {
-  state = { fileIsMissing: false }
+  state = { certificateFileIsMissing: false }
 
   componentDidMount() {
     this.props.getIpfs();
@@ -18,15 +18,16 @@ class AddCertificatePage extends React.Component {
 
   handleSubmit(event, component) {
     event.preventDefault();
+    debugger;
+
+    // TODO: needs fix urgently
     const categories = [];
-    const skills = [];
     for (let i = 0; i < (event.target.elements[6].parentElement.childElementCount - 5); i += 1) {
       categories.push(event.target.elements[6].parentElement.children[i].textContent);
     }
 
-    for (let i = 0; i < (event.target.elements[7].parentElement.childElementCount - 5); i += 1) {
-      skills.push(event.target.elements[7].parentElement.children[i].textContent);
-    }
+    const skills = this.skillsRef.state.currentValue;
+
     const certificateData = {
       academy_title: event.target.elements.academy_title.value,
       academy_address: event.target.elements.academy_address.value,
@@ -44,26 +45,26 @@ class AddCertificatePage extends React.Component {
     if (component.state.buffer) {
       component.props.storeProofOfExistance(component.state.buffer, certificateData);
     } else {
-      component.setState({ fileIsMissing: true });
+      component.setState({ certificateFileIsMissing: true });
     }
   }
 
-  captureFile =(event) => {
+  captureCertificateFile =(event) => {
     event.stopPropagation();
     event.preventDefault();
     const file = event.target.files[0];
     const reader = new window.FileReader();
     reader.readAsArrayBuffer(file);
-    reader.onloadend = () => this.convertToBuffer(reader);
+    reader.onloadend = () => this.storeCertificateFile(reader);
   }
 
-  convertToBuffer = (reader) => {
+  storeCertificateFile = (reader) => {
     // file is converted to a buffer to prepare for uploading to IPFS
     const buffer = Buffer.from(reader.result);
     /* eslint-disable prefer-destructuring */
     /* eslint-disable react/no-unused-state */
     this.setState({ buffer });
-    this.setState({ fileIsMissing: false });
+    this.setState({ certificateFileIsMissing: false });
     /* eslint-enable react/no-unused-state */
   };
   /* eslint-disable jsx-a11y/label-has-for */
@@ -118,10 +119,10 @@ class AddCertificatePage extends React.Component {
                       icon="upload"
                       type="file"
                       accept=".png,.gif,.jpg,.jpeg,.pdf"
-                      error={this.state.fileIsMissing}
+                      error={this.state.certificateFileIsMissing}
                       name="certificate_file"
                       placeholder="Certificate File"
-                      onChange={this.captureFile}
+                      onChange={this.captureCertificateFile}
                     />
                   </Form.Field>
                 </Grid.Column>
@@ -142,6 +143,7 @@ class AddCertificatePage extends React.Component {
                   </Form.Field>
                   <Form.Dropdown
                     id="categories"
+                    ref={(arg) => { this.categoriesRef = arg; }}
                     name="categories"
                     placeholder="Your course categories"
                     label="Course categories"
@@ -151,17 +153,7 @@ class AddCertificatePage extends React.Component {
                     required
                     options={Industries.Industries}
                   />
-                  <Form.Dropdown
-                    id="skills"
-                    name="skills"
-                    placeholder="Received skills"
-                    label="Skills"
-                    fluid
-                    search
-                    multiple
-                    required
-                    options={Skills.Skills}
-                  />
+                  <SkillsInput ref={(arg) => { this.skillsRef = arg; }} />
                   <Form.Field>
                     <label htmlFor="course_link">
                       Course link (if any)

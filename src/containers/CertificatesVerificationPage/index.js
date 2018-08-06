@@ -36,7 +36,7 @@ class CertificatesVerificationPage extends React.Component {
   }
 
   getIndustries(obj) {
-    const needle = this.props.certificate.subject;
+    const needle = this.props.certificate.categories;
     const categories = [];
     if (!needle) {
       return null;
@@ -64,10 +64,10 @@ class CertificatesVerificationPage extends React.Component {
 
   handleSubmit(event, component) {
     event.preventDefault();
-    const subjects = [];
+    const categories = [];
     const skills = [];
     for (let i = 0; i < (event.target.elements[6].parentElement.childElementCount - 5); i += 1) {
-      subjects.push(event.target.elements[6].parentElement.children[i].textContent);
+      categories.push(event.target.elements[6].parentElement.children[i].textContent);
     }
 
     for (let i = 0; i < (event.target.elements[7].parentElement.childElementCount - 5); i += 1) {
@@ -80,7 +80,7 @@ class CertificatesVerificationPage extends React.Component {
       program_title: event.target.elements.program_title.value,
       course_title: event.target.elements.course_title.value,
       course_link: event.target.elements.course_link.value,
-      subject: subjects,
+      categories,
       skills,
       score: event.target.elements.score.value,
       duration: event.target.elements.duration.value,
@@ -109,16 +109,16 @@ class CertificatesVerificationPage extends React.Component {
   }
 
   renderSubjects() {
-    const subjectsArr = this.props.certificate.subject;
-    const subjects = [];
+    const categoriesArr = this.props.certificate.categories;
+    const categories = [];
     try {
-      for (let i = 0; i < subjectsArr.length; i += 1) {
-        subjects.push({
-          have_icon: false, check: true, name: subjectsArr[i], basic: false,
+      for (let i = 0; i < categoriesArr.length; i += 1) {
+        categories.push({
+          have_icon: false, check: true, name: categoriesArr[i].name, basic: false,
         });
       }
-      return subjects.map((subject, index) => (
-        <SkillItem skill={subject} key={index} />
+      return categories.map((category, index) => (
+        <SkillItem skill={category} key={index} />
       ));
     } catch (e) {
       return null;
@@ -308,20 +308,20 @@ class CertificatesVerificationPage extends React.Component {
                 {this.props.certificate.verified ?
                   <div>
                     <label>
-                      <b>Course subjects</b> <br /><br />
+                      <b>Course categories</b> <br /><br />
                     </label>
                     {this.renderSubjects()}
                     <br /><br />
                   </div> :
                   <Form.Dropdown
-                    id="subject"
-                    name="subject"
-                    placeholder="Your course subjects"
-                    label="Course subjects"
+                    id="categories"
+                    name="categories"
+                    placeholder="Your course categories"
+                    label="Course categories"
                     fluid
                     search
                     multiple
-                    key={`subject:${this.props.certificate.subject || ''}`}
+                    key={`categories:${this.props.certificate.categories || ''}`}
                     defaultValue={this.getIndustries(Industries.Industries)}
                     options={Industries.Industries}
                     readOnly={this.props.certificate.verified}

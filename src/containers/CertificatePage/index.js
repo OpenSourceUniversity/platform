@@ -20,7 +20,7 @@ class CertificatePage extends React.Component {
     try {
       for (let i = 0; i < skillsArr.length; i += 1) {
         skills.push({
-          have_icon: false, check: true, name: skillsArr[i], basic: false,
+          have_icon: false, check: true, name: skillsArr[i].name, basic: false,
         });
       }
       return skills.map((skill, index) => (
@@ -32,16 +32,16 @@ class CertificatePage extends React.Component {
   }
 
   renderSubjects() {
-    const subjectsArr = this.props.certificate.subject;
-    const subjects = [];
+    const categoriesArr = this.props.certificate.categories;
+    const categories = [];
     try {
-      for (let i = 0; i < subjectsArr.length; i += 1) {
-        subjects.push({
-          have_icon: false, check: true, name: subjectsArr[i], basic: false,
+      for (let i = 0; i < categoriesArr.length; i += 1) {
+        categories.push({
+          have_icon: false, check: true, name: categoriesArr[i].name, basic: false,
         });
       }
-      return subjects.map((subject, index) => (
-        <SkillItem skill={subject} key={index} />
+      return categories.map((category, index) => (
+        <SkillItem skill={category} key={index} />
       ));
     } catch (e) {
       return null;

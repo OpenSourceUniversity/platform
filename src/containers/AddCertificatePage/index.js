@@ -18,10 +18,10 @@ class AddCertificatePage extends React.Component {
 
   handleSubmit(event, component) {
     event.preventDefault();
-    const subjects = [];
+    const categories = [];
     const skills = [];
     for (let i = 0; i < (event.target.elements[6].parentElement.childElementCount - 5); i += 1) {
-      subjects.push(event.target.elements[6].parentElement.children[i].textContent);
+      categories.push(event.target.elements[6].parentElement.children[i].textContent);
     }
 
     for (let i = 0; i < (event.target.elements[7].parentElement.childElementCount - 5); i += 1) {
@@ -34,7 +34,7 @@ class AddCertificatePage extends React.Component {
       program_title: event.target.elements.program_title.value,
       course_title: event.target.elements.course_title.value,
       course_link: event.target.elements.course_link.value,
-      subject: subjects,
+      categories,
       skills,
       learner_eth_address: event.target.elements.learner_eth_address.value,
       score: event.target.elements.score.value,
@@ -117,6 +117,7 @@ class AddCertificatePage extends React.Component {
                       iconPosition="left"
                       icon="upload"
                       type="file"
+                      accept=".png,.gif,.jpg,.jpeg,.pdf"
                       error={this.state.fileIsMissing}
                       name="certificate_file"
                       placeholder="Certificate File"
@@ -136,14 +137,14 @@ class AddCertificatePage extends React.Component {
                       name="course_title"
                       iconPosition="left"
                       icon="file"
-                      placeholder="Oficial course title"
+                      placeholder="Official course title"
                     />
                   </Form.Field>
                   <Form.Dropdown
-                    id="subject"
-                    name="subject"
-                    placeholder="Your course subjects"
-                    label="Course subjects"
+                    id="categories"
+                    name="categories"
+                    placeholder="Your course categories"
+                    label="Course categories"
                     fluid
                     search
                     multiple

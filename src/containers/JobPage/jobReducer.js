@@ -15,6 +15,9 @@ const INITIAL_STATE = {
     skills: [
     ],
   },
+  company: {
+    company_logo: null
+  }
 };
 
 export default function jobReducer(state = INITIAL_STATE, action) {
@@ -26,7 +29,8 @@ export default function jobReducer(state = INITIAL_STATE, action) {
   case 'FETCH_JOB_SUCCESS':
     return Object.assign({}, state, {
       isFetching: false,
-      job: action.result,
+      job: action.job,
+      company: action.company,
     });
   case 'FETCH_JOB_FAILURE':
     return Object.assign({}, state, {

@@ -27,7 +27,8 @@ export function fetchJob(url = START_URL) {
         } else {
           dispatch({
             type: 'FETCH_JOB_SUCCESS',
-            result: body,
+            job: body.job,
+            company: body.company,
           });
         }
       })

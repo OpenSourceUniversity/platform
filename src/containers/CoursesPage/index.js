@@ -22,6 +22,7 @@ class CoursesPage extends React.Component {
     } else {
       this.props.fetchCourses();
     }
+    document.title = 'Courses | OS.University';
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
@@ -67,23 +68,17 @@ class CoursesPage extends React.Component {
   }
 
   renderSearch() {
-    const courses = [
-      { value: '1', text: 'Course title 1' },
-      { value: '2', text: 'Course title 2' },
-    ];
-
     return (
-      <Form.Field>
-        <Form.Dropdown
-          label="Serch"
-          placeholder="Search courses"
-          fluid
-          multiple
-          search
-          selection
-          options={courses}
-        />
-      </Form.Field>
+      <Form onSubmit={event => this.props.search(event.currentTarget.elements.query.value)}>
+        <Form.Field>
+          <Form.Input
+            label="Search"
+            placeholder="Search courses"
+            name="query"
+            fluid
+          />
+        </Form.Field>
+      </Form>
     );
   }
 

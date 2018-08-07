@@ -193,6 +193,90 @@ class HeaderWithoutRouter extends React.Component {
       },
     ];
 
+    const academyAcademiaDropdownElements = [
+      {
+        key: 'learners', content: 'Learners', name: 'learners', className: 'academia', active: activeItem === 'learners', onClick: this.handleItemClick,
+      },
+      {
+        key: 'add-course', content: 'Add courses', name: 'academies/add/', active: activeItem === 'academies/add/', onClick: this.handleItemClick,
+      },
+      {
+        key: 'add-certificate', content: 'Add Certificate', name: 'certificates/add', active: activeItem === 'certificates/add', onClick: this.handleItemClick,
+      },
+      {
+        key: 'verification', content: 'Certificates verification', name: 'academies/certificates-verification/', active: activeItem === 'academies/certificates-verification/', onClick: this.handleItemClick,
+      },
+      {
+        key: 'scholarships', content: 'Scholarships', name: 'scholarships', active: false, className: 'secondary-nav-disabled-beta',
+      },
+      {
+        key: 'challenges', content: 'Academic Challenges', name: 'challenges', active: false, className: 'secondary-nav-disabled-customer',
+      },
+    ];
+
+    const academyBusinessesDropdownElements = [
+      {
+        key: 'businesses', content: 'Businesses', name: 'businesses', className: 'businesses', active: activeItem === 'businesses', onClick: this.handleItemClick,
+      },
+      {
+        key: 'jobs', content: 'Browse jobs', name: 'jobs', active: activeItem === 'jobs', onClick: this.handleItemClick,
+      },
+      {
+        key: 'interviews', content: 'My Interviews', name: 'interviews', active: false, className: 'secondary-nav-disabled-beta',
+      },
+      {
+        key: 'career', content: 'Career Paths', name: 'career', active: false, className: 'secondary-nav-disabled-beta',
+      },
+      {
+        key: 'interships', content: 'Interships', name: 'interships', active: false, className: 'secondary-nav-disabled-beta',
+      },
+      {
+        key: 'business-challenges', content: 'Business challenges', name: 'business-challenges', active: false, className: 'secondary-nav-disabled-customer',
+      },
+    ];
+
+    const businessAcademiaDropdownElements = [
+      {
+        key: 'academies', content: 'Academia', name: 'academies', className: 'academia', active: activeItem === 'academies', onClick: this.handleItemClick,
+      },
+      {
+        key: 'courses', content: 'Browse courses', name: 'courses', active: activeItem === 'courses', onClick: this.handleItemClick,
+      },
+      {
+        key: 'certificates', content: 'My certificates', name: 'certificates', active: activeItem === 'certificates', onClick: this.handleItemClick,
+      },
+      {
+        key: 'programs', content: 'Student Programs', name: 'programs', active: false, className: 'secondary-nav-disabled-beta',
+      },
+      {
+        key: 'scholarships', content: 'Scholarships', name: 'scholarships', active: false, className: 'secondary-nav-disabled-beta',
+      },
+      {
+        key: 'challenges', content: 'Academic Challenges', name: 'challenges', active: false, className: 'secondary-nav-disabled-customer',
+      },
+    ];
+
+    const businessBusinessesDropdownElements = [
+      {
+        key: 'learners', content: 'Learners', name: 'learners', className: 'academia', active: activeItem === 'learners', onClick: this.handleItemClick,
+      },
+      {
+        key: 'add-job', content: 'Add job positions', name: 'businesses/add/', active: activeItem === 'businesses/add/', onClick: this.handleItemClick,
+      },
+      {
+        key: 'interviews', content: 'My Interviews', name: 'interviews', active: false, className: 'secondary-nav-disabled-beta',
+      },
+      {
+        key: 'career', content: 'Career Paths', name: 'career', active: false, className: 'secondary-nav-disabled-beta',
+      },
+      {
+        key: 'interships', content: 'Interships', name: 'interships', active: false, className: 'secondary-nav-disabled-beta',
+      },
+      {
+        key: 'business-challenges', content: 'Business challenges', name: 'business-challenges', active: false, className: 'secondary-nav-disabled-customer',
+      },
+    ];
+
     return (
       <Menu size="massive" fixed="top">
         <Container fluid>
@@ -205,10 +289,23 @@ class HeaderWithoutRouter extends React.Component {
                 <Dropdown className="explore-dropdown" item trigger={exploreTrigger}>
                   <Dropdown.Menu>
                     <Dropdown.Item name="academia" className="nav-list">
-                      <List selection items={learnerAcademiaDropdownElements} />
+                      {(() => {
+                        switch (this.props.activeAccount) {
+                        case 'Academy': return <List selection items={academyAcademiaDropdownElements} />;
+                        case 'Business': return <List selection items={businessAcademiaDropdownElements} />;
+                        default: return <List selection items={learnerAcademiaDropdownElements} />;
+                        }
+                      })()}
                     </Dropdown.Item>
                     <Dropdown.Item name="business" className="nav-list secondary-nav-disabled-beta">
-                      <List selection items={learnerBusinessesDropdownElements} />
+                      {(() => {
+                        switch (this.props.activeAccount) {
+                        case 'Academy': return <List selection items={academyBusinessesDropdownElements} />;
+                        case 'Business': return <List selection items={businessBusinessesDropdownElements} />;
+                        default:
+                          return <List selection items={learnerBusinessesDropdownElements} />;
+                        }
+                      })()}
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
@@ -297,11 +394,27 @@ class HeaderWithoutRouter extends React.Component {
             <Grid.Row className="secondary-nav">
               {(() => {
                 if (this.props.isLoggedIn) {
-                  switch (this.props.secondaryNav) {
-                  case 'business': return <Menu size="massive" items={learnerBusinessesDropdownElements.slice(1)} />;
-                  case 'academia': return <Menu size="massive" items={learnerAcademiaDropdownElements.slice(1)} />;
-                  case 'account': return <Menu size="massive" items={accountElements} />;
-                  default: return null;
+                  if (this.props.activeAccount === 'Learner') {
+                    switch (this.props.secondaryNav) {
+                    case 'business': return <Menu size="massive" items={learnerBusinessesDropdownElements.slice(1)} />;
+                    case 'academia': return <Menu size="massive" items={learnerAcademiaDropdownElements.slice(1)} />;
+                    case 'account': return <Menu size="massive" items={accountElements} />;
+                    default: return null;
+                    }
+                  } else if (this.props.activeAccount === 'Academy') {
+                    switch (this.props.secondaryNav) {
+                    case 'business': return <Menu size="massive" items={academyBusinessesDropdownElements.slice(1)} />;
+                    case 'academia': return <Menu size="massive" items={academyAcademiaDropdownElements.slice(1)} />;
+                    case 'account': return <Menu size="massive" items={accountElements} />;
+                    default: return null;
+                    }
+                  } else {
+                    switch (this.props.secondaryNav) {
+                    case 'business': return <Menu size="massive" items={businessBusinessesDropdownElements.slice(1)} />;
+                    case 'academia': return <Menu size="massive" items={businessAcademiaDropdownElements.slice(1)} />;
+                    case 'account': return <Menu size="massive" items={accountElements} />;
+                    default: return null;
+                    }
                   }
                 }
                 return null;

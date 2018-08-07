@@ -1,28 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Form, Dimmer, Loader, Button, Container, Header, Divider, Grid, Segment, Accordion, Menu, Icon } from 'semantic-ui-react';
-import BusinessItem from 'components/BusinessItem';
-import { fetchBusinesses } from './actions';
+import LearnerItem from 'components/LearnerItem';
+import { fetchLearners } from './actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 
 
-class BusinessesPage extends React.Component {
+class LearnersPage extends React.Component {
   state = { activeIndex: 0, activeItem: 'trending' }
 
   componentDidMount() {
-    this.props.fetchBusinesses();
-    this.props.setSecondaryNav('business');
-    document.title = 'Businesses | OS.University';
+    this.props.fetchLearners();
+    this.props.setSecondaryNav('academia');
+    document.title = 'Learners | OS.University';
   }
 
   categories = [
     {
-      name: 'Company',
+      name: 'Learner',
       id: '1',
-    },
-    {
-      name: 'Freelance',
-      id: '2',
     },
   ]
 
@@ -55,9 +51,9 @@ class BusinessesPage extends React.Component {
     );
   }
 
-  renderBusinesses() {
+  renderLearners() {
     return (
-      this.props.businesses.map((business, index) => (
+      this.props.learners.map((learner, index) => (
         <Grid.Column
           computer={8}
           largeScreen={8}
@@ -66,13 +62,13 @@ class BusinessesPage extends React.Component {
           mobile={16}
           key={index}
         >
-          <BusinessItem business={business} key={index} />
+          <LearnerItem learner={learner} key={index} />
         </Grid.Column>))
     );
   }
 
   renderSearch() {
-    const academies = [
+    const learners = [
       { value: '1', text: 'Academy title 1' },
       { value: '2', text: 'Academy title 2' },
     ];
@@ -86,7 +82,7 @@ class BusinessesPage extends React.Component {
           multiple
           search
           selection
-          options={academies}
+          options={learners}
         />
       </Form.Field>
     );
@@ -97,7 +93,7 @@ class BusinessesPage extends React.Component {
     return (
       <Container className="courses-page">
         <Header>
-          Courses
+          Learners
         </Header>
         <Grid>
           <Grid.Column width={3}>
@@ -141,7 +137,7 @@ class BusinessesPage extends React.Component {
               {(() => {
                 switch (this.state.activeItem) {
                 case 'recommended': return 'Recommended page';
-                default: return this.renderBusinesses();
+                default: return this.renderLearners();
                 }
               })()}
               <Dimmer active={this.props.isFetching} inverted>
@@ -150,7 +146,7 @@ class BusinessesPage extends React.Component {
 
               <div style={{ display: !this.props.next ? 'none' : 'block', marginTop: '20px', textAlign: 'center' }}>
                 <Button
-                  onClick={() => { this.props.fetchCourses(this.props.next); }}
+                  onClick={() => { this.props.fetchLearners(this.props.next); }}
                   icon
                   labelPosition="left"
                 >
@@ -173,18 +169,18 @@ class BusinessesPage extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    businesses: state.businesses.businesses,
-    isFetching: state.businesses.isFetching,
-    error: state.businesses.error,
-    next: state.businesses.next,
+    learners: state.learners.learners,
+    isFetching: state.learners.isFetching,
+    error: state.learners.error,
+    next: state.learners.next,
   };
 }
 
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchBusinesses(url) {
-      dispatch(fetchBusinesses(url));
+    fetchLearners(url) {
+      dispatch(fetchLearners(url));
     },
     setSecondaryNav(secondaryNav) {
       dispatch(setSecondaryNav(secondaryNav));
@@ -193,4 +189,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(BusinessesPage);
+export default connect(mapStateToProps, mapDispatchToProps)(LearnersPage);

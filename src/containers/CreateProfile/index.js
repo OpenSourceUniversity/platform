@@ -4,6 +4,10 @@ import ChooseAccount from 'components/ChooseAccount';
 
 
 export default class CreateAccount extends React.Component {
+  componentDidMount() {
+    document.title = 'Create Profile | OS.University';
+  }
+
   render() {
     return (
       <div className="course">

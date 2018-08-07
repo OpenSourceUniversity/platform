@@ -15,6 +15,9 @@ const INITIAL_STATE = {
     skills: [
     ],
   },
+  academy: {
+    academy_logo: null,
+  }
 };
 
 export default function courseReducer(state = INITIAL_STATE, action) {
@@ -26,7 +29,8 @@ export default function courseReducer(state = INITIAL_STATE, action) {
   case 'FETCH_COURSE_SUCCESS':
     return Object.assign({}, state, {
       isFetching: false,
-      course: action.result,
+      course: action.course,
+      academy: action.academy,
     });
   case 'FETCH_COURSE_FAILURE':
     return Object.assign({}, state, {

@@ -27,7 +27,8 @@ export function fetchCourse(url = START_URL) {
         } else {
           dispatch({
             type: 'FETCH_COURSE_SUCCESS',
-            result: body,
+            course: body.course,
+            academy: body.academy,
           });
         }
       })

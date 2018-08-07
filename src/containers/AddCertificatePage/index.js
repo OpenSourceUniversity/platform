@@ -18,8 +18,6 @@ class AddCertificatePage extends React.Component {
 
   handleSubmit(event, component) {
     event.preventDefault();
-    debugger;
-
     // TODO: needs fix urgently
     const categories = [];
     for (let i = 0; i < (event.target.elements[6].parentElement.childElementCount - 5); i += 1) {

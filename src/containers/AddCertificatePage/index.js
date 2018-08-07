@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Grid, Header, Segment, Button, Message, Divider, Breadcrumb, Form, Input, Dimmer, Loader } from 'semantic-ui-react';
 import SkillsInput from 'components/SkillsInput';
+import IndustriesInput from 'components/IndustriesInput';
 import { addCertificate, storeProofOfExistance } from './actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import { getIpfs } from '../../util/ipfs/getIpfs';
-import Industries from '../../data/industryList';
 
 
 class AddCertificatePage extends React.Component {
@@ -18,14 +18,8 @@ class AddCertificatePage extends React.Component {
 
   handleSubmit(event, component) {
     event.preventDefault();
-    debugger;
 
-    // TODO: needs fix urgently
-    const categories = [];
-    for (let i = 0; i < (event.target.elements[6].parentElement.childElementCount - 5); i += 1) {
-      categories.push(event.target.elements[6].parentElement.children[i].textContent);
-    }
-
+    const industries = this.industriesRef.state.currentValue;
     const skills = this.skillsRef.state.currentValue;
 
     const certificateData = {
@@ -35,7 +29,7 @@ class AddCertificatePage extends React.Component {
       program_title: event.target.elements.program_title.value,
       course_title: event.target.elements.course_title.value,
       course_link: event.target.elements.course_link.value,
-      categories,
+      industries,
       skills,
       learner_eth_address: event.target.elements.learner_eth_address.value,
       score: event.target.elements.score.value,
@@ -141,18 +135,7 @@ class AddCertificatePage extends React.Component {
                       placeholder="Official course title"
                     />
                   </Form.Field>
-                  <Form.Dropdown
-                    id="categories"
-                    ref={(arg) => { this.categoriesRef = arg; }}
-                    name="categories"
-                    placeholder="Your course categories"
-                    label="Course categories"
-                    fluid
-                    search
-                    multiple
-                    required
-                    options={Industries.Industries}
-                  />
+                  <IndustriesInput ref={(arg) => { this.industriesRef = arg; }} />
                   <SkillsInput ref={(arg) => { this.skillsRef = arg; }} />
                   <Form.Field>
                     <label htmlFor="course_link">
@@ -232,7 +215,7 @@ class AddCertificatePage extends React.Component {
                       name="academy_title"
                       iconPosition="left"
                       icon="university"
-                      placeholder="Oficial name of your academy"
+                      placeholder="Official name of your academy"
                     />
                   </Form.Field>
                   <Form.Field>

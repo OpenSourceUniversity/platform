@@ -7,7 +7,7 @@ const INITIAL_STATE = {
       name: null,
       eth_address: null,
     },
-    categories: [
+    industries: [
       {
         name: null,
       },

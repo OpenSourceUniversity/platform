@@ -15,7 +15,7 @@ class BusinessesPage extends React.Component {
     document.title = 'Businesses | OS.University';
   }
 
-  categories = [
+  industries = [
     {
       name: 'Company',
       id: '1',
@@ -35,21 +35,21 @@ class BusinessesPage extends React.Component {
     this.setState({ activeIndex: newIndex });
   }
 
-  renderCategories() {
-    return this.categories.map(category => (
+  renderIndustries() {
+    return this.industries.map(industry => (
       <Form.Checkbox
-        label={category.name}
-        name={category.id}
-        key={category.id}
-        value={category.name}
+        label={industry.name}
+        name={industry.id}
+        key={industry.id}
+        value={industry.name}
       />));
   }
 
-  renderCategoryGroup() {
+  renderIndustryGroup() {
     return (
       <Form>
         <Form.Group grouped>
-          {this.renderCategories()}
+          {this.renderIndustries()}
         </Form.Group>
       </Form>
     );
@@ -117,7 +117,7 @@ class BusinessesPage extends React.Component {
                   </Accordion.Title>
                   <Accordion.Content
                     active={activeIndex === 0}
-                    content={this.renderCategoryGroup()}
+                    content={this.renderIndustryGroup()}
                   />
                 </Menu.Item>
               </Accordion>

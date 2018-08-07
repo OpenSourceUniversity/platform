@@ -177,11 +177,11 @@ class CoursePage extends React.Component {
                   </span>
                   <Divider clearing />
                   <Header style={{ fontSize: '1.5em', marginBottom: '5px' }}>
-                    Category
+                    Industry
                   </Header>
                   <Icon name="industry" />
                   <span style={{ color: 'grey' }} >
-                    {this.props.course.categories[0] ? this.props.course.categories[0].name : null}
+                    {this.props.course.industries[0] ? this.props.course.industries[0].name : null}
                   </span>
                   <Divider clearing />
                   <Header style={{ fontSize: '1.5em', marginBottom: '5px' }}>

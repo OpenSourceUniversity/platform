@@ -3,7 +3,7 @@ const INITIAL_STATE = {
   isAdded: false,
   jobDefault: {
     skills: [],
-    categories: [],
+    industries: [],
     languages: [],
   },
 };

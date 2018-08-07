@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Header, Grid, Button, Icon, Divider, Checkbox, Breadcrumb, Loader, Message, Dimmer, Menu, Segment, Form, Input } from 'semantic-ui-react';
 import SkillItem from 'components/SkillItem';
+import SkillsInput from 'components/SkillsInput';
+import IndustriesInput from 'components/IndustriesInput';
 import { fetchCertificates } from '../CertificatesPage/actions';
 import { fetchCertificate } from '../CertificatePage/actions';
 import { addCertificate, verifyCertificate, massVerification, rejectCertificate } from '../AddCertificatePage/actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
-import Industries from '../../data/industryList';
-import Skills from '../../data/skillsList';
 
 
 class CertificatesVerificationPage extends React.Component {
@@ -20,34 +20,28 @@ class CertificatesVerificationPage extends React.Component {
     document.title = 'Certificates Validation | OS.University';
   }
 
-  getSkills(obj) {
+  getSkills() {
     const needle = this.props.certificate.skills;
     const skills = [];
     if (!needle) {
       return null;
     }
     for (let i = 0; i < needle.length; i += 1) {
-      const result = obj.filter(skill => skill.text === needle[i]);
-      if (result.length) {
-        skills.push(result[0].value);
-      }
+      skills.push({value: needle.name, text: needle.name})
     }
     return skills;
   }
 
-  getIndustries(obj) {
-    const needle = this.props.certificate.categories;
-    const categories = [];
+  getIndustries() {
+    const needle = this.props.certificate.industries;
+    const industries = [];
     if (!needle) {
       return null;
     }
     for (let i = 0; i < needle.length; i += 1) {
-      const result = obj.filter(category => category.text === needle[i]);
-      if (result.length) {
-        categories.push(result[0].value);
-      }
+      industries.push({value: needle.name, text: needle.name})
     }
-    return categories;
+    return industries;
   }
 
   massVerification() {
@@ -64,15 +58,8 @@ class CertificatesVerificationPage extends React.Component {
 
   handleSubmit(event, component) {
     event.preventDefault();
-    const categories = [];
-    const skills = [];
-    for (let i = 0; i < (event.target.elements[6].parentElement.childElementCount - 5); i += 1) {
-      categories.push(event.target.elements[6].parentElement.children[i].textContent);
-    }
-
-    for (let i = 0; i < (event.target.elements[7].parentElement.childElementCount - 5); i += 1) {
-      skills.push(event.target.elements[7].parentElement.children[i].textContent);
-    }
+    const industries = this.industriesRef.state.currentValue;
+    const skills = this.skillsRef.state.currentValue;
     const certificateData = {
       id: component.state.activeItem,
       academy_title: event.target.elements.academy_title.value,
@@ -80,7 +67,7 @@ class CertificatesVerificationPage extends React.Component {
       program_title: event.target.elements.program_title.value,
       course_title: event.target.elements.course_title.value,
       course_link: event.target.elements.course_link.value,
-      categories,
+      industries,
       skills,
       score: event.target.elements.score.value,
       duration: event.target.elements.duration.value,
@@ -109,16 +96,16 @@ class CertificatesVerificationPage extends React.Component {
   }
 
   renderSubjects() {
-    const categoriesArr = this.props.certificate.categories;
-    const categories = [];
+    const industriesArr = this.props.certificate.industries;
+    const industries = [];
     try {
-      for (let i = 0; i < categoriesArr.length; i += 1) {
-        categories.push({
-          have_icon: false, check: true, name: categoriesArr[i].name, basic: false,
+      for (let i = 0; i < industriesArr.length; i += 1) {
+        industries.push({
+          have_icon: false, check: true, name: industriesArr[i].name, basic: false,
         });
       }
-      return categories.map((category, index) => (
-        <SkillItem skill={category} key={index} />
+      return industries.map((industry, index) => (
+        <SkillItem skill={industry} key={index} />
       ));
     } catch (e) {
       return null;
@@ -308,24 +295,12 @@ class CertificatesVerificationPage extends React.Component {
                 {this.props.certificate.verified ?
                   <div>
                     <label>
-                      <b>Course categories</b> <br /><br />
+                      <b>Course industries</b> <br /><br />
                     </label>
                     {this.renderSubjects()}
                     <br /><br />
                   </div> :
-                  <Form.Dropdown
-                    id="categories"
-                    name="categories"
-                    placeholder="Your course categories"
-                    label="Course categories"
-                    fluid
-                    search
-                    multiple
-                    key={`categories:${this.props.certificate.categories || ''}`}
-                    defaultValue={this.getIndustries(Industries.Industries)}
-                    options={Industries.Industries}
-                    readOnly={this.props.certificate.verified}
-                  />
+                  <IndustriesInput ref={(arg) => { this.industriesRef = arg; }} defaultValue={this.getIndustries()} />
                 }
                 {this.props.certificate.verified ?
                   <div>
@@ -335,19 +310,7 @@ class CertificatesVerificationPage extends React.Component {
                     {this.renderSkills()}
                     <br /><br />
                   </div> :
-                  <Form.Dropdown
-                    id="skills"
-                    name="skills"
-                    placeholder="Recieved skills"
-                    label="Skills"
-                    fluid
-                    search
-                    multiple
-                    key={`skills:${this.props.certificate.skills || ''}`}
-                    defaultValue={this.getSkills(Skills.Skills)}
-                    options={Skills.Skills}
-                    readOnly={this.props.certificate.verified}
-                  />
+                  <SkillsInput ref={(arg) => { this.skillsRef = arg; }} defaultValue={this.getSkills()} />
                 }
                 <Form.Field required>
                   <label htmlFor="learner_eth_address">

@@ -3,7 +3,7 @@ const INITIAL_STATE = {
   isAdded: false,
   courseDefault: {
     skills: [],
-    categories: [],
+    industries: [],
     languages: [],
   },
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Header, Divider, Grid, Segment, Input, Accordion, Menu, Icon, Dropdown } from 'semantic-ui-react';
-import CoursesCategoryFilter from 'components/CoursesCategoryFilter';
+import CoursesIndustryFilter from 'components/CoursesIndustryFilter';
 import JobItem from 'components/JobItem';
 import { fetchJobs } from './actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
@@ -72,7 +72,7 @@ class JobsPage extends React.Component {
                 </Accordion.Title>
                 <Accordion.Content
                   active={activeIndex === 0}
-                  content={<CoursesCategoryFilter filterType="jobs" />}
+                  content={<CoursesIndustryFilter filterType="jobs" />}
                 />
               </Menu.Item>
             </Accordion>

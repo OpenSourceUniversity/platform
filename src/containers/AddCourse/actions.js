@@ -70,7 +70,7 @@ export function addCourse(courseData) {
       skills: courseData.skills ? courseData.skills : null,
       description: courseData.description ? courseData.description : null,
       external_link: courseData.external_link ? courseData.external_link : null,
-      categories: courseData.categories ? courseData.categories : null,
+      industries: courseData.industries ? courseData.industries : null,
     };
     const { bdnUrl } = Config.network;
     axios.post(`${bdnUrl}api/v1/courses/`, postData, axiosConfig).then(() => {
@@ -103,7 +103,7 @@ export function editCourse(id, courseData) {
       skills: courseData.skills ? courseData.skills : null,
       description: courseData.description ? courseData.description : null,
       external_link: courseData.external_link ? courseData.external_link : null,
-      categories: courseData.categories ? courseData.categories : null,
+      industries: courseData.industries ? courseData.industries : null,
     };
     const { bdnUrl } = Config.network;
     const url = `${bdnUrl}api/v1/courses/${id}/edit_by_id/`;

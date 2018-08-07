@@ -1,7 +1,6 @@
 
-
-let AuthorizedAccess = artifacts.require("./contracts/authorities/AuthorizedAccess.sol");
+let ipfsHashStorage = artifacts.require("./contracts/ipfsHashStorage.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(AuthorizedAccess);
+   deployer.deploy(ipfsHashStorage);
 };

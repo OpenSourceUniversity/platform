@@ -1,17 +1,17 @@
 import axios from 'axios';
 import store from '../../store';
 import Config from '../../config';
+import { fetchCertificates } from '../../containers/CertificatesPage/actions';
 
 const { bdnUrl } = Config.network;
 const START_URL = `${bdnUrl}api/v1/certificates/`;
 
 
-export function addCertificate(certificateData, ipfsHash, url = START_URL) {
+export default function verifyCertificate(certificateData, url = START_URL) {
   return function action(dispatch) {
     dispatch({
       type: 'ADD_CERTIFICATE_REQUEST',
     });
-    console.log(ipfsHash);
     const axiosConfig = {
       headers: {
         'Auth-Signature': store.getState().auth.signedAddress,
@@ -29,43 +29,23 @@ export function addCertificate(certificateData, ipfsHash, url = START_URL) {
       course_link: certificateData.course_link ? certificateData.course_link : null,
       industries: certificateData.industries ? certificateData.industries : null,
       skills: certificateData.skills ? certificateData.skills : null,
-      ipfs_hash: ipfsHash,
       learner_eth_address: certificateData.learner_eth_address ?
         certificateData.learner_eth_address : null,
       score: certificateData.score ? certificateData.score : 0,
       duration: certificateData.duration ? certificateData.duration * 3600 : null,
       expiration_date: certificateData.expiration_date ? certificateData.expiration_date : null,
+      verified: true,
     };
     axios.post(url, postData, axiosConfig).then(() => {
       dispatch({
         type: 'ADD_CERTIFICATE_SUCCESS',
       });
+      dispatch(fetchCertificates(`${bdnUrl}api/v1/certificates/get_certificates_by_academy/`));
     }).catch(() => {
       dispatch({
         type: 'ADD_CERTIFICATE_FAILURE',
         error: 'Fail',
       });
-    });
-  };
-}
-
-export function storeCertificateOnIpfs(buffer, certificateData) {
-  return function dispatcher(dispatch) {
-    const ipfs = store.getState().ipfs.IPFSinstance;
-    dispatch({
-      type: 'IPFS_GET_REQUEST',
-    });
-    dispatch({
-      type: 'ADD_CERTIFICATE_REQUEST',
-    });
-    ipfs.add(buffer, (err, ipfsHash) => {
-      dispatch({
-        type: 'IPFS_GET_SUCCESS',
-        payload: {
-          ipfsHash: ipfsHash[0].hash,
-        },
-      });
-      dispatch(addCertificate(certificateData, ipfsHash[0].hash));
     });
   };
 }

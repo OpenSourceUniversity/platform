@@ -6,7 +6,10 @@ import SkillsInput from 'components/SkillsInput';
 import IndustriesInput from 'components/IndustriesInput';
 import { fetchCertificates } from '../CertificatesPage/actions';
 import { fetchCertificate } from '../CertificatePage/actions';
-import { addCertificate, verifyCertificate, massVerification, rejectCertificate } from '../AddCertificatePage/actions';
+import { addCertificate } from '../AddCertificatePage/actions';
+import verifyCertificate from '../../util/verification/verifyCertificate';
+import massVerification from '../../util/verification/massVerification';
+import rejectCertificate from '../../util/verification/rejectCertificate';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import Config from '../../config';
 

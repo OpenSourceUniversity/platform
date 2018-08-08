@@ -6,7 +6,7 @@ import SkillsInput from 'components/SkillsInput';
 import IndustriesInput from 'components/IndustriesInput';
 import fetchCertificates from '../../util/certificate/fetchCertificates';
 import fetchCertificate from '../../util/certificate/fetchCertificate';
-import addCertificate from '../../util/certificate/addCertificate';
+import updateCertificate from '../../util/certificate/updateCertificate';
 import verifyCertificate from '../../util/verification/verifyCertificate';
 import massVerification from '../../util/verification/massVerification';
 import rejectCertificate from '../../util/verification/rejectCertificate';
@@ -55,9 +55,9 @@ class CertificatesVerificationPage extends React.Component {
       expiration_date: event.target.elements.expiration_date.value,
     };
     if (component.state.verification) {
-      component.props.verifyCertificate(certificateData, `${bdnUrl}api/v1/certificates/update_certificate_by_id/`);
+      component.props.verifyCertificate(certificateData);
     } else {
-      component.props.addCertificate(certificateData, null, `${bdnUrl}api/v1/certificates/update_certificate_by_id/`);
+      component.props.updateCertificate(certificateData);
     }
     component.setState({ verification: false });
     component.setState({ activeItem: null });
@@ -405,11 +405,11 @@ function mapDispatchToProps(dispatch) {
     fetchCertificate(url) {
       dispatch(fetchCertificate(url));
     },
-    addCertificate(data, IPFShash, url) {
-      dispatch(addCertificate(data, IPFShash, url));
+    updateCertificate(data) {
+      dispatch(updateCertificate(data));
     },
-    verifyCertificate(data, url) {
-      dispatch(verifyCertificate(data, url));
+    verifyCertificate(data) {
+      dispatch(verifyCertificate(data));
     },
     massVerification(ids) {
       dispatch(massVerification(ids));

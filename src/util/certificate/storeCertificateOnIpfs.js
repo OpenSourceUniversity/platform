@@ -18,7 +18,9 @@ export default function storeCertificateOnIpfs(buffer, certificateData) {
           ipfsHash: ipfsHash[0].hash,
         },
       });
-      dispatch(addCertificate(certificateData, ipfsHash[0].hash));
+      const hashComponent = { ipfs_hash: ipfsHash[0].hash };
+      const certificateDataCopy = Object.assign({}, certificateData, hashComponent);
+      dispatch(addCertificate(certificateDataCopy));
     });
   };
 }

@@ -6,7 +6,7 @@ import SkillsInput from 'components/SkillsInput';
 import IndustriesInput from 'components/IndustriesInput';
 import fetchCertificates from '../../util/certificate/fetchCertificates';
 import fetchCertificate from '../../util/certificate/fetchCertificate';
-import addCertificate from '../../util/certificate/addCertificate';
+import updateCertificate from '../../util/certificate/updateCertificate';
 import verifyCertificate from '../../util/verification/verifyCertificate';
 import massVerification from '../../util/verification/massVerification';
 import rejectCertificate from '../../util/verification/rejectCertificate';
@@ -79,9 +79,9 @@ class CertificatesVerificationPage extends React.Component {
       expiration_date: event.target.elements.expiration_date.value,
     };
     if (component.state.verification) {
-      component.props.verifyCertificate(certificateData, `${bdnUrl}api/v1/certificates/update_certificate_by_id/`);
+      component.props.verifyCertificate(certificateData);
     } else {
-      component.props.addCertificate(certificateData, null, `${bdnUrl}api/v1/certificates/update_certificate_by_id/`);
+      component.props.updateCertificate(certificateData);
     }
     component.setState({ verification: false });
     component.setState({ activeItem: null });
@@ -389,14 +389,6 @@ class CertificatesVerificationPage extends React.Component {
                 <Form.Field>
                   <label htmlFor="certificate_file">
                     Certificate file in PDF
-                    <Input
-                      id="certificate_file"
-                      iconPosition="left"
-                      icon="address card"
-                      type="file"
-                      name="certificate_file"
-                      placeholder="Certificate File"
-                    />
                   </label>
                   <a href={`https://ipfs.io/ipfs/${this.props.certificate.ipfs_hash}`} target="_blank" rel="noopener noreferrer">
                     {this.props.certificate.ipfs_hash}
@@ -439,11 +431,11 @@ function mapDispatchToProps(dispatch) {
     fetchCertificate(url) {
       dispatch(fetchCertificate(url));
     },
-    addCertificate(data, IPFShash, url) {
-      dispatch(addCertificate(data, IPFShash, url));
+    updateCertificate(data) {
+      dispatch(updateCertificate(data));
     },
-    verifyCertificate(data, url) {
-      dispatch(verifyCertificate(data, url));
+    verifyCertificate(data) {
+      dispatch(verifyCertificate(data));
     },
     massVerification(ids) {
       dispatch(massVerification(ids));

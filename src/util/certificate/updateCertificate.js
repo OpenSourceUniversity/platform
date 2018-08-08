@@ -3,10 +3,10 @@ import store from '../../store';
 import Config from '../../config';
 
 const { bdnUrl } = Config.network;
-const ADD_CERTIFICATE_URL = `${bdnUrl}api/v1/certificates/`;
+const UPDATE_CERTIFICATE_URL = `${bdnUrl}api/v1/certificates/update_certificate_by_id/`;
 
 
-export default function addCertificate(certificateData) {
+export default function updateCertificate(certificateData) {
   return function action(dispatch) {
     dispatch({
       type: 'ADD_CERTIFICATE_REQUEST',
@@ -18,7 +18,7 @@ export default function addCertificate(certificateData) {
       },
     };
 
-    axios.post(ADD_CERTIFICATE_URL, certificateData, axiosConfig).then(() => {
+    axios.post(UPDATE_CERTIFICATE_URL, certificateData, axiosConfig).then(() => {
       dispatch({
         type: 'ADD_CERTIFICATE_SUCCESS',
       });

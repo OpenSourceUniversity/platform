@@ -2,19 +2,7 @@
 import axios from 'axios';
 import store from '../../store';
 import Config from '../../config';
-// const contract = require('truffle-contract');
 
-
-export function storeProofOfExistance(/* state , hash */) {
-  return function action(dispatch) {
-    // const web3 = store.getState().web3.web3Instance;
-    setTimeout(() => {
-      dispatch({
-        type: 'ADD_COURSE_SUCCESS',
-      });
-    }, 1500);
-  };
-}
 
 export function getDefaultValues(id) {
   return function action(dispatch) {

@@ -5,16 +5,6 @@ import Config from '../../config';
 // const contract = require('truffle-contract');
 const { bdnUrl } = Config.network;
 
-export function storeProofOfExistance(/* state , hash */) {
-  return function action(dispatch) {
-    // const web3 = store.getState().web3.web3Instance;
-    setTimeout(() => {
-      dispatch({
-        type: 'ADD_JOB_SUCCESS',
-      });
-    }, 1500);
-  };
-}
 
 export function getDefaultValues(id) {
   return function action(dispatch) {

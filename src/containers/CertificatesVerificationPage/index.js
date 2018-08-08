@@ -29,7 +29,7 @@ class CertificatesVerificationPage extends React.Component {
       return null;
     }
     for (let i = 0; i < needle.length; i += 1) {
-      skills.push({value: needle.name, text: needle.name})
+      skills.push({ value: needle.name, text: needle.name });
     }
     return skills;
   }
@@ -41,7 +41,7 @@ class CertificatesVerificationPage extends React.Component {
       return null;
     }
     for (let i = 0; i < needle.length; i += 1) {
-      industries.push({value: needle.name, text: needle.name})
+      industries.push({ value: needle.name, text: needle.name });
     }
     return industries;
   }
@@ -302,7 +302,10 @@ class CertificatesVerificationPage extends React.Component {
                     {this.renderSubjects()}
                     <br /><br />
                   </div> :
-                  <IndustriesInput ref={(arg) => { this.industriesRef = arg; }} defaultValue={this.getIndustries()} />
+                  <IndustriesInput
+                    ref={(arg) => { this.industriesRef = arg; }}
+                    defaultValue={this.getIndustries()}
+                  />
                 }
                 {this.props.certificate.verified ?
                   <div>
@@ -312,7 +315,10 @@ class CertificatesVerificationPage extends React.Component {
                     {this.renderSkills()}
                     <br /><br />
                   </div> :
-                  <SkillsInput ref={(arg) => { this.skillsRef = arg; }} defaultValue={this.getSkills()} />
+                  <SkillsInput
+                    ref={(arg) => { this.skillsRef = arg; }}
+                    defaultValue={this.getSkills()}
+                  />
                 }
                 <Form.Field required>
                   <label htmlFor="learner_eth_address">

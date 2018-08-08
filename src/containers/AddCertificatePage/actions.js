@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { fetchCertificates } from '../CertificatesPage/actions';
 import store from '../../store';
-// const contract = require('truffle-contract');
+import Config from '../../config';
 
-const START_URL = 'http://localhost:8000/api/v1/certificates/';
+const { bdnUrl } = Config.network;
+const START_URL = `${bdnUrl}api/v1/certificates/`;
 
 
 export function addCertificate(certificateData, ipfsHash, url = START_URL) {
@@ -49,7 +50,7 @@ export function addCertificate(certificateData, ipfsHash, url = START_URL) {
   };
 }
 
-export function storeProofOfExistance(buffer, certificateData) {
+export function storeCertificateOnIpfs(buffer, certificateData) {
   return function dispatcher(dispatch) {
     const ipfs = store.getState().ipfs.IPFSinstance;
     dispatch({
@@ -103,7 +104,7 @@ export function verifyCertificate(certificateData, url = START_URL) {
       dispatch({
         type: 'ADD_CERTIFICATE_SUCCESS',
       });
-      dispatch(fetchCertificates('http://localhost:8000/api/v1/certificates/get_certificates_by_academy'));
+      dispatch(fetchCertificates(`${bdnUrl}api/v1/certificates/get_certificates_by_academy/`));
     }).catch(() => {
       dispatch({
         type: 'ADD_CERTIFICATE_FAILURE',
@@ -127,11 +128,11 @@ export function massVerification(ids) {
     const postData = {
       ids: ids.reduce((a, b) => `${a}|${b}`, ''),
     };
-    axios.post('http://localhost:8000/api/v1/certificates/mass_verification/', postData, axiosConfig).then(() => {
+    axios.post(`${bdnUrl}api/v1/certificates/mass_verification/`, postData, axiosConfig).then(() => {
       dispatch({
         type: 'ADD_CERTIFICATE_SUCCESS',
       });
-      dispatch(fetchCertificates('http://localhost:8000/api/v1/certificates/get_certificates_by_academy'));
+      dispatch(fetchCertificates(`${bdnUrl}api/v1/certificates/get_certificates_by_academy/`));
     }).catch(() => {
       dispatch({
         type: 'ADD_CERTIFICATE_FAILURE',
@@ -156,11 +157,11 @@ export function rejectCertificate(id) {
     const postData = {
       id,
     };
-    axios.post(`http://localhost:8000/api/v1/certificates/${id}/delete_by_id/`, postData, axiosConfig).then(() => {
+    axios.post(`${bdnUrl}api/v1/certificates/${id}/delete_by_id/`, postData, axiosConfig).then(() => {
       dispatch({
         type: 'ADD_CERTIFICATE_SUCCESS',
       });
-      dispatch(fetchCertificates('http://localhost:8000/api/v1/certificates/get_certificates_by_academy'));
+      dispatch(fetchCertificates(`${bdnUrl}api/v1/certificates/get_certificates_by_academy/`));
     }).catch(() => {
       dispatch({
         type: 'ADD_CERTIFICATE_FAILURE',

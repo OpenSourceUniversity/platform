@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Container, Grid, Header, Segment, Button, Message, Divider, Breadcrumb, Form, Input, Dimmer, Loader } from 'semantic-ui-react';
 import SkillsInput from 'components/SkillsInput';
 import IndustriesInput from 'components/IndustriesInput';
-import { addCertificate, storeProofOfExistance } from './actions';
+import { addCertificate, storeCertificateOnIpfs } from './actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import { getIpfs } from '../../util/ipfs/getIpfs';
 
@@ -37,7 +37,7 @@ class AddCertificatePage extends React.Component {
       expiration_date: event.target.elements.expiration_date.value,
     };
     if (component.state.buffer) {
-      component.props.storeProofOfExistance(component.state.buffer, certificateData);
+      component.props.storeCertificateOnIpfs(component.state.buffer, certificateData);
     } else {
       component.setState({ certificateFileIsMissing: true });
     }
@@ -289,8 +289,8 @@ function mapDispatchToProps(dispatch) {
     setSecondaryNav(secondaryNav) {
       dispatch(setSecondaryNav(secondaryNav));
     },
-    storeProofOfExistance(buffer, certificateData) {
-      dispatch(storeProofOfExistance(buffer, certificateData));
+    storeCertificateOnIpfs(buffer, certificateData) {
+      dispatch(storeCertificateOnIpfs(buffer, certificateData));
     },
     getIpfs() {
       dispatch(getIpfs());

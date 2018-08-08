@@ -11,6 +11,9 @@ const Config = {
         protocol: 'https'
     },
   },
+  blockchain: {
+    storageAddress: '0x2A22e' // Needs to be filled in
+  },
   token: {
     contractAddress: '0x2A22e5cCA00a3D63308fa39f29202eB1b39eEf52',
   },

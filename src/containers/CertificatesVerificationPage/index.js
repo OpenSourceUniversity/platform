@@ -8,14 +8,16 @@ import { fetchCertificates } from '../CertificatesPage/actions';
 import { fetchCertificate } from '../CertificatePage/actions';
 import { addCertificate, verifyCertificate, massVerification, rejectCertificate } from '../AddCertificatePage/actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
+import Config from '../../config';
 
+const { bdnUrl } = Config.network;
 
 class CertificatesVerificationPage extends React.Component {
   /* eslint-disable react/no-unused-state */
   state = { activeItem: null, verification: false }
 
   componentDidMount() {
-    this.props.fetchCertificates('http://localhost:8000/api/v1/certificates/get_certificates_by_academy');
+    this.props.fetchCertificates(`${bdnUrl}api/v1/certificates/get_certificates_by_academy/`);
     this.props.setSecondaryNav('academia');
     document.title = 'Certificates Validation | OS.University';
   }
@@ -74,9 +76,9 @@ class CertificatesVerificationPage extends React.Component {
       expiration_date: event.target.elements.expiration_date.value,
     };
     if (component.state.verification) {
-      component.props.verifyCertificate(certificateData, 'http://localhost:8000/api/v1/certificates/update_certificate_by_id/');
+      component.props.verifyCertificate(certificateData, `${bdnUrl}api/v1/certificates/update_certificate_by_id/`);
     } else {
-      component.props.addCertificate(certificateData, null, 'http://localhost:8000/api/v1/certificates/update_certificate_by_id/');
+      component.props.addCertificate(certificateData, null, `${bdnUrl}api/v1/certificates/update_certificate_by_id/`);
     }
     component.setState({ verification: false });
     component.setState({ activeItem: null });
@@ -84,7 +86,7 @@ class CertificatesVerificationPage extends React.Component {
 
   handleItemClick = (e, { name }) => {
     this.setState({ activeItem: name });
-    this.props.fetchCertificate(`http://localhost:8000/api/v1/certificates/${name}/`);
+    this.props.fetchCertificate(`${bdnUrl}api/v1/certificates/${name}/`);
   }
 
   handleCheckboxClick =(e, { name }) => {
@@ -387,6 +389,9 @@ class CertificatesVerificationPage extends React.Component {
                       placeholder="Certificate File"
                     />
                   </label>
+                  <a href={`https://ipfs.io/ipfs/${this.props.certificate.ipfs_hash}`} target="_blank" rel="noopener noreferrer">
+                    {this.props.certificate.ipfs_hash}
+                  </a>
                 </Form.Field>
                 <div style={{ display: this.props.certificate.verified ? 'none' : null }}>
                   <Button type="submit" color="green" size="huge" onClick={() => this.setState({ verification: true })}>Verify</Button>

@@ -5,8 +5,28 @@ import arrayUnique from '../../util/arrayUnique';
 
 
 export default class SkillsInput extends Component {
-  state = { options: this.props.defaultValue ? this.props.defaultValue : [],
-    currentValue: this.props.defaultValue ? this.props.defaultValue : [] }
+  state = { options: [], currentValue: [], searchValue: '' }
+
+  componentDidUpdate(prevProps, prevState) {
+    // only update chart if the data has changed
+    if (prevProps.skills !== this.props.skills) {
+      const needle = this.props.skills;
+      const skills = [];
+      if (!needle) {
+        return null;
+      }
+      for (let i = 0; i < needle.length; i += 1) {
+        skills.push(needle[i].name);
+      }
+      const normalizedSkillValue = skills.map(value => (
+          { value, text: value }
+        ));
+      this.setState({
+        currentValue: skills,
+        options: normalizedSkillValue,
+      });
+    }
+  }
 
   handleAddition = (e, { value }) => {
     this.setState({
@@ -14,7 +34,7 @@ export default class SkillsInput extends Component {
     });
   }
 
-  handleChange = (e, { value }) => {
+  handleChange = (event, { value }) => {
     const normalizedCurrentValue = value.map(v => (
       { value: v, text: v }
     ));
@@ -22,9 +42,11 @@ export default class SkillsInput extends Component {
       currentValue: value,
       options: normalizedCurrentValue,
     });
+    this.setState({searchValue: ''})
   }
 
   handleSearchChange = (event) => {
+    this.setState({searchValue: event.target.value})
     const query = event.target.value;
     const { bdnUrl } = Config.network;
     fetch(`${bdnUrl}api/v1/skills/autocomplete/?q=${query}`)
@@ -52,6 +74,7 @@ export default class SkillsInput extends Component {
         placeholder="Choose skills"
         label="Skills"
         search
+        searchQuery={this.state.searchValue}
         selection
         fluid
         multiple

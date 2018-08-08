@@ -21,6 +21,23 @@ export default class IndustriesInput extends React.Component {
       });
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    // only update chart if the data has changed
+    if (prevProps.industries !== this.props.industries) {
+      const needle = this.props.industries;
+      const industries = [];
+      if (!needle) {
+        return null;
+      }
+      for (let i = 0; i < needle.length; i += 1) {
+        industries.push(needle[i].name);
+      }
+      this.setState({
+        currentValue: industries,
+      });
+    }
+  }
+
   handleChange = (e, { value }) => {
     this.setState({
       currentValue: value,
@@ -40,7 +57,6 @@ export default class IndustriesInput extends React.Component {
         search
         selection
         multiple
-        defaultValue={this.props.defaultValue}
         onChange={this.handleChange}
         required
       />

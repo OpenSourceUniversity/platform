@@ -82,7 +82,13 @@ class HomePage extends React.Component {
         <div>
           <Header style={{ textAlign: 'center' }} size="huge">Courses</Header>
           <Grid width={16}>
-            { this.renderFeaturedCourses() }
+            {
+              !!this.props.courses.length ?
+              this.renderFeaturedCourses() :
+              <div style={{ textAlign: 'center', width: '100%',  marginTop: '3em' }}> 
+                <p style={{ textAlign: 'center' }}>There are no featured courses yet.</p>
+              </div>
+            }
           </Grid>
           <Divider style={{ marginTop: '3em' }} clearing />
           <div style={{ textAlign: 'center' }}>

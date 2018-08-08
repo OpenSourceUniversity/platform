@@ -16,30 +16,6 @@ class AddCourse extends React.Component {
     document.title = 'Add Course | OS.University';
   }
 
-  getSkills() {
-    const needle = this.props.courseDefault.skills;
-    const skills = [];
-    if (!needle) {
-      return null;
-    }
-    for (let i = 0; i < needle.length; i += 1) {
-      skills.push({value: needle.name, text: needle.name})
-    }
-    return skills;
-  }
-
-  getIndustries() {
-    const needle = this.props.courseDefault.industries;
-    const industries = [];
-    if (!needle) {
-      return null;
-    }
-    for (let i = 0; i < needle.length; i += 1) {
-      industries.push({value: needle.name, text: needle.name})
-    }
-    return industries;
-  }
-
   handleSubmit(event, component) {
     event.preventDefault();
     const industries = this.industriesRef.state.currentValue;
@@ -107,7 +83,7 @@ class AddCourse extends React.Component {
                   />
                 </label>
               </Form.Field>
-              <SkillsInput ref={(arg) => { this.skillsRef = arg; }} defaultValue={this.getSkills()} />
+              <SkillsInput ref={(arg) => { this.skillsRef = arg; }} skills={this.props.courseDefault.skills} />
               <Form.Field>
                 <label htmlFor="description">
                   Description
@@ -135,7 +111,7 @@ class AddCourse extends React.Component {
                   />
                 </label>
               </Form.Field>
-              <IndustriesInput ref={(arg) => { this.industriesRef = arg; }} defaultValue={this.getIndustries()} />
+              <IndustriesInput ref={(arg) => { this.industriesRef = arg; }} industries={this.props.courseDefault.industries} />
               <Button type="submit" size="huge">Submit</Button>
             </Form>
           </Grid.Column>

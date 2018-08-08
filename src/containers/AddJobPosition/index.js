@@ -16,30 +16,6 @@ class AddJobPosition extends React.Component {
     document.title = 'Add Job Position | OS.University';
   }
 
-  getSkills() {
-    const needle = this.props.jobDefault.skills;
-    const skills = [];
-    if (!needle) {
-      return null;
-    }
-    for (let i = 0; i < needle.length; i += 1) {
-      skills.push({value: needle.name, text: needle.name})
-    }
-    return skills;
-  }
-
-  getIndustries() {
-    const needle = this.props.jobDefault.industries;
-    const industries = [];
-    if (!needle) {
-      return null;
-    }
-    for (let i = 0; i < needle.length; i += 1) {
-      industries.push({value: needle.name, text: needle.name})
-    }
-    return industries;
-  }
-
   handleSubmit(event, component) {
     event.preventDefault();
     const industries = this.industriesRef.state.currentValue;
@@ -140,7 +116,7 @@ class AddJobPosition extends React.Component {
                   />
                 </label>
               </Form.Field>
-              <SkillsInput ref={(arg) => { this.skillsRef = arg; }} defaultValue={this.getSkills()} />
+              <SkillsInput ref={(arg) => { this.skillsRef = arg; }} skills={this.props.jobDefault.skills} />
               <Form.Field>
                 <label htmlFor="description">
                   Description
@@ -168,7 +144,7 @@ class AddJobPosition extends React.Component {
                   />
                 </label>
               </Form.Field>
-              <IndustriesInput ref={(arg) => { this.industriesRef = arg; }} defaultValue={this.getIndustries()} />
+              <IndustriesInput ref={(arg) => { this.industriesRef = arg; }} industries={this.props.jobDefault.industries} />
               <Form.Field>
                 <label htmlFor="closes">
                   Offer closes

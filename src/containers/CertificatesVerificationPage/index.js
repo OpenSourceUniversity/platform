@@ -25,30 +25,6 @@ class CertificatesVerificationPage extends React.Component {
     document.title = 'Certificates Validation | OS.University';
   }
 
-  getSkills() {
-    const needle = this.props.certificate.skills;
-    const skills = [];
-    if (!needle) {
-      return null;
-    }
-    for (let i = 0; i < needle.length; i += 1) {
-      skills.push({ value: needle.name, text: needle.name });
-    }
-    return skills;
-  }
-
-  getIndustries() {
-    const needle = this.props.certificate.industries;
-    const industries = [];
-    if (!needle) {
-      return null;
-    }
-    for (let i = 0; i < needle.length; i += 1) {
-      industries.push({ value: needle.name, text: needle.name });
-    }
-    return industries;
-  }
-
   massVerification() {
     this.props.massVerification(this.massVerifyIds);
     this.setState({ activeItem: null });
@@ -100,6 +76,23 @@ class CertificatesVerificationPage extends React.Component {
     }
   }
 
+  renderSkills() {
+    const skillsArr = this.props.certificate.skills;
+    const skills = [];
+    try {
+      for (let i = 0; i < skillsArr.length; i += 1) {
+        skills.push({
+          have_icon: false, check: true, name: skillsArr[i].name, basic: false,
+        });
+      }
+      return skills.map((skill, index) => (
+        <SkillItem skill={skill} key={index} />
+      ));
+    } catch (e) {
+      return null;
+    }
+  }
+
   renderSubjects() {
     const industriesArr = this.props.certificate.industries;
     const industries = [];
@@ -111,23 +104,6 @@ class CertificatesVerificationPage extends React.Component {
       }
       return industries.map((industry, index) => (
         <SkillItem skill={industry} key={index} />
-      ));
-    } catch (e) {
-      return null;
-    }
-  }
-
-  renderSkills() {
-    const skillsArr = this.props.certificate.skills;
-    const skills = [];
-    try {
-      for (let i = 0; i < skillsArr.length; i += 1) {
-        skills.push({
-          have_icon: false, check: true, name: skillsArr[i], basic: false,
-        });
-      }
-      return skills.map((skill, index) => (
-        <SkillItem skill={skill} key={index} />
       ));
     } catch (e) {
       return null;
@@ -307,7 +283,7 @@ class CertificatesVerificationPage extends React.Component {
                   </div> :
                   <IndustriesInput
                     ref={(arg) => { this.industriesRef = arg; }}
-                    defaultValue={this.getIndustries()}
+                    industries={this.props.certificate.industries}
                   />
                 }
                 {this.props.certificate.verified ?
@@ -315,12 +291,12 @@ class CertificatesVerificationPage extends React.Component {
                     <label>
                       <b>Recieved skills</b> <br /><br />
                     </label>
-                    {this.renderSkills()}
+                    {this.renderSkills() }
                     <br /><br />
                   </div> :
                   <SkillsInput
                     ref={(arg) => { this.skillsRef = arg; }}
-                    defaultValue={this.getSkills()}
+                    skills={this.props.certificate.skills}
                   />
                 }
                 <Form.Field required>
@@ -386,23 +362,13 @@ class CertificatesVerificationPage extends React.Component {
                     />
                   </label>
                 </Form.Field>
-                <Form.Field>
-                  <label htmlFor="certificate_file">
-                    Certificate file in PDF
-                    <Input
-                      id="certificate_file"
-                      iconPosition="left"
-                      icon="address card"
-                      type="file"
-                      name="certificate_file"
-                      placeholder="Certificate File"
-                    />
+                  <label htmlFor="ipfsHash">
+                    <b>Certificate file in PDF</b><br/><br/>
+                    <a id="ipfsHash" name="ipfsHash" href={`https://ipfs.io/ipfs/${this.props.certificate.ipfs_hash}`} target="_blank" rel="noopener noreferrer">
+                      {this.props.certificate.ipfs_hash}
+                    </a>
                   </label>
-                  <a href={`https://ipfs.io/ipfs/${this.props.certificate.ipfs_hash}`} target="_blank" rel="noopener noreferrer">
-                    {this.props.certificate.ipfs_hash}
-                  </a>
-                </Form.Field>
-                <div style={{ display: this.props.certificate.verified ? 'none' : null }}>
+                <div style={{ display: this.props.certificate.verified ? 'none' : null, paddingTop: '20px' }}>
                   <Button type="submit" color="green" size="huge" onClick={() => this.setState({ verification: true })}>Verify</Button>
                   <Button type="submit" primary size="huge">Save changed data</Button>
                   <Button color="red" floated="right" size="huge" onClick={() => this.rejectCertificate()}>Reject</Button>

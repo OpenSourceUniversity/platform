@@ -5,7 +5,8 @@ import arrayUnique from '../../util/arrayUnique';
 
 
 export default class SkillsInput extends Component {
-  state = { options: [], currentValue: [] }
+  state = { options: this.props.defaultValue ? this.props.defaultValue : [],
+    currentValue: this.props.defaultValue ? this.props.defaultValue : [] }
 
   handleAddition = (e, { value }) => {
     this.setState({
@@ -48,12 +49,14 @@ export default class SkillsInput extends Component {
     const dropdown = (
       <Form.Dropdown
         options={this.state.options}
-        placeholder="Choose Skills"
+        placeholder="Choose skills"
+        label="Skills"
         search
         selection
         fluid
         multiple
         allowAdditions
+        required
         value={currentValue}
         onAddItem={this.handleAddition}
         onChange={this.handleChange}

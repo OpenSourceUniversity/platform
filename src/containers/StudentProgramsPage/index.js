@@ -135,7 +135,7 @@ export default class StudenProgramsPage extends React.Component {
                     onClick={this.handleClick}
                   >
                     <Icon name="block layout" />
-                    Categories
+                    Industries
                   </Accordion.Title>
                   <Accordion.Content active={activeIndex === 0} content={FilterForm} />
                 </Menu.Item>

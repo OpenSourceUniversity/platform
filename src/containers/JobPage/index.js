@@ -27,8 +27,8 @@ class JobPage extends React.Component {
   }
 
   renderIndustries() {
-    return this.props.job.categories.map((category, index) => (
-      <SkillItem skill={category} key={index} />
+    return this.props.job.industries.map((industry, index) => (
+      <SkillItem skill={industry} key={index} />
     ));
   }
 

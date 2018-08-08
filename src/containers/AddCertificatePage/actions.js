@@ -27,7 +27,7 @@ export function addCertificate(certificateData, ipfsHash, url = START_URL) {
         certificateData.program_title : null,
       course_title: certificateData.course_title ? certificateData.course_title : null,
       course_link: certificateData.course_link ? certificateData.course_link : null,
-      categories: certificateData.categories ? certificateData.categories : null,
+      industries: certificateData.industries ? certificateData.industries : null,
       skills: certificateData.skills ? certificateData.skills : null,
       ipfs_hash: ipfsHash,
       learner_eth_address: certificateData.learner_eth_address ?
@@ -90,7 +90,7 @@ export function verifyCertificate(certificateData, url = START_URL) {
         certificateData.program_title : null,
       course_title: certificateData.course_title ? certificateData.course_title : null,
       course_link: certificateData.course_link ? certificateData.course_link : null,
-      categories: certificateData.categories ? certificateData.categories : null,
+      industries: certificateData.industries ? certificateData.industries : null,
       skills: certificateData.skills ? certificateData.skills : null,
       learner_eth_address: certificateData.learner_eth_address ?
         certificateData.learner_eth_address : null,

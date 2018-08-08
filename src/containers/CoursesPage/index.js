@@ -4,7 +4,7 @@ import { Form, Dimmer, Loader, Button, Container, Header, Divider, Grid, Segment
 import CourseItem from 'components/CourseItem';
 import TopCoursesItem from 'components/TopCoursesItem';
 import TopAcademiaItem from 'components/TopAcademiaItem';
-import CoursesCategoryFilter from 'components/CoursesCategoryFilter';
+import CoursesIndustryFilter from 'components/CoursesIndustryFilter';
 import { fetchCourses } from './actions';
 import search from '../../util/search/search';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
@@ -119,11 +119,11 @@ class CoursesPage extends React.Component {
                   onClick={this.handleClick}
                 >
                   <Icon name="block layout" />
-                  Categories
+                  Industries
                 </Accordion.Title>
                 <Accordion.Content
                   active={activeIndex === 0}
-                  content={<CoursesCategoryFilter filterType="courses" />}
+                  content={<CoursesIndustryFilter filterType="courses" />}
                 />
               </Menu.Item>
             </Accordion>

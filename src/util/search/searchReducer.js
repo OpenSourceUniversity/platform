@@ -1,7 +1,7 @@
 const initialState = {
   suggestions: [],
-  categories: [],
-  filteredCategories: [],
+  industries: [],
+  filteredIndustries: [],
   filterType: null,
 };
 
@@ -12,18 +12,18 @@ const authReducer = (state = initialState, action) => {
     return Object.assign({}, state, {
       suggestions: action.suggestions,
     });
-  case 'FETCH_CATEGORIES_SUCCESS':
+  case 'FETCH_INDUSTRIES_SUCCESS':
     return Object.assign({}, state, {
-      categories: action.categories,
+      industries: action.industries,
       filterType: action.filterType,
     });
-  case 'FILTER_CATEGORY_ADDED':
+  case 'FILTER_INDUSTRY_ADDED':
     return Object.assign({}, state, {
-      filteredCategories: [...state.filteredCategories, action.id],
+      filteredIndustries: [...state.filteredIndustries, action.id],
     });
-  case 'FILTER_CATEGORY_REMOVED':
+  case 'FILTER_INDUSTRY_REMOVED':
     return Object.assign({}, state, {
-      filteredCategories: state.filteredCategories.filter(item => item !== action.id),
+      filteredIndustries: state.filteredIndustries.filter(item => item !== action.id),
     });
   default:
     return state;

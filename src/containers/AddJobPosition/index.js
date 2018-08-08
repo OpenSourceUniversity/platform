@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Header, Button, Message, Divider, Breadcrumb, Form, Input, Grid, TextArea } from 'semantic-ui-react';
+import SkillsInput from 'components/SkillsInput';
+import IndustriesInput from 'components/IndustriesInput';
 import { addJobPosition, getDefaultValues, editJobPosition } from './actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
-import Industries from '../../data/industryList';
-import Skills from '../../data/skillsList';
 
 
 class AddJobPosition extends React.Component {
@@ -16,47 +16,34 @@ class AddJobPosition extends React.Component {
     document.title = 'Add Job Position | OS.University';
   }
 
-  getSkills(obj) {
+  getSkills() {
     const needle = this.props.jobDefault.skills;
     const skills = [];
     if (!needle) {
       return null;
     }
     for (let i = 0; i < needle.length; i += 1) {
-      const result = obj.filter(skill => skill.text.toLowerCase() === needle[i].name);
-      if (result.length) {
-        skills.push(result[0].value);
-      }
+      skills.push({value: needle.name, text: needle.name})
     }
     return skills;
   }
 
-  getIndustries(obj) {
-    const needle = this.props.jobDefault.categories;
-    const categories = [];
+  getIndustries() {
+    const needle = this.props.jobDefault.industries;
+    const industries = [];
     if (!needle) {
       return null;
     }
     for (let i = 0; i < needle.length; i += 1) {
-      const result = obj.filter(skill => skill.text === needle[i].name);
-      if (result.length) {
-        categories.push(result[0].value);
-      }
+      industries.push({value: needle.name, text: needle.name})
     }
-    return categories;
+    return industries;
   }
 
   handleSubmit(event, component) {
     event.preventDefault();
-    const categories = [];
-    const skills = [];
-    for (let i = 0; i < (event.target.elements[7].parentElement.childElementCount - 5); i += 1) {
-      categories.push(event.target.elements[7].parentElement.children[i].textContent);
-    }
-
-    for (let i = 0; i < (event.target.elements[4].parentElement.childElementCount - 5); i += 1) {
-      skills.push(event.target.elements[4].parentElement.children[i].textContent);
-    }
+    const industries = this.industriesRef.state.currentValue;
+    const skills = this.skillsRef.state.currentValue;
     const jobData = {
       title: event.target.elements.title.value,
       location: event.target.elements.location.value,
@@ -64,7 +51,7 @@ class AddJobPosition extends React.Component {
       overview: event.target.elements.overview.value,
       description: event.target.elements.description.value,
       external_link: event.target.elements.external_link.value,
-      categories,
+      industries,
       skills,
       closes: event.target.elements.closes.value,
       experience: event.target.elements.experience.value,
@@ -153,18 +140,7 @@ class AddJobPosition extends React.Component {
                   />
                 </label>
               </Form.Field>
-              <Form.Dropdown
-                id="skills"
-                name="skills"
-                placeholder="Required skills"
-                label="Skills"
-                fluid
-                search
-                multiple
-                key={`skills:${this.props.jobDefault.skills || ''}`}
-                defaultValue={this.getSkills(Skills.Skills)}
-                options={Skills.Skills}
-              />
+              <SkillsInput ref={(arg) => { this.skillsRef = arg; }} defaultValue={this.getSkills()} />
               <Form.Field>
                 <label htmlFor="description">
                   Description
@@ -192,18 +168,7 @@ class AddJobPosition extends React.Component {
                   />
                 </label>
               </Form.Field>
-              <Form.Dropdown
-                id="industries"
-                name="industries"
-                placeholder="Your job position industries"
-                label="Job industries"
-                fluid
-                search
-                multiple
-                key={`categories:${this.props.jobDefault.categories || ''}`}
-                defaultValue={this.getIndustries(Industries.Industries)}
-                options={Industries.Industries}
-              />
+              <IndustriesInput ref={(arg) => { this.industriesRef = arg; }} defaultValue={this.getIndustries()} />
               <Form.Field>
                 <label htmlFor="closes">
                   Offer closes

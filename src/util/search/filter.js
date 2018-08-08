@@ -1,9 +1,9 @@
 import fetchFilteredCourses from './fetchFilteredCourses';
 
-export function addCategoryToFilter(id) {
+export function addIndustryToFilter(id) {
   return function action(dispatch) {
     dispatch({
-      type: 'FILTER_CATEGORY_ADDED',
+      type: 'FILTER_INDUSTRY_ADDED',
       id,
     });
     dispatch(fetchFilteredCourses());
@@ -11,10 +11,10 @@ export function addCategoryToFilter(id) {
 }
 
 
-export function removeCategoryFromFilter(id) {
+export function removeIndustryFromFilter(id) {
   return function action(dispatch) {
     dispatch({
-      type: 'FILTER_CATEGORY_REMOVED',
+      type: 'FILTER_INDUSTRY_REMOVED',
       id,
     });
     dispatch(fetchFilteredCourses());

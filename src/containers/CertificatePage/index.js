@@ -32,16 +32,16 @@ class CertificatePage extends React.Component {
   }
 
   renderSubjects() {
-    const categoriesArr = this.props.certificate.categories;
-    const categories = [];
+    const industriesArr = this.props.certificate.industries;
+    const industries = [];
     try {
-      for (let i = 0; i < categoriesArr.length; i += 1) {
-        categories.push({
-          have_icon: false, check: true, name: categoriesArr[i].name, basic: false,
+      for (let i = 0; i < industriesArr.length; i += 1) {
+        industries.push({
+          have_icon: false, check: true, name: industriesArr[i].name, basic: false,
         });
       }
-      return categories.map((category, index) => (
-        <SkillItem skill={category} key={index} />
+      return industries.map((industry, index) => (
+        <SkillItem skill={industry} key={index} />
       ));
     } catch (e) {
       return null;

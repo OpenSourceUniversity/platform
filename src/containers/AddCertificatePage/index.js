@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { Container, Grid, Header, Segment, Button, Message, Divider, Breadcrumb, Form, Input, Dimmer, Loader } from 'semantic-ui-react';
 import SkillsInput from 'components/SkillsInput';
 import IndustriesInput from 'components/IndustriesInput';
-import { addCertificate, storeCertificateOnIpfs } from './actions';
+import addCertificate from '../../util/certificate/addCertificate';
+import storeCertificateOnIpfs from '../../util/certificate/storeCertificateOnIpfs';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import { getIpfs } from '../../util/ipfs/getIpfs';
 

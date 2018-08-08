@@ -362,12 +362,12 @@ class CertificatesVerificationPage extends React.Component {
                     />
                   </label>
                 </Form.Field>
-                  <label htmlFor="ipfsHash">
-                    <b>Certificate file in PDF</b><br/><br/>
-                    <a id="ipfsHash" name="ipfsHash" href={`https://ipfs.io/ipfs/${this.props.certificate.ipfs_hash}`} target="_blank" rel="noopener noreferrer">
-                      {this.props.certificate.ipfs_hash}
-                    </a>
-                  </label>
+                <label htmlFor="ipfsHash">
+                  <b>Certificate file in PDF</b><br /><br />
+                  <a id="ipfsHash" name="ipfsHash" href={`https://ipfs.io/ipfs/${this.props.certificate.ipfs_hash}`} target="_blank" rel="noopener noreferrer">
+                    {this.props.certificate.ipfs_hash}
+                  </a>
+                </label>
                 <div style={{ display: this.props.certificate.verified ? 'none' : null, paddingTop: '20px' }}>
                   <Button type="submit" color="green" size="huge" onClick={() => this.setState({ verification: true })}>Verify</Button>
                   <Button type="submit" primary size="huge">Save changed data</Button>

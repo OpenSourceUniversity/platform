@@ -6,7 +6,7 @@ const { bdnUrl } = Config.network;
 const UPDATE_CERTIFICATE_URL = `${bdnUrl}api/v1/certificates/update_certificate_by_id/`;
 
 
-export default function updateCertificate(certificateData) {
+export default function updateCertificate(certificateData, callback) {
   return function action(dispatch) {
     dispatch({
       type: 'UPDATE_CERTIFICATE_REQUEST',
@@ -22,11 +22,17 @@ export default function updateCertificate(certificateData) {
       dispatch({
         type: 'UPDATE_CERTIFICATE_SUCCESS',
       });
+      if (callback) {
+        callback();
+      }
     }).catch((error) => {
       dispatch({
         type: 'UPDATE_CERTIFICATE_FAILURE',
         error,
       });
+      if (callback) {
+        callback(error);
+      }
     });
   };
 }

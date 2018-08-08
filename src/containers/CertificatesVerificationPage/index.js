@@ -4,8 +4,8 @@ import { Container, Header, Grid, Button, Icon, Divider, Checkbox, Breadcrumb, L
 import SkillItem from 'components/SkillItem';
 import SkillsInput from 'components/SkillsInput';
 import IndustriesInput from 'components/IndustriesInput';
-import { fetchCertificates } from '../CertificatesPage/actions';
-import { fetchCertificate } from '../CertificatePage/actions';
+import fetchCertificates from '../../util/certificate/fetchCertificates';
+import fetchCertificate from '../../util/certificate/fetchCertificate';
 import { addCertificate } from '../AddCertificatePage/actions';
 import verifyCertificate from '../../util/verification/verifyCertificate';
 import massVerification from '../../util/verification/massVerification';

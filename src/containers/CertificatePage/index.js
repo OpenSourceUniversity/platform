@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Header, Divider, Segment, Container, Dimmer, Loader, Breadcrumb, Grid } from 'semantic-ui-react';
 import SkillItem from 'components/SkillItem';
-import { fetchCertificate } from './actions';
+import fetchCertificate from '../../util/certificate/fetchCertificate';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import Config from '../../config';
 

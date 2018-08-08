@@ -1,15 +1,13 @@
 import store from '../../store';
 import Config from '../../config';
 
-
 const { bdnUrl } = Config.network;
-const START_URL = `${bdnUrl}api/v1/certificates/1/`;
+const START_URL = `${bdnUrl}api/v1/certificates/`;
 
-
-export function fetchCertificate(url = START_URL) {
+export default function fetchCertificates(url = START_URL) {
   return function dispatcher(dispatch) {
     dispatch({
-      type: 'FETCH_CERTIFICATE_REQUEST',
+      type: 'FETCH_CERTIFICATES_REQUEST',
     });
     const headers = new Headers({
       'Auth-Signature': store.getState().auth.signedAddress,
@@ -20,19 +18,19 @@ export function fetchCertificate(url = START_URL) {
       .then(({ response, body }) => {
         if (!response.ok) {
           dispatch({
-            type: 'FETCH_CERTIFICATE_FAILURE',
+            type: 'FETCH_CERTIFICATES_FAILURE',
             error: body.error,
           });
         } else {
           dispatch({
-            type: 'FETCH_CERTIFICATE_SUCCESS',
-            result: body,
+            type: 'FETCH_CERTIFICATES_SUCCESS',
+            certificates: body,
           });
         }
       })
       .catch((error) => {
         dispatch({
-          type: 'FETCH_CERTIFICATE_FAILURE',
+          type: 'FETCH_CERTIFICATES_FAILURE',
           error,
         });
       });

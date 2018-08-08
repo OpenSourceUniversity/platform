@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import CourseItem from 'components/CourseItem';
 import CertificateItem from 'components/CertificateItem';
 import { fetchFeaturedCourses } from './actionsFeatured';
-import { fetchCertificates } from '../CertificatesPage/actions';
+import fetchCertificates from '../../util/certificate/fetchCertificates';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 
 

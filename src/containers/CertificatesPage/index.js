@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Container, Header, Grid, Button, Icon, Divider, Breadcrumb, Loader, Message, Dimmer } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import CertificateItem from 'components/CertificateItem';
-import { fetchCertificates } from './actions';
+import fetchCertificates from '../../util/certificate/fetchCertificates';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 
 

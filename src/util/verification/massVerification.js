@@ -1,7 +1,7 @@
 import axios from 'axios';
 import store from '../../store';
 import Config from '../../config';
-import { fetchCertificates } from '../../containers/CertificatesPage/actions';
+import fetchCertificates from '../../util/certificate/fetchCertificates';
 
 const { bdnUrl } = Config.network;
 

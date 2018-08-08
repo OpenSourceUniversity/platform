@@ -4,7 +4,7 @@ import { Header, Divider, Grid, Sticky, Segment, List, Button, Statistic, Dimmer
 import { Link } from 'react-router-dom';
 import SkillItem from 'components/SkillItem';
 import CertificateItem from 'components/CertificateItem';
-import { fetchCertificates } from '../../containers/CertificatesPage/actions';
+import fetchCertificates from '../../util/certificate/fetchCertificates';
 
 
 class LearnerProfile extends React.Component {

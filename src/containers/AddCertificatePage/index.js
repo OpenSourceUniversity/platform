@@ -6,6 +6,7 @@ import IndustriesInput from 'components/IndustriesInput';
 import storeCertificateOnIpfs from '../../util/certificate/storeCertificateOnIpfs';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import { getIpfs } from '../../util/ipfs/getIpfs';
+import resetAddCertificateProps from './actions'
 
 
 class AddCertificatePage extends React.Component {
@@ -14,6 +15,7 @@ class AddCertificatePage extends React.Component {
   componentDidMount() {
     this.props.getIpfs();
     document.title = 'Add Certificate | OS.University';
+    this.props.resetAddCertificateProps();
   }
 
   handleSubmit(event, component) {
@@ -291,6 +293,9 @@ function mapDispatchToProps(dispatch) {
     },
     getIpfs() {
       dispatch(getIpfs());
+    },
+    resetAddCertificateProps() {
+      dispatch(resetAddCertificateProps())
     },
   };
 }

@@ -31,6 +31,7 @@ export default function addJobReducer(state = INITIAL_STATE, action) {
     return Object.assign({}, state, {
       isAdding: false,
       error: null,
+      isAdded: false,
       jobDefault: {},
     });
   case 'JOB_GET_FAILURE':

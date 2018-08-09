@@ -6,6 +6,10 @@ import HeaderSearchComponent from '../HeaderSearchComponent';
 import logout from '../../util/auth/logout';
 import getBalances from '../../util/web3/getBalances';
 import setOnBoardingActiveElement from '../../util/auth/setOnBoardingActiveElement';
+import resetAddCertificateProps from '../../containers/AddCertificatePage/actions'
+import { resetAddCourseProps } from '../../containers/AddCourse/actions'
+import { resetAddJobProps } from '../../containers/AddJobPosition/actions'
+
 
 
 class HeaderWithoutRouter extends React.Component {
@@ -25,6 +29,9 @@ class HeaderWithoutRouter extends React.Component {
       this.props.setOnBoardingActiveElement('signin');
     } else {
       newPath = `/${name}`;
+      this.props.resetAddJobProps();
+      this.props.resetAddCourseProps();
+      this.props.resetAddCertificateProps();
     }
     if (this.props.history.location.pathname !== newPath) {
       this.props.history.push(newPath);
@@ -451,6 +458,15 @@ function mapDispatchToProps(dispatch) {
     },
     setOnBoardingActiveElement(activeElement) {
       dispatch(setOnBoardingActiveElement(activeElement));
+    },
+    resetAddCertificateProps(){
+      dispatch(resetAddCertificateProps())
+    },
+    resetAddCourseProps(){
+      dispatch(resetAddCourseProps())
+    },
+    resetAddJobProps(){
+      dispatch(resetAddJobProps())
     },
   };
 }

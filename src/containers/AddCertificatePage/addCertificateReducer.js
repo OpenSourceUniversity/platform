@@ -23,6 +23,11 @@ export default function addCertificateReducer(state = INITIAL_STATE, action) {
       isAdding: false,
       error: action.error.message,
     });
+  case 'ADD_CERTIFICATE_RESET':
+    return Object.assign({}, state, {
+      isAdding: false,
+      isAdded: false,
+    });
   default:
     return state;
   }

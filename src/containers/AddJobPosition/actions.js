@@ -120,3 +120,12 @@ export function editJobPosition(id, jobData) {
     });
   };
 }
+
+export function resetAddJobProps() {
+  return function action(dispatch) {
+    dispatch({
+      type: 'RESET_JOB_VALUES',
+    });
+    console.log('reset')
+  };
+}

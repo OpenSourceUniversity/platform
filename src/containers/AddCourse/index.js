@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Container, Header, Button, Message, Divider, Breadcrumb, Form, Input, Grid, TextArea } from 'semantic-ui-react';
+import { Container, Header, Button, Message, Divider, Breadcrumb, Form, Input, Grid, TextArea, Loader, Dimmer } from 'semantic-ui-react';
 import SkillsInput from 'components/SkillsInput';
 import IndustriesInput from 'components/IndustriesInput';
-import { addCourse, getDefaultValues, editCourse } from './actions';
+import { addCourse, getDefaultValues, editCourse, resetAddCourseProps } from './actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 
 
@@ -12,6 +12,9 @@ class AddCourse extends React.Component {
     this.props.setSecondaryNav('academia');
     if (this.props.match.params.id) {
       this.props.getDefaultValues(this.props.match.params.id);
+    } else {
+      console.log('reset')
+      this.props.resetAddCourseProps();
     }
     document.title = 'Add Course | OS.University';
   }
@@ -36,6 +39,9 @@ class AddCourse extends React.Component {
   }
   /* eslint-disable jsx-a11y/label-has-for */
   render() {
+    /* eslint-disable global-require */
+    const loader = require('../../icons/osu-loader.svg');
+    /* eslint-enable global-require */
     return (
       <Container>
         <Breadcrumb>
@@ -47,13 +53,30 @@ class AddCourse extends React.Component {
         </Breadcrumb>
 
         <Divider clearing />
+
+        <Message success hidden={!this.props.isAdded}>
+          <p>Course {this.props.match.params.id ? 'edited' : 'added'} successfully.</p>
+        </Message>
+
+        <Message error hidden={!this.props.error}>
+          <p>{this.props.error}</p>
+        </Message>
+
         <Header size="large" floated="left">
           Add Course
         </Header>
         <Divider clearing />
 
-        <Grid>
+        <Grid style={{ display: this.props.isAdded ? 'none' : 'block' }}>
           <Grid.Column width={10}>
+            <Dimmer active={this.props.isAdding} inverted>
+              <Loader size="medium">
+                <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
+                  <image href={loader} x="0" y="0" width="100%" height="100%" />
+                </svg>
+                Adding course...
+              </Loader>
+            </Dimmer>
             <Form size="huge" onSubmit={(event) => { this.handleSubmit(event, this); }}>
               <Form.Field>
                 <label htmlFor="title">
@@ -112,13 +135,13 @@ class AddCourse extends React.Component {
                 </label>
               </Form.Field>
               <IndustriesInput ref={(arg) => { this.industriesRef = arg; }} industries={this.props.courseDefault.industries} />
-              <Button type="submit" size="huge">Submit</Button>
+              <Button type="submit" primary size="huge">Submit</Button>
             </Form>
           </Grid.Column>
           <Grid.Column width={6}>
-            <Message positive>
+            <Message positive={!this.props.match.params.id} warning={!!this.props.match.params.id}>
               <Message.Header>
-                  Adding Course
+                  {this.props.match.params.id ? 'Editing' : 'Adding'} Course
               </Message.Header>
             </Message>
           </Grid.Column>
@@ -151,6 +174,9 @@ function mapDispatchToProps(dispatch) {
     },
     setSecondaryNav(secondaryNav) {
       dispatch(setSecondaryNav(secondaryNav));
+    },
+    resetAddCourseProps() {
+      dispatch(resetAddCourseProps())
     },
   };
 }

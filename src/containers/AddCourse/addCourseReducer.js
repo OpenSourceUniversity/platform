@@ -30,6 +30,7 @@ export default function addCourseReducer(state = INITIAL_STATE, action) {
   case 'RESET_COURSE_VALUES':
     return Object.assign({}, state, {
       isAdding: false,
+      isAdded: false,
       error: null,
       courseDefault: {},
     });

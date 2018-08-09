@@ -107,3 +107,11 @@ export function editCourse(id, courseData) {
     });
   };
 }
+
+export function resetAddCourseProps() {
+  return function action(dispatch) {
+    dispatch({
+      type: 'RESET_COURSE_VALUES',
+    });
+  };
+}

@@ -5,6 +5,7 @@ import SkillsInput from 'components/SkillsInput';
 import IndustriesInput from 'components/IndustriesInput';
 import storeCertificateOnIpfs from '../../util/certificate/storeCertificateOnIpfs';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
+import resetAddCertificateProps from './actions'
 
 
 
@@ -288,6 +289,9 @@ function mapDispatchToProps(dispatch) {
     },
     storeCertificateOnIpfs(buffer, certificateData) {
       dispatch(storeCertificateOnIpfs(buffer, certificateData));
+    },
+    resetAddCertificateProps() {
+      dispatch(resetAddCertificateProps())
     },
   };
 }

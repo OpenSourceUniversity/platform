@@ -289,15 +289,6 @@ function mapDispatchToProps(dispatch) {
     storeCertificateOnIpfs(buffer, certificateData) {
       dispatch(storeCertificateOnIpfs(buffer, certificateData));
     },
-<<<<<<< HEAD
-    getIpfs() {
-      dispatch(getIpfs());
-    },
-    resetAddCertificateProps() {
-      dispatch(resetAddCertificateProps())
-    },
-=======
->>>>>>> a1cbec2efc339c23b2f55b9e307f920427ddd0ac
   };
 }
 

@@ -25,14 +25,14 @@ class AddCertificatePage extends React.Component {
 
     const certificateData = {
       academy_title: event.target.elements.academy_title.value,
-      academy_address: event.target.elements.academy_address.value,
+      academy_address: component.props.activeAccount === 'Academy' ? component.props.ethAddress : event.target.elements.academy_address.value,
       academy_link: event.target.elements.academy_link.value,
       program_title: event.target.elements.program_title.value,
       course_title: event.target.elements.course_title.value,
       course_link: event.target.elements.course_link.value,
       industries,
       skills,
-      learner_eth_address: event.target.elements.learner_eth_address.value,
+      learner_eth_address: component.props.activeAccount === 'Learner' ? component.props.ethAddress : event.target.elements.learner_eth_address.value,
       score: event.target.elements.score.value,
       duration: event.target.elements.duration.value,
       expiration_date: event.target.elements.expiration_date.value,
@@ -189,6 +189,8 @@ class AddCertificatePage extends React.Component {
                       iconPosition="left"
                       icon="globe"
                       placeholder="ETH address of learner"
+                      defaultValue={this.props.activeAccount === 'Learner' ? this.props.ethAddress : ''}
+                      readOnly={this.props.activeAccount === 'Learner'}
                     />
                   </Form.Field>
                   <Form.Field>
@@ -229,6 +231,9 @@ class AddCertificatePage extends React.Component {
                       iconPosition="left"
                       icon="globe"
                       placeholder="ETH address of your academy"
+                      defaultValue={this.props.activeAccount === 'Academy' ? this.props.ethAddress : ''}
+                      readOnly={this.props.activeAccount === 'Academy'}
+
                     />
                   </Form.Field>
                   <Form.Field required>
@@ -278,6 +283,8 @@ function mapStateToProps(state) {
     isAdding: state.addCertificate.isAdding,
     error: state.addCertificate.error,
     isAdded: state.addCertificate.isAdded,
+    ethAddress: state.auth.address,
+    activeAccount: state.activeAccount.activeAccount
   };
 }
 

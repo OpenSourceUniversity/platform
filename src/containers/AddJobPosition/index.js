@@ -45,7 +45,6 @@ class AddJobPosition extends React.Component {
   }
   /* eslint-disable jsx-a11y/label-has-for */
   render() {
-    console.log(this.props.jobDefault)
     /* eslint-disable global-require */
     const loader = require('../../icons/osu-loader.svg');
     /* eslint-enable global-require */

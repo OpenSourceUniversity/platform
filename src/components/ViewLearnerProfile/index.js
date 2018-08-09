@@ -27,9 +27,7 @@ class ViewLearnerProfile extends React.Component {
   }
 
   renderSkills() {
-    /* eslint-disable prefer-destructuring */
-    const certificates = this.props.certificates;
-    /* eslint-enable prefer-destructuring */
+    const { certificates } = this.props;
     certificates.sort((a, b) => b.verified);
     let verifiedSkills = [];
     let notVerifiedSkills = [];
@@ -41,10 +39,11 @@ class ViewLearnerProfile extends React.Component {
         notVerifiedSkills = notVerifiedSkills.concat(certificates[i].skills);
       }
     }
-    verifiedSkills = verifiedSkills.filter((item, pos) => verifiedSkills.indexOf(item) === pos);
+    verifiedSkills = verifiedSkills.filter((item, pos) => verifiedSkills.indexOf(item) === pos).map(e => e.name);
     notVerifiedSkills = notVerifiedSkills.filter((item, pos) =>
-      notVerifiedSkills.indexOf(item) === pos);
+      notVerifiedSkills.indexOf(item) === pos).map(e => e.name);
     notVerifiedSkills = notVerifiedSkills.filter(el => !verifiedSkills.includes(el));
+
     for (let i = 0; i < verifiedSkills.length; i += 1) {
       skills.push({
         have_icon: true, check: true, name: verifiedSkills[i], basic: true,

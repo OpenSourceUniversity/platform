@@ -126,6 +126,5 @@ export function resetAddJobProps() {
     dispatch({
       type: 'RESET_JOB_VALUES',
     });
-    console.log('reset')
   };
 }

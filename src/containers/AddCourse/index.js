@@ -13,7 +13,6 @@ class AddCourse extends React.Component {
     if (this.props.match.params.id) {
       this.props.getDefaultValues(this.props.match.params.id);
     } else {
-      console.log('reset')
       this.props.resetAddCourseProps();
     }
     document.title = 'Add Course | OS.University';

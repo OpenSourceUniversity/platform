@@ -5,15 +5,13 @@ import SkillsInput from 'components/SkillsInput';
 import IndustriesInput from 'components/IndustriesInput';
 import storeCertificateOnIpfs from '../../util/certificate/storeCertificateOnIpfs';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
-import { getIpfs } from '../../util/ipfs/getIpfs';
-import resetAddCertificateProps from './actions'
+
 
 
 class AddCertificatePage extends React.Component {
   state = { certificateFileIsMissing: false }
 
   componentDidMount() {
-    this.props.getIpfs();
     document.title = 'Add Certificate | OS.University';
     this.props.resetAddCertificateProps();
   }
@@ -291,12 +289,15 @@ function mapDispatchToProps(dispatch) {
     storeCertificateOnIpfs(buffer, certificateData) {
       dispatch(storeCertificateOnIpfs(buffer, certificateData));
     },
+<<<<<<< HEAD
     getIpfs() {
       dispatch(getIpfs());
     },
     resetAddCertificateProps() {
       dispatch(resetAddCertificateProps())
     },
+=======
+>>>>>>> a1cbec2efc339c23b2f55b9e307f920427ddd0ac
   };
 }
 

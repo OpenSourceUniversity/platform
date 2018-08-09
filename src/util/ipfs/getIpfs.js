@@ -11,7 +11,7 @@ const getIpfsPromise = new Promise(((resolve, reject) => {
   reject(new Error('something bad happened'));
 }));
 
-export function getIpfs() {
+export default function getIpfs() {
   return function action(dispatch) {
     getIpfsPromise
       .then(
@@ -24,7 +24,12 @@ export function getIpfs() {
           });
         },
         (error) => {
-          console.log(error);
+          dispatch({
+            type: 'IPFS_INITIALIZATION_FAILED',
+            payload: {
+              error,
+            },
+          });
         },
       );
   };

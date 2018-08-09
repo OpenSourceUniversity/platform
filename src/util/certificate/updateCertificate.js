@@ -6,10 +6,10 @@ const { bdnUrl } = Config.network;
 const UPDATE_CERTIFICATE_URL = `${bdnUrl}api/v1/certificates/update_certificate_by_id/`;
 
 
-export default function updateCertificate(certificateData) {
+export default function updateCertificate(certificateData, callback) {
   return function action(dispatch) {
     dispatch({
-      type: 'ADD_CERTIFICATE_REQUEST',
+      type: 'UPDATE_CERTIFICATE_REQUEST',
     });
     const axiosConfig = {
       headers: {
@@ -20,13 +20,19 @@ export default function updateCertificate(certificateData) {
 
     axios.post(UPDATE_CERTIFICATE_URL, certificateData, axiosConfig).then(() => {
       dispatch({
-        type: 'ADD_CERTIFICATE_SUCCESS',
+        type: 'UPDATE_CERTIFICATE_SUCCESS',
       });
-    }).catch(() => {
+      if (callback) {
+        callback();
+      }
+    }).catch((error) => {
       dispatch({
-        type: 'ADD_CERTIFICATE_FAILURE',
-        error: 'Fail',
+        type: 'UPDATE_CERTIFICATE_FAILURE',
+        error,
       });
+      if (callback) {
+        callback(error);
+      }
     });
   };
 }

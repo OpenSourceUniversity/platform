@@ -32,6 +32,23 @@ export function withdraw(wallet, recipient, amountLong, coin) {
         web3.eth.sendSignedTransaction(`0x${serializedTx.toString('hex')}`, (error, txHash) => {
           console.log(error, txHash);
         });
+      } else if (coin === 'eth') {
+        const rawTransaction = {
+          from: address,
+          nonce: `0x${nonce}`,
+          gasPrice: '0x003B9ACA00',
+          gasLimit: 21000,
+          to: recipient,
+          value: amount,
+        };
+        const tx = new Tx(rawTransaction);
+        const privateKey = Buffer.from(wallet.getPrivateKey(), 'hex');
+        tx.sign(privateKey);
+
+        const serializedTx = tx.serialize();
+        web3.eth.sendSignedTransaction(`0x${serializedTx.toString('hex')}`, (error, txHash) => {
+          console.log(error, txHash);
+        });
       }
     });
   };

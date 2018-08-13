@@ -17,7 +17,7 @@ const INITIAL_STATE = {
   },
   academy: {
     academy_logo: null,
-  }
+  },
 };
 
 export default function courseReducer(state = INITIAL_STATE, action) {

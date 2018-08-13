@@ -56,13 +56,6 @@ const Wallet = require('ethereumjs-wallet');
 // }
 
 
-
-
-
-
-
-
-
 // export function encryptTEST(_data,_key) {
 //     if (_key.length != (128 + 256) / 8 * 2) throw new Error('invalid_key');
 //
@@ -87,8 +80,6 @@ const Wallet = require('ethereumjs-wallet');
 //     p += d.final('utf8');
 //     return p;
 // }
-
-
 
 
 export function encryptIPFS(publicKey, userData) {

@@ -16,10 +16,10 @@ export default function verifyCertificate(certificateData) {
     const metaJsonBuffer = Buffer.from(metaJson);
     ipfs.add(metaJsonBuffer, (err, ipfsHash) => {
       dispatch({
-      type: 'IPFS_GET_SUCCESS',
-      payload: {
-        ipfsHash: ipfsHash[0].hash,
-      },
+        type: 'IPFS_GET_SUCCESS',
+        payload: {
+          ipfsHash: ipfsHash[0].hash,
+        },
       });
       dispatch(initWalletUnlocker((wallet) => {
         dispatch(updateCertificate(certificateData, () => {

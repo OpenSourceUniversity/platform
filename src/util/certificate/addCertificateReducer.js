@@ -1,6 +1,8 @@
 const INITIAL_STATE = {
   isAdding: false,
   isAdded: false,
+  ipfsAdding: false,
+  error: null,
 };
 
 
@@ -27,6 +29,16 @@ export default function addCertificateReducer(state = INITIAL_STATE, action) {
     return Object.assign({}, state, {
       isAdding: false,
       isAdded: false,
+      ipfsAdding: false,
+      error: null,
+    });
+  case 'IPFS_GET_REQUEST':
+    return Object.assign({}, state, {
+      ipfsAdding: true,
+    });
+  case 'IPFS_GET_SUCCESS':
+    return Object.assign({}, state, {
+      ipfsAdding: false,
     });
   default:
     return state;

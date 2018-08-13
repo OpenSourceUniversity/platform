@@ -7,8 +7,9 @@ import arrayUnique from '../../util/arrayUnique';
 export default class SkillsInput extends Component {
   state = { options: [], currentValue: [], searchValue: '' }
 
-  componentDidUpdate(prevProps, prevState) {
-    // only update chart if the data has changed
+  componentDidUpdate(prevProps) {
+    /* eslint-disable consistent-return */
+    /* eslint-disable react/no-did-update-set-state */
     if (prevProps.skills !== this.props.skills) {
       const needle = this.props.skills;
       const skills = [];
@@ -19,8 +20,8 @@ export default class SkillsInput extends Component {
         skills.push(needle[i].name);
       }
       const normalizedSkillValue = skills.map(value => (
-          { value, text: value }
-        ));
+        { value, text: value }
+      ));
       this.setState({
         currentValue: skills,
         options: normalizedSkillValue,
@@ -42,11 +43,11 @@ export default class SkillsInput extends Component {
       currentValue: value,
       options: normalizedCurrentValue,
     });
-    this.setState({searchValue: ''})
+    this.setState({ searchValue: '' });
   }
 
   handleSearchChange = (event) => {
-    this.setState({searchValue: event.target.value})
+    this.setState({ searchValue: event.target.value });
     const query = event.target.value;
     const { bdnUrl } = Config.network;
     fetch(`${bdnUrl}api/v1/skills/autocomplete/?q=${query}`)

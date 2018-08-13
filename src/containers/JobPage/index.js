@@ -138,7 +138,7 @@ class JobPage extends React.Component {
                       circular
                       onClick={this.props.job.company.eth_address ? () => { this.props.history.push(`/view-profile/business/${this.props.job.company.eth_address}/`); } : null}
                       style={{
-                        boxShadow: '2px 6px 20px 0 #bcbdbd, 0 1px 21px 1px #d4d4d5', width: '8em', height: '8em', backgroundColor: 'white', backgroundImage: 'None', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: '80%', cursor: 'pointer', backgroundImage: `url(${this.props.company.company_logo ? `https://ipfs.io/ipfs/${this.props.company.company_logo}` : avatarPlaceholder})`,
+                        boxShadow: '2px 6px 20px 0 #bcbdbd, 0 1px 21px 1px #d4d4d5', width: '8em', height: '8em', backgroundColor: 'white', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: '80%', cursor: 'pointer', backgroundImage: `url(${this.props.company.company_logo ? `https://ipfs.io/ipfs/${this.props.company.company_logo}` : avatarPlaceholder})`,
                       }}
                     />
                     <Divider hidden />

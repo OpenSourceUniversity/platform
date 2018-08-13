@@ -174,7 +174,6 @@ class CertificatesVerificationPage extends React.Component {
         </Message>
 
 
-
         <Grid>
 
           <Grid.Column width={4}>
@@ -183,17 +182,16 @@ class CertificatesVerificationPage extends React.Component {
             </Menu>
           </Grid.Column>
           <Grid.Column width={12}>
-          // display: this.state.activeItem ? null : 'none',
             <Segment style={{ borderColor: this.props.certificate.verified ? 'green' : 'orange' }}>
               <Form size="huge" onSubmit={(event) => { this.handleSubmit(event, this); }}>
-              <Dimmer active={this.props.isUpdating} page>
-                <Loader size="medium">
-                  <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
-                    <image href={loader} x="0" y="0" width="100%" height="100%" />
-                  </svg>
+                <Dimmer active={this.props.isUpdating} page>
+                  <Loader size="medium">
+                    <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
+                      <image href={loader} x="0" y="0" width="100%" height="100%" />
+                    </svg>
                   Updating the certificate ...
-                </Loader>
-              </Dimmer>
+                  </Loader>
+                </Dimmer>
                 <Form.Field required>
                   <label htmlFor="academy_title">
                     Academy title

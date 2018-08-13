@@ -105,7 +105,10 @@ class AddCourse extends React.Component {
                   />
                 </label>
               </Form.Field>
-              <SkillsInput ref={(arg) => { this.skillsRef = arg; }} skills={this.props.courseDefault.skills} />
+              <SkillsInput
+                ref={(arg) => { this.skillsRef = arg; }}
+                skills={this.props.courseDefault.skills}
+              />
               <Form.Field>
                 <label htmlFor="description">
                   Description
@@ -133,14 +136,17 @@ class AddCourse extends React.Component {
                   />
                 </label>
               </Form.Field>
-              <IndustriesInput ref={(arg) => { this.industriesRef = arg; }} industries={this.props.courseDefault.industries} />
+              <IndustriesInput
+                ref={(arg) => { this.industriesRef = arg; }}
+                industries={this.props.courseDefault.industries}
+              />
               <Button type="submit" primary size="huge">Submit</Button>
             </Form>
           </Grid.Column>
           <Grid.Column width={6}>
             <Message positive={!this.props.match.params.id} warning={!!this.props.match.params.id}>
               <Message.Header>
-                  {this.props.match.params.id ? 'Editing' : 'Adding'} Course
+                {this.props.match.params.id ? 'Editing' : 'Adding'} Course
               </Message.Header>
             </Message>
           </Grid.Column>
@@ -175,7 +181,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(setSecondaryNav(secondaryNav));
     },
     resetAddCourseProps() {
-      dispatch(resetAddCourseProps())
+      dispatch(resetAddCourseProps());
     },
   };
 }

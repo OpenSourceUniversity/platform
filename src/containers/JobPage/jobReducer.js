@@ -16,8 +16,8 @@ const INITIAL_STATE = {
     ],
   },
   company: {
-    company_logo: null
-  }
+    company_logo: null,
+  },
 };
 
 export default function jobReducer(state = INITIAL_STATE, action) {

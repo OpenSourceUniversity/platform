@@ -138,7 +138,10 @@ class AddJobPosition extends React.Component {
                   />
                 </label>
               </Form.Field>
-              <SkillsInput ref={(arg) => { this.skillsRef = arg; }} skills={this.props.jobDefault.skills} />
+              <SkillsInput
+                ref={(arg) => { this.skillsRef = arg; }}
+                skills={this.props.jobDefault.skills}
+              />
               <Form.Field>
                 <label htmlFor="description">
                   Description
@@ -166,7 +169,10 @@ class AddJobPosition extends React.Component {
                   />
                 </label>
               </Form.Field>
-              <IndustriesInput ref={(arg) => { this.industriesRef = arg; }} industries={this.props.jobDefault.industries} />
+              <IndustriesInput
+                ref={(arg) => { this.industriesRef = arg; }}
+                industries={this.props.jobDefault.industries}
+              />
               <Form.Field>
                 <label htmlFor="closes">
                   Offer closes
@@ -245,7 +251,7 @@ class AddJobPosition extends React.Component {
           <Grid.Column width={6}>
             <Message positive={!this.props.match.params.id} warning={!!this.props.match.params.id}>
               <Message.Header>
-                  {this.props.match.params.id ? 'Editing' : 'Adding'} Job Position
+                {this.props.match.params.id ? 'Editing' : 'Adding'} Job Position
               </Message.Header>
             </Message>
           </Grid.Column>

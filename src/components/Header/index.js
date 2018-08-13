@@ -6,10 +6,9 @@ import HeaderSearchComponent from '../HeaderSearchComponent';
 import logout from '../../util/auth/logout';
 import getBalances from '../../util/web3/getBalances';
 import setOnBoardingActiveElement from '../../util/auth/setOnBoardingActiveElement';
-import resetAddCertificateProps from '../../containers/AddCertificatePage/actions'
-import { resetAddCourseProps } from '../../containers/AddCourse/actions'
-import { resetAddJobProps } from '../../containers/AddJobPosition/actions'
-
+import resetAddCertificateProps from '../../containers/AddCertificatePage/actions';
+import { resetAddCourseProps } from '../../containers/AddCourse/actions';
+import { resetAddJobProps } from '../../containers/AddJobPosition/actions';
 
 
 class HeaderWithoutRouter extends React.Component {
@@ -459,14 +458,14 @@ function mapDispatchToProps(dispatch) {
     setOnBoardingActiveElement(activeElement) {
       dispatch(setOnBoardingActiveElement(activeElement));
     },
-    resetAddCertificateProps(){
-      dispatch(resetAddCertificateProps())
+    resetAddCertificateProps() {
+      dispatch(resetAddCertificateProps());
     },
-    resetAddCourseProps(){
-      dispatch(resetAddCourseProps())
+    resetAddCourseProps() {
+      dispatch(resetAddCourseProps());
     },
-    resetAddJobProps(){
-      dispatch(resetAddJobProps())
+    resetAddJobProps() {
+      dispatch(resetAddJobProps());
     },
   };
 }

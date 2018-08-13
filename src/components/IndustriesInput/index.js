@@ -1,13 +1,12 @@
 import React from 'react';
 import { Form } from 'semantic-ui-react';
 import Config from '../../config';
-import Industries from '../../data/industryList';
 
 export default class IndustriesInput extends React.Component {
   state = { options: [], currentValue: [] }
 
   componentDidMount() {
-    const { bdnUrl } = Config.network; 
+    const { bdnUrl } = Config.network;
     fetch(`${bdnUrl}api/v1/industries/`)
       .then(response => response.json().then(body => ({ response, body })))
       .then(({ response, body }) => {
@@ -21,8 +20,9 @@ export default class IndustriesInput extends React.Component {
       });
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    // only update chart if the data has changed
+  componentDidUpdate(prevProps) {
+    /* eslint-disable react/no-did-update-set-state */
+    /* eslint-disable consistent-return */
     if (prevProps.industries !== this.props.industries) {
       const needle = this.props.industries;
       const industries = [];
@@ -60,7 +60,7 @@ export default class IndustriesInput extends React.Component {
         onChange={this.handleChange}
         required
       />
-   );
-   return dropdown;
+    );
+    return dropdown;
   }
 }

@@ -23,7 +23,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header />
-        <div style={{ height: `${170}px` }} />
+        <div style={{ height: `${this.props.secondaryNav ? 170 : 100}px` }} />
         <div id="Main">
           <Main />
         </div>
@@ -42,6 +42,7 @@ function mapStateToProps(state) {
   return {
     address: state.auth.address,
     isLoggedIn: state.auth.isLoggedIn,
+    secondaryNav: state.secondaryNav.secondaryNav,
   };
 }
 

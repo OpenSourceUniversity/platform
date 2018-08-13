@@ -14,10 +14,14 @@ import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 /* eslint-disable camelcase */
 class HomePage extends React.Component {
   componentDidMount() {
-    this.props.fetchCertificates();
-    this.props.fetchFeaturedCourses();
-    this.props.fetchDepartmentCourses(this.props.eth_address.toLowerCase());
-    this.props.fetchCompanyJobs(this.props.eth_address.toLowerCase());
+    if (this.props.activeAccount === 'Business') {
+      this.props.fetchCompanyJobs(this.props.eth_address.toLowerCase());
+    } else if (this.props.activeAccount === 'Academy') {
+      this.props.fetchDepartmentCourses(this.props.eth_address.toLowerCase());
+    } else {
+      this.props.fetchCertificates();
+      this.props.fetchFeaturedCourses();
+    }
     this.props.setSecondaryNav(null);
     document.title = 'Home | OS.University';
   }

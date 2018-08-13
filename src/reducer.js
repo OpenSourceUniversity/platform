@@ -11,6 +11,7 @@ import courseReducer from './containers/CoursePage/courseReducer';
 import activeAccountReducer from './util/activeAccount/activeAccountReducer';
 import secondaryNavReducer from './util/secondaryNav/secondaryNavReducer';
 import profilesReducer from './util/profiles/profilesReducer';
+import withdrawReducer from './util/withdraw/withdrawReducer';
 import departmentCoursesReducer from './components/ViewAcademyProfile/departmentCoursesReducer';
 import academiesReducer from './containers/Academies/academiesReducer';
 import learnersReducer from './containers/Learners/learnersReducer';
@@ -44,6 +45,7 @@ const reducer = combineReducers({
   addJob: addJobReducer,
   addCourse: addCourseReducer,
   learners: learnersReducer,
+  withdraw: withdrawReducer,
 });
 
 export default reducer;

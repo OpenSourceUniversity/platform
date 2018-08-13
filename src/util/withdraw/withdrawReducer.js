@@ -1,8 +1,8 @@
 const initialState = {
   isSuccess: false,
-  ethError: null,
+  error: null,
   isError: false,
-  eduError: null,
+  txHash: null,
 };
 
 
@@ -12,18 +12,14 @@ const withdrawReducer = (state = initialState, action) => {
     return Object.assign({}, state, {
       isSuccess: true,
       isError: false,
+      txHash: action.payload.txHash,
     });
-  case 'WITHDRAW_EDU_ERROR':
+  case 'WITHDRAW_ERROR':
     return Object.assign({}, state, {
       isSuccess: false,
       isError: true,
-      eduError: action.error,
-    });
-  case 'WITHDRAW_ETH_ERROR':
-    return Object.assign({}, state, {
-      isSuccess: false,
-      isError: true,
-      ethError: action.error,
+      error: action.payload.error,
+      txHash: null,
     });
   default:
     return state;

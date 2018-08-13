@@ -97,7 +97,7 @@ class HomePage extends React.Component {
               </p>
             </Message>
 
-            <Message info hidden={this.props.departmentCourses.length > 0 || !!this.props.error}>
+            <Message info hidden={this.props.jobs.length > 0 || !!this.props.error}>
               <p>
                 You do not have any job positions yet. Go ahead and add some.
               </p>

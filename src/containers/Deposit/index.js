@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import React from 'react';
-import { Segment, Container, Grid, Card, Image, Button, Icon, Header, Divider, Statistic, Responsive, Input, Form, Dropdown } from 'semantic-ui-react';
+import { Segment, Container, Grid, Card, Image, Button, Icon, Header, Divider, Statistic, Responsive, Input, Form, Dropdown, Dimmer, Message } from 'semantic-ui-react';
 import TransactionHistoryItem from 'components/TransactionHistoryItem';
 import { initWalletUnlocker } from '../../util/auth/walletUnlocker';
 import getBalances from '../../util/web3/getBalances';
@@ -85,6 +85,18 @@ class Deposit extends React.Component {
 
     return (
       <Container>
+        <Dimmer active={this.props.isError || this.props.isSuccess} inverted>
+          <Segment>
+            <Message success hidden={!this.props.txHash}>
+              <p>Successful transaction!</p>
+              <p>Your transaction hash: {this.props.txHash}</p>
+            </Message>
+            <Message error hidden={!this.props.error}>
+              <p>Error!</p>
+              <p>{this.props.error}</p>
+            </Message>
+          </Segment>
+        </Dimmer>
         <Header size="huge">
           <svg width="32" height="32" className="icon">
             <image href={settings} x="0" y="0" width="100%" height="100%" />
@@ -218,6 +230,10 @@ function mapStateToProps(state) {
     ethBalance: state.web3.ethBalance,
     balancesError: state.web3.web3Error,
     address: state.auth.address,
+    isSuccess: state.withdraw.isSuccess,
+    error: state.withdraw.error,
+    isError: state.withdraw.isError,
+    txHash: state.withdraw.txHash,
   };
 }
 

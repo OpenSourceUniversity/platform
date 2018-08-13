@@ -1,6 +1,5 @@
-
-let ipfsHashStorage = artifacts.require("./contracts/ipfsHashStorage.sol");
+const VerificationStorage = artifacts.require('./contracts/VerificationStorage.sol');
 
 module.exports = function(deployer) {
-   deployer.deploy(ipfsHashStorage);
+   deployer.deploy(VerificationStorage);
 };

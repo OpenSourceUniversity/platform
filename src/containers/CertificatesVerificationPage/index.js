@@ -131,6 +131,10 @@ class CertificatesVerificationPage extends React.Component {
   }
   /* eslint-disable jsx-a11y/label-has-for */
   render() {
+    /* eslint-disable global-require */
+    const loader = require('../../icons/osu-loader.svg');
+    /* eslint-enable global-require */
+
     return (
       <Container>
         <Breadcrumb>
@@ -169,18 +173,27 @@ class CertificatesVerificationPage extends React.Component {
           </p>
         </Message>
 
+
+
         <Grid>
+
           <Grid.Column width={4}>
             <Menu fluid vertical pointing>
               {this.renderCertificatesMenu()}
             </Menu>
           </Grid.Column>
           <Grid.Column width={12}>
-            <Segment style={{ display: this.state.activeItem ? null : 'none', borderColor: this.props.certificate.verified ? 'green' : 'orange' }}>
-              <Dimmer active={this.props.isFetching} inverted>
-                <Loader size="large">Loading</Loader>
-              </Dimmer>
+          // display: this.state.activeItem ? null : 'none',
+            <Segment style={{ borderColor: this.props.certificate.verified ? 'green' : 'orange' }}>
               <Form size="huge" onSubmit={(event) => { this.handleSubmit(event, this); }}>
+              <Dimmer active={this.props.isUpdating} page>
+                <Loader size="medium">
+                  <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
+                    <image href={loader} x="0" y="0" width="100%" height="100%" />
+                  </svg>
+                  Updating the certificate ...
+                </Loader>
+              </Dimmer>
                 <Form.Field required>
                   <label htmlFor="academy_title">
                     Academy title
@@ -389,6 +402,7 @@ function mapStateToProps(state) {
     certificate: state.certificate.certificate,
     isFetchingList: state.certificates.isFetching,
     isFetching: state.certificate.isFetching,
+    isUpdating: state.certificate.isUpdating,
     error: state.certificates.error,
   };
 }

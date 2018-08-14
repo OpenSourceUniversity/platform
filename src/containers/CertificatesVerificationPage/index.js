@@ -22,7 +22,7 @@ class CertificatesVerificationPage extends React.Component {
   componentDidMount() {
     this.props.fetchCertificates(`${bdnUrl}api/v1/certificates/get_certificates_by_academy/`);
     this.props.setSecondaryNav('academia');
-    document.title = 'Certificates Validation | OS.University';
+    document.title = 'Certificates Validation | OSU DApp';
   }
 
   massVerification() {

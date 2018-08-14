@@ -12,7 +12,7 @@ class AcademiesPage extends React.Component {
   componentDidMount() {
     this.props.fetchAcademies();
     this.props.setSecondaryNav('academia');
-    document.title = 'Academies | OS.University';
+    document.title = 'Academies | OSU DApp';
   }
 
   industries = [

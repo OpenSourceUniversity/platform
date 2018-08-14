@@ -131,7 +131,7 @@ class HeaderWithoutRouter extends React.Component {
 
     const exploreTrigger = (
       <span className="explore-icon">
-        <Icon name="compass outline" /> Explore
+        <Icon className="compass outline" /> Explore
       </span>
     );
 

@@ -6,6 +6,7 @@ import { initWalletUnlocker } from '../../util/auth/walletUnlocker';
 import getBalances from '../../util/web3/getBalances';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import store from '../../store';
+import Config from '../../config';
 import { withdraw, resetWithdrawProps } from './actions';
 
 const options = JSON.parse(localStorage.getItem('withdrawWallets')) ? JSON.parse(localStorage.getItem('withdrawWallets')) : [];
@@ -95,7 +96,7 @@ class Deposit extends React.Component {
 
           <Message success hidden={!this.props.txHash}>
             <p>Successful transaction!</p>
-            <p>Your transaction hash: {this.props.txHash}</p>
+            <p>Your transaction hash: <a href={`${Config.network.etherscanUrl}tx/${this.props.txHash}`}>{this.props.txHash}</a></p>
           </Message>
           <Message error hidden={!this.props.error}>
             <p>Error withdraw <span style={{ textTransform: 'uppercase' }}>{this.state.coin}</span>!</p>

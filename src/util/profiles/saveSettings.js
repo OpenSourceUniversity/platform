@@ -10,7 +10,7 @@ const ACADEMY = 2;
 const BUSINESS = 3;
 const STATES = { learner: LEARNER, academy: ACADEMY, business: BUSINESS };
 /* eslint-disable camelcase */
-export default function saveSettings(profileData, account, buffer) {
+export function saveSettings(profileData, account, buffer) {
   return function dispatcher(dispatch) {
     dispatch({
       type: 'SETTINGS_SAVE_REQUEST',
@@ -68,11 +68,6 @@ export default function saveSettings(profileData, account, buffer) {
           dispatch({
             type: 'SETTINGS_SAVE_SUCCESS',
           });
-          setTimeout(() => {
-            dispatch({
-              type: 'RESET_STATES',
-            });
-          }, 2000);
         }).catch(() => {
           dispatch({
             type: 'SETTINGS_GET_FAILURE',
@@ -111,11 +106,6 @@ export default function saveSettings(profileData, account, buffer) {
         dispatch({
           type: 'SETTINGS_SAVE_SUCCESS',
         });
-        setTimeout(() => {
-          dispatch({
-            type: 'RESET_STATES',
-          });
-        }, 2000);
       }).catch(() => {
         dispatch({
           type: 'SETTINGS_GET_FAILURE',
@@ -125,4 +115,13 @@ export default function saveSettings(profileData, account, buffer) {
     }
   };
 }
+
+export function resetSaveProfileProps() {
+  return function action(dispatch) {
+    dispatch({
+      type: 'SETTINGS_SAVE_RESET_STATES',
+    });
+  };
+}
+
 /* eslint-enable camelcase */

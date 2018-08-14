@@ -2,10 +2,15 @@ import React from 'react';
 import { Form, Button, Header, Divider, Input, Message, Checkbox, Dimmer, Loader } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import Countries from '../../data/countriesList';
-import saveSettings from '../../util/profiles/saveSettings';
+import { saveSettings, resetSaveProfileProps } from '../../util/profiles/saveSettings';
 
 class LearnerSettings extends React.Component {
-  state = { visible: true }
+  /* eslint-disable react/no-unused-state */
+  state = { buffer: null }
+
+  componentDidMount() {
+    this.props.resetSaveProfileProps();
+  }
 
   getCountry(obj) {
     const needle = this.props.profiles.learner_country;
@@ -51,6 +56,10 @@ class LearnerSettings extends React.Component {
     /* eslint-enable react/no-unused-state */
   };
 
+  handleDismiss = () => {
+    this.props.resetSaveProfileProps();
+  }
+
   render() {
     /* eslint-disable global-require */
     const loader = require('../../icons/osu-loader.svg');
@@ -72,7 +81,7 @@ class LearnerSettings extends React.Component {
             content="You can't explore the platform with this active account, please, submit this form with yor information, or chose another setuped account."
           />
         ) : null}
-        {this.props.isSaved && this.state.visible ? (
+        {this.props.isSaved ? (
           <Message
             positive
             header="Successfully saved!"
@@ -84,6 +93,7 @@ class LearnerSettings extends React.Component {
             negative
             header="Oops, something went wrong!"
             content={this.props.error}
+            onDismiss={this.handleDismiss}
           />
         ) : null}
         <Header>
@@ -226,6 +236,9 @@ function mapDispatchToProps(dispatch) {
   return {
     saveSettings(profileData, account, buffer) {
       dispatch(saveSettings(profileData, account, buffer));
+    },
+    resetSaveProfileProps() {
+      dispatch(resetSaveProfileProps());
     },
   };
 }

@@ -12,7 +12,7 @@ class BusinessesPage extends React.Component {
   componentDidMount() {
     this.props.fetchBusinesses();
     this.props.setSecondaryNav('business');
-    document.title = 'Businesses | OS.University';
+    document.title = 'Businesses | OSU DApp';
   }
 
   industries = [

@@ -19,7 +19,7 @@ class JobsPage extends React.Component {
   componentDidMount() {
     this.props.fetchJobs();
     this.props.setSecondaryNav('business');
-    document.title = 'Jobs | OS.University';
+    document.title = 'Jobs | OSU DApp';
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })

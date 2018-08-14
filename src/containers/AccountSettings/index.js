@@ -12,7 +12,7 @@ import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 class AccountSettings extends React.Component {
   componentDidMount() {
     this.props.setSecondaryNav('account');
-    document.title = 'Account Settings | OS.University';
+    document.title = 'Account Settings | OSU DApp';
   }
 
   render() {

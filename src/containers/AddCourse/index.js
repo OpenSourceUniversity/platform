@@ -15,7 +15,7 @@ class AddCourse extends React.Component {
     } else {
       this.props.resetAddCourseProps();
     }
-    document.title = 'Add Course | OS.University';
+    document.title = 'Add Course | OSU DApp';
   }
 
   handleSubmit(event, component) {

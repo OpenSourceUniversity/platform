@@ -12,7 +12,7 @@ class LearnersPage extends React.Component {
   componentDidMount() {
     this.props.fetchLearners();
     this.props.setSecondaryNav('academia');
-    document.title = 'Learners | OS.University';
+    document.title = 'Learners | OSU DApp';
   }
 
   industries = [

@@ -11,7 +11,7 @@ class CertificatesPage extends React.Component {
   componentDidMount() {
     this.props.fetchCertificates();
     this.props.setSecondaryNav('academia');
-    document.title = 'Certificates | OS.University';
+    document.title = 'Certificates | OSU DApp';
   }
 
   renderCertificates() {

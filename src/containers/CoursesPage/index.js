@@ -22,7 +22,7 @@ class CoursesPage extends React.Component {
     } else {
       this.props.fetchCourses();
     }
-    document.title = 'Courses | OS.University';
+    document.title = 'Courses | OSU DApp';
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })

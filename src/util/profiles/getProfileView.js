@@ -44,7 +44,7 @@ export default function getProfileView(type, eth_address) {
         if (!response.ok) {
           dispatch({
             type: 'PROFILE_GET_FAILURE',
-            error: body.error,
+            error: body.error.message,
           });
         } else {
           dispatch({
@@ -57,7 +57,7 @@ export default function getProfileView(type, eth_address) {
       .catch((error) => {
         dispatch({
           type: 'PROFILE_GET_FAILURE',
-          error,
+          error: error.message,
         });
       });
   };

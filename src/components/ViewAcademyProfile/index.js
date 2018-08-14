@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter, Link } from 'react-router-dom';
 import { Header, Divider, Grid, Sticky, Segment, List, Button, Dimmer, Loader, Message } from 'semantic-ui-react';
 import { fetchDepartmentCourses } from './actions';
 import CourseItem from '../../components/CourseItem';
@@ -11,6 +12,8 @@ class ViewAcademyProfile extends React.Component {
     this.props.getProfileView('academy', this.props.eth_address);
     this.props.fetchDepartmentCourses(this.props.eth_address);
   }
+
+  handleBack = () => this.props.history.push('/academies');
 
   renderCourses() {
     return (
@@ -41,11 +44,19 @@ class ViewAcademyProfile extends React.Component {
         <Dimmer
           active={showDimmer}
           inverted
+          onClickOutside={this.handleBack}
         >
           <Message negative>
             <Message.Header>Can&apos;t load this profile</Message.Header>
             <p>Please, check the ETH address</p>
           </Message>
+          <Button
+            primary
+            as={Link}
+            to="/academies"
+          >
+            Back to Academies list
+          </Button>
         </Dimmer>
         <Grid>
           <Grid.Column mobile={16} tablet={8} computer={5}>
@@ -103,7 +114,13 @@ class ViewAcademyProfile extends React.Component {
                 Courses
               </Header>
               <Divider clearing />
-              {this.renderCourses()}
+              {
+                this.props.courses.length ?
+                  this.renderCourses() :
+                  <div style={{ textAlign: 'center', width: '100%' }}>
+                    <p style={{ textAlign: 'center' }}>There are no courses yet.</p>
+                  </div>
+              }
             </Segment>
           </Grid.Column>
         </Grid>
@@ -132,4 +149,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 /* eslint-enable camelcase */
-export default connect(mapStateToProps, mapDispatchToProps)(ViewAcademyProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ViewAcademyProfile));

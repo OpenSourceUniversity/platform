@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Container, Header, Grid, Button, Icon, Divider, Checkbox, Breadcrumb, Loader, Message, Dimmer, Menu, Segment, Form, Input } from 'semantic-ui-react';
 import SkillItem from 'components/SkillItem';
 import SkillsInput from 'components/SkillsInput';
@@ -148,6 +149,7 @@ class CertificatesVerificationPage extends React.Component {
           Certificates verification list
         </Header>
         <Button
+          style={{ display: this.props.certificates.length > 0 ? null : 'none' }}
           icon
           labelPosition="left"
           positive
@@ -157,6 +159,18 @@ class CertificatesVerificationPage extends React.Component {
         >
           <Icon name="checkmark" />
           Verify all selected certificates
+        </Button>
+        <Button
+          style={{ display: this.props.certificates.length > 0 ? 'none' : null }}
+          icon
+          labelPosition="left"
+          positive
+          floated="right"
+          as={Link}
+          to="/certificates/add"
+        >
+          <Icon name="plus" />
+          Add Certificate
         </Button>
 
         <Divider clearing />
@@ -176,12 +190,12 @@ class CertificatesVerificationPage extends React.Component {
 
         <Grid>
 
-          <Grid.Column width={4}>
+          <Grid.Column width={4} style={{ display: this.props.certificates.length > 0 ? null : 'none' }}>
             <Menu fluid vertical pointing>
               {this.renderCertificatesMenu()}
             </Menu>
           </Grid.Column>
-          <Grid.Column width={12}>
+          <Grid.Column width={12} style={{ display: this.state.activeItem ? 'block' : 'none' }}>
             <Segment style={{ borderColor: this.props.certificate.verified ? 'green' : 'orange' }}>
               <Form size="huge" onSubmit={(event) => { this.handleSubmit(event, this); }}>
                 <Dimmer active={this.props.isUpdating} page>

@@ -87,7 +87,13 @@ class BusinessProfile extends React.Component {
                 Job positions
               </Header>
               <Divider clearing />
-              {this.renderJobs()}
+              {
+                this.props.jobs.length ?
+                  this.renderJobs() :
+                  <div style={{ textAlign: 'center', width: '100%' }}>
+                    <p style={{ textAlign: 'center' }}>There are no job positions yet.</p>
+                  </div>
+              }
             </Segment>
           </Grid.Column>
         </Grid>

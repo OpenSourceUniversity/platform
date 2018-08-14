@@ -103,15 +103,15 @@ export default function profilesReducer(state = INITIAL_STATE, action) {
     });
   case 'PROFILE_GET_REQUEST':
     return Object.assign({}, state, {
-      academyIsFetching: true,
-      academyGetError: null,
-      isPublicLearner: true,
+      profileViewIsFetching: true,
+      profileViewError: null,
+      isPublic: true,
     });
   case 'PROFILE_GET_FAILURE':
     return Object.assign({}, state, {
-      academyIsFetching: false,
-      academyGetError: action.error.message,
-      isPublicLearnerLearner: true,
+      profileViewIsFetching: false,
+      profileViewError: action.error,
+      isPublic: true,
     });
   case 'PROFILE_GET_SUCCESS':
     return Object.assign({}, state, {

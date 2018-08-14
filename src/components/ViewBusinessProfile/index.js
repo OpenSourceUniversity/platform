@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter, Link } from 'react-router-dom';
 import { Header, Divider, Grid, Sticky, Segment, List, Button, Dimmer, Loader, Message } from 'semantic-ui-react';
 import { fetchCompanyJobs } from './actions';
 import JobItem from '../../components/JobItem';
@@ -11,6 +12,8 @@ class ViewBusinessProfile extends React.Component {
     this.props.getProfileView('business', this.props.eth_address);
     this.props.fetchCompanyJobs(this.props.eth_address);
   }
+
+  handleBack = () => this.props.history.push('/businesses');
 
   renderJobs() {
     return (
@@ -40,11 +43,19 @@ class ViewBusinessProfile extends React.Component {
         <Dimmer
           active={!!(this.props.profileViewError) || !(this.props.company.company_name)}
           inverted
+          onClickOutside={this.handleBack}
         >
           <Message negative>
             <Message.Header>Can&apos;t load this profile</Message.Header>
             <p>Please, check the ETH address</p>
           </Message>
+          <Button
+            primary
+            as={Link}
+            to="/businesses"
+          >
+            Back to Businesses list
+          </Button>
         </Dimmer>
         <Grid>
           <Grid.Column mobile={16} tablet={8} computer={5}>
@@ -77,7 +88,7 @@ class ViewBusinessProfile extends React.Component {
                 </Segment>
                 <Segment>
                   <List>
-                    {/* <List.Item icon="users" content={this.props.company.employees} /> */}
+                    { <List.Item icon={{ name: 'users', style: { width: '22px' } }} content={<span>{this.props.eth_address}</span>} /> }
                     <List.Item icon="mail" content={<a href={email}>{this.props.company.company_email}</a>} />
                     <List.Item icon="linkify" content={<a href={link}>{this.props.company.company_website}</a>} />
                   </List>
@@ -102,7 +113,13 @@ class ViewBusinessProfile extends React.Component {
                 Courses
               </Header>
               <Divider clearing />
-              {this.renderJobs()}
+              {
+                this.props.jobs.length ?
+                  this.renderJobs() :
+                  <div style={{ textAlign: 'center', width: '100%' }}>
+                    <p style={{ textAlign: 'center' }}>There are no job positions yet.</p>
+                  </div>
+              }
             </Segment>
           </Grid.Column>
         </Grid>
@@ -131,4 +148,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 /* eslint-enable camelcase */
-export default connect(mapStateToProps, mapDispatchToProps)(ViewBusinessProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ViewBusinessProfile));

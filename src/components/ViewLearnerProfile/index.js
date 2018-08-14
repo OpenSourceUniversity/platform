@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Header, Divider, Grid, Sticky, Segment, List, Statistic, Dimmer, Loader, Message } from 'semantic-ui-react';
+import { withRouter, Link } from 'react-router-dom';
+import { Header, Divider, Grid, Sticky, Segment, List, Statistic, Dimmer, Loader, Message, Button } from 'semantic-ui-react';
 import SkillItem from 'components/SkillItem';
 import CertificateItem from 'components/CertificateItem';
 import getProfileView from '../../util/profiles/getProfileView';
@@ -10,6 +11,8 @@ class ViewLearnerProfile extends React.Component {
   componentDidMount() {
     this.props.getProfileView('learner', this.props.eth_address);
   }
+
+  handleBack = () => this.props.history.push('/learners');
 
   renderCertificates() {
     return this.props.certificates.map((certificate, index) => (
@@ -73,6 +76,7 @@ class ViewLearnerProfile extends React.Component {
         <Dimmer
           active={!!(this.props.profileViewError) || !(this.props.learner.first_name)}
           inverted
+          onClickOutside={this.handleBack}
         >
           {this.props.isPublic ?
             (
@@ -87,6 +91,13 @@ class ViewLearnerProfile extends React.Component {
                 <p>*Some info*</p>
               </Message>)
           }
+          <Button
+            primary
+            as={Link}
+            to="/learners"
+          >
+            Back to Learners list
+          </Button>
         </Dimmer>
         <Grid>
           <Grid.Column mobile={16} tablet={8} computer={5}>
@@ -147,7 +158,13 @@ class ViewLearnerProfile extends React.Component {
                 Certificates
               </Header>
               <Grid width={16}>
-                {this.renderCertificates()}
+                {
+                  this.props.certificates.length ?
+                    this.renderCertificates() :
+                    <div style={{ textAlign: 'center', width: '100%' }}>
+                      <p style={{ textAlign: 'center' }}>There are no any certificates yet.</p>
+                    </div>
+                }
               </Grid>
             </Segment>
             <Segment.Group size="large">
@@ -155,7 +172,13 @@ class ViewLearnerProfile extends React.Component {
                 <Header>
                   Education
                 </Header>
-                {this.renderSkills()}
+                {
+                  this.props.certificates.length ?
+                    this.renderSkills() :
+                    <div style={{ textAlign: 'center', width: '100%' }}>
+                      <p style={{ textAlign: 'center' }}>There are no any skills yet.</p>
+                    </div>
+                }
                 <Divider clearing />
               </Segment>
               <Segment>
@@ -211,4 +234,4 @@ function mapDispatchToProps(dispatch) {
 }
 /* eslint-enable camelcase */
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewLearnerProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ViewLearnerProfile));

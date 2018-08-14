@@ -146,8 +146,11 @@ class CoursesPage extends React.Component {
 
               {(() => {
                 switch (this.state.activeItem) {
-                case 'recommended': return 'Recommended page';
-                default: return this.renderCourses();
+                default: return this.props.courses.length ?
+                  this.renderCourses() :
+                  <div style={{ textAlign: 'center', width: '100%' }}>
+                    <p style={{ textAlign: 'center' }}>There are no courses yet.</p>
+                  </div>;
                 }
               })()}
 

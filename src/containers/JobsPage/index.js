@@ -92,12 +92,14 @@ class JobsPage extends React.Component {
               <Divider clearing />
               <Menu pointing secondary color="orange">
                 <Menu.Item name="trending" active={activeItem === 'trending'} onClick={this.handleItemClick} />
-                <Menu.Item name="recommended" active={activeItem === 'recommended'} onClick={this.handleItemClick} />
               </Menu>
               {(() => {
                 switch (this.state.activeItem) {
-                case 'recommended': return 'Recommended page';
-                default: return this.renderJobs();
+                default: return this.props.jobs.length ?
+                  this.renderJobs() :
+                  <div style={{ textAlign: 'center', width: '100%' }}>
+                    <p style={{ textAlign: 'center' }}>There are no job positions yet.</p>
+                  </div>;
                 }
               })()}
             </Segment>

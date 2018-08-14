@@ -89,7 +89,13 @@ class AcademyProfile extends React.Component {
                 Courses
               </Header>
               <Divider clearing />
-              {this.renderCourses()}
+              {
+                this.props.courses.length ?
+                  this.renderCourses() :
+                  <div style={{ textAlign: 'center', width: '100%' }}>
+                    <p style={{ textAlign: 'center' }}>There are no courses yet.</p>
+                  </div>
+              }
             </Segment>
           </Grid.Column>
         </Grid>

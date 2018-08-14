@@ -7,7 +7,7 @@ import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import Config from '../../config';
 
 class CertificatePage extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const { bdnUrl } = Config.network;
     this.props.fetchCertificate(`${bdnUrl}api/v1/certificates/${this.props.match.params.id}/`);
     this.props.setSecondaryNav('academia');

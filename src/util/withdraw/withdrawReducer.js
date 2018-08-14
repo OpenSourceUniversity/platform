@@ -21,6 +21,13 @@ const withdrawReducer = (state = initialState, action) => {
       error: action.payload.error,
       txHash: null,
     });
+  case 'WITHDRAW_RESET':
+    return Object.assign({}, state, {
+      isSuccess: false,
+      isError: false,
+      error: null,
+      txHash: null,
+    });
   default:
     return state;
   }

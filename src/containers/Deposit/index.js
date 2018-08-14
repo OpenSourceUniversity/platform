@@ -6,7 +6,7 @@ import { initWalletUnlocker } from '../../util/auth/walletUnlocker';
 import getBalances from '../../util/web3/getBalances';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import store from '../../store';
-import { withdraw } from './actions';
+import { withdraw, resetWithdrawProps } from './actions';
 
 const options = JSON.parse(localStorage.getItem('withdrawWallets')) ? JSON.parse(localStorage.getItem('withdrawWallets')) : [];
 
@@ -30,6 +30,8 @@ class Deposit extends React.Component {
       coin: data.value,
     });
   }
+
+  handleHide = () => this.props.resetWithdrawProps()
 
   submitWithdraw(event, component) {
     event.preventDefault();
@@ -85,17 +87,21 @@ class Deposit extends React.Component {
 
     return (
       <Container>
-        <Dimmer active={this.props.isError || this.props.isSuccess} inverted>
-          <Segment>
-            <Message success hidden={!this.props.txHash}>
-              <p>Successful transaction!</p>
-              <p>Your transaction hash: {this.props.txHash}</p>
-            </Message>
-            <Message error hidden={!this.props.error}>
-              <p>Error!</p>
-              <p>{this.props.error}</p>
-            </Message>
-          </Segment>
+        <Dimmer
+          active={this.props.isError || this.props.isSuccess}
+          inverted
+          onClickOutside={this.handleHide}
+        >
+
+          <Message success hidden={!this.props.txHash}>
+            <p>Successful transaction!</p>
+            <p>Your transaction hash: {this.props.txHash}</p>
+          </Message>
+          <Message error hidden={!this.props.error}>
+            <p>Error withdraw <span style={{ textTransform: 'uppercase' }}>{this.state.coin}</span>!</p>
+            <p>{this.props.error}</p>
+          </Message>
+
         </Dimmer>
         <Header size="huge">
           <svg width="32" height="32" className="icon">
@@ -247,6 +253,9 @@ function mapDispatchToProps(dispatch) {
     },
     setSecondaryNav(secondaryNav) {
       dispatch(setSecondaryNav(secondaryNav));
+    },
+    resetWithdrawProps() {
+      dispatch(resetWithdrawProps());
     },
   };
 }

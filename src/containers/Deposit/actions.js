@@ -10,6 +10,25 @@ export function withdraw(wallet, recipient, amountLong, coin) {
     const web3 = store.getState().web3.web3Instance;
     const { address } = store.getState().auth;
     const amount = Number(amountLong) * (10 ** 18);
+    const { ethBalance, eduBalance } = store.getState().web3;
+    if (coin === 'edu' && amountLong > eduBalance) {
+      dispatch({
+        type: 'WITHDRAW_ERROR',
+        payload: {
+          error: 'Not enough EDU balance!',
+        },
+      });
+      return null;
+    } else if (amountLong > ethBalance) {
+      dispatch({
+        type: 'WITHDRAW_ERROR',
+        payload: {
+          error: 'Not enough ETH balance!',
+        },
+      });
+      return null;
+    }
+
     web3.eth.getTransactionCount(address).then((txCount) => {
       const nonce = txCount.toString(16);
       let rawTransaction = null;
@@ -32,6 +51,7 @@ export function withdraw(wallet, recipient, amountLong, coin) {
           gasPrice: '0x003B9ACA00',
           gasLimit: 21000,
           to: recipient,
+          chainId: Config.network.chainId,
           value: amount,
         };
       }
@@ -52,10 +72,18 @@ export function withdraw(wallet, recipient, amountLong, coin) {
           dispatch({
             type: 'WITHDRAW_ERROR',
             payload: {
-              error,
+              error: error.message,
             },
           });
         });
+    });
+  };
+}
+
+export function resetWithdrawProps() {
+  return function action(dispatch) {
+    dispatch({
+      type: 'WITHDRAW_RESET',
     });
   };
 }

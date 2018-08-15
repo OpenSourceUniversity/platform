@@ -198,12 +198,12 @@ class CertificatesVerificationPage extends React.Component {
           <Grid.Column width={12} style={{ display: this.state.activeItem ? 'block' : 'none' }}>
             <Segment style={{ borderColor: this.props.certificate.verified ? 'green' : 'orange' }}>
               <Form size="huge" onSubmit={(event) => { this.handleSubmit(event, this); }}>
-                <Dimmer active={this.props.isUpdating} page>
+                <Dimmer active={this.props.isUpdating || this.props.isVerifying} page>
                   <Loader size="medium">
                     <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
                       <image href={loader} x="0" y="0" width="100%" height="100%" />
                     </svg>
-                  Updating the certificate ...
+                    {this.props.isUpdating ? 'Updating the certificate...' : 'Verifying the certificate...'}
                   </Loader>
                 </Dimmer>
                 <Form.Field required>
@@ -415,6 +415,7 @@ function mapStateToProps(state) {
     isFetchingList: state.certificates.isFetching,
     isFetching: state.certificate.isFetching,
     isUpdating: state.certificate.isUpdating,
+    isVerifying: state.verification.isVerifying,
     error: state.certificates.error,
   };
 }

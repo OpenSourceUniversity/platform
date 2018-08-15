@@ -8,6 +8,7 @@ import certificateReducer from './util/certificate/certificateReducer';
 import addCertificateReducer from './util/certificate/addCertificateReducer';
 import coursesReducer from './containers/CoursesPage/coursesReducer';
 import courseReducer from './containers/CoursePage/courseReducer';
+import verificationReducer from './util/verification/verificationReducer';
 import activeAccountReducer from './util/activeAccount/activeAccountReducer';
 import secondaryNavReducer from './util/secondaryNav/secondaryNavReducer';
 import profilesReducer from './util/profiles/profilesReducer';
@@ -45,6 +46,7 @@ const reducer = combineReducers({
   addJob: addJobReducer,
   addCourse: addCourseReducer,
   learners: learnersReducer,
+  verification: verificationReducer,
   withdraw: withdrawReducer,
 });
 

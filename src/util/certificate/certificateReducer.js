@@ -3,8 +3,6 @@ const INITIAL_STATE = {
   isUpdating: false,
   error: null,
   certificate: 'null',
-  transactionHash: null,
-  transactionError: '',
 };
 
 export default function certificateReducer(state = INITIAL_STATE, action) {
@@ -28,14 +26,6 @@ export default function certificateReducer(state = INITIAL_STATE, action) {
       isFetching: false,
       certificate: 'null',
       error: null,
-    });
-  case 'CERTIFICATE_HASH_STORED':
-    return Object.assign({}, state, {
-      transactionHash: action.result,
-    });
-  case 'CERTIFICATE_HASH_FAILED':
-    return Object.assign({}, state, {
-      transactionError: action.error.message,
     });
   case 'UPDATE_CERTIFICATE_REQUEST':
     return Object.assign({}, state, {

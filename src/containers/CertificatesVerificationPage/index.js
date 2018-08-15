@@ -54,6 +54,7 @@ class CertificatesVerificationPage extends React.Component {
       score: event.target.elements.score.value,
       duration: event.target.elements.duration.value,
       expiration_date: event.target.elements.expiration_date.value,
+      ipfs_hash: component.props.certificate.ipfs_hash,
     };
     if (component.state.verification) {
       component.props.verifyCertificate(certificateData);

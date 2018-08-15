@@ -26,7 +26,6 @@ export default function verifyCertificate(certificateData) {
         },
       });
       dispatch(storeVerification(ipfsHash, grantedTo, (error) => {
-        debugger;
         if (error) {
           return;
         }

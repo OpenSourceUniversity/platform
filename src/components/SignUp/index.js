@@ -54,13 +54,15 @@ export default class SignUp extends React.Component {
               <Form.Field name="passphrase" inline width="16" label={{ icon: 'user' }} control="input" type="password" placeholder="Set your passphrase" />
             </Form.Group>
             <Form.Field inline className="check-box">
-              <Input
-                name="agreement"
-                type="checkbox"
-              />
-              <span>
-                I agree with the <a style={{ color: 'orange' }} href="https://os.university/static/Terms-And-Conditions.pdf" rel="noopener noreferrer" target="_blank">Terms&Conditions</a>
-              </span>
+              <label htmlFor="agreement">
+                <Input
+                  id="agreement"
+                  name="agreement"
+                  type="checkbox"
+                  labelPosition="left"
+                />
+                <span style={{ marginLeft: '5px' }}>I agree with the <a style={{ color: 'orange' }} href="https://os.university/static/Terms-And-Conditions.pdf" rel="noopener noreferrer" target="_blank">Terms&Conditions</a></span>
+              </label>
             </Form.Field>
             <span style={{ color: 'red' }}>
               {this.state.errorMessage}

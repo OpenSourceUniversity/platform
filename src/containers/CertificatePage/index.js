@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Header, Divider, Segment, Container, Dimmer, Loader, Breadcrumb, Grid } from 'semantic-ui-react';
+import { Header, Divider, Segment, Container, Dimmer, Loader, Breadcrumb, Grid, Modal, Button, Icon, Form, Input } from 'semantic-ui-react';
 import SkillItem from 'components/SkillItem';
 import fetchCertificate from '../../util/certificate/fetchCertificate';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import Config from '../../config';
+import { requireVerification } from './actions';
 
 class CertificatePage extends React.Component {
   componentDidMount() {
@@ -12,6 +13,15 @@ class CertificatePage extends React.Component {
     this.props.fetchCertificate(`${bdnUrl}api/v1/certificates/${this.props.match.params.id}/`);
     this.props.setSecondaryNav('academia');
     document.title = 'Certificate | OSU DApp';
+  }
+
+  handleSubmit(event, component) {
+    event.preventDefault();
+    const certificateData = {
+      id: component.props.match.params.id,
+      verifier: event.target.elements.verifier_eth_address.value,
+    };
+    component.props.requireVerification(certificateData);
   }
 
   renderSkills() {
@@ -47,6 +57,7 @@ class CertificatePage extends React.Component {
       return null;
     }
   }
+
   // renderRating(ratingNumb) {
   //   return (
   //     <div className="ui accurate star widget inline" style={{ marginRight: '10px' }}>
@@ -71,6 +82,33 @@ class CertificatePage extends React.Component {
               <Dimmer active={this.props.certificate.isFetching} inverted>
                 <Loader size="large">Loading</Loader>
               </Dimmer>
+              <Modal trigger={
+                <Button icon labelPosition="left" positive floated="right" to="/certificates/add">
+                  <Icon name="checkmark" />
+                  Verifiy Certificate
+                </Button>
+              }
+              >
+                <Modal.Header>Verification Request</Modal.Header>
+                <Modal.Content>
+                  <Form size="large" onSubmit={(event) => { this.handleSubmit(event, this); }}>
+                    <Form.Field required>
+                      <label htmlFor="verifier_eth_address">
+                        Please, enter instance ETH address
+                      </label>
+                      <Input
+                        id="verifier_eth_address"
+                        name="verifier_eth_address"
+                        iconPosition="left"
+                        icon="file"
+                        placeholder="ETH address"
+                      />
+                    </Form.Field>
+                    <Button type="submit" primary size="huge">Submit</Button>
+                  </Form>
+                </Modal.Content>
+              </Modal>
+              <Divider hidden />
               <Header style={{ fontSize: '1.7em' }}>
                 Certificate Information
               </Header>
@@ -89,10 +127,6 @@ class CertificatePage extends React.Component {
                       Academy Title:
                     </Header>
                     <span>{this.props.certificate.academy_title}</span>
-                    <Header style={{ fontSize: '1.7em' }}>
-                      Academy ETH Address:
-                    </Header>
-                    <a rel="noopener noreferrer" target="_blank" href={`https://etherscan.io/address/${this.props.certificate.academy_address}`}>{this.props.certificate.academy_address}</a>
                     <Header style={{ fontSize: '1.7em' }}>
                       Academy Site:
                     </Header>
@@ -189,6 +223,9 @@ function mapDispatchToProps(dispatch) {
     },
     setSecondaryNav(secondaryNav) {
       dispatch(setSecondaryNav(secondaryNav));
+    },
+    requireVerification(certificateData) {
+      dispatch(requireVerification(certificateData));
     },
   };
 }

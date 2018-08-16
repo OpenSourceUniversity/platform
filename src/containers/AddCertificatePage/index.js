@@ -24,7 +24,6 @@ class AddCertificatePage extends React.Component {
 
     const certificateData = {
       academy_title: event.target.elements.academy_title.value,
-      academy_address: component.props.activeAccount === 'Academy' ? component.props.ethAddress : event.target.elements.academy_address.value,
       academy_link: event.target.elements.academy_link.value,
       program_title: event.target.elements.program_title.value,
       course_title: event.target.elements.course_title.value,
@@ -232,21 +231,6 @@ class AddCertificatePage extends React.Component {
                       icon="university"
                       placeholder="Official name of your academy"
                       onChange={this.handleChange}
-                    />
-                  </Form.Field>
-                  <Form.Field>
-                    <label htmlFor="academy_address">
-                      Academy ETH address (if any)
-                    </label>
-                    <Input
-                      id="academy_address"
-                      name="academy_address"
-                      iconPosition="left"
-                      icon="globe"
-                      placeholder="ETH address of your academy"
-                      defaultValue={this.props.activeAccount === 'Academy' ? this.props.ethAddress : ''}
-                      readOnly={this.props.activeAccount === 'Academy'}
-
                     />
                   </Form.Field>
                   <Form.Field required>

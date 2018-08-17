@@ -1,5 +1,6 @@
 import storeSignedAddress from './storeSignedAddress';
 import getDefaultValues from '../profiles/getDefaultValues';
+import { getActiveAccount } from '../activeAccount/setActiveAccount';
 
 export default function storeV3Wallet(v3Wallet, checksumAddress, publicKey, privateKey) {
   return function action(dispatch) {
@@ -14,6 +15,7 @@ export default function storeV3Wallet(v3Wallet, checksumAddress, publicKey, priv
         v3Wallet,
       },
     });
+    dispatch(getActiveAccount());
     dispatch(getDefaultValues());
   };
 }

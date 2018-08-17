@@ -7,7 +7,7 @@ const activeAccountReducer = (state = initialState, action) => {
   switch (action.type) {
   case 'ACCOUNT_CHANGED':
     return Object.assign({}, state, {
-      activeAccount: action.payload.activeAccount,
+      activeAccount: action.activeAccount,
     });
   default:
     return state;

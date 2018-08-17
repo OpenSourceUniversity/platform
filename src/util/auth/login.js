@@ -2,6 +2,7 @@ import { createHashHistory } from 'history';
 import store from '../../store';
 import storeSignedAddress from './storeSignedAddress';
 import getDefaultValues from '../profiles/getDefaultValues';
+import { getActiveAccount } from '../activeAccount/setActiveAccount';
 
 const Wallet = require('ethereumjs-wallet');
 
@@ -35,6 +36,7 @@ export default function login(passphrase) {
             wallet,
           },
         });
+        dispatch(getActiveAccount());
         dispatch(getDefaultValues());
         const newPath = '/';
         const history = createHashHistory();

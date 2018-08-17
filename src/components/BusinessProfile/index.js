@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Header, Divider, Grid, Sticky, Segment, List, Button } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import { Header, Divider, Grid, Sticky, Segment, List, Button, Icon } from 'semantic-ui-react';
 import { fetchCompanyJobs } from '../ViewBusinessProfile/actions';
 import JobItem from '../../components/JobItem';
 /* eslint-disable camelcase */
@@ -87,6 +88,10 @@ class BusinessProfile extends React.Component {
                 Job positions
               </Header>
               <Divider clearing />
+              <Button style={{ marginBottom: '1em' }} icon labelPosition="left" positive floated="right" as={Link} to="/businesses/add">
+                <Icon name="plus" />
+                Add job position
+              </Button>
               {
                 this.props.jobs.length ?
                   this.renderJobs() :

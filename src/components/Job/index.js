@@ -210,8 +210,6 @@ class Job extends React.Component {
                 <br />
                 <span style={{ fontWeight: 600, marginRight: '10px' }}> Hours: </span> <span> {vals.time} </span>
                 <br />
-                <span style={{ fontWeight: 600, marginRight: '10px' }}> Job type: </span> <span> {vals.job_type} </span>
-                <br />
                 <span style={{ fontWeight: 600, marginRight: '10px' }}> Language: </span> <span> {vals.lang} </span>
                 <br />
               </div>

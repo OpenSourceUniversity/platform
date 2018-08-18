@@ -160,8 +160,6 @@ class JobPage extends React.Component {
                     <br />
                     <span style={{ fontWeight: 600, marginRight: '10px' }}> Hours: </span> <span> {this.props.job.hours} </span>
                     <br />
-                    <span style={{ fontWeight: 600, marginRight: '10px' }}> Job type: </span> <span> {this.props.job.job_type} </span>
-                    <br />
                     <span style={{ fontWeight: 600, marginRight: '10px' }}> Language: </span> <span> {this.renderLanguages()} </span>
                     <br />
                   </div>

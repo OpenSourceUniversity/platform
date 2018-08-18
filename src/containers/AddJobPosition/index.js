@@ -36,7 +36,6 @@ class AddJobPosition extends React.Component {
       closes: event.target.elements.closes.value,
       experience: event.target.elements.experience.value,
       hours: event.target.elements.hours.value,
-      job_type: event.target.elements.job_type.value,
       languages: event.target.elements.languages.value.split(','),
     };
     if (component.props.match.params.id) {
@@ -216,20 +215,6 @@ class AddJobPosition extends React.Component {
                     type="number"
                     key={`hours:${this.props.jobDefault.hours || ''}`}
                     defaultValue={this.props.jobDefault.hours ? this.props.jobDefault.hours : ''}
-                  />
-                </label>
-              </Form.Field>
-              <Form.Field>
-                <label htmlFor="job_type">
-                  Job type
-                  <Input
-                    id="job_type"
-                    name="job_type"
-                    iconPosition="left"
-                    icon="tag"
-                    placeholder="Contract type"
-                    key={`job_type:${this.props.jobDefault.job_type || ''}`}
-                    defaultValue={this.props.jobDefault.job_type ? this.props.jobDefault.job_type : ''}
                   />
                 </label>
               </Form.Field>

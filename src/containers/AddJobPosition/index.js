@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { Container, Header, Button, Message, Divider, Breadcrumb, Form, Input, Grid, TextArea, Dimmer, Loader } from 'semantic-ui-react';
 import SkillsInput from 'components/SkillsInput';
 import IndustriesInput from 'components/IndustriesInput';
-import { addJobPosition, getDefaultValues, editJobPosition, resetAddJobProps } from './actions';
+import { getDefaultValues, editJobPosition, resetAddJobProps } from './actions';
+import addJobPosition from '../../util/job/addJobPosition';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 
 

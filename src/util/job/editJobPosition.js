@@ -5,7 +5,7 @@ import Config from '../../config';
 const { bdnUrl } = Config.network;
 
 
-export function editJobPosition(id, jobData) {
+export default function editJobPosition(id, jobData) {
   return function action(dispatch) {
     dispatch({
       type: 'ADD_JOB_REQUEST',

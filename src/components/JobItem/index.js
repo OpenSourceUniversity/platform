@@ -19,7 +19,7 @@ class JobItemWithoutRouter extends React.Component {
   render() {
     /* eslint-disable global-require */
 
-    const profile = require('../../icons/account_profile.svg');
+    const profile_business = require('../../icons/businesses.svg');
 
     /* eslint-enable global-require */
 
@@ -28,13 +28,10 @@ class JobItemWithoutRouter extends React.Component {
         <Card.Content extra>
           <Card.Header style={{ color: 'black' }} icon="ellipsis vertical">{this.props.job.title}</Card.Header>
           <span className="course-desc" >
-            <Icon name="signal" style={{ color: '#c1c1c1' }} className="course-desc" /> {this.props.job.job_type}
-          </span>
-          <span className="course-desc" >
             <Icon name="world" style={{ color: '#c1c1c1' }} className="course-desc" /> {this.props.job.location}
           </span>
           <span className="course-desc" >
-            <Icon name="time" style={{ color: '#c1c1c1' }} className="course-desc" /> {this.props.job.hours}
+            <Icon name="time" style={{ color: '#c1c1c1' }} className="course-desc" /> {this.props.job.hours} h/w
           </span>
         </Card.Content>
         <Card.Content>
@@ -45,8 +42,8 @@ class JobItemWithoutRouter extends React.Component {
             Show job&apos;s details
           </Button>
           <span className="course-desc" style={{ float: 'right', color: 'black' }}>
-            <Image style={{ width: '25px' }} spaced="right" src={profile} />
-            Lorem ipsum dolor sit
+            <Image style={{ width: '25px' }} spaced="right" src={profile_business} />
+            { this.props.job.company.name ? `${this.props.job.company.name}` : 'deleted' }
           </span>
         </Card.Content>
       </Card>

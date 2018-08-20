@@ -23,6 +23,7 @@ import businessesReducer from './containers/Businesses/businessesReducer';
 import addJobReducer from './containers/AddJobPosition/addJobReducer';
 import addCourseReducer from './containers/AddCourse/addCourseReducer';
 import verificationsReducer from './util/verification/verificationsReducer';
+import verificationRequestReducer from './util/verification/verificationRequestReducer';
 
 
 const reducer = combineReducers({
@@ -50,6 +51,7 @@ const reducer = combineReducers({
   verification: verificationReducer,
   withdraw: withdrawReducer,
   verifications: verificationsReducer,
+  verificationRequest: verificationRequestReducer,
 });
 
 export default reducer;

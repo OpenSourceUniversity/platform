@@ -17,10 +17,7 @@ export default function rejectVerification(id) {
         'Auth-Eth-Address': store.getState().auth.address.slice(2),
       },
     };
-    const postData = {
-      id,
-    };
-    axios.post(`${bdnUrl}api/v1/verifications/reject_by_id/`, postData, axiosConfig).then(() => {
+    axios.post(`${bdnUrl}api/v1/verifications/${id}/reject_by_id/`, null, axiosConfig).then(() => {
       dispatch({
         type: 'ADD_CERTIFICATE_SUCCESS',
       });

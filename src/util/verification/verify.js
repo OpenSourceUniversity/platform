@@ -3,7 +3,7 @@ import setPendingVerification from './setPendingVerification';
 import storeVerification from './storeVerification';
 import fetchVerifications from './fetchVerifications';
 
-export default function verifyCertificate(certificateData) {
+export default function verify(verification) {
   return function action(dispatch) {
     // TODO: do not dispatch this event. Instead dispatch something more
     // related to the verification functionality, e.g. VERIFICATION_REQUEST
@@ -11,8 +11,15 @@ export default function verifyCertificate(certificateData) {
       type: 'VERIFY_REQUEST',
     });
     const ipfs = store.getState().ipfs.IPFSinstance;
-    const metaJson = certificateData;
-    const grantedTo = certificateData.learner_eth_address;
+    const metaJson = verification;
+    metaJson.previous_state = metaJson.state;
+    const verificationID = verification.id;
+    delete metaJson.state;
+    delete metaJson.id;
+    delete metaJson.certificate.id;
+    metaJson.granted_to = verification.certificate.learner_eth_address;
+    metaJson.verifier = verification.certificate.provider.eth_address;
+    console.log(metaJson);
     const metaJsonBuffer = Buffer.from(JSON.stringify(metaJson));
     ipfs.add(metaJsonBuffer, (err, ipfsHashFull) => {
       const ipfsHash = ipfsHashFull[0].hash;
@@ -22,12 +29,12 @@ export default function verifyCertificate(certificateData) {
           ipfsHash,
         },
       });
-      dispatch(storeVerification(ipfsHash, grantedTo, (error) => {
+      dispatch(storeVerification(ipfsHash, metaJson.granted_to, (error) => {
         if (error) {
           return;
         }
         // Store the updated data on BDN
-        dispatch(setPendingVerification(certificateData, () => {
+        dispatch(setPendingVerification(verificationID, () => {
           dispatch(fetchVerifications());
         }));
       }));

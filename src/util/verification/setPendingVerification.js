@@ -7,7 +7,7 @@ const { bdnUrl } = Config.network;
 
 export default function setPendingVerification(id, callback) {
   return function action(dispatch) {
-    const url = `${bdnUrl}api/v1/verifications/set_pending_by_id/${id}`;
+    const url = `${bdnUrl}api/v1/verifications/${id}/set_pending_by_id/`;
     dispatch({
       type: 'UPDATE_CERTIFICATE_REQUEST',
     });
@@ -17,7 +17,7 @@ export default function setPendingVerification(id, callback) {
         'Auth-Eth-Address': store.getState().auth.address.slice(2),
       },
     };
-    axios.post(url, axiosConfig).then(() => {
+    axios.post(url, null, axiosConfig).then(() => {
       dispatch({
         type: 'UPDATE_CERTIFICATE_SUCCESS',
       });

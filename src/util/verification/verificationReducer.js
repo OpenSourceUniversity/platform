@@ -11,7 +11,7 @@ const INITIAL_STATE = {
 };
 
 
-export default function certificateReducer(state = INITIAL_STATE, action) {
+export default function verificationReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
   case 'VERIFY_REQUEST':
     return Object.assign({}, state, {

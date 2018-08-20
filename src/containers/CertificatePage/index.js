@@ -6,8 +6,10 @@ import fetchCertificate from '../../util/certificate/fetchCertificate';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import Config from '../../config';
 import { requireVerification } from '../../util/verification/verificationRequest';
+import deleteCertificate from '../../util/certificate/deleteCertificate';
 
 class CertificatePage extends React.Component {
+  state = { modalOpen: false }
   componentDidMount() {
     const { bdnUrl } = Config.network;
     this.props.fetchCertificate(`${bdnUrl}api/v1/certificates/${this.props.match.params.id}/`);
@@ -27,6 +29,10 @@ class CertificatePage extends React.Component {
     };
     component.props.requireVerification(certificateData);
   }
+
+  handleOpen = () => this.setState({ modalOpen: true })
+
+  handleClose = () => this.setState({ modalOpen: false })
 
   renderSkills() {
     const skillsArr = this.props.certificate.skills;
@@ -93,6 +99,40 @@ class CertificatePage extends React.Component {
                   </svg>
                 </Loader>
               </Dimmer>
+              {this.props.address.toLowerCase() === this.props.certificate.learner_eth_address ?
+                <Modal open={this.state.modalOpen} onClose={this.handleClose} trigger={<Button floated="left" onClick={this.handleOpen} color="red">Delete</Button>} basic size="small">
+                  <Header icon="archive" content="Delete course confirmation" />
+                  <Modal.Content>
+                    <Dimmer active={this.props.isDeleting} page>
+                      <Loader size="medium">
+                        <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
+                          <image href={loader} x="0" y="0" width="100%" height="100%" />
+                        </svg>
+                      </Loader>
+                    </Dimmer>
+                    <Message error hidden={!this.props.error}>
+                      <p>
+                        {this.props.error}
+                      </p>
+                    </Message>
+                    <p>
+                    You want to delete youre certificate, named: {this.props.certificate.course_title}.
+                    </p>
+                    <p>
+                    Please, confirm this action.
+                    </p>
+                  </Modal.Content>
+                  <Modal.Actions>
+                    <Button onClick={this.handleClose} floated="left" basic color="grey" inverted>
+                      <Icon name="remove" /> Cancel
+                    </Button>
+                    <Button basic color="red" inverted onClick={() => { this.props.deleteCertificate(this.props.match.params.id); }}>
+                      <Icon name="remove" /> Delete
+                    </Button>
+                  </Modal.Actions>
+                </Modal> :
+                null
+              }
               <Modal trigger={
                 <Button icon labelPosition="left" positive floated="right" to="/certificates/add">
                   <Icon name="checkmark" />
@@ -243,11 +283,13 @@ function mapStateToProps(state) {
   return {
     certificate: state.certificate.certificate,
     isFetching: state.certificate.isFetching,
+    isDeleting: state.certificate.isDeleting,
     error: state.certificate.error,
     requestSuccess: state.verificationRequest.requestSuccess,
     requestSending: state.verificationRequest.requestSending,
     requestError: state.verificationRequest.requestError,
     activeAccount: state.activeAccount.activeAccount,
+    address: state.auth.address,
   };
 }
 
@@ -262,6 +304,9 @@ function mapDispatchToProps(dispatch) {
     },
     requireVerification(certificateData) {
       dispatch(requireVerification(certificateData));
+    },
+    deleteCertificate(id) {
+      dispatch(deleteCertificate(id));
     },
   };
 }

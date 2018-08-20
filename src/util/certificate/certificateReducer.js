@@ -3,6 +3,7 @@ const INITIAL_STATE = {
   isUpdating: false,
   error: null,
   certificate: 'null',
+  isDeleting: false,
 };
 
 export default function certificateReducer(state = INITIAL_STATE, action) {
@@ -40,6 +41,21 @@ export default function certificateReducer(state = INITIAL_STATE, action) {
   case 'UPDATE_CERTIFICATE_FAILURE':
     return Object.assign({}, state, {
       isUpdating: false,
+      error: action.error.message,
+    });
+  case 'DELETE_CERTIFICATE_REQUEST':
+    return Object.assign({}, state, {
+      isDeleting: true,
+      error: null,
+    });
+  case 'DELETE_CERTIFICATE_SUCCESS':
+    return Object.assign({}, state, {
+      isDeleting: false,
+      error: null,
+    });
+  case 'DELETE_CERTIFICATE_FAILURE':
+    return Object.assign({}, state, {
+      isDeleting: false,
       error: action.error.message,
     });
   default:

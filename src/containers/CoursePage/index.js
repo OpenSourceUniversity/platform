@@ -94,7 +94,7 @@ class CoursePage extends React.Component {
                         </p>
                       </Modal.Content>
                       <Modal.Actions>
-                        <Button onClick={this.handleOpen} basic color="grey" inverted>
+                        <Button onClick={this.handleClose} basic color="grey" inverted>
                           <Icon name="remove" /> Cancel
                         </Button>
                         <Button basic color="red" inverted onClick={() => { this.props.deleteCourse(this.props.match.params.id); }}>

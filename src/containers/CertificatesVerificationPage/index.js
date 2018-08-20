@@ -5,12 +5,12 @@ import { Container, Header, Grid, Button, Icon, Divider, Checkbox, Breadcrumb, L
 import SkillItem from 'components/SkillItem';
 import SkillsInput from 'components/SkillsInput';
 import IndustriesInput from 'components/IndustriesInput';
-import fetchCertificates from '../../util/certificate/fetchCertificates';
-import fetchCertificate from '../../util/certificate/fetchCertificate';
+import fetchVerifications from '../../util/verification/fetchVerifications';
+import fetchVerification from '../../util/verification/fetchVerification';
 import updateCertificate from '../../util/certificate/updateCertificate';
 import verifyCertificate from '../../util/verification/verifyCertificate';
 import massVerification from '../../util/verification/massVerification';
-import rejectCertificate from '../../util/verification/rejectCertificate';
+import rejectVerification from '../../util/verification/rejectVerification';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import Config from '../../config';
 
@@ -18,10 +18,10 @@ const { bdnUrl } = Config.network;
 
 class CertificatesVerificationPage extends React.Component {
   /* eslint-disable react/no-unused-state */
-  state = { activeItem: null, verification: false }
+  state = { activeItem: null }
 
   componentDidMount() {
-    this.props.fetchCertificates(`${bdnUrl}api/v1/certificates/get_certificates_by_academy/`);
+    this.props.fetchVerifications();
     this.props.setSecondaryNav('academia');
     document.title = 'Certificates Validation | OSU DApp';
   }
@@ -31,8 +31,8 @@ class CertificatesVerificationPage extends React.Component {
     this.setState({ activeItem: null });
   }
 
-  rejectCertificate() {
-    this.props.rejectCertificate(this.state.activeItem);
+  rejectVerification() {
+    this.props.rejectVerification(this.state.activeItem);
     this.setState({ activeItem: null });
   }
 
@@ -54,20 +54,14 @@ class CertificatesVerificationPage extends React.Component {
       score: event.target.elements.score.value,
       duration: event.target.elements.duration.value,
       expiration_date: event.target.elements.expiration_date.value,
-      ipfs_hash: component.props.certificate.ipfs_hash,
     };
-    if (component.state.verification) {
-      component.props.verifyCertificate(certificateData);
-    } else {
-      component.props.updateCertificate(certificateData);
-    }
-    component.setState({ verification: false });
+    component.props.verifyCertificate(certificateData);
     component.setState({ activeItem: null });
   }
 
   handleItemClick = (e, { name }) => {
     this.setState({ activeItem: name });
-    this.props.fetchCertificate(`${bdnUrl}api/v1/certificates/${name}/`);
+    this.props.fetchVerification(`${bdnUrl}api/v1/verifications/${name}/`);
   }
 
   handleCheckboxClick =(e, { name }) => {
@@ -113,9 +107,27 @@ class CertificatesVerificationPage extends React.Component {
   }
 
   renderCertificatesMenu() {
-    return this.props.certificates.map((certificate, index) => (
+    const { verifications } = this.props;
+    const certificates = [];
+    for (let i = 0; i < verifications.length; i += 1) {
+      if (verifications[i].certificate) {
+        certificates.push(verifications[i].certificate);
+        certificates[certificates.length - 1].state = verifications[i].state;
+        certificates[certificates.length - 1].id = verifications[i].id;
+      }
+    }
+    return certificates.map((certificate, index) => (
       <Menu.Item
-        style={{ color: certificate.verified ? 'green' : 'orange' }}
+        style={(() => {
+          if (certificate.state === 'pending') {
+            return { color: 'blue' };
+          } else if (certificate.state === 'verified') {
+            return { color: 'green' };
+          } else if (certificate.state === 'rejected') {
+            return { color: 'red' };
+          }
+          return { color: 'orange' };
+        })()}
         key={index}
         name={certificate.id}
         active={this.state.activeItem === certificate.id}
@@ -150,7 +162,7 @@ class CertificatesVerificationPage extends React.Component {
           Certificates verification list
         </Header>
         <Button
-          style={{ display: this.props.certificates.length > 0 ? null : 'none' }}
+          style={{ display: this.props.verifications.length > 0 ? null : 'none' }}
           icon
           labelPosition="left"
           positive
@@ -162,7 +174,7 @@ class CertificatesVerificationPage extends React.Component {
           Verify all selected certificates
         </Button>
         <Button
-          style={{ display: this.props.certificates.length > 0 ? 'none' : null }}
+          style={{ display: this.props.verifications.length > 0 ? 'none' : null }}
           icon
           labelPosition="left"
           positive
@@ -182,7 +194,7 @@ class CertificatesVerificationPage extends React.Component {
           </p>
         </Message>
 
-        <Message info hidden={this.props.certificates.length > 0 || !!this.props.error}>
+        <Message info hidden={this.props.verifications.length > 0 || !!this.props.error}>
           <p>
             You do not have any certificates yet. Go ahead and add some.
           </p>
@@ -191,7 +203,7 @@ class CertificatesVerificationPage extends React.Component {
 
         <Grid>
 
-          <Grid.Column width={4} style={{ display: this.props.certificates.length > 0 ? null : 'none' }}>
+          <Grid.Column width={4} style={{ display: this.props.verifications.length > 0 ? null : 'none' }}>
             <Menu fluid vertical pointing>
               {this.renderCertificatesMenu()}
             </Menu>
@@ -395,9 +407,8 @@ class CertificatesVerificationPage extends React.Component {
                   </a>
                 </label>
                 <div style={{ display: this.props.certificate.verified ? 'none' : null, paddingTop: '20px' }}>
-                  <Button type="submit" color="green" size="huge" onClick={() => this.setState({ verification: true })}>Verify</Button>
-                  <Button type="submit" primary size="huge">Save changed data</Button>
-                  <Button color="red" floated="right" size="huge" onClick={() => this.rejectCertificate()}>Reject</Button>
+                  <Button type="submit" color="green" size="huge">Verify</Button>
+                  <Button type="button" color="red" floated="right" size="huge" onClick={() => this.rejectVerification()}>Reject</Button>
                 </div>
               </Form>
             </Segment>
@@ -411,27 +422,27 @@ class CertificatesVerificationPage extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    certificates: state.certificates.certificates,
-    certificate: state.certificate.certificate,
-    isFetchingList: state.certificates.isFetching,
+    verifications: state.verifications.verifications,
+    certificate: state.verification.verification.certificate,
+    isFetchingList: state.verifications.isFetching,
     isFetching: state.certificate.isFetching,
     isUpdating: state.certificate.isUpdating,
     isVerifying: state.verification.isVerifying,
-    error: state.certificates.error,
+    error: state.verifications.error,
   };
 }
 
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchCertificates(url) {
-      dispatch(fetchCertificates(url));
+    fetchVerifications() {
+      dispatch(fetchVerifications());
     },
     setSecondaryNav(secondaryNav) {
       dispatch(setSecondaryNav(secondaryNav));
     },
-    fetchCertificate(url) {
-      dispatch(fetchCertificate(url));
+    fetchVerification(url) {
+      dispatch(fetchVerification(url));
     },
     updateCertificate(data) {
       dispatch(updateCertificate(data));
@@ -442,8 +453,8 @@ function mapDispatchToProps(dispatch) {
     massVerification(ids) {
       dispatch(massVerification(ids));
     },
-    rejectCertificate(id) {
-      dispatch(rejectCertificate(id));
+    rejectVerification(id) {
+      dispatch(rejectVerification(id));
     },
   };
 }

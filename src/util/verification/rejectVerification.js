@@ -1,12 +1,12 @@
 import axios from 'axios';
 import store from '../../store';
 import Config from '../../config';
-import fetchCertificates from '../../util/certificate/fetchCertificates';
+import fetchVerifications from './fetchVerifications';
 
 const { bdnUrl } = Config.network;
 
 
-export default function rejectCertificate(id) {
+export default function rejectVerification(id) {
   return function action(dispatch) {
     dispatch({
       type: 'ADD_CERTIFICATE_REQUEST',
@@ -20,11 +20,11 @@ export default function rejectCertificate(id) {
     const postData = {
       id,
     };
-    axios.post(`${bdnUrl}api/v1/certificates/${id}/delete_by_id/`, postData, axiosConfig).then(() => {
+    axios.post(`${bdnUrl}api/v1/verifications/reject_by_id/`, postData, axiosConfig).then(() => {
       dispatch({
         type: 'ADD_CERTIFICATE_SUCCESS',
       });
-      dispatch(fetchCertificates(`${bdnUrl}api/v1/certificates/get_certificates_by_academy/`));
+      dispatch(fetchVerifications());
     }).catch(() => {
       dispatch({
         type: 'ADD_CERTIFICATE_FAILURE',

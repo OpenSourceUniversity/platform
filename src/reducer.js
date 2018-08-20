@@ -22,6 +22,7 @@ import companyJobsReducer from './components/ViewBusinessProfile/companyJobsRedu
 import businessesReducer from './containers/Businesses/businessesReducer';
 import addJobReducer from './containers/AddJobPosition/addJobReducer';
 import addCourseReducer from './containers/AddCourse/addCourseReducer';
+import verificationsReducer from './util/verification/verificationsReducer';
 
 
 const reducer = combineReducers({
@@ -48,6 +49,7 @@ const reducer = combineReducers({
   learners: learnersReducer,
   verification: verificationReducer,
   withdraw: withdrawReducer,
+  verifications: verificationsReducer,
 });
 
 export default reducer;

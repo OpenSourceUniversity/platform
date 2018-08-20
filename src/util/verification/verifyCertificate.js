@@ -1,10 +1,7 @@
-import updateCertificate from '../certificate/updateCertificate';
 import store from '../../store';
-import Config from '../../config';
-import fetchCertificates from '../../util/certificate/fetchCertificates';
+import setPendingVerification from './setPendingVerification';
 import storeVerification from './storeVerification';
-
-const { bdnUrl } = Config.network;
+import fetchVerifications from './fetchVerifications';
 
 export default function verifyCertificate(certificateData) {
   return function action(dispatch) {
@@ -30,9 +27,8 @@ export default function verifyCertificate(certificateData) {
           return;
         }
         // Store the updated data on BDN
-        dispatch(updateCertificate(certificateData, () => {
-          const url = `${bdnUrl}api/v1/certificates/get_certificates_by_academy/`;
-          dispatch(fetchCertificates(url));
+        dispatch(setPendingVerification(certificateData, () => {
+          dispatch(fetchVerifications());
         }));
       }));
     });

@@ -13,7 +13,7 @@ export function requireVerification(certificateData) {
       },
     };
     const { bdnUrl } = Config.network;
-    axios.post(`${bdnUrl}api/v1/verification/`, certificateData, axiosConfig).then(() => {
+    axios.post(`${bdnUrl}api/v1/verifications/`, certificateData, axiosConfig).then(() => {
     }).catch(() => {
       console.log('error');
     });

@@ -1,20 +1,15 @@
 const initialState = {
-  IPFSinstance: null,
-  isFailed: false,
+  unreadNotificationsCount: 0,
+  notifications: [],
 };
 
 
-const ipfsReducer = (state = initialState, action) => {
+const notificationReducer = (state = initialState, action) => {
   switch (action.type) {
-  case 'IPFS_INITIALIZED':
+  case 'NOTIFICATION_RECEIVED':
     return Object.assign({}, state, {
-      IPFSinstance: action.payload.result,
-      isFailed: false,
-    });
-  case 'IPFS_INITIALIZATION_FAILED':
-    return Object.assign({}, state, {
-      isFailed: true,
-      error: action.payload.error,
+      unreadNotificationsCount: state.unreadNotificationsCount + 1,
+      notifications: [action.payload].concat(state.notifications),
     });
   default:
     return state;
@@ -22,4 +17,4 @@ const ipfsReducer = (state = initialState, action) => {
 };
 
 
-export default ipfsReducer;
+export default notificationReducer;

@@ -19,7 +19,10 @@ export default function notificationsConnection() {
 
     function wsMessage(event) {
       const data = JSON.parse(event.data);
-      console.log('message', data);
+      dispatch({
+        type: 'NOTIFICATION_RECEIVED',
+        payload: data,
+      });
     }
 
     function connect() {

@@ -6,6 +6,7 @@ import searchReducer from './util/search/searchReducer';
 import certificatesReducer from './util/certificate/certificatesReducer';
 import certificateReducer from './util/certificate/certificateReducer';
 import addCertificateReducer from './util/certificate/addCertificateReducer';
+import notificationReducer from './util/notification/notificationReducer';
 import coursesReducer from './containers/CoursesPage/coursesReducer';
 import courseReducer from './containers/CoursePage/courseReducer';
 import verificationReducer from './util/verification/verificationReducer';
@@ -52,6 +53,7 @@ const reducer = combineReducers({
   withdraw: withdrawReducer,
   verifications: verificationsReducer,
   verificationRequest: verificationRequestReducer,
+  notification: notificationReducer,
 });
 
 export default reducer;

@@ -267,6 +267,9 @@ class HeaderWithoutRouter extends React.Component {
         key: 'learners', content: 'Learners', name: 'learners', className: 'academia', active: activeItem === 'learners', onClick: this.handleItemClick,
       },
       {
+        key: 'jobs', content: 'Browse jobs', name: 'jobs', active: activeItem === 'jobs/', onClick: this.handleItemClick,
+      },
+      {
         key: 'add-job', content: 'Add job positions', name: 'businesses/add/', active: activeItem === 'businesses/add/', onClick: this.handleItemClick,
       },
       {
@@ -277,9 +280,6 @@ class HeaderWithoutRouter extends React.Component {
       },
       {
         key: 'interships', content: 'Interships', name: 'interships', active: false, className: 'secondary-nav-disabled-beta',
-      },
-      {
-        key: 'business-challenges', content: 'Business challenges', name: 'business-challenges', active: false, className: 'secondary-nav-disabled-customer',
       },
     ];
 

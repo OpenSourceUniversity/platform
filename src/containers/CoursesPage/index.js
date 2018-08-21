@@ -4,9 +4,10 @@ import { Form, Dimmer, Loader, Button, Container, Header, Divider, Grid, Segment
 import CourseItem from 'components/CourseItem';
 import TopCoursesItem from 'components/TopCoursesItem';
 import TopAcademiaItem from 'components/TopAcademiaItem';
-import CoursesIndustryFilter from 'components/CoursesIndustryFilter';
+import IndustryFilter from 'components/IndustryFilter';
 import { fetchCourses } from './actions';
 import search from '../../util/search/search';
+import storeSearchType from '../../util/search/storeSearchType';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 
 
@@ -15,6 +16,7 @@ class CoursesPage extends React.Component {
 
   componentDidMount() {
     this.props.setSecondaryNav('academia');
+    this.props.storeSearchType('courses');
     const params = new URLSearchParams(this.props.location.search);
     const searchQuery = params.get('q');
     if (searchQuery) {
@@ -22,7 +24,7 @@ class CoursesPage extends React.Component {
     } else {
       this.props.fetchCourses();
     }
-    document.title = 'Courses | OSU DApp';
+    document.title = 'Courses';
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
@@ -35,6 +37,7 @@ class CoursesPage extends React.Component {
   }
 
   renderCourses() {
+
     return (
       this.props.courses.map((course, index) => (
         <Grid.Column
@@ -123,7 +126,7 @@ class CoursesPage extends React.Component {
                 </Accordion.Title>
                 <Accordion.Content
                   active={activeIndex === 0}
-                  content={<CoursesIndustryFilter filterType="courses" />}
+                  content={<IndustryFilter filterType="courses" />}
                 />
               </Menu.Item>
             </Accordion>
@@ -135,14 +138,6 @@ class CoursesPage extends React.Component {
               {this.renderSearch()}
 
               <Divider clearing />
-              {/*
-              <Menu pointing secondary color="orange">
-                <Menu.Item name="trending" active={activeItem === 'trending'}
-                  onClick={this.handleItemClick} />
-                <Menu.Item name="recommended" active={activeItem === 'recommended'}
-                  onClick={this.handleItemClick} />
-              </Menu>
-              */}
 
               {(() => {
                 switch (this.state.activeItem) {
@@ -214,6 +209,9 @@ function mapDispatchToProps(dispatch) {
     },
     setSecondaryNav(secondaryNav) {
       dispatch(setSecondaryNav(secondaryNav));
+    },
+    storeSearchType(searchType) {
+      dispatch(storeSearchType(searchType));
     },
     search(query) {
       dispatch(search(query));

@@ -5,7 +5,7 @@ import { addIndustryToFilter, removeIndustryFromFilter } from '../../util/search
 import fetchIndustries from '../../util/search/fetchIndustries';
 
 
-class CoursesIndustryFilter extends Form {
+class IndustryFilter extends Form {
   componentDidMount() {
     this.props.fetchIndustries(this.props.filterType);
   }
@@ -66,4 +66,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(CoursesIndustryFilter);
+export default connect(mapStateToProps, mapDispatchToProps)(IndustryFilter);

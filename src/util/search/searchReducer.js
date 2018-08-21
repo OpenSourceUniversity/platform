@@ -3,6 +3,7 @@ const initialState = {
   industries: [],
   filteredIndustries: [],
   filterType: null,
+  searchType: null,
 };
 
 
@@ -24,6 +25,10 @@ const authReducer = (state = initialState, action) => {
   case 'FILTER_INDUSTRY_REMOVED':
     return Object.assign({}, state, {
       filteredIndustries: state.filteredIndustries.filter(item => item !== action.id),
+    });
+  case 'SEARCH_TYPE_STORED':
+    return Object.assign({}, state, {
+      searchType: action.payload.searchType,
     });
   default:
     return state;

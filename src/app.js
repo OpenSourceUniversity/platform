@@ -5,6 +5,7 @@ import WalletUnlocker from 'components/WalletUnlocker';
 import React from 'react';
 import getDefaultValues from './util/profiles/getDefaultValues';
 import getIpfs from './util/ipfs/getIpfs';
+import notificationsConnection from './util/notification/notificationsConnection';
 import store from './store';
 import './util/web3/getWeb3';
 
@@ -15,6 +16,7 @@ import Main from './components/Main';
 class App extends React.Component {
   componentDidMount() {
     store.dispatch(getIpfs());
+    store.dispatch(notificationsConnection());
     if (this.props.isLoggedIn) {
       this.props.getDefaultValues();
     }

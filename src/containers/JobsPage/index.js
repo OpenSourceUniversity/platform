@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Container, Header, Divider, Grid, Segment, Input, Accordion, Menu, Icon, Dropdown } from 'semantic-ui-react';
-import CoursesIndustryFilter from 'components/CoursesIndustryFilter';
+import { Container, Header, Divider, Grid, Segment, Input, Accordion, Menu, Icon, Dropdown, Form } from 'semantic-ui-react';
+import IndustryFilter from 'components/IndustryFilter';
 import JobItem from 'components/JobItem';
 import { fetchJobs } from './actions';
+import search from '../../util/search/search';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
+import storeSearchType from '../../util/search/storeSearchType';
 
 const options = [
   { key: 'one', text: 'One', value: '1' },
@@ -17,9 +19,16 @@ class JobsPage extends React.Component {
   state = { activeIndex: 0, activeItem: 'trending' }
 
   componentDidMount() {
-    this.props.fetchJobs();
+    // this.props.fetchJobs();
     this.props.setSecondaryNav('business');
-    document.title = 'Jobs | OSU DApp';
+    const params = new URLSearchParams(this.props.location.search);
+    const searchQuery = params.get('q');
+    if (searchQuery) {
+      this.props.search(searchQuery);
+    } else {
+      this.props.fetchJobs();
+    }
+    document.title = 'Jobs';
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
@@ -28,11 +37,26 @@ class JobsPage extends React.Component {
     const { index } = titleProps;
     const { activeIndex } = this.state;
     const newIndex = activeIndex === index ? -1 : index;
-
     this.setState({ activeIndex: newIndex });
   }
 
+  renderSearch() {
+    return (
+      <Form onSubmit={event => this.props.search(event.currentTarget.elements.query.value)}>
+        <Form.Field>
+          <Form.Input
+            label="Search"
+            placeholder="Search courses"
+            name="query"
+            fluid
+          />
+        </Form.Field>
+      </Form>
+    );
+  }
+
   renderJobs() {
+    this.props.storeSearchType('jobs');
     return (
       this.props.jobs.map((job, index) => (
         <Grid.Column
@@ -72,7 +96,7 @@ class JobsPage extends React.Component {
                 </Accordion.Title>
                 <Accordion.Content
                   active={activeIndex === 0}
-                  content={<CoursesIndustryFilter filterType="jobs" />}
+                  content={<IndustryFilter filterType="jobs" />}
                 />
               </Menu.Item>
             </Accordion>
@@ -80,15 +104,7 @@ class JobsPage extends React.Component {
 
           <Grid.Column width={10}>
             <Segment>
-              <Input
-                label={<Dropdown defaultValue="Python" options={options} />}
-                labelPosition="left"
-                placeholder="Search by keyword..."
-                icon={{
-                  name: 'search', circular: false, link: true, bordered: true,
-                }}
-                fluid
-              />
+              {this.renderSearch()}
               <Divider clearing />
               <Menu pointing secondary color="orange">
                 <Menu.Item name="trending" active={activeItem === 'trending'} onClick={this.handleItemClick} />
@@ -128,6 +144,12 @@ function mapDispatchToProps(dispatch) {
     },
     setSecondaryNav(secondaryNav) {
       dispatch(setSecondaryNav(secondaryNav));
+    },
+    storeSearchType(searchType) {
+      dispatch(storeSearchType(searchType));
+    },
+    search(query) {
+      dispatch(search(query));
     },
   };
 }

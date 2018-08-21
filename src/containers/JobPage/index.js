@@ -13,7 +13,7 @@ class JobPage extends React.Component {
     const { bdnUrl } = Config.network;
     this.props.fetchJob(`${bdnUrl}api/v1/jobs/${this.props.match.params.id}/`);
     this.props.setSecondaryNav('business');
-    document.title = 'Job | OSU DApp';
+    document.title = 'Job';
   }
 
   handleOpen = () => this.setState({ modalOpen: true })

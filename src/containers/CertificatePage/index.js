@@ -1,13 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Header, Divider, Segment, Container, Dimmer, Loader, Breadcrumb, Grid, Modal, Button, Icon, Form, Input } from 'semantic-ui-react';
+import { Header, Divider, Segment, Container, Dimmer, Loader, Breadcrumb, Grid, Modal, Button, Icon, Form, Input, Message } from 'semantic-ui-react';
 import SkillItem from 'components/SkillItem';
 import fetchCertificate from '../../util/certificate/fetchCertificate';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import Config from '../../config';
-import { requireVerification } from './actions';
+import { requireVerification } from '../../util/verification/verificationRequest';
+import deleteCertificate from '../../util/certificate/deleteCertificate';
 
 class CertificatePage extends React.Component {
+  state = { modalOpen: false }
   componentDidMount() {
     const { bdnUrl } = Config.network;
     this.props.fetchCertificate(`${bdnUrl}api/v1/certificates/${this.props.match.params.id}/`);
@@ -17,12 +19,20 @@ class CertificatePage extends React.Component {
 
   handleSubmit(event, component) {
     event.preventDefault();
+    const STATES = { Learner: 1, Academy: 2, Business: 3 };
     const certificateData = {
-      id: component.props.match.params.id,
+      certificate: component.props.match.params.id,
       verifier: event.target.elements.verifier_eth_address.value,
+      verifier_type: event.target.elements.verifierType.value,
+      granted_to_type: STATES[component.props.activeAccount],
+
     };
     component.props.requireVerification(certificateData);
   }
+
+  handleOpen = () => this.setState({ modalOpen: true })
+
+  handleClose = () => this.setState({ modalOpen: false })
 
   renderSkills() {
     const skillsArr = this.props.certificate.skills;
@@ -66,6 +76,9 @@ class CertificatePage extends React.Component {
   // }
 
   render() {
+    /* eslint-disable global-require */
+    const loader = require('../../icons/osu-loader.svg');
+    /* eslint-enable global-require */
     return (
       <div className="certificate">
         <Container>
@@ -80,8 +93,46 @@ class CertificatePage extends React.Component {
           <div className="course">
             <Segment style={{ textAlign: 'center' }}>
               <Dimmer active={this.props.certificate.isFetching} inverted>
-                <Loader size="large">Loading</Loader>
+                <Loader size="large">
+                  <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
+                    <image href={loader} x="0" y="0" width="100%" height="100%" />
+                  </svg>
+                </Loader>
               </Dimmer>
+              {this.props.address.toLowerCase() === this.props.certificate.learner_eth_address ?
+                <Modal open={this.state.modalOpen} onClose={this.handleClose} trigger={<Button floated="left" onClick={this.handleOpen} color="red">Delete</Button>} basic size="small">
+                  <Header icon="archive" content="Delete course confirmation" />
+                  <Modal.Content>
+                    <Dimmer active={this.props.isDeleting} page>
+                      <Loader size="medium">
+                        <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
+                          <image href={loader} x="0" y="0" width="100%" height="100%" />
+                        </svg>
+                      </Loader>
+                    </Dimmer>
+                    <Message error hidden={!this.props.error}>
+                      <p>
+                        {this.props.error}
+                      </p>
+                    </Message>
+                    <p>
+                    You want to delete youre certificate, named: {this.props.certificate.course_title}.
+                    </p>
+                    <p>
+                    Please, confirm this action.
+                    </p>
+                  </Modal.Content>
+                  <Modal.Actions>
+                    <Button onClick={this.handleClose} floated="left" basic color="grey" inverted>
+                      <Icon name="remove" /> Cancel
+                    </Button>
+                    <Button basic color="red" inverted onClick={() => { this.props.deleteCertificate(this.props.match.params.id); }}>
+                      <Icon name="remove" /> Delete
+                    </Button>
+                  </Modal.Actions>
+                </Modal> :
+                null
+              }
               <Modal trigger={
                 <Button icon labelPosition="left" positive floated="right" to="/certificates/add">
                   <Icon name="checkmark" />
@@ -91,6 +142,23 @@ class CertificatePage extends React.Component {
               >
                 <Modal.Header>Verification Request</Modal.Header>
                 <Modal.Content>
+                  <Dimmer active={this.props.requestSending} page>
+                    <Loader size="medium">
+                      <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
+                        <image href={loader} x="0" y="0" width="100%" height="100%" />
+                      </svg>
+                    </Loader>
+                  </Dimmer>
+                  <Message error hidden={!this.props.requestError}>
+                    <p>
+                      {this.props.requestError}
+                    </p>
+                  </Message>
+                  <Message positive hidden={!this.props.requestSuccess}>
+                    <p>
+                      Success message.
+                    </p>
+                  </Message>
                   <Form size="large" onSubmit={(event) => { this.handleSubmit(event, this); }}>
                     <Form.Field required>
                       <label htmlFor="verifier_eth_address">
@@ -103,6 +171,10 @@ class CertificatePage extends React.Component {
                         icon="file"
                         placeholder="ETH address"
                       />
+                    </Form.Field>
+                    <Form.Field id="verifierType" name="verifierType" label="Type of verifier" control="select">
+                      <option value={2}>Academy</option>
+                      <option value={3}>Business</option>
                     </Form.Field>
                     <Button type="submit" primary size="huge">Submit</Button>
                   </Form>
@@ -211,7 +283,13 @@ function mapStateToProps(state) {
   return {
     certificate: state.certificate.certificate,
     isFetching: state.certificate.isFetching,
+    isDeleting: state.certificate.isDeleting,
     error: state.certificate.error,
+    requestSuccess: state.verificationRequest.requestSuccess,
+    requestSending: state.verificationRequest.requestSending,
+    requestError: state.verificationRequest.requestError,
+    activeAccount: state.activeAccount.activeAccount,
+    address: state.auth.address,
   };
 }
 
@@ -226,6 +304,9 @@ function mapDispatchToProps(dispatch) {
     },
     requireVerification(certificateData) {
       dispatch(requireVerification(certificateData));
+    },
+    deleteCertificate(id) {
+      dispatch(deleteCertificate(id));
     },
   };
 }

@@ -5,7 +5,10 @@ import Config from '../../config';
 
 
 export function requireVerification(certificateData) {
-  return function action() {
+  return function action(dispatch) {
+    dispatch({
+      type: 'VERIFICATION_REQUEST',
+    });
     const axiosConfig = {
       headers: {
         'Auth-Signature': store.getState().auth.signedAddress,
@@ -13,9 +16,15 @@ export function requireVerification(certificateData) {
       },
     };
     const { bdnUrl } = Config.network;
-    axios.post(`${bdnUrl}api/v1/verification/`, certificateData, axiosConfig).then(() => {
-    }).catch(() => {
-      console.log('error');
+    axios.post(`${bdnUrl}api/v1/verifications/`, certificateData, axiosConfig).then(() => {
+      dispatch({
+        type: 'VERIFICATION_REQUEST_SUCCESS',
+      });
+    }).catch((error) => {
+      dispatch({
+        type: 'VERIFICATION_REQUEST_FAILURE',
+        error,
+      });
     });
   };
 }

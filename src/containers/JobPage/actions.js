@@ -1,3 +1,4 @@
+import { createHashHistory } from 'history';
 import axios from 'axios';
 import store from '../../store';
 import Config from '../../config';
@@ -61,6 +62,9 @@ export function deleteJobPosition(id) {
         type: 'FETCH_JOB_SUCCESS',
         result: 'ok',
       });
+      const newPath = '/profile';
+      const history = createHashHistory();
+      history.push(newPath);
     }).catch(() => {
       dispatch({
         type: 'FETCH_JOB_FAILURE',

@@ -6,6 +6,7 @@ import searchReducer from './util/search/searchReducer';
 import certificatesReducer from './util/certificate/certificatesReducer';
 import certificateReducer from './util/certificate/certificateReducer';
 import addCertificateReducer from './util/certificate/addCertificateReducer';
+import notificationReducer from './util/notification/notificationReducer';
 import coursesReducer from './containers/CoursesPage/coursesReducer';
 import courseReducer from './containers/CoursePage/courseReducer';
 import verificationReducer from './util/verification/verificationReducer';
@@ -22,6 +23,8 @@ import companyJobsReducer from './components/ViewBusinessProfile/companyJobsRedu
 import businessesReducer from './containers/Businesses/businessesReducer';
 import addJobReducer from './containers/AddJobPosition/addJobReducer';
 import addCourseReducer from './containers/AddCourse/addCourseReducer';
+import verificationsReducer from './util/verification/verificationsReducer';
+import verificationRequestReducer from './util/verification/verificationRequestReducer';
 
 
 const reducer = combineReducers({
@@ -48,6 +51,9 @@ const reducer = combineReducers({
   learners: learnersReducer,
   verification: verificationReducer,
   withdraw: withdrawReducer,
+  verifications: verificationsReducer,
+  verificationRequest: verificationRequestReducer,
+  notification: notificationReducer,
 });
 
 export default reducer;

@@ -25,6 +25,7 @@ import AcademiesPage from 'containers/Academies';
 import BusinessesPage from 'containers/Businesses';
 import LearnersPage from 'containers/Learners';
 import CertificatesVerificationPage from 'containers/CertificatesVerificationPage';
+import NotificationsPage from 'containers/NotificationsPage';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -106,6 +107,7 @@ class Main extends React.Component {
         <PrivateRoute activeAccount={this.props.activeAccount} isLoggedIn={this.props.isLoggedIn} learnerIsCreated={this.props.learnerIsCreated} academyIsCreated={this.props.academyIsCreated} businessIsCreated={this.props.businessIsCreated} path="/program-page" component={StudentProgramPage} />
         <PrivateRouteCreateProfile isLoggedIn={this.props.isLoggedIn} path="/create-profile" component={CreateProfile} />
         <PrivateRoute activeAccount={this.props.activeAccount} isLoggedIn={this.props.isLoggedIn} learnerIsCreated={this.props.learnerIsCreated} academyIsCreated={this.props.academyIsCreated} businessIsCreated={this.props.businessIsCreated} path="/job-page/:id/" component={JobPage} />
+        <PrivateRoute activeAccount={this.props.activeAccount} isLoggedIn={this.props.isLoggedIn} learnerIsCreated={this.props.learnerIsCreated} academyIsCreated={this.props.academyIsCreated} businessIsCreated={this.props.businessIsCreated} path="/notifications" component={NotificationsPage} />
       </Switch>
     );
   }

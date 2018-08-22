@@ -5,7 +5,7 @@ import { Container, Header, Divider, Grid, Segment, Menu } from 'semantic-ui-rea
 import LearnerSettings from 'components/LearnerSettings';
 import AcademySettings from 'components/AcademySettings';
 import BusinessSettings from 'components/BusinessSettings';
-import { setActiveAccount } from '../../util/activeAccount/setActiveAccount';
+import { setActiveAccount } from '../../util/activeAccount';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 
 

@@ -9,8 +9,20 @@ const { bdnUrl } = Config.network;
 const LEARNER = 1;
 const ACADEMY = 2;
 const BUSINESS = 3;
-const STATES = { Learner: LEARNER, Academy: ACADEMY, Business: BUSINESS };
-const GETSTATES = { 1: 'Learner', 2: 'Academy', 3: 'Business' };
+const PROFILE_TYPE_NAME_TO_ID = {
+  Learner: LEARNER,
+  Academy: ACADEMY,
+  Business: BUSINESS,
+};
+const PROFILE_TYPE_ID_TO_NAME = {
+  1: 'Learner',
+  2: 'Academy',
+  3: 'Business',
+};
+
+export function getProfileTypeName(id) {
+  return PROFILE_TYPE_ID_TO_NAME[id];
+}
 
 export function setActiveAccount(activeAccount) {
   return function action(dispatch) {
@@ -18,7 +30,7 @@ export function setActiveAccount(activeAccount) {
       headers: {
         'Auth-Signature': store.getState().auth.signedAddress,
         'Auth-Eth-Address': store.getState().auth.address.slice(2),
-        'Profile-Type': STATES[activeAccount],
+        'Profile-Type': PROFILE_TYPE_NAME_TO_ID[activeAccount],
       },
     };
     axios.post(`${bdnUrl}api/v1/profile/set_active_profile/`, null, axiosConfig).then(() => {
@@ -50,9 +62,9 @@ export function getActiveAccount() {
         } else {
           dispatch({
             type: 'ACCOUNT_CHANGED',
-            activeAccount: GETSTATES[body.active_profile_type],
+            activeAccount: PROFILE_TYPE_ID_TO_NAME[body.active_profile_type],
           });
-          localStorage.setItem('activeAccount', GETSTATES[body.active_profile_type]);
+          localStorage.setItem('activeAccount', PROFILE_TYPE_ID_TO_NAME[body.active_profile_type]);
           dispatch(validateAccounts());
         }
       })

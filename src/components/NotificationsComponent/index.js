@@ -1,38 +1,45 @@
 import React from 'react';
-import { Feed, Dropdown, Image, Label, Card } from 'semantic-ui-react';
+import { Feed, Dropdown, Image, Label } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import { getProfileTypeName } from '../../util/activeAccount';
 import fetchNotifications from '../../util/notification/fetchNotifications';
 
 
 class NotificationItem extends Dropdown.Item {
+  notificationClick(event) {
+    event.preventDefault();
+  }
 
   render() {
     const { notification } = this.props;
     let summary = '';
     const target = notification.target_content_type_name;
-    const actor = notification.actor_content_type_name;
     const actorName = notification.actor_name;
     const actionObject = notification.action_object_content_type_name;
     const { verb } = notification;
     const { timesince } = notification;
+    const actorType = getProfileTypeName(notification.actor_active_profile_type).toLowerCase();
+    const actorUsername = notification.actor_username;
+    const actorUrl = `/view-profile/${actorType}/${actorUsername}/`;
+    const actor = (<Link href={actorUrl} to={actorUrl}>{actorName}</Link>);
 
     if (target) {
       if (actionObject) {
-        summary = `${actorName} ${verb} ${actionObject} on ${target}`;
+        summary = (<span>{actor} {verb} {actionObject} on {target}</span>);
       } else {
-        summary = `${actorName} ${verb} ${target}`;
+        summary = (<span>{actor} {verb} {target}</span>);
       }
     } else if (actionObject) {
-      summary = `${actorName} ${verb} ${actionObject}`;
+      summary = (<span>{actor} {verb} {actionObject}</span>);
     } else {
-      summary = `${actorName} ${verb}`;
+      summary = (<span>{actor} {verb}</span>);
     }
 
     return (
-      <Feed.Event style={{ width: 500, padding: '15px', borderBottom: '1px solid #ccc' }}>
+      <Feed.Event onClick={this.notificationClick} style={{ width: 400, padding: '15px', borderBottom: '1px solid #ccc' }}>
         <Feed.Label>
-          <img src='https://react.semantic-ui.com/images/avatar/small/elliot.jpg' />
+          <img src="https://react.semantic-ui.com/images/avatar/small/elliot.jpg" alt="" />
         </Feed.Label>
         <Feed.Content>
           <Feed.Summary>

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { Button, Header, Divider, Segment, Grid } from 'semantic-ui-react';
-import { setActiveAccount } from '../../util/activeAccount/setActiveAccount';
+import { setActiveAccount } from '../../util/activeAccount';
 
 class ChooseAccount extends React.Component {
   render() {

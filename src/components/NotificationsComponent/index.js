@@ -1,21 +1,58 @@
 import React from 'react';
-import { Dropdown, Image, Label } from 'semantic-ui-react';
+import { Feed, Dropdown, Image, Label, Card } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import fetchNotifications from '../../util/notification/fetchNotifications';
 
 
 class NotificationItem extends Dropdown.Item {
+
   render() {
+    const { notification } = this.props;
+    let summary = '';
+    const target = notification.target_content_type_name;
+    const actor = notification.actor_content_type_name;
+    const actorName = notification.actor_name;
+    const actionObject = notification.action_object_content_type_name;
+    const { verb } = notification;
+    const { timesince } = notification;
+
+    if (target) {
+      if (actionObject) {
+        summary = `${actorName} ${verb} ${actionObject} on ${target}`;
+      } else {
+        summary = `${actorName} ${verb} ${target}`;
+      }
+    } else if (actionObject) {
+      summary = `${actorName} ${verb} ${actionObject}`;
+    } else {
+      summary = `${actorName} ${verb}`;
+    }
+
     return (
-      <div>
-        asd
-      </div>
+      <Feed.Event style={{ width: 500, padding: '15px', borderBottom: '1px solid #ccc' }}>
+        <Feed.Label>
+          <img src='https://react.semantic-ui.com/images/avatar/small/elliot.jpg' />
+        </Feed.Label>
+        <Feed.Content>
+          <Feed.Summary>
+            {summary}
+          </Feed.Summary>
+          <Feed.Meta>
+            <Feed.Date>{timesince} ago</Feed.Date>
+          </Feed.Meta>
+        </Feed.Content>
+      </Feed.Event>
     );
   }
 }
 
 
 class NotificationsComponent extends Dropdown {
+  componentDidMount() {
+    this.props.fetchNotifications();
+  }
+
   render() {
     /* eslint-disable global-require */
     const notifications = require('../../icons/nav_notifications.svg');
@@ -38,8 +75,10 @@ class NotificationsComponent extends Dropdown {
         pointing="top right"
         icon={null}
       >
-        <Dropdown.Menu>
-          {this.renderNotificationItems()}
+        <Dropdown.Menu style={{ maxHeight: '400px', overflowY: 'scroll', overflowX: 'none' }}>
+          <Feed>
+            {this.renderNotificationItems()}
+          </Feed>
         </Dropdown.Menu>
       </Dropdown>
     );
@@ -65,7 +104,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-
+    fetchNotifications() {
+      dispatch(fetchNotifications());
+    },
   };
 }
 

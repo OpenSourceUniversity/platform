@@ -2,6 +2,7 @@ const initialState = {
   unreadNotificationsCount: 0,
   notifications: [],
   isFetching: false,
+  nextUrl: null,
 };
 
 
@@ -20,6 +21,7 @@ const notificationReducer = (state = initialState, action) => {
     return Object.assign({}, state, {
       unreadNotificationsCount: action.notifications.unread_count,
       notifications: state.notifications.concat(action.notifications.results),
+      nextUrl: action.notifications.next,
       isFetching: false,
     });
   case 'FETCH_NOTIFICATIONS_FAILURE':

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Loader, Feed, Dropdown, Image, Label } from 'semantic-ui-react';
+import { Feed, Dropdown, Image, Label } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { getProfileTypeName } from '../../util/activeAccount';
@@ -62,8 +62,9 @@ class NotificationsComponent extends Dropdown {
 
   notificationsScroll = (event) => {
     const { scrollHeight, scrollTop, offsetHeight } = event.currentTarget;
-    if (scrollHeight <= (scrollTop + offsetHeight)) {
-      this.props.fetchNotifications();
+    const shouldScroll = scrollHeight <= (scrollTop + offsetHeight);
+    if (shouldScroll && this.props.nextUrl && !this.props.isFetching) {
+      this.props.fetchNotifications(this.props.nextUrl);
     }
   }
 
@@ -118,14 +119,15 @@ function mapStateToProps(state) {
     notifications: state.notification.notifications,
     unreadNotificationsCount: state.notification.unreadNotificationsCount,
     isFetching: state.notification.isFetching,
+    nextUrl: state.notification.nextUrl,
   };
 }
 
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchNotifications() {
-      dispatch(fetchNotifications());
+    fetchNotifications(url) {
+      dispatch(fetchNotifications(url));
     },
   };
 }

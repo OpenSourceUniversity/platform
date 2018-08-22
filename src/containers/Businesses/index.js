@@ -86,7 +86,7 @@ class BusinessesPage extends React.Component {
         <Form.Field>
           <Form.Input
             label="Search"
-            placeholder="Search courses"
+            placeholder="Search businesses"
             name="query"
             fluid
           />

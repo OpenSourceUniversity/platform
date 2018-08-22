@@ -82,7 +82,7 @@ class LearnersPage extends React.Component {
         <Form.Field>
           <Form.Input
             label="Search"
-            placeholder="Search courses"
+            placeholder="Search learners"
             name="query"
             fluid
           />

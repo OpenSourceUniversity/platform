@@ -46,7 +46,7 @@ class JobsPage extends React.Component {
         <Form.Field>
           <Form.Input
             label="Search"
-            placeholder="Search courses"
+            placeholder="Search jobs"
             name="query"
             fluid
           />

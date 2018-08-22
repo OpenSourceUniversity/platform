@@ -86,7 +86,7 @@ class AcademiesPage extends React.Component {
         <Form.Field>
           <Form.Input
             label="Search"
-            placeholder="Search courses"
+            placeholder="Search academies"
             name="query"
             fluid
           />

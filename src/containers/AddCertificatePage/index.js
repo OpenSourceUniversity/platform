@@ -12,7 +12,7 @@ class AddCertificatePage extends React.Component {
   state = { certificateFileIsMissing: false }
 
   componentDidMount() {
-    document.title = 'Add Certificate | OSU DApp';
+    document.title = 'Add Certificate';
     this.props.resetAddCertificateProps();
   }
 

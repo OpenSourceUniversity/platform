@@ -21,7 +21,7 @@ class CertificatesVerificationPage extends React.Component {
   componentDidMount() {
     this.props.fetchVerifications();
     this.props.setSecondaryNav('academia');
-    document.title = 'Certificates Validation | OSU DApp';
+    document.title = 'Certificates Validation';
   }
 
   massVerification() {

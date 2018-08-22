@@ -37,7 +37,6 @@ class CoursesPage extends React.Component {
   }
 
   renderCourses() {
-
     return (
       this.props.courses.map((course, index) => (
         <Grid.Column
@@ -138,7 +137,6 @@ class CoursesPage extends React.Component {
               {this.renderSearch()}
 
               <Divider clearing />
-
               {(() => {
                 switch (this.state.activeItem) {
                 default: return this.props.courses.length ?

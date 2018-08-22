@@ -4,15 +4,24 @@ import { Form, Dimmer, Loader, Button, Container, Header, Divider, Grid, Segment
 import BusinessItem from 'components/BusinessItem';
 import { fetchBusinesses } from './actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
+import storeSearchType from '../../util/search/storeSearchType';
+import search from '../../util/search/search';
 
 
 class BusinessesPage extends React.Component {
   state = { activeIndex: 0, activeItem: 'trending' }
 
   componentDidMount() {
-    this.props.fetchBusinesses();
     this.props.setSecondaryNav('business');
-    document.title = 'Businesses | OSU DApp';
+    this.props.storeSearchType('businesses');
+    const params = new URLSearchParams(this.props.location.search);
+    const searchQuery = params.get('q');
+    if (searchQuery) {
+      this.props.search(searchQuery);
+    } else {
+      this.props.fetchBusinesses();
+    }
+    document.title = 'Businesses';
   }
 
   industries = [
@@ -72,23 +81,17 @@ class BusinessesPage extends React.Component {
   }
 
   renderSearch() {
-    const academies = [
-      { value: '1', text: 'Academy title 1' },
-      { value: '2', text: 'Academy title 2' },
-    ];
-
     return (
-      <Form.Field>
-        <Form.Dropdown
-          label="Search"
-          placeholder="Search by keyword ..."
-          fluid
-          multiple
-          search
-          selection
-          options={academies}
-        />
-      </Form.Field>
+      <Form onSubmit={event => this.props.search(event.currentTarget.elements.query.value)}>
+        <Form.Field>
+          <Form.Input
+            label="Search"
+            placeholder="Search courses"
+            name="query"
+            fluid
+          />
+        </Form.Field>
+      </Form>
     );
   }
 
@@ -130,27 +133,23 @@ class BusinessesPage extends React.Component {
               {this.renderSearch()}
 
               <Divider clearing />
-              {/*
-              <Menu pointing secondary color="orange">
-                <Menu.Item name="trending" active={activeItem === 'trending'}
-                  onClick={this.handleItemClick} />
-                <Menu.Item name="recommended" active={activeItem === 'recommended'}
-                  onClick={this.handleItemClick} />
-              </Menu>
-              */}
               {(() => {
                 switch (this.state.activeItem) {
-                case 'recommended': return 'Recommended page';
-                default: return this.renderBusinesses();
+                default: return this.props.businesses.length ?
+                  this.renderBusinesses() :
+                  <div style={{ textAlign: 'center', width: '100%' }}>
+                    <p style={{ textAlign: 'center' }}>There are no businesses yet.</p>
+                  </div>;
                 }
               })()}
+
               <Dimmer active={this.props.isFetching} inverted>
                 <Loader size="large">Loading</Loader>
               </Dimmer>
 
               <div style={{ display: !this.props.next ? 'none' : 'block', marginTop: '20px', textAlign: 'center' }}>
                 <Button
-                  onClick={() => { this.props.fetchCourses(this.props.next); }}
+                  onClick={() => { this.props.fetchBusinesses(this.props.next); }}
                   icon
                   labelPosition="left"
                 >
@@ -161,6 +160,7 @@ class BusinessesPage extends React.Component {
                   Load More
                 </Button>
               </div>
+
             </Segment>
           </Grid.Column>
         </Grid>
@@ -188,6 +188,12 @@ function mapDispatchToProps(dispatch) {
     },
     setSecondaryNav(secondaryNav) {
       dispatch(setSecondaryNav(secondaryNav));
+    },
+    storeSearchType(searchType) {
+      dispatch(storeSearchType(searchType));
+    },
+    search(query) {
+      dispatch(search(query));
     },
   };
 }

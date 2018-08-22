@@ -5,7 +5,7 @@ import ChooseAccount from 'components/ChooseAccount';
 
 export default class CreateAccount extends React.Component {
   componentDidMount() {
-    document.title = 'Create Profile | OSU DApp';
+    document.title = 'Create Profile';
   }
 
   render() {

@@ -13,7 +13,7 @@ class CoursePage extends React.Component {
     const { bdnUrl } = Config.network;
     this.props.fetchCourse(`${bdnUrl}api/v1/courses/${this.props.match.params.id}/`);
     this.props.setSecondaryNav('academia');
-    document.title = 'Course | OSU DApp';
+    document.title = 'Course';
   }
 
   setIcon(provider) {

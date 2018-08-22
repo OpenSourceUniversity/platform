@@ -17,7 +17,7 @@ class AddJobPosition extends React.Component {
     } else {
       this.props.resetAddJobProps();
     }
-    document.title = 'Add Job Position | OSU DApp';
+    document.title = 'Add Job Position';
   }
 
   handleSubmit(event, component) {

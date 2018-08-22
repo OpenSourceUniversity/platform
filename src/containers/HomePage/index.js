@@ -23,7 +23,7 @@ class HomePage extends React.Component {
       this.props.fetchFeaturedCourses();
     }
     this.props.setSecondaryNav(null);
-    document.title = 'Dashboard | OSU DApp';
+    document.title = 'Dashboard';
   }
 
   renderFeaturedCourses(courses) {

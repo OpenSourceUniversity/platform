@@ -14,7 +14,7 @@ class CertificatePage extends React.Component {
     const { bdnUrl } = Config.network;
     this.props.fetchCertificate(`${bdnUrl}api/v1/certificates/${this.props.match.params.id}/`);
     this.props.setSecondaryNav('academia');
-    document.title = 'Certificate | OSU DApp';
+    document.title = 'Certificate';
   }
 
   handleSubmit(event, component) {

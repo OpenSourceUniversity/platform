@@ -23,7 +23,7 @@ class Deposit extends React.Component {
 
   componentDidMount() {
     this.props.setSecondaryNav('account');
-    document.title = 'Deposit or Withdraw | OSU DApp';
+    document.title = 'Deposit or Withdraw';
   }
 
   onCoinChange(event, data) {

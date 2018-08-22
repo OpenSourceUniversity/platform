@@ -149,7 +149,7 @@ class AcademiesPage extends React.Component {
 
               <div style={{ display: !this.props.next ? 'none' : 'block', marginTop: '20px', textAlign: 'center' }}>
                 <Button
-                  onClick={() => { this.props.fetchCourses(this.props.next); }}
+                  onClick={() => { this.props.fetchAcademies(this.props.next); }}
                   icon
                   labelPosition="left"
                 >

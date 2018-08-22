@@ -1,5 +1,5 @@
 import React from 'react';
-import { Feed, Dropdown, Image, Label } from 'semantic-ui-react';
+import { Loader, Feed, Dropdown, Image, Label } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { getProfileTypeName } from '../../util/activeAccount';
@@ -60,6 +60,13 @@ class NotificationsComponent extends Dropdown {
     this.props.fetchNotifications();
   }
 
+  notificationsScroll = (event) => {
+    const { scrollHeight, scrollTop, offsetHeight } = event.currentTarget;
+    if (scrollHeight <= (scrollTop + offsetHeight)) {
+      this.props.fetchNotifications();
+    }
+  }
+
   render() {
     /* eslint-disable global-require */
     const notifications = require('../../icons/nav_notifications.svg');
@@ -82,9 +89,14 @@ class NotificationsComponent extends Dropdown {
         pointing="top right"
         icon={null}
       >
-        <Dropdown.Menu style={{ maxHeight: '400px', overflowY: 'scroll', overflowX: 'none' }}>
+        <Dropdown.Menu onScroll={this.notificationsScroll} style={{ maxHeight: '400px', overflowY: 'scroll', overflowX: 'none' }}>
           <Feed>
             {this.renderNotificationItems()}
+            <Feed.Event style={{ display: this.props.isFetching ? 'block' : 'none' }}>
+              <Feed.Content style={{ textAlign: 'center' }}>
+                Loading notifications...
+              </Feed.Content>
+            </Feed.Event>
           </Feed>
         </Dropdown.Menu>
       </Dropdown>
@@ -105,6 +117,7 @@ function mapStateToProps(state) {
   return {
     notifications: state.notification.notifications,
     unreadNotificationsCount: state.notification.unreadNotificationsCount,
+    isFetching: state.notification.isFetching,
   };
 }
 

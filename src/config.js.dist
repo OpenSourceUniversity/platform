@@ -9,9 +9,7 @@ const Config = {
   ipfs: {
     host: 'ipfs.infura.io',
     port: 5001,
-    protocol: {
-        protocol: 'https'
-    },
+    protocol: 'https',
   },
   blockchain: {
     storageAddress: '0x2A22e' // Needs to be filled in

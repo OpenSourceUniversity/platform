@@ -4,14 +4,23 @@ import { Form, Dimmer, Loader, Button, Container, Header, Divider, Grid, Segment
 import LearnerItem from 'components/LearnerItem';
 import { fetchLearners } from './actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
+import search from '../../util/search/search';
+import storeSearchType from '../../util/search/storeSearchType';
 
 
 class LearnersPage extends React.Component {
   state = { activeIndex: 0, activeItem: 'trending' }
 
   componentDidMount() {
-    this.props.fetchLearners();
     this.props.setSecondaryNav('academia');
+    this.props.storeSearchType('learners');
+    const params = new URLSearchParams(this.props.location.search);
+    const searchQuery = params.get('q');
+    if (searchQuery) {
+      this.props.search(searchQuery);
+    } else {
+      this.props.fetchLearners();
+    }
     document.title = 'Learners';
   }
 
@@ -68,23 +77,17 @@ class LearnersPage extends React.Component {
   }
 
   renderSearch() {
-    const learners = [
-      { value: '1', text: 'Academy title 1' },
-      { value: '2', text: 'Academy title 2' },
-    ];
-
     return (
-      <Form.Field>
-        <Form.Dropdown
-          label="Search"
-          placeholder="Search by keyword ..."
-          fluid
-          multiple
-          search
-          selection
-          options={learners}
-        />
-      </Form.Field>
+      <Form onSubmit={event => this.props.search(event.currentTarget.elements.query.value)}>
+        <Form.Field>
+          <Form.Input
+            label="Search"
+            placeholder="Search courses"
+            name="query"
+            fluid
+          />
+        </Form.Field>
+      </Form>
     );
   }
 
@@ -126,20 +129,16 @@ class LearnersPage extends React.Component {
               {this.renderSearch()}
 
               <Divider clearing />
-              {/*
-              <Menu pointing secondary color="orange">
-                <Menu.Item name="trending" active={activeItem === 'trending'}
-                  onClick={this.handleItemClick} />
-                <Menu.Item name="recommended" active={activeItem === 'recommended'}
-                  onClick={this.handleItemClick} />
-              </Menu>
-              */}
               {(() => {
                 switch (this.state.activeItem) {
-                case 'recommended': return 'Recommended page';
-                default: return this.renderLearners();
+                default: return this.props.learners.length ?
+                  this.renderLearners() :
+                  <div style={{ textAlign: 'center', width: '100%' }}>
+                    <p style={{ textAlign: 'center' }}>There are no learners yet.</p>
+                  </div>;
                 }
               })()}
+
               <Dimmer active={this.props.isFetching} inverted>
                 <Loader size="large">Loading</Loader>
               </Dimmer>
@@ -184,6 +183,12 @@ function mapDispatchToProps(dispatch) {
     },
     setSecondaryNav(secondaryNav) {
       dispatch(setSecondaryNav(secondaryNav));
+    },
+    storeSearchType(searchType) {
+      dispatch(storeSearchType(searchType));
+    },
+    search(query) {
+      dispatch(search(query));
     },
   };
 }

@@ -3,6 +3,7 @@ const Config = {
     nodeUrl: 'https://mainnet.infura.io/',
     chainId: 0x01,
     bdnUrl: 'http://localhost:8000/',
+    bdnWebsocket: 'ws://localhost:8000/',
     etherscanUrl: 'https://kovan.etherscan.io/',
   },
   ipfs: {

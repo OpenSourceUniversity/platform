@@ -1,10 +1,12 @@
 import store from '../../store';
+import Config from '../../config';
 
 
 export default function notificationsConnection() {
   return function action(dispatch) {
     let ws;
     let wsClose;
+    const { bdnWebsocket } = Config.network;
 
     const authEthAddress = store.getState().auth.address.slice(2);
     const authSignature = store.getState().auth.signedAddress;
@@ -27,7 +29,7 @@ export default function notificationsConnection() {
 
     function connect() {
       const queryString = `?auth_eth_address=${authEthAddress}&auth_signature=${authSignature}`;
-      const endpoint = `ws://localhost:8000/notifications/${queryString}`;
+      const endpoint = `${bdnWebsocket}notifications/${queryString}`;
       ws = new WebSocket(endpoint);
       ws.onmessage = wsMessage;
       ws.onopen = wsOpen;

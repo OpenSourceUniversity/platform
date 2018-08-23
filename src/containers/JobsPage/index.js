@@ -106,9 +106,6 @@ class JobsPage extends React.Component {
             <Segment>
               {this.renderSearch()}
               <Divider clearing />
-              <Menu pointing secondary color="orange">
-                <Menu.Item name="trending" active={activeItem === 'trending'} onClick={this.handleItemClick} />
-              </Menu>
               {(() => {
                 switch (this.state.activeItem) {
                 default: return this.props.jobs.length ?

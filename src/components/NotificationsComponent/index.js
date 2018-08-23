@@ -2,8 +2,8 @@ import React from 'react';
 import { Button, Container, Feed, Dropdown, Image, Label } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import { getProfileTypeName } from '../../util/activeAccount';
 import fetchNotifications from '../../util/notification/fetchNotifications';
+import NotificationSummaryComponent from '../NotificationSummaryComponent';
 
 
 class NotificationItem extends Dropdown.Item {
@@ -13,30 +13,8 @@ class NotificationItem extends Dropdown.Item {
 
   render() {
     const { notification } = this.props;
-    let summary = '';
-    const target = notification.target_content_type_name;
-    const actorName = notification.actor_name;
-    const actionObject = notification.action_object_content_type_name;
-    const { verb } = notification;
-    const { timesince } = notification;
-    const actorType = getProfileTypeName(notification.actor_active_profile_type).toLowerCase();
-    const actorUsername = notification.actor_username;
-    const actorUrl = `/view-profile/${actorType}/${actorUsername}/`;
-    const actor = (<Link href={actorUrl} to={actorUrl}>{actorName}</Link>);
-
-    if (target) {
-      if (actionObject) {
-        summary = (<span>{actor} {verb} {actionObject} on {target}</span>);
-      } else {
-        summary = (<span>{actor} {verb} {target}</span>);
-      }
-    } else if (actionObject) {
-      summary = (<span>{actor} {verb} {actionObject}</span>);
-    } else {
-      summary = (<span>{actor} {verb}</span>);
-    }
-
     const backgroundColor = notification.unread ? '#efefef' : 'white';
+    const { timesince } = notification;
 
     return (
       <Feed.Event
@@ -53,7 +31,7 @@ class NotificationItem extends Dropdown.Item {
         </Feed.Label>
         <Feed.Content>
           <Feed.Summary>
-            {summary}
+            <NotificationSummaryComponent notification={notification} />
           </Feed.Summary>
           <Feed.Meta>
             <Feed.Date>{timesince} ago</Feed.Date>

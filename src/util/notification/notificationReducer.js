@@ -8,6 +8,14 @@ const initialState = {
 
 const notificationReducer = (state = initialState, action) => {
   switch (action.type) {
+  case 'NOTIFICATION_READ':
+    return Object.assign({}, state, {
+      unreadNotificationsCount: state.unreadNotificationsCount - 1,
+    });
+  case 'NOTIFICATION_UNREAD':
+    return Object.assign({}, state, {
+      unreadNotificationsCount: state.unreadNotificationsCount + 1,
+    });
   case 'NOTIFICATION_RECEIVED':
     return Object.assign({}, state, {
       unreadNotificationsCount: state.unreadNotificationsCount + 1,

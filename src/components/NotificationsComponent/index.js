@@ -2,13 +2,21 @@ import React from 'react';
 import { Button, Container, Feed, Dropdown, Image, Label } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
+import store from '../../store';
 import fetchNotifications from '../../util/notification/fetchNotifications';
+import toggleNotificationUnread from '../../util/notification/toggleNotificationUnread';
 import NotificationSummaryComponent from '../NotificationSummaryComponent';
 
 
 class NotificationItem extends Dropdown.Item {
-  notificationClick(event) {
+  notificationClick = (event, component) => {
     event.preventDefault();
+    event.stopPropagation();
+    store.dispatch(toggleNotificationUnread(component.props.notification.id, (error, response) => {
+      if (!error) {
+        this.props.notification.unread = response.data.new_unread;
+      }
+    }));
   }
 
   render() {
@@ -18,7 +26,7 @@ class NotificationItem extends Dropdown.Item {
 
     return (
       <Feed.Event
-        onClick={this.notificationClick}
+        onClick={event => this.notificationClick(event, this)}
         style={{
           padding: '15px',
           borderBottom: '1px solid #ccc',

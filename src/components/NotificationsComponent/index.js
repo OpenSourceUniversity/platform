@@ -1,5 +1,5 @@
 import React from 'react';
-import { Feed, Dropdown, Image, Label } from 'semantic-ui-react';
+import { Button, Container, Feed, Dropdown, Image, Label } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { getProfileTypeName } from '../../util/activeAccount';
@@ -37,7 +37,7 @@ class NotificationItem extends Dropdown.Item {
     }
 
     return (
-      <Feed.Event onClick={this.notificationClick} style={{ width: 400, padding: '15px', borderBottom: '1px solid #ccc' }}>
+      <Feed.Event onClick={this.notificationClick} style={{ padding: '15px', borderBottom: '1px solid #ccc' }}>
         <Feed.Label>
           <img src="https://react.semantic-ui.com/images/avatar/small/elliot.jpg" alt="" />
         </Feed.Label>
@@ -90,15 +90,33 @@ class NotificationsComponent extends Dropdown {
         pointing="top right"
         icon={null}
       >
-        <Dropdown.Menu onScroll={this.notificationsScroll} style={{ maxHeight: '400px', overflowY: 'scroll', overflowX: 'none' }}>
-          <Feed>
-            {this.renderNotificationItems()}
-            <Feed.Event style={{ display: this.props.isFetching ? 'block' : 'none' }}>
-              <Feed.Content style={{ textAlign: 'center' }}>
-                Loading notifications...
-              </Feed.Content>
-            </Feed.Event>
-          </Feed>
+        <Dropdown.Menu>
+          <Container
+            onScroll={this.notificationsScroll}
+            style={{
+              maxHeight: '400px', overflowY: 'scroll', overflowX: 'none', width: '400px',
+            }}
+          >
+            <Feed>
+              {this.renderNotificationItems()}
+              <Feed.Event style={{ display: this.props.isFetching ? 'block' : 'none' }}>
+                <Feed.Content style={{ textAlign: 'center' }}>
+                  Loading notifications...
+                </Feed.Content>
+              </Feed.Event>
+            </Feed>
+          </Container>
+          <Button
+            as={Link}
+            to="/notifications/"
+            style={{
+              textAlign: 'center',
+              margin: '0 auto',
+              width: '100%',
+            }}
+          >
+            All Notifications
+          </Button>
         </Dropdown.Menu>
       </Dropdown>
     );

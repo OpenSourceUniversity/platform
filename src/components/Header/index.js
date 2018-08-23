@@ -197,7 +197,7 @@ class HeaderWithoutRouter extends React.Component {
         key: 'add-certificate', content: 'Add Certificate', name: 'certificates/add', active: activeItem === 'certificates/add', onClick: this.handleItemClick,
       },
       {
-        key: 'verification', content: 'Certificates verification', name: 'academies/certificates-verification/', active: activeItem === 'academies/certificates-verification/', onClick: this.handleItemClick,
+        key: 'verification', content: 'Certificates verification', name: 'verifications/', active: activeItem === 'verifications/', onClick: this.handleItemClick,
       },
       {
         key: 'scholarships', content: 'Scholarships', name: 'scholarships', active: false, className: 'secondary-nav-disabled-beta',

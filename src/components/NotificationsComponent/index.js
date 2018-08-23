@@ -45,6 +45,7 @@ class NotificationItem extends Dropdown.Item {
           padding: '15px',
           borderBottom: '1px solid #ccc',
           backgroundColor,
+          cursor: 'pointer',
         }}
       >
         <Feed.Label>

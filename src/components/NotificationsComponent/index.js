@@ -36,8 +36,17 @@ class NotificationItem extends Dropdown.Item {
       summary = (<span>{actor} {verb}</span>);
     }
 
+    const backgroundColor = notification.unread ? '#efefef' : 'white';
+
     return (
-      <Feed.Event onClick={this.notificationClick} style={{ padding: '15px', borderBottom: '1px solid #ccc' }}>
+      <Feed.Event
+        onClick={this.notificationClick}
+        style={{
+          padding: '15px',
+          borderBottom: '1px solid #ccc',
+          backgroundColor,
+        }}
+      >
         <Feed.Label>
           <img src="https://react.semantic-ui.com/images/avatar/small/elliot.jpg" alt="" />
         </Feed.Label>

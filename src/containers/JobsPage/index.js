@@ -20,6 +20,7 @@ class JobsPage extends React.Component {
 
   componentDidMount() {
     // this.props.fetchJobs();
+    this.props.storeSearchType('jobs');
     this.props.setSecondaryNav('business');
     const params = new URLSearchParams(this.props.location.search);
     const searchQuery = params.get('q');
@@ -56,7 +57,6 @@ class JobsPage extends React.Component {
   }
 
   renderJobs() {
-    this.props.storeSearchType('jobs');
     return (
       this.props.jobs.map((job, index) => (
         <Grid.Column

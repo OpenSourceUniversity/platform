@@ -15,24 +15,26 @@ export default function search(query) {
     const url = `${bdnUrl}api/v1/${searchType}/?limit=20&offset=0&q=${query}`;
 
     switch (searchType) {
-      case 'courses':
-        dispatch({
-          type: 'RESET_FETCHED_COURSES',
-        });
-        dispatch(fetchCourses(url));
-      case 'jobs':
-        dispatch({
-          type: 'RESET_FETCHED_JOBS',
-        });
-        dispatch(fetchJobs(url));
-        break;
-      case 'learners':
-        dispatch({
-          type: 'RESET_FETCHED_LEARNERS',
-        });
-        dispatch(fetchLearners(url));
+    case 'courses':
+      dispatch({
+        type: 'RESET_FETCHED_COURSES',
+      });
+      dispatch(fetchCourses(url));
+      break;
+    case 'jobs':
+      dispatch({
+        type: 'RESET_FETCHED_JOBS',
+      });
+      dispatch(fetchJobs(url));
+      break;
+    case 'learners':
+      dispatch({
+        type: 'RESET_FETCHED_LEARNERS',
+      });
+      dispatch(fetchLearners(url));
+      break;
+    default:
+      return null;
     }
-
-
   };
 }

@@ -14,7 +14,7 @@ class ProfilePage extends React.Component {
 
   render() {
     return (
-      <Container>
+      <Container fluid>
         {(() => {
           switch (this.props.activeAccount) {
           case 'Academy': return <AcademyProfile />;

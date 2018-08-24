@@ -2,6 +2,7 @@ body {
   background: #ecf0f1;
 }
 div.App {
+  /*
   div.ui.fluid.card {
     -webkit-box-shadow: 0 10px 40px 0 rgba(28,45,65,.25);
     -moz-box-shadow: 0 10px 40px 0 rgba(28,45,65,.25);
@@ -12,7 +13,7 @@ div.App {
     -webkit-box-shadow: 0 15px 40px 0 rgba(28,45,65,.5);
     -moz-box-shadow: 0 15px 40px 0 rgba(28,45,65,.5);
     box-shadow: 0 15px 40px 0 rgba(28,45,65,.5);
-  }
+  }*/
   .certificateCard:hover {
     transition: all .3s ease-in-out;
     -webkit-box-shadow: 0 15px 40px 0 rgba(28,45,65,.5);
@@ -148,7 +149,7 @@ div.App {
       div.search-bar {
         margin-left: 3em;
         input {
-          border-radius: 30px !important;
+          border-radius: 5px !important;
           height: 45%;
           margin-top: 8.1% !important;
         }

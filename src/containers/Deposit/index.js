@@ -143,12 +143,6 @@ class Deposit extends React.Component {
                       </Card.Content>
                     </Card>
                   </Grid.Column>
-                  <Responsive minWidth={768}>
-                    <Divider vertical>Or</Divider>
-                  </Responsive>
-                  <Responsive maxWidth={767}>
-                    <Divider horizontal>Or</Divider>
-                  </Responsive>
                   <Grid.Column mobile={16} tablet={8} computer={8}>
                     <Card fluid>
                       <Card.Content>

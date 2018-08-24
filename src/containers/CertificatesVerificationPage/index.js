@@ -19,6 +19,11 @@ class CertificatesVerificationPage extends React.Component {
   state = { activeVerificationId: null }
 
   componentDidMount() {
+    if (this.props.match.params.id) {
+      const verificationId = this.props.match.params.id;
+      this.state.activeVerificationId = verificationId;
+      this.props.fetchVerification(`${bdnUrl}api/v1/verifications/${verificationId}/`);
+    }
     this.props.fetchVerifications();
     this.props.setSecondaryNav('academia');
     document.title = 'Certificates Validation';
@@ -44,6 +49,7 @@ class CertificatesVerificationPage extends React.Component {
 
   showVerification = (verificationId) => {
     this.setState({ activeVerificationId: verificationId });
+    this.props.history.push(`/verifications/${verificationId}/`);
     this.props.fetchVerification(`${bdnUrl}api/v1/verifications/${verificationId}/`);
   }
 

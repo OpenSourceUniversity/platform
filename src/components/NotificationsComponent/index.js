@@ -1,49 +1,45 @@
 import React from 'react';
-import { Feed, Dropdown, Image, Label } from 'semantic-ui-react';
+import { Button, Container, Feed, Dropdown, Image, Label } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import { getProfileTypeName } from '../../util/activeAccount';
+import store from '../../store';
 import fetchNotifications from '../../util/notification/fetchNotifications';
+import toggleNotificationUnread from '../../util/notification/toggleNotificationUnread';
+import NotificationSummaryComponent from '../NotificationSummaryComponent';
 
 
 class NotificationItem extends Dropdown.Item {
-  notificationClick(event) {
+  notificationClick = (event, component) => {
     event.preventDefault();
+    event.stopPropagation();
+    store.dispatch(toggleNotificationUnread(component.props.notification.id, (error, response) => {
+      if (!error) {
+        this.props.notification.unread = response.data.new_unread;
+      }
+    }));
   }
 
   render() {
     const { notification } = this.props;
-    let summary = '';
-    const target = notification.target_content_type_name;
-    const actorName = notification.actor_name;
-    const actionObject = notification.action_object_content_type_name;
-    const { verb } = notification;
+    const backgroundColor = notification.unread ? '#efefef' : 'white';
     const { timesince } = notification;
-    const actorType = getProfileTypeName(notification.actor_active_profile_type).toLowerCase();
-    const actorUsername = notification.actor_username;
-    const actorUrl = `/view-profile/${actorType}/${actorUsername}/`;
-    const actor = (<Link href={actorUrl} to={actorUrl}>{actorName}</Link>);
-
-    if (target) {
-      if (actionObject) {
-        summary = (<span>{actor} {verb} {actionObject} on {target}</span>);
-      } else {
-        summary = (<span>{actor} {verb} {target}</span>);
-      }
-    } else if (actionObject) {
-      summary = (<span>{actor} {verb} {actionObject}</span>);
-    } else {
-      summary = (<span>{actor} {verb}</span>);
-    }
 
     return (
-      <Feed.Event onClick={this.notificationClick} style={{ width: 400, padding: '15px', borderBottom: '1px solid #ccc' }}>
+      <Feed.Event
+        onClick={event => this.notificationClick(event, this)}
+        style={{
+          padding: '15px',
+          borderBottom: '1px solid #ccc',
+          backgroundColor,
+          cursor: 'pointer',
+        }}
+      >
         <Feed.Label>
           <img src="https://react.semantic-ui.com/images/avatar/small/elliot.jpg" alt="" />
         </Feed.Label>
         <Feed.Content>
           <Feed.Summary>
-            {summary}
+            <NotificationSummaryComponent notification={notification} />
           </Feed.Summary>
           <Feed.Meta>
             <Feed.Date>{timesince} ago</Feed.Date>
@@ -90,15 +86,33 @@ class NotificationsComponent extends Dropdown {
         pointing="top right"
         icon={null}
       >
-        <Dropdown.Menu onScroll={this.notificationsScroll} style={{ maxHeight: '400px', overflowY: 'scroll', overflowX: 'none' }}>
-          <Feed>
-            {this.renderNotificationItems()}
-            <Feed.Event style={{ display: this.props.isFetching ? 'block' : 'none' }}>
-              <Feed.Content style={{ textAlign: 'center' }}>
-                Loading notifications...
-              </Feed.Content>
-            </Feed.Event>
-          </Feed>
+        <Dropdown.Menu>
+          <Container
+            onScroll={this.notificationsScroll}
+            style={{
+              maxHeight: '400px', overflowY: 'scroll', overflowX: 'none', width: '400px',
+            }}
+          >
+            <Feed>
+              {this.renderNotificationItems()}
+              <Feed.Event style={{ display: this.props.isFetching ? 'block' : 'none' }}>
+                <Feed.Content style={{ textAlign: 'center' }}>
+                  Loading notifications...
+                </Feed.Content>
+              </Feed.Event>
+            </Feed>
+          </Container>
+          <Button
+            as={Link}
+            to="/notifications/"
+            style={{
+              textAlign: 'center',
+              margin: '0 auto',
+              width: '100%',
+            }}
+          >
+            All Notifications
+          </Button>
         </Dropdown.Menu>
       </Dropdown>
     );

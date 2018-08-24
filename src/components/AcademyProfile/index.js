@@ -62,7 +62,7 @@ class AcademyProfile extends React.Component {
                       {this.props.profiles.academy_name}
                     </Header>
                   </Segment>
-                  <Segment>
+                  <Segment padded>
                     <Button
                       as="a"
                       primary
@@ -73,7 +73,7 @@ class AcademyProfile extends React.Component {
                       href={email}
                     />
                   </Segment>
-                  <Segment>
+                  <Segment padded='very'>
                     <List>
                       {/* <List.Item icon={{ name: 'users', style: { width: '22px' } }}
                     content={<span>{this.props.profiles.students}</span>} /> */}
@@ -82,12 +82,11 @@ class AcademyProfile extends React.Component {
                       <List.Item icon={{ name: 'linkify', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={link}>{this.props.profiles.academy_website}</a>} />
                     </List>
                   </Segment>
-                  <Segment />
                 </Segment.Group>
               </Sticky>
             </Grid.Column>
             <Grid.Column mobile={16} tablet={8} computer={11}>
-              <Segment size="large">
+              <Segment padded='very' size="large">
                 <Header>
                   About
                 </Header>
@@ -97,7 +96,7 @@ class AcademyProfile extends React.Component {
                 </div>
                 <Divider clearing />
               </Segment>
-              <Segment size="large">
+              <Segment padded='very' size="large">
                 <Header>
                   Courses
                 </Header>

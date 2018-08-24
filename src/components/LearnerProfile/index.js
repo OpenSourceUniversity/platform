@@ -110,7 +110,7 @@ class LearnerProfile extends React.Component {
                       <List.Item icon={{ name: 'phone', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={phoneNumber}>{this.props.profiles.phone_number ? this.props.profiles.phone_number : '-'}</a>} />
                     </List>
                   </Segment>
-                  <Segment>
+                  <Segment padded='very'>
                     <Statistic.Group size="tiny" color="orange" horizontal>
                       <Statistic>
                         <Statistic.Value>{this.props.certificates.length}</Statistic.Value>
@@ -122,7 +122,7 @@ class LearnerProfile extends React.Component {
               </Sticky>
             </Grid.Column>
             <Grid.Column mobile={16} tablet={8} computer={11}>
-              <Segment style={{ paddingBottom: '2em' }} size="large">
+              <Segment padded='very' size="large">
                 <Header>
                   Introduction
                 </Header>
@@ -130,10 +130,9 @@ class LearnerProfile extends React.Component {
                 <div style={{ whiteSpace: 'pre-line' }}>
                   {this.props.profiles.learner_about ? this.props.profiles.learner_about : '-'}
                 </div>
-                <Header>
+                <Header floated="left">
                   Certificates
                 </Header>
-                <Divider clearing />
                 <Button style={{ marginBottom: '1em' }} icon labelPosition="left" positive floated="right" as={Link} to="/certificates/add">
                   <Icon name="plus" />
                   Add Certificate
@@ -159,7 +158,7 @@ class LearnerProfile extends React.Component {
 
               </Segment>
               <Segment.Group size="large">
-                <Segment>
+                <Segment padded='very'>
                   <Header>
                     Education
                   </Header>
@@ -172,7 +171,7 @@ class LearnerProfile extends React.Component {
                   }
                   <Divider clearing />
                 </Segment>
-                <Segment>
+                <Segment padded='very'>
                   <Header>
                     Experience
                   </Header>
@@ -185,7 +184,7 @@ class LearnerProfile extends React.Component {
                   <Divider clearing />
                 </Segment>
               </Segment.Group>
-              <Segment size="large">
+              <Segment padded='very' size="large">
                 <Header>
                   Reviews
                 </Header>

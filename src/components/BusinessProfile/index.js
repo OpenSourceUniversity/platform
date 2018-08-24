@@ -66,7 +66,7 @@ class BusinessProfile extends React.Component {
                       {this.props.profiles.company_country ? this.props.profiles.company_country : '-'}
                     </Header>
                   </Segment>
-                  <Segment>
+                  <Segment padded>
                     <Button
                       primary
                       size="large"
@@ -75,19 +75,18 @@ class BusinessProfile extends React.Component {
                       icon="mail outline"
                     />
                   </Segment>
-                  <Segment>
+                  <Segment padded='very'>
                     <List>
                       {/* <List.Item icon="users" content={this.props.profiles.employees} /> */}
                       <List.Item icon="mail" content={<a target="_blank" rel="noopener noreferrer" href={email}>{this.props.profiles.company_email}</a>} />
                       <List.Item icon="linkify" content={<a target="_blank" rel="noopener noreferrer" href={link}>{this.props.profiles.company_website}</a>} />
                     </List>
                   </Segment>
-                  <Segment />
                 </Segment.Group>
               </Sticky>
             </Grid.Column>
             <Grid.Column mobile={16} tablet={8} computer={11}>
-              <Segment size="large">
+              <Segment size="large" padded='very'>
                 <Header>
                   About
                 </Header>
@@ -96,7 +95,7 @@ class BusinessProfile extends React.Component {
                   {this.props.profiles.company_about ? this.props.profiles.company_about : '-'}
                 </div>
               </Segment>
-              <Segment size="large">
+              <Segment size="large" padded='very'>
                 <Header>
                   Job positions
                 </Header>

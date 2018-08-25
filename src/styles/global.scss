@@ -2,6 +2,7 @@ body {
   background: #ecf0f1;
 }
 div.App {
+  /*
   div.ui.fluid.card {
     -webkit-box-shadow: 0 10px 40px 0 rgba(28,45,65,.25);
     -moz-box-shadow: 0 10px 40px 0 rgba(28,45,65,.25);
@@ -12,7 +13,7 @@ div.App {
     -webkit-box-shadow: 0 15px 40px 0 rgba(28,45,65,.5);
     -moz-box-shadow: 0 15px 40px 0 rgba(28,45,65,.5);
     box-shadow: 0 15px 40px 0 rgba(28,45,65,.5);
-  }
+  }*/
   .certificateCard:hover {
     transition: all .3s ease-in-out;
     -webkit-box-shadow: 0 15px 40px 0 rgba(28,45,65,.5);
@@ -148,7 +149,7 @@ div.App {
       div.search-bar {
         margin-left: 3em;
         input {
-          border-radius: 30px !important;
+          border-radius: 5px !important;
           height: 45%;
           margin-top: 8.1% !important;
         }
@@ -174,7 +175,7 @@ div.App {
         div.transition {
           div.item:hover {
             background-color: white;
-            color: #f39c12 !important;
+            color: #f16722 !important;
 
           }
 
@@ -186,8 +187,8 @@ div.App {
             color: inherit !important;
           }
           div.item.active {
-            color: #f39c12 !important;
-            border-bottom-color:  #f39c12 !important;
+            color: #f16722 !important;
+            border-bottom-color:  #f16722 !important;
             background-color: white !important;
           }
           div.item {
@@ -266,8 +267,8 @@ div.App {
           padding: 2px 5px;
         }
         a.item.active {
-          color: #f39c12 !important;
-          border-bottom: solid 2px #f39c12 !important;
+          color: #f16722 !important;
+          border-bottom: solid 1px #f16722 !important;
           background-color: transparent !important;
         }
       }
@@ -331,7 +332,7 @@ div#Main {
       div.description {
         padding-top: 3em;
         span.orange {
-          color: #f39c12;
+          color: #f16722;
         }
         span.welcome {
           color: black;
@@ -391,7 +392,7 @@ div#Main {
           color: #b6b5b5;
         }
         a:hover {
-          color: #f39c12;
+          color: #f16722;
         }
         span {
           color: #b6b5b5;
@@ -534,4 +535,11 @@ div#Main {
 }
 input[type="file"] {
   cursor: pointer;
+}
+.profileBackground {
+  min-height: 250px;
+}
+.profileDetails {
+  position: relative;
+  top: -190px;
 }

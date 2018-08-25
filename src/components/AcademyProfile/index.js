@@ -1,8 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Header, Divider, Grid, Sticky, Segment, List, Button } from 'semantic-ui-react';
+import { Container, Header, Divider, Grid, Sticky, Segment, List, Button } from 'semantic-ui-react';
 import { fetchDepartmentCourses } from '../ViewAcademyProfile/actions';
 import CourseItem from '../../components/CourseItem';
+
+const colors = [
+  'orange',
+]
+
 /* eslint-disable camelcase */
 class AcademyProfile extends React.Component {
   componentDidMount() {
@@ -33,72 +38,80 @@ class AcademyProfile extends React.Component {
     return (
       <div>
         <Grid>
-          <Grid.Column mobile={16} tablet={8} computer={5}>
-            <Sticky offset={150}>
-              <Segment.Group className="profileSegment">
-                <Segment textAlign="center">
-                  <Segment
-                    textAlign="center"
-                    circular
-                    className="profilePicSegment"
-                    style={{
-                      width: 175, height: 175, backgroundImage: `url(${this.props.profiles.academy_logo ? `https://ipfs.io/ipfs/${this.props.profiles.academy_logo}` : avatarPlaceholder})`, backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center center',
-                    }}
-                  />
-                  <Header size="large">
-                    {this.props.profiles.academy_name}
-                  </Header>
-                </Segment>
-                <Segment>
-                  <Button
-                    as="a"
-                    primary
-                    size="large"
-                    className="fluid"
-                    content="MESSAGE US"
-                    icon="mail outline"
-                    href={email}
-                  />
-                </Segment>
-                <Segment>
-                  <List>
-                    {/* <List.Item icon={{ name: 'users', style: { width: '22px' } }}
-                  content={<span>{this.props.profiles.students}</span>} /> */}
-                    <List.Item icon={{ name: 'marker', style: { width: '22px' } }} content={this.props.profiles.academy_country ? this.props.profiles.academy_country : '-'} />
-                    <List.Item icon={{ name: 'mail', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={email}>{this.props.profiles.academy_email}</a>} />
-                    <List.Item icon={{ name: 'linkify', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={link}>{this.props.profiles.academy_website}</a>} />
-                  </List>
-                </Segment>
-                <Segment />
-              </Segment.Group>
-            </Sticky>
-          </Grid.Column>
-          <Grid.Column mobile={16} tablet={8} computer={11}>
-            <Segment size="large">
-              <Header>
-                About
-              </Header>
-              <Divider clearing />
-              <div style={{ whiteSpace: 'pre-line' }}>
-                {this.props.profiles.academy_about ? this.props.profiles.academy_about : '-'}
-              </div>
-              <Divider clearing />
-            </Segment>
-            <Segment size="large">
-              <Header>
-                Courses
-              </Header>
-              <Divider clearing />
-              {
-                this.props.courses.length ?
-                  this.renderCourses() :
-                  <div style={{ textAlign: 'center', width: '100%' }}>
-                    <p style={{ textAlign: 'center' }}>There are no courses yet.</p>
-                  </div>
-              }
-            </Segment>
-          </Grid.Column>
+          {colors.map(color => (
+            <Grid.Row className="profileBackground" color={color} key={color}>
+              <Grid.Column></Grid.Column>
+            </Grid.Row>
+          ))}
         </Grid>
+        <Container>
+          <Grid className="profileDetails">
+            <Grid.Column mobile={16} tablet={8} computer={5}>
+              <Sticky offset={150}>
+                <Segment.Group className="profileSegment">
+                  <Segment textAlign="center">
+                    <Segment
+                      textAlign="center"
+                      circular
+                      className="profilePicSegment"
+                      style={{
+                        width: 175, height: 175, backgroundImage: `url(${this.props.profiles.academy_logo ? `https://ipfs.io/ipfs/${this.props.profiles.academy_logo}` : avatarPlaceholder})`, backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center center',
+                      }}
+                    />
+                    <Header size="large">
+                      {this.props.profiles.academy_name}
+                    </Header>
+                  </Segment>
+                  <Segment padded>
+                    <Button
+                      as="a"
+                      primary
+                      size="large"
+                      className="fluid"
+                      content="MESSAGE US"
+                      icon="mail outline"
+                      href={email}
+                    />
+                  </Segment>
+                  <Segment padded='very'>
+                    <List>
+                      {/* <List.Item icon={{ name: 'users', style: { width: '22px' } }}
+                    content={<span>{this.props.profiles.students}</span>} /> */}
+                      <List.Item icon={{ name: 'marker', style: { width: '22px' } }} content={this.props.profiles.academy_country ? this.props.profiles.academy_country : '-'} />
+                      <List.Item icon={{ name: 'mail', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={email}>{this.props.profiles.academy_email}</a>} />
+                      <List.Item icon={{ name: 'linkify', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={link}>{this.props.profiles.academy_website}</a>} />
+                    </List>
+                  </Segment>
+                </Segment.Group>
+              </Sticky>
+            </Grid.Column>
+            <Grid.Column mobile={16} tablet={8} computer={11}>
+              <Segment padded='very' size="large">
+                <Header>
+                  About
+                </Header>
+                <Divider clearing />
+                <div style={{ whiteSpace: 'pre-line' }}>
+                  {this.props.profiles.academy_about ? this.props.profiles.academy_about : '-'}
+                </div>
+                <Divider clearing />
+              </Segment>
+              <Segment padded='very' size="large">
+                <Header>
+                  Courses
+                </Header>
+                <Divider clearing />
+                {
+                  this.props.courses.length ?
+                    this.renderCourses() :
+                    <div style={{ textAlign: 'center', width: '100%' }}>
+                      <p style={{ textAlign: 'center' }}>There are no courses yet.</p>
+                    </div>
+                }
+              </Segment>
+            </Grid.Column>
+          </Grid>
+        </Container>
       </div>
     );
   }

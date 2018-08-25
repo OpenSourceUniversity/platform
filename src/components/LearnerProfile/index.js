@@ -1,11 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Header, Divider, Grid, Sticky, Segment, List, Button, Statistic, Dimmer, Loader, Message, Icon } from 'semantic-ui-react';
+import { Container, Header, Divider, Grid, Sticky, Segment, List, Button, Statistic, Dimmer, Loader, Message, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import SkillItem from 'components/SkillItem';
 import CertificateItem from 'components/CertificateItem';
 import fetchCertificates from '../../util/certificate/fetchCertificates';
 
+const colors = [
+  'grey',
+]
 
 class LearnerProfile extends React.Component {
   componentDidMount() {
@@ -66,102 +69,124 @@ class LearnerProfile extends React.Component {
     const email = `mailto:${this.props.profiles.learner_email}`;
     const site = `${this.props.profiles.learner_site}`;
     const phoneNumber = `tel:${this.props.profiles.phone_number}`;
+    
+
     return (
       <div>
         <Grid>
-          <Grid.Column mobile={16} tablet={8} computer={5}>
-            <Sticky offset={150}>
-              <Segment.Group className="profileSegment">
-                <Segment textAlign="center">
-                  <Segment
-                    textAlign="center"
-                    circular
-                    className="profilePicSegment"
-                    style={{
-                      width: 175, height: 175, backgroundImage: `url(${this.props.profiles.learner_avatar ? `https://ipfs.io/ipfs/${this.props.profiles.learner_avatar}` : avatarPlaceholder})`, backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center center',
-                    }}
-                  />
-                  <Header size="large">
-                    {this.props.profiles.first_name} {this.props.profiles.last_name}
+          {colors.map(color => (
+            <Grid.Row className="profileBackground" color={color} key={color}>
+              <Grid.Column></Grid.Column>
+            </Grid.Row>
+          ))}
+        </Grid>
+        <Container>
+          <Grid className="profileDetails">
+            <Grid.Column mobile={16} tablet={8} computer={5}>
+              <Sticky offset={150}>
+                <Segment.Group className="profileSegment">
+                  <Segment textAlign="center">
+                    <Segment
+                      textAlign="center"
+                      circular
+                      className="profilePicSegment"
+                      style={{
+                        width: 175, height: 175, backgroundImage: `url(${this.props.profiles.learner_avatar ? `https://ipfs.io/ipfs/${this.props.profiles.learner_avatar}` : avatarPlaceholder})`, backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center center',
+                      }}
+                    />
+                    <Header size="large">
+                      {this.props.profiles.first_name} {this.props.profiles.last_name}
+                    </Header>
+                    <Header size="small" color="grey">
+                      {this.props.profiles.learner_position ? this.props.profiles.learner_position : '-'}
+                    </Header>
+                  </Segment>
+                  <Segment padded='very'>
+                    <List>
+                      <List.Item icon={{ name: 'users', style: { width: '22px' } }} content={this.props.profiles.learner_specialisation ? this.props.profiles.learner_specialisation : '-'} />
+                      <List.Item icon={{ name: 'marker', style: { width: '22px' } }} content={this.props.profiles.learner_country ? this.props.profiles.learner_country : '-'} />
+                      <List.Item icon={{ name: 'mail', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={email}>{this.props.profiles.learner_email ? this.props.profiles.learner_email : '-'}</a>} />
+                      <List.Item icon={{ name: 'linkify', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={site}>{this.props.profiles.learner_site ? this.props.profiles.learner_site : '-'}</a>} />
+                      <List.Item icon={{ name: 'phone', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={phoneNumber}>{this.props.profiles.phone_number ? this.props.profiles.phone_number : '-'}</a>} />
+                    </List>
+                  </Segment>
+                  <Segment padded='very'>
+                    <Statistic.Group size="tiny" color="orange" horizontal>
+                      <Statistic>
+                        <Statistic.Value>{this.props.certificates.length}</Statistic.Value>
+                        <Statistic.Label>Certificates</Statistic.Label>
+                      </Statistic>
+                    </Statistic.Group>
+                  </Segment>
+                </Segment.Group>
+              </Sticky>
+            </Grid.Column>
+            <Grid.Column mobile={16} tablet={8} computer={11}>
+              <Segment padded='very' size="large">
+                <Header>
+                  Introduction
+                </Header>
+                <Divider clearing />
+                <div style={{ whiteSpace: 'pre-line' }}>
+                  {this.props.profiles.learner_about ? this.props.profiles.learner_about : '-'}
+                </div>
+                <Header floated="left">
+                  Certificates
+                </Header>
+                <Button style={{ marginBottom: '1em' }} icon labelPosition="left" positive floated="right" as={Link} to="/certificates/add">
+                  <Icon name="plus" />
+                  Add Certificate
+                </Button>
+                <Divider clearing />
+                <Dimmer active={this.props.isFetching} inverted>
+                  <Loader size="large">Loading</Loader>
+                </Dimmer>
+                <Message error hidden={!this.props.error}>
+                  <p>
+                    {this.props.error}
+                  </p>
+                </Message>
+
+                <Message info hidden={this.props.certificates.length > 0 || !!this.props.error}>
+                  <p>
+                    You do not have any certificates yet. Go ahead and add some.
+                  </p>
+                </Message>
+                <Grid width={16}>
+                  {this.renderCertificates()}
+                </Grid>
+
+              </Segment>
+              <Segment.Group size="large">
+                <Segment padded='very'>
+                  <Header>
+                    Education
                   </Header>
-                  <Header size="small" color="grey">
-                    {this.props.profiles.learner_position ? this.props.profiles.learner_position : '-'}
+                  {
+                    this.props.certificates.length ?
+                      this.renderSkills() :
+                      <div style={{ textAlign: 'center', width: '100%' }}>
+                        <p style={{ textAlign: 'center' }}>There are no any skills yet.</p>
+                      </div>
+                  }
+                  <Divider clearing />
+                </Segment>
+                <Segment padded='very'>
+                  <Header>
+                    Experience
                   </Header>
-                </Segment>
-                <Segment>
-                  <List>
-                    <List.Item icon={{ name: 'users', style: { width: '22px' } }} content={this.props.profiles.learner_specialisation ? this.props.profiles.learner_specialisation : '-'} />
-                    <List.Item icon={{ name: 'marker', style: { width: '22px' } }} content={this.props.profiles.learner_country ? this.props.profiles.learner_country : '-'} />
-                    <List.Item icon={{ name: 'mail', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={email}>{this.props.profiles.learner_email ? this.props.profiles.learner_email : '-'}</a>} />
-                    <List.Item icon={{ name: 'linkify', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={site}>{this.props.profiles.learner_site ? this.props.profiles.learner_site : '-'}</a>} />
-                    <List.Item icon={{ name: 'phone', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={phoneNumber}>{this.props.profiles.phone_number ? this.props.profiles.phone_number : '-'}</a>} />
-                  </List>
-                </Segment>
-                <Segment>
-                  <Statistic.Group size="tiny" color="orange" horizontal>
-                    <Statistic>
-                      <Statistic.Value>{this.props.certificates.length}</Statistic.Value>
-                      <Statistic.Label>Certificates</Statistic.Label>
-                    </Statistic>
-                  </Statistic.Group>
+                  <Segment style={{
+                    textAlign: 'center', background: '#7f8fa6', color: '#fff', borderRadius: '10px', opacity: 0.7,
+                  }}
+                  >
+                      Coming in Beta
+                  </Segment>
+                  <Divider clearing />
                 </Segment>
               </Segment.Group>
-            </Sticky>
-          </Grid.Column>
-          <Grid.Column mobile={16} tablet={8} computer={11}>
-            <Segment style={{ paddingBottom: '2em' }} size="large">
-              <Header>
-                Introduction
-              </Header>
-              <Divider clearing />
-              <div style={{ whiteSpace: 'pre-line' }}>
-                {this.props.profiles.learner_about ? this.props.profiles.learner_about : '-'}
-              </div>
-              <Header>
-                Certificates
-              </Header>
-              <Divider clearing />
-              <Button style={{ marginBottom: '1em' }} icon labelPosition="left" positive floated="right" as={Link} to="/certificates/add">
-                <Icon name="plus" />
-                Add Certificate
-              </Button>
-              <Divider clearing />
-              <Dimmer active={this.props.isFetching} inverted>
-                <Loader size="large">Loading</Loader>
-              </Dimmer>
-              <Message error hidden={!this.props.error}>
-                <p>
-                  {this.props.error}
-                </p>
-              </Message>
-
-              <Message info hidden={this.props.certificates.length > 0 || !!this.props.error}>
-                <p>
-                  You do not have any certificates yet. Go ahead and add some.
-                </p>
-              </Message>
-              <Grid width={16}>
-                {this.renderCertificates()}
-              </Grid>
-
-            </Segment>
-            <Segment.Group size="large">
-              <Segment>
+              <Segment padded='very' size="large">
                 <Header>
-                  Education
-                </Header>
-                {
-                  this.props.certificates.length ?
-                    this.renderSkills() :
-                    <div style={{ textAlign: 'center', width: '100%' }}>
-                      <p style={{ textAlign: 'center' }}>There are no any skills yet.</p>
-                    </div>
-                }
-                <Divider clearing />
-              </Segment>
-              <Segment>
-                <Header>
-                  Experience
+                  Reviews
                 </Header>
                 <Segment style={{
                   textAlign: 'center', background: '#7f8fa6', color: '#fff', borderRadius: '10px', opacity: 0.7,
@@ -171,21 +196,9 @@ class LearnerProfile extends React.Component {
                 </Segment>
                 <Divider clearing />
               </Segment>
-            </Segment.Group>
-            <Segment size="large">
-              <Header>
-                Reviews
-              </Header>
-              <Segment style={{
-                textAlign: 'center', background: '#7f8fa6', color: '#fff', borderRadius: '10px', opacity: 0.7,
-              }}
-              >
-                  Coming in Beta
-              </Segment>
-              <Divider clearing />
-            </Segment>
-          </Grid.Column>
-        </Grid>
+            </Grid.Column>
+          </Grid>
+        </Container>
       </div>
     );
   }

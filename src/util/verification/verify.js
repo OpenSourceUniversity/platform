@@ -23,7 +23,7 @@ export default function verify(verification) {
           ipfsHash,
         },
       });
-      dispatch(storeVerification(ipfsHash, metaJson.granted_to, (error) => {
+      dispatch(storeVerification(ipfsHash, metaJson.granted_to_eth_address, (error) => {
         if (error) {
           return;
         }

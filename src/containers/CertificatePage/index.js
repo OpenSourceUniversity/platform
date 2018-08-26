@@ -76,6 +76,21 @@ class CertificatePage extends React.Component {
     }
   }
 
+  renderStatus() {
+    if (this.props.certificate.is_expired) {
+      return 'expired';
+    }
+    if (!this.props.certificate.verifications) {
+      return 'not verified';
+    }
+    for (let i = 0; i < this.props.certificate.verifications.length; i += 1) {
+      if (this.props.certificate.verifications[i].pop().state === 'verified') {
+        return 'verified';
+      }
+    }
+    return 'revoked';
+  }
+
   renderVerifications() {
     const verifications = [];
     for (let i = 0; i < this.props.certificate.verifications.length; i += 1) {
@@ -112,6 +127,20 @@ class CertificatePage extends React.Component {
   // }
 
   render() {
+    const status = this.renderStatus();
+    function getColor() {
+      switch (status) {
+      case 'verified':
+        return 'green';
+      case 'revoked':
+        return 'red';
+      case 'expired':
+        return 'blue';
+      default:
+        return 'yellow';
+      }
+    }
+    const color = getColor();
     /* eslint-disable global-require */
     const loader = require('../../icons/osu-loader.svg');
     /* eslint-enable global-require */
@@ -286,17 +315,18 @@ class CertificatePage extends React.Component {
                   </Segment>
                 </Grid.Column>
                 <Grid.Column width={8}>
-                  <Segment color={this.props.certificate.verifications ? 'green' : 'red'} className="certificateCard">
+                  <Segment color={color} className="certificateCard">
                     <Header style={{ fontSize: '1.7em' }}>
                       Certificate Status
                     </Header>
                     <Divider clearing />
                     <Header style={{ fontSize: '1.7em' }}>
+                    Status: {capitalizeFirstLetter(status)}<br />
                       {this.props.certificate.verifications ?
                         <Modal trigger={
                           <Button positive >
                             <Icon name="checkmark" />
-                            Verified
+                            Verification History
                           </Button>
                         }
                         >
@@ -305,7 +335,7 @@ class CertificatePage extends React.Component {
                             {this.renderVerifications()}
                           </Modal.Content>
                         </Modal>
-                        : ('Not Verified')}
+                        : (capitalizeFirstLetter(status))}
                     </Header>
                     <Header style={{ fontSize: '1.7em' }}>
                       Duration:

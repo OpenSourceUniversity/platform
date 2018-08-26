@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Header, Divider, Segment, Container, Dimmer, Loader, Breadcrumb, Grid, Modal, Button, Icon, Form, Input, Message } from 'semantic-ui-react';
 import SkillItem from 'components/SkillItem';
 import fetchCertificate from '../../util/certificate/fetchCertificate';
@@ -7,6 +8,13 @@ import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import Config from '../../config';
 import { requireVerification } from '../../util/verification/verificationRequest';
 import deleteCertificate from '../../util/certificate/deleteCertificate';
+import { getProfileTypeName } from '../../util/activeAccount';
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+const { etherscanUrl } = Config.network;
 
 class CertificatePage extends React.Component {
   state = { modalOpen: false }
@@ -66,6 +74,34 @@ class CertificatePage extends React.Component {
     } catch (e) {
       return null;
     }
+  }
+
+  renderVerifications() {
+    const verifications = [];
+    for (let i = 0; i < this.props.certificate.verifications.length; i += 1) {
+      verifications.push(this.props.certificate.verifications[i].map((verification, index) => (
+        <div key={index}>
+          <Divider clearing />
+          <p>
+            <a
+              href={`${etherscanUrl}${verification.tx_hash}`}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              {capitalizeFirstLetter(verification.state)}
+            </a> by {getProfileTypeName(verification.verifier_type)}&nbsp;
+            <Link
+              to={`/view-profile/${getProfileTypeName(verification.verifier_type).toLowerCase()}/${verification.verifier_eth_address}/`}
+              href={`/view-profile/${getProfileTypeName(verification.verifier_type).toLowerCase()}/${verification.verifier_eth_address}/`}
+            >
+              {verification.verifier_name}
+            </Link>
+          </p>
+          <Divider clearing />
+        </div>
+      )));
+    }
+    return verifications;
   }
 
   // renderRating(ratingNumb) {
@@ -134,7 +170,7 @@ class CertificatePage extends React.Component {
                 null
               }
               <Modal trigger={
-                <Button icon labelPosition="left" positive floated="right" to="/certificates/add">
+                <Button icon labelPosition="left" positive floated="right">
                   <Icon name="checkmark" />
                   Verifiy Certificate
                 </Button>
@@ -250,14 +286,25 @@ class CertificatePage extends React.Component {
                   </Segment>
                 </Grid.Column>
                 <Grid.Column width={8}>
-                  <Segment color={this.props.certificate.verified ? 'green' : 'red'} className="certificateCard">
+                  <Segment color={this.props.certificate.verifications ? 'green' : 'red'} className="certificateCard">
                     <Header style={{ fontSize: '1.7em' }}>
                       Certificate Status
                     </Header>
                     <Divider clearing />
                     <Header style={{ fontSize: '1.7em' }}>
-                      {this.props.certificate.verified ?
-                        (<a rel="noopener noreferrer" target="_blank" href={`https://etherscan.io/tx/${this.props.certificate.ipfs_hash}`}>Verified</a>)
+                      {this.props.certificate.verifications ?
+                        <Modal trigger={
+                          <Button positive >
+                            <Icon name="checkmark" />
+                            Verified
+                          </Button>
+                        }
+                        >
+                          <Modal.Header>Verifications History</Modal.Header>
+                          <Modal.Content>
+                            {this.renderVerifications()}
+                          </Modal.Content>
+                        </Modal>
                         : ('Not Verified')}
                     </Header>
                     <Header style={{ fontSize: '1.7em' }}>

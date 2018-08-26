@@ -16,8 +16,8 @@ import Main from './components/Main';
 class App extends React.Component {
   componentDidMount() {
     store.dispatch(getIpfs());
-    store.dispatch(notificationsConnection());
     if (this.props.isLoggedIn) {
+      store.dispatch(notificationsConnection());
       this.props.getDefaultValues();
     }
   }

@@ -3,6 +3,7 @@ import store from '../../store';
 import storeSignedAddress from './storeSignedAddress';
 import getDefaultValues from '../profiles/getDefaultValues';
 import { getActiveAccount } from '../activeAccount';
+import notificationsConnection from '../notification/notificationsConnection';
 
 const Wallet = require('ethereumjs-wallet');
 
@@ -38,6 +39,7 @@ export default function login(passphrase) {
         });
         dispatch(getActiveAccount());
         dispatch(getDefaultValues());
+        dispatch(notificationsConnection());
         const newPath = '/';
         const history = createHashHistory();
         history.push(newPath);

@@ -1,12 +1,32 @@
+import 'rc-slider/assets/index.css';
 import React from 'react';
 import { Form, Button, Header, Divider, Input, Message, Checkbox, Dimmer, Loader } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import AvatarEditor from 'react-avatar-editor';
+import Slider from 'rc-slider';
 import Countries from '../../data/countriesList';
 import { saveSettings, resetSaveProfileProps } from '../../util/profiles/saveSettings';
 
+const dataURLtoBlob = (dataURI) => {
+  const bytes = dataURI.split(',')[0].indexOf('base64') >= 0 ?
+    atob(dataURI.split(',')[1]) :
+    unescape(dataURI.split(',')[1]);
+  const mime = dataURI.split(',')[0].split(':')[1].split(';')[0];
+  const max = bytes.length;
+  const ia = new Uint8Array(max);
+  for (let i = 0; i < max; i += 1) {
+    ia[i] = bytes.charCodeAt(i);
+  }
+  return new Blob([ia], { type: mime });
+};
+
 class LearnerSettings extends React.Component {
   /* eslint-disable react/no-unused-state */
-  state = { buffer: null }
+  state = {
+    buffer: null,
+    src: null,
+    zoom: 1,
+  }
 
   componentDidMount() {
     this.props.resetSaveProfileProps();
@@ -18,6 +38,28 @@ class LearnerSettings extends React.Component {
       if (obj[i].text === needle) {
         return obj[i].value;
       }
+    }
+    return null;
+  }
+
+  setEditorRef = (editor) => {
+    this.editor = editor;
+  }
+
+  handleZoom = (value) => {
+    this.setState({ zoom: value / 33 });
+  }
+
+  handleImageChange = () => {
+    try {
+      this.editor.getImage();
+      const canvasScaled = this.editor.getImageScaledToCanvas();
+      const dataURL = canvasScaled.toDataURL('image/png');
+      const fileReader = new FileReader();
+      fileReader.readAsArrayBuffer(dataURLtoBlob(dataURL));
+      fileReader.onloadend = () => this.convertToBuffer(fileReader);
+    } catch (e) {
+      return null;
     }
     return null;
   }
@@ -42,10 +84,21 @@ class LearnerSettings extends React.Component {
   captureFile =(event) => {
     event.stopPropagation();
     event.preventDefault();
-    const file = event.target.files[0];
-    const reader = new window.FileReader();
-    reader.readAsArrayBuffer(file);
-    reader.onloadend = () => this.convertToBuffer(reader);
+    if (event.target.files && event.target.files.length > 0) {
+      const reader = new FileReader();
+      reader.addEventListener(
+        'load',
+        () =>
+          this.setState({
+            src: reader.result,
+          }),
+        false,
+      );
+      if (event.target.files[0].type.match(/image.*/)) {
+        console.log('img!');
+      }
+      reader.readAsDataURL(event.target.files[0]);
+    }
   }
 
   convertToBuffer = (reader) => {
@@ -213,6 +266,20 @@ class LearnerSettings extends React.Component {
               onChange={this.captureFile}
             />
           </Form.Field>
+          <div style={{ display: this.state.src ? null : 'none', textAlign: 'center' }}>
+            <AvatarEditor
+              ref={this.setEditorRef}
+              onImageChange={this.handleImageChange}
+              image={this.state.src}
+              width={500}
+              height={500}
+              border={50}
+              color={[255, 255, 255, 0.6]} // RGBA
+              scale={this.state.zoom}
+              borderRadius={500}
+            />
+            <Slider min={33} max={99} defaultValue={33} onChange={this.handleZoom} />
+          </div>
           <Divider hidden />
           <Button primary type="submit">Save Profile Settings</Button>
         </Form>

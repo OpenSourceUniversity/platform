@@ -15,6 +15,15 @@ class LearnerProfile extends React.Component {
     this.props.fetchCertificates();
   }
 
+  isVerified(certificate) {
+    for (let i = 0; i < certificate.verifications.length; i += 1) {
+      if (certificate.verifications[i][certificate.verifications[i].length - 1].state === 'verified') {
+        return true;
+      }
+    }
+    return false;
+  }
+
   renderCertificates() {
     return this.props.certificates.map((certificate, index) => (
       <Grid.Column
@@ -37,7 +46,7 @@ class LearnerProfile extends React.Component {
     let notVerifiedSkills = [];
     const skills = [];
     for (let i = 0; i < certificates.length; i += 1) {
-      if (certificates[i].verified) {
+      if (this.isVerified(certificates[i])) {
         verifiedSkills = verifiedSkills.concat(certificates[i].skills);
       } else {
         notVerifiedSkills = notVerifiedSkills.concat(certificates[i].skills);
@@ -91,7 +100,14 @@ class LearnerProfile extends React.Component {
                       circular
                       className="profilePicSegment"
                       style={{
-                        width: 175, height: 175, backgroundImage: `url(${this.props.profiles.learner_avatar ? `https://ipfs.io/ipfs/${this.props.profiles.learner_avatar}` : avatarPlaceholder})`, backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center center',
+                        width: 175,
+                        height: 175,
+                        backgroundImage: `url(${this.props.profiles.learner_avatar ? `https://ipfs.io/ipfs/${this.props.profiles.learner_avatar}` : avatarPlaceholder})`,
+                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: 'contain',
+                        backgroundPosition: 'center center',
+                        borderWidth: 0,
+                        cursor: 'auto',
                       }}
                     />
                     <Header size="large">

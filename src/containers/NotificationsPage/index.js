@@ -1,44 +1,42 @@
 import React from 'react';
 import { Dimmer, Header, Container, Button, Icon, Loader, Feed, Segment, Card } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
-import { getProfileTypeName } from '../../util/activeAccount';
+import { withRouter } from 'react-router-dom';
+import store from '../../store';
+import NotificationSummaryComponent from '../../components/NotificationSummaryComponent';
+import toggleNotificationUnread from '../../util/notification/toggleNotificationUnread';
 import fetchNotifications from '../../util/notification/fetchNotifications';
 
 class NotificationItem extends Card {
+  notificationClick = (event, component) => {
+    event.preventDefault();
+    store.dispatch(toggleNotificationUnread(component.props.notification.id, (error, response) => {
+      if (!error) {
+        this.props.notification.unread = response.data.new_unread;
+      }
+    }));
+  }
   render() {
     const { notification } = this.props;
-    let summary = '';
-    const target = notification.target_content_type_name;
-    const actorName = notification.actor_name;
-    const actionObject = notification.action_object_content_type_name;
-    const { verb } = notification;
+    const backgroundColor = notification.unread ? '#efefef' : 'white';
     const { timesince } = notification;
-    const actorType = getProfileTypeName(notification.actor_active_profile_type).toLowerCase();
-    const actorUsername = notification.actor_username;
-    const actorUrl = `/view-profile/${actorType}/${actorUsername}/`;
-    const actor = (<Link href={actorUrl} to={actorUrl}>{actorName}</Link>);
-
-    if (target) {
-      if (actionObject) {
-        summary = (<span>{actor} {verb} {actionObject} on {target}</span>);
-      } else {
-        summary = (<span>{actor} {verb} {target}</span>);
-      }
-    } else if (actionObject) {
-      summary = (<span>{actor} {verb} {actionObject}</span>);
-    } else {
-      summary = (<span>{actor} {verb}</span>);
-    }
 
     return (
-      <Feed.Event onClick={this.notificationClick} style={{ padding: '15px', borderBottom: '1px solid #ccc' }}>
+      <Feed.Event
+        onClick={event => this.notificationClick(event, this)}
+        style={{
+          padding: '15px',
+          borderBottom: '1px solid #ccc',
+          backgroundColor,
+          cursor: 'pointer',
+        }}
+      >
         <Feed.Label>
           <img src="https://react.semantic-ui.com/images/avatar/small/elliot.jpg" alt="" />
         </Feed.Label>
         <Feed.Content>
           <Feed.Summary>
-            {summary}
+            <NotificationSummaryComponent notification={notification} />
           </Feed.Summary>
           <Feed.Meta>
             <Feed.Date>{timesince} ago</Feed.Date>

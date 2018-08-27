@@ -2,7 +2,9 @@ const INITIAL_STATE = {
   isFetching: false,
   isUpdating: false,
   error: null,
-  certificate: 'null',
+  certificate: {
+    verifications: [],
+  },
   isDeleting: false,
 };
 

@@ -16,7 +16,7 @@ class CertificateItemWithoutRouter extends React.Component {
     if (this.props.certificate.is_expired) {
       return 'expired';
     }
-    if (!this.props.certificate.verifications) {
+    if (this.props.certificate.verifications.length === 0) {
       return 'not verified';
     }
     for (let i = 0; i < this.props.certificate.verifications.length; i += 1) {

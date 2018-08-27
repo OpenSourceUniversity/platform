@@ -80,21 +80,21 @@ class CertificatePage extends React.Component {
     if (this.props.certificate.is_expired) {
       return 'expired';
     }
-    if (!this.props.certificate.verifications) {
+    if (this.props.certificate.verifications.length === 0) {
       return 'not verified';
     }
     for (let i = 0; i < this.props.certificate.verifications.length; i += 1) {
-      if (this.props.certificate.verifications[i].pop().state === 'verified') {
+      if (this.props.certificate.verifications[i][this.props.certificate.verifications[i].length - 1].state === 'verified') {
         return 'verified';
       }
     }
     return 'revoked';
   }
 
-  renderVerifications() {
+  renderVerifications(certificate) {
     const verifications = [];
-    for (let i = 0; i < this.props.certificate.verifications.length; i += 1) {
-      verifications.push(this.props.certificate.verifications[i].map((verification, index) => (
+    for (let i = 0; i < certificate.verifications.length; i += 1) {
+      verifications.push(certificate.verifications[i].map((verification, index) => (
         <div key={index}>
           <Divider clearing />
           <p>
@@ -322,7 +322,7 @@ class CertificatePage extends React.Component {
                     <Divider clearing />
                     <Header style={{ fontSize: '1.7em' }}>
                     Status: {capitalizeFirstLetter(status)}<br />
-                      {this.props.certificate.verifications ?
+                      {this.props.certificate.verifications.length > 0 ?
                         <Modal trigger={
                           <Button positive >
                             <Icon name="checkmark" />
@@ -332,10 +332,10 @@ class CertificatePage extends React.Component {
                         >
                           <Modal.Header>Verifications History</Modal.Header>
                           <Modal.Content>
-                            {this.renderVerifications()}
+                            {this.renderVerifications(this.props.certificate)}
                           </Modal.Content>
                         </Modal>
-                        : (capitalizeFirstLetter(status))}
+                        : null}
                     </Header>
                     <Header style={{ fontSize: '1.7em' }}>
                       Duration:

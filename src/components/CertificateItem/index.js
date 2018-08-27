@@ -20,7 +20,7 @@ class CertificateItemWithoutRouter extends React.Component {
       return 'not verified';
     }
     for (let i = 0; i < this.props.certificate.verifications.length; i += 1) {
-      if (this.props.certificate.verifications[i].pop().state === 'verified') {
+      if (this.props.certificate.verifications[i][this.props.certificate.verifications[i].length - 1].state === 'verified') {
         return 'verified';
       }
     }

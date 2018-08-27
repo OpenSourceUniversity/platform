@@ -7,7 +7,7 @@ import JobItem from '../../components/JobItem';
 
 const colors = [
   'blue',
-]
+];
 
 /* eslint-disable camelcase */
 class BusinessProfile extends React.Component {
@@ -41,7 +41,7 @@ class BusinessProfile extends React.Component {
         <Grid>
           {colors.map(color => (
             <Grid.Row className="profileBackground" color={color} key={color}>
-              <Grid.Column></Grid.Column>
+              <Grid.Column />
             </Grid.Row>
           ))}
         </Grid>
@@ -75,7 +75,7 @@ class BusinessProfile extends React.Component {
                       icon="mail outline"
                     />
                   </Segment>
-                  <Segment padded='very'>
+                  <Segment padded="very">
                     <List>
                       {/* <List.Item icon="users" content={this.props.profiles.employees} /> */}
                       <List.Item icon="mail" content={<a target="_blank" rel="noopener noreferrer" href={email}>{this.props.profiles.company_email}</a>} />
@@ -86,7 +86,7 @@ class BusinessProfile extends React.Component {
               </Sticky>
             </Grid.Column>
             <Grid.Column mobile={16} tablet={8} computer={11}>
-              <Segment size="large" padded='very'>
+              <Segment size="large" padded="very">
                 <Header>
                   About
                 </Header>
@@ -95,7 +95,7 @@ class BusinessProfile extends React.Component {
                   {this.props.profiles.company_about ? this.props.profiles.company_about : '-'}
                 </div>
               </Segment>
-              <Segment size="large" padded='very'>
+              <Segment size="large" padded="very">
                 <Header>
                   Job positions
                 </Header>

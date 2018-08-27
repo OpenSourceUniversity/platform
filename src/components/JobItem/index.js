@@ -19,7 +19,7 @@ class JobItemWithoutRouter extends React.Component {
   render() {
     /* eslint-disable global-require */
 
-    const profile_business = require('../../icons/businesses.svg');
+    const profileBusiness = require('../../icons/businesses.svg');
 
     /* eslint-enable global-require */
 
@@ -42,7 +42,7 @@ class JobItemWithoutRouter extends React.Component {
             Show job&apos;s details
           </Button>
           <span className="course-desc" style={{ float: 'right', color: 'black' }}>
-            <Image style={{ width: '25px' }} spaced="right" src={profile_business} />
+            <Image style={{ width: '25px' }} spaced="right" src={profileBusiness} />
             { this.props.job.company.name ? `${this.props.job.company.name}` : 'deleted' }
           </span>
         </Card.Content>

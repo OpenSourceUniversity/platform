@@ -23,6 +23,7 @@ export default class SignUp extends React.Component {
     /* eslint-disable global-require */
     const logo = require('../../icons/edu-logo.png');
     /* eslint-enable global-require */
+    /* eslint-disable jsx-a11y/label-has-for */
     return (
       <div>
         <Card.Header>

@@ -1,19 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Container, Header, Divider, Grid, Segment, Input, Accordion, Menu, Icon, Dropdown, Form } from 'semantic-ui-react';
+import { Container, Header, Divider, Grid, Segment, Accordion, Menu, Icon, Form } from 'semantic-ui-react';
 import IndustryFilter from 'components/IndustryFilter';
 import JobItem from 'components/JobItem';
 import { fetchJobs } from './actions';
 import search from '../../util/search/search';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import storeSearchType from '../../util/search/storeSearchType';
-
-const options = [
-  { key: 'one', text: 'One', value: '1' },
-  { key: 'two', text: 'Two', value: '2' },
-  { key: 'three', text: 'Three', value: '3' },
-  { key: 'python', text: 'Python', value: 'Python' },
-];
 
 class JobsPage extends React.Component {
   state = { activeIndex: 0, activeItem: 'trending' }
@@ -73,7 +66,7 @@ class JobsPage extends React.Component {
   }
 
   render() {
-    const { activeIndex, activeItem } = this.state;
+    const { activeIndex } = this.state;
     return (
       <Container>
         <Header>

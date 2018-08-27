@@ -27,6 +27,7 @@ export default class SkillsInput extends Component {
         options: normalizedSkillValue,
       });
     }
+    return null;
   }
 
   handleAddition = (e, { value }) => {

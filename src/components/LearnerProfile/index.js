@@ -8,7 +8,7 @@ import fetchCertificates from '../../util/certificate/fetchCertificates';
 
 const colors = [
   'grey',
-]
+];
 
 class LearnerProfile extends React.Component {
   componentDidMount() {
@@ -69,14 +69,14 @@ class LearnerProfile extends React.Component {
     const email = `mailto:${this.props.profiles.learner_email}`;
     const site = `${this.props.profiles.learner_site}`;
     const phoneNumber = `tel:${this.props.profiles.phone_number}`;
-    
+
 
     return (
       <div>
         <Grid>
           {colors.map(color => (
             <Grid.Row className="profileBackground" color={color} key={color}>
-              <Grid.Column></Grid.Column>
+              <Grid.Column />
             </Grid.Row>
           ))}
         </Grid>
@@ -101,7 +101,7 @@ class LearnerProfile extends React.Component {
                       {this.props.profiles.learner_position ? this.props.profiles.learner_position : '-'}
                     </Header>
                   </Segment>
-                  <Segment padded='very'>
+                  <Segment padded="very">
                     <List>
                       <List.Item icon={{ name: 'users', style: { width: '22px' } }} content={this.props.profiles.learner_specialisation ? this.props.profiles.learner_specialisation : '-'} />
                       <List.Item icon={{ name: 'marker', style: { width: '22px' } }} content={this.props.profiles.learner_country ? this.props.profiles.learner_country : '-'} />
@@ -110,7 +110,7 @@ class LearnerProfile extends React.Component {
                       <List.Item icon={{ name: 'phone', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={phoneNumber}>{this.props.profiles.phone_number ? this.props.profiles.phone_number : '-'}</a>} />
                     </List>
                   </Segment>
-                  <Segment padded='very'>
+                  <Segment padded="very">
                     <Statistic.Group size="tiny" color="orange" horizontal>
                       <Statistic>
                         <Statistic.Value>{this.props.certificates.length}</Statistic.Value>
@@ -122,7 +122,7 @@ class LearnerProfile extends React.Component {
               </Sticky>
             </Grid.Column>
             <Grid.Column mobile={16} tablet={8} computer={11}>
-              <Segment padded='very' size="large">
+              <Segment padded="very" size="large">
                 <Header>
                   Introduction
                 </Header>
@@ -158,7 +158,7 @@ class LearnerProfile extends React.Component {
 
               </Segment>
               <Segment.Group size="large">
-                <Segment padded='very'>
+                <Segment padded="very">
                   <Header>
                     Education
                   </Header>
@@ -171,7 +171,7 @@ class LearnerProfile extends React.Component {
                   }
                   <Divider clearing />
                 </Segment>
-                <Segment padded='very'>
+                <Segment padded="very">
                   <Header>
                     Experience
                   </Header>
@@ -184,7 +184,7 @@ class LearnerProfile extends React.Component {
                   <Divider clearing />
                 </Segment>
               </Segment.Group>
-              <Segment padded='very' size="large">
+              <Segment padded="very" size="large">
                 <Header>
                   Reviews
                 </Header>

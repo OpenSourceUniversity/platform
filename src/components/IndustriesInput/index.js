@@ -36,6 +36,7 @@ export default class IndustriesInput extends React.Component {
         currentValue: industries,
       });
     }
+    return null;
   }
 
   handleChange = (e, { value }) => {

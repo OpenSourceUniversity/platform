@@ -1,6 +1,5 @@
 import Config from '../../config';
 
-const default_filter = 'industries';
 
 export default function fetchIndustries(filterType) {
   return function action(dispatch) {

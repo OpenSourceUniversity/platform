@@ -6,7 +6,7 @@ import CourseItem from '../../components/CourseItem';
 
 const colors = [
   'orange',
-]
+];
 
 /* eslint-disable camelcase */
 class AcademyProfile extends React.Component {
@@ -40,7 +40,7 @@ class AcademyProfile extends React.Component {
         <Grid>
           {colors.map(color => (
             <Grid.Row className="profileBackground" color={color} key={color}>
-              <Grid.Column></Grid.Column>
+              <Grid.Column />
             </Grid.Row>
           ))}
         </Grid>
@@ -73,7 +73,7 @@ class AcademyProfile extends React.Component {
                       href={email}
                     />
                   </Segment>
-                  <Segment padded='very'>
+                  <Segment padded="very">
                     <List>
                       {/* <List.Item icon={{ name: 'users', style: { width: '22px' } }}
                     content={<span>{this.props.profiles.students}</span>} /> */}
@@ -86,7 +86,7 @@ class AcademyProfile extends React.Component {
               </Sticky>
             </Grid.Column>
             <Grid.Column mobile={16} tablet={8} computer={11}>
-              <Segment padded='very' size="large">
+              <Segment padded="very" size="large">
                 <Header>
                   About
                 </Header>
@@ -96,7 +96,7 @@ class AcademyProfile extends React.Component {
                 </div>
                 <Divider clearing />
               </Segment>
-              <Segment padded='very' size="large">
+              <Segment padded="very" size="large">
                 <Header>
                   Courses
                 </Header>

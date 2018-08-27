@@ -77,6 +77,7 @@ export function withdraw(wallet, recipient, amountLong, coin) {
           });
         });
     });
+    return null;
   };
 }
 

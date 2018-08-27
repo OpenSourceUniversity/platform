@@ -1,7 +1,7 @@
-import CryptoJS from 'crypto-js';
+// import CryptoJS from 'crypto-js';
 
 const ethEcies = require('eth-ecies');
-const Wallet = require('ethereumjs-wallet');
+// const Wallet = require('ethereumjs-wallet');
 
 
 // function toWordArray(str){
@@ -48,7 +48,8 @@ const Wallet = require('ethereumjs-wallet');
 //     var end = packet.words.length;
 //
 //     var ciphertext = CryptoJS.lib.WordArray.create(packet.words.slice(start, end));
-//     var parsed_iv = CryptoJS.lib.WordArray.create(packet.words.slice(header.words.length, iv.words.length+1));
+//     var parsed_iv = CryptoJS.lib.WordArray.create(
+// packet.words.slice(header.words.length, iv.words.length+1));
 //     ciphertext = toBase64String(ciphertext);
 //     var decrypted = CryptoJS.AES.decrypt(ciphertext, secret_key, {iv: parsed_iv});
 //

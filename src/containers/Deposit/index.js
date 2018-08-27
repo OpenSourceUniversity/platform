@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import React from 'react';
-import { Segment, Container, Grid, Card, Image, Button, Icon, Header, Divider, Statistic, Responsive, Input, Form, Dropdown, Dimmer, Message } from 'semantic-ui-react';
+import { Segment, Container, Grid, Card, Image, Button, Icon, Header, Divider, Statistic, Input, Form, Dropdown, Dimmer, Message } from 'semantic-ui-react';
 import TransactionHistoryItem from 'components/TransactionHistoryItem';
 import { initWalletUnlocker } from '../../util/auth/walletUnlocker';
 import getBalances from '../../util/web3/getBalances';

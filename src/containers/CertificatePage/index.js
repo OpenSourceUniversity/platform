@@ -144,6 +144,7 @@ class CertificatePage extends React.Component {
     /* eslint-disable global-require */
     const loader = require('../../icons/osu-loader.svg');
     /* eslint-enable global-require */
+    /* eslint-disable jsx-a11y/label-has-for */
     return (
       <div className="certificate">
         <Container>
@@ -181,7 +182,8 @@ class CertificatePage extends React.Component {
                       </p>
                     </Message>
                     <p>
-                    You want to delete youre certificate, named: {this.props.certificate.course_title}.
+                    You want to delete youre certificate,&nbsp;
+                    named: {this.props.certificate.course_title}.
                     </p>
                     <p>
                     Please, confirm this action.

@@ -36,5 +36,6 @@ export default function search(query) {
     default:
       return null;
     }
+    return null;
   };
 }

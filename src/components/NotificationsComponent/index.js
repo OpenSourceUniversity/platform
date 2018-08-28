@@ -12,11 +12,15 @@ class NotificationItem extends Dropdown.Item {
   notificationClick = (event, component) => {
     event.preventDefault();
     event.stopPropagation();
-    store.dispatch(toggleNotificationUnread(component.props.notification.id, (error, response) => {
-      if (!error) {
-        this.props.notification.unread = response.data.new_unread;
-      }
-    }));
+    const isLink = !!event.nativeEvent.target.href;
+    if ((isLink && this.props.notification.unread) || !isLink) {
+      const { id } = component.props.notification;
+      store.dispatch(toggleNotificationUnread(id, (error, response) => {
+        if (!error) {
+          this.props.notification.unread = response.data.new_unread;
+        }
+      }));
+    }
   }
 
   render() {

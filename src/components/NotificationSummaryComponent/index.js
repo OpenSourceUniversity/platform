@@ -4,8 +4,7 @@ import { getProfileTypeName } from '../../util/activeAccount';
 
 
 class NotificationSummaryComponent extends React.Component {
-  actionObject() {
-    const { notification } = this.props;
+  actionObject(notification) {
     const actionObjectName = notification.action_object_content_type_name;
     function getActionObjectLink() {
       switch (actionObjectName) {
@@ -32,11 +31,38 @@ class NotificationSummaryComponent extends React.Component {
     return null;
   }
 
+  target(notification) {
+    const targetName = notification.target_content_type_name;
+    function getTargetLink() {
+      switch (targetName) {
+      case 'certificate':
+        return `/certificate/${notification.target_object_id}/`;
+      default:
+        return null;
+      }
+    }
+    if (targetName) {
+      const targetUrl = getTargetLink();
+      if (!targetUrl) {
+        return (<span>{targetName}</span>);
+      }
+      return (
+        <Link
+          href={targetUrl}
+          to={targetUrl}
+        >
+          {targetName}
+        </Link>
+      );
+    }
+    return null;
+  }
+
   render() {
     const { notification } = this.props;
-    const target = notification.target_content_type_name;
+    const target = this.target(notification);
     const actorName = notification.actor_name;
-    const actionObject = this.actionObject();
+    const actionObject = this.actionObject(notification);
     const { verb } = notification;
     const actorType = getProfileTypeName(notification.actor_active_profile_type).toLowerCase();
     const actorUsername = notification.actor_username;

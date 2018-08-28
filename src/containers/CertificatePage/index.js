@@ -200,53 +200,56 @@ class CertificatePage extends React.Component {
                 </Modal> :
                 null
               }
-              <Modal trigger={
-                <Button icon labelPosition="left" positive floated="right">
-                  <Icon name="checkmark" />
-                  Verifiy Certificate
-                </Button>
+              {this.props.address.toLowerCase() === this.props.certificate.learner_eth_address ?
+                <Modal trigger={
+                  <Button icon labelPosition="left" positive floated="right">
+                    <Icon name="checkmark" />
+                    Verifiy Certificate
+                  </Button>
+                }
+                >
+                  <Modal.Header>Verification Request</Modal.Header>
+                  <Modal.Content>
+                    <Dimmer active={this.props.requestSending} page>
+                      <Loader size="medium">
+                        <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
+                          <image href={loader} x="0" y="0" width="100%" height="100%" />
+                        </svg>
+                      </Loader>
+                    </Dimmer>
+                    <Message error hidden={!this.props.requestError}>
+                      <p>
+                        {this.props.requestError}
+                      </p>
+                    </Message>
+                    <Message positive hidden={!this.props.requestSuccess}>
+                      <p>
+                        Success message.
+                      </p>
+                    </Message>
+                    <Form size="large" onSubmit={(event) => { this.handleSubmit(event, this); }}>
+                      <Form.Field required>
+                        <label htmlFor="verifier_eth_address">
+                          Please, enter instance ETH address
+                        </label>
+                        <Input
+                          id="verifier_eth_address"
+                          name="verifier_eth_address"
+                          iconPosition="left"
+                          icon="file"
+                          placeholder="ETH address"
+                        />
+                      </Form.Field>
+                      <Form.Field id="verifierType" name="verifierType" label="Type of verifier" control="select">
+                        <option value={2}>Academy</option>
+                        <option value={3}>Business</option>
+                      </Form.Field>
+                      <Button type="submit" primary size="huge">Submit</Button>
+                    </Form>
+                  </Modal.Content>
+                </Modal> :
+                null
               }
-              >
-                <Modal.Header>Verification Request</Modal.Header>
-                <Modal.Content>
-                  <Dimmer active={this.props.requestSending} page>
-                    <Loader size="medium">
-                      <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
-                        <image href={loader} x="0" y="0" width="100%" height="100%" />
-                      </svg>
-                    </Loader>
-                  </Dimmer>
-                  <Message error hidden={!this.props.requestError}>
-                    <p>
-                      {this.props.requestError}
-                    </p>
-                  </Message>
-                  <Message positive hidden={!this.props.requestSuccess}>
-                    <p>
-                      Success message.
-                    </p>
-                  </Message>
-                  <Form size="large" onSubmit={(event) => { this.handleSubmit(event, this); }}>
-                    <Form.Field required>
-                      <label htmlFor="verifier_eth_address">
-                        Please, enter instance ETH address
-                      </label>
-                      <Input
-                        id="verifier_eth_address"
-                        name="verifier_eth_address"
-                        iconPosition="left"
-                        icon="file"
-                        placeholder="ETH address"
-                      />
-                    </Form.Field>
-                    <Form.Field id="verifierType" name="verifierType" label="Type of verifier" control="select">
-                      <option value={2}>Academy</option>
-                      <option value={3}>Business</option>
-                    </Form.Field>
-                    <Button type="submit" primary size="huge">Submit</Button>
-                  </Form>
-                </Modal.Content>
-              </Modal>
               <Divider hidden />
               <Header style={{ fontSize: '1.7em' }}>
                 Certificate Information
@@ -326,7 +329,7 @@ class CertificatePage extends React.Component {
                     Status: {capitalizeFirstLetter(status)}<br />
                       {this.props.certificate.verifications.length > 0 ?
                         <Modal trigger={
-                          <Button positive >
+                          <Button positive color={color}>
                             <Icon name="checkmark" />
                             Verification History
                           </Button>

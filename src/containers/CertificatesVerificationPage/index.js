@@ -104,7 +104,7 @@ class CertificatesVerificationPage extends React.Component {
             return { color: 'blue' };
           } else if (verification.state === 'verified') {
             return { color: 'green' };
-          } else if (verification.state === 'rejected') {
+          } else if (verification.state === 'rejected' || verification.state === 'revoked') {
             return { color: 'red' };
           }
           return { color: 'orange' };
@@ -187,7 +187,7 @@ class CertificatesVerificationPage extends React.Component {
                 return { borderColor: 'blue' };
               } else if (this.props.verification.state === 'verified') {
                 return { borderColor: 'green' };
-              } else if (this.props.verification.state === 'rejected') {
+              } else if (this.props.verification.state === 'rejected' || this.props.verification.state === 'revoked') {
                 return { borderColor: 'red' };
               }
               return { borderColor: 'orange' };

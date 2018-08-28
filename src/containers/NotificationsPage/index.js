@@ -10,11 +10,15 @@ import fetchNotifications from '../../util/notification/fetchNotifications';
 class NotificationItem extends Card {
   notificationClick = (event, component) => {
     event.preventDefault();
-    store.dispatch(toggleNotificationUnread(component.props.notification.id, (error, response) => {
-      if (!error) {
-        this.props.notification.unread = response.data.new_unread;
-      }
-    }));
+    const isLink = !!event.nativeEvent.target.href;
+    if ((isLink && this.props.notification.unread) || !isLink) {
+      const { id } = component.props.notification;
+      store.dispatch(toggleNotificationUnread(id, (error, response) => {
+        if (!error) {
+          this.props.notification.unread = response.data.new_unread;
+        }
+      }));
+    }
   }
   render() {
     const { notification } = this.props;

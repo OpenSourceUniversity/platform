@@ -74,7 +74,7 @@ class NotificationSummaryComponent extends React.Component {
       if (actionObject) {
         summary = (<span>{actor} {verb} {actionObject} on {target}</span>);
       } else {
-        summary = (<span>{actor} {verb} {target}</span>);
+        summary = (<span>{actor} {verb} your {target}</span>);
       }
     } else if (actionObject) {
       summary = (<span>{actor} {verb} {actionObject}</span>);

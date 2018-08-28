@@ -543,3 +543,23 @@ input[type="file"] {
   position: relative;
   top: -190px;
 }
+
+.ui.cards>.red.card, .ui.red.card, .ui.red.cards>.card {
+  box-shadow: 0 0 0 1px #d4d4d5, 0 -3px 0 0 #db2828, 0 1px 3px 0 #d4d4d5;
+  -webkit-box-shadow: 0 0 0 1px #d4d4d5, 0 -3px 0 0 #db2828, 0 1px 3px 0 #d4d4d5;
+}
+
+.ui.cards>.green.card, .ui.green.card, .ui.green.cards>.card {
+  -webkit-box-shadow: 0 0 0 1px #d4d4d5, 0 -3px 0 0 #2ecc71, 0 1px 3px 0 #d4d4d5;
+  box-shadow: 0 0 0 1px #d4d4d5, 0 -3px 0 0 #2ecc71, 0 1px 3px 0 #d4d4d5;
+}
+
+.ui.blue.card, .ui.blue.cards>.card, .ui.cards>.blue.card {
+  -webkit-box-shadow: 0 0 0 1px #d4d4d5, 0 -3px 0 0 #2185d0, 0 1px 3px 0 #d4d4d5;
+  box-shadow: 0 0 0 1px #d4d4d5, 0 -3px 0 0 #2185d0, 0 1px 3px 0 #d4d4d5;
+}
+
+.ui.cards>.orange.card, .ui.orange.card, .ui.orange.cards>.card {
+  -webkit-box-shadow: 0 0 0 1px #d4d4d5, 0 -3px 0 0 #f2711c, 0 1px 3px 0 #d4d4d5;
+  box-shadow: 0 0 0 1px #d4d4d5, 0 -3px 0 0 #f2711c, 0 1px 3px 0 #d4d4d5;
+}

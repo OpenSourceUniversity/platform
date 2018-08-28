@@ -31,19 +31,23 @@ export default class SkillsInput extends Component {
   }
 
   handleAddition = (e, { value }) => {
-    this.setState({
-      currentValue: arrayUnique(this.state.currentValue.concat(value)),
-    });
+    if (this.state.currentValue.length < 5) {
+      this.setState({
+        currentValue: arrayUnique(this.state.currentValue.concat(value)),
+      });
+    }
   }
 
   handleChange = (event, { value }) => {
     const normalizedCurrentValue = value.map(v => (
       { value: v, text: v }
     ));
-    this.setState({
-      currentValue: value,
-      options: normalizedCurrentValue,
-    });
+    if (value.length <= 5) {
+      this.setState({
+        currentValue: value,
+        options: normalizedCurrentValue,
+      });
+    }
     this.setState({ searchValue: '' });
   }
 
@@ -74,7 +78,7 @@ export default class SkillsInput extends Component {
       <Form.Dropdown
         options={this.state.options}
         placeholder="Choose skills"
-        label="Skills"
+        label="Skills (max. 5)"
         search
         searchQuery={this.state.searchValue}
         selection

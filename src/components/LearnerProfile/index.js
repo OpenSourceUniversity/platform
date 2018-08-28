@@ -178,14 +178,14 @@ class LearnerProfile extends React.Component {
                   <Header>
                     Education
                   </Header>
+                  <Divider clearing />
                   {
                     this.props.certificates.length ?
                       this.renderSkills() :
                       <div style={{ textAlign: 'center', width: '100%' }}>
-                        <p style={{ textAlign: 'center' }}>There are no any skills yet.</p>
+                        <p style={{ textAlign: 'center' }}>There is no any skill yet.</p>
                       </div>
                   }
-                  <Divider clearing />
                 </Segment>
                 <Segment padded="very">
                   <Header>

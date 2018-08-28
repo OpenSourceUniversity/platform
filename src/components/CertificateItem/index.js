@@ -17,7 +17,7 @@ class CertificateItemWithoutRouter extends React.Component {
       return 'expired';
     }
     if (this.props.certificate.verifications.length === 0) {
-      return 'not verified';
+      return 'self-Validated';
     }
     for (let i = 0; i < this.props.certificate.verifications.length; i += 1) {
       if (this.props.certificate.verifications[i][this.props.certificate.verifications[i].length - 1].state === 'verified') {
@@ -29,6 +29,7 @@ class CertificateItemWithoutRouter extends React.Component {
 
   render() {
     const status = this.renderStatus();
+    const { industries } = this.props.certificate;
     function getColor() {
       switch (status) {
       case 'verified':
@@ -38,22 +39,26 @@ class CertificateItemWithoutRouter extends React.Component {
       case 'expired':
         return 'blue';
       default:
-        return 'yellow';
+        return 'orange';
       }
+    }
+    function getIndustriesString() {
+      let industriesStr = '';
+      for (let i = 0; i < industries.length; i += 1) {
+        industriesStr += `${industries[i].name}, `;
+      }
+      return industriesStr.slice(0, industriesStr.length - 2);
     }
     const color = getColor();
     return (
       <Card color={color} onClick={() => { this.props.history.push(`/certificate/${this.props.certificate.id}/`); }}>
         <Card.Content>
           <Card.Header>{this.props.certificate.course_title}</Card.Header>
+          <Card.Meta>{ getIndustriesString() }</Card.Meta>
         </Card.Content>
         <Card.Content extra>
           <Icon name={status === 'verified' ? 'check' : 'warning sign'} color={color} />
           { capitalizeFirstLetter(status) }
-        </Card.Content>
-        <Card.Content extra>
-          <Icon name="graduation" color={color} />
-          Score: { this.props.certificate.score }
         </Card.Content>
       </Card>
     );

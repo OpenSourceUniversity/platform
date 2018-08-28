@@ -40,9 +40,11 @@ export default class IndustriesInput extends React.Component {
   }
 
   handleChange = (e, { value }) => {
-    this.setState({
-      currentValue: value,
-    });
+    if (value.length <= 3) {
+      this.setState({
+        currentValue: value,
+      });
+    }
   }
 
   render() {
@@ -53,7 +55,7 @@ export default class IndustriesInput extends React.Component {
         options={this.state.options}
         value={currentValue}
         placeholder="Choose industries"
-        label="Industries"
+        label="Industries (max. 3)"
         fluid
         search
         selection

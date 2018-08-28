@@ -81,7 +81,7 @@ class CertificatePage extends React.Component {
       return 'expired';
     }
     if (this.props.certificate.verifications.length === 0) {
-      return 'not verified';
+      return 'self-Validated';
     }
     for (let i = 0; i < this.props.certificate.verifications.length; i += 1) {
       if (this.props.certificate.verifications[i][this.props.certificate.verifications[i].length - 1].state === 'verified') {

@@ -4,6 +4,8 @@ import { withRouter } from 'react-router-dom';
 import { Card, Grid, Button, Input } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import storeV3Wallet from '../../util/auth/storeV3Wallet';
+import store from '../../store';
+import signUpStep from '../../util/auth/signUpStep';
 
 class WalletCreatedWithoutRouter extends React.Component {
   static propTypes = {
@@ -42,6 +44,12 @@ class WalletCreatedWithoutRouter extends React.Component {
       v3Wallet, wallet.getChecksumAddressString(),
       wallet.getPublicKey(), wallet.getPrivateKey(),
     );
+    const { email } = this.props;
+    const data = {
+      email,
+      step: 5,
+    };
+    store.dispatch(signUpStep(data));
     this.address = wallet.getChecksumAddressString();
   }
 

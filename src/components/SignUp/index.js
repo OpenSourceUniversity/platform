@@ -1,5 +1,7 @@
 import React from 'react';
 import { Card, Form, Input, Grid, Button } from 'semantic-ui-react';
+import store from '../../store';
+import signUpStep from '../../util/auth/signUpStep';
 
 export default class SignUp extends React.Component {
   state = {
@@ -16,6 +18,12 @@ export default class SignUp extends React.Component {
       return;
     }
     component.props.setPassphrase(passphrase);
+    const { email } = component.props;
+    const data = {
+      email,
+      step: 2,
+    };
+    store.dispatch(signUpStep(data));
     component.props.handleItemClick(event, event.target.elements.recoveryPhraseSeed);
   }
 

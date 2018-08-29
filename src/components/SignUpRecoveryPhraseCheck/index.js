@@ -1,5 +1,7 @@
 import React from 'react';
 import { Card, Grid, Button } from 'semantic-ui-react';
+import store from '../../store';
+import signUpStep from '../../util/auth/signUpStep';
 
 export default class SignUpRecoveryPhraseCheck extends React.Component {
   state = { equalPhrases: false, errorMessage: null }
@@ -57,6 +59,16 @@ export default class SignUpRecoveryPhraseCheck extends React.Component {
     }
   }
 
+  createdHandleClick = (event) => {
+    const { email } = this.props;
+    const data = {
+      email,
+      step: 4,
+    };
+    store.dispatch(signUpStep(data));
+    this.props.handleItemClick(event, event.target);
+  }
+
   renderClickedButtons(choosed) {
     return choosed.map((phrase, index) => (
       <Button primary id={this.clicked[index]} name={phrase} style={{ textTransform: 'uppercase', marginTop: `${5}px` }} onClick={this.phraseButtonClick} key={index} > {phrase}</Button>
@@ -107,7 +119,7 @@ export default class SignUpRecoveryPhraseCheck extends React.Component {
         </span>
         <Card.Content>
           <Button style={{ float: 'left' }} className="button" name="recoveryPhraseSeed" onClick={this.props.handleItemClick} >BACK</Button>
-          <Button style={{ float: 'right' }} className="button" disabled={!this.state.equalPhrases} name="created" onClick={this.props.handleItemClick} >CONTINUE</Button>
+          <Button style={{ float: 'right' }} className="button" disabled={!this.state.equalPhrases} name="created" onClick={this.createdHandleClick} >CONTINUE</Button>
         </Card.Content>
       </div>
     );

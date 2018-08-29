@@ -28,7 +28,31 @@ class CertificateItemWithoutRouter extends React.Component {
   }
 
   render() {
+    /* eslint-disable global-require */
+    const verified = require('../../icons/verified.svg');
+    const revoked = require('../../icons/revoked.svg');
+    const expired = require('../../icons/expired.svg');
+    const validated = require('../../icons/validated.svg');
+    /* eslint-enable global-require */
     const status = this.renderStatus();
+    const certificateStatusIcon = (
+      <svg width="32" height="32" style={{ marginBottom: '-12px' }}>
+        <image
+          href={(() => {
+            switch (status) {
+            case 'verified': return verified;
+            case 'revoked': return revoked;
+            case 'expired': return expired;
+            default: return validated;
+            }
+          })()}
+          x="0"
+          y="0"
+          width="100%"
+          height="100%"
+        />
+      </svg>
+    );
     const { industries } = this.props.certificate;
     function getColor() {
       switch (status) {
@@ -57,8 +81,8 @@ class CertificateItemWithoutRouter extends React.Component {
           <Card.Meta>{ getIndustriesString() }</Card.Meta>
         </Card.Content>
         <Card.Content extra>
-          <Icon name={status === 'verified' ? 'check' : 'warning sign'} color={color} />
-          { capitalizeFirstLetter(status) }
+          { certificateStatusIcon }
+          <b style={{ color }}>{ capitalizeFirstLetter(status) }</b>
         </Card.Content>
       </Card>
     );

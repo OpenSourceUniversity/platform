@@ -63,7 +63,7 @@ class SignInWithoutRouter extends React.Component {
           </Form>
           <Button fluid name="recovery" className="recovery-link" onClick={this.props.handleItemClick}>Wallet Recovery </Button> <br />
           <span> Don&apos;t have a wallet? </span>
-          <Button className="button" style={{ float: 'right' }} name="signup" onClick={this.props.handleItemClick} >NEW WALLET</Button>
+          <Button className="button" style={{ float: 'right' }} name="presignup" onClick={this.props.handleItemClick} >NEW WALLET</Button>
         </Card.Content>
       </div>
     );

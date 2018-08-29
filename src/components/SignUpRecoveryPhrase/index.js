@@ -1,6 +1,8 @@
 import React from 'react';
 import bip39 from 'bip39';
 import { Card, Grid, Button, Icon, Label } from 'semantic-ui-react';
+import store from '../../store';
+import signUpStep from '../../util/auth/signUpStep';
 
 export default class SignUpRecoveryPhrase extends React.Component {
   constructor(props) {
@@ -23,6 +25,16 @@ export default class SignUpRecoveryPhrase extends React.Component {
 
   mnemonicPhrase() {
     return this.props.mnemonicPhrase;
+  }
+
+  recoveryPhraseCheckClick = (event) => {
+    const { email } = this.props;
+    const data = {
+      email,
+      step: 3,
+    };
+    store.dispatch(signUpStep(data));
+    this.props.handleItemClick(event, event.target);
   }
 
   render() {
@@ -66,7 +78,7 @@ export default class SignUpRecoveryPhrase extends React.Component {
         </Card.Content>
         <Card.Content>
           <Button style={{ float: 'left' }} onClick={this.downloadSeedAsTxtFile} className="button" name="download" >DOWNLOAD SEED PHRASE</Button>
-          <Button style={{ float: 'right' }} className="button" name="recoveryPhraseCheck" onClick={this.props.handleItemClick} >CONTINUE</Button>
+          <Button style={{ float: 'right' }} className="button" name="recoveryPhraseCheck" onClick={this.recoveryPhraseCheckClick} >CONTINUE</Button>
         </Card.Content>
       </div>
     );

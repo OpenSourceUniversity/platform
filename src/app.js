@@ -6,6 +6,7 @@ import React from 'react';
 import getDefaultValues from './util/profiles/getDefaultValues';
 import getIpfs from './util/ipfs/getIpfs';
 import notificationsConnection from './util/notification/notificationsConnection';
+import messagesConnection from './util/messaging/messagesConnection';
 import store from './store';
 import './util/web3/getWeb3';
 
@@ -18,6 +19,7 @@ class App extends React.Component {
     store.dispatch(getIpfs());
     if (this.props.isLoggedIn) {
       store.dispatch(notificationsConnection());
+      store.dispatch(messagesConnection());
       this.props.getDefaultValues();
     }
   }

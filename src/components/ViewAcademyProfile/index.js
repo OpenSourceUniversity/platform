@@ -5,6 +5,7 @@ import { Header, Divider, Grid, Sticky, Segment, List, Button, Dimmer, Loader, M
 import { fetchDepartmentCourses } from './actions';
 import CourseItem from '../../components/CourseItem';
 import getProfileView from '../../util/profiles/getProfileView';
+import openThread from '../../util/messaging/openThread';
 
 /* eslint-disable camelcase */
 class ViewAcademyProfile extends React.Component {
@@ -14,6 +15,13 @@ class ViewAcademyProfile extends React.Component {
   }
 
   handleBack = () => this.props.history.push('/academies');
+
+  openMessaging = (e, { name }) => {
+    const threadData = {
+      opponent_eth_address: name,
+    };
+    this.props.openThread(threadData);
+  }
 
   renderCourses() {
     return (
@@ -84,13 +92,13 @@ class ViewAcademyProfile extends React.Component {
                 </Segment>
                 <Segment>
                   <Button
-                    as="a"
                     primary
                     size="large"
                     className="fluid"
                     content="MESSAGE US"
+                    name={this.props.eth_address.toLowerCase()}
                     icon="mail outline"
-                    href={email}
+                    onClick={this.openMessaging}
                   />
                 </Segment>
                 <Segment>
@@ -152,6 +160,9 @@ function mapDispatchToProps(dispatch) {
     },
     fetchDepartmentCourses(eth_address) {
       dispatch(fetchDepartmentCourses(eth_address));
+    },
+    openThread(threadData) {
+      dispatch(openThread(threadData));
     },
   };
 }

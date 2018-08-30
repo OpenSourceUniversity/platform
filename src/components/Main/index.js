@@ -9,6 +9,7 @@ import AddCourse from 'containers/AddCourse';
 import CoursesPage from 'containers/CoursesPage';
 import JobsPage from 'containers/JobsPage';
 import ProfilePage from 'containers/ProfilePage';
+import SocialNetworkPage from 'containers/SocialNetworkPage';
 import ViewProfile from 'containers/ViewProfile';
 import AccountSettings from 'containers/AccountSettings';
 import OnBoarding from 'containers/OnBoarding';
@@ -103,6 +104,7 @@ class Main extends React.Component {
         <Route path="/onboarding" component={OnBoarding} />
         <PrivateRoute {...this.props} path="/inbox" component={Inbox} />
         <PrivateRoute {...this.props} path="/network" component={Network} />
+        <PrivateRoute {...this.props} path="/social-network" component={SocialNetworkPage} />
         <PrivateRoute {...this.props} path="/deposit" component={Deposit} />
         <PrivateRoute {...this.props} path="/course-page/:id/" component={CoursePage} />
         <PrivateRoute {...this.props} path="/program-page" component={StudentProgramPage} />

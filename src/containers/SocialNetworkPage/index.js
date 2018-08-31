@@ -6,12 +6,12 @@ import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 
 class SocialNetworkPage extends React.Component {
   componentDidMount() {
+    document.title = 'Social Network';
     switch (this.props.activeAccount) {
     case 'Academy': return this.props.setSecondaryNav('academia');
     case 'Business': return this.props.setSecondaryNav('business');
     default: return this.props.setSecondaryNav('learner');
     }
-    document.title = 'Social Network';
   }
 
   render() {

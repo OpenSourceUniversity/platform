@@ -1,17 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 import { withRouter } from 'react-router-dom';
-import { Segment, Container, Grid, Card, Image, Button, Icon, Header, Divider, Statistic, Responsive, Input, Form, Dropdown, Dimmer, Message, List } from 'semantic-ui-react';
+import { Segment, Container, Grid, Card, Image, Button, Icon, Header, Divider, Statistic, List } from 'semantic-ui-react';
 
 
 class SocialNetworkWithoutRouter extends React.Component {
-  state = { buffer: null }
-
-  static propTypes = {
-    history: PropTypes.object.isRequired,
-  }
-
   constructor() {
     super();
     this.state = {
@@ -20,8 +13,12 @@ class SocialNetworkWithoutRouter extends React.Component {
     };
   }
 
+  /* eslint-disable */
+  state = { buffer: null }
+  /* eslint-enable */
+
   onDrop() {
-    if (this.state.accepted.length > 0 && this.state.rejected.length == 0) {
+    if (this.state.accepted.length > 0 && this.state.rejected.length === 0) {
       const file = this.state.accepted[0];
       const reader = new window.FileReader();
       reader.readAsArrayBuffer(file);
@@ -31,7 +28,9 @@ class SocialNetworkWithoutRouter extends React.Component {
 
   convertToBuffer = (reader) => {
     const buffer = Buffer.from(reader.result);
+    /* eslint-disable */
     this.setState({ buffer });
+    /* eslint-enable */
   }
 
   renderRating(ratingNumb) {
@@ -43,14 +42,14 @@ class SocialNetworkWithoutRouter extends React.Component {
 
 
   render() {
-    /* eslint-disable global-require */
+    /* eslint-disable */
     const profile = require('../../icons/account_profile.svg');
     const avatarPlaceholder = require('../../icons/avatar_placeholder.svg');
     const settings = require('../../icons/account_deposit.svg');
     const introduction = 'You can upgrade your profile and get numerus opportunities for professional career. \
                           Boost your skills and professional experience by uploading your LinkedIn data (->Video Tutorial). \
                           Each time someone in your network join the platform YOU will get EDU tokens except Free PRO account containing all the functionality you need.';
-    /* eslint-enable global-require */
+    /* eslint-enable */
 
     return (
       <Container>
@@ -80,20 +79,27 @@ class SocialNetworkWithoutRouter extends React.Component {
                     <List as="ol">
                       <List.Item as="li">Visit the LinkedIn Download Your Data page</List.Item>
                       <Divider hidden />
-                      <List.Item as="li">Select the following files from "Pick and Choose":</List.Item>
+                      <List.Item as="li">Select the following files from &quot;Pick and Choose&quot;:</List.Item>
                       <Divider hidden />
-                      <List.Item as="li">Click "Request Download" button. Wait for the downloaded file to appear in your email.</List.Item>
+                      <List.Item as="li">Click &quot;Request Download&quot; button. Wait for the downloaded file to appear in your email.</List.Item>
                       <Divider hidden />
                       <List.Item as="li">Locate your ZIP file in the lower left of your screen (or your Download folder). Drag your ZIP file into our form and click the orange button.</List.Item>
                     </List>
                     <Divider hidden />
                     <b>Thank you for your time and support!</b><br />
-                    <i>Your account will be promoted to PRO version for /.../ period and you ll receive .. EDU for every new member onboarded on the platform from your uploaded LinkedIn contacts.</i>
+                    <i>
+                      Your account will be promoted to PRO version for /.../
+                      period and you ll receive .. EDU for every new member onboarded
+                      on the platform from your uploaded LinkedIn contacts.
+                    </i>
                   </Card.Description>
                 </Card.Content>
                 <Card.Content extra>
                   <Image centered size="tiny" src={avatarPlaceholder} />
-                  <Card.Meta>"This is the best platform for skill verification and job opportunities I've ever met :)"</Card.Meta>
+                  <Card.Meta>
+                    &quot;This is the best platform for skill verification and
+                    job opportunities I&apos;ve ever met :)&quot;
+                  </Card.Meta>
                   <Divider hidden />
                 </Card.Content>
               </Card>
@@ -103,15 +109,18 @@ class SocialNetworkWithoutRouter extends React.Component {
               <Segment>
                 <Dropzone
                   accept="application/zip"
-                  onDrop={(accepted, rejected) => { this.setState({ accepted, rejected }); this.onDrop(); }}
+                  onDrop={
+                    (accepted, rejected) => {
+                      this.setState({ accepted, rejected }); this.onDrop();
+                    }
+                  }
                 >
                   <i>Drop your ZIP file here</i>
                 </Dropzone>
                 <Statistic size="mini" color="orange">
                   <Button
                     basic
-                    color={(!this.state.rejected.length && !this.state.accepted.length) ? 'orange' : ((this.state.rejected.length == 0 && this.state.accepted.length > 0) ? 'green' : 'red')}
-                    onClick={this.showPrivateKey}
+                    color="green"
                   >
                     <Icon name="users" />
                     <emp>Invite</emp>

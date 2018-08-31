@@ -8,7 +8,6 @@ before_script:
 
 stages:
   - lint
-  - test_solidity
 
 run_js_linter:
   stage: lint
@@ -16,7 +15,3 @@ run_js_linter:
     - truffle compile
     - npm run lint
 
-run_solidity_tests:
-  stage: test_solidity
-  script:
-    - echo "TODO - Execute Solidity Tests"

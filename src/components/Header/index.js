@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Container, Menu, Dropdown, Grid, Image, Icon, List, Button, Step } from 'semantic-ui-react';
+import { Container, Menu, Dropdown, Grid, Image, Icon, List, Button, Step, Label } from 'semantic-ui-react';
 import HeaderSearchComponent from '../HeaderSearchComponent';
 import NotificationsComponent from '../NotificationsComponent';
 import logout from '../../util/auth/logout';
@@ -269,7 +269,6 @@ class HeaderWithoutRouter extends React.Component {
         key: 'interships', content: 'Interships', name: 'interships', active: false, className: 'secondary-nav-disabled-beta',
       },
     ];
-
     return (
       <Menu size="massive" fixed="top">
         <Container fluid>
@@ -311,10 +310,13 @@ class HeaderWithoutRouter extends React.Component {
                       <image href={network} x="0" y="0" width="100%" height="100%" />
                     </svg>
                   </Menu.Item>
-                  <Menu.Item disabled style={{ cursor: 'pointer!important' }} className="nav-disabled-beta" name="inbox" onClick={this.handleItemClick}>
-                    <svg width="20" height="20" className="inbox" style={{ opacity: 0.5, cursor: 'pointer' }} >
+                  <Menu.Item name="messaging" onClick={this.handleItemClick}>
+                    <svg width="20" height="20" className="inbox" >
                       <image href={messages} x="0" y="0" width="100%" height="100%" />
                     </svg>
+                    <Label style={{ top: 18, left: 40, display: this.props.unreadAllMessagesCount === 0 ? 'none' : 'block' }} color="red" size="mini" floating>
+                      { this.props.unreadAllMessagesCount }
+                    </Label>
                   </Menu.Item>
                   <Menu.Item style={{ cursor: 'pointer!important' }}>
                     <NotificationsComponent />
@@ -431,6 +433,7 @@ function mapStateToProps(state) {
     profiles: state.profiles.profiles,
     onBoardingActiveElement: state.auth.onBoardingActiveElement,
     activeAccount: state.activeAccount.activeAccount,
+    unreadAllMessagesCount: state.messaging.unreadAllMessagesCount,
   };
 }
 

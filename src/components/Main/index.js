@@ -93,6 +93,8 @@ class Main extends React.Component {
         <PrivateRoute {...this.props} exact path="/academies/edit/:id/" component={AddCourse} />
         <PrivateRoute {...this.props} exact path="/verifications/" component={CertificatesVerificationPage} />
         <PrivateRoute {...this.props} exact path="/verifications/:id/" component={CertificatesVerificationPage} />
+        <PrivateRoute {...this.props} exact path="/messaging" component={MessagingPage} />
+        <PrivateRoute {...this.props} exact path="/messaging/:id/" component={MessagingPage} />
         <PrivateRoute {...this.props} path="/courses" component={CoursesPage} />
         <PrivateRoute {...this.props} path="/academies" component={AcademiesPage} />
         <PrivateRoute {...this.props} path="/businesses" component={BusinessesPage} />
@@ -112,8 +114,6 @@ class Main extends React.Component {
         <PrivateRouteCreateProfile isLoggedIn={this.props.isLoggedIn} path="/create-profile" component={CreateProfile} />
         <PrivateRoute {...this.props} path="/job-page/:id/" component={JobPage} />
         <PrivateRoute {...this.props} path="/notifications" component={NotificationsPage} />
-        <PrivateRoute {...this.props} path="/messaging" component={MessagingPage} />
-        <PrivateRoute {...this.props} path="/messaging/:id/" component={MessagingPage} />
       </Switch>
     );
   }

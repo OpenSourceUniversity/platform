@@ -2,6 +2,7 @@ import storeSignedAddress from './storeSignedAddress';
 import getDefaultValues from '../profiles/getDefaultValues';
 import { getActiveAccount } from '../activeAccount';
 import notificationsConnection from '../notification/notificationsConnection';
+import messagesConnection from '../messaging/messagesConnection';
 
 export default function storeV3Wallet(v3Wallet, checksumAddress, publicKey, privateKey) {
   return function action(dispatch) {
@@ -19,5 +20,6 @@ export default function storeV3Wallet(v3Wallet, checksumAddress, publicKey, priv
     dispatch(getActiveAccount());
     dispatch(getDefaultValues());
     dispatch(notificationsConnection());
+    dispatch(messagesConnection());
   };
 }

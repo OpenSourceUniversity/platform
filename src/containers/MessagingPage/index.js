@@ -1,33 +1,61 @@
 import React from 'react';
-import { Dimmer, Header, Container, Image, Loader, Form, Segment, Menu, Grid } from 'semantic-ui-react';
+import { Dimmer, Header, Container, Image, Loader, Form, Segment, Menu, Grid, Button, Icon, Label } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import store from '../../store';
 import Message from '../../components/Message';
 import fetchThreads from '../../util/messaging/fetchThreads';
 import fetchMessages from '../../util/messaging/fetchMessages';
 import sendMessage from '../../util/messaging/sendMessage';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
+import resetMessages from './actions';
 
 
 class MessagesPage extends React.Component {
-  state = { activeThread: null, opponent: null }
+  state = { activeThread: null }
+
   componentDidMount() {
-    this.props.fetchThreads();
     if (this.props.match.params.id) {
       const activeThreadId = this.props.match.params.id;
       this.state.activeThread = activeThreadId;
-      this.props.fetchMessages(activeThreadId);
+      this.props.fetchMessages(this.props.match.params.id, null);
     }
+    this.props.fetchThreads();
     this.props.setSecondaryNav(null);
     document.title = 'Messaging';
   }
 
-  showThread(activeThreadID, opponent) {
+  getOpponentInfo(opponentInstance) {
+    switch (opponentInstance.active_profile_type) {
+    case 1:
+      return { name: `${opponentInstance.first_name} ${opponentInstance.last_name}`, avatar: opponentInstance.learner_avatar };
+    case 2:
+      return { name: opponentInstance.academy_name, avatar: opponentInstance.academy_logo };
+    case 3:
+      return { name: opponentInstance.company_name, avatar: opponentInstance.company_logo };
+    default:
+      return null;
+    }
+  }
+
+  getOpponent() {
+    let opponentInstance = null;
+    if (this.props.threadsById[this.state.activeThread]) {
+      const activeThreadObj = this.props.threadsById[this.state.activeThread];
+      opponentInstance = activeThreadObj.owner_profile.user.username === this.props.address.toLowerCase() ?
+        activeThreadObj.opponent_profile :
+        activeThreadObj.owner_profile;
+      return this.getOpponentInfo(opponentInstance);
+    }
+    return null;
+  }
+
+  avatarPlaceholder = 'data:image/jpeg;base64,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';
+
+  showThread(activeThreadID) {
     this.setState({ activeThread: activeThreadID });
-    this.setState({ opponent });
     this.props.history.push(`/messaging/${activeThreadID}/`);
-    this.props.fetchMessages(activeThreadID);
+    this.props.resetMessages();
+    this.props.fetchMessages(activeThreadID, null);
   }
 
   sendMessage = (event) => {
@@ -54,11 +82,12 @@ class MessagesPage extends React.Component {
 
   renderMessages() {
     const { messages } = this.props;
+    const opponent = this.getOpponent();
     return messages.map((message, index) => (
       <Message
         key={index}
         message={message}
-        opponent={message.sender.username === this.props.address.toLowerCase() ? null : this.state.opponent}
+        opponent={message.sender.username === this.props.address.toLowerCase() ? null : opponent}
       />
 
     ));
@@ -70,17 +99,28 @@ class MessagesPage extends React.Component {
       <Menu.Item
         key={index}
         active={this.state.activeThread === thread.id}
-        onClick={() => this.showThread(
-          thread.id,
-          thread.owner_profile.user.username === this.props.address.toLowerCase() ?
-            thread.opponent_profile :
-            thread.owner_profile,
-        )}
+        onClick={() => this.showThread(thread.id)}
       >
-        { thread.owner_profile.user.username === this.props.address.toLowerCase() ?
-          thread.opponent_profile.first_name :
-          thread.owner_profile.first_name
-        }
+        <Label
+          style={{ display: this.props.threadsById[thread.id].unread_count === 0 ? 'none' : 'block' }}
+          color="red"
+          size="mini"
+        >
+          { this.props.threadsById[thread.id].unread_count }
+        </Label>
+        <Grid>
+          <Grid.Column width={3}>
+            <Image avatar src={this.getOpponentInfo(thread.opponent_profile).avatar ? `https://ipfs.io/ipfs/${this.getOpponentInfo(thread.opponent_profile).avatar}` : this.avatarPlaceholder} />
+          </Grid.Column>
+          <Grid.Column width={13}>
+            { thread.owner_profile.user.username === this.props.address.toLowerCase() ?
+              this.getOpponentInfo(thread.opponent_profile).name :
+              this.getOpponentInfo(thread.owner_profile).name
+            }
+            <br />
+            <small>{thread.last_message.text ? thread.last_message.text.slice(0, 30) : null}</small>
+          </Grid.Column>
+        </Grid>
       </Menu.Item>
     ));
   }
@@ -100,7 +140,20 @@ class MessagesPage extends React.Component {
             </Segment>
           </Grid.Column>
           <Grid.Column width={9} style={{ display: this.state.activeThread ? 'block' : 'none' }}>
-            <Segment>
+            <Segment style={{ height: '75vh', overflowY: 'scroll' }}>
+              <div style={{ display: !this.props.nextUrl ? 'none' : 'block', marginTop: '20px', textAlign: 'center' }}>
+                <Button
+                  onClick={() => { this.props.fetchMessages(this.state.activeThread, this.props.nextUrl); }}
+                  icon
+                  labelPosition="left"
+                >
+                  <Icon
+                    name={!this.props.isFetching ? 'arrow up' : 'spinner'}
+                    loading={this.props.isFetching}
+                  />
+                  Load More
+                </Button>
+              </div>
               {this.renderMessages()}
             </Segment>
             <Form onSubmit={this.sendMessage}>
@@ -124,7 +177,8 @@ function mapStateToProps(state) {
   return {
     messages: state.messaging.messages,
     threads: state.messaging.threads,
-    thread: state.messaging.thread,
+    threadsById: state.messaging.threadsById,
+    activeThread: state.messaging.activeThread,
     unreadThreadMessagesCount: state.messaging.unreadThreadMessagesCount,
     isFetchingThreads: state.messaging.isFetchingThreads,
     isFetchingMessages: state.messaging.isFetchingMessages,
@@ -139,14 +193,17 @@ function mapDispatchToProps(dispatch) {
     fetchThreads(url) {
       dispatch(fetchThreads(url));
     },
-    fetchMessages(url) {
-      dispatch(fetchMessages(url));
+    fetchMessages(threadId, url) {
+      dispatch(fetchMessages(threadId, url));
     },
     sendMessage(messageData) {
       dispatch(sendMessage(messageData));
     },
     setSecondaryNav(secondaryNav) {
       dispatch(setSecondaryNav(secondaryNav));
+    },
+    resetMessages() {
+      dispatch(resetMessages());
     },
   };
 }

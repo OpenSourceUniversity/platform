@@ -2,13 +2,13 @@ import store from '../../store';
 import Config from '../../config';
 
 const { bdnUrl } = Config.network;
-const START_URL = `${bdnUrl}api/v1/messaging/threads/`;
 
-export default function fetchThreads(url = START_URL) {
+export default function fetchUnreadMessagesCount() {
   return function dispatcher(dispatch) {
     dispatch({
-      type: 'FETCH_THREADS_REQUEST',
+      type: 'FETCH_UNREAD_COUNT_REQUEST',
     });
+    const url = `${bdnUrl}api/v1/messaging/threads/get_unread_count/`;
     const headers = new Headers({
       'Auth-Signature': store.getState().auth.signedAddress,
       'Auth-Eth-Address': store.getState().auth.address.slice(2),
@@ -18,24 +18,19 @@ export default function fetchThreads(url = START_URL) {
       .then(({ response, body }) => {
         if (!response.ok) {
           dispatch({
-            type: 'FETCH_THREADS_FAILURE',
+            type: 'FETCH_UNREAD_COUNT_FAILURE',
             error: body.error,
           });
         } else {
-          const threadsById = {};
-          for (let i = 0; i < body.length; i += 1) {
-            threadsById[body[i].id] = body[i];
-          }
           dispatch({
-            type: 'FETCH_THREADS_SUCCESS',
-            threads: body,
-            threadsById,
+            type: 'FETCH_UNREAD_COUNT_SUCCESS',
+            unread_count: body.unread_messages_count,
           });
         }
       })
       .catch((error) => {
         dispatch({
-          type: 'FETCH_THREADS_FAILURE',
+          type: 'FETCH_UNREAD_COUNT_FAILURE',
           error,
         });
       });

@@ -2,8 +2,8 @@ const initialState = {
   messages: [],
   activeThread: null,
   threads: [],
+  threadsById: {},
   unreadAllMessagesCount: 0,
-  unreadThreadMessagesCount: 0,
   isFetchingThreads: false,
   isFetchingMessages: false,
   nextUrl: null,
@@ -12,15 +12,20 @@ const initialState = {
 
 const messagingReducer = (state = initialState, action) => {
   let isActiveState = false;
+  let buffer = {};
   switch (action.type) {
   case 'FETCH_THREADS_REQUEST':
     return Object.assign({}, state, {
       isFetchingThreads: true,
     });
+  case 'FETCH_UNREAD_COUNT_SUCCESS':
+    return Object.assign({}, state, {
+      unreadAllMessagesCount: action.unread_count,
+    });
   case 'FETCH_THREADS_SUCCESS':
     return Object.assign({}, state, {
-      unreadAllMessagesCount: action.threads.unread_count,
       threads: state.threads.concat(action.threads),
+      threadsById: Object.assign({}, state.threadsById, action.threadsById),
       nextUrl: action.threads.next,
       isFetchingThreads: false,
     });
@@ -31,15 +36,18 @@ const messagingReducer = (state = initialState, action) => {
   case 'FETCH_MESSAGES_REQUEST':
     return Object.assign({}, state, {
       isFetchingMessages: true,
+    });
+  case 'RESET_MESSAGES':
+    return Object.assign({}, state, {
       messages: [],
     });
   case 'FETCH_MESSAGES_SUCCESS':
     return Object.assign({}, state, {
-      unreadThreadMessagesCount: action.messages.unread_count,
-      messages: state.messages.concat(action.messages),
+      messages: state.messages.concat(action.messages).reverse(),
       activeThread: action.activeThread,
-      nextUrl: action.messages.next,
+      nextUrl: action.next,
       isFetchingMessages: false,
+      threadsById: Object.assign({}, state.threadsById, action.threadToUpdate),
     });
   case 'FETCH_MESSAGES_FAILURE':
     return Object.assign({}, state, {
@@ -51,8 +59,14 @@ const messagingReducer = (state = initialState, action) => {
     });
   case 'MESSAGE_RECEIVED':
     isActiveState = state.activeThread === action.payload.thread;
+    buffer[action.payload.thread] = state.threadsById[action.payload.thread];
+    if (state.activeThread !== action.payload.thread) {
+      buffer[action.payload.thread].unread_count += 1;
+    }
     return Object.assign({}, state, {
       messages: isActiveState ? state.messages.concat([action.payload]) : state.messages,
+      unreadAllMessagesCount: state.activeThread !== action.payload.thread ? state.unreadAllMessagesCount + 1 : state.unreadAllMessagesCount,
+      threadsById: Object.assign({}, state.threadsById, buffer),
     });
   default:
     return state;

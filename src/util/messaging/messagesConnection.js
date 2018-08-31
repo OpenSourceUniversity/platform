@@ -1,5 +1,6 @@
 import store from '../../store';
 import Config from '../../config';
+import fetchUnreadMessagesCount from './fetchUnreadMessagesCount';
 
 
 export default function messagesConnection() {
@@ -13,6 +14,7 @@ export default function messagesConnection() {
 
     function wsOpen(event) {
       console.log('Messages open', event);
+      dispatch(fetchUnreadMessagesCount());
     }
 
     function wsError(event) {
@@ -25,7 +27,6 @@ export default function messagesConnection() {
         type: 'MESSAGE_RECEIVED',
         payload: data,
       });
-      console.log(data);
     }
 
     function connect() {

@@ -41,9 +41,11 @@ class MessagesPage extends React.Component {
     let opponentInstance = null;
     if (this.props.threadsById[this.state.activeThread]) {
       const activeThreadObj = this.props.threadsById[this.state.activeThread];
-      opponentInstance = activeThreadObj.owner_profile.user.username === this.props.address.toLowerCase() ?
-        activeThreadObj.opponent_profile :
-        activeThreadObj.owner_profile;
+      if (activeThreadObj.owner_profile.user.username === this.props.address.toLowerCase()) {
+        opponentInstance = activeThreadObj.opponent_profile;
+      } else {
+        opponentInstance = activeThreadObj.owner_profile;
+      }
       return this.getOpponentInfo(opponentInstance);
     }
     return null;
@@ -59,14 +61,14 @@ class MessagesPage extends React.Component {
   }
 
   sendMessage = (event) => {
-    const text = event.target.elements.message.value;
+    let text = event.target.elements.message.value;
     if (text) {
       const messageData = {
         threadID: this.state.activeThread,
         text,
       };
       this.props.sendMessage(messageData);
-      event.target.elements.message.value = '';
+      text = '';
     }
   }
 
@@ -126,6 +128,9 @@ class MessagesPage extends React.Component {
   }
 
   render() {
+    /* eslint-disable global-require */
+    const loader = require('../../icons/osu-loader.svg');
+    /* eslint-enable global-require */
     return (
       <Container fluid>
         <Header>
@@ -135,15 +140,33 @@ class MessagesPage extends React.Component {
           <Grid.Column width={4}>
             <Segment>
               <Menu fluid vertical pointing>
+                <Dimmer active={this.props.isFetchingThreads} inverted>
+                  <Loader size="medium">
+                    <p>Fetching your threads</p>
+                    <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
+                      <image href={loader} x="0" y="0" width="100%" height="100%" />
+                    </svg>
+                  </Loader>
+                </Dimmer>
                 {this.renderThreads()}
               </Menu>
             </Segment>
           </Grid.Column>
           <Grid.Column width={9} style={{ display: this.state.activeThread ? 'block' : 'none' }}>
             <Segment style={{ height: '75vh', overflowY: 'scroll' }}>
+              <Dimmer active={this.props.isFetchingMessages} inverted>
+                <Loader size="medium">
+                  <p>Fetching your messages</p>
+                  <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
+                    <image href={loader} x="0" y="0" width="100%" height="100%" />
+                  </svg>
+                </Loader>
+              </Dimmer>
               <div style={{ display: !this.props.nextUrl ? 'none' : 'block', marginTop: '20px', textAlign: 'center' }}>
                 <Button
-                  onClick={() => { this.props.fetchMessages(this.state.activeThread, this.props.nextUrl); }}
+                  onClick={
+                    () => { this.props.fetchMessages(this.state.activeThread, this.props.nextUrl); }
+                  }
                   icon
                   labelPosition="left"
                 >

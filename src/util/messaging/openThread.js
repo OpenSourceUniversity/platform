@@ -7,7 +7,7 @@ const { bdnUrl } = Config.network;
 
 
 export default function openThread(threadData) {
-  return function action(dispatch) {
+  return function action() {
     console.log('openThread');
     const axiosConfig = {
       headers: {

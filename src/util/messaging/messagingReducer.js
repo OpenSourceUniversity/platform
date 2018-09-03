@@ -12,7 +12,7 @@ const initialState = {
 
 const messagingReducer = (state = initialState, action) => {
   let isActiveState = false;
-  let buffer = {};
+  const buffer = {};
   switch (action.type) {
   case 'FETCH_THREADS_REQUEST':
     return Object.assign({}, state, {
@@ -65,7 +65,9 @@ const messagingReducer = (state = initialState, action) => {
     }
     return Object.assign({}, state, {
       messages: isActiveState ? state.messages.concat([action.payload]) : state.messages,
-      unreadAllMessagesCount: state.activeThread !== action.payload.thread ? state.unreadAllMessagesCount + 1 : state.unreadAllMessagesCount,
+      unreadAllMessagesCount: state.activeThread !== action.payload.thread ?
+        state.unreadAllMessagesCount + 1 :
+        state.unreadAllMessagesCount,
       threadsById: Object.assign({}, state.threadsById, buffer),
     });
   default:

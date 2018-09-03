@@ -1,6 +1,7 @@
 import store from '../../store';
 import Config from '../../config';
 import fetchUnreadMessagesCount from './fetchUnreadMessagesCount';
+import messageRecivedInNewThread from './messageRecivedInNewThread';
 
 
 export default function messagesConnection() {
@@ -23,10 +24,15 @@ export default function messagesConnection() {
 
     function wsMessage(event) {
       const data = JSON.parse(event.data);
-      dispatch({
-        type: 'MESSAGE_RECEIVED',
-        payload: data,
-      });
+      const { threadsById } = store.getState().messaging;
+      if (threadsById[data.thread]) {
+        dispatch({
+          type: 'MESSAGE_RECEIVED',
+          payload: data,
+        });
+      } else {
+        dispatch(messageRecivedInNewThread(data));
+      }
     }
 
     function connect() {

@@ -461,9 +461,11 @@ div#Main {
   box-shadow: none;
   border-width: 2px;
   cursor: pointer;
+  border-width: 0;
 }
 .profilePicSegment:hover {
   border-color: orange;
+  border-width: 2px;
 }
 
 .ui.segments.profileSegment .segment .ui[class*="left labeled"].button>.label {width: 80%;text-align: center;}
@@ -566,4 +568,44 @@ input[type="file"] {
 
 .messageInput {
   width: 100%;
+}
+
+.messagingThreads {
+  .item {
+    padding-right: 0!important;
+    padding-left: 2rem!important;
+    border-bottom: 1px solid lightgrey!important;
+  }
+  .item:hover {
+    background-color: #ececec!important;
+  }
+  .active {
+    border-right-color: orange!important;
+    border-right-width: 3px!important;
+    background-color: #ececec!important;
+    font-weight: inherit!important;
+  }
+}
+
+.message {
+  .card {
+    width: inherit!important;
+    max-width: 27em;
+    display: inline-flex;
+    white-space: pre-line;
+    white-space: pre-line;
+    padding: 12px 22px;
+    background-color: #ececec;
+    border-width: 0;
+    -webkit-box-shadow: inherit;
+    border-radius: 15px;
+  }
+}
+
+.message.owner {
+  .card {
+    margin-top: 0.1em;
+    background-color: #ff9441!important;
+    color: white;
+  }
 }

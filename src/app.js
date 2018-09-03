@@ -27,7 +27,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header />
-        <div style={{ height: `${this.props.secondaryNav ? 142 : 100}px` }} />
+        <div style={{ height: `${this.props.secondaryNav ? 142 : 76}px` }} />
         <div id="Main">
           <Main />
         </div>

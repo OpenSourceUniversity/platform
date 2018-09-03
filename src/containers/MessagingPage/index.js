@@ -1,7 +1,7 @@
 import React from 'react';
-import { Dimmer, Header, Container, Image, Loader, Form, Segment, Menu, Grid, Button, Icon, Label } from 'semantic-ui-react';
+import { Dimmer, Header, Container, Image, Loader, Form, Segment, Menu, Grid, Button, Icon, Label, Divider } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import Message from '../../components/Message';
 import fetchThreads from '../../util/messaging/fetchThreads';
 import fetchMessages from '../../util/messaging/fetchMessages';
@@ -24,14 +24,39 @@ class MessagesPage extends React.Component {
     document.title = 'Messaging';
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.nextUrl === this.props.nextUrl || !prevProps.nextUrl) {
+      const objDiv = document.getElementById('MessageHistory');
+      objDiv.scrollTop = objDiv.scrollHeight;
+    }
+  }
+
   getOpponentInfo(opponentInstance) {
     switch (opponentInstance.active_profile_type) {
     case 1:
-      return { name: `${opponentInstance.first_name} ${opponentInstance.last_name}`, avatar: opponentInstance.learner_avatar };
+      return {
+        name: `${opponentInstance.first_name} ${opponentInstance.last_name}`,
+        avatar: opponentInstance.learner_avatar,
+        additional: opponentInstance.learner_position,
+        viewProfile: `/view-profile/learner/${opponentInstance.user.username}/`,
+        username: opponentInstance.user.username,
+      };
     case 2:
-      return { name: opponentInstance.academy_name, avatar: opponentInstance.academy_logo };
+      return {
+        name: opponentInstance.academy_name,
+        avatar: opponentInstance.academy_logo,
+        additional: opponentInstance.academy_website,
+        viewProfile: `/view-profile/academy/${opponentInstance.user.username}/`,
+        username: opponentInstance.user.username,
+      };
     case 3:
-      return { name: opponentInstance.company_name, avatar: opponentInstance.company_logo };
+      return {
+        name: opponentInstance.company_name,
+        avatar: opponentInstance.company_logo,
+        additional: opponentInstance.company_website,
+        viewProfile: `/view-profile/business/${opponentInstance.user.username}/`,
+        username: opponentInstance.user.username,
+      };
     default:
       return null;
     }
@@ -61,35 +86,77 @@ class MessagesPage extends React.Component {
   }
 
   sendMessage = (event) => {
-    let text = event.target.elements.message.value;
+    const text = event.target.elements.message.value;
     if (text) {
       const messageData = {
         threadID: this.state.activeThread,
         text,
       };
       this.props.sendMessage(messageData);
-      text = '';
+      /* eslint-disable no-param-reassign */
+      event.target.elements.message.value = '';
+      /* eslint-enable no-param-reassign */
     }
   }
 
   renderUserInfo() {
-    // const { opponent } = this.props;
-    // return (
-    //   <div>
-    //     <Image src={opponent.avatar} />
-    //     {opponent.names}
-    //   </div>
-    // );
+    if (!this.state.activeThread) {
+      return null;
+    }
+    const thread = this.props.threadsById[this.state.activeThread];
+    if (!thread) {
+      return null;
+    }
+    const ownerUsername = thread.owner_profile.user.username;
+    const isOwner = ownerUsername === this.props.address.toLowerCase();
+    let opponentProfile = null;
+    if (isOwner) {
+      opponentProfile = this.getOpponentInfo(thread.opponent_profile);
+    } else {
+      opponentProfile = this.getOpponentInfo(thread.owner_profile);
+    }
+    return (
+      <div style={{ textAlign: 'center' }}>
+        <Header>
+          User Info
+        </Header>
+        <Segment
+          textAlign="center"
+          circular
+          className="profilePicSegment"
+          as={Link}
+          to={opponentProfile.viewProfile}
+          style={{
+            width: 175,
+            height: 175,
+            backgroundImage: `url(${opponentProfile.avatar ?
+              `https://ipfs.io/ipfs/${opponentProfile.avatar}` :
+              this.avatarPlaceholder})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'contain',
+            backgroundPosition: 'center center',
+          }}
+        />
+        <Header size="large">
+          {opponentProfile.name}
+        </Header>
+        <Header size="small" color="grey">
+          {opponentProfile.additional ? opponentProfile.additional : '-'}
+        </Header>
+        <Divider clearing />
+      </div>
+    );
   }
 
   renderMessages() {
     const { messages } = this.props;
     const opponent = this.getOpponent();
-    return messages.map((message, index) => (
+    return messages.map((message, index, array) => (
       <Message
         key={index}
         message={message}
         opponent={message.sender.username === this.props.address.toLowerCase() ? null : opponent}
+        prev={array[index - 1]}
       />
 
     ));
@@ -112,15 +179,37 @@ class MessagesPage extends React.Component {
         </Label>
         <Grid>
           <Grid.Column width={3}>
-            <Image avatar src={this.getOpponentInfo(thread.opponent_profile).avatar ? `https://ipfs.io/ipfs/${this.getOpponentInfo(thread.opponent_profile).avatar}` : this.avatarPlaceholder} />
+            <Image
+              avatar
+              src={(() => {
+                const ownerUsername = thread.owner_profile.user.username;
+                const isOwner = ownerUsername === this.props.address.toLowerCase();
+                if (isOwner) {
+                  return this.getOpponentInfo(thread.opponent_profile).avatar ?
+                    `https://ipfs.io/ipfs/${this.getOpponentInfo(thread.opponent_profile).avatar}` :
+                    this.avatarPlaceholder;
+                }
+                return this.getOpponentInfo(thread.owner_profile).avatar ?
+                  `https://ipfs.io/ipfs/${this.getOpponentInfo(thread.owner_profile).avatar}` :
+                  this.avatarPlaceholder;
+              })()
+              }
+              style={{ height: 'auto', width: '100%' }}
+            />
           </Grid.Column>
-          <Grid.Column width={13}>
-            { thread.owner_profile.user.username === this.props.address.toLowerCase() ?
-              this.getOpponentInfo(thread.opponent_profile).name :
-              this.getOpponentInfo(thread.owner_profile).name
-            }
-            <br />
-            <small>{thread.last_message.text ? thread.last_message.text.slice(0, 30) : null}</small>
+          <Grid.Column width={13} style={{ paddingTop: '6%' }} >
+            <Header as="h4" style={{ marginBottom: 0 }} >
+              { thread.owner_profile.user.username === this.props.address.toLowerCase() ?
+                this.getOpponentInfo(thread.opponent_profile).name :
+                this.getOpponentInfo(thread.owner_profile).name
+              }
+            </Header>
+            <p style={{ color: 'rgb(175, 175, 175)' }}>{
+              this.props.threadsById[thread.id].last_message.text ?
+                this.props.threadsById[thread.id].last_message.text.slice(0, 30)
+                :
+                null}
+            </p>
           </Grid.Column>
         </Grid>
       </Menu.Item>
@@ -133,13 +222,10 @@ class MessagesPage extends React.Component {
     /* eslint-enable global-require */
     return (
       <Container fluid>
-        <Header>
-          Messaging
-        </Header>
-        <Grid>
-          <Grid.Column width={4}>
-            <Segment>
-              <Menu fluid vertical pointing>
+        <Segment>
+          <Grid>
+            <Grid.Column width={4} style={{ paddingLeft: 0 }}>
+              <Menu className="messagingThreads" style={{ height: '100%' }} fluid vertical secondary pointing>
                 <Dimmer active={this.props.isFetchingThreads} inverted>
                   <Loader size="medium">
                     <p>Fetching your threads</p>
@@ -150,46 +236,62 @@ class MessagesPage extends React.Component {
                 </Dimmer>
                 {this.renderThreads()}
               </Menu>
-            </Segment>
-          </Grid.Column>
-          <Grid.Column width={9} style={{ display: this.state.activeThread ? 'block' : 'none' }}>
-            <Segment style={{ height: '75vh', overflowY: 'scroll' }}>
-              <Dimmer active={this.props.isFetchingMessages} inverted>
-                <Loader size="medium">
-                  <p>Fetching your messages</p>
-                  <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
-                    <image href={loader} x="0" y="0" width="100%" height="100%" />
-                  </svg>
-                </Loader>
-              </Dimmer>
-              <div style={{ display: !this.props.nextUrl ? 'none' : 'block', marginTop: '20px', textAlign: 'center' }}>
-                <Button
-                  onClick={
-                    () => { this.props.fetchMessages(this.state.activeThread, this.props.nextUrl); }
-                  }
-                  icon
-                  labelPosition="left"
+            </Grid.Column>
+            <Grid.Column width={9}>
+              <div id="MessageHistory" style={{ height: '75vh', overflowY: 'scroll', padding: '2% 5% 5% 5%' }}>
+                <Dimmer active={this.props.isFetchingMessages} inverted>
+                  <Loader size="medium">
+                    <p>Fetching your messages</p>
+                    <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
+                      <image href={loader} x="0" y="0" width="100%" height="100%" />
+                    </svg>
+                  </Loader>
+                </Dimmer>
+                <div
+                  style={{
+                    display: !this.props.nextUrl ? 'none' : 'block',
+                    marginTop: '20px',
+                    textAlign: 'center',
+                  }}
                 >
-                  <Icon
-                    name={!this.props.isFetching ? 'arrow up' : 'spinner'}
-                    loading={this.props.isFetching}
-                  />
-                  Load More
-                </Button>
+                  <Button
+                    onClick={
+                      () => {
+                        this.props.fetchMessages(this.state.activeThread, this.props.nextUrl);
+                      }
+                    }
+                    icon
+                    labelPosition="left"
+                  >
+                    <Icon
+                      name={!this.props.isFetching ? 'arrow up' : 'spinner'}
+                      loading={this.props.isFetching}
+                    />
+                    Load More
+                  </Button>
+                </div>
+                {this.renderMessages()}
               </div>
-              {this.renderMessages()}
-            </Segment>
-            <Form onSubmit={this.sendMessage}>
-              <Form.Group inline>
-                <Form.TextArea className="messageInput" rows={2} style={{ resize: 'none' }} ref={(arg) => { this.inputRef = arg; }} autoComplete="off" type="text" name="message" />
-                <Form.Button content="Send" type="submit" />
-              </Form.Group>
-            </Form>
-          </Grid.Column>
-          <Grid.Column width={3}>
-            {this.renderUserInfo()}
-          </Grid.Column>
-        </Grid>
+              <Form onSubmit={this.sendMessage}>
+                <Form.Group inline>
+                  <Form.TextArea
+                    className="messageInput"
+                    rows={2}
+                    style={{ resize: 'none' }}
+                    ref={(arg) => { this.inputRef = arg; }}
+                    autoComplete="off"
+                    type="text"
+                    name="message"
+                  />
+                  <Form.Button content="Send" type="submit" />
+                </Form.Group>
+              </Form>
+            </Grid.Column>
+            <Grid.Column width={3}>
+              {this.renderUserInfo()}
+            </Grid.Column>
+          </Grid>
+        </Segment>
       </Container>
     );
   }

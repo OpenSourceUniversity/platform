@@ -28,8 +28,8 @@ export default function fetchMessages(threadId, urlNext) {
         } else {
           const { threadsById } = store.getState().messaging;
           const buffer = {};
+          buffer[threadId] = threadsById[threadId];
           if (buffer[threadId]) {
-            buffer[threadId] = threadsById[threadId];
             buffer[threadId].unread_count = 0;
           }
           dispatch({

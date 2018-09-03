@@ -146,6 +146,7 @@ class LearnerProfile extends React.Component {
                 <div style={{ whiteSpace: 'pre-line' }}>
                   {this.props.profiles.learner_about ? this.props.profiles.learner_about : '-'}
                 </div>
+                <Divider hidden />
                 <Header floated="left">
                   Certificates
                 </Header>

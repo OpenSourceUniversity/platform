@@ -9,6 +9,18 @@ const initialState = {
   nextUrl: null,
 };
 
+const moveToFirst = (threadsInit, threadID) => {
+  const threads = threadsInit;
+  const threadToMove = threads.find((element) => {
+    const equal = element.id === threadID;
+    return equal;
+  });
+  const index = threads.indexOf(threadToMove);
+  threads.splice(index, 1);
+  threads.unshift(threadToMove);
+  return threads;
+};
+
 
 const messagingReducer = (state = initialState, action) => {
   let isActiveState = false;
@@ -28,7 +40,6 @@ const messagingReducer = (state = initialState, action) => {
     return Object.assign({}, state, {
       threads: state.threads.concat(action.threads),
       threadsById: Object.assign({}, state.threadsById, action.threadsById),
-      nextUrl: action.threads.next,
       isFetchingThreads: false,
     });
   case 'FETCH_THREADS_FAILURE':
@@ -45,7 +56,7 @@ const messagingReducer = (state = initialState, action) => {
     });
   case 'FETCH_MESSAGES_SUCCESS':
     return Object.assign({}, state, {
-      messages: state.messages.concat(action.messages).reverse(),
+      messages: action.messages.concat(state.messages),
       activeThread: action.activeThread,
       nextUrl: action.next,
       isFetchingMessages: false,
@@ -63,6 +74,7 @@ const messagingReducer = (state = initialState, action) => {
     return Object.assign({}, state, {
       messages: state.messages.concat([action.message]),
       threadsById: Object.assign({}, state.threadsById, buffer),
+      threads: moveToFirst(state.threads, action.message.thread),
     });
   case 'MESSAGE_RECEIVED':
     isActiveState = state.activeThread === action.payload.thread;
@@ -79,6 +91,7 @@ const messagingReducer = (state = initialState, action) => {
         state.unreadAllMessagesCount + 1 :
         state.unreadAllMessagesCount,
       threadsById: Object.assign({}, state.threadsById, buffer),
+      threads: moveToFirst(state.threads, action.payload.thread),
     });
   case 'NEW_THREAD_RECEIVED':
     return Object.assign({}, state, {

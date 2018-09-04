@@ -37,12 +37,25 @@ export default class Message extends React.Component {
         }
         <Card
           style={(() => {
+            let style = {};
             if (this.props.prev && this.props.opponent) {
-              if (this.props.prev.sender.username === this.props.opponent.username) {
-                return { marginLeft: '5.2em', marginTop: '0.1em' };
+              const opponentUsername = this.props.opponent.username;
+              if (this.props.prev.sender.username === opponentUsername) {
+                style = Object.assign({}, style, { marginLeft: '5em', marginTop: '0.1em', borderTopLeftRadius: '5px' });
+              }
+              if (this.props.next && this.props.next.sender.username === opponentUsername) {
+                style = Object.assign({}, style, { borderBottomLeftRadius: '5px' });
+              }
+            } else if (this.props.prev) {
+              const ownerAddress = this.props.ownerAddress.toLowerCase();
+              if (this.props.prev.sender.username === ownerAddress) {
+                style = Object.assign({}, style, { borderTopRightRadius: '5px' });
+              }
+              if (this.props.next && this.props.next.sender.username === ownerAddress) {
+                style = Object.assign({}, style, { borderBottomRightRadius: '5px' });
               }
             }
-            return null;
+            return style;
           })()}
         >
           {this.props.message.text}

@@ -34,7 +34,7 @@ export default function fetchMessages(threadId, urlNext) {
           }
           dispatch({
             type: 'FETCH_MESSAGES_SUCCESS',
-            messages: body.results,
+            messages: body.results.reverse(),
             next: body.next,
             activeThread: threadId,
             threadToUpdate: buffer,

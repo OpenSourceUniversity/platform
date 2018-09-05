@@ -37,7 +37,7 @@ export default class Message extends React.Component {
         }
         <Card
           style={(() => {
-            let style = {};
+            let style = { wordBreak: 'break-word' };
             if (this.props.prev && this.props.opponent) {
               const opponentUsername = this.props.opponent.username;
               if (this.props.prev.sender.username === opponentUsername) {

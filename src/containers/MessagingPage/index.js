@@ -7,7 +7,7 @@ import fetchThreads from '../../util/messaging/fetchThreads';
 import fetchMessages from '../../util/messaging/fetchMessages';
 import sendMessage from '../../util/messaging/sendMessage';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
-import resetMessages from './actions';
+import { resetMessages } from './actions';
 
 
 class MessagesPage extends React.Component {

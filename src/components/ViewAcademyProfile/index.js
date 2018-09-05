@@ -95,7 +95,7 @@ class ViewAcademyProfile extends React.Component {
                     primary
                     size="large"
                     className="fluid"
-                    content="MESSAGE US"
+                    content="SEND MESSAGE"
                     name={this.props.eth_address.toLowerCase()}
                     icon="mail outline"
                     onClick={this.openMessaging}

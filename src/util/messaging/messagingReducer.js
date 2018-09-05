@@ -1,3 +1,5 @@
+import { markAsRead } from '../../containers/MessagingPage/actions';
+
 const initialState = {
   messages: [],
   activeThread: null,
@@ -82,6 +84,8 @@ const messagingReducer = (state = initialState, action) => {
     if (buffer[action.payload.thread]) {
       if (state.activeThread !== action.payload.thread) {
         buffer[action.payload.thread].unread_count += 1;
+      } else {
+        markAsRead(action.payload.id);
       }
       buffer[action.payload.thread].last_message = action.payload;
     }

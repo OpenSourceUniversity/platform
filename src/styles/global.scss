@@ -567,10 +567,23 @@ input[type="file"] {
 }
 
 .messageInput {
-  width: 100%;
+  width: 95%;
+  border-top: 1px solid rgba(34,36,38,.15);
+  textarea {
+    width: 90%!important;
+    border: none!important;
+  }
+}
+
+.sendButton button {
+  position: absolute!important;
+  top: 1em;
+  right: 4em;
 }
 
 .messagingThreads {
+  overflow-x: hidden;
+  overflow-y: scroll;
   .item {
     padding-right: 0!important;
     padding-left: 2rem!important;
@@ -585,6 +598,11 @@ input[type="file"] {
     background-color: #ececec!important;
     font-weight: inherit!important;
   }
+}
+
+.messagingThreads::-webkit-scrollbar {
+  width: 0px!important;  /* remove scrollbar space */
+  background: transparent;  /* optional: just make scrollbar invisible */
 }
 
 .message {

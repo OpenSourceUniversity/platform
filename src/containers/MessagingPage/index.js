@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimmer, Header, Container, Image, Loader, Form, Segment, Menu, Grid, Button, Icon, Label, Divider } from 'semantic-ui-react';
+import { Dimmer, Header, Container, Image, Loader, Form, Segment, Menu, Grid, Label, Divider } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import Message from '../../components/Message';
@@ -14,12 +14,18 @@ class MessagesPage extends React.Component {
   state = { activeThread: null }
 
   componentDidMount() {
-    if (this.props.match.params.id) {
-      const activeThreadId = this.props.match.params.id;
-      this.state.activeThread = activeThreadId;
-      this.props.fetchMessages(this.props.match.params.id, null);
-    }
     this.props.fetchThreads();
+    let activeThreadId = null;
+    if (this.props.match.params.id) {
+      activeThreadId = this.props.match.params.id;
+      this.props.fetchMessages(activeThreadId, null);
+    } else if (this.props.threads.length) {
+      activeThreadId = this.props.threads[0].id;
+      const newPath = `/messaging/${activeThreadId}/`;
+      this.props.history.push(newPath);
+      this.props.fetchMessages(activeThreadId, null);
+    }
+    this.state.activeThread = activeThreadId;
     this.props.setSecondaryNav(null);
     document.title = 'Messaging';
   }
@@ -28,6 +34,30 @@ class MessagesPage extends React.Component {
     if (prevProps.nextUrl === this.props.nextUrl || !prevProps.nextUrl) {
       const objDiv = document.getElementById('MessageHistory');
       objDiv.scrollTop = objDiv.scrollHeight;
+    }
+    if (!this.props.match.params.id && this.props.threads.length) {
+      const activeThreadId = this.props.threads[0].id;
+      const newPath = `/messaging/${activeThreadId}/`;
+      this.props.history.push(newPath);
+      this.props.fetchMessages(activeThreadId, null);
+      this.state.activeThread = activeThreadId;
+    }
+  }
+
+  onEnterPress = (event) => {
+    if (event.keyCode === 13 && event.shiftKey === false && event.ctrlKey === false) {
+      event.preventDefault();
+      const text = event.target.value;
+      if (text && this.state.activeThread) {
+        const messageData = {
+          threadID: this.state.activeThread,
+          text,
+        };
+        this.props.sendMessage(messageData);
+        /* eslint-disable no-param-reassign */
+        event.target.value = '';
+        /* eslint-enable no-param-reassign */
+      }
     }
   }
 
@@ -95,7 +125,7 @@ class MessagesPage extends React.Component {
 
   sendMessage = (event) => {
     const text = event.target.elements.message.value;
-    if (text) {
+    if (text && this.state.activeThread) {
       const messageData = {
         threadID: this.state.activeThread,
         text,
@@ -234,7 +264,7 @@ class MessagesPage extends React.Component {
       <Container fluid>
         <Segment>
           <Grid>
-            <Grid.Column width={4} style={{ paddingLeft: 0 }}>
+            <Grid.Column width={4} style={{ paddingLeft: 0, paddingTop: 0, paddingBottom: 0 }} >
               <Menu className="messagingThreads" style={{ height: '100%' }} fluid vertical secondary pointing>
                 <Dimmer active={this.props.isFetchingThreads} inverted>
                   <Loader size="medium">
@@ -247,10 +277,10 @@ class MessagesPage extends React.Component {
                 {this.renderThreads()}
               </Menu>
             </Grid.Column>
-            <Grid.Column width={9}>
+            <Grid.Column width={9} style={{ paddingTop: 0, paddingBottom: 0 }} >
               <div
                 id="MessageHistory"
-                style={{ height: '75vh', overflowY: 'scroll', padding: '2% 5% 5% 5%' }}
+                style={{ height: '78vh', overflowY: 'scroll', padding: '2% 5% 5% 5%' }}
                 onScroll={this.messagesScroll}
               >
                 <Dimmer active={this.props.isFetchingMessages} inverted>
@@ -263,22 +293,24 @@ class MessagesPage extends React.Component {
                 </Dimmer>
                 {this.renderMessages()}
               </div>
-              <Form onSubmit={this.sendMessage}>
+              <Form onSubmit={this.sendMessage} >
                 <Form.Group inline>
                   <Form.TextArea
                     className="messageInput"
                     rows={2}
                     style={{ resize: 'none' }}
                     ref={(arg) => { this.inputRef = arg; }}
+                    onKeyDown={this.onEnterPress}
                     autoComplete="off"
                     type="text"
                     name="message"
+                    placeholder="Type your message here..."
                   />
-                  <Form.Button content="Send" type="submit" />
+                  <Form.Button color="orange" className="sendButton" content="Send" type="submit" />
                 </Form.Group>
               </Form>
             </Grid.Column>
-            <Grid.Column width={3}>
+            <Grid.Column width={3} style={{ paddingBottom: 0 }} >
               {this.renderUserInfo()}
             </Grid.Column>
           </Grid>

@@ -5,6 +5,7 @@ import { Header, Divider, Grid, Sticky, Segment, List, Button, Dimmer, Loader, M
 import { fetchCompanyJobs } from './actions';
 import JobItem from '../../components/JobItem';
 import getProfileView from '../../util/profiles/getProfileView';
+import openThread from '../../util/messaging/openThread';
 
 /* eslint-disable camelcase */
 class ViewBusinessProfile extends React.Component {
@@ -14,6 +15,13 @@ class ViewBusinessProfile extends React.Component {
   }
 
   handleBack = () => this.props.history.push('/businesses');
+
+  openMessaging = (e, { name }) => {
+    const threadData = {
+      opponent_eth_address: name,
+    };
+    this.props.openThread(threadData);
+  }
 
   renderJobs() {
     return (
@@ -89,8 +97,10 @@ class ViewBusinessProfile extends React.Component {
                     primary
                     size="large"
                     className="fluid"
-                    content="MESSAGE US"
+                    content="SEND MESSAGE"
+                    name={this.props.eth_address.toLowerCase()}
                     icon="mail outline"
+                    onClick={this.openMessaging}
                   />
                 </Segment>
                 <Segment>
@@ -151,6 +161,9 @@ function mapDispatchToProps(dispatch) {
     },
     fetchCompanyJobs(eth_address) {
       dispatch(fetchCompanyJobs(eth_address));
+    },
+    openThread(threadData) {
+      dispatch(openThread(threadData));
     },
   };
 }

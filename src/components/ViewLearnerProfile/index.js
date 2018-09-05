@@ -5,6 +5,7 @@ import { Header, Divider, Grid, Sticky, Segment, List, Statistic, Dimmer, Loader
 import SkillItem from 'components/SkillItem';
 import CertificateItem from 'components/CertificateItem';
 import getProfileView from '../../util/profiles/getProfileView';
+import openThread from '../../util/messaging/openThread';
 
 /* eslint-disable camelcase */
 class ViewLearnerProfile extends React.Component {
@@ -13,6 +14,13 @@ class ViewLearnerProfile extends React.Component {
   }
 
   handleBack = () => this.props.history.push('/learners');
+
+  openMessaging = (e, { name }) => {
+    const threadData = {
+      opponent_eth_address: name,
+    };
+    this.props.openThread(threadData);
+  }
 
   isVerified(certificate) {
     for (let i = 0; i < certificate.verifications.length; i += 1) {
@@ -134,6 +142,15 @@ class ViewLearnerProfile extends React.Component {
                   <Header size="small" color="grey">
                     {this.props.learner.learner_position ? this.props.learner.learner_position : '-'}
                   </Header>
+                  <Button
+                    primary
+                    size="large"
+                    className="fluid"
+                    content="SEND MESSAGE"
+                    name={this.props.eth_address.toLowerCase()}
+                    icon="mail outline"
+                    onClick={this.openMessaging}
+                  />
                   <Header size="small" color="grey">
                     ETH Address:
                   </Header>
@@ -245,6 +262,9 @@ function mapDispatchToProps(dispatch) {
   return {
     getProfileView(type, eth_address) {
       dispatch(getProfileView(type, eth_address));
+    },
+    openThread(threadData) {
+      dispatch(openThread(threadData));
     },
   };
 }

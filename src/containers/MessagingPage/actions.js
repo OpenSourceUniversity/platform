@@ -23,3 +23,11 @@ export function markAsRead(id) {
   const url = `${bdnUrl}api/v1/messages/${id}/mark_as_read_by_id/`;
   axios.post(url, null, axiosConfig);
 }
+
+export function resetActiveThread() {
+  return function dispatcher(dispatch) {
+    dispatch({
+      type: 'RESET_ACTIVE_THREAD',
+    });
+  };
+}

@@ -39,6 +39,9 @@ export default function fetchMessages(threadId, urlNext) {
             activeThread: threadId,
             threadToUpdate: buffer,
           });
+          const objDiv = document.getElementById('MessageHistory');
+          const messagesCount = store.getState().messaging.messages.length;
+          objDiv.scrollTop = objDiv.scrollHeight / (messagesCount / 30);
           dispatch(fetchUnreadMessagesCount());
         }
       })

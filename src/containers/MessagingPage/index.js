@@ -7,7 +7,7 @@ import fetchThreads from '../../util/messaging/fetchThreads';
 import fetchMessages from '../../util/messaging/fetchMessages';
 import sendMessage from '../../util/messaging/sendMessage';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
-import { resetMessages } from './actions';
+import { resetMessages, resetActiveThread } from './actions';
 
 
 class MessagesPage extends React.Component {
@@ -42,6 +42,11 @@ class MessagesPage extends React.Component {
       this.props.fetchMessages(activeThreadId, null);
       this.state.activeThread = activeThreadId;
     }
+  }
+
+  componentWillUnmount() {
+    this.props.resetMessages();
+    this.props.resetActiveThread();
   }
 
   onEnterPress = (event) => {
@@ -104,6 +109,28 @@ class MessagesPage extends React.Component {
       return this.getOpponentInfo(opponentInstance);
     }
     return null;
+  }
+
+  toAgoDate(pythonDateStr) {
+    const jsDateStr = `${pythonDateStr.substr(0, 10)} ${pythonDateStr.substr(11, 8)}`;
+    const jsDateTime = Date.parse(jsDateStr);
+    const nowDateTime = Date.now();
+    const timeZoneOffset = new Date(nowDateTime).getTimezoneOffset() * 60000;
+    const durationms = nowDateTime - jsDateTime;
+    const duration = new Date(durationms + timeZoneOffset);
+    let durationStr = 'now';
+    if (duration.getUTCFullYear() > 1970) {
+      durationStr = `${duration.getUTCFullYear() - 1970} year(s) ago`;
+    } else if (duration.getUTCMonth() > 0) {
+      durationStr = `${duration.getUTCMonth()} month(s) ago`;
+    } else if (duration.getUTCDate() > 1) {
+      durationStr = `${duration.getUTCDate() - 1} day(s) ago`;
+    } else if (duration.getUTCHours() > 0) {
+      durationStr = `${duration.getUTCHours()} hour(s) ago`;
+    } else if (duration.getUTCMinutes() > 0) {
+      durationStr = `${duration.getUTCMinutes()} minute(s) ago`;
+    }
+    return durationStr;
   }
 
   avatarPlaceholder = 'data:image/jpeg;base64,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';
@@ -197,6 +224,7 @@ class MessagesPage extends React.Component {
         prev={array[index - 1]}
         next={array[index + 1]}
         ownerAddress={this.props.address}
+        toAgoDate={this.toAgoDate}
       />
 
     ));
@@ -237,19 +265,25 @@ class MessagesPage extends React.Component {
               style={{ height: 'auto', width: '100%' }}
             />
           </Grid.Column>
-          <Grid.Column width={13} style={{ paddingTop: '6%' }} >
+          <Grid.Column width={13} >
             <Header as="h4" style={{ marginBottom: 0 }} >
               { thread.owner_profile.user.username === this.props.address.toLowerCase() ?
                 this.getOpponentInfo(thread.opponent_profile).name :
                 this.getOpponentInfo(thread.owner_profile).name
               }
             </Header>
-            <p style={{ color: 'rgb(175, 175, 175)' }}>{
+            <p style={{ color: 'rgb(175, 175, 175)', marginTop: '0.5em', marginBottom: '0.5em' }}>{
               this.props.threadsById[thread.id].last_message.text ?
                 this.props.threadsById[thread.id].last_message.text.slice(0, 30)
                 :
                 null}
             </p>
+            <small style={{ color: 'rgb(175, 175, 175)' }}>{
+              this.props.threadsById[thread.id].last_message.created ?
+                this.toAgoDate(this.props.threadsById[thread.id].last_message.created)
+                :
+                null}
+            </small>
           </Grid.Column>
         </Grid>
       </Menu.Item>
@@ -275,40 +309,43 @@ class MessagesPage extends React.Component {
                   </Loader>
                 </Dimmer>
                 {this.renderThreads()}
+                {this.props.threads.length ? null : <span>You haven&#39;t any open thread</span>}
               </Menu>
             </Grid.Column>
             <Grid.Column width={9} style={{ paddingTop: 0, paddingBottom: 0 }} >
-              <div
-                id="MessageHistory"
-                style={{ height: '78vh', overflowY: 'scroll', padding: '2% 5% 5% 5%' }}
-                onScroll={this.messagesScroll}
-              >
-                <Dimmer active={this.props.isFetchingMessages} inverted>
-                  <Loader size="medium">
-                    <p>Fetching your messages</p>
-                    <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
-                      <image href={loader} x="0" y="0" width="100%" height="100%" />
-                    </svg>
-                  </Loader>
-                </Dimmer>
-                {this.renderMessages()}
+              <div style={{ display: this.props.match.params.id ? null : 'none' }}>
+                <div
+                  id="MessageHistory"
+                  style={{ height: '78vh', overflowY: 'scroll', padding: '2% 5% 5% 5%' }}
+                  onScroll={this.messagesScroll}
+                >
+                  <Dimmer active={this.props.isFetchingMessages} inverted>
+                    <Loader size="medium">
+                      <p>Fetching your messages</p>
+                      <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
+                        <image href={loader} x="0" y="0" width="100%" height="100%" />
+                      </svg>
+                    </Loader>
+                  </Dimmer>
+                  {this.renderMessages()}
+                </div>
+                <Form onSubmit={this.sendMessage} >
+                  <Form.Group inline>
+                    <Form.TextArea
+                      className="messageInput"
+                      rows={2}
+                      style={{ resize: 'none' }}
+                      ref={(arg) => { this.inputRef = arg; }}
+                      onKeyDown={this.onEnterPress}
+                      autoComplete="off"
+                      type="text"
+                      name="message"
+                      placeholder="Type your message here..."
+                    />
+                    <Form.Button color="orange" className="sendButton" content="Send" type="submit" />
+                  </Form.Group>
+                </Form>
               </div>
-              <Form onSubmit={this.sendMessage} >
-                <Form.Group inline>
-                  <Form.TextArea
-                    className="messageInput"
-                    rows={2}
-                    style={{ resize: 'none' }}
-                    ref={(arg) => { this.inputRef = arg; }}
-                    onKeyDown={this.onEnterPress}
-                    autoComplete="off"
-                    type="text"
-                    name="message"
-                    placeholder="Type your message here..."
-                  />
-                  <Form.Button color="orange" className="sendButton" content="Send" type="submit" />
-                </Form.Group>
-              </Form>
             </Grid.Column>
             <Grid.Column width={3} style={{ paddingBottom: 0 }} >
               {this.renderUserInfo()}
@@ -352,6 +389,9 @@ function mapDispatchToProps(dispatch) {
     },
     resetMessages() {
       dispatch(resetMessages());
+    },
+    resetActiveThread() {
+      dispatch(resetActiveThread());
     },
   };
 }

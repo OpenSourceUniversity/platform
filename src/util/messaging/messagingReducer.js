@@ -102,6 +102,10 @@ const messagingReducer = (state = initialState, action) => {
       threadsById: Object.assign({}, state.threadsById, action.threadById),
       threads: [action.thread].concat(state.threads),
     });
+  case 'RESET_ACTIVE_THREAD':
+    return Object.assign({}, state, {
+      activeThread: null,
+    });
   default:
     return state;
   }

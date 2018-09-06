@@ -15,10 +15,12 @@ module.exports = {
       network_id: "*"
     },
     kovan: {
-      provider: new LedgerWalletProvider(
-        kovanLedgerOptions,
-        "https://kovan.infura.io/v3/94b6488e61684d60800d7d8aa6263431"
-      ),
+      provider() {
+        return new LedgerWalletProvider(
+          kovanLedgerOptions,
+          'https://kovan.infura.io/v3/94b6488e61684d60800d7d8aa6263431'
+        )
+      },
       network_id: kovanLedgerOptions.networkId,
       gas: 4600000,
       gasPrice: 25000000000

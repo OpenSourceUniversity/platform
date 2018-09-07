@@ -3,7 +3,7 @@ import store from '../../store';
 import Config from '../../config';
 
 const { bdnUrl } = Config.network;
-const ADD_CONNECTIONS_ARCHIVE_URL = `${bdnUrl}api/v1/connections/addzip`;
+const ADD_CONNECTIONS_ARCHIVE_URL = `${bdnUrl}api/v1/archive/`;
 
 
 export default function addFileWithConnections(connectionsDataFile) {
@@ -17,8 +17,10 @@ export default function addFileWithConnections(connectionsDataFile) {
         'Auth-Eth-Address': store.getState().auth.address.slice(2),
       },
     };
-
-    axios.post(ADD_CONNECTIONS_ARCHIVE_URL, connectionsDataFile, axiosConfig).then(() => {
+    const postData = {
+      datafile: connectionsDataFile ? connectionsDataFile : null,
+    };
+    axios.post(ADD_CONNECTIONS_ARCHIVE_URL, postData, axiosConfig).then(() => {
       dispatch({
         type: 'ADD_CONNECTIONS_ARCHIVE_SUCCESS',
       });

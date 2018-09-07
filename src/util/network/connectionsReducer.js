@@ -22,7 +22,7 @@ export default function connectionsReducer(state = INITIAL_STATE, action) {
   case 'ADD_CONNECTIONS_ARCHIVE_FAILURE':
     return Object.assign({}, state, {
       isArchiveAdding: false,
-      errorArchive: action.error.message,
+      errorArchive: action.error,
     });
   case 'ADD_CONNECTONS_ARCHIVE_RESET':
     return Object.assign({}, state, {

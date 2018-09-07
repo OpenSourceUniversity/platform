@@ -1,10 +1,13 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Segment, Container, Grid, Card, Image, Button, Icon, Header, Divider, Statistic, List } from 'semantic-ui-react';
+import { setActiveAccount } from '../../util/activeAccount';
+import addFileWithConnections from '../../util/network/addFileWithConnections';
 
 
-class SocialNetworkWithoutRouter extends React.Component {
+class SocialNetwork extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -13,16 +16,15 @@ class SocialNetworkWithoutRouter extends React.Component {
     };
   }
 
-  /* eslint-disable */
-  state = { buffer: null }
-  /* eslint-enable */
+  onDrop(event) {
+    event.preventDefault();
 
-  onDrop() {
     if (this.state.accepted.length > 0 && this.state.rejected.length === 0) {
       const file = this.state.accepted[0];
       const reader = new window.FileReader();
       reader.readAsArrayBuffer(file);
       reader.onloadend = () => this.convertToBuffer(reader);
+      this.props.addFileWithConnections(reader);
     }
   }
 
@@ -111,7 +113,7 @@ class SocialNetworkWithoutRouter extends React.Component {
                   accept="application/zip"
                   onDrop={
                     (accepted, rejected) => {
-                      this.setState({ accepted, rejected }); this.onDrop();
+                      this.setState({ accepted, rejected }); this.onDrop(event);
                     }
                   }
                 >
@@ -144,6 +146,26 @@ class SocialNetworkWithoutRouter extends React.Component {
   }
 }
 
-const SocialNetwork = withRouter(SocialNetworkWithoutRouter);
 
-export default SocialNetwork;
+function mapStateToProps(state) {
+  return {
+    activeAccount: state.activeAccount.activeAccount,
+    isArchiveAdded: state.connections.isArchiveAdded,
+    isArchiveAdding: state.connections.isArchiveAdding,
+    errorArchive: state.connections.errorArchive,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setActiveAccount(activeAccount) {
+      dispatch(setActiveAccount(activeAccount));
+    },
+    addFileWithConnections(connectionsDataFile) {
+      dispatch(addFileWithConnections(connectionsDataFile));
+    },
+  };
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SocialNetwork));

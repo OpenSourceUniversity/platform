@@ -18,7 +18,7 @@ export default function addFileWithConnections(connectionsDataFile) {
       },
     };
     const postData = {
-      datafile: connectionsDataFile ? connectionsDataFile : null,
+      datafile: connectionsDataFile || null,
     };
     axios.post(ADD_CONNECTIONS_ARCHIVE_URL, postData, axiosConfig).then(() => {
       dispatch({

@@ -59,10 +59,8 @@ class ViewLearnerProfile extends React.Component {
         notVerifiedSkills = notVerifiedSkills.concat(certificates[i].skills);
       }
     }
-    verifiedSkills = verifiedSkills.filter((item, pos) =>
-      verifiedSkills.indexOf(item) === pos).map(e => e.name);
-    notVerifiedSkills = notVerifiedSkills.filter((item, pos) =>
-      notVerifiedSkills.indexOf(item) === pos).map(e => e.name);
+    verifiedSkills = [...new Set(verifiedSkills.map(e => e.name))];
+    notVerifiedSkills = [...new Set(notVerifiedSkills.map(e => e.name))];
     notVerifiedSkills = notVerifiedSkills.filter(el => !verifiedSkills.includes(el));
 
     for (let i = 0; i < verifiedSkills.length; i += 1) {

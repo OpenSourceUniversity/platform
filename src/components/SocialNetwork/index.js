@@ -113,9 +113,9 @@ class SocialNetwork extends React.Component {
                   accept="application/zip"
                   onDrop={
                     (accepted, rejected) => {
-                      /* eslint-disable no-restricted-globals*/
+                      /* eslint-disable no-restricted-globals */
                       this.setState({ accepted, rejected }); this.onDrop(event);
-                      /* eslint-enable no-restricted-globals*/
+                      /* eslint-enable no-restricted-globals */
                     }
                   }
                 >

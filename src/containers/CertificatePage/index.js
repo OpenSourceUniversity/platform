@@ -7,6 +7,7 @@ import fetchCertificate from '../../util/certificate/fetchCertificate';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import Config from '../../config';
 import { requireVerification } from '../../util/verification/verificationRequest';
+import resetVerificationMessages from '../../util/verification/resetVerificationMessages';
 import deleteCertificate from '../../util/certificate/deleteCertificate';
 import { getProfileTypeName } from '../../util/activeAccount';
 
@@ -40,7 +41,10 @@ class CertificatePage extends React.Component {
 
   handleOpen = () => this.setState({ modalOpen: true })
 
-  handleClose = () => this.setState({ modalOpen: false })
+  handleClose = () => {
+    this.setState({ modalOpen: false });
+    this.props.resetVerificationMessages();
+  }
 
   renderSkills() {
     const skillsArr = this.props.certificate.skills;
@@ -389,6 +393,9 @@ function mapDispatchToProps(dispatch) {
     },
     deleteCertificate(id) {
       dispatch(deleteCertificate(id));
+    },
+    resetVerificationMessages() {
+      dispatch(resetVerificationMessages());
     },
   };
 }

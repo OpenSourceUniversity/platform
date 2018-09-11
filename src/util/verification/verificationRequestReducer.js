@@ -25,6 +25,11 @@ export default function verificationRequestReducer(state = INITIAL_STATE, action
       requestSending: false,
       requestSuccess: false,
     });
+  case 'RESET_VERIFICATION_MESSAGES':
+    return Object.assign({}, state, {
+      requestSuccess: false,
+      requestError: false,
+    });
   default:
     return state;
   }

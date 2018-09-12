@@ -7,7 +7,7 @@ import fetchCertificate from '../../util/certificate/fetchCertificate';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import Config from '../../config';
 import { requireVerification } from '../../util/verification/verificationRequest';
-import resetVerificationMessages from '../../util/verification/resetVerificationMessages';
+import resetVerificationRequestMessages from '../../util/verification/resetVerificationRequestMessages';
 import deleteCertificate from '../../util/certificate/deleteCertificate';
 import { getProfileTypeName } from '../../util/activeAccount';
 
@@ -43,7 +43,7 @@ class CertificatePage extends React.Component {
 
   handleClose = () => {
     this.setState({ modalOpen: false });
-    this.props.resetVerificationMessages();
+    this.props.resetVerificationRequestMessages();
   }
 
   renderSkills() {
@@ -169,7 +169,7 @@ class CertificatePage extends React.Component {
                   </svg>
                 </Loader>
               </Dimmer>
-              {this.props.address.toLowerCase() === this.props.certificate.learner_eth_address ?
+              {this.props.address.toLowerCase() === this.props.certificate.holder_eth_address ?
                 <Modal open={this.state.modalOpen} onClose={this.handleClose} trigger={<Button floated="left" onClick={this.handleOpen} color="red">Delete</Button>} basic size="small">
                   <Header icon="archive" content="Delete course confirmation" />
                   <Modal.Content>
@@ -204,7 +204,7 @@ class CertificatePage extends React.Component {
                 </Modal> :
                 null
               }
-              {this.props.address.toLowerCase() === this.props.certificate.learner_eth_address ?
+              {this.props.address.toLowerCase() === this.props.certificate.holder_eth_address ?
                 <Modal trigger={
                   <Button icon labelPosition="left" positive floated="right">
                     <Icon name="checkmark" />
@@ -316,7 +316,7 @@ class CertificatePage extends React.Component {
                     <Header style={{ fontSize: '1.7em' }}>
                       Learner ETH Address:
                     </Header>
-                    <a rel="noopener noreferrer" target="_blank" href={`https://etherscan.io/address/${this.props.certificate.learner_eth_address}`}>{this.props.certificate.learner_eth_address}</a>
+                    <a rel="noopener noreferrer" target="_blank" href={`https://etherscan.io/address/${this.props.certificate.holder_eth_address}`}>{this.props.certificate.holder_eth_address}</a>
                     <Header style={{ fontSize: '1.7em' }}>
                       Score:
                     </Header>
@@ -394,8 +394,8 @@ function mapDispatchToProps(dispatch) {
     deleteCertificate(id) {
       dispatch(deleteCertificate(id));
     },
-    resetVerificationMessages() {
-      dispatch(resetVerificationMessages());
+    resetVerificationRequestMessages() {
+      dispatch(resetVerificationRequestMessages());
     },
   };
 }

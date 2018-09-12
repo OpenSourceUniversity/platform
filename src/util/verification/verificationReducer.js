@@ -35,6 +35,10 @@ export default function verificationReducer(state = INITIAL_STATE, action) {
     return Object.assign({}, state, {
       fetchError: action.error,
     });
+  case 'RESET_VERIFICATION_ERROR_MESSAGE':
+    return Object.assign({}, state, {
+      txError: null,
+    });
   default:
     return state;
   }

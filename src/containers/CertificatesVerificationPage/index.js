@@ -225,7 +225,7 @@ class CertificatesVerificationPage extends React.Component {
                 <div>{this.renderSkills()}</div>
                 <Divider clearing />
                 Learner address:
-                <p>{this.props.certificate.learner_eth_address ? this.props.certificate.learner_eth_address : '-'}</p>
+                <p>{this.props.certificate.holder_eth_address ? this.props.certificate.holder_eth_address : '-'}</p>
                 <Divider clearing />
                 Learner&apos;s score:
                 <p>{this.props.certificate.score ? this.props.certificate.score : '-'}</p>

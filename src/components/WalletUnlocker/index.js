@@ -2,11 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Message, Modal, Icon, Input } from 'semantic-ui-react';
 import { closeUnlocker, unlockWallet } from '../../util/auth/walletUnlocker';
+import resetVerificationErrorMessages from '../../util/verification/resetVerificationErrorMessages';
 
 
 class WalletUnlocker extends React.Component {
   handleClose() {
     this.props.closeUnlocker();
+    this.props.resetVerificationErrorMessages();
   }
 
   render() {
@@ -19,6 +21,9 @@ class WalletUnlocker extends React.Component {
         <Modal.Content>
           <Message error hidden={!this.props.error}>
             {this.props.error}
+          </Message>
+          <Message error hidden={!this.props.txError}>
+            {this.props.txError}
           </Message>
           <Input fluid label="Passphrase" placeholder="enter your passphrase..." type="password" id="passphrase" />
         </Modal.Content>
@@ -49,6 +54,7 @@ function mapStateToProps(state) {
   return {
     open: state.auth.walletUnlockerModalOpen,
     error: state.auth.walletUnlockerError,
+    txError: state.verification.txError,
   };
 }
 
@@ -61,6 +67,9 @@ function mapDispatchToProps(dispatch) {
 
     unlockWallet(passphrase) {
       dispatch(unlockWallet(passphrase));
+    },
+    resetVerificationErrorMessages() {
+      dispatch(resetVerificationErrorMessages());
     },
   };
 }

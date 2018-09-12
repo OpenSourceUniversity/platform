@@ -30,7 +30,7 @@ class AddCertificatePage extends React.Component {
       course_link: event.target.elements.course_link.value,
       industries,
       skills,
-      learner_eth_address: component.props.activeAccount === 'Learner' ? component.props.ethAddress : event.target.elements.learner_eth_address.value,
+      holder_eth_address: component.props.activeAccount === 'Learner' ? component.props.ethAddress : event.target.elements.holder_eth_address.value,
       score: event.target.elements.score.value,
       expiration_date: event.target.elements.expiration_date.value,
     };
@@ -49,7 +49,7 @@ class AddCertificatePage extends React.Component {
   }
 
   validation = () => !this.state.buffer || !this.state.course_title
-        || !(this.props.activeAccount === 'Learner' ? this.props.ethAddress : this.state.learner_eth_address)
+        || !(this.props.activeAccount === 'Learner' ? this.props.ethAddress : this.state.holder_eth_address)
         || !this.state.academy_title || !this.state.academy_link
 
   captureCertificateFile = (event) => {
@@ -190,12 +190,12 @@ class AddCertificatePage extends React.Component {
                 </Grid.Column>
                 <Grid.Column>
                   <Form.Field required>
-                    <label htmlFor="learner_eth_address">
+                    <label htmlFor="holder_eth_address">
                       Learner address
                     </label>
                     <Input
-                      id="learner_eth_address"
-                      name="learner_eth_address"
+                      id="holder_eth_address"
+                      name="holder_eth_address"
                       iconPosition="left"
                       icon="globe"
                       placeholder="ETH address of learner"

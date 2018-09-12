@@ -9,7 +9,6 @@ const INITIAL_STATE = {
       },
       first_name: null,
       last_name: null,
-      learner_email: null,
       learner_position: null,
       learner_specialisation: null,
       learner_about: null,

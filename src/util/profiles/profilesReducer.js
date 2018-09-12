@@ -33,7 +33,6 @@ const INITIAL_STATE = {
     learner_specialisation: null,
     learner_about: null,
     public_profile: null,
-    learner_email: null,
     learner_site: null,
     phone_number: null,
     learner_country: null,

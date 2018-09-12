@@ -113,7 +113,7 @@ class CertificatesVerificationPage extends React.Component {
         active={this.state.activeVerificationId === verification.id}
         onClick={() => this.showVerification(verification.id)}
       >
-        {verification.certificate.course_title}
+        {verification.certificate.certificate_title}
         {verification.state === 'open' || verification.state === 'requested' ?
           <div style={{ float: 'right' }}>
             <Checkbox onChange={this.handleCheckboxClick} name={verification.id} label="to verify" />
@@ -204,16 +204,16 @@ class CertificatesVerificationPage extends React.Component {
                   </Loader>
                 </Dimmer>
                 Academy title:
-                <p>{this.props.certificate.academy_title ? this.props.certificate.academy_title : '-'}</p>
+                <p>{this.props.certificate.institution_title ? this.props.certificate.institution_title : '-'}</p>
                 <Divider clearing />
                 Academy site:
-                <p>{this.props.certificate.academy_link ? this.props.certificate.academy_link : '-'}</p>
+                <p>{this.props.certificate.institution_link ? this.props.certificate.institution_link : '-'}</p>
                 <Divider clearing />
                 Program title:
                 <p>{this.props.certificate.program_title ? this.props.certificate.program_title : '-'}</p>
                 <Divider clearing />
                 Course title:
-                <p>{this.props.certificate.course_title ? this.props.certificate.course_title : '-'}</p>
+                <p>{this.props.certificate.certificate_title ? this.props.certificate.certificate_title : '-'}</p>
                 <Divider clearing />
                 Course link:
                 <p>{this.props.certificate.course_link ? this.props.certificate.course_link : '-'}</p>

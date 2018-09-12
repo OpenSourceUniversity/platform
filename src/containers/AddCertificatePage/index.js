@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Container, Grid, Header, Segment, Button, Message, Divider, Breadcrumb, Form, Input, Dimmer, Loader } from 'semantic-ui-react';
+import { Container, Grid, Header, Segment, Button, Message, Divider, Breadcrumb, Form, Input, Dimmer, Loader, Dropdown } from 'semantic-ui-react';
 import SkillsInput from 'components/SkillsInput';
 import IndustriesInput from 'components/IndustriesInput';
 import storeCertificateOnIpfs from '../../util/certificate/storeCertificateOnIpfs';
@@ -16,6 +16,35 @@ class AddCertificatePage extends React.Component {
     this.props.resetAddCertificateProps();
   }
 
+  getDynamicOptions() {
+    const { activeAccount } = this.props;
+    switch (activeAccount) {
+    case 'Academy': return ([
+      {
+        text: 'Learner',
+        value: 1,
+      },
+      {
+        text: 'Me',
+        value: 2,
+      }]);
+    case 'Business': return ([
+      {
+        text: 'Learner',
+        value: 1,
+      },
+      {
+        text: 'Academy',
+        value: 2,
+      },
+      {
+        text: 'Me',
+        value: 3,
+      }]);
+    default: return null;
+    }
+  }
+
   handleSubmit(event, component) {
     event.preventDefault();
 
@@ -23,14 +52,15 @@ class AddCertificatePage extends React.Component {
     const skills = this.skillsRef.state.currentValue;
 
     const certificateData = {
-      academy_title: event.target.elements.academy_title.value,
-      academy_link: event.target.elements.academy_link.value,
+      institution_title: event.target.elements.institution_title.value,
+      institution_link: event.target.elements.institution_link.value,
       program_title: event.target.elements.program_title.value,
-      course_title: event.target.elements.course_title.value,
+      certificate_title: event.target.elements.certificate_title.value,
       course_link: event.target.elements.course_link.value,
       industries,
       skills,
       holder_eth_address: component.props.activeAccount === 'Learner' ? component.props.ethAddress : event.target.elements.holder_eth_address.value,
+      granted_to_type: component.props.activeAccount === 'Learner' ? 1 : component.state.granted_to_type,
       score: event.target.elements.score.value,
       expiration_date: event.target.elements.expiration_date.value,
     };
@@ -44,13 +74,29 @@ class AddCertificatePage extends React.Component {
     }
   }
 
+  grantedToTypeOptions = [
+    {
+      text: 'Learner',
+      value: 1,
+    },
+    {
+      text: 'Academy',
+      value: 2,
+    },
+    {
+      text: 'Business',
+      value: 3,
+    },
+  ]
+
   handleChange = (e, { name, value }) => {
     this.setState({ [name]: value });
   }
 
-  validation = () => !this.state.buffer || !this.state.course_title
+  validation = () => !this.state.buffer || !this.state.certificate_title
         || !(this.props.activeAccount === 'Learner' ? this.props.ethAddress : this.state.holder_eth_address)
-        || !this.state.academy_title || !this.state.academy_link
+        || !this.state.institution_title || !this.state.institution_link
+        || !(this.props.activeAccount === 'Learner' ? true : this.state.granted_to_type)
 
   captureCertificateFile = (event) => {
     event.stopPropagation();
@@ -134,12 +180,12 @@ class AddCertificatePage extends React.Component {
               <Grid.Row columns={2}>
                 <Grid.Column>
                   <Form.Field required>
-                    <label htmlFor="course_title">
+                    <label htmlFor="certificate_title">
                       Course title
                     </label>
                     <Input
-                      id="course_title"
-                      name="course_title"
+                      id="certificate_title"
+                      name="certificate_title"
                       iconPosition="left"
                       icon="file"
                       placeholder="Official course title"
@@ -204,6 +250,27 @@ class AddCertificatePage extends React.Component {
                       onChange={this.handleChange}
                     />
                   </Form.Field>
+                  {this.props.activeAccount === 'Learner' ?
+                    null :
+                    <Form.Field required>
+                      <label htmlFor="granted_to_type">
+                        Granted to type
+                      </label>
+                      <Dropdown
+                        id="granted_to_type"
+                        name="granted_to_type"
+                        placeholder="Granted to type"
+                        fluid
+                        selection
+                        onChange={(e, { value }) => {
+                          /* eslint-disable react/no-unused-state */
+                          this.setState({ granted_to_type: value });
+                          /* eslint-enable react/no-unused-state */
+                        }}
+                        options={this.getDynamicOptions()}
+                      />
+                    </Form.Field>
+                  }
                   <Form.Field>
                     <label htmlFor="score">
                       Learner score (if any)
@@ -221,12 +288,12 @@ class AddCertificatePage extends React.Component {
                     />
                   </Form.Field>
                   <Form.Field required>
-                    <label htmlFor="academy_title">
+                    <label htmlFor="institution_title">
                       Academy title
                     </label>
                     <Input
-                      id="academy_title"
-                      name="academy_title"
+                      id="institution_title"
+                      name="institution_title"
                       iconPosition="left"
                       icon="university"
                       placeholder="Official name of your academy"
@@ -234,12 +301,12 @@ class AddCertificatePage extends React.Component {
                     />
                   </Form.Field>
                   <Form.Field required>
-                    <label htmlFor="academy_link">
+                    <label htmlFor="institution_link">
                       Academy site
                     </label>
                     <Input
-                      id="academy_link"
-                      name="academy_link"
+                      id="institution_link"
+                      name="institution_link"
                       iconPosition="left"
                       icon="chain"
                       type="url"

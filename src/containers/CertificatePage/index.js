@@ -187,7 +187,7 @@ class CertificatePage extends React.Component {
                     </Message>
                     <p>
                     You want to delete youre certificate,&nbsp;
-                    named: {this.props.certificate.course_title}.
+                    named: {this.props.certificate.certificate_title}.
                     </p>
                     <p>
                     Please, confirm this action.
@@ -259,7 +259,7 @@ class CertificatePage extends React.Component {
                 Certificate Information
               </Header>
               <Header style={{ fontSize: '1.7em' }}>
-                {this.props.certificate.course_title}
+                {this.props.certificate.certificate_title}
               </Header>
               <Divider clearing />
               <Grid>
@@ -272,11 +272,11 @@ class CertificatePage extends React.Component {
                     <Header style={{ fontSize: '1.7em' }}>
                       Academy Title:
                     </Header>
-                    <span>{this.props.certificate.academy_title}</span>
+                    <span>{this.props.certificate.institution_title}</span>
                     <Header style={{ fontSize: '1.7em' }}>
                       Academy Site:
                     </Header>
-                    <a rel="noopener noreferrer" target="_blank" href={this.props.certificate.academy_link}>{this.props.certificate.academy_link}</a>
+                    <a rel="noopener noreferrer" target="_blank" href={this.props.certificate.institution_link}>{this.props.certificate.institution_link}</a>
                   </Segment>
                 </Grid.Column>
                 <Grid.Column width={8}>

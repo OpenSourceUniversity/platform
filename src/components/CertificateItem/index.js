@@ -77,7 +77,7 @@ class CertificateItemWithoutRouter extends React.Component {
     return (
       <Card color={color} onClick={() => { this.props.history.push(`/certificate/${this.props.certificate.id}/`); }}>
         <Card.Content>
-          <Card.Header>{this.props.certificate.course_title}</Card.Header>
+          <Card.Header>{this.props.certificate.certificate_title}</Card.Header>
           <Card.Meta>{ getIndustriesString() }</Card.Meta>
         </Card.Content>
         <Card.Content extra>

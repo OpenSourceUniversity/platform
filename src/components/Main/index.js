@@ -91,8 +91,8 @@ class Main extends React.Component {
         <PrivateRoute {...this.props} exact path="/businesses/edit/:id/" component={AddJobPosition} />
         <PrivateRoute {...this.props} exact path="/academies/add/" component={AddCourse} />
         <PrivateRoute {...this.props} exact path="/academies/edit/:id/" component={AddCourse} />
-        <PrivateRoute {...this.props} exact path="/verifications/" component={CertificatesVerificationPage} />
-        <PrivateRoute {...this.props} exact path="/verifications/:id/" component={CertificatesVerificationPage} />
+        <PrivateRoute {...this.props} exact path="/verifications/:type/" component={CertificatesVerificationPage} />
+        <PrivateRoute {...this.props} exact path="/verifications/:type/:id/" component={CertificatesVerificationPage} />
         <PrivateRoute {...this.props} exact path="/messaging" component={MessagingPage} />
         <PrivateRoute {...this.props} exact path="/messaging/:id/" component={MessagingPage} />
         <PrivateRoute {...this.props} path="/courses" component={CoursesPage} />

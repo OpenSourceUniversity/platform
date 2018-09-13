@@ -1,15 +1,35 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import { getProfileTypeName } from '../../util/activeAccount';
+import { getProfileTypeName, setActiveAccount } from '../../util/activeAccount';
 
 
 class NotificationSummaryComponent extends React.Component {
+  setActiveProfileClick = (recipientProfileType) => {
+    switch (recipientProfileType) {
+    case 1:
+      this.props.setActiveAccount('Learner');
+      return null;
+    case 2:
+      this.props.setActiveAccount('Academy');
+      return null;
+    case 3:
+      this.props.setActiveAccount('Business');
+      return null;
+    default:
+      return null;
+    }
+  };
+
   actionObject(notification) {
     const actionObjectName = notification.action_object_content_type_name;
+    const recipientProfileType = notification.recipient_active_profile_type;
     function getActionObjectLink() {
       switch (actionObjectName) {
       case 'verification':
-        return `/verifications/${notification.action_object_object_id}/`;
+        return recipientProfileType === 2 ?
+          `/verifications/academy/${notification.action_object_object_id}/` :
+          `/verifications/business/${notification.action_object_object_id}/`;
       default:
         return null;
       }
@@ -23,6 +43,7 @@ class NotificationSummaryComponent extends React.Component {
         <Link
           href={actionObjectUrl}
           to={actionObjectUrl}
+          onClick={() => { this.setActiveProfileClick(recipientProfileType); }}
         >
           {actionObjectName}
         </Link>
@@ -33,6 +54,7 @@ class NotificationSummaryComponent extends React.Component {
 
   target(notification) {
     const targetName = notification.target_content_type_name;
+    const recipientProfileType = notification.recipient_active_profile_type;
     function getTargetLink() {
       switch (targetName) {
       case 'certificate':
@@ -50,6 +72,7 @@ class NotificationSummaryComponent extends React.Component {
         <Link
           href={targetUrl}
           to={targetUrl}
+          onClick={() => { this.setActiveProfileClick(recipientProfileType); }}
         >
           {targetName}
         </Link>
@@ -86,4 +109,22 @@ class NotificationSummaryComponent extends React.Component {
 }
 
 
-export default withRouter(NotificationSummaryComponent);
+function mapStateToProps(state) {
+  return {
+    activeAccount: state.activeAccount.activeAccount,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setActiveAccount(activeAccount) {
+      dispatch(setActiveAccount(activeAccount));
+    },
+  };
+}
+
+
+export default withRouter(connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(NotificationSummaryComponent));

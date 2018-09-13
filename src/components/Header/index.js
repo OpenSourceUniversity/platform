@@ -120,6 +120,7 @@ class HeaderWithoutRouter extends React.Component {
             return null;
           })()}
         />
+        {this.props.activeAccount}
       </span>
     );
 
@@ -197,7 +198,7 @@ class HeaderWithoutRouter extends React.Component {
         key: 'add-certificate', content: 'Add Certificate', name: 'certificates/add', active: activeItem === 'certificates/add', onClick: this.handleItemClick,
       },
       {
-        key: 'verification', content: 'Certificates verification', name: 'verifications/', active: activeItem === 'verifications/', onClick: this.handleItemClick,
+        key: 'verification', content: 'Certificates verification', name: 'verifications/academy/', active: activeItem === 'verifications/academy/', onClick: this.handleItemClick,
       },
       {
         key: 'scholarships', content: 'Scholarships', name: 'scholarships', active: false, className: 'secondary-nav-disabled-beta',

@@ -24,9 +24,23 @@ class CertificatesVerificationPage extends React.Component {
       this.state.activeVerificationId = verificationId;
       this.props.fetchVerification(`${bdnUrl}api/v1/verifications/${verificationId}/`);
     }
-    this.props.fetchVerifications();
+    if (this.props.match.params.type === 'academy') {
+      this.props.fetchVerifications(`${bdnUrl}api/v1/verifications/?active_profile=Academy`);
+    } else {
+      this.props.fetchVerifications(`${bdnUrl}api/v1/verifications/?active_profile=Business`);
+    }
     this.props.setSecondaryNav('academia');
     document.title = 'Certificates Validation';
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.match.params.type !== prevProps.match.params.type) {
+      if (this.props.match.params.type === 'academy') {
+        this.props.fetchVerifications(`${bdnUrl}api/v1/verifications/?active_profile=Academy`);
+      } else {
+        this.props.fetchVerifications(`${bdnUrl}api/v1/verifications/?active_profile=Business`);
+      }
+    }
   }
 
   massVerification() {
@@ -49,7 +63,7 @@ class CertificatesVerificationPage extends React.Component {
 
   showVerification = (verificationId) => {
     this.setState({ activeVerificationId: verificationId });
-    this.props.history.push(`/verifications/${verificationId}/`);
+    this.props.history.push(`/verifications/${this.props.match.params.type}/${verificationId}/`);
     this.props.fetchVerification(`${bdnUrl}api/v1/verifications/${verificationId}/`);
   }
 
@@ -128,7 +142,6 @@ class CertificatesVerificationPage extends React.Component {
     /* eslint-disable global-require */
     const loader = require('../../icons/osu-loader.svg');
     /* eslint-enable global-require */
-
     return (
       <Container>
         <Breadcrumb>
@@ -266,14 +279,15 @@ function mapStateToProps(state) {
     isUpdating: state.certificate.isUpdating,
     isVerifying: state.verification.isVerifying,
     error: state.verifications.error,
+    activeAccount: state.activeAccount.activeAccount,
   };
 }
 
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchVerifications() {
-      dispatch(fetchVerifications());
+    fetchVerifications(url) {
+      dispatch(fetchVerifications(url));
     },
     setSecondaryNav(secondaryNav) {
       dispatch(setSecondaryNav(secondaryNav));

@@ -23,6 +23,20 @@ class NotificationItem extends Dropdown.Item {
     }
   }
 
+  setTypeHeader(notification) {
+    const recipientProfileType = notification.recipient_active_profile_type;
+    switch (recipientProfileType) {
+    case 1:
+      return 'Learner';
+    case 2:
+      return 'Academy';
+    case 3:
+      return 'Business';
+    default:
+      return null;
+    }
+  }
+
   render() {
     const { notification } = this.props;
     const backgroundColor = notification.unread ? '#efefef' : 'white';
@@ -41,7 +55,10 @@ class NotificationItem extends Dropdown.Item {
         <Feed.Label>
           <img src="https://react.semantic-ui.com/images/avatar/small/elliot.jpg" alt="" />
         </Feed.Label>
-        <Feed.Content>
+        <Feed.Content style={{ marginTop: 0 }} >
+          <Feed.Meta style={{ margin: 0 }}>
+            {this.setTypeHeader(notification)}
+          </Feed.Meta>
           <Feed.Summary>
             <NotificationSummaryComponent notification={notification} />
           </Feed.Summary>

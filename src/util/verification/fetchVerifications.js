@@ -1,10 +1,7 @@
 import store from '../../store';
-import Config from '../../config';
 
-const { bdnUrl } = Config.network;
-const START_URL = `${bdnUrl}api/v1/verifications/`;
 
-export default function fetchVerifications(url = START_URL) {
+export default function fetchVerifications(url) {
   return function dispatcher(dispatch) {
     dispatch({
       type: 'FETCH_VERIFICATIONS_REQUEST',

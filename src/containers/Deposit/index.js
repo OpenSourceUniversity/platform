@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import React from 'react';
+import QRCode from 'qrcode.react';
 import { Segment, Container, Grid, Card, Image, Button, Icon, Header, Divider, Statistic, Input, Form, Dropdown, Dimmer, Message } from 'semantic-ui-react';
 import TransactionHistoryItem from 'components/TransactionHistoryItem';
 import { initWalletUnlocker } from '../../util/auth/walletUnlocker';
@@ -125,6 +126,9 @@ class Deposit extends React.Component {
                         </Card.Header>
                         <Card.Meta>
                           Send EDU Tokens or ETH to the address below.
+                        </Card.Meta>
+                        <Card.Meta style={{ textAlign: 'center', paddingTop: '1em', paddingBottom: '1em' }}>
+                          <QRCode value={this.props.address} />
                         </Card.Meta>
                         <Card.Description>
                           <Form className="attached fluid segment">

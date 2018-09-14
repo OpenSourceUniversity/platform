@@ -6,7 +6,16 @@ export default class SkillItem extends React.Component {
   render() {
     const color = this.props.skill.check ? 'green' : 'orange';
     return (
-      <Label basic={this.props.skill.basic}>
+      <Label
+        color={this.props.color}
+        basic={this.props.skill.basic}
+        size={this.props.isCertificatePage ? 'huge' : null}
+        style={{
+          borderRadius: this.props.isCertificatePage ? '45%' : null,
+          paddingTop: '8px',
+          paddingBottom: '8px',
+        }}
+      >
         {this.props.skill.have_icon ?
           <Icon size="small" name={this.props.skill.check ? 'check' : 'warning sign'} color={color} /> :
           null

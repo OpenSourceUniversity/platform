@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Header, Divider, Segment, Container, Dimmer, Loader, Breadcrumb, Grid, Modal, Button, Icon, Form, Input, Message } from 'semantic-ui-react';
+import QRCode from 'qrcode.react';
+import { Header, Divider, Segment, Container, Dimmer, Loader, Breadcrumb, Modal, Button, Icon, Form, Input, Message } from 'semantic-ui-react';
 import SkillItem from 'components/SkillItem';
 import fetchCertificate from '../../util/certificate/fetchCertificate';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
@@ -26,6 +27,80 @@ class CertificatePage extends React.Component {
     document.title = 'Certificate';
   }
 
+  getDateString(dateStr) {
+    const year = dateStr.substring(0, 4);
+    const month = dateStr.substring(5, 7);
+    let monthString = '';
+    const day = dateStr.substring(8, 10);
+    let dayString = '';
+    switch (month) {
+    case '01':
+      monthString = 'January';
+      break;
+    case '02':
+      monthString = 'February';
+      break;
+    case '03':
+      monthString = 'March';
+      break;
+    case '04':
+      monthString = 'April';
+      break;
+    case '05':
+      monthString = 'May';
+      break;
+    case '06':
+      monthString = 'June';
+      break;
+    case '07':
+      monthString = 'July';
+      break;
+    case '08':
+      monthString = 'August';
+      break;
+    case '09':
+      monthString = 'September';
+      break;
+    case '10':
+      monthString = 'October';
+      break;
+    case '11':
+      monthString = 'November';
+      break;
+    case '12':
+      monthString = 'December';
+      break;
+    default:
+      monthString = '';
+    }
+    switch (day) {
+    case '01':
+      dayString = '1st';
+      break;
+    case '02':
+      dayString = '2nd';
+      break;
+    case '03':
+      dayString = '3rd';
+      break;
+    case '21':
+      dayString = '21st';
+      break;
+    case '22':
+      dayString = '22nd';
+      break;
+    case '23':
+      dayString = '23rd';
+      break;
+    case '31':
+      dayString = '31st';
+      break;
+    default:
+      dayString = `${day}th`;
+    }
+    return `${monthString} ${dayString}, ${year}`;
+  }
+
   handleSubmit(event, component) {
     event.preventDefault();
     const STATES = { Learner: 1, Academy: 2, Business: 3 };
@@ -46,34 +121,17 @@ class CertificatePage extends React.Component {
     this.props.resetVerificationRequestMessages();
   }
 
-  renderSkills() {
+  renderSkills(status, color) {
     const skillsArr = this.props.certificate.skills;
     const skills = [];
     try {
       for (let i = 0; i < skillsArr.length; i += 1) {
         skills.push({
-          have_icon: false, check: true, name: skillsArr[i].name, basic: false,
+          have_icon: false, check: true, name: skillsArr[i].name, basic: true,
         });
       }
       return skills.map((skill, index) => (
-        <SkillItem skill={skill} key={index} />
-      ));
-    } catch (e) {
-      return null;
-    }
-  }
-
-  renderSubjects() {
-    const industriesArr = this.props.certificate.industries;
-    const industries = [];
-    try {
-      for (let i = 0; i < industriesArr.length; i += 1) {
-        industries.push({
-          have_icon: false, check: true, name: industriesArr[i].name, basic: false,
-        });
-      }
-      return industries.map((industry, index) => (
-        <SkillItem skill={industry} key={index} />
+        <SkillItem isCertificatePage color={color} skill={skill} key={index} />
       ));
     } catch (e) {
       return null;
@@ -101,7 +159,7 @@ class CertificatePage extends React.Component {
       verifications.push(certificate.verifications[i].map((verification, index) => (
         <div key={index}>
           <Divider clearing />
-          <p>
+          <span style={{ lineHeight: '4.4' }}>
             <a
               href={`${etherscanUrl}${verification.tx_hash}`}
               rel="noopener noreferrer"
@@ -115,7 +173,10 @@ class CertificatePage extends React.Component {
             >
               {verification.verifier_name}
             </Link>
-          </p>
+          </span>
+          <span style={{ float: 'right' }}>
+            <QRCode value={`${etherscanUrl}${verification.tx_hash}`} size={64} />
+          </span>
           <Divider clearing />
         </div>
       )));
@@ -131,6 +192,12 @@ class CertificatePage extends React.Component {
   // }
 
   render() {
+    /* eslint-disable global-require */
+    const verified = require('../../icons/verified.svg');
+    const revoked = require('../../icons/revoked.svg');
+    const expired = require('../../icons/expired.svg');
+    const validated = require('../../icons/validated.svg');
+    /* eslint-enable global-require */
     const status = this.renderStatus();
     function getColor() {
       switch (status) {
@@ -144,11 +211,39 @@ class CertificatePage extends React.Component {
         return 'yellow';
       }
     }
+    const certificateStatusIcon = (
+      <svg width="64" height="64" style={{ marginBottom: '-12px' }}>
+        <image
+          href={(() => {
+            switch (status) {
+            case 'verified': return verified;
+            case 'revoked': return revoked;
+            case 'expired': return expired;
+            default: return validated;
+            }
+          })()}
+          x="0"
+          y="0"
+          width="100%"
+          height="100%"
+        />
+      </svg>
+    );
+    const etherscanUser = `${etherscanUrl}${this.props.certificate.holder_eth_address}`;
     const color = getColor();
+    console.log(this.props.certificate);
     /* eslint-disable global-require */
     const loader = require('../../icons/osu-loader.svg');
     /* eslint-enable global-require */
     /* eslint-disable jsx-a11y/label-has-for */
+    const { industries } = this.props.certificate;
+    function getIndustriesString() {
+      let industriesStr = '';
+      for (let i = 0; i < industries.length; i += 1) {
+        industriesStr += `${industries[i].name}, `;
+      }
+      return industriesStr.slice(0, industriesStr.length - 2);
+    }
     return (
       <div className="certificate">
         <Container>
@@ -169,194 +264,184 @@ class CertificatePage extends React.Component {
                   </svg>
                 </Loader>
               </Dimmer>
-              {this.props.address.toLowerCase() === this.props.certificate.holder_eth_address ?
-                <Modal open={this.state.modalOpen} onClose={this.handleClose} trigger={<Button floated="left" onClick={this.handleOpen} color="red">Delete</Button>} basic size="small">
-                  <Header icon="archive" content="Delete course confirmation" />
-                  <Modal.Content>
-                    <Dimmer active={this.props.isDeleting} page>
-                      <Loader size="medium">
-                        <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
-                          <image href={loader} x="0" y="0" width="100%" height="100%" />
-                        </svg>
-                      </Loader>
-                    </Dimmer>
-                    <Message error hidden={!this.props.error}>
+              <div style={{ height: this.props.address.toLowerCase() === this.props.certificate.holder_eth_address ? '40px' : 0 }} >
+                {this.props.address.toLowerCase() === this.props.certificate.holder_eth_address ?
+                  <Modal open={this.state.modalOpen} onClose={this.handleClose} trigger={<Button floated="left" onClick={this.handleOpen} color="red">Delete</Button>} basic size="small">
+                    <Header icon="archive" content="Delete course confirmation" />
+                    <Modal.Content>
+                      <Dimmer active={this.props.isDeleting} page>
+                        <Loader size="medium">
+                          <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
+                            <image href={loader} x="0" y="0" width="100%" height="100%" />
+                          </svg>
+                        </Loader>
+                      </Dimmer>
+                      <Message error hidden={!this.props.error}>
+                        <p>
+                          {this.props.error}
+                        </p>
+                      </Message>
                       <p>
-                        {this.props.error}
+                      You want to delete youre certificate,&nbsp;
+                      named: {this.props.certificate.certificate_title}.
                       </p>
-                    </Message>
-                    <p>
-                    You want to delete youre certificate,&nbsp;
-                    named: {this.props.certificate.certificate_title}.
-                    </p>
-                    <p>
-                    Please, confirm this action.
-                    </p>
-                  </Modal.Content>
-                  <Modal.Actions>
-                    <Button onClick={this.handleClose} floated="left" basic color="grey" inverted>
-                      <Icon name="remove" /> Cancel
-                    </Button>
-                    <Button basic color="red" inverted onClick={() => { this.props.deleteCertificate(this.props.match.params.id); }}>
-                      <Icon name="remove" /> Delete
-                    </Button>
-                  </Modal.Actions>
-                </Modal> :
-                null
-              }
-              {this.props.address.toLowerCase() === this.props.certificate.holder_eth_address ?
-                <Modal trigger={
-                  <Button icon labelPosition="left" positive floated="right">
-                    <Icon name="checkmark" />
-                    Verifiy Certificate
-                  </Button>
+                      <p>
+                      Please, confirm this action.
+                      </p>
+                    </Modal.Content>
+                    <Modal.Actions>
+                      <Button onClick={this.handleClose} floated="left" basic color="grey" inverted>
+                        <Icon name="remove" /> Cancel
+                      </Button>
+                      <Button basic color="red" inverted onClick={() => { this.props.deleteCertificate(this.props.match.params.id); }}>
+                        <Icon name="remove" /> Delete
+                      </Button>
+                    </Modal.Actions>
+                  </Modal> :
+                  null
                 }
-                >
-                  <Modal.Header>Verification Request</Modal.Header>
-                  <Modal.Content>
-                    <Dimmer active={this.props.requestSending} page>
-                      <Loader size="medium">
-                        <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
-                          <image href={loader} x="0" y="0" width="100%" height="100%" />
-                        </svg>
-                      </Loader>
-                    </Dimmer>
-                    <Message error hidden={!this.props.requestError}>
-                      <p>
-                        {this.props.requestError}
-                      </p>
-                    </Message>
-                    <Message positive hidden={!this.props.requestSuccess}>
-                      <p>
-                        Success message.
-                      </p>
-                    </Message>
-                    <Form size="large" onSubmit={(event) => { this.handleSubmit(event, this); }}>
-                      <Form.Field required>
-                        <label htmlFor="verifier_eth_address">
-                          Please, enter instance ETH address
-                        </label>
-                        <Input
-                          id="verifier_eth_address"
-                          name="verifier_eth_address"
-                          iconPosition="left"
-                          icon="file"
-                          placeholder="ETH address"
-                        />
-                      </Form.Field>
-                      <Form.Field id="verifierType" name="verifierType" label="Type of verifier" control="select">
-                        <option value={2}>Academy</option>
-                        <option value={3}>Business</option>
-                      </Form.Field>
-                      <Button type="submit" primary size="huge">Submit</Button>
-                    </Form>
-                  </Modal.Content>
-                </Modal> :
-                null
-              }
+                {this.props.address.toLowerCase() === this.props.certificate.holder_eth_address ?
+                  <Modal trigger={
+                    <Button icon labelPosition="left" positive floated="right">
+                      <Icon name="checkmark" />
+                      Verifiy Certificate
+                    </Button>
+                  }
+                  >
+                    <Modal.Header>Verification Request</Modal.Header>
+                    <Modal.Content>
+                      <Dimmer active={this.props.requestSending} page>
+                        <Loader size="medium">
+                          <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
+                            <image href={loader} x="0" y="0" width="100%" height="100%" />
+                          </svg>
+                        </Loader>
+                      </Dimmer>
+                      <Message error hidden={!this.props.requestError}>
+                        <p>
+                          {this.props.requestError}
+                        </p>
+                      </Message>
+                      <Message positive hidden={!this.props.requestSuccess}>
+                        <p>
+                          Success message.
+                        </p>
+                      </Message>
+                      <Form size="large" onSubmit={(event) => { this.handleSubmit(event, this); }}>
+                        <Form.Field required>
+                          <label htmlFor="verifier_eth_address">
+                            Please, enter instance ETH address
+                          </label>
+                          <Input
+                            id="verifier_eth_address"
+                            name="verifier_eth_address"
+                            iconPosition="left"
+                            icon="file"
+                            placeholder="ETH address"
+                          />
+                        </Form.Field>
+                        <Form.Field id="verifierType" name="verifierType" label="Type of verifier" control="select">
+                          <option value={2}>Academy</option>
+                          <option value={3}>Business</option>
+                        </Form.Field>
+                        <Button type="submit" primary size="huge">Submit</Button>
+                      </Form>
+                    </Modal.Content>
+                  </Modal> :
+                  null
+                }
+              </div>
               <Divider hidden />
-              <Header style={{ fontSize: '1.7em' }}>
-                Certificate Information
-              </Header>
-              <Header style={{ fontSize: '1.7em' }}>
-                {this.props.certificate.certificate_title}
-              </Header>
-              <Divider clearing />
-              <Grid>
-                <Grid.Column width={8}>
-                  <Segment color="orange" className="certificateCard">
-                    <Header style={{ fontSize: '1.7em' }}>
-                      Academy Information
-                    </Header>
-                    <Divider clearing />
-                    <Header style={{ fontSize: '1.7em' }}>
-                      Academy Title:
-                    </Header>
-                    <span>{this.props.certificate.institution_title}</span>
-                    <Header style={{ fontSize: '1.7em' }}>
-                      Academy Site:
-                    </Header>
-                    <a rel="noopener noreferrer" target="_blank" href={this.props.certificate.institution_link}>{this.props.certificate.institution_link}</a>
-                  </Segment>
-                </Grid.Column>
-                <Grid.Column width={8}>
-                  <Segment color="orange" className="certificateCard">
-                    <Header style={{ fontSize: '1.7em' }}>
-                      Course Information
-                    </Header>
-                    <Divider clearing />
-                    <Header style={{ fontSize: '1.7em' }}>
-                      Program Title:
-                    </Header>
-                    <span>{this.props.certificate.program_title}</span>
-                    <Header style={{ fontSize: '1.7em' }}>
-                      Course Link:
-                    </Header>
-                    <a rel="noopener noreferrer" target="_blank" href={this.props.certificate.course_link}>{this.props.certificate.course_link}</a>
-                    <Header style={{ fontSize: '1.7em' }}>
-                      Subject:
-                    </Header>
-                    <span>
-                      {this.renderSubjects()}
+              <Container style={{ textAlign: 'left', padding: '0 10em 5em 10em' }} >
+                <Header size="huge" >
+                  { certificateStatusIcon }
+                  <Header.Content>
+                    <span style={{ color, fontWeight: 100 }} >
+                      {`${status.toUpperCase()} CERTIFICATE`}
                     </span>
-                  </Segment>
-                </Grid.Column>
-                <Grid.Column width={8}>
-                  <Segment color="orange" className="certificateCard">
-                    <Header style={{ fontSize: '1.7em' }}>
-                      Learner Information
-                    </Header>
-                    <Divider clearing />
-                    <Header style={{ fontSize: '1.7em' }}>
-                      Skills:
-                    </Header>
+                    <Header.Subheader>
+                      Expiration date:&nbsp;
+                      <span
+                        style={{ color: 'orange' }}
+                      >
+                        {this.props.certificate.expiration_date ? this.getDateString(this.props.certificate.expiration_date) : 'Indefinitely'}
+                      </span>
+                    </Header.Subheader>
+                  </Header.Content>
+                </Header>
+                <Divider hidden />
+                <span>
+                  {this.props.certificate.verifications.length > 0 ?
+                    <Modal trigger={
+                      <Button positive color={color}>
+                        <Icon name="checkmark" />
+                        Verification History
+                      </Button>
+                    }
+                    >
+                      <Modal.Header>Verifications History</Modal.Header>
+                      <Modal.Content>
+                        {this.renderVerifications(this.props.certificate)}
+                      </Modal.Content>
+                    </Modal>
+                    : null}
+                </span>
+                <Divider hidden />
+                <Header size="huge" >
+                  <span style={{ color, fontSize: '2.5em', fontWeight: 100 }} >
+                    {this.props.certificate.certificate_title}
+                  </span>
+                  <Header.Subheader>
+                    {this.props.certificate.industries ? getIndustriesString() : null}
+                  </Header.Subheader>
+                </Header>
+                <Divider hidden />
+                <span>
+                  {this.renderSkills(status, color)}
+                </span>
+                <Divider hidden />
+                <p>
+                  Institution:&nbsp;
+                  <a
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    href={this.props.certificate.institution_link}
+                  >
+                    {this.props.certificate.institution_title}
+                  </a>
+                </p>
+                {this.props.certificate.program_title ?
+                  <p>
+                    Program title: <span>{this.props.certificate.program_title}</span>
+                  </p> : null
+                }
+                {this.props.certificate.score ?
+                  <p>
+                    Course score: <span>{this.props.certificate.score}</span>/100
+                  </p> : null
+                }
+                {this.props.certificate.score ?
+                  <p>
+                    Course duration: <span>{this.props.certificate.duration}</span> hours
+                  </p> : null
+                }
+                <Divider hidden />
+                <p>
+                  <a rel="noopener noreferrer" target="_blank" href={this.props.certificate.course_link}>{this.props.certificate.course_link}</a>
+                </p>
+                <Divider hidden />
+                <Header size="huge">
+                  <QRCode value={etherscanUser} size={64} />
+                  <Header.Content style={{ paddingLeft: '1em' }} >
                     <span>
-                      {this.renderSkills()}
+                      {this.props.certificate.holder_names}
                     </span>
-                    <Header style={{ fontSize: '1.7em' }}>
-                      Learner ETH Address:
-                    </Header>
-                    <a rel="noopener noreferrer" target="_blank" href={`https://etherscan.io/address/${this.props.certificate.holder_eth_address}`}>{this.props.certificate.holder_eth_address}</a>
-                    <Header style={{ fontSize: '1.7em' }}>
-                      Score:
-                    </Header>
-                    <span>{this.props.certificate.score}</span>
-                  </Segment>
-                </Grid.Column>
-                <Grid.Column width={8}>
-                  <Segment color={color} className="certificateCard">
-                    <Header style={{ fontSize: '1.7em' }}>
-                      Certificate Status
-                    </Header>
-                    <Divider clearing />
-                    <Header style={{ fontSize: '1.7em' }}>
-                    Status: {capitalizeFirstLetter(status)}<br />
-                      {this.props.certificate.verifications.length > 0 ?
-                        <Modal trigger={
-                          <Button positive color={color}>
-                            <Icon name="checkmark" />
-                            Verification History
-                          </Button>
-                        }
-                        >
-                          <Modal.Header>Verifications History</Modal.Header>
-                          <Modal.Content>
-                            {this.renderVerifications(this.props.certificate)}
-                          </Modal.Content>
-                        </Modal>
-                        : null}
-                    </Header>
-                    <Header style={{ fontSize: '1.7em' }}>
-                      Duration:
-                    </Header>
-                    <span>{this.props.certificate.duration}</span>
-                    <Header style={{ fontSize: '1.7em' }}>
-                      Expiration date:
-                    </Header>
-                    <span>{this.props.certificate.expiration_date ? this.props.certificate.expiration_date : '-'}</span>
-                  </Segment>
-                </Grid.Column>
-              </Grid>
+                    <Header.Subheader>
+                      {this.props.certificate.holder_eth_address}
+                    </Header.Subheader>
+                  </Header.Content>
+                </Header>
+              </Container>
             </Segment>
           </div>
         </Container>

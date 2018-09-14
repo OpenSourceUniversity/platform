@@ -185,7 +185,7 @@ class CertificatesVerificationPage extends React.Component {
         </Message>
         <Message info hidden={this.props.verifications.length > 0 || !!this.props.error}>
           <p>
-            You do not have any verifications yet. Go ahead and add some certificate.
+            You don&amp;t have pending certificates for verification.
           </p>
         </Message>
         <Grid>

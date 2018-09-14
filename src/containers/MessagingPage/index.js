@@ -61,6 +61,8 @@ class MessagesPage extends React.Component {
         this.props.sendMessage(messageData);
         /* eslint-disable no-param-reassign */
         event.target.value = '';
+        const objDiv = document.getElementById('MessageHistory');
+        objDiv.scrollTop = objDiv.scrollHeight;
         /* eslint-enable no-param-reassign */
       }
     }
@@ -160,6 +162,8 @@ class MessagesPage extends React.Component {
       this.props.sendMessage(messageData);
       /* eslint-disable no-param-reassign */
       event.target.elements.message.value = '';
+      const objDiv = document.getElementById('MessageHistory');
+      objDiv.scrollTop = objDiv.scrollHeight;
       /* eslint-enable no-param-reassign */
     }
   }

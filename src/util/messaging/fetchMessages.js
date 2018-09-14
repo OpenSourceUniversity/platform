@@ -9,6 +9,8 @@ export default function fetchMessages(threadId, urlNext) {
     dispatch({
       type: 'FETCH_MESSAGES_REQUEST',
     });
+    const objDiv = document.getElementById('MessageHistory');
+    const prevHeight = objDiv.scrollHeight;
     let url = urlNext;
     if (!url) {
       url = `${bdnUrl}api/v1/messages/?thread_id=${threadId}`;
@@ -39,9 +41,13 @@ export default function fetchMessages(threadId, urlNext) {
             activeThread: threadId,
             threadToUpdate: buffer,
           });
-          const objDiv = document.getElementById('MessageHistory');
           const messagesCount = store.getState().messaging.messages.length;
-          objDiv.scrollTop = objDiv.scrollHeight / (messagesCount / 30);
+          const toScroll = 1 - (prevHeight / objDiv.scrollHeight);
+          if (messagesCount > 30) {
+            objDiv.scrollTop = objDiv.scrollHeight * toScroll;
+          } else {
+            objDiv.scrollTop = objDiv.scrollHeight;
+          }
           dispatch(fetchUnreadMessagesCount());
         }
       })

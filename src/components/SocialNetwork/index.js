@@ -21,10 +21,7 @@ class SocialNetwork extends React.Component {
 
     if (this.state.accepted.length > 0 && this.state.rejected.length === 0) {
       const file = this.state.accepted[0];
-      const reader = new window.FileReader();
-      reader.readAsArrayBuffer(file);
-      reader.onloadend = () => this.convertToBuffer(reader);
-      this.props.addFileWithConnections(reader);
+      this.props.addFileWithConnections(file);
     }
   }
 
@@ -33,6 +30,10 @@ class SocialNetwork extends React.Component {
     /* eslint-disable */
     this.setState({ buffer });
     /* eslint-enable */
+  }
+
+  handleImportConnections() {
+
   }
 
   renderRating(ratingNumb) {
@@ -109,22 +110,23 @@ class SocialNetwork extends React.Component {
 
             <Grid.Column tablet={16} computer={4}>
               <Segment>
+                <form method="post" encType="multipart/form-data" action="">
                 <Dropzone
                   accept="application/zip"
                   onDrop={
                     (accepted, rejected) => {
-                      /* eslint-disable no-restricted-globals */
                       this.setState({ accepted, rejected }); this.onDrop(event);
-                      /* eslint-enable no-restricted-globals */
                     }
                   }
                 >
                   <i>Drop your ZIP file here</i>
                 </Dropzone>
+                </form>
                 <Statistic size="mini" color="orange">
                   <Button
                     basic
                     color="green"
+                    onClick={this.handleImportConnections}
                   >
                     <Icon name="users" />
                     <emp>Invite</emp>

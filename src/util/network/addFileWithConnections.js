@@ -13,14 +13,14 @@ export default function addFileWithConnections(connectionsDataFile) {
     });
     const axiosConfig = {
       headers: {
+        'Content-Type': 'multipart/form-data',
         'Auth-Signature': store.getState().auth.signedAddress,
         'Auth-Eth-Address': store.getState().auth.address.slice(2),
       },
     };
-    const postData = {
-      datafile: connectionsDataFile || null,
-    };
-    axios.post(ADD_CONNECTIONS_ARCHIVE_URL, postData, axiosConfig).then(() => {
+    var bodyFormData = new FormData();
+    bodyFormData.set('datafile', connectionsDataFile);
+    axios.post(ADD_CONNECTIONS_ARCHIVE_URL, bodyFormData, axiosConfig).then(() => {
       dispatch({
         type: 'ADD_CONNECTIONS_ARCHIVE_SUCCESS',
       });

@@ -17,14 +17,14 @@ export default function storeVerification(ipfsHash, grantedTo, callback) {
     const web3 = store.getState().web3.web3Instance;
     const { address } = store.getState().auth;
     const storageContract = new web3.eth.Contract(abi, storageAddress);
-
+    const { gasPrice } = store.getState().withdraw;
     web3.eth.getTransactionCount(address).then((txCount) => {
       const ipfsHashBytes = web3.utils.asciiToHex(ipfsHash);
       const nonce = txCount.toString(16);
       const rawTransaction = {
         from: address,
         nonce: `0x${nonce}`,
-        gasPrice: '0x003B9ACA00',
+        gasPrice: `0x${gasPrice}`,
         gasLimit: '0x250CA',
         to: Config.blockchain.storageAddress,
         chainId: Config.network.chainId,

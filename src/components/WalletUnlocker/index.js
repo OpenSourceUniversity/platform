@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, Message, Modal, Icon, Input } from 'semantic-ui-react';
+import { Button, Message, Modal, Icon, Input, Dimmer, Loader } from 'semantic-ui-react';
 import { closeUnlocker, unlockWallet } from '../../util/auth/walletUnlocker';
 import resetVerificationErrorMessages from '../../util/verification/resetVerificationErrorMessages';
 
@@ -12,8 +12,20 @@ class WalletUnlocker extends React.Component {
   }
 
   render() {
+    /* eslint-disable global-require */
+    const loader = require('../../icons/osu-loader.svg');
+    /* eslint-enable global-require */
     return (
       <Modal open={this.props.open} onClose={() => this.handleClose()} size="small">
+        <Dimmer active={this.props.isUnlocking} inverted>
+          <Loader size="medium">
+            <p>This may take a few moments</p>
+            <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
+              <image href={loader} x="0" y="0" width="100%" height="100%" />
+            </svg>
+            Wallet is Unlocking...
+          </Loader>
+        </Dimmer>
         <Modal.Header>
           <Icon name="unlock" />
           Enter passphrase to unlock your wallet
@@ -57,6 +69,7 @@ function mapStateToProps(state) {
     error: state.auth.walletUnlockerError,
     txError: state.verification.txError,
     extension: state.auth.walletUnlockerExtension,
+    isUnlocking: state.auth.isUnlocking,
   };
 }
 

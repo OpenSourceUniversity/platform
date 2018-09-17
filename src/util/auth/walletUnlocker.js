@@ -41,16 +41,20 @@ export function unlockWallet(passphrase) {
   return function action(dispatch) {
     const callback = store.getState().auth.walletUnlockerCallback;
     const { v3Wallet } = store.getState().auth;
-
+    dispatch({
+      type: 'WALLET_IS_UNLOCKING',
+    });
     try {
-      const wallet = Wallet.fromV3(v3Wallet, passphrase);
-      dispatch({
-        type: 'WALLET_UNLOCKER_MODAL_OPEN',
-        payload: {
-          open: false,
-        },
-      });
-      callback(wallet);
+      setTimeout(() => {
+        const wallet = Wallet.fromV3(v3Wallet, passphrase);
+        dispatch({
+          type: 'WALLET_UNLOCKER_MODAL_OPEN',
+          payload: {
+            open: false,
+          },
+        });
+        callback(wallet);
+      }, 3000);
     } catch (e) {
       dispatch({
         type: 'WALLET_UNLOCKER_ERROR',

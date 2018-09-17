@@ -25,26 +25,28 @@ export default function login(passphrase) {
       });
     } else {
       try {
-        const wallet = Wallet.fromV3(v3Wallet, passphrase);
-        const address = wallet.getChecksumAddressString();
-        const privateKey = wallet.getPrivateKey();
-        dispatch(storeSignedAddress(address.slice(2), privateKey));
-        localStorage.setItem('isLoggedIn', true);
-        localStorage.setItem('address', address);
-        localStorage.setItem('publicKey', wallet.getPublicKey());
-        dispatch({
-          type: 'LOGGED_IN',
-          payload: {
-            wallet,
-          },
-        });
-        dispatch(getActiveAccount());
-        dispatch(getDefaultValues());
-        dispatch(notificationsConnection());
-        dispatch(messagesConnection());
-        const newPath = '/';
-        const history = createHashHistory();
-        history.push(newPath);
+        setTimeout(() => {
+          const wallet = Wallet.fromV3(v3Wallet, passphrase);
+          const address = wallet.getChecksumAddressString();
+          const privateKey = wallet.getPrivateKey();
+          dispatch(storeSignedAddress(address.slice(2), privateKey));
+          localStorage.setItem('isLoggedIn', true);
+          localStorage.setItem('address', address);
+          localStorage.setItem('publicKey', wallet.getPublicKey());
+          dispatch({
+            type: 'LOGGED_IN',
+            payload: {
+              wallet,
+            },
+          });
+          dispatch(getActiveAccount());
+          dispatch(getDefaultValues());
+          dispatch(notificationsConnection());
+          dispatch(messagesConnection());
+          const newPath = '/';
+          const history = createHashHistory();
+          history.push(newPath);
+        }, 3000);
       } catch (e) {
         dispatch({
           type: 'LOGIN_ERROR',

@@ -11,6 +11,7 @@ const initialState = {
   walletUnlockerError: null,
   walletUnlockerCallback: () => {},
   walletUnlockerExtension: null,
+  isUnlocking: false,
 };
 
 
@@ -21,6 +22,7 @@ const authReducer = (state = initialState, action) => {
       v3Wallet: action.payload.v3Wallet,
       loginError: null,
       isLoggedIn: true,
+      isLoggingIn: false,
       address: localStorage.getItem('address'),
     });
   case 'SIGNED_ADDRESS_STORED':
@@ -59,6 +61,7 @@ const authReducer = (state = initialState, action) => {
       walletUnlockerModalOpen: action.payload.open,
       walletUnlockerError: null,
       walletUnlockerExtension: action.payload.walletUnlockerExtension,
+      isUnlocking: false,
     });
   case 'WALLET_UNLOCKER_MODAL_CALLBACK':
     return Object.assign({}, state, {
@@ -67,6 +70,10 @@ const authReducer = (state = initialState, action) => {
   case 'WALLET_UNLOCKER_ERROR':
     return Object.assign({}, state, {
       walletUnlockerError: action.payload.error,
+    });
+  case 'WALLET_IS_UNLOCKING':
+    return Object.assign({}, state, {
+      isUnlocking: true,
     });
   default:
     return state;

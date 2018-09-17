@@ -20,11 +20,18 @@ class SignInWithoutRouter extends React.Component {
   render() {
     /* eslint-disable global-require */
     const logo = require('../../icons/edu-logo.png');
+    const loader = require('../../icons/osu-loader.svg');
     /* eslint-enable global-require */
     return (
       <div>
         <Dimmer active={this.props.isLoggingIn} inverted>
-          <Loader size="large">Loading</Loader>
+          <Loader size="medium">
+            <p>This may take a few moments</p>
+            <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
+              <image href={loader} x="0" y="0" width="100%" height="100%" />
+            </svg>
+            Wallet is Unlocking...
+          </Loader>
         </Dimmer>
         <Card.Header>
           <Grid centered>

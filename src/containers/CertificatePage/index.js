@@ -208,7 +208,7 @@ class CertificatePage extends React.Component {
       case 'expired':
         return 'blue';
       default:
-        return 'yellow';
+        return 'orange';
       }
     }
     const certificateStatusIcon = (

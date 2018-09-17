@@ -3,6 +3,8 @@ const initialState = {
   error: null,
   isError: false,
   txHash: null,
+  gasPrice: 1,
+  recomendedGasPrice: 1,
 };
 
 
@@ -27,6 +29,16 @@ const withdrawReducer = (state = initialState, action) => {
       isError: false,
       error: null,
       txHash: null,
+    });
+  case 'GAS_PRICE_CHANGE':
+    return Object.assign({}, state, {
+      gasPrice: action.payload.gasPrice,
+    });
+  case 'GAS_PRICE_GET':
+    return Object.assign({}, state, {
+      gasPrice: action.gasPrice.toString(16),
+      recomendedGasPrice: action.gasPrice,
+      error: action.error,
     });
   default:
     return state;

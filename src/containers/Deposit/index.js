@@ -8,6 +8,7 @@ import getBalances from '../../util/web3/getBalances';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import store from '../../store';
 import Config from '../../config';
+import GasPriceExtension from '../../components/GasPriceExtension';
 import { withdraw, resetWithdrawProps } from './actions';
 
 const options = JSON.parse(localStorage.getItem('withdrawWallets')) ? JSON.parse(localStorage.getItem('withdrawWallets')) : [];
@@ -43,7 +44,7 @@ class Deposit extends React.Component {
     const { coin } = this.state;
     store.dispatch(initWalletUnlocker((wallet) => {
       this.props.withdraw(wallet, recipient, amount, coin);
-    }));
+    }, <GasPriceExtension activityText="Unlock wallet to complete withdraw transaction" />));
   }
 
   copyAddress() {

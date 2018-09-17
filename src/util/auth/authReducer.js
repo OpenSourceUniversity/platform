@@ -10,6 +10,7 @@ const initialState = {
   walletUnlockerModalOpen: false,
   walletUnlockerError: null,
   walletUnlockerCallback: () => {},
+  walletUnlockerExtension: null,
 };
 
 
@@ -57,6 +58,7 @@ const authReducer = (state = initialState, action) => {
     return Object.assign({}, state, {
       walletUnlockerModalOpen: action.payload.open,
       walletUnlockerError: null,
+      walletUnlockerExtension: action.payload.walletUnlockerExtension,
     });
   case 'WALLET_UNLOCKER_MODAL_CALLBACK':
     return Object.assign({}, state, {

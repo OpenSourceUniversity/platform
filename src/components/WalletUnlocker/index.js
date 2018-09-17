@@ -25,6 +25,7 @@ class WalletUnlocker extends React.Component {
           <Message error hidden={!this.props.txError}>
             {this.props.txError}
           </Message>
+          {this.props.extension}
           <Input fluid label="Passphrase" placeholder="enter your passphrase..." type="password" id="passphrase" />
         </Modal.Content>
         <br />
@@ -55,6 +56,7 @@ function mapStateToProps(state) {
     open: state.auth.walletUnlockerModalOpen,
     error: state.auth.walletUnlockerError,
     txError: state.verification.txError,
+    extension: state.auth.walletUnlockerExtension,
   };
 }
 

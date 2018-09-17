@@ -1,3 +1,4 @@
+import getBalances from '../../util/web3/getBalances';
 import ERC20_ABI from '../../abi/erc20';
 import store from '../../store';
 import Config from '../../config';
@@ -11,6 +12,7 @@ export function withdraw(wallet, recipient, amountLong, coin) {
     const { address } = store.getState().auth;
     const amount = Number(amountLong) * (10 ** 18);
     const { ethBalance, eduBalance } = store.getState().web3;
+    const { gasPrice } = store.getState().withdraw;
     if (coin === 'edu' && amountLong > eduBalance) {
       dispatch({
         type: 'WITHDRAW_ERROR',
@@ -37,7 +39,7 @@ export function withdraw(wallet, recipient, amountLong, coin) {
         rawTransaction = {
           from: address,
           nonce: `0x${nonce}`,
-          gasPrice: '0x003B9ACA00',
+          gasPrice: `0x${gasPrice}`,
           gasLimit: '0x250CA',
           to: Config.token.contractAddress,
           chainId: Config.network.chainId,
@@ -48,7 +50,7 @@ export function withdraw(wallet, recipient, amountLong, coin) {
         rawTransaction = {
           from: address,
           nonce: `0x${nonce}`,
-          gasPrice: '0x003B9ACA00',
+          gasPrice: `0x${gasPrice}`,
           gasLimit: 21000,
           to: recipient,
           chainId: Config.network.chainId,
@@ -67,6 +69,7 @@ export function withdraw(wallet, recipient, amountLong, coin) {
               txHash,
             },
           });
+          dispatch(getBalances());
         })
         .on('error', (error) => {
           dispatch({
@@ -85,6 +88,17 @@ export function resetWithdrawProps() {
   return function action(dispatch) {
     dispatch({
       type: 'WITHDRAW_RESET',
+    });
+  };
+}
+
+export function changeGasPrice(gasPrice) {
+  return function action(dispatch) {
+    dispatch({
+      type: 'GAS_PRICE_CHANGE',
+      payload: {
+        gasPrice,
+      },
     });
   };
 }

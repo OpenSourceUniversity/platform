@@ -5,6 +5,7 @@ const Config = {
     bdnUrl: 'http://localhost:8000/',
     bdnWebsocket: 'ws://localhost:8000/',
     etherscanUrl: 'https://kovan.etherscan.io/',
+    gasPriceUrl: 'https://www.etherchain.org/api/gasPriceOracle',
   },
   ipfs: {
     host: 'ipfs.infura.io',

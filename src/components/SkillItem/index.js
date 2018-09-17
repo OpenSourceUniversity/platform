@@ -11,9 +11,9 @@ export default class SkillItem extends React.Component {
         basic={this.props.skill.basic}
         size={this.props.isCertificatePage ? 'huge' : null}
         style={{
-          borderRadius: this.props.isCertificatePage ? '45%' : null,
-          paddingTop: '8px',
-          paddingBottom: '8px',
+          borderRadius: this.props.isCertificatePage ? '100px' : null,
+          fontSize: this.props.isCertificatePage ? '1.2em' : null,
+          borderWidth: this.props.isCertificatePage ? '2px' : null,
         }}
       >
         {this.props.skill.have_icon ?

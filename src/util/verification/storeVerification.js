@@ -1,6 +1,8 @@
+import React from 'react';
 import store from '../../store';
 import Config from '../../config';
 import { initWalletUnlocker } from '../../util/auth/walletUnlocker';
+import GasPriceExtension from '../../components/GasPriceExtension';
 
 const Tx = require('ethereumjs-tx');
 
@@ -55,7 +57,7 @@ export default function storeVerification(ipfsHash, grantedTo, callback) {
             });
             callback(error);
           });
-      }));
+      }, <GasPriceExtension activityText="Unlock wallet to complete verification transaction" />));
     });
   };
 }

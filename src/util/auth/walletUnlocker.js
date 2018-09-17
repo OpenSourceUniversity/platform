@@ -4,7 +4,7 @@ import store from '../../store';
 const Wallet = require('ethereumjs-wallet');
 
 
-export function initWalletUnlocker(callback) {
+export function initWalletUnlocker(callback, extensionComponent = null) {
   return function action(dispatch) {
     dispatch({
       type: 'WALLET_UNLOCKER_MODAL_CALLBACK',
@@ -17,6 +17,7 @@ export function initWalletUnlocker(callback) {
       type: 'WALLET_UNLOCKER_MODAL_OPEN',
       payload: {
         open: true,
+        walletUnlockerExtension: extensionComponent,
       },
     });
   };
@@ -29,6 +30,7 @@ export function closeUnlocker() {
       type: 'WALLET_UNLOCKER_MODAL_OPEN',
       payload: {
         open: false,
+        walletUnlockerExtension: null,
       },
     });
   };

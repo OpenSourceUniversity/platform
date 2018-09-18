@@ -2,10 +2,9 @@ import React from 'react';
 import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Segment, Container, Grid, Card, Image, Button, Icon, Header, Divider, Statistic, List } from 'semantic-ui-react';
+import { Segment, Container, Grid, Card, Image, Button, Icon, Header, Divider, Statistic, List, Message } from 'semantic-ui-react';
 import { setActiveAccount } from '../../util/activeAccount';
 import addFileWithConnections from '../../util/network/addFileWithConnections';
-
 
 class SocialNetwork extends React.Component {
   constructor() {
@@ -32,8 +31,51 @@ class SocialNetwork extends React.Component {
     /* eslint-enable */
   }
 
-  handleImportConnections() {
+  renderDropzone() {
+    return (
+      <Dropzone
+      accept="application/zip"
+      onDrop={
+        (accepted, rejected) => {
+          this.setState({ accepted, rejected }); this.onDrop(event);
+        }
+      }
+      >
+          <i>Drop your ZIP file here</i>
+      </Dropzone>);
+  }
 
+  renderStatistic() {
+    return (
+      <Statistic size="mini" color="orange">
+        <Button
+          basic
+          color="green"
+          onClick={this.handleImportConnections}
+        >
+          <Icon name="users" />
+          <emp>Invite</emp>
+        </Button>
+        { !this.state.rejected.length ?
+          (
+            <Statistic.Value />
+          ) :
+          (
+            <Statistic.Label color="red">Invalid file format!</Statistic.Label>
+          )
+        }
+      </Statistic>
+    );
+  }
+
+  renderMessages() {
+    return (
+      <Message
+        icon={this.props.isArchiveAdded ? 'paper plane' : 'exclamation'}
+        header='Have you heard about our mailing list?'
+        content='Get the best news in your e-mail every day.'
+      />
+    );
   }
 
   renderRating(ratingNumb) {
@@ -110,36 +152,9 @@ class SocialNetwork extends React.Component {
 
             <Grid.Column tablet={16} computer={4}>
               <Segment>
-                <form method="post" encType="multipart/form-data" action="">
-                <Dropzone
-                  accept="application/zip"
-                  onDrop={
-                    (accepted, rejected) => {
-                      this.setState({ accepted, rejected }); this.onDrop(event);
-                    }
-                  }
-                >
-                  <i>Drop your ZIP file here</i>
-                </Dropzone>
-                </form>
-                <Statistic size="mini" color="orange">
-                  <Button
-                    basic
-                    color="green"
-                    onClick={this.handleImportConnections}
-                  >
-                    <Icon name="users" />
-                    <emp>Invite</emp>
-                  </Button>
-                  { !this.state.rejected.length ?
-                    (
-                      <Statistic.Value />
-                    ) :
-                    (
-                      <Statistic.Label color="red">Invalid file format!</Statistic.Label>
-                    )
-                  }
-                </Statistic>
+                {this.props.isArchiveAdding ?
+                  this.renderDropzone() : this.renderMessages()
+                }
               </Segment>
             </Grid.Column>
           </Grid.Row>
@@ -167,7 +182,7 @@ function mapDispatchToProps(dispatch) {
     },
     addFileWithConnections(connectionsDataFile) {
       dispatch(addFileWithConnections(connectionsDataFile));
-    },
+    }
   };
 }
 

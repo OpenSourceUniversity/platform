@@ -1,5 +1,6 @@
 import store from '../../store';
 import addCertificate from './addCertificate';
+import { encrypt } from '../../util/privacy';
 
 
 export default function storeCertificateOnIpfs(buffer, certificateData) {
@@ -16,31 +17,23 @@ export default function storeCertificateOnIpfs(buffer, certificateData) {
     const { checksum_hash } = certificateData;
     const hdkey = require('ethereumjs-wallet/hdkey');
     const bip39 = require('bip39');
-    const openpgp = require('openpgp');
     const mnemonic = bip39.entropyToMnemonic(checksum_hash);
     const seed = bip39.mnemonicToSeed(mnemonic);
     const hdKeyInstance = hdkey.fromMasterSeed(seed);
-    const passphrase = hdKeyInstance.publicExtendedKey();
-    let encryptedArrayBuffer;
-    const options = {
-      message: openpgp.message.fromBinary(buffer),
-      passwords: [passphrase],
-      armor: false,
-    };
-    openpgp.encrypt(options).then((ciphertext) => {
-      encryptedArrayBuffer = ciphertext.message.packets.write();
-      const encryptedBuffer = Buffer.from(encryptedArrayBuffer);
-      ipfs.add(encryptedBuffer, (err, ipfsHash) => {
-        dispatch({
-          type: 'IPFS_GET_SUCCESS',
-          payload: {
-            ipfsHash: ipfsHash[0].hash,
-          },
-        });
-        const hashComponent = { ipfs_hash: ipfsHash[0].hash };
-        const certificateDataCopy = Object.assign({}, certificateData, hashComponent);
-        dispatch(addCertificate(certificateDataCopy));
+    const walletInstance = hdKeyInstance.getWallet();
+    const publicKey = walletInstance.getPublicKey();
+    const encryptedBuffer = encrypt(publicKey, buffer);
+
+    ipfs.add(encryptedBuffer, (err, ipfsHash) => {
+      dispatch({
+        type: 'IPFS_GET_SUCCESS',
+        payload: {
+          ipfsHash: ipfsHash[0].hash,
+        },
       });
+      const hashComponent = { ipfs_hash: ipfsHash[0].hash };
+      const certificateDataCopy = Object.assign({}, certificateData, hashComponent);
+      dispatch(addCertificate(certificateDataCopy));
     });
   };
 }

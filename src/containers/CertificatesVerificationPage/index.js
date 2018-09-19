@@ -11,18 +11,20 @@ import massVerification from '../../util/verification/massVerification';
 import rejectVerification from '../../util/verification/rejectVerification';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import Config from '../../config';
+import { decrypt } from '../../util/privacy';
 
 const { bdnUrl } = Config.network;
 
 class CertificatesVerificationPage extends React.Component {
   /* eslint-disable react/no-unused-state */
-  state = { activeVerificationId: null }
+  state = { activeVerificationId: null, isFetching: false }
 
   componentDidMount() {
     if (this.props.match.params.id) {
       const verificationId = this.props.match.params.id;
       this.state.activeVerificationId = verificationId;
       this.props.fetchVerification(`${bdnUrl}api/v1/verifications/${verificationId}/`);
+      this.state.isFetching = true;
     }
     if (this.props.match.params.type === 'academy') {
       this.props.fetchVerifications(`${bdnUrl}api/v1/verifications/?active_profile=Academy`);
@@ -42,30 +44,26 @@ class CertificatesVerificationPage extends React.Component {
       }
     }
     if (this.props.certificate !== prevProps.certificate && this.props.match.params.id) {
+      /* eslint-disable react/no-did-update-set-state */
+      this.setState({ isFetching: true });
       if (this.props.certificate.checksum_hash) {
         /* eslint-disable global-require */
         const hdkey = require('ethereumjs-wallet/hdkey');
         const bip39 = require('bip39');
-        const openpgp = require('openpgp');
         const mnemonic = bip39.entropyToMnemonic(this.props.certificate.checksum_hash);
         const seed = bip39.mnemonicToSeed(mnemonic);
         const hdKeyInstance = hdkey.fromMasterSeed(seed);
-        const passphrase = hdKeyInstance.publicExtendedKey();
+        const walletInstance = hdKeyInstance.getWallet();
+        const privateKey = walletInstance.getPrivateKey();
         fetch(`https://ipfs.io/ipfs/${this.props.certificate.ipfs_hash}`)
           .then(response => response.arrayBuffer().then((buffer) => {
-            const uint8ArrayEnc = new Uint8Array(buffer);
-            openpgp.message.read(uint8ArrayEnc).then((result) => {
-              const options = {
-                message: result,
-                passwords: [passphrase],
-                format: 'binary',
-              };
-              openpgp.decrypt(options).then((decrypted) => {
-                const blob = new Blob([decrypted.data], { type: 'image/jpeg' });
-                const url = URL.createObjectURL(blob);
-                document.getElementById('CertificateFile').src = url;
-              });
-            });
+            const encryptedBuffer = Buffer.from(buffer);
+            const decryptedBuffer = decrypt(privateKey, encryptedBuffer);
+            const uint8Array = new Uint8Array(decryptedBuffer);
+            const blob = new Blob([uint8Array], { type: 'image/jpeg' });
+            const url = URL.createObjectURL(blob);
+            document.getElementById('CertificateFile').src = url;
+            this.setState({ isFetching: false });
           }));
       } else {
         fetch(`https://ipfs.io/ipfs/${this.props.certificate.ipfs_hash}`)
@@ -74,6 +72,7 @@ class CertificatesVerificationPage extends React.Component {
             const blob = new Blob([uint8Array], { type: 'image/jpeg' });
             const url = URL.createObjectURL(blob);
             document.getElementById('CertificateFile').src = url;
+            this.setState({ isFetching: false });
           }));
       }
     }
@@ -243,16 +242,29 @@ class CertificatesVerificationPage extends React.Component {
               return { borderColor: 'orange' };
             })()}
             >
+              <Dimmer
+                inverted
+                active={this.props.isUpdating || this.props.isVerifying || this.state.isFetching}
+              >
+                <Loader size="medium">
+                  <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
+                    <image href={loader} x="0" y="0" width="100%" height="100%" />
+                  </svg>
+                  {
+                    (() => {
+                      if (this.props.isUpdating) {
+                        return 'Updating the certificate...';
+                      }
+                      if (this.props.isVerifying) {
+                        return 'Verifying the certificate...';
+                      }
+                      return 'Loading certificate file...';
+                    })()
+                  }
+                </Loader>
+              </Dimmer>
               <p>Verification status: {this.props.verification.state}</p>
               <Form size="big" onSubmit={(event) => { this.handleSubmit(event, this); }}>
-                <Dimmer active={this.props.isUpdating || this.props.isVerifying} page>
-                  <Loader size="medium">
-                    <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
-                      <image href={loader} x="0" y="0" width="100%" height="100%" />
-                    </svg>
-                    {this.props.isUpdating ? 'Updating the certificate...' : 'Verifying the certificate...'}
-                  </Loader>
-                </Dimmer>
                 Academy title:
                 <p>{this.props.certificate.institution_title ? this.props.certificate.institution_title : '-'}</p>
                 <Divider clearing />
@@ -288,9 +300,6 @@ class CertificatesVerificationPage extends React.Component {
                 <Divider clearing />
                 <label htmlFor="ipfsHash">
                   <b>Certificate file</b><br /><br />
-                  <a id="ipfsHash" name="ipfsHash" href={`https://ipfs.io/ipfs/${this.props.certificate.ipfs_hash}`} target="_blank" rel="noopener noreferrer">
-                    {this.props.certificate.ipfs_hash}
-                  </a>
                   <img style={{ width: '100%' }} id="CertificateFile" alt="" src="" />
                 </label>
                 <div style={{ display: this.props.verification.state === 'requested' || this.props.verification.state === 'open' ? null : 'none', paddingTop: '20px' }}>

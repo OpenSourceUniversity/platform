@@ -28,7 +28,6 @@
     "ipfs-api": "^22.2.4",
     "keythereum": "^1.0.2",
     "node-file-hash": "^1.0.1",
-    "openpgp": "^4.0.2",
     "prop-types": "^15.6.0",
     "qrcode.react": "^0.8.0",
     "rc-slider": "^8.6.1",

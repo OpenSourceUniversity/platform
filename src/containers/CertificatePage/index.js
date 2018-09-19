@@ -231,7 +231,6 @@ class CertificatePage extends React.Component {
     );
     const etherscanUser = `${etherscanUrl}${this.props.certificate.holder_eth_address}`;
     const color = getColor();
-    console.log(this.props.certificate);
     /* eslint-disable global-require */
     const loader = require('../../icons/osu-loader.svg');
     /* eslint-enable global-require */

@@ -84,6 +84,9 @@ class LearnerSettings extends React.Component {
   captureFile =(event) => {
     event.stopPropagation();
     event.preventDefault();
+    if (!event.target.files[0].type.match(/image.*/)) {
+      return;
+    }
     if (event.target.files && event.target.files.length > 0) {
       const reader = new FileReader();
       reader.addEventListener(
@@ -94,9 +97,6 @@ class LearnerSettings extends React.Component {
           }),
         false,
       );
-      if (event.target.files[0].type.match(/image.*/)) {
-        console.log('img!');
-      }
       reader.readAsDataURL(event.target.files[0]);
     }
   }

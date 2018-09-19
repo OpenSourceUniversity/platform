@@ -41,6 +41,42 @@ class CertificatesVerificationPage extends React.Component {
         this.props.fetchVerifications(`${bdnUrl}api/v1/verifications/?active_profile=Business`);
       }
     }
+    if (this.props.certificate !== prevProps.certificate && this.props.match.params.id) {
+      if (this.props.certificate.checksum_hash) {
+        /* eslint-disable global-require */
+        const hdkey = require('ethereumjs-wallet/hdkey');
+        const bip39 = require('bip39');
+        const openpgp = require('openpgp');
+        const mnemonic = bip39.entropyToMnemonic(this.props.certificate.checksum_hash);
+        const seed = bip39.mnemonicToSeed(mnemonic);
+        const hdKeyInstance = hdkey.fromMasterSeed(seed);
+        const passphrase = hdKeyInstance.publicExtendedKey();
+        fetch(`https://ipfs.io/ipfs/${this.props.certificate.ipfs_hash}`)
+          .then(response => response.arrayBuffer().then((buffer) => {
+            const uint8ArrayEnc = new Uint8Array(buffer);
+            openpgp.message.read(uint8ArrayEnc).then((result) => {
+              const options = {
+                message: result,
+                passwords: [passphrase],
+                format: 'binary',
+              };
+              openpgp.decrypt(options).then((decrypted) => {
+                const blob = new Blob([decrypted.data], { type: 'image/jpeg' });
+                const url = URL.createObjectURL(blob);
+                document.getElementById('CertificateFile').src = url;
+              });
+            });
+          }));
+      } else {
+        fetch(`https://ipfs.io/ipfs/${this.props.certificate.ipfs_hash}`)
+          .then(response => response.arrayBuffer().then((buffer) => {
+            const uint8Array = new Uint8Array(buffer);
+            const blob = new Blob([uint8Array], { type: 'image/jpeg' });
+            const url = URL.createObjectURL(blob);
+            document.getElementById('CertificateFile').src = url;
+          }));
+      }
+    }
   }
 
   massVerification() {
@@ -62,6 +98,7 @@ class CertificatesVerificationPage extends React.Component {
   }
 
   showVerification = (verificationId) => {
+    document.getElementById('CertificateFile').src = '';
     this.setState({ activeVerificationId: verificationId });
     this.props.history.push(`/verifications/${this.props.match.params.type}/${verificationId}/`);
     this.props.fetchVerification(`${bdnUrl}api/v1/verifications/${verificationId}/`);
@@ -250,10 +287,11 @@ class CertificatesVerificationPage extends React.Component {
                 <p>{this.props.certificate.expiration_date ? this.props.certificate.expiration_date.substr(0, 10) : '-'}</p>
                 <Divider clearing />
                 <label htmlFor="ipfsHash">
-                  <b>Certificate file in PDF</b><br /><br />
+                  <b>Certificate file</b><br /><br />
                   <a id="ipfsHash" name="ipfsHash" href={`https://ipfs.io/ipfs/${this.props.certificate.ipfs_hash}`} target="_blank" rel="noopener noreferrer">
                     {this.props.certificate.ipfs_hash}
                   </a>
+                  <img style={{ width: '100%' }} id="CertificateFile" alt="" src="" />
                 </label>
                 <div style={{ display: this.props.verification.state === 'requested' || this.props.verification.state === 'open' ? null : 'none', paddingTop: '20px' }}>
                   <Button type="submit" color="green" size="huge">Verify</Button>

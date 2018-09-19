@@ -63,6 +63,7 @@ class AddCertificatePage extends React.Component {
       granted_to_type: component.props.activeAccount === 'Learner' ? 1 : component.state.granted_to_type,
       score: event.target.elements.score.value,
       expiration_date: event.target.elements.expiration_date.value,
+      checksum_hash: component.state.hash,
     };
     if (event.target.elements.duration.value) {
       certificateData.duration = event.target.elements.duration.value;
@@ -110,8 +111,13 @@ class AddCertificatePage extends React.Component {
   storeCertificateFile = (reader) => {
     // file is converted to a buffer to prepare for uploading to IPFS
     const buffer = Buffer.from(reader.result);
-    /* eslint-disable prefer-destructuring */
     /* eslint-disable react/no-unused-state */
+    /* eslint-disable global-require */
+    const lib = require('node-file-hash');
+    lib.createHash(buffer).then((hash) => {
+      this.setState({ hash: hash.sha256 });
+    });
+    /* eslint-disable prefer-destructuring */
     this.setState({ buffer });
     this.setState({ certificateFileIsMissing: false });
     /* eslint-enable react/no-unused-state */

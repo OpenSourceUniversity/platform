@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Image } from 'semantic-ui-react';
+import { decrypt } from '../../util/privacy';
 
 
 export default class Message extends React.Component {
@@ -85,7 +86,12 @@ export default class Message extends React.Component {
             return style;
           })()}
         >
-          {this.props.message.text}
+          {(() => {
+            const encryptedText = this.props.message.text;
+            const encryptedBuffer = Buffer.from(encryptedText, 'base64');
+            const decryptedBuffer = decrypt(this.props.decryptionKey, encryptedBuffer);
+            return decryptedBuffer.toString('utf8');
+          })()}
         </Card>
         { isOpponentLastMessage ?
           <small style={{ color: 'rgb(175, 175, 175)', marginLeft: '1em' }}>{

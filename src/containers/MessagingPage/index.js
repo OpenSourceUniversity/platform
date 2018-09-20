@@ -7,11 +7,12 @@ import fetchThreads from '../../util/messaging/fetchThreads';
 import fetchMessages from '../../util/messaging/fetchMessages';
 import sendMessage from '../../util/messaging/sendMessage';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
+import { encrypt, decrypt } from '../../util/privacy';
 import { resetMessages, resetActiveThread } from './actions';
 
 
 class MessagesPage extends React.Component {
-  state = { activeThread: null }
+  state = { activeThread: null, privateKey: null, publicKey: null }
 
   componentDidMount() {
     this.props.fetchThreads();
@@ -24,6 +25,18 @@ class MessagesPage extends React.Component {
       const newPath = `/messaging/${activeThreadId}/`;
       this.props.history.push(newPath);
       this.props.fetchMessages(activeThreadId, null);
+    }
+    if (this.props.match.params.id || this.props.threads.length) {
+    /* eslint-disable global-require */
+      const pk = this.props.match.params.id;
+      const hdkey = require('ethereumjs-wallet/hdkey');
+      const bip39 = require('bip39');
+      const mnemonic = bip39.entropyToMnemonic(pk.replace(/[^a-zA-Z0-9 ]/g, ''));
+      const seed = bip39.mnemonicToSeed(mnemonic);
+      const hdKeyInstance = hdkey.fromMasterSeed(seed);
+      const walletInstance = hdKeyInstance.getWallet();
+      this.state.privateKey = walletInstance.getPrivateKey();
+      this.state.publicKey = walletInstance.getPublicKey();
     }
     this.state.activeThread = activeThreadId;
     this.props.setSecondaryNav(null);
@@ -53,10 +66,13 @@ class MessagesPage extends React.Component {
     if (event.keyCode === 13 && event.shiftKey === false && event.ctrlKey === false) {
       event.preventDefault();
       const text = event.target.value;
+      const buffer = Buffer.from(text);
+      const encryptedBuffer = encrypt(this.state.publicKey, buffer);
+      const ecryptedString = encryptedBuffer.toString('base64');
       if (text && this.state.activeThread) {
         const messageData = {
           threadID: this.state.activeThread,
-          text,
+          text: ecryptedString,
         };
         this.props.sendMessage(messageData);
         /* eslint-disable no-param-reassign */
@@ -154,10 +170,13 @@ class MessagesPage extends React.Component {
 
   sendMessage = (event) => {
     const text = event.target.elements.message.value;
+    const buffer = Buffer.from(text);
+    const encryptedBuffer = encrypt(this.state.publicKey, buffer);
+    const ecryptedString = encryptedBuffer.toString('base64');
     if (text && this.state.activeThread) {
       const messageData = {
         threadID: this.state.activeThread,
-        text,
+        text: ecryptedString,
       };
       this.props.sendMessage(messageData);
       /* eslint-disable no-param-reassign */
@@ -220,15 +239,17 @@ class MessagesPage extends React.Component {
   renderMessages() {
     const { messages } = this.props;
     const opponent = this.getOpponent();
+    const address = this.props.address.toLowerCase();
     return messages.map((message, index, array) => (
       <Message
         key={index}
         message={message}
-        opponent={message.sender.username === this.props.address.toLowerCase() ? null : opponent}
+        opponent={message.sender.username === address ? null : opponent}
         prev={array[index - 1]}
         next={array[index + 1]}
         ownerAddress={this.props.address}
         toAgoDate={this.toAgoDate}
+        decryptionKey={this.state.privateKey}
       />
 
     ));
@@ -277,10 +298,23 @@ class MessagesPage extends React.Component {
               }
             </Header>
             <p style={{ color: 'rgb(175, 175, 175)', marginTop: '0.5em', marginBottom: '0.5em' }}>{
-              this.props.threadsById[thread.id].last_message.text ?
-                this.props.threadsById[thread.id].last_message.text.slice(0, 30)
-                :
-                null}
+              (() => {
+                if (this.props.threadsById[thread.id].last_message.text) {
+                  const pk = thread.id;
+                  const hdkey = require('ethereumjs-wallet/hdkey');
+                  const bip39 = require('bip39');
+                  const mnemonic = bip39.entropyToMnemonic(pk.replace(/[^a-zA-Z0-9 ]/g, ''));
+                  const seed = bip39.mnemonicToSeed(mnemonic);
+                  const hdKeyInstance = hdkey.fromMasterSeed(seed);
+                  const walletInstance = hdKeyInstance.getWallet();
+                  const decryptionKey = walletInstance.getPrivateKey();
+                  const encryptedText = this.props.threadsById[thread.id].last_message.text;
+                  const encryptedBuffer = Buffer.from(encryptedText, 'base64');
+                  const decryptedBuffer = decrypt(decryptionKey, encryptedBuffer);
+                  return decryptedBuffer.toString('utf8').slice(0, 30);
+                }
+                return null;
+              })()}
             </p>
             <small style={{ color: 'rgb(175, 175, 175)' }}>{
               this.props.threadsById[thread.id].last_message.created ?

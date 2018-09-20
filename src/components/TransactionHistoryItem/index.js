@@ -1,35 +1,67 @@
 import React from 'react';
-import { Table, Icon, Button, Modal } from 'semantic-ui-react';
+import { Table, Icon, Button, Modal, Header } from 'semantic-ui-react';
 
 
 export default class TransactionHistoryItem extends React.Component {
+  toJsDate(pythonDateStr) {
+    const jsDateStr = `${pythonDateStr.substr(0, 10)} ${pythonDateStr.substr(11, 8)}`;
+    let jsDateTime = Date.parse(jsDateStr);
+    const nowDateTime = Date.now();
+    const timeZoneOffset = new Date(nowDateTime).getTimezoneOffset() * 60000;
+    jsDateTime -= timeZoneOffset;
+    return new Date(jsDateTime).toString();
+  }
+
   render() {
     return (
       <Table.Row>
         <Table.Cell>
-          { this.props.historyDetails.type === 'Deposit' ?
+          { this.props.historyDetails.type === 1 ?
             (<Icon name="arrow up" />) :
             (<Icon name="arrow down" />)
           }
         </Table.Cell>
-        <Table.Cell>{ this.props.historyDetails.type }</Table.Cell>
+        <Table.Cell>{ this.props.historyDetails.type === 1 ? 'Deposit' : 'Withdraw' }</Table.Cell>
         <Table.Cell>{ this.props.historyDetails.value }</Table.Cell>
-        <Table.Cell>{ this.props.historyDetails.currency }</Table.Cell>
-        <Table.Cell textAlign="right">{ this.props.historyDetails.date }</Table.Cell>
+        <Table.Cell>{ this.props.historyDetails.currency.toUpperCase() }</Table.Cell>
+        <Table.Cell textAlign="right">{ this.toJsDate(this.props.historyDetails.date) }</Table.Cell>
         <Table.Cell textAlign="center">
           <Modal className="modalFix" style={{ display: 'flex!important', textAlign: 'center' }} trigger={<Button size="tiny" icon="unordered list" />}>
             <Modal.Content>
-              <Modal.Header>
-                Transaction Details
+              <Modal.Header style={{ marginBottom: '1em' }}>
+                <Header>
+                  Transaction Details
+                </Header>
               </Modal.Header>
               <Modal.Description>
-                <p>Type: { this.props.historyDetails.type }</p>
-                <p>Currency: { this.props.historyDetails.currency } </p>
-                <p>Value: { this.props.historyDetails.value } </p>
-                <p>Date: { this.props.historyDetails.date } </p>
-                <p>From: { this.props.historyDetails.sentFrom } </p>
-                <p>To: { this.props.historyDetails.sentTo } </p>
-                <p>TX: <a target="blank" href={`https://etherscan.io/tx/${this.props.historyDetails.transactionHash}`}>{ this.props.historyDetails.transactionHash }</a></p>
+                <Header size="small" style={{ margin: 0 }}>
+                  Type:
+                </Header>
+                <p>{ this.props.historyDetails.type }</p>
+                <Header size="small" style={{ margin: 0 }}>
+                  Currency:
+                </Header>
+                <p>{ this.props.historyDetails.currency.toUpperCase() } </p>
+                <Header size="small" style={{ margin: 0 }}>
+                  Value:
+                </Header>
+                <p>{ this.props.historyDetails.value } </p>
+                <Header size="small" style={{ margin: 0 }}>
+                  Date:
+                </Header>
+                <p>{ this.toJsDate(this.props.historyDetails.date) } </p>
+                <Header size="small" style={{ margin: 0 }}>
+                  From:
+                </Header>
+                <p>{ this.props.historyDetails.sender } </p>
+                <Header size="small" style={{ margin: 0 }}>
+                  To:
+                </Header>
+                <p>{ this.props.historyDetails.receiver } </p>
+                <Header size="small" style={{ margin: 0 }}>
+                  TX:
+                </Header>
+                <p><a target="blank" href={`https://etherscan.io/tx/${this.props.historyDetails.tx_hash}`}>{ this.props.historyDetails.tx_hash }</a></p>
               </Modal.Description>
             </Modal.Content>
           </Modal>

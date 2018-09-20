@@ -1,7 +1,9 @@
+import axios from 'axios';
 import getBalances from '../../util/web3/getBalances';
 import ERC20_ABI from '../../abi/erc20';
 import store from '../../store';
 import Config from '../../config';
+import getWithdrawTransactions from '../../util/withdraw/getWithdrawTransactions';
 
 const Tx = require('ethereumjs-tx');
 
@@ -69,7 +71,29 @@ export function withdraw(wallet, recipient, amountLong, coin) {
               txHash,
             },
           });
-          dispatch(getBalances());
+          const axiosConfig = {
+            headers: {
+              'Auth-Signature': store.getState().auth.signedAddress,
+              'Auth-Eth-Address': store.getState().auth.address.slice(2),
+            },
+          };
+          const { bdnUrl } = Config.network;
+          const transactionData = {
+            transaction_type: 2,
+            currency: coin,
+            value: amountLong,
+            sender: store.getState().auth.address,
+            receiver: recipient,
+            tx_hash: txHash,
+          };
+          console.log(transactionData);
+          axios.post(`${bdnUrl}api/v1/transactions/`, transactionData, axiosConfig).then(() => {
+            console.log('ok');
+            dispatch(getWithdrawTransactions());
+            dispatch(getBalances());
+          }).catch((error) => {
+            console.log(error);
+          });
         })
         .on('error', (error) => {
           dispatch({

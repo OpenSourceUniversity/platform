@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import React from 'react';
 import QRCode from 'qrcode.react';
-import { Segment, Container, Grid, Card, Image, Button, Icon, Header, Divider, Statistic, Input, Form, Dropdown, Dimmer, Message } from 'semantic-ui-react';
+import { Segment, Container, Grid, Card, Image, Button, Icon, Header, Divider, Statistic, Table, Input, Form, Dropdown, Dimmer, Message } from 'semantic-ui-react';
 import TransactionHistoryItem from 'components/TransactionHistoryItem';
 import { initWalletUnlocker } from '../../util/auth/walletUnlocker';
 import getBalances from '../../util/web3/getBalances';
@@ -10,8 +10,7 @@ import store from '../../store';
 import Config from '../../config';
 import GasPriceExtension from '../../components/GasPriceExtension';
 import { withdraw, resetWithdrawProps } from './actions';
-
-const options = JSON.parse(localStorage.getItem('withdrawWallets')) ? JSON.parse(localStorage.getItem('withdrawWallets')) : [];
+import getWithdrawTransactions from '../../util/withdraw/getWithdrawTransactions';
 
 class Deposit extends React.Component {
   constructor(props) {
@@ -25,6 +24,7 @@ class Deposit extends React.Component {
 
   componentDidMount() {
     this.props.setSecondaryNav('account');
+    this.props.getWithdrawTransactions();
     document.title = 'Deposit or Withdraw';
   }
 
@@ -32,6 +32,14 @@ class Deposit extends React.Component {
     this.setState({
       coin: data.value,
     });
+  }
+
+  transactionsScroll = (event) => {
+    const { scrollHeight, scrollTop, offsetHeight } = event.currentTarget;
+    const shouldScroll = scrollHeight <= (scrollTop + offsetHeight);
+    if (shouldScroll && this.props.next && !this.props.isGetingWithdrawTransactions) {
+      this.props.getWithdrawTransactions(this.props.next);
+    }
   }
 
   handleHide = () => this.props.resetWithdrawProps()
@@ -60,21 +68,7 @@ class Deposit extends React.Component {
   }
 
   renderHistory() {
-    const history = [
-      {
-        type: 'Deposit', value: 5, currency: 'ETH', date: '17/Apr/18 18:52:89', sentFrom: options[0], sentTo: this.props.address, transactionHash: '0x9c83816b9264bfc9ce28a1bf32847686ce262fde0a528ac08ef6902abd4da143',
-      },
-      {
-        type: 'Withdraw', value: 5, currency: 'ETH', date: '17/Apr/18 18:52:89', sentFrom: this.props.address, sentTo: options[0], transactionHash: '0x9c83816b9264bfc9ce28a1bf32847686ce262fde0a528ac08ef6902abd4da143',
-      },
-      {
-        type: 'Deposit', value: 6000, currency: 'EDU', date: '17/Apr/18 18:52:89', sentFrom: options[0], sentTo: this.props.address, transactionHash: '0x9c83816b9264bfc9ce28a1bf32847686ce262fde0a528ac08ef6902abd4da143',
-      },
-      {
-        type: 'Withdraw', value: 5000, currency: 'EDU', date: '17/Apr/18 18:52:89', sentFrom: this.props.address, sentTo: options[0], transactionHash: '0x9c83816b9264bfc9ce28a1bf32847686ce262fde0a528ac08ef6902abd4da143',
-      },
-    ];
-
+    const history = this.props.withdrawTransactions;
     return history.map((historyDetails, index) => (
       <TransactionHistoryItem historyDetails={historyDetails} key={index} />
     ));
@@ -87,7 +81,6 @@ class Deposit extends React.Component {
     const token = require('../../icons/edu_token.svg');
     const ethereum = require('../../icons/ethereum.svg');
     /* eslint-enable global-require */
-
     return (
       <Container>
         <Dimmer
@@ -194,7 +187,6 @@ class Deposit extends React.Component {
                   </Grid.Column>
                 </Grid.Row>
               </Grid>
-              <Divider />
             </Grid.Column>
             <Grid.Column tablet={16} computer={6}>
               <Segment>
@@ -221,10 +213,29 @@ class Deposit extends React.Component {
                   <Statistic.Label>ETH Balance</Statistic.Label>
                 </Statistic>
               </Segment>
+              <Table celled striped>
+                <Table.Header>
+                  <Table.Row>
+                    <Table.HeaderCell
+                      colSpan={6}
+                    >
+                      Withdraw Transaction History
+                    </Table.HeaderCell>
+                  </Table.Row>
+                </Table.Header>
+                <Table.Body>
+                  <div
+                    onScroll={this.transactionsScroll}
+                    style={{ overflowY: 'scroll', maxHeight: '256px' }}
+                  >
+                    {this.renderHistory()}
+                  </div>
+                </Table.Body>
+              </Table>
             </Grid.Column>
           </Grid.Row>
         </Grid>
-
+        <Divider />
       </Container>
     );
   }
@@ -240,6 +251,10 @@ function mapStateToProps(state) {
     error: state.withdraw.error,
     isError: state.withdraw.isError,
     txHash: state.withdraw.txHash,
+    withdrawTransactions: state.withdraw.withdrawTransactions,
+    isGetingWithdrawTransactions: state.withdraw.isGetingWithdrawTransactions,
+    getingWithdrawTransactionsError: state.withdraw.getingWithdrawTransactionsError,
+    next: state.withdraw.next,
   };
 }
 
@@ -256,6 +271,9 @@ function mapDispatchToProps(dispatch) {
     },
     resetWithdrawProps() {
       dispatch(resetWithdrawProps());
+    },
+    getWithdrawTransactions() {
+      dispatch(getWithdrawTransactions());
     },
   };
 }

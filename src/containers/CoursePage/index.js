@@ -160,11 +160,24 @@ class CoursePage extends React.Component {
                     <Header style={{ fontSize: '1.5em' }}>
                       Provider
                     </Header>
-                    <Label
+                    <Segment
+                      textAlign="center"
                       circular
+                      className="profilePicSegment"
                       onClick={this.props.course.provider ? () => { this.props.history.push(`/view-profile/academy/${this.props.course.provider.eth_address}/`); } : null}
                       style={{
-                        boxShadow: '2px 6px 20px 0 #bcbdbd, 0 1px 21px 1px #d4d4d5', width: '8em', height: '8em', backgroundColor: 'white', backgroundImage: `url(${this.props.academy.academy_logo ? `https://ipfs.io/ipfs/${this.props.academy.academy_logo}` : avatarPlaceholder})`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: '80%', cursor: 'pointer',
+                        boxShadow: '2px 6px 20px 0 #bcbdbd, 0 1px 21px 1px #d4d4d5',
+                        width: '8em',
+                        height: '8em',
+                        backgroundColor: 'white',
+                        backgroundImage: `url(${this.props.academy && this.props.academy.academy_logo ?
+                          `https://ipfs.io/ipfs/${this.props.academy.academy_logo}` :
+                          avatarPlaceholder})`,
+                        backgroundPosition: 'center center',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: 'contain',
+                        borderWidth: 0,
+                        cursor: 'auto',
                       }}
                     />
                     <Header>

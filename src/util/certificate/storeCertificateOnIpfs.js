@@ -10,7 +10,7 @@ export default function storeCertificateOnIpfs(buffer, certificateData) {
       type: 'IPFS_GET_REQUEST',
     });
     dispatch({
-      type: 'ADD_CERTIFICATE_REQUEST',
+      type: 'ENCRYPT_CERTIFICATE',
     });
     /* eslint-disable global-require */
     /* eslint-disable camelcase */
@@ -23,7 +23,9 @@ export default function storeCertificateOnIpfs(buffer, certificateData) {
     const walletInstance = hdKeyInstance.getWallet();
     const publicKey = walletInstance.getPublicKey();
     const encryptedBuffer = encrypt(publicKey, buffer);
-
+    dispatch({
+      type: 'ADD_CERTIFICATE_REQUEST',
+    });
     ipfs.add(encryptedBuffer, (err, ipfsHash) => {
       dispatch({
         type: 'IPFS_GET_SUCCESS',

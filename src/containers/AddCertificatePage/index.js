@@ -152,13 +152,21 @@ class AddCertificatePage extends React.Component {
         </Message>
 
         <Segment style={{ display: (this.props.isAdded || this.props.error) ? 'none' : 'block' }}>
-          <Dimmer active={this.props.isAdding} inverted>
+          <Dimmer active={this.props.isAdding || this.props.isEncrypting} inverted>
             <Loader size="medium">
               <p>This may take a few moments</p>
               <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
                 <image href={loader} x="0" y="0" width="100%" height="100%" />
               </svg>
-              {this.props.ipfsAdding ? 'Uploading certificate file on IPFS...' : 'Adding certificate on BDN...'}
+              {(() => {
+                if (this.props.isEncrypting) {
+                  return 'Encrypting certificate file...';
+                }
+                if (this.props.isAdding) {
+                  return 'Uploading certificate file on IPFS...';
+                }
+                return 'Adding certificate on BDN...';
+              })()}
             </Loader>
           </Dimmer>
           <Form size="large" onSubmit={(event) => { this.handleSubmit(event, this); }}>
@@ -352,6 +360,7 @@ class AddCertificatePage extends React.Component {
 function mapStateToProps(state) {
   return {
     isAdding: state.addCertificate.isAdding,
+    isEncrypting: state.addCertificate.isEncrypting,
     ipfsAdding: state.addCertificate.ipfsAdding,
     error: state.addCertificate.error,
     isAdded: state.addCertificate.isAdded,

@@ -365,9 +365,9 @@ class HeaderWithoutRouter extends React.Component {
                           Account Settings
                         </Dropdown.Item>
                         <Dropdown.Item name="social-network" className="social-network" active={activeItem === 'social-network'} onClick={this.handleItemClick}>
-                        <svg width="16" height="16">
-                          <image href={settings} x="0" y="0" width="100%" height="100%" />
-                        </svg>
+                          <svg width="16" height="16">
+                            <image href={settings} x="0" y="0" width="100%" height="100%" />
+                          </svg>
                           LinkedIn contacts
                         </Dropdown.Item>
                         <Dropdown.Item name="onboarding" className="logout-nav" onClick={this.loginFunc}>

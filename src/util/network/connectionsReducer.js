@@ -16,7 +16,6 @@ export default function connectionsReducer(state = INITIAL_STATE, action) {
     return Object.assign({}, state, {
       isArchiveAdded: true,
       isArchiveAdding: false,
-      connectionsArchive: action.archive,
       errorArchive: null,
     });
   case 'ADD_CONNECTIONS_ARCHIVE_FAILURE':

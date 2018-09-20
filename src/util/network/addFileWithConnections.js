@@ -18,11 +18,12 @@ export default function addFileWithConnections(connectionsDataFile) {
         'Auth-Eth-Address': store.getState().auth.address.slice(2),
       },
     };
-    var bodyFormData = new FormData();
+    const bodyFormData = new FormData();
     bodyFormData.set('datafile', connectionsDataFile);
     axios.post(ADD_CONNECTIONS_ARCHIVE_URL, bodyFormData, axiosConfig).then(() => {
       dispatch({
         type: 'ADD_CONNECTIONS_ARCHIVE_SUCCESS',
+        isArchiveAdded: true,
       });
     }).catch((error) => {
       dispatch({

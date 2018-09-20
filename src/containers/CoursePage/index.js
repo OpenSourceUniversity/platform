@@ -170,9 +170,16 @@ class CoursePage extends React.Component {
                         width: '8em',
                         height: '8em',
                         backgroundColor: 'white',
-                        backgroundImage: `url(${this.props.academy && this.props.academy.academy_logo ?
-                          `https://ipfs.io/ipfs/${this.props.academy.academy_logo}` :
-                          avatarPlaceholder})`,
+                        backgroundImage: `url(${
+                          (() => {
+                            if (this.props.academy) {
+                              if (this.props.academy.academy_logo) {
+                                return `https://ipfs.io/ipfs/${this.props.academy.academy_logo}`;
+                              }
+                              return avatarPlaceholder;
+                            }
+                            return this.setIcon(this.props.course.provider.name);
+                          })()})`,
                         backgroundPosition: 'center center',
                         backgroundRepeat: 'no-repeat',
                         backgroundSize: 'contain',

@@ -17,26 +17,17 @@ class MessagesPage extends React.Component {
   componentDidMount() {
     this.props.fetchThreads();
     let activeThreadId = null;
-    if (this.props.match.params.id) {
+    const { id } = this.props.match.params;
+    if (id) {
       activeThreadId = this.props.match.params.id;
       this.props.fetchMessages(activeThreadId, null);
+      this.setKeys(activeThreadId);
     } else if (this.props.threads.length) {
       activeThreadId = this.props.threads[0].id;
+      this.setKeys(activeThreadId);
       const newPath = `/messaging/${activeThreadId}/`;
       this.props.history.push(newPath);
       this.props.fetchMessages(activeThreadId, null);
-    }
-    if (this.props.match.params.id || this.props.threads.length) {
-    /* eslint-disable global-require */
-      const pk = this.props.match.params.id;
-      const hdkey = require('ethereumjs-wallet/hdkey');
-      const bip39 = require('bip39');
-      const mnemonic = bip39.entropyToMnemonic(pk.replace(/[^a-zA-Z0-9 ]/g, ''));
-      const seed = bip39.mnemonicToSeed(mnemonic);
-      const hdKeyInstance = hdkey.fromMasterSeed(seed);
-      const walletInstance = hdKeyInstance.getWallet();
-      this.state.privateKey = walletInstance.getPrivateKey();
-      this.state.publicKey = walletInstance.getPublicKey();
     }
     this.state.activeThread = activeThreadId;
     this.props.setSecondaryNav(null);
@@ -54,6 +45,7 @@ class MessagesPage extends React.Component {
       this.props.history.push(newPath);
       this.props.fetchMessages(activeThreadId, null);
       this.state.activeThread = activeThreadId;
+      this.setKeys(activeThreadId);
     }
   }
 
@@ -82,6 +74,18 @@ class MessagesPage extends React.Component {
         /* eslint-enable no-param-reassign */
       }
     }
+  }
+
+  setKeys(activeThreadId) {
+    /* eslint-disable global-require */
+    const hdkey = require('ethereumjs-wallet/hdkey');
+    const bip39 = require('bip39');
+    const mnemonic = bip39.entropyToMnemonic(activeThreadId.replace(/[^a-zA-Z0-9 ]/g, ''));
+    const seed = bip39.mnemonicToSeed(mnemonic);
+    const hdKeyInstance = hdkey.fromMasterSeed(seed);
+    const walletInstance = hdKeyInstance.getWallet();
+    this.state.privateKey = walletInstance.getPrivateKey();
+    this.state.publicKey = walletInstance.getPublicKey();
   }
 
   getOpponentInfo(opponentInstance) {

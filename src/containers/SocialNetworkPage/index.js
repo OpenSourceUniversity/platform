@@ -1,7 +1,7 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
-import { Segment, Container, Grid, Card, Image, Button, Icon, Header, Divider, List, Message } from 'semantic-ui-react';
+import { Segment, Container, Grid, Card, Button, Icon, Header, Divider, List, Message } from 'semantic-ui-react';
 import { setActiveAccount } from '../../util/activeAccount';
 import addFileWithConnections from '../../util/network/addFileWithConnections';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';

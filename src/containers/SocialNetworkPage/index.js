@@ -63,7 +63,6 @@ class SocialNetworkPage extends React.Component {
   render() {
     /* eslint-disable */
     const profile = require('../../icons/account_profile.svg');
-    const avatarPlaceholder = require('../../icons/avatar_placeholder.svg');
     const settings = require('../../icons/account_deposit.svg');
     const introduction = 'You can upgrade your profile and get numerus opportunities for professional career. \
                           Boost your skills and professional experience by uploading your LinkedIn data (->Video Tutorial). \
@@ -120,15 +119,6 @@ class SocialNetworkPage extends React.Component {
                       on the platform from your uploaded LinkedIn contacts.
                     </i>
                   </Card.Description>
-                </Card.Content>
-                <Card.Content extra>
-                  <Image centered size="tiny" src={avatarPlaceholder} />
-                  <Card.Meta>
-                    &quot;I couldn&apos;t have asked for more than this&#46;
-                    Definitely worth the investment. OS&#44;University
-                    platform should be nominated for service of the year&#46; &quot;
-                  </Card.Meta>
-                  <Divider hidden />
                 </Card.Content>
               </Card>
             </Grid.Column>

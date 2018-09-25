@@ -9,7 +9,7 @@ import resetAddCertificateProps from './actions';
 
 
 class AddCertificatePage extends React.Component {
-  state = { certificateFileIsMissing: false }
+  state = { certificateFileIsMissing: false, maxSizeError: null }
 
   componentDidMount() {
     document.title = 'Add Certificate';
@@ -102,7 +102,15 @@ class AddCertificatePage extends React.Component {
   captureCertificateFile = (event) => {
     event.stopPropagation();
     event.preventDefault();
+    this.setState({ maxSizeError: null });
     const file = event.target.files[0];
+    if (file.size > 10485760) {
+      /* eslint-disable no-param-reassign */
+      event.target.value = null;
+      this.setState({ buffer: null });
+      this.setState({ maxSizeError: 'This file is too big. Max size is 10 MB' });
+      return;
+    }
     const reader = new window.FileReader();
     reader.readAsArrayBuffer(file);
     reader.onloadend = () => this.storeCertificateFile(reader);
@@ -149,6 +157,10 @@ class AddCertificatePage extends React.Component {
 
         <Message error hidden={!this.props.error}>
           <p>{this.props.error}</p>
+        </Message>
+
+        <Message error hidden={!this.state.maxSizeError}>
+          <p>{this.state.maxSizeError}</p>
         </Message>
 
         <Segment style={{ display: (this.props.isAdded || this.props.error) ? 'none' : 'block' }}>

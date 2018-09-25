@@ -241,6 +241,9 @@ class MessagesPage extends React.Component {
   }
 
   renderMessages() {
+    if (this.props.match.params.id) {
+      this.setKeys(this.props.match.params.id);
+    }
     const { messages } = this.props;
     const opponent = this.getOpponent();
     const address = this.props.address.toLowerCase();

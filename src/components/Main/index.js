@@ -28,6 +28,7 @@ import LearnersPage from 'containers/Learners';
 import CertificatesVerificationPage from 'containers/CertificatesVerificationPage';
 import NotificationsPage from 'containers/NotificationsPage';
 import MessagingPage from 'containers/MessagingPage';
+import JobApplications from 'containers/JobApplications';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -114,6 +115,7 @@ class Main extends React.Component {
         <PrivateRouteCreateProfile isLoggedIn={this.props.isLoggedIn} path="/create-profile" component={CreateProfile} />
         <PrivateRoute {...this.props} path="/job-page/:id/" component={JobPage} />
         <PrivateRoute {...this.props} path="/notifications" component={NotificationsPage} />
+        <PrivateRoute {...this.props} path="/job-applications" component={JobApplications} />
       </Switch>
     );
   }

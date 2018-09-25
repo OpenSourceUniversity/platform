@@ -27,6 +27,7 @@ import addCourseReducer from './containers/AddCourse/addCourseReducer';
 import verificationsReducer from './util/verification/verificationsReducer';
 import verificationRequestReducer from './util/verification/verificationRequestReducer';
 import messagingReducer from './util/messaging/messagingReducer';
+import jobApplicationReducer from './util/jobApplication/jobApplicationReducer';
 
 
 const reducer = combineReducers({
@@ -58,6 +59,7 @@ const reducer = combineReducers({
   verificationRequest: verificationRequestReducer,
   notification: notificationReducer,
   messaging: messagingReducer,
+  jobApplication: jobApplicationReducer,
 });
 
 export default reducer;

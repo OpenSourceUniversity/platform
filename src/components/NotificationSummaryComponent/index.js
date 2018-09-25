@@ -30,6 +30,8 @@ class NotificationSummaryComponent extends React.Component {
         return recipientProfileType === 2 ?
           `/verifications/academy/${notification.action_object_object_id}/` :
           `/verifications/business/${notification.action_object_object_id}/`;
+      case 'job application':
+        return '/job-applications/';
       default:
         return null;
       }

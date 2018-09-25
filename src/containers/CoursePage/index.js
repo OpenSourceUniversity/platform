@@ -184,7 +184,7 @@ class CoursePage extends React.Component {
                         backgroundRepeat: 'no-repeat',
                         backgroundSize: 'contain',
                         borderWidth: 0,
-                        cursor: 'auto',
+                        cursor: this.props.job.academy ? 'pointer' : 'auto',
                       }}
                     />
                     <Header>

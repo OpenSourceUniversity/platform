@@ -177,7 +177,7 @@ class HeaderWithoutRouter extends React.Component {
         key: 'jobs', content: 'Browse jobs', name: 'jobs', active: activeItem === 'jobs', onClick: this.handleItemClick,
       },
       {
-        key: 'interviews', content: 'My Interviews', name: 'interviews', active: false, className: 'secondary-nav-disabled-beta',
+        key: 'job-applications', content: 'Job Applications', name: 'job-applications', active: activeItem === 'job-applications', onClick: this.handleItemClick,
       },
       {
         key: 'career', content: 'Career Paths', name: 'career', active: false, className: 'secondary-nav-disabled-beta',
@@ -264,7 +264,7 @@ class HeaderWithoutRouter extends React.Component {
         key: 'add-job', content: 'Add job positions', name: 'businesses/add/', active: activeItem === 'businesses/add/', onClick: this.handleItemClick,
       },
       {
-        key: 'interviews', content: 'My Interviews', name: 'interviews', active: false, className: 'secondary-nav-disabled-beta',
+        key: 'job-applications', content: 'Job Applications', name: 'job-applications', active: activeItem === 'job-applications', onClick: this.handleItemClick,
       },
       {
         key: 'career', content: 'Career Paths', name: 'career', active: false, className: 'secondary-nav-disabled-beta',

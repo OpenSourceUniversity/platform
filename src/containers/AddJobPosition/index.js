@@ -54,7 +54,7 @@ class AddJobPosition extends React.Component {
         <Breadcrumb>
           <Breadcrumb.Section href="/#/">Home</Breadcrumb.Section>
           <Breadcrumb.Divider icon="right angle" />
-          <Breadcrumb.Section href="/#/business">Business</Breadcrumb.Section>
+          <Breadcrumb.Section href="/#/businesses">Business</Breadcrumb.Section>
           <Breadcrumb.Divider icon="right angle" />
           <Breadcrumb.Section active>Add Position</Breadcrumb.Section>
         </Breadcrumb>

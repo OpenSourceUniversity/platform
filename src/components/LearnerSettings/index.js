@@ -26,6 +26,7 @@ class LearnerSettings extends React.Component {
     buffer: null,
     src: null,
     zoom: 1,
+    maxSizeError: null,
   }
 
   componentDidMount() {
@@ -84,7 +85,20 @@ class LearnerSettings extends React.Component {
   captureFile =(event) => {
     event.stopPropagation();
     event.preventDefault();
-    if (!event.target.files[0].type.match(/image.*/)) {
+    this.setState({ maxSizeError: null });
+    const file = event.target.files[0];
+    if (!file.type.match(/image.*/)) {
+      /* eslint-disable no-param-reassign */
+      event.target.value = null;
+      this.setState({ buffer: null });
+      this.setState({ maxSizeError: 'This file is not an image.' });
+      return;
+    }
+    if (file.size > 5242880) {
+      /* eslint-disable no-param-reassign */
+      event.target.value = null;
+      this.setState({ buffer: null });
+      this.setState({ maxSizeError: 'This file is too big. Max size is 5 MB' });
       return;
     }
     if (event.target.files && event.target.files.length > 0) {
@@ -97,7 +111,7 @@ class LearnerSettings extends React.Component {
           }),
         false,
       );
-      reader.readAsDataURL(event.target.files[0]);
+      reader.readAsDataURL(file);
     }
   }
 
@@ -149,6 +163,9 @@ class LearnerSettings extends React.Component {
             onDismiss={this.handleDismiss}
           />
         ) : null}
+        <Message error hidden={!this.state.maxSizeError}>
+          <p>{this.state.maxSizeError}</p>
+        </Message>
         <Header>
           Personal Information
         </Header>

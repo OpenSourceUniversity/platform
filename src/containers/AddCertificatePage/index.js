@@ -111,9 +111,16 @@ class AddCertificatePage extends React.Component {
       this.setState({ maxSizeError: 'This file is too big. Max size is 10 MB' });
       return;
     }
-    const reader = new window.FileReader();
-    reader.readAsArrayBuffer(file);
-    reader.onloadend = () => this.storeCertificateFile(reader);
+    if (file.type.match(/image.*/) || file.type === 'application/pdf') {
+      const reader = new window.FileReader();
+      reader.readAsArrayBuffer(file);
+      reader.onloadend = () => this.storeCertificateFile(reader);
+    } else {
+      /* eslint-disable no-param-reassign */
+      event.target.value = null;
+      this.setState({ buffer: null });
+      this.setState({ maxSizeError: 'Wrong file type' });
+    }
   }
 
   storeCertificateFile = (reader) => {
@@ -187,14 +194,14 @@ class AddCertificatePage extends React.Component {
                 <Grid.Column>
                   <Form.Field required>
                     <label htmlFor="certificate_file">
-                      Certificate file in PDF
+                      Certificate file in PDF or image
                     </label>
                     <Input
                       id="certificate_file"
                       iconPosition="left"
                       icon="upload"
                       type="file"
-                      accept=".png,.gif,.jpg,.jpeg,.pdf"
+                      accept=".png,.gif,.jpeg,.pdf"
                       error={this.state.certificateFileIsMissing}
                       name="certificate_file"
                       placeholder="Certificate File"

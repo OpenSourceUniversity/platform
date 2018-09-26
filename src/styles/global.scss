@@ -581,7 +581,7 @@ input[type="file"] {
   right: 4em;
 }
 
-.messagingThreads {
+.messagingThreads, verificationsList {
   overflow-x: hidden;
   overflow-y: scroll;
   .item {

@@ -134,7 +134,7 @@ class CertificatesVerificationPage extends React.Component {
 
   showVerification = (verificationId) => {
     document.getElementById('CertificateFile').src = '';
-    document.getElementById('CertificatePDFFile').height = '100%';
+    document.getElementById('CertificatePDFFile').height = '1px';
     document.getElementById('CertificatePDFFile').data = '';
     this.setState({ activeVerificationId: verificationId });
     this.props.history.push(`/verifications/${this.props.match.params.type}/${verificationId}/`);
@@ -263,21 +263,28 @@ class CertificatesVerificationPage extends React.Component {
           </p>
         </Message>
         <Grid>
-          <Grid.Column width={4} style={{ display: this.props.verifications.length > 0 ? null : 'none' }}>
-            <Menu fluid vertical pointing>
+          <Grid.Column
+            width={4}
+            style={{ display: this.props.verifications.length > 0 ? null : 'none', paddingRight: 0 }}
+          >
+            <Menu className="verificationsList" fluid vertical pointing style={{ height: '78vh' }}>
               {this.renderVerificationsMenu()}
             </Menu>
           </Grid.Column>
-          <Grid.Column width={12} style={{ display: this.state.activeVerificationId ? 'block' : 'none' }}>
+          <Grid.Column
+            width={12}
+            style={{ display: this.state.activeVerificationId ? 'block' : 'none', paddingLeft: 0 }}
+          >
             <Segment style={(() => {
+              let style = { borderColor: 'orange' };
               if (this.props.verification.state === 'pending') {
-                return { borderColor: 'blue' };
+                style = Object.assign({}, style, { borderColor: 'blue' });
               } else if (this.props.verification.state === 'verified') {
-                return { borderColor: 'green' };
+                style = Object.assign({}, style, { borderColor: 'green' });
               } else if (this.props.verification.state === 'rejected' || this.props.verification.state === 'revoked') {
-                return { borderColor: 'red' };
+                style = Object.assign({}, style, { borderColor: 'red' });
               }
-              return { borderColor: 'orange' };
+              return style;
             })()}
             >
               <Dimmer
@@ -339,7 +346,7 @@ class CertificatesVerificationPage extends React.Component {
                 <label htmlFor="ipfsHash">
                   <b>Certificate file</b><br /><br />
                   <img style={{ width: '100%' }} id="CertificateFile" alt="" src="" />
-                  <object alt="" id="CertificatePDFFile" data="" type="application/pdf" width="100%" height="100%">
+                  <object alt="" id="CertificatePDFFile" data="" type="application/pdf" width="100%" height="1px">
                     <p>Alternative text</p>
                   </object>
                 </label>

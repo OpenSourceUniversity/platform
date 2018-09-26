@@ -46,6 +46,14 @@ class CertificatesVerificationPage extends React.Component {
     if (this.props.certificate !== prevProps.certificate && this.props.match.params.id) {
       /* eslint-disable react/no-did-update-set-state */
       this.setState({ isFetching: true });
+      const mimtypes = {
+        '89504E47': 'image/png',
+        47494638: 'image/gif',
+        25504446: 'application/pdf',
+        FFD8FFDB: 'image/jpeg',
+        FFD8FFE0: 'image/jpeg',
+        FFD8FFE1: 'image/jpeg',
+      };
       if (this.props.certificate.checksum_hash) {
         /* eslint-disable global-require */
         const hdkey = require('ethereumjs-wallet/hdkey');
@@ -60,18 +68,46 @@ class CertificatesVerificationPage extends React.Component {
             const encryptedBuffer = Buffer.from(buffer);
             const decryptedBuffer = decrypt(privateKey, encryptedBuffer);
             const uint8Array = new Uint8Array(decryptedBuffer);
-            const blob = new Blob([uint8Array], { type: 'image/jpeg' });
+            const first4Bytest = uint8Array.slice(0, 4);
+            const bytes = [];
+            first4Bytest.forEach((byte) => {
+              bytes.push(byte.toString(16));
+            });
+            const hexFirstBytes = bytes.join('').toUpperCase();
+            if (!mimtypes[hexFirstBytes]) {
+              console.log('Unknown file type!');
+            }
+            const blob = new Blob([uint8Array], { type: mimtypes[hexFirstBytes] });
             const url = URL.createObjectURL(blob);
-            document.getElementById('CertificateFile').src = url;
+            if (mimtypes[hexFirstBytes] === 'application/pdf') {
+              document.getElementById('CertificatePDFFile').data = url;
+              document.getElementById('CertificatePDFFile').height = `${window.innerHeight * 0.8}px`;
+            } else {
+              document.getElementById('CertificateFile').src = url;
+            }
             this.setState({ isFetching: false });
           }));
       } else {
         fetch(`https://ipfs.io/ipfs/${this.props.certificate.ipfs_hash}`)
           .then(response => response.arrayBuffer().then((buffer) => {
             const uint8Array = new Uint8Array(buffer);
-            const blob = new Blob([uint8Array], { type: 'image/jpeg' });
+            const first4Bytest = uint8Array.slice(0, 4);
+            const bytes = [];
+            first4Bytest.forEach((byte) => {
+              bytes.push(byte.toString(16));
+            });
+            const hexFirstBytes = bytes.join('').toUpperCase();
+            if (!mimtypes[hexFirstBytes]) {
+              console.log('Unknown file type!');
+            }
+            const blob = new Blob([uint8Array], { type: mimtypes[hexFirstBytes] });
             const url = URL.createObjectURL(blob);
-            document.getElementById('CertificateFile').src = url;
+            if (mimtypes[hexFirstBytes] === 'application/pdf') {
+              document.getElementById('CertificatePDFFile').data = url;
+              document.getElementById('CertificatePDFFile').height = `${window.innerHeight * 0.8}px`;
+            } else {
+              document.getElementById('CertificateFile').src = url;
+            }
             this.setState({ isFetching: false });
           }));
       }
@@ -98,6 +134,8 @@ class CertificatesVerificationPage extends React.Component {
 
   showVerification = (verificationId) => {
     document.getElementById('CertificateFile').src = '';
+    document.getElementById('CertificatePDFFile').height = '100%';
+    document.getElementById('CertificatePDFFile').data = '';
     this.setState({ activeVerificationId: verificationId });
     this.props.history.push(`/verifications/${this.props.match.params.type}/${verificationId}/`);
     this.props.fetchVerification(`${bdnUrl}api/v1/verifications/${verificationId}/`);
@@ -301,6 +339,9 @@ class CertificatesVerificationPage extends React.Component {
                 <label htmlFor="ipfsHash">
                   <b>Certificate file</b><br /><br />
                   <img style={{ width: '100%' }} id="CertificateFile" alt="" src="" />
+                  <object alt="" id="CertificatePDFFile" data="" type="application/pdf" width="100%" height="100%">
+                    <p>Alternative text</p>
+                  </object>
                 </label>
                 <div style={{ display: this.props.verification.state === 'requested' || this.props.verification.state === 'open' ? null : 'none', paddingTop: '20px' }}>
                   <Button type="submit" color="green" size="huge">Verify</Button>

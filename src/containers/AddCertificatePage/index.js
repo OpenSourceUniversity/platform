@@ -194,7 +194,7 @@ class AddCertificatePage extends React.Component {
                 <Grid.Column>
                   <Form.Field required>
                     <label htmlFor="certificate_file">
-                      Certificate file in PDF or image
+                      Certificate file in PDF or image (PNG, GIF, JPEG)
                     </label>
                     <Input
                       id="certificate_file"

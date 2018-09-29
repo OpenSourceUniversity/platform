@@ -267,7 +267,13 @@ class CertificatesVerificationPage extends React.Component {
             width={4}
             style={{ display: this.props.verifications.length > 0 ? null : 'none', paddingRight: 0 }}
           >
-            <Menu className="verificationsList" fluid vertical pointing style={{ height: '78vh' }}>
+            <Menu
+              className="verificationsList"
+              fluid
+              vertical
+              pointing
+              style={{ height: '78vh', borderTopRightRadius: 0 }}
+            >
               {this.renderVerificationsMenu()}
             </Menu>
           </Grid.Column>
@@ -276,7 +282,7 @@ class CertificatesVerificationPage extends React.Component {
             style={{ display: this.state.activeVerificationId ? 'block' : 'none', paddingLeft: 0 }}
           >
             <Segment style={(() => {
-              let style = { borderColor: 'orange' };
+              let style = { borderColor: 'orange', borderTopLeftRadius: 0 };
               if (this.props.verification.state === 'pending') {
                 style = Object.assign({}, style, { borderColor: 'blue' });
               } else if (this.props.verification.state === 'verified') {

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import CourseItem from 'components/CourseItem';
 import JobItem from 'components/JobItem';
 import CertificateItem from 'components/CertificateItem';
-import { fetchFeaturedCourses } from './actionsFeatured';
+import { fetchFeaturedCourses, fetchFeaturedJobs } from './actionsFeatured';
 import { fetchDepartmentCourses } from '../../components/ViewAcademyProfile/actions';
 import { fetchCompanyJobs } from '../../components/ViewBusinessProfile/actions';
 import fetchCertificates from '../../util/certificate/fetchCertificates';
@@ -21,6 +21,7 @@ class HomePage extends React.Component {
     } else {
       this.props.fetchCertificates();
       this.props.fetchFeaturedCourses();
+      this.props.fetchFeaturedJobs();
     }
     this.props.setSecondaryNav(null);
     document.title = 'Dashboard';
@@ -188,6 +189,25 @@ class HomePage extends React.Component {
             </Button>
           </div>
         </div>
+        <Divider style={{ marginTop: '3em', marginBottom: '3em' }} clearing />
+        <div>
+          <Header style={{ textAlign: 'center' }} size="huge">Job Positions</Header>
+          <Grid width={16}>
+            {
+              this.props.featuredJobs.length ?
+                this.renderFeaturedJobs(this.props.featuredJobs) :
+                <div style={{ textAlign: 'center', width: '100%', marginTop: '3em' }}>
+                  <p style={{ textAlign: 'center' }}>There are no featured courses yet.</p>
+                </div>
+            }
+          </Grid>
+          <Divider style={{ marginTop: '3em' }} clearing />
+          <div style={{ textAlign: 'center' }}>
+            <Button primary style={{ margin: '1em' }}as={Link} to="/jobs">
+                Explore all Jobs
+            </Button>
+          </div>
+        </div>
       </Container>
     );
   }
@@ -199,6 +219,9 @@ function mapStateToProps(state) {
     courses: state.courses.courses,
     isFetchingCourses: state.courses.isFetching,
     errorCourses: state.courses.error,
+    featuredJobs: state.jobs.jobs,
+    isFetchingJobs: state.jobs.isFetching,
+    errorJobs: state.jobs.error,
     certificates: state.certificates.certificates,
     isFetchingCertificate: state.certificates.isFetching,
     errorCertificate: state.certificates.error,
@@ -225,6 +248,9 @@ function mapDispatchToProps(dispatch) {
     },
     fetchDepartmentCourses(eth_address) {
       dispatch(fetchDepartmentCourses(eth_address));
+    },
+    fetchFeaturedJobs() {
+      dispatch(fetchFeaturedJobs());
     },
   };
 }

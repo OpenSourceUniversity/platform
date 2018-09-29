@@ -10,6 +10,9 @@ function arraysEqual(arr1, arr2) {
   if (arr1.length !== arr2.length) {
     return false;
   }
+  if (arr1.length === 0 && arr2.length === 0) {
+    return false;
+  }
   for (let i = arr1.length; i >= 0; i -= 1) {
     if (arr1[i].id !== arr2[i].id && arr1[i].state !== arr2[i].state && arr2[i].company_profile) {
       return false;

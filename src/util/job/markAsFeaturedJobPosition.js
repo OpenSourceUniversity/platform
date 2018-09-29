@@ -1,15 +1,14 @@
 import axios from 'axios';
 import store from '../../store';
 import Config from '../../config';
-import checkJobApplication from './checkJobApplication';
 
 const { bdnUrl } = Config.network;
 
 
-export default function applyJobPosition(id) {
+export default function markAsFeaturedJobPosition(id) {
   return function action(dispatch) {
     dispatch({
-      type: 'APPLY_JOB_POSITION_REQUEST',
+      type: 'ADD_JOB_REQUEST',
     });
     const axiosConfig = {
       headers: {
@@ -17,19 +16,16 @@ export default function applyJobPosition(id) {
         'Auth-Eth-Address': store.getState().auth.address.slice(2),
       },
     };
-    const data = {
-      job: id,
-    };
-    const url = `${bdnUrl}api/v1/job-applications/`;
-    axios.post(url, data, axiosConfig).then(() => {
+    axios.post(`${bdnUrl}api/v1/jobs/${id}/mark_featured_by_id/`, null, axiosConfig).then(() => {
       dispatch({
-        type: 'APPLY_JOB_POSITION_SUCCESS',
+        type: 'ADD_JOB_SUCCESS',
       });
-      dispatch(checkJobApplication(id));
     }).catch((error) => {
       dispatch({
-        type: 'APPLY_JOB_POSITION_FAILURE',
-        error: error.response.data.error,
+        type: 'ADD_JOB_FAILURE',
+        error: {
+          message: error.response.data.error,
+        },
       });
     });
   };

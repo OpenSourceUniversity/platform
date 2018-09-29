@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, Header, Divider, Label, Segment, Grid, Menu, Icon, Container, Dimmer, Loader, Breadcrumb, Modal } from 'semantic-ui-react';
+import { Button, Header, Divider, Label, Segment, Grid, Menu, Icon, Container, Dimmer, Loader, Breadcrumb, Modal, Message } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import SkillItem from 'components/SkillItem';
-import { fetchCourse, deleteCourse } from './actions';
+import { fetchCourse, deleteCourse, markAsFeaturedCoursePosition } from './actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import Config from '../../config';
 
 class CoursePage extends React.Component {
-  state = { activeItem: 'about', modalOpen: false }
+  state = { activeItem: 'about', modalOpen: false, modalFeaturedOpen: false }
   componentDidMount() {
     const { bdnUrl } = Config.network;
     this.props.fetchCourse(`${bdnUrl}api/v1/courses/${this.props.match.params.id}/`);
@@ -34,6 +34,10 @@ class CoursePage extends React.Component {
   handleOpen = () => this.setState({ modalOpen: true })
 
   handleClose = () => this.setState({ modalOpen: false })
+
+  handleFeaturedOpen = () => this.setState({ modalFeaturedOpen: true })
+
+  handleFeaturedClose = () => this.setState({ modalFeaturedOpen: false })
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
@@ -83,6 +87,47 @@ class CoursePage extends React.Component {
                 <Grid.Column width={16}>
                   <Segment clearing floated="right">
                     <Button as="a" target="_blank" onClick={() => { this.props.history.push(`/academies/edit/${this.props.match.params.id}/`); }} color="yellow">Edit</Button>
+                    {this.props.course.is_featured ?
+                      null :
+                      <Modal
+                        open={this.state.modalFeaturedOpen}
+                        onClose={this.handleFeaturedClose}
+                        trigger={
+                          <Button
+                            onClick={this.handleFeaturedOpen}
+                            color="green"
+                          >
+                            Mark as Featured
+                          </Button>
+                        }
+                        basic
+                        size="small"
+                      >
+                        <Header icon="archive" content="Mark as featured course confirmation" />
+                        <Modal.Content>
+                          <Message error hidden={!this.props.errorFeatured}>
+                            <p>
+                              {this.props.errorFeatured}
+                            </p>
+                          </Message>
+                          <p>
+                          You want to mark as featured&nbsp;
+                          youre course, named: {this.props.course.title}.
+                          </p>
+                          <p>
+                          Please, confirm this action.
+                          </p>
+                        </Modal.Content>
+                        <Modal.Actions>
+                          <Button onClick={this.handleFeaturedClose} floated="left" basic color="grey" inverted>
+                            <Icon name="remove" /> Cancel
+                          </Button>
+                          <Button basic color="green" inverted onClick={() => { this.props.markAsFeaturedCoursePosition(this.props.match.params.id); }}>
+                            <Icon name="rocket" /> Mark as Featured
+                          </Button>
+                        </Modal.Actions>
+                      </Modal>
+                    }
                     <Modal open={this.state.modalOpen} onClose={this.handleClose} trigger={<Button onClick={this.handleOpen} color="red">Delete</Button>} basic size="small">
                       <Header icon="archive" content="Delete course confirmation" />
                       <Modal.Content>
@@ -184,7 +229,7 @@ class CoursePage extends React.Component {
                         backgroundRepeat: 'no-repeat',
                         backgroundSize: 'contain',
                         borderWidth: 0,
-                        cursor: this.props.job.academy ? 'pointer' : 'auto',
+                        cursor: this.props.course.provider ? 'pointer' : 'auto',
                       }}
                     />
                     <Header>
@@ -242,6 +287,7 @@ function mapStateToProps(state) {
     academy: state.course.academy,
     isFetching: state.course.isFetching,
     error: state.course.error,
+    errorFeatured: state.addCourse.error,
     address: state.auth.address,
   };
 }
@@ -257,6 +303,9 @@ function mapDispatchToProps(dispatch) {
     },
     setSecondaryNav(secondaryNav) {
       dispatch(setSecondaryNav(secondaryNav));
+    },
+    markAsFeaturedCoursePosition(id) {
+      dispatch(markAsFeaturedCoursePosition(id));
     },
   };
 }

@@ -34,7 +34,7 @@ const jobApplicationReducer = (state = initialState, action) => {
   case 'FETCH_JOB_APPLICATIONS_FAILURE':
     return Object.assign({}, state, {
       isFetching: false,
-      error: action.jobApplications.error,
+      error: action.error,
     });
   case 'CHECK_JOB_APPLICATION_SUCCESS':
     return Object.assign({}, state, {
@@ -57,7 +57,7 @@ const jobApplicationReducer = (state = initialState, action) => {
     });
   case 'APPLY_JOB_POSITION_FAILURE':
     return Object.assign({}, state, {
-      error: state.error,
+      error: action.error,
     });
   default:
     return state;

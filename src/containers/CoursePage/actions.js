@@ -73,3 +73,31 @@ export function deleteCourse(id) {
     });
   };
 }
+
+
+export function markAsFeaturedCoursePosition(id) {
+  return function action(dispatch) {
+    dispatch({
+      type: 'ADD_COURSE_REQUEST',
+    });
+    const axiosConfig = {
+      headers: {
+        'Auth-Signature': store.getState().auth.signedAddress,
+        'Auth-Eth-Address': store.getState().auth.address.slice(2),
+      },
+    };
+    axios.post(`${bdnUrl}api/v1/courses/${id}/mark_featured_by_id/`, null, axiosConfig).then(() => {
+      dispatch({
+        type: 'ADD_COURSE_SUCCESS',
+      });
+    }).catch((error) => {
+      dispatch({
+        type: 'ADD_COURSE_FAILURE',
+        error: {
+          message: error.response.data.error,
+        },
+      });
+    });
+  };
+}
+

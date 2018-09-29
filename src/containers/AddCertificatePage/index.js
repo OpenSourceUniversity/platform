@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Grid, Header, Segment, Button, Message, Divider, Breadcrumb, Form, Input, Dimmer, Loader, Dropdown } from 'semantic-ui-react';
-import SkillsInput from 'components/SkillsInput';
-import IndustriesInput from 'components/IndustriesInput';
+import SkillsInput from '../../components/SkillsInput';
+import IndustriesInput from '../../components/IndustriesInput';
 import storeCertificateOnIpfs from '../../util/certificate/storeCertificateOnIpfs';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
-import resetAddCertificateProps from './actions';
+import { resetAddCertificateProps, resetCertificateAutocomplete } from './actions';
 
 
 class AddCertificatePage extends React.Component {
@@ -14,6 +14,10 @@ class AddCertificatePage extends React.Component {
   componentDidMount() {
     document.title = 'Add Certificate';
     this.props.resetAddCertificateProps();
+  }
+
+  componentWillUnmount() {
+    this.props.resetCertificateAutocomplete();
   }
 
   getDynamicOptions() {
@@ -139,6 +143,7 @@ class AddCertificatePage extends React.Component {
   };
   /* eslint-disable jsx-a11y/label-has-for */
   render() {
+    console.log(this.props.certificateAutocomplete);
     /* eslint-disable global-require */
     const loader = require('../../icons/osu-loader.svg');
     /* eslint-enable global-require */
@@ -222,11 +227,19 @@ class AddCertificatePage extends React.Component {
                       iconPosition="left"
                       icon="file"
                       placeholder="Official course title"
+                      key={`title:${this.props.certificateAutocomplete.title || ''}`}
+                      defaultValue={this.props.certificateAutocomplete.title ? this.props.certificateAutocomplete.title : ''}
                       onChange={this.handleChange}
                     />
                   </Form.Field>
-                  <IndustriesInput ref={(arg) => { this.industriesRef = arg; }} />
-                  <SkillsInput ref={(arg) => { this.skillsRef = arg; }} />
+                  <IndustriesInput
+                    ref={(arg) => { this.industriesRef = arg; }}
+                    industries={this.props.certificateAutocomplete.industries}
+                  />
+                  <SkillsInput
+                    ref={(arg) => { this.skillsRef = arg; }}
+                    skills={this.props.certificateAutocomplete.skills}
+                  />
                   <Form.Field>
                     <label htmlFor="course_link">
                       Course link (if any)
@@ -238,6 +251,8 @@ class AddCertificatePage extends React.Component {
                       iconPosition="left"
                       icon="chain"
                       placeholder="Link to your course"
+                      key={`title:${this.props.certificateAutocomplete.external_link || ''}`}
+                      defaultValue={this.props.certificateAutocomplete.external_link ? this.props.certificateAutocomplete.external_link : ''}
                     />
                   </Form.Field>
                   <Form.Field>
@@ -331,6 +346,8 @@ class AddCertificatePage extends React.Component {
                       icon="university"
                       placeholder="Official name of your academy"
                       onChange={this.handleChange}
+                      key={`title:${this.props.certificateAutocomplete.provider || ''}`}
+                      defaultValue={this.props.certificateAutocomplete.provider ? this.props.certificateAutocomplete.provider.name : ''}
                     />
                   </Form.Field>
                   <Form.Field required>
@@ -385,6 +402,7 @@ function mapStateToProps(state) {
     isAdded: state.addCertificate.isAdded,
     ethAddress: state.auth.address,
     activeAccount: state.activeAccount.activeAccount,
+    certificateAutocomplete: state.certificate.certificateAutocomplete,
   };
 }
 
@@ -399,6 +417,9 @@ function mapDispatchToProps(dispatch) {
     },
     resetAddCertificateProps() {
       dispatch(resetAddCertificateProps());
+    },
+    resetCertificateAutocomplete() {
+      dispatch(resetCertificateAutocomplete());
     },
   };
 }

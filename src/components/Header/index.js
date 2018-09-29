@@ -7,7 +7,7 @@ import NotificationsComponent from '../NotificationsComponent';
 import logout from '../../util/auth/logout';
 import getBalances from '../../util/web3/getBalances';
 import setOnBoardingActiveElement from '../../util/auth/setOnBoardingActiveElement';
-import resetAddCertificateProps from '../../containers/AddCertificatePage/actions';
+import { resetAddCertificateProps } from '../../containers/AddCertificatePage/actions';
 import { resetAddCourseProps } from '../../containers/AddCourse/actions';
 import { resetAddJobProps } from '../../containers/AddJobPosition/actions';
 

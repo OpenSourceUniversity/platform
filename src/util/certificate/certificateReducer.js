@@ -5,6 +5,11 @@ const INITIAL_STATE = {
   certificate: {
     verifications: [],
   },
+  certificateAutocomplete: {
+    skills: [],
+    industries: [],
+    languages: [],
+  },
   isDeleting: false,
 };
 
@@ -59,6 +64,14 @@ export default function certificateReducer(state = INITIAL_STATE, action) {
     return Object.assign({}, state, {
       isDeleting: false,
       error: action.error.message,
+    });
+  case 'SET_CERTIFICATE_AUTOCOMPLETE':
+    return Object.assign({}, state, {
+      certificateAutocomplete: action.certificate,
+    });
+  case 'RESET_CERTIFICATE_AUTOCOMPLETE':
+    return Object.assign({}, state, {
+      certificateAutocomplete: {},
     });
   default:
     return state;

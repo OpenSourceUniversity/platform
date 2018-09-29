@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Container, Header, Divider, Grid, Segment, Accordion, Menu, Icon, Form } from 'semantic-ui-react';
+import { Container, Header, Divider, Grid, Segment, Accordion, Menu, Icon, Form, Dimmer, Button, Loader } from 'semantic-ui-react';
 import IndustryFilter from 'components/IndustryFilter';
 import JobItem from 'components/JobItem';
 import { fetchJobs } from './actions';
@@ -107,6 +107,23 @@ class JobsPage extends React.Component {
                   </div>;
                 }
               })()}
+              <Dimmer active={this.props.isFetching} inverted>
+                <Loader size="large">Loading</Loader>
+              </Dimmer>
+
+              <div style={{ display: !this.props.next ? 'none' : 'block', marginTop: '20px', textAlign: 'center' }}>
+                <Button
+                  onClick={() => { this.props.fetchJobs(this.props.next); }}
+                  icon
+                  labelPosition="left"
+                >
+                  <Icon
+                    name={!this.props.isFetching ? 'arrow down' : 'spinner'}
+                    loading={this.props.isFetching}
+                  />
+                  Load More
+                </Button>
+              </div>
             </Segment>
           </Grid.Column>
         </Grid>

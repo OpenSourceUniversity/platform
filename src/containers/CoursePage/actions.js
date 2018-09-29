@@ -75,7 +75,7 @@ export function deleteCourse(id) {
 }
 
 
-export function markAsFeaturedCoursePosition(id) {
+export function markAsFeaturedCourse(id) {
   return function action(dispatch) {
     dispatch({
       type: 'ADD_COURSE_REQUEST',
@@ -104,3 +104,12 @@ export function markAsFeaturedCoursePosition(id) {
   };
 }
 
+
+export function registerCertificate(course) {
+  return function action(dispatch) {
+    dispatch({
+      type: 'SET_CERTIFICATE_AUTOCOMPLETE',
+      certificate: course,
+    });
+  };
+}

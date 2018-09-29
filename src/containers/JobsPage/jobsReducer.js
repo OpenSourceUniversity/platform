@@ -15,7 +15,7 @@ export default function jobsReducer(state = INITIAL_STATE, action) {
   case 'FETCH_JOBS_SUCCESS':
     return Object.assign({}, state, {
       isFetching: false,
-      jobs: action.results,
+      jobs: state.jobs.concat(action.results),
       next: action.next,
     });
   case 'FETCH_JOBS_FAILURE':
@@ -37,7 +37,7 @@ export default function jobsReducer(state = INITIAL_STATE, action) {
   case 'FETCH_FEATURED_JOBS_SUCCESS':
     return Object.assign({}, state, {
       isFetching: false,
-      featuredJobs: action.results,
+      featuredJobs: state.featuredJobs.concat(action.results),
       next: action.next,
     });
   case 'FETCH_FEATURED_JOBS_FAILURE':

@@ -7,6 +7,23 @@ import arrayUnique from '../../util/arrayUnique';
 export default class SkillsInput extends Component {
   state = { options: [], currentValue: [], searchValue: '' }
 
+  componentDidMount() {
+    const needle = this.props.skills;
+    const skills = [];
+    if (!needle) {
+      return null;
+    }
+    for (let i = 0; i < needle.length; i += 1) {
+      skills.push(needle[i].name);
+    }
+    const normalizedSkillValue = skills.map(value => (
+      { value, text: value }
+    ));
+    this.state.currentValue = skills;
+    this.state.options = normalizedSkillValue;
+    return null;
+  }
+
   componentDidUpdate(prevProps) {
     /* eslint-disable consistent-return */
     /* eslint-disable react/no-did-update-set-state */

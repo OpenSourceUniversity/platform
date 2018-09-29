@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Button, Header, Divider, Label, Segment, Grid, Menu, Icon, Container, Dimmer, Loader, Breadcrumb, Modal, Message } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import SkillItem from 'components/SkillItem';
-import { fetchCourse, deleteCourse, markAsFeaturedCoursePosition } from './actions';
+import { fetchCourse, deleteCourse, markAsFeaturedCourse, registerCertificate } from './actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import Config from '../../config';
 
@@ -41,6 +41,10 @@ class CoursePage extends React.Component {
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
+  registerCertificateClick = () => {
+    this.props.registerCertificate(this.props.course);
+  }
+
   renderSkills() {
     const skillsJSON = this.props.course.skills;
     let skillsJSONLength = 0;
@@ -55,6 +59,7 @@ class CoursePage extends React.Component {
       <SkillItem skill={skill} key={index} />
     ));
   }
+
   // renderRating(ratingNumb) {
   //   return (
   //     <div className="ui accurate star widget inline" style={{ marginRight: '10px' }}>
@@ -122,7 +127,7 @@ class CoursePage extends React.Component {
                           <Button onClick={this.handleFeaturedClose} floated="left" basic color="grey" inverted>
                             <Icon name="remove" /> Cancel
                           </Button>
-                          <Button basic color="green" inverted onClick={() => { this.props.markAsFeaturedCoursePosition(this.props.match.params.id); }}>
+                          <Button basic color="green" inverted onClick={() => { this.props.markAsFeaturedCourse(this.props.match.params.id); }}>
                             <Icon name="rocket" /> Mark as Featured
                           </Button>
                         </Modal.Actions>
@@ -180,7 +185,7 @@ class CoursePage extends React.Component {
                         <Button as="a" target="_blank" href={this.props.course.external_link}>SHOW COURSE</Button>
                       </Grid.Column>
                       <Grid.Column width={6}>
-                        <Button as={Link} to="/certificates/add" color="green">REGISTER CERTIFICATE</Button>
+                        <Button as={Link} to="/certificates/add" onClick={this.registerCertificateClick} color="green">REGISTER CERTIFICATE</Button>
                       </Grid.Column>
                     </Grid.Row>
                   </Grid>
@@ -304,8 +309,11 @@ function mapDispatchToProps(dispatch) {
     setSecondaryNav(secondaryNav) {
       dispatch(setSecondaryNav(secondaryNav));
     },
-    markAsFeaturedCoursePosition(id) {
-      dispatch(markAsFeaturedCoursePosition(id));
+    markAsFeaturedCourse(id) {
+      dispatch(markAsFeaturedCourse(id));
+    },
+    registerCertificate(course) {
+      dispatch(registerCertificate(course));
     },
   };
 }

@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Header, Button, Message, Divider, Breadcrumb, Form, Input, Grid, TextArea, Loader, Dimmer } from 'semantic-ui-react';
-import SkillsInput from 'components/SkillsInput';
-import IndustriesInput from 'components/IndustriesInput';
+import SkillsInput from '../../components/SkillsInput';
+import IndustriesInput from '../../components/IndustriesInput';
 import { addCourse, getDefaultValues, editCourse, resetAddCourseProps } from './actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 

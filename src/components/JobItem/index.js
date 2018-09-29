@@ -24,11 +24,27 @@ class JobItemWithoutRouter extends React.Component {
     /* eslint-enable global-require */
 
     return (
-      <Card fluid style={this.props.isNotList ? { height: '400px' } : null} onClick={() => { this.props.history.push(`/job-page/${this.props.job.id}/`); }} >
+      <Card
+        fluid
+        style={(() => {
+          let style = {};
+          if (this.props.isNotList) {
+            style = Object.assign({}, style, { height: '400px' });
+          }
+          if (this.props.job.is_featured) {
+            style = Object.assign({}, style, { border: '1px solid red' });
+          }
+          return style;
+        })()
+        }
+        onClick={() => { this.props.history.push(`/job-page/${this.props.job.id}/`); }}
+      >
         <Card.Content extra>
+          <img alt="" style={{ marginBottom: '20px', width: '100%' }} src={this.props.isNotList ? this.props.job.imgSrc : null} />
           <Card.Header style={{ color: 'black' }} icon="ellipsis vertical">{this.props.job.title}</Card.Header>
           <span className="course-desc" >
-            <Icon name="world" style={{ color: '#c1c1c1' }} className="course-desc" /> {this.props.job.location}
+            <Icon name="signal" style={{ color: '#c1c1c1' }} className="course-desc" />
+            {this.props.job.industries[0] ? this.props.job.industries[0].name : null}
           </span>
           <span className="course-desc" >
             <Icon name="time" style={{ color: '#c1c1c1' }} className="course-desc" /> {this.props.job.hours} h/w

@@ -25,7 +25,21 @@ class CourseItemWithoutRouter extends React.Component {
     /* eslint-enable global-require */
 
     return (
-      <Card fluid style={this.props.isNotList ? { height: '400px' } : null} onClick={() => { this.props.history.push(`/course-page/${this.props.course.id}/`); }}>
+      <Card
+        fluid
+        style={(() => {
+          let style = {};
+          if (this.props.isNotList) {
+            style = Object.assign({}, style, { height: '400px' });
+          }
+          if (this.props.course.is_featured) {
+            style = Object.assign({}, style, { border: '1px solid red' });
+          }
+          return style;
+        })()
+        }
+        onClick={() => { this.props.history.push(`/course-page/${this.props.course.id}/`); }}
+      >
         <Card.Content>
           <img alt="" style={{ marginBottom: '20px', width: '100%' }} src={this.props.isNotList ? this.props.course.imgSrc : null} />
           <Card.Header style={{ color: 'black', marginBottom: '20px' }} icon="ellipsis vertical">{this.props.course.title}</Card.Header>

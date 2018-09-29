@@ -1,3 +1,4 @@
+import { createHashHistory } from 'history';
 import axios from 'axios';
 import store from '../../store';
 import Config from '../../config';
@@ -20,6 +21,9 @@ export default function markAsFeaturedJobPosition(id) {
       dispatch({
         type: 'ADD_JOB_SUCCESS',
       });
+      const newPath = '/profile';
+      const history = createHashHistory();
+      history.push(newPath);
     }).catch((error) => {
       dispatch({
         type: 'ADD_JOB_FAILURE',

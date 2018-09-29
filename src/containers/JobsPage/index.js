@@ -12,7 +12,6 @@ class JobsPage extends React.Component {
   state = { activeIndex: 0, activeItem: 'trending' }
 
   componentDidMount() {
-    // this.props.fetchJobs();
     this.props.storeSearchType('jobs');
     this.props.setSecondaryNav('business');
     const params = new URLSearchParams(this.props.location.search);

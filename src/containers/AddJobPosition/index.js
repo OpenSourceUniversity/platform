@@ -36,7 +36,7 @@ class AddJobPosition extends React.Component {
       closes: event.target.elements.closes.value,
       experience: event.target.elements.experience.value,
       hours: event.target.elements.hours.value,
-      languages: event.target.elements.languages.value.split(','),
+      languages: event.target.elements.languages.value.split(/[,\s]/),
     };
     if (component.props.match.params.id) {
       component.props.editJobPosition(component.props.match.params.id, jobData);

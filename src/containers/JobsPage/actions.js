@@ -9,6 +9,9 @@ const START_URL = `${bdnUrl}api/v1/jobs/?offset=0&limit=40`;
 export function fetchJobs(url = START_URL) {
   return function dispatcher(dispatch) {
     dispatch({
+      type: 'RESET_FETCHED_JOBS',
+    });
+    dispatch({
       type: 'FETCH_JOBS_REQUEST',
     });
     const headers = new Headers({

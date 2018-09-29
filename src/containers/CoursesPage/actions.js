@@ -39,3 +39,12 @@ export function fetchCourses(url = START_URL) {
       });
   };
 }
+
+
+export function resetCourses() {
+  return function dispatcher(dispatch) {
+    dispatch({
+      type: 'RESET_FETCHED_COURSES',
+    });
+  };
+}

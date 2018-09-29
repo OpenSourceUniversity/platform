@@ -90,6 +90,9 @@ export function markAsFeaturedCoursePosition(id) {
       dispatch({
         type: 'ADD_COURSE_SUCCESS',
       });
+      const newPath = '/profile';
+      const history = createHashHistory();
+      history.push(newPath);
     }).catch((error) => {
       dispatch({
         type: 'ADD_COURSE_FAILURE',

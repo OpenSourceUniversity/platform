@@ -5,7 +5,7 @@ import CourseItem from 'components/CourseItem';
 import TopCoursesItem from 'components/TopCoursesItem';
 import TopAcademiaItem from 'components/TopAcademiaItem';
 import IndustryFilter from 'components/IndustryFilter';
-import { fetchCourses } from './actions';
+import { fetchCourses, resetCourses } from './actions';
 import search from '../../util/search/search';
 import storeSearchType from '../../util/search/storeSearchType';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
@@ -213,6 +213,9 @@ function mapDispatchToProps(dispatch) {
     },
     search(query) {
       dispatch(search(query));
+    },
+    resetCourses() {
+      dispatch(resetCourses());
     },
   };
 }

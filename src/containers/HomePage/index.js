@@ -175,8 +175,8 @@ class HomePage extends React.Component {
           <Header style={{ textAlign: 'center' }} size="huge">Courses</Header>
           <Grid width={16}>
             {
-              this.props.courses.length ?
-                this.renderFeaturedCourses(this.props.courses) :
+              this.props.featuredCourses.length ?
+                this.renderFeaturedCourses(this.props.featuredCourses) :
                 <div style={{ textAlign: 'center', width: '100%', marginTop: '3em' }}>
                   <p style={{ textAlign: 'center' }}>There are no featured courses yet.</p>
                 </div>
@@ -189,7 +189,7 @@ class HomePage extends React.Component {
             </Button>
           </div>
         </div>
-        <Divider style={{ marginTop: '3em', marginBottom: '3em' }} clearing />
+        <Divider style={{ marginBottom: '3em' }} clearing />
         <div>
           <Header style={{ textAlign: 'center' }} size="huge">Job Positions</Header>
           <Grid width={16}>
@@ -217,9 +217,10 @@ function mapStateToProps(state) {
   return {
     activeAccount: state.activeAccount.activeAccount,
     courses: state.courses.courses,
+    featuredCourses: state.courses.featuredCourses,
     isFetchingCourses: state.courses.isFetching,
     errorCourses: state.courses.error,
-    featuredJobs: state.jobs.jobs,
+    featuredJobs: state.jobs.featuredJobs,
     isFetchingJobs: state.jobs.isFetching,
     errorJobs: state.jobs.error,
     certificates: state.certificates.certificates,

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { Container } from 'semantic-ui-react';
+import { Container, Dimmer } from 'semantic-ui-react';
 import WalletUnlocker from 'components/WalletUnlocker';
 import React from 'react';
 import getDefaultValues from './util/profiles/getDefaultValues';
@@ -24,6 +24,20 @@ class App extends React.Component {
     }
   }
   render() {
+    /* eslint-disable global-require */
+    const logo = require('./icons/edu-logo.png');
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      return (
+        <div style={{ height: '100hv' }}>
+          <Dimmer style={{ paddingTop: '40%' }} active>
+            <img alt="" src={logo} />
+            <h1>
+              We are sorry, but this version of platform doesn&#39;t support mobile devices
+            </h1>
+          </Dimmer>
+        </div>
+      );
+    }
     return (
       <div className="App">
         <Header />

@@ -62,10 +62,10 @@ const webpackConfig = {
     ],
     extensions: ['.js', '.jsx'],
   },
-}
+};
 
 if (analyze) {
-  webpackConfig.plugins.push(new BundleAnalyzerPlugin())
+  webpackConfig.plugins.push(new BundleAnalyzerPlugin());
 }
 
 if (env === 'production') {
@@ -80,8 +80,8 @@ if (env === 'production') {
         dead_code: true,
         warnings: false,
       },
-    })
-  )
+    }),
+  );
 }
 
-module.exports = webpackConfig
+module.exports = webpackConfig;

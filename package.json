@@ -74,6 +74,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --progress --inline --watch --hot --content-base ./public/",
+    "host": "webpack-dev-server --progress --inline --watch --hot --content-base ./public/ --host 192.168.1.212",
     "watch": "webpack --progress --colors --watch",
     "lint": "eslint src/",
     "fix": "eslint --fix src/",

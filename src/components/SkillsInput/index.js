@@ -93,6 +93,7 @@ export default class SkillsInput extends Component {
 
     const dropdown = (
       <Form.Dropdown
+        key={`skills:${this.props.skills || ''}`}
         options={this.state.options}
         placeholder="Choose skills"
         label="Skills (max. 5)"

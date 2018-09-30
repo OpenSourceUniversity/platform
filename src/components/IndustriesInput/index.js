@@ -18,6 +18,15 @@ export default class IndustriesInput extends React.Component {
           options: industries,
         });
       });
+    const needle = this.props.industries;
+    const industries = [];
+    if (!needle) {
+      return;
+    }
+    for (let i = 0; i < needle.length; i += 1) {
+      industries.push(needle[i].name);
+    }
+    this.state.currentValue = industries;
   }
 
   componentDidUpdate(prevProps) {

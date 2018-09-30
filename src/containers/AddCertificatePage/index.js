@@ -14,6 +14,8 @@ class AddCertificatePage extends React.Component {
   componentDidMount() {
     document.title = 'Add Certificate';
     this.props.resetAddCertificateProps();
+    this.skillsRef.forceUpdate();
+    this.industriesRef.forceUpdate();
   }
 
   componentWillUnmount() {
@@ -143,7 +145,6 @@ class AddCertificatePage extends React.Component {
   };
   /* eslint-disable jsx-a11y/label-has-for */
   render() {
-    console.log(this.props.certificateAutocomplete);
     /* eslint-disable global-require */
     const loader = require('../../icons/osu-loader.svg');
     /* eslint-enable global-require */

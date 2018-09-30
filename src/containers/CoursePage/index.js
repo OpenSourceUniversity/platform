@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Header, Divider, Label, Segment, Grid, Menu, Icon, Container, Dimmer, Loader, Breadcrumb, Modal, Message } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import SkillItem from 'components/SkillItem';
-import { fetchCourse, deleteCourse, markAsFeaturedCourse, registerCertificate } from './actions';
+import SkillItem from '../../components/SkillItem';
+import { fetchCourse, deleteCourse, markAsFeaturedCourse, registerCertificate, resetMessages } from './actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import Config from '../../config';
 
@@ -14,6 +14,10 @@ class CoursePage extends React.Component {
     this.props.fetchCourse(`${bdnUrl}api/v1/courses/${this.props.match.params.id}/`);
     this.props.setSecondaryNav('academia');
     document.title = 'Course';
+  }
+
+  componentWillUnmount() {
+    this.props.resetMessages();
   }
 
   setIcon(provider) {
@@ -33,11 +37,17 @@ class CoursePage extends React.Component {
   }
   handleOpen = () => this.setState({ modalOpen: true })
 
-  handleClose = () => this.setState({ modalOpen: false })
+  handleClose = () => {
+    this.setState({ modalOpen: false });
+    this.props.resetMessages();
+  }
 
   handleFeaturedOpen = () => this.setState({ modalFeaturedOpen: true })
 
-  handleFeaturedClose = () => this.setState({ modalFeaturedOpen: false })
+  handleFeaturedClose = () => {
+    this.setState({ modalFeaturedOpen: false });
+    this.props.resetMessages();
+  }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
@@ -81,7 +91,7 @@ class CoursePage extends React.Component {
           </Breadcrumb>
           <Divider clearing />
           <div className="course">
-            <Dimmer active={this.props.course.isFetching} inverted>
+            <Dimmer active={this.props.isFetching} inverted>
               <Loader size="large">Loading</Loader>
             </Dimmer>
             <Header style={{ fontSize: '1.7em' }}>
@@ -109,11 +119,25 @@ class CoursePage extends React.Component {
                         size="small"
                       >
                         <Header icon="archive" content="Mark as featured course confirmation" />
+                        <Dimmer active={this.props.isFetchingModal}>
+                          <Loader size="large">Loading</Loader>
+                        </Dimmer>
                         <Modal.Content>
-                          <Message error hidden={!this.props.errorFeatured}>
+                          <Message error hidden={!this.props.error}>
                             <p>
-                              {this.props.errorFeatured}
+                              {this.props.error}
                             </p>
+                          </Message>
+                          <Message positive hidden={!this.props.message}>
+                            <p>
+                              {this.props.message}
+                            </p>
+                            <Link
+                              to="/"
+                              href="/"
+                            >
+                              Back to Home page
+                            </Link>
                           </Message>
                           <p>
                           You want to mark as featured&nbsp;
@@ -135,7 +159,26 @@ class CoursePage extends React.Component {
                     }
                     <Modal open={this.state.modalOpen} onClose={this.handleClose} trigger={<Button onClick={this.handleOpen} color="red">Delete</Button>} basic size="small">
                       <Header icon="archive" content="Delete course confirmation" />
+                      <Dimmer active={this.props.isFetchingModal}>
+                        <Loader size="large">Loading</Loader>
+                      </Dimmer>
                       <Modal.Content>
+                        <Message error hidden={!this.props.error}>
+                          <p>
+                            {this.props.error}
+                          </p>
+                        </Message>
+                        <Message positive hidden={!this.props.message}>
+                          <p>
+                            {this.props.message}
+                          </p>
+                          <Link
+                            to="/"
+                            href="/"
+                          >
+                            Back to Home page
+                          </Link>
+                        </Message>
                         <p>
                         You want to delete youre course, named: {this.props.course.title}.
                         </p>
@@ -289,6 +332,8 @@ class CoursePage extends React.Component {
 function mapStateToProps(state) {
   return {
     course: state.course.course,
+    isFetchingModal: state.course.isFetchingModal,
+    message: state.course.message,
     academy: state.course.academy,
     isFetching: state.course.isFetching,
     error: state.course.error,
@@ -314,6 +359,9 @@ function mapDispatchToProps(dispatch) {
     },
     registerCertificate(course) {
       dispatch(registerCertificate(course));
+    },
+    resetMessages() {
+      dispatch(resetMessages());
     },
   };
 }

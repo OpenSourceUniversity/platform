@@ -1,4 +1,3 @@
-import { createHashHistory } from 'history';
 import axios from 'axios';
 import store from '../../store';
 import Config from '../../config';
@@ -9,7 +8,7 @@ const { bdnUrl } = Config.network;
 export default function markAsFeaturedJobPosition(id) {
   return function action(dispatch) {
     dispatch({
-      type: 'ADD_JOB_REQUEST',
+      type: 'MODAL_JOB_REQUEST',
     });
     const axiosConfig = {
       headers: {
@@ -19,14 +18,12 @@ export default function markAsFeaturedJobPosition(id) {
     };
     axios.post(`${bdnUrl}api/v1/jobs/${id}/mark_featured_by_id/`, null, axiosConfig).then(() => {
       dispatch({
-        type: 'ADD_JOB_SUCCESS',
+        type: 'MARK_FEATURED_JOB_SUCCESS',
+        result: 'Course successfully marked as featured',
       });
-      const newPath = '/profile';
-      const history = createHashHistory();
-      history.push(newPath);
     }).catch((error) => {
       dispatch({
-        type: 'ADD_JOB_FAILURE',
+        type: 'MARK_FEATURED_JOB_FAILURE',
         error: {
           message: error.response.data.error,
         },

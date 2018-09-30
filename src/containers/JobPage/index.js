@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, Header, Divider, Label, Segment, Grid, Menu, Icon, Container, Breadcrumb, Modal, Message } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import { Button, Header, Divider, Label, Segment, Grid, Menu, Icon, Container, Breadcrumb, Modal, Message, Dimmer, Loader } from 'semantic-ui-react';
 import SkillItem from 'components/SkillItem';
-import { fetchJob, deleteJobPosition } from './actions';
+import { fetchJob, deleteJobPosition, resetMessages } from './actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import applyJobPosition from '../../util/jobApplication/applyJobPosition';
 import checkJobApplication from '../../util/jobApplication/checkJobApplication';
@@ -20,13 +21,23 @@ class JobPage extends React.Component {
     document.title = 'Job';
   }
 
+  componentWillUnmount() {
+    this.props.resetMessages();
+  }
+
   handleOpen = () => this.setState({ modalOpen: true })
 
-  handleClose = () => this.setState({ modalOpen: false })
+  handleClose = () => {
+    this.setState({ modalOpen: false });
+    this.props.resetMessages();
+  }
 
   handleFeaturedOpen = () => this.setState({ modalFeaturedOpen: true })
 
-  handleFeaturedClose = () => this.setState({ modalFeaturedOpen: false })
+  handleFeaturedClose = () => {
+    this.setState({ modalFeaturedOpen: false });
+    this.props.resetMessages();
+  }
 
   renderSkills() {
     return this.props.job.skills.map((skill, index) => (
@@ -78,6 +89,9 @@ class JobPage extends React.Component {
           </Breadcrumb>
           <Divider clearing />
           <div className="course">
+            <Dimmer active={this.props.isFetching} inverted>
+              <Loader size="large">Loading</Loader>
+            </Dimmer>
             <Grid>
               {this.props.address.toLowerCase() === this.props.job.company.eth_address ?
                 <Grid.Column width={16}>
@@ -100,11 +114,25 @@ class JobPage extends React.Component {
                         size="small"
                       >
                         <Header icon="archive" content="Mark as featured job position confirmation" />
+                        <Dimmer active={this.props.isFetchingModal}>
+                          <Loader size="large">Loading</Loader>
+                        </Dimmer>
                         <Modal.Content>
-                          <Message error hidden={!this.props.errorFeatured}>
+                          <Message error hidden={!this.props.error}>
                             <p>
-                              {this.props.errorFeatured}
+                              {this.props.error}
                             </p>
+                          </Message>
+                          <Message positive hidden={!this.props.message}>
+                            <p>
+                              {this.props.message}
+                            </p>
+                            <Link
+                              to="/"
+                              href="/"
+                            >
+                              Back to Home page
+                            </Link>
                           </Message>
                           <p>
                           You want to mark as featured&nbsp;
@@ -126,7 +154,26 @@ class JobPage extends React.Component {
                     }
                     <Modal open={this.state.modalOpen} onClose={this.handleClose} trigger={<Button onClick={this.handleOpen} color="red">Delete</Button>} basic size="small">
                       <Header icon="archive" content="Delete job position confirmation" />
+                      <Dimmer active={this.props.isFetchingModal}>
+                        <Loader size="large">Loading</Loader>
+                      </Dimmer>
                       <Modal.Content>
+                        <Message error hidden={!this.props.error}>
+                          <p>
+                            {this.props.error}
+                          </p>
+                        </Message>
+                        <Message positive hidden={!this.props.message}>
+                          <p>
+                            {this.props.message}
+                          </p>
+                          <Link
+                            to="/"
+                            href="/"
+                          >
+                            Back to Home page
+                          </Link>
+                        </Message>
                         <p>
                         You want to delete youre job position, named: {this.props.job.title}.
                         </p>
@@ -271,6 +318,8 @@ function mapStateToProps(state) {
   return {
     job: state.job.job,
     company: state.job.company,
+    isFetchingModal: state.job.isFetchingModal,
+    message: state.job.message,
     isFetching: state.job.isFetching,
     error: state.job.error,
     errorFeatured: state.addJob.error,
@@ -300,6 +349,9 @@ function mapDispatchToProps(dispatch) {
     },
     markAsFeaturedJobPosition(id) {
       dispatch(markAsFeaturedJobPosition(id));
+    },
+    resetMessages() {
+      dispatch(resetMessages());
     },
   };
 }

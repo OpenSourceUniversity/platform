@@ -52,16 +52,8 @@ export function addCourse(courseData) {
         'Auth-Eth-Address': store.getState().auth.address.slice(2),
       },
     };
-    const postData = {
-      title: courseData.title ? courseData.title : null,
-      tutor: courseData.tutor ? courseData.tutor : null,
-      skills: courseData.skills ? courseData.skills : null,
-      description: courseData.description ? courseData.description : null,
-      external_link: courseData.external_link ? courseData.external_link : null,
-      industries: courseData.industries ? courseData.industries : null,
-    };
     const { bdnUrl } = Config.network;
-    axios.post(`${bdnUrl}api/v1/courses/`, postData, axiosConfig).then(() => {
+    axios.post(`${bdnUrl}api/v1/courses/`, courseData, axiosConfig).then(() => {
       dispatch({
         type: 'ADD_COURSE_SUCCESS',
       });

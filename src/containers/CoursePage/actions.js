@@ -45,7 +45,7 @@ export function fetchCourse(url = START_URL) {
 export function deleteCourse(id) {
   return function action(dispatch) {
     dispatch({
-      type: 'FETCH_COURSE_REQUEST',
+      type: 'MODAL_COURSE_REQUEST',
     });
     const axiosConfig = {
       headers: {
@@ -59,16 +59,13 @@ export function deleteCourse(id) {
     const url = `${bdnUrl}api/v1/courses/${id}/delete_by_id/`;
     axios.post(url, postData, axiosConfig).then(() => {
       dispatch({
-        type: 'FETCH_COURSE_SUCCESS',
-        result: 'ok',
+        type: 'DELETE_COURSE_SUCCESS',
+        result: 'Course successfully deleted',
       });
-      const newPath = '/profile';
-      const history = createHashHistory();
-      history.push(newPath);
     }).catch(() => {
       dispatch({
-        type: 'FETCH_COURSE_FAILURE',
-        error: 'Fail',
+        type: 'DELETE_COURSE_FAILURE',
+        error: 'Delete fail',
       });
     });
   };
@@ -78,7 +75,7 @@ export function deleteCourse(id) {
 export function markAsFeaturedCourse(id) {
   return function action(dispatch) {
     dispatch({
-      type: 'ADD_COURSE_REQUEST',
+      type: 'MODAL_COURSE_REQUEST',
     });
     const axiosConfig = {
       headers: {
@@ -88,18 +85,24 @@ export function markAsFeaturedCourse(id) {
     };
     axios.post(`${bdnUrl}api/v1/courses/${id}/mark_featured_by_id/`, null, axiosConfig).then(() => {
       dispatch({
-        type: 'ADD_COURSE_SUCCESS',
+        type: 'MARK_FEATURED_COURSE_SUCCESS',
+        result: 'Course successfully marked as featured',
       });
-      const newPath = '/profile';
-      const history = createHashHistory();
-      history.push(newPath);
     }).catch((error) => {
       dispatch({
-        type: 'ADD_COURSE_FAILURE',
+        type: 'MARK_FEATURED_COURSE_FAILURE',
         error: {
           message: error.response.data.error,
         },
       });
+    });
+  };
+}
+
+export function resetMessages() {
+  return function action(dispatch) {
+    dispatch({
+      type: 'MODAL_COURSE_MESSAGES_RESET',
     });
   };
 }

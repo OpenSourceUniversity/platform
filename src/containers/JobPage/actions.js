@@ -1,4 +1,3 @@
-import { createHashHistory } from 'history';
 import axios from 'axios';
 import store from '../../store';
 import Config from '../../config';
@@ -45,7 +44,7 @@ export function fetchJob(url = START_URL) {
 export function deleteJobPosition(id) {
   return function action(dispatch) {
     dispatch({
-      type: 'FETCH_JOB_REQUEST',
+      type: 'MODAL_JOB_REQUEST',
     });
     const axiosConfig = {
       headers: {
@@ -59,17 +58,22 @@ export function deleteJobPosition(id) {
     const url = `${bdnUrl}api/v1/jobs/${id}/delete_by_id/`;
     axios.post(url, postData, axiosConfig).then(() => {
       dispatch({
-        type: 'FETCH_JOB_SUCCESS',
-        result: 'ok',
+        type: 'DELETE_JOB_SUCCESS',
+        result: 'Course successfully deleted',
       });
-      const newPath = '/profile';
-      const history = createHashHistory();
-      history.push(newPath);
     }).catch(() => {
       dispatch({
-        type: 'FETCH_JOB_FAILURE',
-        error: 'Fail',
+        type: 'DELETE_JOB_FAILURE',
+        error: 'Delete fail',
       });
+    });
+  };
+}
+
+export function resetMessages() {
+  return function action(dispatch) {
+    dispatch({
+      type: 'MODAL_JOB_MESSAGES_RESET',
     });
   };
 }

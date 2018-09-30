@@ -109,8 +109,8 @@ class AddCourse extends React.Component {
                   iconPosition="left"
                   icon="list"
                   placeholder="Name of program"
-                  key={`title:${this.props.certificateAutocomplete.program_title || ''}`}
-                  defaultValue={this.props.certificateAutocomplete.program_title ? this.props.certificateAutocomplete.program_title : ''}
+                  key={`title:${this.props.courseDefault.program_title || ''}`}
+                  defaultValue={this.props.courseDefault.program_title ? this.props.courseDefault.program_title : ''}
                 />
               </Form.Field>
               <Form.Field>
@@ -186,8 +186,8 @@ class AddCourse extends React.Component {
                   iconPosition="left"
                   icon="time"
                   placeholder="Course duration"
-                  key={`duration:${this.props.certificateAutocomplete.duration || ''}`}
-                  defaultValue={this.props.certificateAutocomplete.duration ? this.props.certificateAutocomplete.duration : ''}
+                  key={`duration:${this.props.courseDefault.duration || ''}`}
+                  defaultValue={this.props.courseDefault.duration ? this.props.courseDefault.duration : ''}
                 />
               </Form.Field>
               <Button type="submit" primary size="huge">Submit</Button>

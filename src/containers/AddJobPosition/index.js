@@ -30,7 +30,6 @@ class AddJobPosition extends React.Component {
       salary: event.target.elements.salary.value,
       overview: event.target.elements.overview.value,
       description: event.target.elements.description.value,
-      external_link: event.target.elements.external_link.value,
       industries,
       skills,
       closes: event.target.elements.closes.value,
@@ -152,21 +151,6 @@ class AddJobPosition extends React.Component {
                     placeholder="Full position description"
                     key={`description:${this.props.jobDefault.description || ''}`}
                     defaultValue={this.props.jobDefault.description ? this.props.jobDefault.description : ''}
-                  />
-                </label>
-              </Form.Field>
-              <Form.Field>
-                <label htmlFor="external_link">
-                  Url to your position
-                  <Input
-                    id="external_link"
-                    name="external_link"
-                    iconPosition="left"
-                    icon="tag"
-                    placeholder="Url to your position"
-                    type="url"
-                    key={`external_link:${this.props.jobDefault.external_link || ''}`}
-                    defaultValue={this.props.jobDefault.external_link ? this.props.jobDefault.external_link : ''}
                   />
                 </label>
               </Form.Field>

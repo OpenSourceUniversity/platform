@@ -56,13 +56,21 @@ class AddCertificatePage extends React.Component {
 
     const industries = this.industriesRef.state.currentValue;
     const skills = this.skillsRef.state.currentValue;
+    let institutionLink = event.target.elements.institution_link.value;
+    if (institutionLink.indexOf('http') !== 0) {
+      institutionLink = `http://${institutionLink}`;
+    }
+    let courseLink = event.target.elements.course_link.value;
+    if (!!courseLink && courseLink.indexOf('http') !== 0) {
+      courseLink = `http://${courseLink}`;
+    }
 
     const certificateData = {
       institution_title: event.target.elements.institution_title.value,
-      institution_link: event.target.elements.institution_link.value,
+      institution_link: institutionLink,
       program_title: event.target.elements.program_title.value,
       certificate_title: event.target.elements.certificate_title.value,
-      course_link: event.target.elements.course_link.value,
+      course_link: courseLink,
       industries,
       skills,
       holder_eth_address: component.props.activeAccount === 'Learner' ? component.props.ethAddress : event.target.elements.holder_eth_address.value,
@@ -248,12 +256,25 @@ class AddCertificatePage extends React.Component {
                     <Input
                       id="course_link"
                       name="course_link"
-                      type="url"
-                      iconPosition="left"
-                      icon="chain"
-                      placeholder="Link to your course"
+                      label="http://"
+                      labelPosition="left"
+                      placeholder="example.com"
                       key={`title:${this.props.certificateAutocomplete.external_link || ''}`}
-                      defaultValue={this.props.certificateAutocomplete.external_link ? this.props.certificateAutocomplete.external_link : ''}
+                      defaultValue={
+                        (() => {
+                          if (this.props.certificateAutocomplete.external_link) {
+                            const url = this.props.certificateAutocomplete.external_link;
+                            if (url.indexOf('http://') === 0) {
+                              return url.slice(7);
+                            }
+                            if (url.indexOf('https://') === 0) {
+                              return url.slice(8);
+                            }
+                            return url;
+                          }
+                          return '';
+                        })()
+                      }
                     />
                   </Form.Field>
                   <Form.Field>
@@ -267,6 +288,8 @@ class AddCertificatePage extends React.Component {
                       iconPosition="left"
                       icon="time"
                       placeholder="Course duration"
+                      key={`duration:${this.props.certificateAutocomplete.duration || ''}`}
+                      defaultValue={this.props.certificateAutocomplete.duration ? this.props.certificateAutocomplete.duration : ''}
                     />
                   </Form.Field>
                   <Form.Field>
@@ -358,11 +381,27 @@ class AddCertificatePage extends React.Component {
                     <Input
                       id="institution_link"
                       name="institution_link"
-                      iconPosition="left"
-                      icon="chain"
-                      type="url"
-                      placeholder="Site of academy"
+                      label="http://"
+                      labelPosition="left"
+                      placeholder="example.com"
                       onChange={this.handleChange}
+                      key={`academy_url:${this.props.certificateAutocomplete.provider || ''}`}
+                      defaultValue={
+                        (() => {
+                          const provider = this.props.certificateAutocomplete.provider;
+                          if (provider && this.props.certificateAutocomplete.provider.academy_url) {
+                            const url = this.props.certificateAutocomplete.provider.academy_url;
+                            if (url.indexOf('http://') === 0) {
+                              return url.slice(7);
+                            }
+                            if (url.indexOf('https://') === 0) {
+                              return url.slice(8);
+                            }
+                            return url;
+                          }
+                          return '';
+                        })()
+                      }
                     />
                   </Form.Field>
                   <Form.Field>
@@ -375,6 +414,8 @@ class AddCertificatePage extends React.Component {
                       iconPosition="left"
                       icon="list"
                       placeholder="Name of program"
+                      key={`title:${this.props.certificateAutocomplete.program_title || ''}`}
+                      defaultValue={this.props.certificateAutocomplete.program_title ? this.props.certificateAutocomplete.program_title : ''}
                     />
                   </Form.Field>
                 </Grid.Column>

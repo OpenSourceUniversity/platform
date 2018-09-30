@@ -6,11 +6,11 @@ import Slider from 'rc-slider';
 import Countries from '../../data/countriesList';
 import { saveSettings, resetSaveProfileProps } from '../../util/profiles/saveSettings';
 
-const dataURLtoBlob = (dataURI) => {
-  const bytes = dataURI.split(',')[0].indexOf('base64') >= 0 ?
-    atob(dataURI.split(',')[1]) :
-    unescape(dataURI.split(',')[1]);
-  const mime = dataURI.split(',')[0].split(':')[1].split(';')[0];
+const dataURLtoBlob = (dataURL) => {
+  const bytes = dataURL.split(',')[0].indexOf('base64') >= 0 ?
+    atob(dataURL.split(',')[1]) :
+    unescape(dataURL.split(',')[1]);
+  const mime = dataURL.split(',')[0].split(':')[1].split(';')[0];
   const max = bytes.length;
   const ia = new Uint8Array(max);
   for (let i = 0; i < max; i += 1) {
@@ -66,9 +66,13 @@ class AcademySettings extends React.Component {
 
   saveSettings(event, component) {
     event.preventDefault();
+    let academyWebsite = event.target.elements.academy_website.value;
+    if (academyWebsite.indexOf('http') !== 0) {
+      academyWebsite = `http://${academyWebsite}`;
+    }
     const profileData = {
       academy_name: event.target.elements.academy_name.value,
-      academy_website: event.target.elements.academy_website.value,
+      academy_website: academyWebsite,
       academy_email: event.target.elements.academy_email.value,
       academy_country: event.target.elements[3].parentElement.children[1].textContent === 'Select Country' ? null : event.target.elements[3].parentElement.children[1].textContent,
       academy_about: event.target.elements.academy_about.value,
@@ -120,7 +124,7 @@ class AcademySettings extends React.Component {
   handleDismiss = () => {
     this.props.resetSaveProfileProps();
   }
-
+  /* eslint-disable jsx-a11y/label-has-for */
   render() {
     /* eslint-disable global-require */
     const loader = require('../../icons/osu-loader.svg');
@@ -177,15 +181,34 @@ class AcademySettings extends React.Component {
             key={`academy_name:${this.props.profiles.academy_name || ''}`}
             defaultValue={this.props.profiles.academy_name ? this.props.profiles.academy_name : ''}
           />
-          <Form.Field
-            required
-            label="Academy website"
-            control="input"
-            name="academy_website"
-            placeholder="Your academy website"
-            key={`academy_website:${this.props.profiles.academy_website || ''}`}
-            defaultValue={this.props.profiles.academy_website ? this.props.profiles.academy_website : ''}
-          />
+          <Form.Field required>
+            <label htmlFor="academy_website">
+              Academy website
+            </label>
+            <Input
+              id="academy_website"
+              name="academy_website"
+              label="http://"
+              labelPosition="left"
+              placeholder="example.com"
+              key={`academy_website:${this.props.profiles.academy_website || ''}`}
+              defaultValue={
+                (() => {
+                  if (this.props.profiles.academy_website) {
+                    const url = this.props.profiles.academy_website;
+                    if (url.indexOf('http://') === 0) {
+                      return url.slice(7);
+                    }
+                    if (url.indexOf('https://') === 0) {
+                      return url.slice(8);
+                    }
+                    return url;
+                  }
+                  return '';
+                })()
+              }
+            />
+          </Form.Field>
           <Form.Field
             required
             name="academy_email"

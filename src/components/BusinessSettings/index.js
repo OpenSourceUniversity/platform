@@ -6,11 +6,11 @@ import Slider from 'rc-slider';
 import Countries from '../../data/countriesList';
 import { saveSettings, resetSaveProfileProps } from '../../util/profiles/saveSettings';
 
-const dataURLtoBlob = (dataURI) => {
-  const bytes = dataURI.split(',')[0].indexOf('base64') >= 0 ?
-    atob(dataURI.split(',')[1]) :
-    unescape(dataURI.split(',')[1]);
-  const mime = dataURI.split(',')[0].split(':')[1].split(';')[0];
+const dataURLtoBlob = (dataURL) => {
+  const bytes = dataURL.split(',')[0].indexOf('base64') >= 0 ?
+    atob(dataURL.split(',')[1]) :
+    unescape(dataURL.split(',')[1]);
+  const mime = dataURL.split(',')[0].split(':')[1].split(';')[0];
   const max = bytes.length;
   const ia = new Uint8Array(max);
   for (let i = 0; i < max; i += 1) {
@@ -66,9 +66,13 @@ class BusinessSettings extends React.Component {
 
   saveSettings(event, component) {
     event.preventDefault();
+    let companyWebsite = event.target.elements.company_website.value;
+    if (companyWebsite.indexOf('http') !== 0) {
+      companyWebsite = `http://${companyWebsite}`;
+    }
     const profileData = {
       company_name: event.target.elements.company_name.value,
-      company_website: event.target.elements.company_website.value,
+      company_website: companyWebsite,
       company_email: event.target.elements.company_email.value,
       company_country: event.target.elements[3].parentElement.children[1].textContent === 'Select Country' ? null : event.target.elements[3].parentElement.children[1].textContent,
       company_about: event.target.elements.company_about.value,
@@ -120,7 +124,7 @@ class BusinessSettings extends React.Component {
   handleDismiss = () => {
     this.props.resetSaveProfileProps();
   }
-
+  /* eslint-disable jsx-a11y/label-has-for */
   render() {
     /* eslint-disable global-require */
     const loader = require('../../icons/osu-loader.svg');
@@ -177,15 +181,34 @@ class BusinessSettings extends React.Component {
             key={`company_name:${this.props.profiles.company_name || ''}`}
             defaultValue={this.props.profiles.company_name ? this.props.profiles.company_name : ''}
           />
-          <Form.Field
-            required
-            label="Official website"
-            control="input"
-            placeholder="Your website"
-            name="company_website"
-            key={`company_website:${this.props.profiles.company_website || ''}`}
-            defaultValue={this.props.profiles.company_website ? this.props.profiles.company_website : ''}
-          />
+          <Form.Field required>
+            <label htmlFor="company_website">
+              Official company website
+            </label>
+            <Input
+              id="company_website"
+              name="company_website"
+              label="http://"
+              labelPosition="left"
+              placeholder="example.com"
+              key={`company_website:${this.props.profiles.company_website || ''}`}
+              defaultValue={
+                (() => {
+                  if (this.props.profiles.company_website) {
+                    const url = this.props.profiles.company_website;
+                    if (url.indexOf('http://') === 0) {
+                      return url.slice(7);
+                    }
+                    if (url.indexOf('https://') === 0) {
+                      return url.slice(8);
+                    }
+                    return url;
+                  }
+                  return '';
+                })()
+              }
+            />
+          </Form.Field>
           <Form.Field
             required
             name="company_email"

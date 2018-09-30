@@ -7,11 +7,11 @@ import Slider from 'rc-slider';
 import Countries from '../../data/countriesList';
 import { saveSettings, resetSaveProfileProps } from '../../util/profiles/saveSettings';
 
-const dataURLtoBlob = (dataURI) => {
-  const bytes = dataURI.split(',')[0].indexOf('base64') >= 0 ?
-    atob(dataURI.split(',')[1]) :
-    unescape(dataURI.split(',')[1]);
-  const mime = dataURI.split(',')[0].split(':')[1].split(';')[0];
+const dataURLtoBlob = (dataURL) => {
+  const bytes = dataURL.split(',')[0].indexOf('base64') >= 0 ?
+    atob(dataURL.split(',')[1]) :
+    unescape(dataURL.split(',')[1]);
+  const mime = dataURL.split(',')[0].split(':')[1].split(';')[0];
   const max = bytes.length;
   const ia = new Uint8Array(max);
   for (let i = 0; i < max; i += 1) {
@@ -67,6 +67,10 @@ class LearnerSettings extends React.Component {
 
   saveSettings(event, component) {
     event.preventDefault();
+    let learnerSite = event.target.elements.learner_site.value;
+    if (!!learnerSite && learnerSite.indexOf('http') !== 0) {
+      learnerSite = `http://${learnerSite}`;
+    }
     const profileData = {
       first_name: event.target.elements.first_name.value,
       last_name: event.target.elements.last_name.value,
@@ -76,7 +80,7 @@ class LearnerSettings extends React.Component {
       public_profile: event.target.elements.public_profile.checked,
       learner_email: event.target.elements.learner_email.value,
       phone_number: event.target.elements.phone_number.value,
-      learner_site: event.target.elements.learner_site.value,
+      learner_site: learnerSite,
       learner_country: event.target.elements[9].parentElement.children[1].textContent === 'Select Country' ? null : event.target.elements[9].parentElement.children[1].textContent,
     };
     component.props.saveSettings(profileData, 'learner', component.state.buffer);
@@ -126,7 +130,7 @@ class LearnerSettings extends React.Component {
   handleDismiss = () => {
     this.props.resetSaveProfileProps();
   }
-
+  /* eslint-disable jsx-a11y/label-has-for */
   render() {
     /* eslint-disable global-require */
     const loader = require('../../icons/osu-loader.svg');
@@ -251,14 +255,34 @@ class LearnerSettings extends React.Component {
             type="tel"
             placeholder="Phone number"
           />
-          <Form.Field
-            name="learner_site"
-            label="My site"
-            key={`learner_site:${this.props.profiles.learner_site || ''}`}
-            defaultValue={this.props.profiles.learner_site ? this.props.profiles.learner_site : ''}
-            control="input"
-            placeholder="Link to your site"
-          />
+          <Form.Field>
+            <label htmlFor="learner_site">
+              My website
+            </label>
+            <Input
+              id="learner_site"
+              name="learner_site"
+              label="http://"
+              labelPosition="left"
+              placeholder="example.com"
+              key={`learner_site:${this.props.profiles.learner_site || ''}`}
+              defaultValue={
+                (() => {
+                  if (this.props.profiles.learner_site) {
+                    const url = this.props.profiles.learner_site;
+                    if (url.indexOf('http://') === 0) {
+                      return url.slice(7);
+                    }
+                    if (url.indexOf('https://') === 0) {
+                      return url.slice(8);
+                    }
+                    return url;
+                  }
+                  return '';
+                })()
+              }
+            />
+          </Form.Field>
           <Form.Dropdown
             id="Country"
             name="learner_country"

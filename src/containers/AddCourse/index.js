@@ -22,14 +22,22 @@ class AddCourse extends React.Component {
     event.preventDefault();
     const industries = this.industriesRef.state.currentValue;
     const skills = this.skillsRef.state.currentValue;
+    let externalLink = event.target.elements.external_link.value;
+    if (!!externalLink && externalLink.indexOf('http') !== 0) {
+      externalLink = `http://${externalLink}`;
+    }
     const courseData = {
       title: event.target.elements.title.value,
+      program_title: event.target.elements.program_title.value,
       tutor: event.target.elements.tutor.value,
       description: event.target.elements.description.value,
-      external_link: event.target.elements.external_link.value,
+      external_link: externalLink,
       industries,
       skills,
     };
+    if (event.target.elements.duration.value) {
+      courseData.duration = event.target.elements.duration.value;
+    }
     if (component.props.match.params.id) {
       component.props.editCourse(component.props.match.params.id, courseData);
     } else {
@@ -92,6 +100,20 @@ class AddCourse extends React.Component {
                 </label>
               </Form.Field>
               <Form.Field>
+                <label htmlFor="program_title">
+                  Program title (if any)
+                </label>
+                <Input
+                  id="program_title"
+                  name="program_title"
+                  iconPosition="left"
+                  icon="list"
+                  placeholder="Name of program"
+                  key={`title:${this.props.certificateAutocomplete.program_title || ''}`}
+                  defaultValue={this.props.certificateAutocomplete.program_title ? this.props.certificateAutocomplete.program_title : ''}
+                />
+              </Form.Field>
+              <Form.Field>
                 <label htmlFor="tutor">
                   Tutor
                   <Input
@@ -105,6 +127,10 @@ class AddCourse extends React.Component {
                   />
                 </label>
               </Form.Field>
+              <IndustriesInput
+                ref={(arg) => { this.industriesRef = arg; }}
+                industries={this.props.courseDefault.industries}
+              />
               <SkillsInput
                 ref={(arg) => { this.skillsRef = arg; }}
                 skills={this.props.courseDefault.skills}
@@ -127,19 +153,43 @@ class AddCourse extends React.Component {
                   <Input
                     id="external_link"
                     name="external_link"
-                    iconPosition="left"
-                    icon="tag"
+                    label="http://"
+                    labelPosition="left"
                     placeholder="Url to your course"
-                    type="url"
                     key={`external_link:${this.props.courseDefault.external_link || ''}`}
-                    defaultValue={this.props.courseDefault.external_link ? this.props.courseDefault.external_link : ''}
+                    defaultValue={
+                      (() => {
+                        if (this.props.courseDefault.external_link) {
+                          const url = this.props.courseDefault.external_link;
+                          if (url.indexOf('http://') === 0) {
+                            return url.slice(7);
+                          }
+                          if (url.indexOf('https://') === 0) {
+                            return url.slice(8);
+                          }
+                          return url;
+                        }
+                        return '';
+                      })()
+                    }
                   />
                 </label>
               </Form.Field>
-              <IndustriesInput
-                ref={(arg) => { this.industriesRef = arg; }}
-                industries={this.props.courseDefault.industries}
-              />
+              <Form.Field>
+                <label htmlFor="duration">
+                  Course duration in hours (if any)
+                </label>
+                <Input
+                  id="duration"
+                  name="duration"
+                  type="number"
+                  iconPosition="left"
+                  icon="time"
+                  placeholder="Course duration"
+                  key={`duration:${this.props.certificateAutocomplete.duration || ''}`}
+                  defaultValue={this.props.certificateAutocomplete.duration ? this.props.certificateAutocomplete.duration : ''}
+                />
+              </Form.Field>
               <Button type="submit" primary size="huge">Submit</Button>
             </Form>
           </Grid.Column>

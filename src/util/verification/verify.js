@@ -3,18 +3,22 @@ import setPendingVerification from './setPendingVerification';
 import storeVerification from './storeVerification';
 import fetchVerifications from './fetchVerifications';
 
-export default function verify(verification) {
+export default function verify(verifications) {
   return function action(dispatch) {
     dispatch({
       type: 'VERIFY_REQUEST',
     });
     const ipfs = store.getState().ipfs.IPFSinstance;
-    const metaJson = verification;
-    metaJson.previous_state = metaJson.state;
-    const verificationId = verification.id;
-    delete metaJson.state;
+    const metaJsons = [];
+    let metaJson = null;
+    for (let i = 0; i < verifications.length; i += 1) {
+      metaJson = verifications[i];
+      metaJson.previous_state = metaJson.state;
+      delete metaJson.state;
+      metaJsons.push(metaJson);
+    }
 
-    const metaJsonBuffer = Buffer.from(JSON.stringify(metaJson));
+    const metaJsonBuffer = Buffer.from(JSON.stringify(metaJsons));
     ipfs.add(metaJsonBuffer, (err, ipfsHashFull) => {
       const ipfsHash = ipfsHashFull[0].hash;
       dispatch({
@@ -23,14 +27,18 @@ export default function verify(verification) {
           ipfsHash,
         },
       });
-      dispatch(storeVerification(ipfsHash, metaJson.granted_to_eth_address, (error) => {
+      dispatch(storeVerification(ipfsHash, (error) => {
         if (error) {
+          console.log(error);
           return;
         }
         // Store the updated data on BDN
-        dispatch(setPendingVerification(verificationId, () => {
-          dispatch(fetchVerifications());
-        }));
+        for (let i = 0; i < verifications.length; i += 1) {
+          console.log(verifications[i]);
+          dispatch(setPendingVerification(verifications[i].id, () => {
+            dispatch(fetchVerifications());
+          }));
+        }
       }));
     });
   };

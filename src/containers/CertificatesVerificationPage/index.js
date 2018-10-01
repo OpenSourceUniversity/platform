@@ -7,7 +7,6 @@ import fetchVerifications from '../../util/verification/fetchVerifications';
 import fetchVerification from '../../util/verification/fetchVerification';
 import updateCertificate from '../../util/certificate/updateCertificate';
 import verify from '../../util/verification/verify';
-import massVerification from '../../util/verification/massVerification';
 import rejectVerification from '../../util/verification/rejectVerification';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import Config from '../../config';
@@ -111,11 +110,20 @@ class CertificatesVerificationPage extends React.Component {
             this.setState({ isFetching: false });
           }));
       }
+      const isChecked = this.massVerifyIds.indexOf(this.props.verification.id) !== -1;
+      const isAdded = this.addedVerifications.indexOf(this.props.verification.id) !== -1;
+      if (!isChecked && isAdded) {
+        this.massVerifyVerifications.splice(this.props.verification, 1);
+        this.addedVerifications.splice(this.props.verification.id, 1);
+      } else if (!isAdded && isChecked) {
+        this.massVerifyVerifications.push(this.props.verification);
+        this.addedVerifications.push(this.props.verification.id);
+      }
     }
   }
 
   massVerification() {
-    this.props.massVerification(this.massVerifyIds);
+    this.props.verify(this.massVerifyVerifications);
     this.setState({ activeVerificationId: null });
   }
 
@@ -125,27 +133,39 @@ class CertificatesVerificationPage extends React.Component {
   }
 
   massVerifyIds = []
+  massVerifyVerifications = []
+  addedVerifications = []
 
   handleSubmit(event, component) {
     event.preventDefault();
-    component.props.verify(component.props.verification);
+    component.props.verify([component.props.verification]);
     component.setState({ activeVerificationId: null });
   }
 
   showVerification = (verificationId) => {
-    document.getElementById('CertificateFile').src = '';
-    document.getElementById('CertificatePDFFile').height = '1px';
-    document.getElementById('CertificatePDFFile').data = '';
-    this.setState({ activeVerificationId: verificationId });
-    this.props.history.push(`/verifications/${this.props.match.params.type}/${verificationId}/`);
-    this.props.fetchVerification(`${bdnUrl}api/v1/verifications/${verificationId}/`);
+    if (this.state.activeVerificationId !== verificationId) {
+      document.getElementById('CertificateFile').src = '';
+      document.getElementById('CertificatePDFFile').height = '1px';
+      document.getElementById('CertificatePDFFile').data = '';
+      this.setState({ activeVerificationId: verificationId });
+      this.props.history.push(`/verifications/${this.props.match.params.type}/${verificationId}/`);
+      this.props.fetchVerification(`${bdnUrl}api/v1/verifications/${verificationId}/`);
+    }
   }
 
   handleCheckboxClick =(e, { name }) => {
     if (e.target.parentElement.children[0].checked) {
       this.massVerifyIds.splice(name, 1);
+      if (name === this.props.verification.id) {
+        this.massVerifyVerifications.splice(this.props.verification, 1);
+        this.addedVerifications.splice(this.props.verification.id, 1);
+      }
     } else {
       this.massVerifyIds.push(name);
+      if (name === this.props.verification.id) {
+        this.addedVerifications.push(this.props.verification.id);
+        this.massVerifyVerifications.push(this.props.verification);
+      }
     }
   }
 
@@ -401,9 +421,6 @@ function mapDispatchToProps(dispatch) {
     },
     verify(data) {
       dispatch(verify(data));
-    },
-    massVerification(ids) {
-      dispatch(massVerification(ids));
     },
     rejectVerification(id) {
       dispatch(rejectVerification(id));

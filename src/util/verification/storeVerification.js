@@ -9,7 +9,7 @@ const Tx = require('ethereumjs-tx');
 const contractJSON = require('../../../build/contracts/VerificationStorage.json');
 
 
-export default function storeVerification(ipfsHash, grantedTo, callback) {
+export default function storeVerification(ipfsHash, callback) {
   return function dispatcher(dispatch) {
     const { storageAddress } = Config.blockchain;
     const { abi } = contractJSON;
@@ -20,21 +20,22 @@ export default function storeVerification(ipfsHash, grantedTo, callback) {
     const { gasPrice } = store.getState().withdraw;
     web3.eth.getTransactionCount(address).then((txCount) => {
       const ipfsHashBytes = web3.utils.asciiToHex(ipfsHash);
+      console.log(ipfsHashBytes);
       const nonce = txCount.toString(16);
-      const rawTransaction = {
-        from: address,
-        nonce: `0x${nonce}`,
-        gasPrice: `0x${gasPrice}`,
-        gasLimit: '0x250CA',
-        to: Config.blockchain.storageAddress,
-        chainId: Config.network.chainId,
-        value: '0x0',
-        data: storageContract.methods.verify(ipfsHashBytes, grantedTo).encodeABI(),
-      };
-
-      const tx = new Tx(rawTransaction);
 
       dispatch(initWalletUnlocker((wallet) => {
+        const rawTransaction = {
+          from: address,
+          nonce: `0x${nonce}`,
+          gasPrice: `0x${gasPrice}`,
+          gasLimit: '0x250CA',
+          to: Config.blockchain.storageAddress,
+          chainId: Config.network.chainId,
+          value: '0x0',
+          data: storageContract.methods.verify(ipfsHashBytes).encodeABI(),
+        };
+        console.log(rawTransaction);
+        const tx = new Tx(rawTransaction);
         const privateKey = Buffer.from(wallet.getPrivateKey(), 'hex');
         tx.sign(privateKey);
         const serializedTx = tx.serialize();

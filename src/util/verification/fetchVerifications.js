@@ -1,7 +1,11 @@
 import store from '../../store';
+import Config from '../../config';
 
 
-export default function fetchVerifications(url) {
+const { bdnUrl } = Config.network;
+const START_URL = `${bdnUrl}api/v1/verifications/?active_profile=${store.getState().activeAccount.activeAccount}`;
+
+export default function fetchVerifications(url = START_URL) {
   return function dispatcher(dispatch) {
     dispatch({
       type: 'FETCH_VERIFICATIONS_REQUEST',

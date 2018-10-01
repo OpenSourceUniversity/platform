@@ -1,9 +1,9 @@
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const path = require('path')
-const webpack = require('webpack')
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const path = require('path');
+const webpack = require('webpack');
 
-const analyze = !!process.env.ANALYZE_ENV
-const env = process.env.NODE_ENV || 'development'
+const analyze = !!process.env.ANALYZE_ENV;
+const env = process.env.NODE_ENV || 'development';
 
 const webpackConfig = {
   name: 'client',

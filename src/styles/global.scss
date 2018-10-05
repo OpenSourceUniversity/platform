@@ -664,7 +664,6 @@ input[type="file"] {
     max-width: 27em;
     display: inline-flex;
     white-space: pre-line;
-    white-space: pre-line;
     padding: 12px 22px;
     background-color: #ececec;
     border-width: 0;
@@ -679,4 +678,25 @@ input[type="file"] {
     background-color: #ff9441!important;
     color: white;
   }
+}
+.courseItem {
+  margin-bottom: 1em;
+}
+.courseItem .extra {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; /* number of lines to show */
+  line-height: 1.5em;        /* fallback */
+  max-height: 5.5em;    /* fallback */
+}
+.ui.breadcrumb a {
+  color: grey;
+}
+a {
+  color: #333;
+}
+a:hover, .ui.breadcrumb a:hover {
+  color: #fa6635;
 }

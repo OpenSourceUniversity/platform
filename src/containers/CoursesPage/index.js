@@ -46,6 +46,7 @@ class CoursesPage extends React.Component {
           tablet={8}
           mobile={16}
           key={index}
+          className="courseItem"
         >
           <CourseItem course={course} key={index} />
         </Grid.Column>))
@@ -109,7 +110,7 @@ class CoursesPage extends React.Component {
           Courses
         </Header>
         <Grid>
-          <Grid.Column width={3}>
+          <Grid.Column width={5}>
             <Accordion as={Menu} vertical>
               <Header style={{ textAlign: 'center', paddingTop: '10px' }}>
                 Advanced filter
@@ -131,12 +132,17 @@ class CoursesPage extends React.Component {
             </Accordion>
           </Grid.Column>
 
-          <Grid.Column width={10}>
+          <Grid.Column width={11}>
             <Segment>
 
               {this.renderSearch()}
 
-              <Divider clearing />
+              
+
+            </Segment>
+
+            <Divider clearing />
+
               {(() => {
                 switch (this.state.activeItem) {
                 default: return this.props.courses.length ?
@@ -164,8 +170,6 @@ class CoursesPage extends React.Component {
                   Load More
                 </Button>
               </div>
-
-            </Segment>
           </Grid.Column>
 
           <Grid.Column width={3}>

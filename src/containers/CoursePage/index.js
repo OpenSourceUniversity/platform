@@ -94,7 +94,7 @@ class CoursePage extends React.Component {
             <Dimmer active={this.props.isFetching} inverted>
               <Loader size="large">Loading</Loader>
             </Dimmer>
-            <Header style={{ fontSize: '1.7em' }}>
+            <Header style={{ fontSize: '2.2em' }}>
               {this.props.course.title}
             </Header>
             <Grid>
@@ -201,55 +201,40 @@ class CoursePage extends React.Component {
               }
               <Grid.Column width={11}>
                 <Segment style={{ padding: '40px' }}>
-                  <Header>
-                    Reviews
-                    <span style={{ float: 'right' }}>
-                      <span style={{ cursor: 'pointer' }} className="disabled-beta">
-                        <Icon color="grey" name="plus" />
-                      </span>
-                      <span style={{ cursor: 'pointer' }} className="disabled-beta">
-                        <Icon color="grey" name="share alternate" />
-                      </span>
-                    </span>
-                  </Header>
-                  <span style={{ whiteSpace: 'pre-line' }}>
-                    {this.props.course.description}
-                  </span>
-                  <Header>
+                  <Header style={{ fontSize: '1.5em' }}>
                     Skills
                   </Header>
-                  <Label.Group size="medium">
+                  <Label.Group size="big">
                     {this.renderSkills()}
                   </Label.Group>
+
                   <Divider hidden />
+
                   <Grid>
                     <Grid.Row>
-                      <Grid.Column width={4}>
-                        <Button as="a" target="_blank" href={this.props.course.external_link}>SHOW COURSE</Button>
-                      </Grid.Column>
-                      <Grid.Column width={6}>
-                        <Button as={Link} to="/certificates/add" onClick={this.registerCertificateClick} color="green">REGISTER CERTIFICATE</Button>
+                      <Grid.Column width={16}>
+                        <Button as={Link} to="/certificates/add" onClick={this.registerCertificateClick} color="green" size="huge">Register Certificate</Button>
+                        <Button basic size="big" as="a" target="_blank" href={this.props.course.external_link}>
+                          <Icon name='world' /> Visit Course Page
+                        </Button>
                       </Grid.Column>
                     </Grid.Row>
                   </Grid>
-                  <Divider hidden />
-                  <Menu pointing secondary color="orange">
-                    <Menu.Item style={{ fontSize: '1.3em' }} name="about" active />
-                  </Menu>
-                  <Container style={{ paddingLeft: '40px', paddingRight: '40px', whiteSpace: 'pre-line' }}>
-                    {(() => {
-                      switch (this.state.activeItem) {
-                      case 'entry requirements': return this.props.course.e_req;
-                      case 'reviews': return this.props.course.reviews;
-                      default: return this.props.course.description;
-                      }
-                    })()}
-                  </Container>
+
+                  <Divider />
+
+                  <Header style={{ fontSize: '1.5em' }}>
+                    Description
+                  </Header>
+                  <span style={{ whiteSpace: 'pre-line', wordBreak: 'break-word' }}>
+                    {this.props.course.description}
+                  </span>
                 </Segment>
+                
               </Grid.Column>
               <Grid.Column width={5}>
-                <Segment style={{ padding: '40px' }}>
-                  <div style={{ textAlign: 'center' }}>
+                <Segment.Group>
+                  <Segment padded textAlign="center">
                     <Header style={{ fontSize: '1.5em' }}>
                       Provider
                     </Header>
@@ -259,7 +244,7 @@ class CoursePage extends React.Component {
                       className="profilePicSegment"
                       onClick={this.props.course.provider ? () => { this.props.history.push(`/view-profile/academy/${this.props.course.provider.eth_address}/`); } : null}
                       style={{
-                        boxShadow: '2px 6px 20px 0 #bcbdbd, 0 1px 21px 1px #d4d4d5',
+                        border: '1px solid #d4d4d5',
                         width: '8em',
                         height: '8em',
                         backgroundColor: 'white',
@@ -276,50 +261,53 @@ class CoursePage extends React.Component {
                         backgroundPosition: 'center center',
                         backgroundRepeat: 'no-repeat',
                         backgroundSize: 'contain',
-                        borderWidth: 0,
                         cursor: this.props.course.provider ? 'pointer' : 'auto',
                       }}
                     />
                     <Header>
                       {this.props.course.provider.name}
                     </Header>
-                  </div>
-                  <br />
-                  <span>
-                    {this.props.course.provider.eth_address ? this.props.course.provider.eth_address : ''}
-                  </span>
-                  <Divider clearing />
-                  <Header style={{ fontSize: '1.5em', marginBottom: '5px' }}>
-                    Industry
-                  </Header>
-                  <Icon name="industry" />
-                  <span style={{ color: 'grey' }} >
-                    {this.props.course.industries[0] ? this.props.course.industries[0].name : null}
-                  </span>
-                  <Divider clearing />
-                  <Header style={{ fontSize: '1.5em', marginBottom: '5px' }}>
-                    Tutor
-                  </Header>
-                  <Icon name="user outline" />
-                  <span style={{ color: 'grey' }} >
-                    {this.props.course.tutor}
-                  </span>
-                  <Divider clearing />
-                  <Header style={{ fontSize: '1.5em', marginBottom: '5px' }}>
-                    Language
-                  </Header>
-                  <Icon name="world" />
-                  <span style={{ color: 'grey' }} >
-                    English
-                  </span>
-                  <Divider clearing />
-                  <Header style={{ fontSize: '1.5em', marginBottom: '5px' }}>
-                    Course code
-                  </Header>
-                  <span style={{ color: 'grey' }} >
-                    {this.props.course.id}
-                  </span>
-                </Segment>
+                    <br />
+                    <span>
+                      {this.props.course.provider.eth_address ? this.props.course.provider.eth_address : ''}
+                    </span>
+                  </Segment>
+                  <Segment padded>
+                    <Header style={{ marginBottom: '5px' }}>
+                      Industry
+                    </Header>
+                    <Icon name="industry" />
+                    <span style={{ color: 'grey' }} >
+                      {this.props.course.industries[0] ? this.props.course.industries[0].name : null}
+                    </span>
+                  </Segment>
+                  <Segment padded>
+                    <Header style={{ marginBottom: '5px' }}>
+                      Tutor
+                    </Header>
+                    <Icon name="user outline" />
+                    <span style={{ color: 'grey' }} >
+                      {this.props.course.tutor}
+                    </span>
+                  </Segment>
+                  <Segment padded>
+                    <Header style={{ marginBottom: '5px' }}>
+                      Language
+                    </Header>
+                    <Icon name="world" />
+                    <span style={{ color: 'grey' }} >
+                      English
+                    </span>
+                  </Segment>
+                  <Segment padded>
+                    <Header style={{ marginBottom: '5px' }}>
+                      Course code
+                    </Header>
+                    <span style={{ color: 'grey' }} >
+                      {this.props.course.id}
+                    </span>
+                  </Segment>
+                </Segment.Group>
               </Grid.Column>
             </Grid>
           </div>

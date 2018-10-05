@@ -137,39 +137,38 @@ class CoursesPage extends React.Component {
 
               {this.renderSearch()}
 
-              
 
             </Segment>
 
             <Divider clearing />
 
-              {(() => {
-                switch (this.state.activeItem) {
-                default: return this.props.courses.length ?
-                  this.renderCourses() :
-                  <div style={{ textAlign: 'center', width: '100%' }}>
-                    <p style={{ textAlign: 'center' }}>There are no courses yet.</p>
-                  </div>;
-                }
-              })()}
+            {(() => {
+              switch (this.state.activeItem) {
+              default: return this.props.courses.length ?
+                this.renderCourses() :
+                <div style={{ textAlign: 'center', width: '100%' }}>
+                  <p style={{ textAlign: 'center' }}>There are no courses yet.</p>
+                </div>;
+              }
+            })()}
 
-              <Dimmer active={this.props.isFetching} inverted>
-                <Loader size="large">Loading</Loader>
-              </Dimmer>
+            <Dimmer active={this.props.isFetching} inverted>
+              <Loader size="large">Loading</Loader>
+            </Dimmer>
 
-              <div style={{ display: !this.props.next ? 'none' : 'block', marginTop: '20px', textAlign: 'center' }}>
-                <Button
-                  onClick={() => { this.props.fetchCourses(this.props.next); }}
-                  icon
-                  labelPosition="left"
-                >
-                  <Icon
-                    name={!this.props.isFetching ? 'arrow down' : 'spinner'}
-                    loading={this.props.isFetching}
-                  />
+            <div style={{ display: !this.props.next ? 'none' : 'block', marginTop: '20px', textAlign: 'center' }}>
+              <Button
+                onClick={() => { this.props.fetchCourses(this.props.next); }}
+                icon
+                labelPosition="left"
+              >
+                <Icon
+                  name={!this.props.isFetching ? 'arrow down' : 'spinner'}
+                  loading={this.props.isFetching}
+                />
                   Load More
-                </Button>
-              </div>
+              </Button>
+            </div>
           </Grid.Column>
 
           <Grid.Column width={3}>

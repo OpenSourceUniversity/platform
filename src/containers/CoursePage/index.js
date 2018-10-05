@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, Header, Divider, Label, Segment, Grid, Menu, Icon, Container, Dimmer, Loader, Breadcrumb, Modal, Message } from 'semantic-ui-react';
+import { Button, Header, Divider, Label, Segment, Grid, Icon, Container, Dimmer, Loader, Breadcrumb, Modal, Message } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import SkillItem from '../../components/SkillItem';
 import { fetchCourse, deleteCourse, markAsFeaturedCourse, registerCertificate, resetMessages } from './actions';
@@ -8,7 +8,7 @@ import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import Config from '../../config';
 
 class CoursePage extends React.Component {
-  state = { activeItem: 'about', modalOpen: false, modalFeaturedOpen: false }
+  state = { modalOpen: false, modalFeaturedOpen: false }
   componentDidMount() {
     const { bdnUrl } = Config.network;
     this.props.fetchCourse(`${bdnUrl}api/v1/courses/${this.props.match.params.id}/`);
@@ -48,8 +48,6 @@ class CoursePage extends React.Component {
     this.setState({ modalFeaturedOpen: false });
     this.props.resetMessages();
   }
-
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   registerCertificateClick = () => {
     this.props.registerCertificate(this.props.course);
@@ -215,7 +213,7 @@ class CoursePage extends React.Component {
                       <Grid.Column width={16}>
                         <Button as={Link} to="/certificates/add" onClick={this.registerCertificateClick} color="green" size="huge">Register Certificate</Button>
                         <Button basic size="big" as="a" target="_blank" href={this.props.course.external_link}>
-                          <Icon name='world' /> Visit Course Page
+                          <Icon name="world" /> Visit Course Page
                         </Button>
                       </Grid.Column>
                     </Grid.Row>
@@ -230,7 +228,7 @@ class CoursePage extends React.Component {
                     {this.props.course.description}
                   </span>
                 </Segment>
-                
+
               </Grid.Column>
               <Grid.Column width={5}>
                 <Segment.Group>
@@ -278,7 +276,8 @@ class CoursePage extends React.Component {
                     </Header>
                     <Icon name="industry" />
                     <span style={{ color: 'grey' }} >
-                      {this.props.course.industries[0] ? this.props.course.industries[0].name : null}
+                      {this.props.course.industries[0] ?
+                        this.props.course.industries[0].name : null}
                     </span>
                   </Segment>
                   <Segment padded>

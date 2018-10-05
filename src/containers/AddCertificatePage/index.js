@@ -16,6 +16,15 @@ class AddCertificatePage extends React.Component {
     this.props.resetAddCertificateProps();
     this.skillsRef.forceUpdate();
     this.industriesRef.forceUpdate();
+    if (this.props.certificateAutocomplete.title) {
+      this.state.certificate_title = this.props.certificateAutocomplete.title;
+    }
+    if (this.props.certificateAutocomplete.provider) {
+      this.state.institution_title = this.props.certificateAutocomplete.provider.name;
+      if (this.props.certificateAutocomplete.provider.academy_url) {
+        this.state.institution_link = this.props.certificateAutocomplete.provider.academy_url;
+      }
+    }
   }
 
   componentWillUnmount() {

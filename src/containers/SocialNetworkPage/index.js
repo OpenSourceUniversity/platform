@@ -1,28 +1,28 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
-import { Segment, Container, Grid, Card, Button, Icon, Header, Divider, List, Message } from 'semantic-ui-react';
+import { Segment, Container, Grid, Card, Icon, Header, Divider, List, Message, Button } from 'semantic-ui-react';
 import { setActiveAccount } from '../../util/activeAccount';
 import addFileWithConnections from '../../util/network/addFileWithConnections';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 
 
 class SocialNetworkPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      accepted: [],
+      rejected: [],
+    };
+  }
   componentDidMount() {
     this.props.setSecondaryNav('account');
     document.title = 'Social network';
     this.state = {
       accepted: [],
       rejected: [],
+      fileName: null,
     };
-    this.onDrop = this.onDrop.bind(this);
-  }
-
-  onDrop() {
-    if (this.state.accepted.length > 0 && this.state.rejected.length === 0) {
-      const file = this.state.accepted[0];
-      this.props.addFileWithConnections(file);
-    }
   }
 
   convertToBuffer = (reader) => {
@@ -34,19 +34,48 @@ class SocialNetworkPage extends React.Component {
 
   renderDropzone() {
     return (
-      <Dropzone
-        style={{ align: 'center', height: '100px' }}
-        accept="application/zip"
-        onDrop={
-          (accepted, rejected) => {
-            this.setState({ accepted, rejected }); this.onDrop(this);
+      <div>
+        <Dropzone
+          style={{ align: 'center', height: '100px', marginBottom: '1em' }}
+          accept="application/zip, application/x-zip-compressed"
+          onDrop={
+            (accepted, rejected) => {
+              this.setState({ accepted, rejected });
+              if (accepted.length > 0 && rejected.length === 0) {
+                this.setState({ fileString: accepted[0].name });
+              }
+              if (rejected.length > 0 && accepted.length === 0) {
+                this.setState({ fileString: 'Wrong file format. Accept only ZIP archives' });
+              }
+            }
           }
-        }
-      >
-        <Grid textAlign="center">
-          <Button fluid color="orange" content="Upload LinkedIn contacts" icon="upload" inverted style={{ align: 'center', height: '100px', margin: '7px 2px 2px 2px' }} />
-        </Grid>
-      </Dropzone>);
+        >
+          <Grid
+            textAlign="center"
+            style={{ border: '2px solid orange', height: '100%', borderRadius: '5px' }}
+          >
+            <div style={{ paddingTop: '37px', textAlign: 'center' }}>
+              <Icon name="upload" />
+              {this.state.fileString ? this.state.fileString : 'LinkedIn contacts archive Dropzone'}
+            </div>
+          </Grid>
+        </Dropzone>
+        <div style={{ textAlign: 'center' }} >
+          <Button
+            content="Upload"
+            primary
+            disabled={!(this.state.accepted.length > 0 && this.state.rejected.length === 0)}
+            icon="upload"
+            onClick={() => {
+              if (this.state.accepted.length > 0 && this.state.rejected.length === 0) {
+                const file = this.state.accepted[0];
+                this.props.addFileWithConnections(file);
+                this.setState({ accepted: [], rejected: [], fileString: null });
+              }
+            }}
+          />
+        </div>
+      </div>);
   }
 
   renderMessages() {
@@ -124,8 +153,7 @@ class SocialNetworkPage extends React.Component {
             </Grid.Column>
 
             <Grid.Column mobile={16} tablet={4} computer={4}>
-              <Segment>
-
+              <Segment style={{ textAlign: 'center' }} >
                 { this.props.isArchiveAdded ? this.renderMessages() : this.renderDropzone() }
               </Segment>
             </Grid.Column>

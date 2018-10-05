@@ -44,25 +44,36 @@ class OnBoarding extends React.Component {
   }
 
   render() {
+    /* eslint-disable global-require */
+    const logoLight = require('../../icons/logo-light.svg');
     return (
-      <Container fluid className="onboarding" style={{ backgroundColor: 'white', marginTop: `${-95}px` }}>
-        <Card className="onboarding-card">
-          {(() => {
-            switch (this.props.onBoardingActiveElement) {
-            case 'recoveryPhraseCheck': return <SignUpRecoveryPhraseCheck mnemonicPhrase={this.state.mnemonicPhrase} handleItemClick={(e, { name }) => this.props.setOnBoardingActiveElement(name)} email={this.state.email} />;
-            case 'recoveryPhraseSeed': return <SignUpRecoveryPhrase setMnemonicPhrase={this.setMnemonicPhrase} mnemonicPhrase={this.state.mnemonicPhrase} handleItemClick={(e, { name }) => this.props.setOnBoardingActiveElement(name)} email={this.state.email} />;
-            case 'recovery': return <WalletRecovery handleItemClick={(e, { name }) => this.props.setOnBoardingActiveElement(name)} setMnemonicPhrase={this.setMnemonicPhrase} />;
-            case 'presignup': return <PreSignUp setEmail={this.setEmail} handleItemClick={(e, { name }) => this.props.setOnBoardingActiveElement(name)} />;
-            case 'signup': return <SignUp setPassphrase={this.setPassphrase} handleItemClick={(e, { name }) => this.props.setOnBoardingActiveElement(name)} email={this.state.email} />;
-            case 'created': return <WalletCreated passphrase={this.state.passphrase} mnemonicPhrase={this.state.mnemonicPhrase} handleItemClick={(e, { name }) => this.props.setOnBoardingActiveElement(name)} email={this.state.email} />;
-            case 'passwordrecovery': return <PasswordRecovery handleItemClick={(e, { name }) => this.props.setOnBoardingActiveElement(name)} setPassphrase={this.setPassphrase} />;
-            case 'walletrecoverysuccess': return <WalletRecoverySuccess passphrase={this.state.passphrase} mnemonicPhrase={this.state.mnemonicPhrase} handleItemClick={(e, { name }) => this.props.setOnBoardingActiveElement(name)} />;
-            default: return (<SignIn
-              handleItemClick={(e, { name }) => this.props.setOnBoardingActiveElement(name)}
-            />);
-            }
-          })()}
-        </Card>
+      <Container fluid className="onboarding" style={{ backgroundColor: 'white' }}>
+        <section className="left-col">
+          <section className="item top-grad">
+            <section className="item color-overlay">
+              <img className="osu-logo" alt="" src={logoLight} />
+            </section>
+          </section>
+        </section>
+        <section className="right-col">
+          <Card className="onboarding-card">
+            {(() => {
+              switch (this.props.onBoardingActiveElement) {
+              case 'recoveryPhraseCheck': return <SignUpRecoveryPhraseCheck mnemonicPhrase={this.state.mnemonicPhrase} handleItemClick={(e, { name }) => this.props.setOnBoardingActiveElement(name)} email={this.state.email} />;
+              case 'recoveryPhraseSeed': return <SignUpRecoveryPhrase setMnemonicPhrase={this.setMnemonicPhrase} mnemonicPhrase={this.state.mnemonicPhrase} handleItemClick={(e, { name }) => this.props.setOnBoardingActiveElement(name)} email={this.state.email} />;
+              case 'recovery': return <WalletRecovery handleItemClick={(e, { name }) => this.props.setOnBoardingActiveElement(name)} setMnemonicPhrase={this.setMnemonicPhrase} />;
+              case 'presignup': return <PreSignUp setEmail={this.setEmail} handleItemClick={(e, { name }) => this.props.setOnBoardingActiveElement(name)} />;
+              case 'signup': return <SignUp setPassphrase={this.setPassphrase} handleItemClick={(e, { name }) => this.props.setOnBoardingActiveElement(name)} email={this.state.email} />;
+              case 'created': return <WalletCreated passphrase={this.state.passphrase} mnemonicPhrase={this.state.mnemonicPhrase} handleItemClick={(e, { name }) => this.props.setOnBoardingActiveElement(name)} email={this.state.email} />;
+              case 'passwordrecovery': return <PasswordRecovery handleItemClick={(e, { name }) => this.props.setOnBoardingActiveElement(name)} setPassphrase={this.setPassphrase} />;
+              case 'walletrecoverysuccess': return <WalletRecoverySuccess passphrase={this.state.passphrase} mnemonicPhrase={this.state.mnemonicPhrase} handleItemClick={(e, { name }) => this.props.setOnBoardingActiveElement(name)} />;
+              default: return (<SignIn
+                handleItemClick={(e, { name }) => this.props.setOnBoardingActiveElement(name)}
+              />);
+              }
+            })()}
+          </Card>
+        </section>
       </Container>
     );
   }

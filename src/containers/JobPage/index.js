@@ -239,7 +239,7 @@ class JobPage extends React.Component {
                       className="profilePicSegment"
                       onClick={
                         this.props.job.company ?
-                          () => { this.props.history.push(`/view-profile/academy/${this.props.job.company.eth_address}/`); } :
+                          () => { this.props.history.push(`/view-profile/business/${this.props.job.company.eth_address}/`); } :
                           null
                       }
                       style={{

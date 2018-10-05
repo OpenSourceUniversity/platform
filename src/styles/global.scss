@@ -291,25 +291,50 @@ div#Main {
     border-radius: 5px;
 
 //**Onboarding page***
-
   .onboarding {
-    margin-top: -40px;
+    display: flex;
+    flex-flow: row nowrap;
+    position: relative;
     height: 100vh;
-    background-image: url("../img/business-academia.jpg") !important;
-    background-repeat: no-repeat !important;
-    background-position: left center !important;
-    background-size: cover;
+    .left-col {
+      position: relative;
+      height: 100%;
+      background: url("../img/business-academia.jpg");
+      background-position:center;
+      background-size:cover;
+    }
+    .color-overlay {
+      height: 100%;
+      background: rgba(24,44,66,0.5);
+    }
+    .left-col, .right-col {
+      width: 50%;
+      flex: 1 0 auto;
+      display: flex;
+      flex-flow: column nowrap;
+    }
+    .item {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .top-grad {
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1a2c42+0,1a2c42+99&0.8+0,0+70 */
+      background: -moz-linear-gradient(top, rgba(26,44,66,0.8) 0%, rgba(26,44,66,0) 70%, rgba(26,44,66,0) 99%); /* FF3.6-15 */
+      background: -webkit-linear-gradient(top, rgba(26,44,66,0.8) 0%,rgba(26,44,66,0) 70%,rgba(26,44,66,0) 99%); /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(to bottom, rgba(26,44,66,0.8) 0%,rgba(26,44,66,0) 70%,rgba(26,44,66,0) 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc1a2c42', endColorstr='#001a2c42',GradientType=0 ); /* IE6-9 */
+    }
     div.onboarding-card {
       text-align: center;
       position: relative;
-      left: 55%;
-      padding: 40px;
-      width: 41em;
-      margin-bottom: 10em;
-      top: 6em;
-      -webkit-box-shadow: 0px 7px 8px 0px rgba(0,0,0,0.18);
-      -moz-box-shadow: 0px 7px 8px 0px rgba(0,0,0,0.18);
-      box-shadow: 0px 7px 8px 0px rgba(0,0,0,0.18);
+      width: 70%;
+      margin: auto;
+      padding: 3em;
+      -webkit-box-shadow: 0px 10px 50px 0px rgba(0,0,0,0.15);
+      -moz-box-shadow: 0px 10px 50px 0px rgba(0,0,0,0.15);
+      box-shadow: 0px 10px 50px 0px rgba(0,0,0,0.15);
       div.header {
         img.logo {
           width: 3em;
@@ -384,6 +409,7 @@ div#Main {
           color: white;
           margin-top: 2em;
           margin-bottom: 0.2em;
+          border: none;
         }
         div.orange-button button:hover {
           background-color: #da8b0b;
@@ -423,6 +449,33 @@ div#Main {
           background-color: #b6b5b5;
           color: white;
         }
+      }
+    }
+    .osu-logo {
+      position: absolute;
+      top: 20px;
+      width: 50%;
+      left: 15%;
+      max-width: 260px;
+    }
+  }
+  @media (max-width:760px) {
+    .onboarding {
+      flex-direction: column;
+      margin: 0 !important;
+      .right-col, .left-col {
+        width: 100%;
+      }
+      .left-col {
+        max-height: 300px;
+      }
+      .right-col {
+        margin-top: -100px;
+      }
+      .osu-logo {
+        margin: 0 auto;
+        left: 0;
+        right: 0;
       }
     }
   }

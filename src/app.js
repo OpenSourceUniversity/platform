@@ -40,14 +40,22 @@ class App extends React.Component {
     }
     return (
       <div className="App">
-        <Header />
-        <div style={{ height: `${this.props.secondaryNav ? 142 : 76}px` }} />
+        {this.props.isLoggedIn ?
+          <div>
+            <Header />
+            <div style={{ height: `${this.props.secondaryNav ? 142 : 95}px` }} />
+          </div> :
+          null
+        }
         <div id="Main">
           <Main />
         </div>
-        <Container className="footer" textAlign="center">
-          Account: {this.props.address}
-        </Container>
+        {this.props.isLoggedIn ?
+          <Container className="footer" textAlign="center">
+            Account: {this.props.address}
+          </Container> :
+          null
+        }
 
         <WalletUnlocker />
       </div>

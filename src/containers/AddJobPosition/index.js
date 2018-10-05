@@ -10,6 +10,7 @@ import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 
 
 class AddJobPosition extends React.Component {
+  state = {}
   componentDidMount() {
     this.props.setSecondaryNav('business');
     if (this.props.match.params.id) {
@@ -20,10 +21,29 @@ class AddJobPosition extends React.Component {
     document.title = 'Add Job Position';
   }
 
+  componentDidUpdate(prevProps) {
+    /* eslint-disable react/no-did-update-set-state */
+    if (prevProps.jobDefault !== this.props.jobDefault) {
+      if (this.props.jobDefault.title) {
+        this.setState({ title: this.props.jobDefault.title });
+      }
+      if (this.props.jobDefault.location) {
+        this.setState({ location: this.props.jobDefault.location });
+      }
+      if (this.props.jobDefault.overview) {
+        this.setState({ overview: this.props.jobDefault.overview });
+      }
+      if (this.props.jobDefault.description) {
+        this.setState({ description: this.props.jobDefault.description });
+      }
+    }
+  }
+
   handleSubmit(event, component) {
     event.preventDefault();
     const industries = this.industriesRef.state.currentValue;
     const skills = this.skillsRef.state.currentValue;
+    const languages = event.target.elements.languages.value.replace(/\s+/g, '');
     const jobData = {
       title: event.target.elements.title.value,
       location: event.target.elements.location.value,
@@ -35,7 +55,7 @@ class AddJobPosition extends React.Component {
       closes: event.target.elements.closes.value,
       experience: event.target.elements.experience.value,
       hours: event.target.elements.hours.value,
-      languages: event.target.elements.languages.value.split(/[,\s]/),
+      languages: languages.split(/[,\s]/),
     };
     if (component.props.match.params.id) {
       component.props.editJobPosition(component.props.match.params.id, jobData);
@@ -43,6 +63,14 @@ class AddJobPosition extends React.Component {
       component.props.addJobPosition(jobData);
     }
   }
+
+  handleChange = (e, { name, value }) => {
+    this.setState({ [name]: value });
+  }
+
+  validation = () => !this.state.title
+        || !this.state.location || !this.state.overview
+        || !this.state.description
   /* eslint-disable jsx-a11y/label-has-for */
   render() {
     /* eslint-disable global-require */
@@ -84,7 +112,7 @@ class AddJobPosition extends React.Component {
               </Loader>
             </Dimmer>
             <Form size="huge" onSubmit={(event) => { this.handleSubmit(event, this); }}>
-              <Form.Field>
+              <Form.Field required>
                 <label htmlFor="title">
                   Position name
                   <Input
@@ -93,12 +121,13 @@ class AddJobPosition extends React.Component {
                     iconPosition="left"
                     icon="tag"
                     placeholder="Position name"
+                    onChange={this.handleChange}
                     key={`title:${this.props.jobDefault.title || ''}`}
                     defaultValue={this.props.jobDefault.title ? this.props.jobDefault.title : ''}
                   />
                 </label>
               </Form.Field>
-              <Form.Field>
+              <Form.Field required>
                 <label htmlFor="location">
                   Location
                   <Input
@@ -107,6 +136,7 @@ class AddJobPosition extends React.Component {
                     iconPosition="left"
                     icon="tag"
                     placeholder="Location"
+                    onChange={this.handleChange}
                     key={`location:${this.props.jobDefault.location || ''}`}
                     defaultValue={this.props.jobDefault.location ? this.props.jobDefault.location : ''}
                   />
@@ -126,13 +156,14 @@ class AddJobPosition extends React.Component {
                   />
                 </label>
               </Form.Field>
-              <Form.Field>
+              <Form.Field required>
                 <label htmlFor="overview">
                   Overview
                   <TextArea
                     id="overview"
                     name="overview"
                     placeholder="Short position overview"
+                    onChange={this.handleChange}
                     key={`overview:${this.props.jobDefault.overview || ''}`}
                     defaultValue={this.props.jobDefault.overview ? this.props.jobDefault.overview : ''}
                   />
@@ -142,13 +173,14 @@ class AddJobPosition extends React.Component {
                 ref={(arg) => { this.skillsRef = arg; }}
                 skills={this.props.jobDefault.skills}
               />
-              <Form.Field>
+              <Form.Field required>
                 <label htmlFor="description">
                   Description
                   <TextArea
                     id="description"
                     name="description"
                     placeholder="Full position description"
+                    onChange={this.handleChange}
                     key={`description:${this.props.jobDefault.description || ''}`}
                     defaultValue={this.props.jobDefault.description ? this.props.jobDefault.description : ''}
                   />
@@ -216,7 +248,7 @@ class AddJobPosition extends React.Component {
                   />
                 </label>
               </Form.Field>
-              <Button type="submit" size="huge">Submit</Button>
+              <Button type="submit" primary disabled={this.validation()} size="huge">Submit</Button>
             </Form>
           </Grid.Column>
           <Grid.Column width={6}>

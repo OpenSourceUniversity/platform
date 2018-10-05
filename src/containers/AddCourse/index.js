@@ -8,6 +8,8 @@ import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 
 
 class AddCourse extends React.Component {
+  state = {}
+
   componentDidMount() {
     this.props.setSecondaryNav('academia');
     if (this.props.match.params.id) {
@@ -16,6 +18,21 @@ class AddCourse extends React.Component {
       this.props.resetAddCourseProps();
     }
     document.title = 'Add Course';
+  }
+
+  componentDidUpdate(prevProps) {
+    /* eslint-disable react/no-did-update-set-state */
+    if (prevProps.courseDefault !== this.props.courseDefault) {
+      if (this.props.courseDefault.title) {
+        this.setState({ title: this.props.courseDefault.title });
+      }
+      if (this.props.courseDefault.description) {
+        this.setState({ description: this.props.courseDefault.description });
+      }
+      if (this.props.courseDefault.external_link) {
+        this.setState({ external_link: this.props.courseDefault.external_link });
+      }
+    }
   }
 
   handleSubmit(event, component) {
@@ -44,6 +61,13 @@ class AddCourse extends React.Component {
       component.props.addCourse(courseData);
     }
   }
+
+  handleChange = (e, { name, value }) => {
+    this.setState({ [name]: value });
+  }
+
+  validation = () => !this.state.title
+        || !this.state.description || !this.state.external_link
   /* eslint-disable jsx-a11y/label-has-for */
   render() {
     /* eslint-disable global-require */
@@ -85,7 +109,7 @@ class AddCourse extends React.Component {
               </Loader>
             </Dimmer>
             <Form size="huge" onSubmit={(event) => { this.handleSubmit(event, this); }}>
-              <Form.Field>
+              <Form.Field required>
                 <label htmlFor="title">
                   Course title
                   <Input
@@ -94,6 +118,7 @@ class AddCourse extends React.Component {
                     iconPosition="left"
                     icon="tag"
                     placeholder="Course name"
+                    onChange={this.handleChange}
                     key={`title:${this.props.courseDefault.title || ''}`}
                     defaultValue={this.props.courseDefault.title ? this.props.courseDefault.title : ''}
                   />
@@ -135,19 +160,20 @@ class AddCourse extends React.Component {
                 ref={(arg) => { this.skillsRef = arg; }}
                 skills={this.props.courseDefault.skills}
               />
-              <Form.Field>
+              <Form.Field required>
                 <label htmlFor="description">
                   Description
                   <TextArea
                     id="description"
                     name="description"
                     placeholder="Full course description"
+                    onChange={this.handleChange}
                     key={`description:${this.props.courseDefault.description || ''}`}
                     defaultValue={this.props.courseDefault.description ? this.props.courseDefault.description : ''}
                   />
                 </label>
               </Form.Field>
-              <Form.Field>
+              <Form.Field required>
                 <label htmlFor="external_link">
                   Url to your course
                   <Input
@@ -156,6 +182,7 @@ class AddCourse extends React.Component {
                     label="http://"
                     labelPosition="left"
                     placeholder="Url to your course"
+                    onChange={this.handleChange}
                     key={`external_link:${this.props.courseDefault.external_link || ''}`}
                     defaultValue={
                       (() => {
@@ -190,7 +217,7 @@ class AddCourse extends React.Component {
                   defaultValue={this.props.courseDefault.duration ? this.props.courseDefault.duration : ''}
                 />
               </Form.Field>
-              <Button type="submit" primary size="huge">Submit</Button>
+              <Button type="submit" disabled={this.validation()} primary size="huge">Submit</Button>
             </Form>
           </Grid.Column>
           <Grid.Column width={6}>

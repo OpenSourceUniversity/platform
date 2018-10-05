@@ -139,7 +139,7 @@ class LearnerProfile extends React.Component {
                   Introduction
                 </Header>
                 <Divider clearing />
-                <div style={{ whiteSpace: 'pre-line' }}>
+                <div style={{ whiteSpace: 'pre-line', wordBreak: 'break-word' }}>
                   {this.props.profiles.learner_about ? this.props.profiles.learner_about : '-'}
                 </div>
                 <Divider hidden />

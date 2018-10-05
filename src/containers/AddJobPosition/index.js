@@ -103,7 +103,7 @@ class AddJobPosition extends React.Component {
 
         <Grid style={{ display: this.props.isAdded ? 'none' : 'block' }}>
           <Grid.Column width={10}>
-            <Dimmer active={this.props.isAdding} inverted>
+            <Dimmer className="belowNavBar" active={this.props.isAdding} inverted>
               <Loader size="medium">
                 <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
                   <image href={loader} x="0" y="0" width="100%" height="100%" />

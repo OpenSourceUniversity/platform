@@ -131,7 +131,7 @@ class AcademySettings extends React.Component {
     /* eslint-enable global-require */
     return (
       <div className="academia-settings">
-        <Dimmer active={this.props.isFetching} inverted>
+        <Dimmer className="belowNavBar" active={this.props.isFetching} inverted>
           <Loader size="medium">
             <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
               <image href={loader} x="0" y="0" width="100%" height="100%" />
@@ -234,6 +234,7 @@ class AcademySettings extends React.Component {
           <Form.TextArea
             name="academy_about"
             label="About"
+            maxLength={500}
             key={`academy_about:${this.props.profiles.academy_about || ''}`}
             defaultValue={this.props.profiles.academy_about ? this.props.profiles.academy_about : ''}
             placeholder="Tell us more about your academy..."

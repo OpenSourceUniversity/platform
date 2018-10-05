@@ -69,7 +69,7 @@ class WalletCreatedWithoutRouter extends React.Component {
     /* eslint-enable global-require */
     return (
       <div className="recovery">
-        <Dimmer active={this.props.isLoggingIn} inverted>
+        <Dimmer className="belowNavBar" active={this.props.isLoggingIn} inverted>
           <Loader size="medium">
             <p>This may take a few moments</p>
             <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>

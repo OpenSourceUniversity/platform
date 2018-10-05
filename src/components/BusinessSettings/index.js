@@ -131,7 +131,7 @@ class BusinessSettings extends React.Component {
     /* eslint-enable global-require */
     return (
       <div className="business-settings">
-        <Dimmer active={this.props.isFetching} inverted>
+        <Dimmer className="belowNavBar" active={this.props.isFetching} inverted>
           <Loader size="medium">
             <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
               <image href={loader} x="0" y="0" width="100%" height="100%" />
@@ -234,6 +234,7 @@ class BusinessSettings extends React.Component {
           <Form.TextArea
             name="company_about"
             label="About"
+            maxLength={500}
             key={`company_about:${this.props.profiles.company_about || ''}`}
             defaultValue={this.props.profiles.company_about ? this.props.profiles.company_about : ''}
             placeholder="Tell us more about your company..."

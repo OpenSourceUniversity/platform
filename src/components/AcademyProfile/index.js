@@ -98,7 +98,7 @@ class AcademyProfile extends React.Component {
                   About
                 </Header>
                 <Divider clearing />
-                <div style={{ whiteSpace: 'pre-line' }}>
+                <div style={{ whiteSpace: 'pre-line', wordBreak: 'break-word' }}>
                   {this.props.profiles.academy_about ? this.props.profiles.academy_about : '-'}
                 </div>
                 <Divider clearing />

@@ -194,7 +194,7 @@ class AddCertificatePage extends React.Component {
         </Message>
 
         <Segment style={{ display: (this.props.isAdded || this.props.error) ? 'none' : 'block' }}>
-          <Dimmer active={this.props.isAdding || this.props.isEncrypting} inverted>
+          <Dimmer className="belowNavBar" active={this.props.isAdding || this.props.isEncrypting} inverted>
             <Loader size="medium">
               <p>This may take a few moments</p>
               <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>

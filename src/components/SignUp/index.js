@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Form, Input, Grid, Button } from 'semantic-ui-react';
+import { Card, Form, Grid, Button } from 'semantic-ui-react';
 import store from '../../store';
 import signUpStep from '../../util/auth/signUpStep';
 
@@ -63,13 +63,19 @@ export default class SignUp extends React.Component {
               <Form.Field name="passphrase" inline width="16" label={{ icon: 'user' }} control="input" type="password" placeholder="Set your passphrase" />
             </Form.Group>
             <Form.Field inline className="check-box">
-              <label htmlFor="agreement">
-                <Input
+              <label className="label-cbx" htmlFor="agreement">
+                <input
                   id="agreement"
                   name="agreement"
                   type="checkbox"
-                  labelPosition="left"
+                  className="invisible"
                 />
+                <div className="checkbox">
+                  <svg width="20px" height="20px" viewBox="0 0 20 20">
+                    <path d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z" />
+                    <polyline points="4 11 8 15 16 6" />
+                  </svg>
+                </div>
                 <span style={{ marginLeft: '5px' }}>I agree with the <a style={{ color: 'orange' }} href="https://os.university/static/Terms-And-Conditions.pdf" rel="noopener noreferrer" target="_blank">Terms&Conditions</a></span>
               </label>
             </Form.Field>

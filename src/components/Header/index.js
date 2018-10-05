@@ -278,7 +278,7 @@ class HeaderWithoutRouter extends React.Component {
         <Container fluid>
           <Grid divided="vertically">
             { this.props.isLoggedIn ? (
-              <Grid.Row className="main-nav">
+              <Grid.Row className="main-nav" style={{ zIndex: '99' }} >
                 <Menu.Item name="home" onClick={this.handleItemClick}>
                   <img className="main-nav-logo" alt="" src={logo} />
                 </Menu.Item>
@@ -396,7 +396,7 @@ class HeaderWithoutRouter extends React.Component {
             )
             }
 
-            <Grid.Row className="secondary-nav">
+            <Grid.Row className="secondary-nav" style={{ zIndex: '98' }}>
               {(() => {
                 if (this.props.isLoggedIn) {
                   if (this.props.activeAccount === 'Learner') {

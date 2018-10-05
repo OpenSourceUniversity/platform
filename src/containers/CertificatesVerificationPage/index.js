@@ -314,6 +314,7 @@ class CertificatesVerificationPage extends React.Component {
             })()}
             >
               <Dimmer
+                className="belowNavBar"
                 inverted
                 active={this.props.isUpdating || this.props.isVerifying || this.state.isFetching}
               >

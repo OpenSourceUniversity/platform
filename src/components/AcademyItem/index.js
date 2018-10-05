@@ -41,7 +41,7 @@ class AcademyItemWithoutRouter extends React.Component {
               Courses: {this.props.academy.courses_count}
               </p>
               <Divider clearing />
-              <p>
+              <p style={{ wordBreak: 'break-word' }}>
                 {this.props.academy.academy_about ? `${this.props.academy.academy_about.substring(0, 100)}...` : '-'}
               </p>
             </Grid.Column>

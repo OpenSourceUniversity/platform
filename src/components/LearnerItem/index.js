@@ -41,7 +41,7 @@ class LearnerItemWithoutRouter extends React.Component {
               Certificates: {this.props.learner.certificates_count}
               </p>
               <Divider clearing />
-              <p>
+              <p style={{ wordBreak: 'break-word' }}>
                 {this.props.learner.learner_about ? `${this.props.learner.learner_about.substring(0, 100)}...` : '-'}
               </p>
             </Grid.Column>

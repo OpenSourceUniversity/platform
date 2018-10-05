@@ -220,7 +220,7 @@ class JobPage extends React.Component {
                           Job Descriptions
                       </Menu.Item>
                     </Menu>
-                    <Container style={{ paddingLeft: '40px', paddingRight: '40px', whiteSpace: 'pre-line' }}>
+                    <Container style={{ paddingLeft: '40px', paddingRight: '40px', whiteSpace: 'pre-line', wordBreak: 'break-word' }}>
                       {this.props.job.description}
                     </Container>
                   </div>

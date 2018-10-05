@@ -41,7 +41,7 @@ class BusinessItemWithoutRouter extends React.Component {
               Open Job Positions: {this.props.business.jobs_count}
               </p>
               <Divider clearing />
-              <p>
+              <p style={{ wordBreak: 'break-word' }}>
                 {this.props.business.company_about ? `${this.props.business.company_about.substring(0, 100)}...` : '-'}
               </p>
             </Grid.Column>

@@ -133,11 +133,8 @@ class CoursesPage extends React.Component {
           </Grid.Column>
 
           <Grid.Column width={11}>
-            <Segment>
-
+            <Segment padded>
               {this.renderSearch()}
-
-
             </Segment>
 
             <Divider clearing />

@@ -208,7 +208,7 @@ class CertificatePage extends React.Component {
       case 'expired':
         return 'blue';
       default:
-        return 'orange';
+        return '#f16722';
       }
     }
     const certificateStatusIcon = (
@@ -265,8 +265,8 @@ class CertificatePage extends React.Component {
               </Dimmer>
               <div style={{ height: this.props.address.toLowerCase() === this.props.certificate.holder_eth_address ? '40px' : 0 }} >
                 {this.props.address.toLowerCase() === this.props.certificate.holder_eth_address ?
-                  <Modal open={this.state.modalOpen} onClose={this.handleClose} trigger={<Button floated="left" onClick={this.handleOpen} color="red">Delete</Button>} basic size="small">
-                    <Header icon="archive" content="Delete course confirmation" />
+                  <Modal open={this.state.modalOpen} onClose={this.handleClose} trigger={<Button floated="left" onClick={this.handleOpen} color="basic">Delete</Button>} size="small">
+                    <Header icon="archive" content="Delete certificate confirmation" />
                     <Modal.Content>
                       <Dimmer active={this.props.isDeleting} page>
                         <Loader size="medium">
@@ -281,7 +281,7 @@ class CertificatePage extends React.Component {
                         </p>
                       </Message>
                       <p>
-                      You want to delete youre certificate,&nbsp;
+                      You want to delete your certificate,&nbsp;
                       named: {this.props.certificate.certificate_title}.
                       </p>
                       <p>
@@ -289,11 +289,11 @@ class CertificatePage extends React.Component {
                       </p>
                     </Modal.Content>
                     <Modal.Actions>
-                      <Button onClick={this.handleClose} floated="left" basic color="grey" inverted>
+                      <Button onClick={this.handleClose} floated="left" basic>
                         <Icon name="remove" /> Cancel
                       </Button>
-                      <Button basic color="red" inverted onClick={() => { this.props.deleteCertificate(this.props.match.params.id); }}>
-                        <Icon name="remove" /> Delete
+                      <Button color="red" inverted onClick={() => { this.props.deleteCertificate(this.props.match.params.id); }}>
+                        <Icon name="trash" /> Delete
                       </Button>
                     </Modal.Actions>
                   </Modal> :
@@ -361,7 +361,7 @@ class CertificatePage extends React.Component {
                     <Header.Subheader>
                       Expiration date:&nbsp;
                       <span
-                        style={{ color: 'orange' }}
+                        style={{ color: '#f16722' }}
                       >
                         {this.props.certificate.expiration_date ? this.getDateString(this.props.certificate.expiration_date) : 'Indefinitely'}
                       </span>
@@ -387,7 +387,7 @@ class CertificatePage extends React.Component {
                 </span>
                 <Divider hidden />
                 <Header size="huge" >
-                  <span style={{ color, fontSize: '2.5em', fontWeight: 100 }} >
+                  <span style={{ fontSize: '1.5em', fontWeight: 100, lineHeight: '125%' }} >
                     {this.props.certificate.certificate_title}
                   </span>
                   <Header.Subheader>

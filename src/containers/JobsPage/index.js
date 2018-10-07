@@ -72,7 +72,7 @@ class JobsPage extends React.Component {
           Jobs
         </Header>
         <Grid>
-          <Grid.Column width={3}>
+          <Grid.Column width={5}>
             <Accordion as={Menu} vertical>
               <Header style={{ textAlign: 'center', paddingTop: '10px' }}>
                 Idustries
@@ -94,37 +94,37 @@ class JobsPage extends React.Component {
             </Accordion>
           </Grid.Column>
 
-          <Grid.Column width={10}>
-            <Segment>
+          <Grid.Column width={11}>
+            <Segment padded>
               {this.renderSearch()}
-              <Divider clearing />
-              {(() => {
-                switch (this.state.activeItem) {
-                default: return this.props.jobs.length ?
-                  this.renderJobs() :
-                  <div style={{ textAlign: 'center', width: '100%' }}>
-                    <p style={{ textAlign: 'center' }}>There are no job positions yet.</p>
-                  </div>;
-                }
-              })()}
-              <Dimmer active={this.props.isFetching} inverted>
-                <Loader size="large">Loading</Loader>
-              </Dimmer>
-
-              <div style={{ display: !this.props.next ? 'none' : 'block', marginTop: '20px', textAlign: 'center' }}>
-                <Button
-                  onClick={() => { this.props.fetchJobs(this.props.next); }}
-                  icon
-                  labelPosition="left"
-                >
-                  <Icon
-                    name={!this.props.isFetching ? 'arrow down' : 'spinner'}
-                    loading={this.props.isFetching}
-                  />
-                  Load More
-                </Button>
-              </div>
             </Segment>
+            <Divider clearing />
+            {(() => {
+              switch (this.state.activeItem) {
+              default: return this.props.jobs.length ?
+                this.renderJobs() :
+                <div style={{ textAlign: 'center', width: '100%' }}>
+                  <p style={{ textAlign: 'center' }}>There are no job positions yet.</p>
+                </div>;
+              }
+            })()}
+            <Dimmer active={this.props.isFetching} inverted>
+              <Loader size="large">Loading</Loader>
+            </Dimmer>
+
+            <div style={{ display: !this.props.next ? 'none' : 'block', marginTop: '20px', textAlign: 'center' }}>
+              <Button
+                onClick={() => { this.props.fetchJobs(this.props.next); }}
+                icon
+                labelPosition="left"
+              >
+                <Icon
+                  name={!this.props.isFetching ? 'arrow down' : 'spinner'}
+                  loading={this.props.isFetching}
+                />
+                Load More
+              </Button>
+            </div>
           </Grid.Column>
         </Grid>
 

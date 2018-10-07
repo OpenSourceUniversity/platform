@@ -5,7 +5,7 @@ import { fetchDepartmentCourses } from '../ViewAcademyProfile/actions';
 import CourseItem from '../../components/CourseItem';
 
 const colors = [
-  'orange',
+  '#f16722',
 ];
 
 /* eslint-disable camelcase */

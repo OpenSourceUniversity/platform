@@ -193,48 +193,28 @@ class AddCertificatePage extends React.Component {
           <p>{this.state.maxSizeError}</p>
         </Message>
 
-        <Segment style={{ display: (this.props.isAdded || this.props.error) ? 'none' : 'block' }}>
-          <Dimmer className="belowNavBar" active={this.props.isAdding || this.props.isEncrypting} inverted>
-            <Loader size="medium">
-              <p>This may take a few moments</p>
-              <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
-                <image href={loader} x="0" y="0" width="100%" height="100%" />
-              </svg>
-              {(() => {
-                if (this.props.isEncrypting) {
-                  return 'Encrypting certificate file...';
-                }
-                if (this.props.isAdding) {
-                  return 'Uploading certificate file on IPFS...';
-                }
-                return 'Adding certificate on BDN...';
-              })()}
-            </Loader>
-          </Dimmer>
-          <Form size="large" onSubmit={(event) => { this.handleSubmit(event, this); }}>
-            <Grid divided="vertically">
-              <Grid.Row columns={1}>
-                <Grid.Column>
-                  <Form.Field required>
-                    <label htmlFor="certificate_file">
-                      Certificate file in PDF or image (PNG, GIF, JPEG)
-                    </label>
-                    <Input
-                      id="certificate_file"
-                      iconPosition="left"
-                      icon="upload"
-                      type="file"
-                      accept=".png,.gif,.jpeg,.pdf"
-                      error={this.state.certificateFileIsMissing}
-                      name="certificate_file"
-                      placeholder="Certificate File"
-                      onChange={this.captureCertificateFile}
-                    />
-                  </Form.Field>
-                </Grid.Column>
-              </Grid.Row>
-              <Grid.Row columns={2}>
-                <Grid.Column>
+        <Dimmer className="belowNavBar" active={this.props.isAdding || this.props.isEncrypting} inverted>
+          <Loader size="medium">
+            <p>This may take a few moments</p>
+            <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
+              <image href={loader} x="0" y="0" width="100%" height="100%" />
+            </svg>
+            {(() => {
+              if (this.props.isEncrypting) {
+                return 'Encrypting certificate file...';
+              }
+              if (this.props.isAdding) {
+                return 'Uploading certificate file on IPFS...';
+              }
+              return 'Adding certificate on BDN...';
+            })()}
+          </Loader>
+        </Dimmer>
+        <Form size="large" onSubmit={(event) => { this.handleSubmit(event, this); }}>
+          <Grid divided="vertically">
+            <Grid.Row columns={2}>
+              <Grid.Column width={10}>
+                <Segment style={{ display: (this.props.isAdded || this.props.error) ? 'none' : 'block' }}>
                   <Form.Field required>
                     <label htmlFor="certificate_title">
                       Course title
@@ -314,8 +294,6 @@ class AddCertificatePage extends React.Component {
                       placeholder="Certificate expiration date"
                     />
                   </Form.Field>
-                </Grid.Column>
-                <Grid.Column>
                   <Form.Field required>
                     <label htmlFor="holder_eth_address">
                       Learner address
@@ -427,17 +405,34 @@ class AddCertificatePage extends React.Component {
                       defaultValue={this.props.certificateAutocomplete.program_title ? this.props.certificateAutocomplete.program_title : ''}
                     />
                   </Form.Field>
-                </Grid.Column>
-              </Grid.Row>
-
-              <Grid.Row columns={1} >
-                <Grid.Column textAlign="center">
+                </Segment>
+              </Grid.Column>
+              <Grid.Column width={6}>
+                <Segment style={{ display: (this.props.isAdded || this.props.error) ? 'none' : 'block' }}>
+                  <Form.Field required>
+                    <label htmlFor="certificate_file">
+                      Certificate file in PDF or image (PNG, GIF, JPEG)
+                    </label>
+                    <Input
+                      id="certificate_file"
+                      iconPosition="left"
+                      icon="upload"
+                      type="file"
+                      accept=".png,.gif,.jpeg,.pdf"
+                      error={this.state.certificateFileIsMissing}
+                      name="certificate_file"
+                      placeholder="Certificate File"
+                      onChange={this.captureCertificateFile}
+                    />
+                  </Form.Field>
+                </Segment>
+                <Segment style={{ display: (this.props.isAdded || this.props.error) ? 'none' : 'block' }}>
                   <Button disabled={this.validation()} type="submit" primary size="huge">Upload Certificate</Button>
-                </Grid.Column>
-              </Grid.Row>
-            </Grid>
-          </Form>
-        </Segment>
+                </Segment>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Form>
       </Container>
     );
   }

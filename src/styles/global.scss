@@ -583,7 +583,7 @@ div#Main {
   border-width: 0;
 }
 .profilePicSegment:hover {
-  border-color: orange;
+  border-color: #f16722;
   border-width: 2px;
 }
 
@@ -712,7 +712,7 @@ input[type="file"] {
     background-color: #ececec!important;
   }
   .active {
-    border-right-color: orange!important;
+    border-right-color: #f16722 !important;
     border-right-width: 5px!important;
     background-color: #ececec!important;
     font-weight: inherit!important;
@@ -765,4 +765,7 @@ a {
 }
 a:hover, .ui.breadcrumb a:hover {
   color: #fa6635;
+}
+.text-primary {
+  color: #f16722;
 }

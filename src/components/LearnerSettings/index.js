@@ -80,7 +80,7 @@ class LearnerSettings extends React.Component {
       learner_email: event.target.elements.learner_email.value,
       phone_number: event.target.elements.phone_number.value,
       learner_site: learnerSite,
-      learner_country: event.target.elements[9].parentElement.children[1].textContent === 'Select Country' ? null : event.target.elements[9].parentElement.children[1].textContent,
+      learner_country: event.target.elements[8].parentElement.children[1].textContent === 'Select Country' ? null : event.target.elements[8].parentElement.children[1].textContent,
     };
     component.props.saveSettings(profileData, 'learner', component.state.buffer);
   }

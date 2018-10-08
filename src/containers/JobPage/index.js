@@ -83,11 +83,11 @@ class JobPage extends React.Component {
           <Breadcrumb>
             <Breadcrumb.Section href="/#/">Home</Breadcrumb.Section>
             <Breadcrumb.Divider icon="right angle" />
-            <Breadcrumb.Section href="/#/jobs">Jobs</Breadcrumb.Section>
+            <Breadcrumb.Section href="/#/jobs">Jobs List</Breadcrumb.Section>
             <Breadcrumb.Divider icon="right angle" />
             <Breadcrumb.Section active>Job Description</Breadcrumb.Section>
           </Breadcrumb>
-          <Divider clearing />
+          <Divider hidden />
           <div className="course">
             <Dimmer active={this.props.isFetching} inverted>
               <Loader size="large">Loading</Loader>

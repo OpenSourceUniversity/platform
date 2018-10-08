@@ -1,7 +1,7 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
-import { Segment, Container, Grid, Icon, Header, Divider, List, Message, Button } from 'semantic-ui-react';
+import { Segment, Container, Grid, Icon, Header, Divider, List, Message, Button, Breadcrumb } from 'semantic-ui-react';
 import { setActiveAccount } from '../../util/activeAccount';
 import addFileWithConnections from '../../util/network/addFileWithConnections';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
@@ -95,8 +95,13 @@ class SocialNetworkPage extends React.Component {
     /* eslint-enable */
     return (
       <Container>
-
-        <Header size="huge">
+        <Breadcrumb>
+          <Breadcrumb.Section href="/#/">Home</Breadcrumb.Section>
+          <Breadcrumb.Divider icon="right angle" />
+          <Breadcrumb.Section active>LinkedIn Connections</Breadcrumb.Section>
+        </Breadcrumb>
+        <Divider hidden />
+        <Header size="large">
           <svg width="32" height="32" className="icon">
             <image href={settings} x="0" y="0" width="100%" height="100%" />
           </svg>

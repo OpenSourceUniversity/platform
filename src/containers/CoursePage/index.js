@@ -85,14 +85,14 @@ class CoursePage extends React.Component {
             <Breadcrumb.Divider icon="right angle" />
             <Breadcrumb.Section href="/#/courses">Courses</Breadcrumb.Section>
             <Breadcrumb.Divider icon="right angle" />
-            <Breadcrumb.Section active>Courses Description</Breadcrumb.Section>
+            <Breadcrumb.Section active>Course Description</Breadcrumb.Section>
           </Breadcrumb>
-          <Divider clearing />
+          <Divider hidden />
           <div className="course">
             <Dimmer active={this.props.isFetching} inverted>
               <Loader size="large">Loading</Loader>
             </Dimmer>
-            <Header style={{ fontSize: '2.2em' }}>
+            <Header size="large">
               {this.props.course.title}
             </Header>
             <Grid>

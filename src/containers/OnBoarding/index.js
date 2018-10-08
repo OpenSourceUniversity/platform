@@ -47,7 +47,15 @@ class OnBoarding extends React.Component {
     /* eslint-disable global-require */
     const logoLight = require('../../icons/logo-light.svg');
     return (
-      <Container fluid className="onboarding" style={{ backgroundColor: 'white' }}>
+      <Container
+        fluid
+        className="onboarding"
+        style={{
+          backgroundColor: 'white',
+          marginTop: this.props.onBoardingActiveElement === 'walletrecoverysuccess' ?
+            '-39px' : null,
+        }}
+      >
         <section className="left-col">
           <section className="item top-grad">
             <section className="item color-overlay">

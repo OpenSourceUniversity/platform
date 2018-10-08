@@ -81,7 +81,7 @@ class HomePage extends React.Component {
       return (
         <Container className="home-page">
           <Segment style={{ padding: '2em', minHeight: '20em' }} >
-            <Header style={{ textAlign: 'center' }} size="huge">My Job Positions</Header>
+            <Header style={{ textAlign: 'center' }} size="large">My Job Positions</Header>
             <Button style={{ marginBottom: '1em' }} icon labelPosition="left" positive floated="right" as={Link} to="/businesses/add/">
               <Icon name="plus" />
               Add Job Position
@@ -113,7 +113,7 @@ class HomePage extends React.Component {
       return (
         <Container className="home-page">
           <Segment style={{ padding: '2em', minHeight: '20em' }} >
-            <Header style={{ textAlign: 'center' }} size="huge">My Courses</Header>
+            <Header style={{ textAlign: 'center' }} size="large">My Courses</Header>
             <Button style={{ marginBottom: '1em' }} icon labelPosition="left" positive floated="right" as={Link} to="/academies/add/">
               <Icon name="plus" />
               Add Course
@@ -145,7 +145,7 @@ class HomePage extends React.Component {
     return (
       <Container className="home-page">
         <Segment style={{ padding: '2em', minHeight: '20em' }} >
-          <Header style={{ textAlign: 'center' }} size="huge">Certificates</Header>
+          <Header style={{ textAlign: 'center' }} size="large">Certificates</Header>
           <Button style={{ marginBottom: '1em' }} icon labelPosition="left" positive floated="right" as={Link} to="/certificates/add">
             <Icon name="plus" />
               Add Certificate
@@ -171,9 +171,9 @@ class HomePage extends React.Component {
             { this.renderCertificates() }
           </Grid>
         </Segment>
-        <div>
-          <Header style={{ textAlign: 'center' }} size="huge">Courses</Header>
-          <Grid width={16}>
+        <Container className="home-page">
+          <Segment style={{ padding: '2em' }}>
+            <Header style={{ textAlign: 'center' }} size="huge">Courses</Header>
             {
               this.props.featuredCourses.length ?
                 this.renderFeaturedCourses(this.props.featuredCourses) :
@@ -181,18 +181,18 @@ class HomePage extends React.Component {
                   <p style={{ textAlign: 'center' }}>There are no featured courses yet.</p>
                 </div>
             }
-          </Grid>
-          <Divider style={{ marginTop: '3em' }} clearing />
-          <div style={{ textAlign: 'center' }}>
-            <Button primary style={{ margin: '1em' }}as={Link} to="/courses">
-                Explore all courses
-            </Button>
-          </div>
-        </div>
-        <Divider style={{ marginBottom: '3em' }} clearing />
-        <div>
-          <Header style={{ textAlign: 'center' }} size="huge">Job Positions</Header>
-          <Grid width={16}>
+            <Divider style={{ marginTop: '3em' }} clearing />
+            <div style={{ textAlign: 'center' }}>
+              <Button primary style={{ margin: '1em' }}as={Link} to="/courses">
+                  Explore all courses
+              </Button>
+            </div>
+          </Segment>
+        </Container>
+        <Divider hidden />
+        <Container className="home-page">
+          <Segment style={{ padding: '2em' }}>
+            <Header style={{ textAlign: 'center' }} size="huge">Job Positions</Header>
             {
               this.props.featuredJobs.length ?
                 this.renderFeaturedJobs(this.props.featuredJobs) :
@@ -200,14 +200,14 @@ class HomePage extends React.Component {
                   <p style={{ textAlign: 'center' }}>There are no featured courses yet.</p>
                 </div>
             }
-          </Grid>
-          <Divider style={{ marginTop: '3em' }} clearing />
-          <div style={{ textAlign: 'center' }}>
-            <Button primary style={{ margin: '1em' }}as={Link} to="/jobs">
-                Explore all Jobs
-            </Button>
-          </div>
-        </div>
+            <Divider style={{ marginTop: '3em' }} clearing />
+            <div style={{ textAlign: 'center' }}>
+              <Button primary style={{ margin: '1em' }}as={Link} to="/jobs">
+                  Explore all Jobs
+              </Button>
+            </div>
+          </Segment>
+        </Container>
       </Container>
     );
   }

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import React from 'react';
 import QRCode from 'qrcode.react';
-import { Segment, Container, Grid, Card, Image, Button, Icon, Header, Divider, Statistic, Table, Input, Form, Dropdown, Dimmer, Message } from 'semantic-ui-react';
+import { Segment, Container, Grid, Card, Image, Button, Icon, Header, Divider, Statistic, Table, Input, Form, Dropdown, Dimmer, Message, Breadcrumb } from 'semantic-ui-react';
 import TransactionHistoryItem from 'components/TransactionHistoryItem';
 import { initWalletUnlocker } from '../../util/auth/walletUnlocker';
 import getBalances from '../../util/web3/getBalances';
@@ -83,6 +83,12 @@ class Deposit extends React.Component {
     /* eslint-enable global-require */
     return (
       <Container>
+        <Breadcrumb>
+          <Breadcrumb.Section href="/#/">Home</Breadcrumb.Section>
+          <Breadcrumb.Divider icon="right angle" />
+          <Breadcrumb.Section active>Deposit/Withdraw</Breadcrumb.Section>
+        </Breadcrumb>
+        <Divider hidden />
         <Dimmer
           active={this.props.isError || this.props.isSuccess}
           inverted
@@ -99,7 +105,7 @@ class Deposit extends React.Component {
           </Message>
 
         </Dimmer>
-        <Header size="huge">
+        <Header size="large">
           <svg width="32" height="32" className="icon">
             <image href={settings} x="0" y="0" width="100%" height="100%" />
           </svg>

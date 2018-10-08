@@ -241,11 +241,11 @@ class CertificatesVerificationPage extends React.Component {
         <Breadcrumb>
           <Breadcrumb.Section href="/#/">Home</Breadcrumb.Section>
           <Breadcrumb.Divider icon="right angle" />
-          <Breadcrumb.Section active>Certificates</Breadcrumb.Section>
+          <Breadcrumb.Section active>Certificates Verification List</Breadcrumb.Section>
         </Breadcrumb>
-        <Divider clearing />
+        <Divider hidden />
         <Header size="large" floated="left">
-          Certificates verification list
+          Certificates verification
         </Header>
         <Button
           style={{ display: this.props.verifications.length > 0 ? null : 'none' }}

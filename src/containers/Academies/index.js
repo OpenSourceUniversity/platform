@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Form, Dimmer, Loader, Button, Container, Header, Divider, Grid, Segment, Accordion, Menu, Icon } from 'semantic-ui-react';
+import { Form, Dimmer, Loader, Button, Container, Header, Divider, Grid, Segment, Accordion, Menu, Icon, Breadcrumb } from 'semantic-ui-react';
 import AcademyItem from 'components/AcademyItem';
 import { fetchAcademies } from './actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
@@ -99,8 +99,14 @@ class AcademiesPage extends React.Component {
     const { activeIndex } = this.state;
     return (
       <Container className="courses-page">
-        <Header>
-          Courses
+        <Breadcrumb>
+          <Breadcrumb.Section href="/#/">Home</Breadcrumb.Section>
+          <Breadcrumb.Divider icon="right angle" />
+          <Breadcrumb.Section active>Academies List</Breadcrumb.Section>
+        </Breadcrumb>
+        <Divider hidden />
+        <Header size="large">
+          Academies
         </Header>
         <Grid>
           <Grid.Column width={3}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimmer, Header, Container, Button, Icon, Loader, Feed, Segment, Grid, Divider } from 'semantic-ui-react';
+import { Dimmer, Header, Container, Button, Icon, Loader, Feed, Segment, Grid, Divider, Breadcrumb } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import JobApplicationItem from '../../components/JobApplicationItem';
@@ -42,7 +42,15 @@ class JobApplicationsPage extends React.Component {
   render() {
     return (
       <Container>
-        <Header>
+        <Breadcrumb>
+          <Breadcrumb.Section href="/#/">Home</Breadcrumb.Section>
+          <Breadcrumb.Divider icon="right angle" />
+          <Breadcrumb.Section href="/#/jobs">Jobs List</Breadcrumb.Section>
+          <Breadcrumb.Divider icon="right angle" />
+          <Breadcrumb.Section active>Job Applications</Breadcrumb.Section>
+        </Breadcrumb>
+        <Divider hidden />
+        <Header size="large">
           Job Applications
         </Header>
         <Segment>

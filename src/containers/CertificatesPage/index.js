@@ -35,10 +35,10 @@ class CertificatesPage extends React.Component {
         <Breadcrumb>
           <Breadcrumb.Section href="/#/">Home</Breadcrumb.Section>
           <Breadcrumb.Divider icon="right angle" />
-          <Breadcrumb.Section active>Certificates</Breadcrumb.Section>
+          <Breadcrumb.Section active>Certificates List</Breadcrumb.Section>
         </Breadcrumb>
 
-        <Divider clearing />
+        <Divider hidden />
         <Header size="large" floated="left">
           Certificates
         </Header>

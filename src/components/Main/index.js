@@ -13,14 +13,10 @@ import SocialNetworkPage from 'containers/SocialNetworkPage';
 import ViewProfile from 'containers/ViewProfile';
 import AccountSettings from 'containers/AccountSettings';
 import OnBoarding from 'containers/OnBoarding';
-import Inbox from 'containers/Inbox';
-import Network from 'containers/Network';
 import Deposit from 'containers/Deposit';
 import CoursePage from 'containers/CoursePage';
-import StudentProgramPage from 'containers/StudentProgramPage';
 import CreateProfile from 'containers/CreateProfile';
 import JobPage from 'containers/JobPage';
-import StudentProgramsPage from 'containers/StudentProgramsPage';
 import CertificatePage from 'containers/CertificatePage';
 import AcademiesPage from 'containers/Academies';
 import BusinessesPage from 'containers/Businesses';
@@ -100,18 +96,14 @@ class Main extends React.Component {
         <PrivateRoute {...this.props} path="/academies" component={AcademiesPage} />
         <PrivateRoute {...this.props} path="/businesses" component={BusinessesPage} />
         <PrivateRoute {...this.props} path="/learners" component={LearnersPage} />
-        <PrivateRoute {...this.props} path="/programs" component={StudentProgramsPage} />
         <PrivateRoute {...this.props} path="/jobs" component={JobsPage} />
         <PrivateRoute {...this.props} path="/profile" component={ProfilePage} />
         <PrivateRoute {...this.props} path="/view-profile/:type/:eth_address/" component={ViewProfile} />
         <PrivateRouteCreateProfile isLoggedIn={this.props.isLoggedIn} path="/settings" component={AccountSettings} />
         <Route path="/onboarding" component={OnBoarding} />
-        <PrivateRoute {...this.props} path="/inbox" component={Inbox} />
-        <PrivateRoute {...this.props} path="/network" component={Network} />
         <PrivateRoute {...this.props} path="/social-network" component={SocialNetworkPage} />
         <PrivateRoute {...this.props} path="/deposit" component={Deposit} />
         <PrivateRoute {...this.props} path="/course-page/:id/" component={CoursePage} />
-        <PrivateRoute {...this.props} path="/program-page" component={StudentProgramPage} />
         <PrivateRouteCreateProfile isLoggedIn={this.props.isLoggedIn} path="/create-profile" component={CreateProfile} />
         <PrivateRoute {...this.props} path="/job-page/:id/" component={JobPage} />
         <PrivateRoute {...this.props} path="/notifications" component={NotificationsPage} />

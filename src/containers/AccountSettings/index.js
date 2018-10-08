@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Container, Header, Divider, Grid, Segment, Menu } from 'semantic-ui-react';
+import { Container, Header, Divider, Grid, Segment, Menu, Breadcrumb } from 'semantic-ui-react';
 import LearnerSettings from 'components/LearnerSettings';
 import AcademySettings from 'components/AcademySettings';
 import BusinessSettings from 'components/BusinessSettings';
@@ -25,7 +25,13 @@ class AccountSettings extends React.Component {
     return (
       <div>
         <Container className="account-settings">
-          <Header size="huge">
+          <Breadcrumb>
+            <Breadcrumb.Section href="/#/">Home</Breadcrumb.Section>
+            <Breadcrumb.Divider icon="right angle" />
+            <Breadcrumb.Section active>Account Settings</Breadcrumb.Section>
+          </Breadcrumb>
+          <Divider hidden />
+          <Header size="large">
             <svg width="32" height="32" className="icon">
               <image href={settings} x="0" y="0" width="100%" height="100%" />
             </svg>

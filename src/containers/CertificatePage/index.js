@@ -265,7 +265,7 @@ class CertificatePage extends React.Component {
               </Dimmer>
               <div style={{ height: this.props.address.toLowerCase() === this.props.certificate.holder_eth_address ? '40px' : 0 }} >
                 {this.props.address.toLowerCase() === this.props.certificate.holder_eth_address ?
-                  <Modal open={this.state.modalOpen} onClose={this.handleClose} trigger={<Button floated="left" onClick={this.handleOpen} color="basic">Delete</Button>} size="small">
+                  <Modal open={this.state.modalOpen} onClose={this.handleClose} trigger={<Button floated="left" onClick={this.handleOpen} basic>Delete</Button>} size="small">
                     <Header icon="archive" content="Delete certificate confirmation" />
                     <Modal.Content>
                       <Dimmer active={this.props.isDeleting} page>

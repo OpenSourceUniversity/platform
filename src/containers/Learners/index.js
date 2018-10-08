@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Form, Dimmer, Loader, Button, Container, Header, Divider, Grid, Segment, Accordion, Menu, Icon } from 'semantic-ui-react';
+import { Form, Dimmer, Loader, Button, Container, Header, Divider, Grid, Segment, Accordion, Menu, Icon, Breadcrumb } from 'semantic-ui-react';
 import LearnerItem from 'components/LearnerItem';
 import { fetchLearners } from './actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
@@ -95,7 +95,13 @@ class LearnersPage extends React.Component {
     const { activeIndex } = this.state;
     return (
       <Container className="courses-page">
-        <Header>
+        <Breadcrumb>
+          <Breadcrumb.Section href="/#/">Home</Breadcrumb.Section>
+          <Breadcrumb.Divider icon="right angle" />
+          <Breadcrumb.Section active>Learners List</Breadcrumb.Section>
+        </Breadcrumb>
+        <Divider hidden />
+        <Header size="large">
           Learners
         </Header>
         <Grid>

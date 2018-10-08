@@ -24,10 +24,12 @@ div.App {
     box-shadow: 0 15px 40px 0 rgba(28,45,65,.5);
   }
   .disabled-beta {
+      display: none;
       position: relative;
       color: rgba(0,0,0,.15);
     }
   .disabled-beta:hover:after {
+    display: none;
     content: 'Coming in Beta';
     position: absolute;
     background: #7f8fa6;
@@ -52,10 +54,12 @@ div.App {
       background: none;
     }
     .nav-disabled-beta {
+      display: none;
       position: relative;
       color: rgba(0,0,0,.15);
     }
     .nav-disabled-beta:hover:after {
+      display: none;
       content: 'Coming in Beta';
       position: absolute;
       background: #7f8fa6;
@@ -101,6 +105,7 @@ div.App {
             font-weight: 400 !important;
           }
           div.item.secondary-nav-disabled-beta, div.item.secondary-nav-disabled-customer {
+            display: none;
             position: relative;
             color: rgba(0,0,0,.15);
           }
@@ -113,9 +118,11 @@ div.App {
               padding-bottom: 10px!important;
           }
           .ui.list>.item.secondary-nav-disabled-beta:hover ,.ui.list>.item.secondary-nav-disabled-customer:hover {
+              display: none;
               color: rgba(0,0,0,.15) !important;
           }
           .ui.list>.item.secondary-nav-disabled-beta:hover:after {
+              display: none;
               content: 'Coming in Beta';
               position: absolute;
               background: #7f8fa6;
@@ -132,6 +139,7 @@ div.App {
               padding: 2px 5px;
           }
           .ui.list>.item.secondary-nav-disabled-customer:hover:after {
+              display: none;
               content: 'Coming in Customer';
               position: absolute;
               background: #7f8fa6;
@@ -234,14 +242,17 @@ div.App {
           color: rgba(0,0,0,.9);
         }
         a.secondary-nav-disabled-beta {
+          display: none;
           position: relative;
           color: rgba(0,0,0,.15);
         }
         a.secondary-nav-disabled-customer {
+          display: none;
           position: relative;
           color: rgba(0,0,0,.15);
         }
         a.secondary-nav-disabled-beta:hover:after {
+          display: none;
           content: 'Coming in Beta';
           position: absolute;
           background: #7f8fa6;
@@ -256,6 +267,7 @@ div.App {
           padding: 2px 5px;
         }
         a.secondary-nav-disabled-customer:hover:after {
+          display: none;
           content: 'Coming in Customer';
           position: absolute;
           background: #7f8fa6;

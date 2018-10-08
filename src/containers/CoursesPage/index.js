@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Form, Dimmer, Loader, Button, Container, Header, Divider, Grid, Segment, Accordion, Menu, Icon } from 'semantic-ui-react';
+import { Form, Dimmer, Loader, Button, Container, Header, Divider, Grid, Segment, Accordion, Menu, Icon, Breadcrumb } from 'semantic-ui-react';
 import CourseItem from 'components/CourseItem';
 import TopCoursesItem from 'components/TopCoursesItem';
 import TopAcademiaItem from 'components/TopAcademiaItem';
@@ -106,7 +106,13 @@ class CoursesPage extends React.Component {
     const { activeIndex } = this.state;
     return (
       <Container className="courses-page">
-        <Header>
+        <Breadcrumb>
+          <Breadcrumb.Section href="/#/">Home</Breadcrumb.Section>
+          <Breadcrumb.Divider icon="right angle" />
+          <Breadcrumb.Section active>Courses List</Breadcrumb.Section>
+        </Breadcrumb>
+        <Divider hidden />
+        <Header size="large">
           Courses
         </Header>
         <Grid>

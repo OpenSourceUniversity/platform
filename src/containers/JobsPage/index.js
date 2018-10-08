@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Container, Header, Divider, Grid, Segment, Accordion, Menu, Icon, Form, Dimmer, Button, Loader } from 'semantic-ui-react';
+import { Container, Header, Divider, Grid, Segment, Accordion, Menu, Icon, Form, Dimmer, Button, Loader, Breadcrumb } from 'semantic-ui-react';
 import IndustryFilter from 'components/IndustryFilter';
 import JobItem from 'components/JobItem';
 import { fetchJobs } from './actions';
@@ -68,8 +68,14 @@ class JobsPage extends React.Component {
     const { activeIndex } = this.state;
     return (
       <Container>
-        <Header>
-          Jobs
+        <Breadcrumb>
+          <Breadcrumb.Section href="/#/">Home</Breadcrumb.Section>
+          <Breadcrumb.Divider icon="right angle" />
+          <Breadcrumb.Section active>Jobs List</Breadcrumb.Section>
+        </Breadcrumb>
+        <Divider hidden />
+        <Header size="large">
+          Jobs List
         </Header>
         <Grid>
           <Grid.Column width={5}>

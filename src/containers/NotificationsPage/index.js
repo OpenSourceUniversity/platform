@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimmer, Header, Container, Button, Icon, Loader, Feed, Segment, Card } from 'semantic-ui-react';
+import { Dimmer, Header, Container, Button, Icon, Loader, Feed, Segment, Card, Breadcrumb, Divider } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import store from '../../store';
@@ -66,7 +66,13 @@ class NotificationsPage extends React.Component {
   render() {
     return (
       <Container>
-        <Header>
+        <Breadcrumb>
+          <Breadcrumb.Section href="/#/">Home</Breadcrumb.Section>
+          <Breadcrumb.Divider icon="right angle" />
+          <Breadcrumb.Section active>Notifications</Breadcrumb.Section>
+        </Breadcrumb>
+        <Divider hidden />
+        <Header size="large">
           Notifications
         </Header>
         <Segment>

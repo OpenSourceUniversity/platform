@@ -83,7 +83,7 @@ class AddCourse extends React.Component {
           <Breadcrumb.Section active>Add Course</Breadcrumb.Section>
         </Breadcrumb>
 
-        <Divider clearing />
+        <Divider hidden />
 
         <Message success hidden={!this.props.isAdded}>
           <p>Course {this.props.match.params.id ? 'edited' : 'added'} successfully.</p>

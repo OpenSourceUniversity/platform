@@ -160,10 +160,10 @@ class AddCertificatePage extends React.Component {
           <Breadcrumb.Divider icon="right angle" />
           <Breadcrumb.Section href="/#/certificates">Certificates</Breadcrumb.Section>
           <Breadcrumb.Divider icon="right angle" />
-          <Breadcrumb.Section active>Add certificate</Breadcrumb.Section>
+          <Breadcrumb.Section active>Add Certificate</Breadcrumb.Section>
         </Breadcrumb>
 
-        <Divider clearing />
+        <Divider hidden />
 
         <Header size="large">
           Add certificate

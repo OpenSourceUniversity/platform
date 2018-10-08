@@ -35,7 +35,7 @@ class LearnerItemWithoutRouter extends React.Component {
             </Grid.Column>
             <Grid.Column mobile={16} tablet={8} computer={12}>
               <Header size="large" style={{ textAlign: 'center' }}>
-                {this.props.learner.first_name} {this.props.learner.last_name}
+                {this.props.learner.full_name}
               </Header>
               <p>
               Certificates: {this.props.learner.certificates_count}

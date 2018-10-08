@@ -108,7 +108,7 @@ class LearnerProfile extends React.Component {
                       }}
                     />
                     <Header size="large">
-                      {this.props.profiles.first_name} {this.props.profiles.last_name}
+                      {this.props.profiles.full_name}
                     </Header>
                     <Header size="small" color="grey">
                       {this.props.profiles.learner_position ? this.props.profiles.learner_position : '-'}

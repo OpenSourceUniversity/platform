@@ -3,8 +3,7 @@ import store from '../../store';
 export default function validateAccounts() {
   const {
     /* eslint-disable camelcase */
-    first_name,
-    last_name,
+    full_name,
     learner_email,
     academy_name,
     academy_website,
@@ -15,7 +14,7 @@ export default function validateAccounts() {
   } = store.getState().profiles.profiles;
 
   return function dispatcher(dispatch) {
-    const learnerAccountCreated = !!first_name && !!last_name && !!learner_email;
+    const learnerAccountCreated = !!full_name && !!learner_email;
     const academyAccountCreated = !!academy_name && !!academy_website && !!academy_email;
     const businessAccountCreated = !!company_name && !!company_website && !!company_email;
     localStorage.setItem('learnerIsCreated', learnerAccountCreated);

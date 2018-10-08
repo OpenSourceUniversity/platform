@@ -88,7 +88,7 @@ class ViewLearnerProfile extends React.Component {
           <Loader size="large">Loading</Loader>
         </Dimmer>
         <Dimmer
-          active={!!(this.props.profileViewError) || !(this.props.learner.first_name)}
+          active={!!(this.props.profileViewError) || !(this.props.learner.full_name)}
           inverted
           onClickOutside={this.handleBack}
         >
@@ -134,7 +134,7 @@ class ViewLearnerProfile extends React.Component {
                     }}
                   />
                   <Header size="large">
-                    {this.props.learner.first_name} {this.props.learner.last_name}
+                    {this.props.learner.full_name}
                   </Header>
                   <Header size="small" color="grey">
                     {this.props.learner.learner_position ? this.props.learner.learner_position : '-'}

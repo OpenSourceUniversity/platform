@@ -2,8 +2,7 @@ const INITIAL_STATE = {
   isFetching: false,
   error: null,
   profiles: {
-    first_name: null,
-    last_name: null,
+    full_name: null,
     learner_position: null,
     learner_specialisation: null,
     learner_about: null,
@@ -27,8 +26,7 @@ const INITIAL_STATE = {
     company_logo: null,
   },
   profileView: {
-    first_name: null,
-    last_name: null,
+    full_name: null,
     learner_position: null,
     learner_specialisation: null,
     learner_about: null,

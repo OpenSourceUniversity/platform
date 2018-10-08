@@ -7,8 +7,7 @@ const INITIAL_STATE = {
       {
         username: null,
       },
-      first_name: null,
-      last_name: null,
+      full_name: null,
       learner_position: null,
       learner_specialisation: null,
       learner_about: null,

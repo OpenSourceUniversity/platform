@@ -72,8 +72,7 @@ class LearnerSettings extends React.Component {
       learnerSite = `http://${learnerSite}`;
     }
     const profileData = {
-      first_name: event.target.elements.first_name.value,
-      last_name: event.target.elements.last_name.value,
+      full_name: event.target.elements.full_name.value,
       learner_position: event.target.elements.learner_position.value,
       learner_specialisation: event.target.elements.learner_specialisation.value,
       learner_about: event.target.elements.learner_about.value,
@@ -178,21 +177,12 @@ class LearnerSettings extends React.Component {
           <Form.Group widths="equal">
             <Form.Field
               required
-              name="first_name"
-              label="First name"
-              key={`first_name:${this.props.profiles.first_name || ''}`}
-              defaultValue={this.props.profiles.first_name ? this.props.profiles.first_name : ''}
+              name="full_name"
+              label="Full name"
+              key={`full_name:${this.props.profiles.full_name || ''}`}
+              defaultValue={this.props.profiles.full_name ? this.props.profiles.full_name : ''}
               control="input"
-              placeholder="First name"
-            />
-            <Form.Field
-              required
-              name="last_name"
-              label="Last name"
-              key={`last_name:${this.props.profiles.last_name || ''}`}
-              defaultValue={this.props.profiles.last_name ? this.props.profiles.last_name : ''}
-              control="input"
-              placeholder="Last name"
+              placeholder="Full name"
             />
           </Form.Group>
           <Form.Field

@@ -108,7 +108,7 @@ class JobApplicationItem extends Dropdown.Item {
                     cursor: application ? 'pointer' : 'auto',
                   }}
                 >
-                  {`${application.issuer_profile.first_name} ${application.issuer_profile.last_name}`}
+                  {application.issuer_profile.full_name}
                   <Header.Subheader>
                     {this.props.application.issuer_profile.learner_country}
                   </Header.Subheader>

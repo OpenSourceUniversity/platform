@@ -92,7 +92,7 @@ class MessagesPage extends React.Component {
     switch (opponentInstance.active_profile_type) {
     case 1:
       return {
-        name: `${opponentInstance.first_name} ${opponentInstance.last_name}`,
+        name: opponentInstance.full_name,
         avatar: opponentInstance.learner_avatar,
         additional: opponentInstance.learner_position,
         viewProfile: `/view-profile/learner/${opponentInstance.user.username}/`,

@@ -178,6 +178,7 @@ class LearnerSettings extends React.Component {
             <Form.Field
               required
               name="full_name"
+              maxLength={70}
               label="Full name"
               key={`full_name:${this.props.profiles.full_name || ''}`}
               defaultValue={this.props.profiles.full_name ? this.props.profiles.full_name : ''}
@@ -187,6 +188,7 @@ class LearnerSettings extends React.Component {
           </Form.Group>
           <Form.Field
             name="learner_position"
+            maxLength={130}
             label="Current position"
             key={`learner_position:${this.props.profiles.learner_position || ''}`}
             defaultValue={this.props.profiles.learner_position ? this.props.profiles.learner_position : ''}
@@ -195,6 +197,7 @@ class LearnerSettings extends React.Component {
           />
           <Form.Field
             name="learner_specialisation"
+            maxLength={130}
             label="Your specialisation"
             key={`learner_specialisation:${this.props.profiles.learner_specialisation || ''}`}
             defaultValue={this.props.profiles.learner_specialisation ? this.props.profiles.learner_specialisation : ''}
@@ -204,7 +207,7 @@ class LearnerSettings extends React.Component {
           <Form.TextArea
             name="learner_about"
             label="About"
-            maxLength={500}
+            maxLength={2048}
             key={`learner_about:${this.props.profiles.learner_about || ''}`}
             defaultValue={this.props.profiles.learner_about ? this.props.profiles.learner_about : ''}
             placeholder="Tell us more about you..."
@@ -229,6 +232,7 @@ class LearnerSettings extends React.Component {
           <Form.Field
             required
             name="learner_email"
+            maxLength={130}
             label="Email"
             key={`learner_email:${this.props.profiles.learner_email || ''}`}
             defaultValue={this.props.profiles.learner_email ? this.props.profiles.learner_email : ''}
@@ -238,6 +242,7 @@ class LearnerSettings extends React.Component {
           />
           <Form.Field
             name="phone_number"
+            maxLength={70}
             label="Phone number"
             key={`phone_number:${this.props.profiles.phone_number || ''}`}
             defaultValue={this.props.profiles.phone_number ? this.props.profiles.phone_number : ''}
@@ -253,6 +258,7 @@ class LearnerSettings extends React.Component {
             <Input
               id="learner_site"
               name="learner_site"
+              maxLength={70}
               label="http://"
               labelPosition="left"
               placeholder="example.com"

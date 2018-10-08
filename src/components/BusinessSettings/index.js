@@ -177,6 +177,7 @@ class BusinessSettings extends React.Component {
             label="Company name"
             control="input"
             name="company_name"
+            maxLength={130}
             placeholder="Your company name"
             key={`company_name:${this.props.profiles.company_name || ''}`}
             defaultValue={this.props.profiles.company_name ? this.props.profiles.company_name : ''}
@@ -188,6 +189,7 @@ class BusinessSettings extends React.Component {
             <Input
               id="company_website"
               name="company_website"
+              maxLength={70}
               label="http://"
               labelPosition="left"
               placeholder="example.com"
@@ -212,6 +214,7 @@ class BusinessSettings extends React.Component {
           <Form.Field
             required
             name="company_email"
+            maxLength={130}
             label="Email"
             key={`company_email:${this.props.profiles.company_email || ''}`}
             defaultValue={this.props.profiles.company_email ? this.props.profiles.company_email : ''}
@@ -234,7 +237,7 @@ class BusinessSettings extends React.Component {
           <Form.TextArea
             name="company_about"
             label="About"
-            maxLength={500}
+            maxLength={2048}
             key={`company_about:${this.props.profiles.company_about || ''}`}
             defaultValue={this.props.profiles.company_about ? this.props.profiles.company_about : ''}
             placeholder="Tell us more about your company..."

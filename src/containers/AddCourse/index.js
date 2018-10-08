@@ -115,6 +115,7 @@ class AddCourse extends React.Component {
                   <Input
                     id="title"
                     name="title"
+                    maxLength={130}
                     iconPosition="left"
                     icon="tag"
                     placeholder="Course name"
@@ -131,6 +132,7 @@ class AddCourse extends React.Component {
                 <Input
                   id="program_title"
                   name="program_title"
+                  maxLength={130}
                   iconPosition="left"
                   icon="list"
                   placeholder="Name of program"
@@ -144,6 +146,7 @@ class AddCourse extends React.Component {
                   <Input
                     id="tutor"
                     name="tutor"
+                    maxLength={270}
                     iconPosition="left"
                     icon="tag"
                     placeholder="Course tutor"
@@ -166,6 +169,7 @@ class AddCourse extends React.Component {
                   <TextArea
                     id="description"
                     name="description"
+                    maxLength={5000}
                     placeholder="Full course description"
                     onChange={this.handleChange}
                     key={`description:${this.props.courseDefault.description || ''}`}

@@ -177,6 +177,7 @@ class AcademySettings extends React.Component {
             label="Academy name"
             control="input"
             name="academy_name"
+            maxLength={130}
             placeholder="Your academy name"
             key={`academy_name:${this.props.profiles.academy_name || ''}`}
             defaultValue={this.props.profiles.academy_name ? this.props.profiles.academy_name : ''}
@@ -188,6 +189,7 @@ class AcademySettings extends React.Component {
             <Input
               id="academy_website"
               name="academy_website"
+              maxLength={70}
               label="http://"
               labelPosition="left"
               placeholder="example.com"
@@ -212,6 +214,7 @@ class AcademySettings extends React.Component {
           <Form.Field
             required
             name="academy_email"
+            maxLength={130}
             label="Email"
             key={`academy_email:${this.props.profiles.academy_email || ''}`}
             defaultValue={this.props.profiles.academy_email ? this.props.profiles.academy_email : ''}
@@ -234,7 +237,7 @@ class AcademySettings extends React.Component {
           <Form.TextArea
             name="academy_about"
             label="About"
-            maxLength={500}
+            maxLength={2048}
             key={`academy_about:${this.props.profiles.academy_about || ''}`}
             defaultValue={this.props.profiles.academy_about ? this.props.profiles.academy_about : ''}
             placeholder="Tell us more about your academy..."

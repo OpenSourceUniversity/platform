@@ -222,6 +222,7 @@ class AddCertificatePage extends React.Component {
                     <Input
                       id="certificate_title"
                       name="certificate_title"
+                      maxLength={130}
                       iconPosition="left"
                       icon="file"
                       placeholder="Official course title"
@@ -353,6 +354,7 @@ class AddCertificatePage extends React.Component {
                     <Input
                       id="institution_title"
                       name="institution_title"
+                      maxLength={130}
                       iconPosition="left"
                       icon="university"
                       placeholder="Official name of your academy"
@@ -398,6 +400,7 @@ class AddCertificatePage extends React.Component {
                     <Input
                       id="program_title"
                       name="program_title"
+                      maxLength={130}
                       iconPosition="left"
                       icon="list"
                       placeholder="Name of program"

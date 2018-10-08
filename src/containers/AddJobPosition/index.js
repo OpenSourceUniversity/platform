@@ -119,6 +119,7 @@ class AddJobPosition extends React.Component {
                     <Input
                       id="title"
                       name="title"
+                      maxLength={130}
                       iconPosition="left"
                       icon="tag"
                       placeholder="Position name"
@@ -134,6 +135,7 @@ class AddJobPosition extends React.Component {
                     <Input
                       id="location"
                       name="location"
+                      maxLength={130}
                       iconPosition="left"
                       icon="tag"
                       placeholder="Location"
@@ -149,6 +151,7 @@ class AddJobPosition extends React.Component {
                     <Input
                       id="salary"
                       name="salary"
+                      maxLength={130}
                       iconPosition="left"
                       icon="tag"
                       placeholder="Salary with currency"
@@ -163,6 +166,7 @@ class AddJobPosition extends React.Component {
                     <TextArea
                       id="overview"
                       name="overview"
+                      maxLength={5000}
                       placeholder="Short position overview"
                       onChange={this.handleChange}
                       key={`overview:${this.props.jobDefault.overview || ''}`}
@@ -180,6 +184,7 @@ class AddJobPosition extends React.Component {
                     <TextArea
                       id="description"
                       name="description"
+                      maxLength={5000}
                       placeholder="Full position description"
                       onChange={this.handleChange}
                       key={`description:${this.props.jobDefault.description || ''}`}
@@ -212,6 +217,7 @@ class AddJobPosition extends React.Component {
                     <Input
                       id="experience"
                       name="experience"
+                      maxLength={130}
                       iconPosition="left"
                       icon="tag"
                       placeholder="Required experience"
@@ -241,6 +247,7 @@ class AddJobPosition extends React.Component {
                     <Input
                       id="languages"
                       name="languages"
+                      maxLength={130}
                       iconPosition="left"
                       icon="tag"
                       placeholder="Languages"

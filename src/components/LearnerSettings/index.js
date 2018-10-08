@@ -1,6 +1,6 @@
-import 'rc-slider/assets/index.css';
 import React from 'react';
-import { Form, Button, Header, Divider, Input, Message, Checkbox, Dimmer, Loader } from 'semantic-ui-react';
+import Dropzone from 'react-dropzone';
+import { Form, Button, Header, Divider, Input, Message, Checkbox, Dimmer, Loader, Container, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import AvatarEditor from 'react-avatar-editor';
 import Slider from 'rc-slider';
@@ -26,7 +26,6 @@ class LearnerSettings extends React.Component {
     buffer: null,
     src: null,
     zoom: 1,
-    maxSizeError: null,
   }
 
   componentDidMount() {
@@ -52,6 +51,9 @@ class LearnerSettings extends React.Component {
   }
 
   handleImageChange = () => {
+    if (!this.state.src) {
+      return null;
+    }
     try {
       this.editor.getImage();
       const canvasScaled = this.editor.getImageScaledToCanvas();
@@ -85,26 +87,8 @@ class LearnerSettings extends React.Component {
     component.props.saveSettings(profileData, 'learner', component.state.buffer);
   }
 
-  captureFile =(event) => {
-    event.stopPropagation();
-    event.preventDefault();
-    this.setState({ maxSizeError: null });
-    const file = event.target.files[0];
-    if (!file.type.match(/image.*/)) {
-      /* eslint-disable no-param-reassign */
-      event.target.value = null;
-      this.setState({ buffer: null });
-      this.setState({ maxSizeError: 'This file is not an image.' });
-      return;
-    }
-    if (file.size > 5242880) {
-      /* eslint-disable no-param-reassign */
-      event.target.value = null;
-      this.setState({ buffer: null });
-      this.setState({ maxSizeError: 'This file is too big. Max size is 5 MB' });
-      return;
-    }
-    if (event.target.files && event.target.files.length > 0) {
+  captureFile = (file) => {
+    if (file) {
       const reader = new FileReader();
       reader.addEventListener(
         'load',
@@ -166,9 +150,6 @@ class LearnerSettings extends React.Component {
             onDismiss={this.handleDismiss}
           />
         ) : null}
-        <Message error hidden={!this.state.maxSizeError}>
-          <p>{this.state.maxSizeError}</p>
-        </Message>
         <Header>
           Personal Information
         </Header>
@@ -293,16 +274,47 @@ class LearnerSettings extends React.Component {
             options={Countries.Countries}
           />
           <Form.Field label="Upload your avatar" control="file">
-            <Input
+            <Dropzone
               id="file"
-              type="file"
+              style={{ align: 'center', height: '100px', marginBottom: '1em' }}
+              accept="image/*"
               name="learner_avatar"
-              placeholder="My avatar"
-              className="input-file"
-              color="orange"
-              accept=".png,.gif,.jpg,.jpeg"
-              onChange={this.captureFile}
-            />
+              onDrop={
+                (accepted, rejected) => {
+                  if (accepted.length > 0 && rejected.length === 0) {
+                    const file = accepted[0];
+                    this.setState({ fileString: accepted[0].name });
+                    if (file.size > 5242880) {
+                      /* eslint-disable react/no-unused-state */
+                      this.setState({ buffer: null });
+                      /* eslint-enable react/no-unused-state */
+                      this.setState({ fileString: 'This file is too big. Max size is 5 MB' });
+                      this.setState({ src: null });
+                    } else {
+                      this.captureFile(file);
+                      this.setState({ fileString: file.name });
+                    }
+                  }
+                  if (rejected.length > 0 && accepted.length === 0) {
+                    this.setState({ src: null });
+                    /* eslint-disable react/no-unused-state */
+                    this.setState({ buffer: null });
+                    /* eslint-enable react/no-unused-state */
+                    this.setState({ fileString: 'Wrong file format. Accept only Images' });
+                  }
+                }
+              }
+            >
+              <Container
+                textAlign="center"
+                style={{ border: '2px dashed grey', height: '100%', borderRadius: '5px' }}
+              >
+                <div style={{ padding: '37px 15px 15px 15px', textAlign: 'center' }}>
+                  <Icon name="upload" />
+                  {this.state.fileString ? this.state.fileString : 'Avatar image Dropzone'}
+                </div>
+              </Container>
+            </Dropzone>
           </Form.Field>
           <div style={{ display: this.state.src ? null : 'none', textAlign: 'center' }}>
             <AvatarEditor

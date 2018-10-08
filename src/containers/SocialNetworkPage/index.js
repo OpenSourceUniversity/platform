@@ -25,13 +25,6 @@ class SocialNetworkPage extends React.Component {
     };
   }
 
-  convertToBuffer = (reader) => {
-    const buffer = Buffer.from(reader.result);
-    /* eslint-disable */
-    this.setState({ buffer });
-    /* eslint-enable */
-  }
-
   renderDropzone() {
     return (
       <div>

@@ -1,6 +1,7 @@
 import React from 'react';
+import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
-import { Container, Grid, Header, Segment, Button, Message, Divider, Breadcrumb, Form, Input, Dimmer, Loader, Dropdown } from 'semantic-ui-react';
+import { Container, Grid, Header, Segment, Button, Message, Divider, Breadcrumb, Form, Input, Dimmer, Loader, Dropdown, Icon } from 'semantic-ui-react';
 import SkillsInput from '../../components/SkillsInput';
 import IndustriesInput from '../../components/IndustriesInput';
 import storeCertificateOnIpfs from '../../util/certificate/storeCertificateOnIpfs';
@@ -9,13 +10,16 @@ import { resetAddCertificateProps, resetCertificateAutocomplete } from './action
 
 
 class AddCertificatePage extends React.Component {
-  state = { certificateFileIsMissing: false, maxSizeError: null }
+  state = {}
 
   componentDidMount() {
     document.title = 'Add Certificate';
     this.props.resetAddCertificateProps();
     this.skillsRef.forceUpdate();
     this.industriesRef.forceUpdate();
+    this.state = {
+      fileName: null,
+    };
     if (this.props.certificateAutocomplete.title) {
       this.state.certificate_title = this.props.certificateAutocomplete.title;
     }
@@ -93,8 +97,6 @@ class AddCertificatePage extends React.Component {
     }
     if (component.state.buffer) {
       component.props.storeCertificateOnIpfs(component.state.buffer, certificateData);
-    } else {
-      component.setState({ certificateFileIsMissing: true });
     }
   }
 
@@ -122,27 +124,14 @@ class AddCertificatePage extends React.Component {
         || !this.state.institution_title || !this.state.institution_link
         || !(this.props.activeAccount === 'Learner' ? true : this.state.granted_to_type)
 
-  captureCertificateFile = (event) => {
-    event.stopPropagation();
-    event.preventDefault();
-    this.setState({ maxSizeError: null });
-    const file = event.target.files[0];
-    if (file.size > 10485760) {
-      /* eslint-disable no-param-reassign */
-      event.target.value = null;
-      this.setState({ buffer: null });
-      this.setState({ maxSizeError: 'This file is too big. Max size is 10 MB' });
-      return;
-    }
+  captureCertificateFile = (file) => {
     if (file.type.match(/image.*/) || file.type === 'application/pdf') {
       const reader = new window.FileReader();
       reader.readAsArrayBuffer(file);
       reader.onloadend = () => this.storeCertificateFile(reader);
     } else {
       /* eslint-disable no-param-reassign */
-      event.target.value = null;
       this.setState({ buffer: null });
-      this.setState({ maxSizeError: 'Wrong file type' });
     }
   }
 
@@ -157,7 +146,6 @@ class AddCertificatePage extends React.Component {
     });
     /* eslint-disable prefer-destructuring */
     this.setState({ buffer });
-    this.setState({ certificateFileIsMissing: false });
     /* eslint-enable react/no-unused-state */
   };
   /* eslint-disable jsx-a11y/label-has-for */
@@ -187,10 +175,6 @@ class AddCertificatePage extends React.Component {
 
         <Message error hidden={!this.props.error}>
           <p>{this.props.error}</p>
-        </Message>
-
-        <Message error hidden={!this.state.maxSizeError}>
-          <p>{this.state.maxSizeError}</p>
         </Message>
 
         <Dimmer className="belowNavBar" active={this.props.isAdding || this.props.isEncrypting} inverted>
@@ -416,17 +400,41 @@ class AddCertificatePage extends React.Component {
                     <label htmlFor="certificate_file">
                       Certificate file in PDF or image (PNG, GIF, JPEG)
                     </label>
-                    <Input
+                    <Dropzone
                       id="certificate_file"
-                      iconPosition="left"
-                      icon="upload"
-                      type="file"
-                      accept=".png,.gif,.jpeg,.pdf"
-                      error={this.state.certificateFileIsMissing}
+                      style={{ align: 'center', height: '100px', marginBottom: '1em' }}
+                      accept="image/*, application/pdf"
                       name="certificate_file"
-                      placeholder="Certificate File"
-                      onChange={this.captureCertificateFile}
-                    />
+                      onDrop={
+                        (accepted, rejected) => {
+                          if (accepted.length > 0 && rejected.length === 0) {
+                            const file = accepted[0];
+                            if (file.size > 10485760) {
+                              /* eslint-disable no-param-reassign */
+                              this.setState({ buffer: null });
+                              this.setState({ fileString: 'This file is too big. Max size is 10 MB' });
+                            } else {
+                              this.captureCertificateFile(file);
+                              this.setState({ fileString: file.name });
+                            }
+                          }
+                          if (rejected.length > 0 && accepted.length === 0) {
+                            this.setState({ buffer: null });
+                            this.setState({ fileString: 'Wrong file format. Accept only Images and PDF' });
+                          }
+                        }
+                      }
+                    >
+                      <Container
+                        textAlign="center"
+                        style={{ border: '2px dashed grey', height: '100%', borderRadius: '5px' }}
+                      >
+                        <div style={{ padding: '37px 15px 15px 15px', textAlign: 'center' }}>
+                          <Icon name="upload" />
+                          {this.state.fileString ? this.state.fileString : 'Certificate file Dropzone'}
+                        </div>
+                      </Container>
+                    </Dropzone>
                   </Form.Field>
                 </Segment>
                 <Segment style={{ display: (this.props.isAdded || this.props.error) ? 'none' : 'block' }}>

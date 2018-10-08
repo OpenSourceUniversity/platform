@@ -29,7 +29,6 @@ export default function addJobPosition(jobData) {
       closes: jobData.closes ? jobData.closes : null,
       experience: jobData.experience ? jobData.experience : null,
       hours: jobData.hours ? jobData.hours : null,
-      job_type: jobData.job_type ? jobData.job_type : null,
       languages: jobData.languages ? jobData.languages : null,
     };
     axios.post(ADD_JOB_URL, postData, axiosConfig).then(() => {

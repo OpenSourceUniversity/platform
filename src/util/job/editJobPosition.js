@@ -28,7 +28,6 @@ export default function editJobPosition(id, jobData) {
       closes: jobData.closes ? jobData.closes : null,
       experience: jobData.experience ? jobData.experience : null,
       hours: jobData.hours ? jobData.hours : null,
-      job_type: jobData.job_type ? jobData.job_type : null,
       languages: jobData.languages ? jobData.languages : null,
     };
     axios.post(`${bdnUrl}api/v1/jobs/${id}/edit_by_id/`, postData, axiosConfig).then(() => {

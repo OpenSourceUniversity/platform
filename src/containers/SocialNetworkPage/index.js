@@ -1,7 +1,7 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
-import { Segment, Container, Grid, Card, Icon, Header, Divider, List, Message, Button } from 'semantic-ui-react';
+import { Segment, Container, Grid, Icon, Header, Divider, List, Message, Button } from 'semantic-ui-react';
 import { setActiveAccount } from '../../util/activeAccount';
 import addFileWithConnections from '../../util/network/addFileWithConnections';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
@@ -119,22 +119,22 @@ class SocialNetworkPage extends React.Component {
                 </Header>
                 <Container>
                   <p>
-                  You can upgrade your profile and get numerus opportunities for professional career. Boost your skills and professional experience by uploading your LinkedIn data (<a className="text-primary" href="https://www.youtube.com/watch?v=PaWZvD2MvkA" target="_blank">Video Tutorial</a>) Each time someone in your network join the platform YOU will get EDU tokens along with PRO account containing all the functionality you need.
+                  You can upgrade your profile and get numerus opportunities for professional career. Boost your skills and professional experience by uploading your LinkedIn data (<a className="text-primary" href="https://www.youtube.com/watch?v=PaWZvD2MvkA" rel="noopener noreferrer" target="_blank">Video Tutorial</a>) Each time someone in your network join the platform YOU will get EDU tokens along with PRO account containing all the functionality you need.
                   </p>
                   <Divider hidden />
                   <List as="ol">
-                    <List.Item as="li">Visit the <a href="https://www.linkedin.com/psettings/member-data" className="text-primary" target="_blank"><b>LinkedIn Download Your Data</b></a> page</List.Item>
+                    <List.Item as="li">Visit the <a href="https://www.linkedin.com/psettings/member-data" className="text-primary" rel="noopener noreferrer" target="_blank"><b>LinkedIn Download Your Data</b></a> page</List.Item>
                     <List.Item as="li">Select the following files from &quot;<b>Pick and Choose</b>&quot;:</List.Item>
                     <List.Item as="li">Click &quot;<b>Request archive</b>&quot; button. Wait for the downloaded file to appear in your email.</List.Item>
-                    <List.Item as="li">Locate your <b>ZIP file</b> in the lower left of your screen (or your Download folder). Drag your <b>ZIP file</b> into our form and click the orange "Upload" button.</List.Item>
+                    <List.Item as="li">Locate your <b>ZIP file</b> in the lower left of your screen (or your Download folder). Drag your <b>ZIP file</b> into our form and click the orange &quot;Upload&quot; button.</List.Item>
                   </List>
                 </Container>
                 <Divider hidden />
                 <Message positive>
                   <Message.Header>Thank you for your time and support!</Message.Header>
                   <p>
-                    Your account will be promoted to PRO version for <b>{ period }
-                    period</b> and you ll receive <b>{ eduBonus }</b>. EDU for every new member onboarded
+                    Your account will be promoted to PRO version for <b>{ period } period </b>
+                    and you ll receive <b>{ eduBonus }</b>. EDU for every new member onboarded
                     on the platform from your uploaded LinkedIn contacts.
                   </p>
                 </Message>

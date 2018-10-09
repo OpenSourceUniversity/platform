@@ -8,6 +8,7 @@ const env = process.env.NODE_ENV || 'development';
 const webpackConfig = {
   name: 'client',
   target: 'web',
+  mode: env,
 
   entry: {
     app: [
@@ -69,19 +70,9 @@ if (analyze) {
 }
 
 if (env === 'production') {
-  webpackConfig.plugins.push(
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      debug: false,
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        unused: true,
-        dead_code: true,
-        warnings: false,
-      },
-    }),
-  );
+  webpackConfig.optimization = {
+    minimize: true,
+  };
 }
 
 module.exports = webpackConfig;

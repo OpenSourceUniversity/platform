@@ -4,15 +4,21 @@ import store from '../../store';
 import signUpStep from '../../util/auth/signUpStep';
 
 export default class PreSignUp extends React.Component {
+  state = {}
   emailSubmit = (event) => {
     const email = event.target.elements.email.value;
-    const data = {
-      email,
-      step: 1,
-    };
-    store.dispatch(signUpStep(data));
-    this.props.setEmail(email);
-    this.props.handleItemClick(event, event.target.elements.signup);
+    if (email) {
+      const data = {
+        email,
+        step: 1,
+      };
+      store.dispatch(signUpStep(data));
+      this.props.setEmail(email);
+      this.props.handleItemClick(event, event.target.elements.signup);
+    }
+    else {
+      this.setState({ errorMessage: 'Please, enter valid address' });
+    }
   }
 
   render() {
@@ -50,6 +56,9 @@ export default class PreSignUp extends React.Component {
             <Form.Group inline>
               <Form.Field name="email" inline width="16" label={{ icon: 'mail' }} control="input" type="email" placeholder="example@mail.com" />
             </Form.Group>
+            <span style={{ color: 'red' }}>
+              {this.state.errorMessage}
+            </span>
             <Form.Button type="submit" name="signup" className="orange-button">SET MY PASSPHRASE</Form.Button>
           </Form>
           <div className="sign-up">

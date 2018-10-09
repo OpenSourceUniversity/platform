@@ -3,6 +3,7 @@ export default function logout() {
     localStorage.setItem('isLoggedIn', false);
     localStorage.setItem('address', null);
     localStorage.setItem('publicKey', null);
+    localStorage.setItem('signedAddress', null);
     dispatch({
       type: 'LOGGED_OUT',
     });

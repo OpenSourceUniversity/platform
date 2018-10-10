@@ -2,6 +2,7 @@ import store from '../../store';
 import Config from '../../config';
 import fetchUnreadMessagesCount from './fetchUnreadMessagesCount';
 import messageRecivedInNewThread from './messageRecivedInNewThread';
+import osu_message from '../../sounds/osu_message.mp3';
 
 
 export default function messagesConnection() {
@@ -12,6 +13,9 @@ export default function messagesConnection() {
 
     const authEthAddress = store.getState().auth.address.slice(2);
     const authSignature = store.getState().auth.signedAddress;
+    /* eslint-disable global-require */
+    /* eslint-enable global-require */
+    const audio = new Audio(osu_message);
 
     function wsOpen(event) {
       console.log('Messages open', event);
@@ -25,6 +29,7 @@ export default function messagesConnection() {
     function wsMessage(event) {
       const data = JSON.parse(event.data);
       const { threadsById } = store.getState().messaging;
+      audio.play();
       if (threadsById[data.thread]) {
         dispatch({
           type: 'MESSAGE_RECEIVED',

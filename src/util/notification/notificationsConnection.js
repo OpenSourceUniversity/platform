@@ -10,6 +10,10 @@ export default function notificationsConnection() {
 
     const authEthAddress = store.getState().auth.address.slice(2);
     const authSignature = store.getState().auth.signedAddress;
+    /* eslint-disable global-require */
+    const notificationSound = require('../../sounds/osu_notification.mp3');
+    /* eslint-enable global-require */
+    const audio = new Audio(notificationSound);
 
     function wsOpen(event) {
       console.log('open', event);
@@ -21,6 +25,7 @@ export default function notificationsConnection() {
 
     function wsMessage(event) {
       const data = JSON.parse(event.data);
+      audio.play();
       dispatch({
         type: 'NOTIFICATION_RECEIVED',
         payload: data,

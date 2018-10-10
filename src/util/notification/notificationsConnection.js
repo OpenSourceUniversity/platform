@@ -15,12 +15,10 @@ export default function notificationsConnection() {
     /* eslint-enable global-require */
     const audio = new Audio(notificationSound);
 
-    function wsOpen(event) {
-      console.log('open', event);
+    function wsOpen() {
     }
 
-    function wsError(event) {
-      console.log('error', event);
+    function wsError() {
     }
 
     function wsMessage(event) {
@@ -42,8 +40,7 @@ export default function notificationsConnection() {
       ws.onclose = wsClose;
     }
 
-    wsClose = function close(event) {
-      console.log('close', event);
+    wsClose = function close() {
       setTimeout(() => {
         connect();
       }, 3500);

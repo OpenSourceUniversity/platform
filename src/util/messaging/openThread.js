@@ -8,7 +8,6 @@ const { bdnUrl } = Config.network;
 
 export default function openThread(threadData) {
   return function action() {
-    console.log('openThread');
     const axiosConfig = {
       headers: {
         'Auth-Signature': store.getState().auth.signedAddress,

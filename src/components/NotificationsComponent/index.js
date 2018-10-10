@@ -115,7 +115,12 @@ class NotificationsComponent extends Dropdown {
             }}
           >
             <Feed>
-              {this.renderNotificationItems()}
+              {this.props.notifications.length ?
+                this.renderNotificationItems() :
+                <div style={{ textAlign: 'center', width: '100%' }}>
+                  <p style={{ textAlign: 'center' }}>There are no any notifications yet.</p>
+                </div>
+              }
               <Feed.Event style={{ display: this.props.isFetching ? 'block' : 'none' }}>
                 <Feed.Content style={{ textAlign: 'center' }}>
                   Loading notifications...

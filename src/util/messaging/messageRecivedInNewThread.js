@@ -13,9 +13,7 @@ export default function messageRecivedInNewThread(messageData) {
     return fetch(url, { headers })
       .then(response => response.json().then(body => ({ response, body })))
       .then(({ response, body }) => {
-        if (!response.ok) {
-          console.log(body.error);
-        } else {
+        if (response.ok) {
           const threadById = {};
           threadById[body.id] = body;
           threadById[body.id].unread_count -= 1;
@@ -30,8 +28,7 @@ export default function messageRecivedInNewThread(messageData) {
           });
         }
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
       });
   };
 }

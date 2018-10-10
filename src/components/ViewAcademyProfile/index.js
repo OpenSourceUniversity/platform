@@ -50,7 +50,7 @@ class ViewAcademyProfile extends React.Component {
           <Loader size="large">Loading</Loader>
         </Dimmer>
         <Dimmer
-          active={showDimmer}
+          active={showDimmer && !this.props.profileViewIsFetching}
           inverted
           onClickOutside={this.handleBack}
         >

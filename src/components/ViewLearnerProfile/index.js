@@ -92,7 +92,7 @@ class ViewLearnerProfile extends React.Component {
           inverted
           onClickOutside={this.handleBack}
         >
-          {this.props.isPublic ?
+          {this.props.isPublic && !this.props.profileViewIsFetching ?
             (
               <Message negative>
                 <Message.Header>Can&apos;t load this profile</Message.Header>
@@ -102,7 +102,6 @@ class ViewLearnerProfile extends React.Component {
             (
               <Message warning>
                 <Message.Header>This profile is private</Message.Header>
-                <p>*Some info*</p>
               </Message>)
           }
           <Button
@@ -210,31 +209,7 @@ class ViewLearnerProfile extends React.Component {
                 }
                 <Divider clearing />
               </Segment>
-              <Segment>
-                <Header>
-                  Experience
-                </Header>
-                <Segment style={{
-                  textAlign: 'center', background: '#7f8fa6', color: '#fff', borderRadius: '10px', opacity: 0.7,
-                }}
-                >
-                    Coming in Beta
-                </Segment>
-                <Divider clearing />
-              </Segment>
             </Segment.Group>
-            <Segment size="large">
-              <Header>
-                Reviews
-              </Header>
-              <Segment style={{
-                textAlign: 'center', background: '#7f8fa6', color: '#fff', borderRadius: '10px', opacity: 0.7,
-              }}
-              >
-                  Coming in Beta
-              </Segment>
-              <Divider clearing />
-            </Segment>
           </Grid.Column>
         </Grid>
       </div>

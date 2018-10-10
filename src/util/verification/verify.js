@@ -29,12 +29,10 @@ export default function verify(verifications) {
       });
       dispatch(storeVerification(ipfsHash, (error) => {
         if (error) {
-          console.log(error);
           return;
         }
         // Store the updated data on BDN
         for (let i = 0; i < verifications.length; i += 1) {
-          console.log(verifications[i]);
           dispatch(setPendingVerification(verifications[i].id, () => {
             dispatch(fetchVerifications());
           }));

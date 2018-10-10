@@ -2,7 +2,6 @@ import store from '../../store';
 import Config from '../../config';
 import fetchUnreadMessagesCount from './fetchUnreadMessagesCount';
 import messageRecivedInNewThread from './messageRecivedInNewThread';
-import osu_message from '../../sounds/osu_message.mp3';
 
 
 export default function messagesConnection() {
@@ -14,16 +13,15 @@ export default function messagesConnection() {
     const authEthAddress = store.getState().auth.address.slice(2);
     const authSignature = store.getState().auth.signedAddress;
     /* eslint-disable global-require */
+    const messageSound = require('../../sounds/osu_message.mp3');
     /* eslint-enable global-require */
-    const audio = new Audio(osu_message);
+    const audio = new Audio(messageSound);
 
-    function wsOpen(event) {
-      console.log('Messages open', event);
+    function wsOpen() {
       dispatch(fetchUnreadMessagesCount());
     }
 
-    function wsError(event) {
-      console.log('Messages error', event);
+    function wsError() {
     }
 
     function wsMessage(event) {
@@ -50,8 +48,7 @@ export default function messagesConnection() {
       ws.onclose = wsClose;
     }
 
-    wsClose = function close(event) {
-      console.log('Messages close', event);
+    wsClose = function close() {
       setTimeout(() => {
         connect();
       }, 3500);

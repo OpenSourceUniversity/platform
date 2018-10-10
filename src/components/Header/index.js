@@ -284,25 +284,31 @@ class HeaderWithoutRouter extends React.Component {
                 </Menu.Item>
                 <Dropdown className="explore-dropdown" item trigger={exploreTrigger}>
                   <Dropdown.Menu>
-                    <Dropdown.Item name="academia" className="nav-list">
-                      {(() => {
-                        switch (this.props.activeAccount) {
-                        case 'Academy': return <List selection items={academyAcademiaDropdownElements} />;
-                        case 'Business': return <List selection items={businessAcademiaDropdownElements} />;
-                        default: return <List selection items={learnerAcademiaDropdownElements} />;
-                        }
-                      })()}
-                    </Dropdown.Item>
-                    <Dropdown.Item name="business" className="nav-list secondary-nav-disabled-beta">
-                      {(() => {
-                        switch (this.props.activeAccount) {
-                        case 'Academy': return <List selection items={academyBusinessesDropdownElements} />;
-                        case 'Business': return <List selection items={businessBusinessesDropdownElements} />;
-                        default:
-                          return <List selection items={learnerBusinessesDropdownElements} />;
-                        }
-                      })()}
-                    </Dropdown.Item>
+                    <div className="d-flex">
+                      <Dropdown.Item name="academia" className="nav-list">
+                        {(() => {
+                          switch (this.props.activeAccount) {
+                          case 'Academy': return <List selection items={academyAcademiaDropdownElements} />;
+                          case 'Business': return <List selection items={businessAcademiaDropdownElements} />;
+                          default: return (
+                            <List
+                              selection
+                              items={learnerAcademiaDropdownElements}
+                            />);
+                          }
+                        })()}
+                      </Dropdown.Item>
+                      <Dropdown.Item name="business" className="nav-list secondary-nav-disabled-beta">
+                        {(() => {
+                          switch (this.props.activeAccount) {
+                          case 'Academy': return <List selection items={academyBusinessesDropdownElements} />;
+                          case 'Business': return <List selection items={businessBusinessesDropdownElements} />;
+                          default:
+                            return <List selection items={learnerBusinessesDropdownElements} />;
+                          }
+                        })()}
+                      </Dropdown.Item>
+                    </div>
                   </Dropdown.Menu>
                 </Dropdown>
 

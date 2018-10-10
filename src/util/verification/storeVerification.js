@@ -17,13 +17,12 @@ export default function storeVerification(ipfsHash, callback) {
     const web3 = store.getState().web3.web3Instance;
     const { address } = store.getState().auth;
     const storageContract = new web3.eth.Contract(abi, storageAddress);
-    const { gasPrice } = store.getState().withdraw;
     web3.eth.getTransactionCount(address).then((txCount) => {
       const ipfsHashBytes = web3.utils.asciiToHex(ipfsHash);
-      console.log(ipfsHashBytes);
       const nonce = txCount.toString(16);
 
       dispatch(initWalletUnlocker((wallet) => {
+        const { gasPrice } = store.getState().withdraw;
         const rawTransaction = {
           from: address,
           nonce: `0x${nonce}`,
@@ -34,7 +33,6 @@ export default function storeVerification(ipfsHash, callback) {
           value: '0x0',
           data: storageContract.methods.verify(ipfsHashBytes).encodeABI(),
         };
-        console.log(rawTransaction);
         const tx = new Tx(rawTransaction);
         const privateKey = Buffer.from(wallet.getPrivateKey(), 'hex');
         tx.sign(privateKey);

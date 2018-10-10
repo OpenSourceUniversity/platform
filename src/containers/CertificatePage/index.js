@@ -323,7 +323,7 @@ class CertificatePage extends React.Component {
                       </Message>
                       <Message positive hidden={!this.props.requestSuccess}>
                         <p>
-                          Success message.
+                          Verification requested.
                         </p>
                       </Message>
                       <Form size="large" onSubmit={(event) => { this.handleSubmit(event, this); }}>

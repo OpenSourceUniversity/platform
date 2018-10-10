@@ -74,7 +74,7 @@ class CertificatesVerificationPage extends React.Component {
             });
             const hexFirstBytes = bytes.join('').toUpperCase();
             if (!mimtypes[hexFirstBytes]) {
-              console.log('Unknown file type!');
+              return;
             }
             const blob = new Blob([uint8Array], { type: mimtypes[hexFirstBytes] });
             const url = URL.createObjectURL(blob);
@@ -97,7 +97,7 @@ class CertificatesVerificationPage extends React.Component {
             });
             const hexFirstBytes = bytes.join('').toUpperCase();
             if (!mimtypes[hexFirstBytes]) {
-              console.log('Unknown file type!');
+              return;
             }
             const blob = new Blob([uint8Array], { type: mimtypes[hexFirstBytes] });
             const url = URL.createObjectURL(blob);

@@ -86,13 +86,9 @@ export function withdraw(wallet, recipient, amountLong, coin) {
             receiver: recipient,
             tx_hash: txHash,
           };
-          console.log(transactionData);
           axios.post(`${bdnUrl}api/v1/transactions/`, transactionData, axiosConfig).then(() => {
-            console.log('ok');
             dispatch(getWithdrawTransactions());
             dispatch(getBalances());
-          }).catch((error) => {
-            console.log(error);
           });
         })
         .on('error', (error) => {

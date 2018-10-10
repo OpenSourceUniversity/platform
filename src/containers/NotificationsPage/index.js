@@ -80,7 +80,12 @@ class NotificationsPage extends React.Component {
             <Loader size="large">Loading</Loader>
           </Dimmer>
           <Feed>
-            {this.renderNotificationItems()}
+            { this.props.notifications.length ?
+              this.renderNotificationItems() :
+              <div style={{ textAlign: 'center', width: '100%' }}>
+                <p style={{ textAlign: 'center' }}>There are no any notifications yet.</p>
+              </div>
+            }
             <div style={{ display: !this.props.nextUrl ? 'none' : 'block', marginTop: '20px', textAlign: 'center' }}>
               <Button
                 onClick={() => { this.props.fetchNotifications(this.props.nextUrl); }}

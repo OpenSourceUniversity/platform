@@ -1,9 +1,17 @@
 body {
   background: #ecf0f1;
 }
+.d-flex {
+  display:flex;
+}
 div.App {
   div.ui.container.home-page {
     margin-top: 20px;
+  }
+  .deposit {
+    .form .ui.dropdown > .dropdown.icon {
+      top: 0;
+    }
   }
   /*
   div.ui.fluid.card {

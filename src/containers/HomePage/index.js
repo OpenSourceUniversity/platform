@@ -174,13 +174,15 @@ class HomePage extends React.Component {
         <Container>
           <Segment style={{ padding: '2em' }}>
             <Header style={{ textAlign: 'center' }} size="huge">Courses</Header>
-            {
-              this.props.featuredCourses.length ?
-                this.renderFeaturedCourses(this.props.featuredCourses) :
-                <div style={{ textAlign: 'center', width: '100%', marginTop: '3em' }}>
-                  <p style={{ textAlign: 'center' }}>There are no featured courses yet.</p>
-                </div>
-            }
+            <Grid>
+              {
+                this.props.featuredCourses.length ?
+                  this.renderFeaturedCourses(this.props.featuredCourses) :
+                  <div style={{ textAlign: 'center', width: '100%', marginTop: '3em' }}>
+                    <p style={{ textAlign: 'center' }}>There are no featured courses yet.</p>
+                  </div>
+              }
+            </Grid>
             <Divider style={{ marginTop: '3em' }} clearing />
             <div style={{ textAlign: 'center' }}>
               <Button primary style={{ margin: '1em' }}as={Link} to="/courses">
@@ -193,13 +195,15 @@ class HomePage extends React.Component {
         <Container>
           <Segment style={{ padding: '2em' }}>
             <Header style={{ textAlign: 'center' }} size="huge">Job Positions</Header>
-            {
-              this.props.featuredJobs.length ?
-                this.renderFeaturedJobs(this.props.featuredJobs) :
-                <div style={{ textAlign: 'center', width: '100%', marginTop: '3em' }}>
-                  <p style={{ textAlign: 'center' }}>There are no featured courses yet.</p>
-                </div>
-            }
+            <Grid>
+              {
+                this.props.featuredJobs.length ?
+                  this.renderFeaturedJobs(this.props.featuredJobs) :
+                  <div style={{ textAlign: 'center', width: '100%', marginTop: '3em' }}>
+                    <p style={{ textAlign: 'center' }}>There are no featured courses yet.</p>
+                  </div>
+              }
+            </Grid>
             <Divider style={{ marginTop: '3em' }} clearing />
             <div style={{ textAlign: 'center' }}>
               <Button primary style={{ margin: '1em' }}as={Link} to="/jobs">

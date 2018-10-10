@@ -47,7 +47,7 @@ class JobItemWithoutRouter extends React.Component {
             {this.props.job.industries[0] ? this.props.job.industries[0].name : null}
           </span>
           <span className="course-desc" >
-            <Icon name="time" style={{ color: '#c1c1c1' }} className="course-desc" /> {this.props.job.hours} h/w
+            <Icon name="time" style={{ color: '#c1c1c1' }} className="course-desc" /> {this.props.job.hours ? this.props.job.hours : '-'} h/w
           </span>
         </Card.Content>
         <Card.Content>

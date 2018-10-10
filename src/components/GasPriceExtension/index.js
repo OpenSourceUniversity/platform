@@ -13,8 +13,7 @@ class GasPriceExtension extends React.Component {
   }
 
   handleChange = (value) => {
-    const hexString = value.toString(16);
-    this.props.changeGasPrice(hexString);
+    this.props.changeGasPrice(value);
   }
 
   render() {
@@ -24,7 +23,7 @@ class GasPriceExtension extends React.Component {
           {this.props.activityText}
         </Header>
         Recomended Gas Price: {this.props.recomendedGasPrice} <br />
-        Current gas price: {parseInt(this.props.gasPrice, 16)} Wei
+        Current gas price: {this.props.gasPrice} Gwei
         <Slider
           min={1}
           max={100}

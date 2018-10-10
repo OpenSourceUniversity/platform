@@ -40,7 +40,7 @@ const withdrawReducer = (state = initialState, action) => {
     });
   case 'GAS_PRICE_GET':
     return Object.assign({}, state, {
-      gasPrice: parseInt(action.gasPrice, 10).toString(16),
+      gasPrice: parseInt(action.gasPrice, 10),
       recomendedGasPrice: action.gasPrice,
       error: action.error,
     });

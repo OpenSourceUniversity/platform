@@ -22,7 +22,7 @@ export default function storeVerification(ipfsHash, callback) {
       const nonce = txCount.toString(16);
 
       dispatch(initWalletUnlocker((wallet) => {
-        const { gasPrice } = store.getState().withdraw;
+        const gasPrice = (store.getState().withdraw.gasPrice * (10 ** 9)).toString(16);
         const rawTransaction = {
           from: address,
           nonce: `0x${nonce}`,

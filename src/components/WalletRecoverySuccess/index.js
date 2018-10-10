@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { Card, Grid, Button } from 'semantic-ui-react';
+import { Card, Grid, Button, Dimmer, Loader } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import storeV3Wallet from '../../util/auth/storeV3Wallet';
+import setIsLoggingIn from '../WalletCreated/actions';
 
 class WalletRecoverySuccessWithoutRouter extends React.Component {
   static propTypes = {
@@ -30,21 +31,36 @@ class WalletRecoverySuccessWithoutRouter extends React.Component {
     const hdkey = require('ethereumjs-wallet/hdkey');
     const bip39 = require('bip39');
     /* eslint-enable global-require */
+    this.props.setIsLoggingIn();
+    setTimeout(() => {
+      const seed = bip39.mnemonicToSeed(this.props.mnemonicPhrase);
+      const wallet = hdkey.fromMasterSeed(seed).getWallet();
+      const v3Wallet = wallet.toV3(this.props.passphrase);
 
-    const seed = bip39.mnemonicToSeed(this.props.mnemonicPhrase);
-    const wallet = hdkey.fromMasterSeed(seed).getWallet();
-    const v3Wallet = wallet.toV3(this.props.passphrase);
-
-    this.props.storeV3Wallet(v3Wallet, wallet.getChecksumAddressString(), wallet.getPublicKey());
-    this.address = wallet.getChecksumAddressString();
+      this.props.storeV3Wallet(
+        v3Wallet, wallet.getChecksumAddressString(),
+        wallet.getPublicKey(), wallet.getPrivateKey(),
+      );
+      this.address = wallet.getChecksumAddressString();
+    }, 3000);
   }
 
   render() {
     /* eslint-disable global-require */
     const logo = require('../../icons/edu-logo.png');
+    const loader = require('../../icons/osu-loader.svg');
     /* eslint-enable global-require */
     return (
       <div className="recovery">
+        <Dimmer className="belowNavBar" active={this.props.isLoggingIn} inverted>
+          <Loader size="medium">
+            <p>This may take a few moments</p>
+            <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
+              <image href={loader} x="0" y="0" width="100%" height="100%" />
+            </svg>
+            Wallet is Recovering...
+          </Loader>
+        </Dimmer>
         <Card.Header>
           <Grid centered>
             <Grid.Row>
@@ -77,15 +93,20 @@ class WalletRecoverySuccessWithoutRouter extends React.Component {
 }
 
 
-function mapStateToProps() {
-  return {};
+function mapStateToProps(state) {
+  return {
+    isLoggingIn: state.auth.isLoggingIn,
+  };
 }
 
 
 function mapDispatchToProps(dispatch) {
   return {
-    storeV3Wallet(v3Wallet, checksumAddress, publicKey) {
-      dispatch(storeV3Wallet(v3Wallet, checksumAddress, publicKey));
+    storeV3Wallet(v3Wallet, checksumAddress, publicKey, privateKey) {
+      dispatch(storeV3Wallet(v3Wallet, checksumAddress, publicKey, privateKey));
+    },
+    setIsLoggingIn() {
+      dispatch(setIsLoggingIn());
     },
   };
 }

@@ -43,7 +43,7 @@ class App extends React.Component {
         {this.props.isLoggedIn ?
           <div>
             <Header />
-            <div style={{ height: `${this.props.secondaryNav ? 165 : 115}px` }} />
+            <div style={{ height: `${this.props.secondaryNav ? 165 : 77}px` }} />
           </div> :
           null
         }

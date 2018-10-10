@@ -27,7 +27,7 @@ class OnBoarding extends React.Component {
     email: null,
   }
   componentDidMount() {
-    this.props.setSecondaryNav('null');
+    this.props.setSecondaryNav(null);
     document.title = 'OS.University';
   }
 
@@ -52,8 +52,6 @@ class OnBoarding extends React.Component {
         className="onboarding"
         style={{
           backgroundColor: 'white',
-          marginTop: this.props.onBoardingActiveElement === 'walletrecoverysuccess' ?
-            '-39px' : null,
         }}
       >
         <section className="left-col">

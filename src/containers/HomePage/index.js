@@ -171,7 +171,7 @@ class HomePage extends React.Component {
             { this.renderCertificates() }
           </Grid>
         </Segment>
-        <Container className="home-page">
+        <Container>
           <Segment style={{ padding: '2em' }}>
             <Header style={{ textAlign: 'center' }} size="huge">Courses</Header>
             {
@@ -190,7 +190,7 @@ class HomePage extends React.Component {
           </Segment>
         </Container>
         <Divider hidden />
-        <Container className="home-page">
+        <Container>
           <Segment style={{ padding: '2em' }}>
             <Header style={{ textAlign: 'center' }} size="huge">Job Positions</Header>
             {

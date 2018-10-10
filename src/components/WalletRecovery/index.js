@@ -46,7 +46,7 @@ export default class WalletRecovery extends React.Component {
             <Form.Button className="orange-button" name="passwordrecovery" type="submit">Continue</Form.Button>
           </Form>
           <Button style={{ float: 'left' }} className="button" name="signip" onClick={this.props.handleItemClick} >BACK TO SIGN IN</Button>
-          <Button style={{ float: 'right' }} className="button" name="signup" onClick={this.props.handleItemClick} >NEW WALLET</Button>
+          <Button style={{ float: 'right' }} className="button" name="presignup" onClick={this.props.handleItemClick} >NEW WALLET</Button>
         </Card.Content>
       </div>
     );

@@ -340,7 +340,7 @@ class MessagesPage extends React.Component {
     const loader = require('../../icons/osu-loader.svg');
     /* eslint-enable global-require */
     return (
-      <Container fluid style={{ marginTop: '-39px' }}>
+      <Container fluid style={{ marginTop: '-1px' }}>
         <Segment>
           <Grid>
             <Grid.Column width={4} style={{ paddingLeft: 0, paddingTop: 0, paddingBottom: 0 }} >

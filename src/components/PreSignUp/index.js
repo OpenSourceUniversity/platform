@@ -15,8 +15,7 @@ export default class PreSignUp extends React.Component {
       store.dispatch(signUpStep(data));
       this.props.setEmail(email);
       this.props.handleItemClick(event, event.target.elements.signup);
-    }
-    else {
+    } else {
       this.setState({ errorMessage: 'Please, enter valid address' });
     }
   }
@@ -59,7 +58,7 @@ export default class PreSignUp extends React.Component {
             <span style={{ color: 'red' }}>
               {this.state.errorMessage}
             </span>
-            <Form.Button type="submit" name="signup" className="orange-button">SET MY PASSPHRASE</Form.Button>
+            <Form.Button type="submit" name="signup" className="orange-button">SET MY EMAIL</Form.Button>
           </Form>
           <div className="sign-up">
             <span> Already have a Wallet? </span>

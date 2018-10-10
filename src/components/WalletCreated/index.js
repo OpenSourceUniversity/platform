@@ -41,6 +41,7 @@ class WalletCreatedWithoutRouter extends React.Component {
     setTimeout(() => {
       const seed = bip39.mnemonicToSeed(this.props.mnemonicPhrase);
       const wallet = hdkey.fromMasterSeed(seed).getWallet();
+      this.address = wallet.getChecksumAddressString();
       const v3Wallet = wallet.toV3(this.props.passphrase);
       this.props.storeV3Wallet(
         v3Wallet, wallet.getChecksumAddressString(),
@@ -52,7 +53,6 @@ class WalletCreatedWithoutRouter extends React.Component {
         step: 5,
       };
       store.dispatch(signUpStep(data));
-      this.address = wallet.getChecksumAddressString();
     }, 3000);
   }
 

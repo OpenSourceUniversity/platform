@@ -22,10 +22,10 @@ export default function addCertificate(certificateData) {
       dispatch({
         type: 'ADD_CERTIFICATE_SUCCESS',
       });
-    }).catch(() => {
+    }).catch((error) => {
       dispatch({
         type: 'ADD_CERTIFICATE_FAILURE',
-        error: 'Fail',
+        error: error.response.data.error,
       });
     });
   };

@@ -30,10 +30,11 @@ export default function addCertificateReducer(state = INITIAL_STATE, action) {
       error: null,
     });
   case 'ADD_CERTIFICATE_FAILURE':
+    console.log(action.error);
     return Object.assign({}, state, {
       isAdding: false,
       isEncrypting: false,
-      error: action.error.message,
+      error: action.error,
     });
   case 'ADD_CERTIFICATE_RESET':
     return Object.assign({}, state, {

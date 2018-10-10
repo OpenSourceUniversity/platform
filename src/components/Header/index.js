@@ -198,7 +198,7 @@ class HeaderWithoutRouter extends React.Component {
         key: 'learners', content: 'Learners', name: 'learners', className: 'academia', active: activeItem === 'learners', onClick: this.handleItemClick,
       },
       {
-        key: 'add-course', content: 'Add courses', name: 'academies/add/', active: activeItem === 'academies/add/', onClick: this.handleItemClick,
+        key: 'add-course', content: 'Add course', name: 'academies/add/', active: activeItem === 'academies/add/', onClick: this.handleItemClick,
       },
       {
         key: 'add-certificate', content: 'Add Certificate', name: 'certificates/add', active: activeItem === 'certificates/add', onClick: this.handleItemClick,
@@ -264,7 +264,7 @@ class HeaderWithoutRouter extends React.Component {
         key: 'jobs', content: 'Browse jobs', name: 'jobs', active: activeItem === 'jobs', onClick: this.handleItemClick,
       },
       {
-        key: 'add-job', content: 'Add job positions', name: 'businesses/add/', active: activeItem === 'businesses/add/', onClick: this.handleItemClick,
+        key: 'add-job', content: 'Add job position', name: 'businesses/add/', active: activeItem === 'businesses/add/', onClick: this.handleItemClick,
       },
       {
         key: 'job-applications', content: 'Job Applications', name: 'job-applications', active: activeItem === 'job-applications', onClick: this.handleItemClick,

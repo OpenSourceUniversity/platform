@@ -108,22 +108,22 @@ class AddCourse extends React.Component {
                 Adding course...
               </Loader>
             </Dimmer>
-            <Form size="huge" onSubmit={(event) => { this.handleSubmit(event, this); }}>
+            <Form size="large" onSubmit={(event) => { this.handleSubmit(event, this); }}>
               <Form.Field required>
                 <label htmlFor="title">
                   Course title
-                  <Input
-                    id="title"
-                    name="title"
-                    maxLength={130}
-                    iconPosition="left"
-                    icon="tag"
-                    placeholder="Course name"
-                    onChange={this.handleChange}
-                    key={`title:${this.props.courseDefault.title || ''}`}
-                    defaultValue={this.props.courseDefault.title ? this.props.courseDefault.title : ''}
-                  />
                 </label>
+                <Input
+                  id="title"
+                  name="title"
+                  maxLength={130}
+                  iconPosition="left"
+                  icon="tag"
+                  placeholder="Course name"
+                  onChange={this.handleChange}
+                  key={`title:${this.props.courseDefault.title || ''}`}
+                  defaultValue={this.props.courseDefault.title ? this.props.courseDefault.title : ''}
+                />
               </Form.Field>
               <Form.Field>
                 <label htmlFor="program_title">
@@ -143,17 +143,17 @@ class AddCourse extends React.Component {
               <Form.Field>
                 <label htmlFor="tutor">
                   Tutor
-                  <Input
-                    id="tutor"
-                    name="tutor"
-                    maxLength={270}
-                    iconPosition="left"
-                    icon="tag"
-                    placeholder="Course tutor"
-                    key={`tutor:${this.props.courseDefault.tutor || ''}`}
-                    defaultValue={this.props.courseDefault.tutor ? this.props.courseDefault.tutor : ''}
-                  />
                 </label>
+                <Input
+                  id="tutor"
+                  name="tutor"
+                  maxLength={270}
+                  iconPosition="left"
+                  icon="tag"
+                  placeholder="Course tutor"
+                  key={`tutor:${this.props.courseDefault.tutor || ''}`}
+                  defaultValue={this.props.courseDefault.tutor ? this.props.courseDefault.tutor : ''}
+                />
               </Form.Field>
               <IndustriesInput
                 ref={(arg) => { this.industriesRef = arg; }}
@@ -166,45 +166,45 @@ class AddCourse extends React.Component {
               <Form.Field required>
                 <label htmlFor="description">
                   Description
-                  <TextArea
-                    id="description"
-                    name="description"
-                    maxLength={5000}
-                    placeholder="Full course description"
-                    onChange={this.handleChange}
-                    key={`description:${this.props.courseDefault.description || ''}`}
-                    defaultValue={this.props.courseDefault.description ? this.props.courseDefault.description : ''}
-                  />
                 </label>
+                <TextArea
+                  id="description"
+                  name="description"
+                  maxLength={5000}
+                  placeholder="Full course description"
+                  onChange={this.handleChange}
+                  key={`description:${this.props.courseDefault.description || ''}`}
+                  defaultValue={this.props.courseDefault.description ? this.props.courseDefault.description : ''}
+                />
               </Form.Field>
               <Form.Field required>
                 <label htmlFor="external_link">
                   Url to your course
-                  <Input
-                    id="external_link"
-                    name="external_link"
-                    label="http://"
-                    labelPosition="left"
-                    placeholder="Url to your course"
-                    onChange={this.handleChange}
-                    key={`external_link:${this.props.courseDefault.external_link || ''}`}
-                    defaultValue={
-                      (() => {
-                        if (this.props.courseDefault.external_link) {
-                          const url = this.props.courseDefault.external_link;
-                          if (url.indexOf('http://') === 0) {
-                            return url.slice(7);
-                          }
-                          if (url.indexOf('https://') === 0) {
-                            return url.slice(8);
-                          }
-                          return url;
-                        }
-                        return '';
-                      })()
-                    }
-                  />
                 </label>
+                <Input
+                  id="external_link"
+                  name="external_link"
+                  label="http://"
+                  labelPosition="left"
+                  placeholder="Url to your course"
+                  onChange={this.handleChange}
+                  key={`external_link:${this.props.courseDefault.external_link || ''}`}
+                  defaultValue={
+                    (() => {
+                      if (this.props.courseDefault.external_link) {
+                        const url = this.props.courseDefault.external_link;
+                        if (url.indexOf('http://') === 0) {
+                          return url.slice(7);
+                        }
+                        if (url.indexOf('https://') === 0) {
+                          return url.slice(8);
+                        }
+                        return url;
+                      }
+                      return '';
+                    })()
+                  }
+                />
               </Form.Field>
               <Form.Field>
                 <label htmlFor="duration">

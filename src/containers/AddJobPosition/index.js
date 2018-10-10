@@ -112,67 +112,67 @@ class AddJobPosition extends React.Component {
                   Adding job position...
                 </Loader>
               </Dimmer>
-              <Form size="huge" onSubmit={(event) => { this.handleSubmit(event, this); }}>
+              <Form size="large" onSubmit={(event) => { this.handleSubmit(event, this); }}>
                 <Form.Field required>
                   <label htmlFor="title">
                     Position name
-                    <Input
-                      id="title"
-                      name="title"
-                      maxLength={130}
-                      iconPosition="left"
-                      icon="tag"
-                      placeholder="Position name"
-                      onChange={this.handleChange}
-                      key={`title:${this.props.jobDefault.title || ''}`}
-                      defaultValue={this.props.jobDefault.title ? this.props.jobDefault.title : ''}
-                    />
                   </label>
+                  <Input
+                    id="title"
+                    name="title"
+                    maxLength={130}
+                    iconPosition="left"
+                    icon="tag"
+                    placeholder="Position name"
+                    onChange={this.handleChange}
+                    key={`title:${this.props.jobDefault.title || ''}`}
+                    defaultValue={this.props.jobDefault.title ? this.props.jobDefault.title : ''}
+                  />
                 </Form.Field>
                 <Form.Field required>
                   <label htmlFor="location">
                     Location
-                    <Input
-                      id="location"
-                      name="location"
-                      maxLength={130}
-                      iconPosition="left"
-                      icon="tag"
-                      placeholder="Location"
-                      onChange={this.handleChange}
-                      key={`location:${this.props.jobDefault.location || ''}`}
-                      defaultValue={this.props.jobDefault.location ? this.props.jobDefault.location : ''}
-                    />
                   </label>
+                  <Input
+                    id="location"
+                    name="location"
+                    maxLength={130}
+                    iconPosition="left"
+                    icon="tag"
+                    placeholder="Location"
+                    onChange={this.handleChange}
+                    key={`location:${this.props.jobDefault.location || ''}`}
+                    defaultValue={this.props.jobDefault.location ? this.props.jobDefault.location : ''}
+                  />
                 </Form.Field>
                 <Form.Field>
                   <label htmlFor="salary">
                     Salary
-                    <Input
-                      id="salary"
-                      name="salary"
-                      maxLength={130}
-                      iconPosition="left"
-                      icon="tag"
-                      placeholder="Salary with currency"
-                      key={`salary:${this.props.jobDefault.salary || ''}`}
-                      defaultValue={this.props.jobDefault.salary ? this.props.jobDefault.salary : ''}
-                    />
                   </label>
+                  <Input
+                    id="salary"
+                    name="salary"
+                    maxLength={130}
+                    iconPosition="left"
+                    icon="tag"
+                    placeholder="Salary with currency"
+                    key={`salary:${this.props.jobDefault.salary || ''}`}
+                    defaultValue={this.props.jobDefault.salary ? this.props.jobDefault.salary : ''}
+                  />
                 </Form.Field>
                 <Form.Field required>
                   <label htmlFor="overview">
                     Overview
-                    <TextArea
-                      id="overview"
-                      name="overview"
-                      maxLength={5000}
-                      placeholder="Short position overview"
-                      onChange={this.handleChange}
-                      key={`overview:${this.props.jobDefault.overview || ''}`}
-                      defaultValue={this.props.jobDefault.overview ? this.props.jobDefault.overview : ''}
-                    />
                   </label>
+                  <TextArea
+                    id="overview"
+                    name="overview"
+                    maxLength={5000}
+                    placeholder="Short position overview"
+                    onChange={this.handleChange}
+                    key={`overview:${this.props.jobDefault.overview || ''}`}
+                    defaultValue={this.props.jobDefault.overview ? this.props.jobDefault.overview : ''}
+                  />
                 </Form.Field>
                 <SkillsInput
                   ref={(arg) => { this.skillsRef = arg; }}
@@ -181,16 +181,16 @@ class AddJobPosition extends React.Component {
                 <Form.Field required>
                   <label htmlFor="description">
                     Description
-                    <TextArea
-                      id="description"
-                      name="description"
-                      maxLength={5000}
-                      placeholder="Full position description"
-                      onChange={this.handleChange}
-                      key={`description:${this.props.jobDefault.description || ''}`}
-                      defaultValue={this.props.jobDefault.description ? this.props.jobDefault.description : ''}
-                    />
                   </label>
+                  <TextArea
+                    id="description"
+                    name="description"
+                    maxLength={5000}
+                    placeholder="Full position description"
+                    onChange={this.handleChange}
+                    key={`description:${this.props.jobDefault.description || ''}`}
+                    defaultValue={this.props.jobDefault.description ? this.props.jobDefault.description : ''}
+                  />
                 </Form.Field>
                 <IndustriesInput
                   ref={(arg) => { this.industriesRef = arg; }}
@@ -199,62 +199,62 @@ class AddJobPosition extends React.Component {
                 <Form.Field>
                   <label htmlFor="closes">
                     Offer closes
-                    <Input
-                      id="closes"
-                      name="closes"
-                      iconPosition="left"
-                      icon="tag"
-                      placeholder="Offer closes"
-                      type="date"
-                      key={`closes:${this.props.jobDefault.closes || ''}`}
-                      defaultValue={this.props.jobDefault.closes ? this.props.jobDefault.closes : ''}
-                    />
                   </label>
+                  <Input
+                    id="closes"
+                    name="closes"
+                    iconPosition="left"
+                    icon="tag"
+                    placeholder="Offer closes"
+                    type="date"
+                    key={`closes:${this.props.jobDefault.closes || ''}`}
+                    defaultValue={this.props.jobDefault.closes ? this.props.jobDefault.closes : ''}
+                  />
                 </Form.Field>
                 <Form.Field>
                   <label htmlFor="experience">
                     Required experience
-                    <Input
-                      id="experience"
-                      name="experience"
-                      maxLength={130}
-                      iconPosition="left"
-                      icon="tag"
-                      placeholder="Required experience"
-                      key={`experience:${this.props.jobDefault.experience || ''}`}
-                      defaultValue={this.props.jobDefault.experience ? this.props.jobDefault.experience : ''}
-                    />
                   </label>
+                  <Input
+                    id="experience"
+                    name="experience"
+                    maxLength={130}
+                    iconPosition="left"
+                    icon="tag"
+                    placeholder="Required experience"
+                    key={`experience:${this.props.jobDefault.experience || ''}`}
+                    defaultValue={this.props.jobDefault.experience ? this.props.jobDefault.experience : ''}
+                  />
                 </Form.Field>
                 <Form.Field>
                   <label htmlFor="hours">
                     Working hours
-                    <Input
-                      id="hours"
-                      name="hours"
-                      iconPosition="left"
-                      icon="tag"
-                      placeholder="Working hours"
-                      type="number"
-                      key={`hours:${this.props.jobDefault.hours || ''}`}
-                      defaultValue={this.props.jobDefault.hours ? this.props.jobDefault.hours : ''}
-                    />
                   </label>
+                  <Input
+                    id="hours"
+                    name="hours"
+                    iconPosition="left"
+                    icon="tag"
+                    placeholder="Working hours"
+                    type="number"
+                    key={`hours:${this.props.jobDefault.hours || ''}`}
+                    defaultValue={this.props.jobDefault.hours ? this.props.jobDefault.hours : ''}
+                  />
                 </Form.Field>
                 <Form.Field>
                   <label htmlFor="languages">
                     Languages
-                    <Input
-                      id="languages"
-                      name="languages"
-                      maxLength={130}
-                      iconPosition="left"
-                      icon="tag"
-                      placeholder="Languages"
-                      key={`languages:${this.props.jobDefault.languages || ''}`}
-                      defaultValue={this.props.jobDefault.languages ? this.props.jobDefault.languages : ''}
-                    />
                   </label>
+                  <Input
+                    id="languages"
+                    name="languages"
+                    maxLength={130}
+                    iconPosition="left"
+                    icon="tag"
+                    placeholder="Languages"
+                    key={`languages:${this.props.jobDefault.languages || ''}`}
+                    defaultValue={this.props.jobDefault.languages ? this.props.jobDefault.languages : ''}
+                  />
                 </Form.Field>
                 <Button type="submit" primary disabled={this.validation()} size="huge">Submit</Button>
               </Form>

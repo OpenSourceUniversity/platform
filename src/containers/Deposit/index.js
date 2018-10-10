@@ -267,7 +267,10 @@ class Deposit extends React.Component {
                     onScroll={this.transactionsScroll}
                     style={{ overflowY: 'scroll', maxHeight: '256px' }}
                   >
-                    {this.renderHistory()}
+                    {this.props.withdrawTransactions.length ?
+                      this.renderHistory() :
+                      <p style={{ textAlign: 'center' }}>You haven&apos;t any withdraw transactions</p>
+                    }
                   </div>
                 </Table.Body>
               </Table>

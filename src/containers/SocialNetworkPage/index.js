@@ -75,7 +75,10 @@ class SocialNetworkPage extends React.Component {
   renderMessages() {
     let result;
     if (this.props.isArchiveAdded) {
-      result = (<Message compact positive ><Icon name="thumbs up" />Successful upload!</Message>);
+      result = (
+        <Message positive>
+          <Message.Header>Thank you for your time and support!</Message.Header>
+        </Message>);
     } else {
       result = (<Message compact negative ><Icon name="exclamation" />Error during the upload!</Message>);
     }
@@ -88,8 +91,7 @@ class SocialNetworkPage extends React.Component {
     const profile = require('../../icons/account_profile.svg');
     const settings = require('../../icons/account_deposit.svg');
     const introduction = 'You can upgrade your profile and get numerus opportunities for professional career. \
-                          Boost your skills and professional experience by uploading your LinkedIn data (->Video Tutorial). \
-                          Each time someone in your network join the platform YOU will get EDU tokens except Free PRO account containing all the functionality you need.';
+                          Boost your skills and professional experience by uploading your LinkedIn data (->Video Tutorial).';
     const period = ' ...... '
     const eduBonus = ' ..... '
     /* eslint-enable */
@@ -117,7 +119,7 @@ class SocialNetworkPage extends React.Component {
                 </Header>
                 <Container>
                   <p>
-                  You can upgrade your profile and get numerus opportunities for professional career. Boost your skills and professional experience by uploading your LinkedIn data (<a className="text-primary" href="https://www.youtube.com/watch?v=PaWZvD2MvkA" rel="noopener noreferrer" target="_blank">Video Tutorial</a>) Each time someone in your network join the platform YOU will get EDU tokens along with PRO account containing all the functionality you need.
+                  You can upgrade your profile and get numerus opportunities for professional career. Boost your skills and professional experience by uploading your LinkedIn data (<a className="text-primary" href="https://www.youtube.com/watch?v=PaWZvD2MvkA" rel="noopener noreferrer" target="_blank">Video Tutorial</a>).
                   </p>
                   <Divider hidden />
                   <List as="ol">
@@ -127,15 +129,6 @@ class SocialNetworkPage extends React.Component {
                     <List.Item as="li">Locate your <b>ZIP file</b> in the lower left of your screen (or your Download folder). Drag your <b>ZIP file</b> into our form and click the orange &quot;Upload&quot; button.</List.Item>
                   </List>
                 </Container>
-                <Divider hidden />
-                <Message positive>
-                  <Message.Header>Thank you for your time and support!</Message.Header>
-                  <p>
-                    Your account will be promoted to PRO version for <b>{ period } period </b>
-                    and you ll receive <b>{ eduBonus }</b>. EDU for every new member onboarded
-                    on the platform from your uploaded LinkedIn contacts.
-                  </p>
-                </Message>
               </Segment>
             </Grid.Column>
             <Grid.Column mobile={16} tablet={6} computer={6}>

@@ -41,7 +41,41 @@ class NotificationItem extends Dropdown.Item {
     const { notification } = this.props;
     const backgroundColor = notification.unread ? '#efefef' : 'white';
     const { timesince } = notification;
+    /* eslint-disable global-require */
+    const jobRequest = require('../../icons/job-request.svg');
+    const jobRejected = require('../../icons/job-rejected.svg');
+    const jobApproved = require('../../icons/job-approved.svg');
+    const certificateApproved = require('../../icons/certificate-approved.svg');
+    const certificateRejected = require('../../icons/certificate-rejected.svg');
+    const certificateRequest = require('../../icons/certificate-request.svg');
+    /* eslint-enable global-require */
 
+    function getIcon() {
+      const actionObjectName = notification.action_object_content_type_name;
+      const { verb } = notification;
+      switch (actionObjectName) {
+      case 'verification':
+        return certificateRequest;
+      case 'job application':
+        if (verb === 'approved') {
+          return jobApproved;
+        } else if (verb === 'submitted') {
+          return jobRequest;
+        }
+        return jobRejected;
+      default:
+      }
+      const targetName = notification.target_content_type_name;
+      switch (targetName) {
+      case 'certificate':
+        return certificateApproved;
+      default:
+      }
+      if (verb === 'rejected') {
+        return certificateRejected;
+      }
+      return null;
+    }
     return (
       <Feed.Event
         onClick={event => this.notificationClick(event, this)}
@@ -53,7 +87,7 @@ class NotificationItem extends Dropdown.Item {
         }}
       >
         <Feed.Label>
-          <img src="https://react.semantic-ui.com/images/avatar/small/elliot.jpg" alt="" />
+          <img style={{ borderRadius: 0 }} src={getIcon()} alt="" />
         </Feed.Label>
         <Feed.Content style={{ marginTop: 0 }} >
           <Feed.Meta style={{ margin: 0 }}>

@@ -124,12 +124,16 @@ class CertificatesVerificationPage extends React.Component {
 
   massVerification() {
     this.props.verify(this.massVerifyVerifications);
-    this.setState({ activeVerificationId: null });
+    setTimeout(() => {
+      this.setState({ activeVerificationId: null });
+    }, 3000);
   }
 
   rejectVerification() {
     this.props.rejectVerification(this.state.activeVerificationId);
-    this.setState({ activeVerificationId: null });
+    setTimeout(() => {
+      this.setState({ activeVerificationId: null });
+    }, 3000);
   }
 
   massVerifyIds = []
@@ -139,7 +143,9 @@ class CertificatesVerificationPage extends React.Component {
   handleSubmit(event, component) {
     event.preventDefault();
     component.props.verify([component.props.verification]);
-    component.setState({ activeVerificationId: null });
+    setTimeout(() => {
+      component.setState({ activeVerificationId: null });
+    }, 3000);
   }
 
   showVerification = (verificationId) => {
@@ -377,7 +383,7 @@ class CertificatesVerificationPage extends React.Component {
                     <p>Alternative text</p>
                   </object>
                 </label>
-                <div style={{ display: this.props.verification.state === 'requested' || this.props.verification.state === 'open' ? null : 'none', paddingTop: '20px' }}>
+                <div style={{ display: this.props.verification.state === 'requested' || this.props.verification.state === 'open' || this.props.verification.state === 'pending' ? null : 'none', paddingTop: '20px' }}>
                   <Button type="submit" color="green" size="huge">Verify</Button>
                   <Button type="button" color="red" floated="right" size="huge" onClick={() => this.rejectVerification()}>Reject</Button>
                 </div>

@@ -24,9 +24,10 @@ export default function login(passphrase) {
         },
       });
     } else {
-      try {
-        setTimeout(() => {
+      setTimeout(() => {
+        try {
           const wallet = Wallet.fromV3(v3Wallet, passphrase);
+          console.log(wallet);
           const address = wallet.getChecksumAddressString();
           const privateKey = wallet.getPrivateKey();
           dispatch(storeSignedAddress(address.slice(2), privateKey));
@@ -46,15 +47,15 @@ export default function login(passphrase) {
           const newPath = '/';
           const history = createHashHistory();
           history.push(newPath);
-        }, 3000);
-      } catch (e) {
-        dispatch({
-          type: 'LOGIN_ERROR',
-          payload: {
-            loginError: 'Could not unlock wallet.',
-          },
-        });
-      }
+        } catch (e) {
+          dispatch({
+            type: 'LOGIN_ERROR',
+            payload: {
+              loginError: 'Could not unlock wallet. Please check your passphrase',
+            },
+          });
+        }
+      }, 3000);
     }
   };
 }

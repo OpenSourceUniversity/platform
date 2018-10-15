@@ -23,6 +23,13 @@ export default function login(passphrase) {
           loginError: 'No stored wallet found. Make sure to register or perform wallet recovery first.',
         },
       });
+    } else if (!passphrase) {
+      dispatch({
+        type: 'LOGIN_ERROR',
+        payload: {
+          loginError: 'Could not unlock wallet. Please check your passphrase.',
+        },
+      });
     } else {
       setTimeout(() => {
         try {
@@ -51,7 +58,7 @@ export default function login(passphrase) {
           dispatch({
             type: 'LOGIN_ERROR',
             payload: {
-              loginError: 'Could not unlock wallet. Please check your passphrase',
+              loginError: 'Could not unlock wallet. Please check your passphrase.',
             },
           });
         }

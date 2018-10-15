@@ -156,7 +156,7 @@ class HeaderWithoutRouter extends React.Component {
         key: 'courses', content: 'Browse courses', name: 'courses', active: activeItem === 'courses', onClick: this.handleItemClick,
       },
       {
-        key: 'learners', content: 'Learners', name: 'learners', active: activeItem === 'courses', onClick: this.handleItemClick,
+        key: 'learners', content: 'Learners', name: 'learners', active: activeItem === 'learners', onClick: this.handleItemClick,
       },
       {
         key: 'certificates', content: 'My certificates', name: 'certificates', active: activeItem === 'certificates', onClick: this.handleItemClick,

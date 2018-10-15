@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { Card, Icon, Button, Image } from 'semantic-ui-react';
+import { Card, Icon, Button, Image, Label } from 'semantic-ui-react';
 
 
 class JobItemWithoutRouter extends React.Component {
@@ -32,16 +32,22 @@ class JobItemWithoutRouter extends React.Component {
             style = Object.assign({}, style, { height: '400px' });
           }
           if (this.props.job.is_featured) {
-            style = Object.assign({}, style, { border: '1px solid red' });
+            style = Object.assign({}, style, { border: '1px solid #fbd233', background: '#fffaea' });
           }
           return style;
         })()
         }
         onClick={() => { this.props.history.push(`/job-page/${this.props.job.id}/`); }}
       >
-        <Card.Content extra>
+        <Card.Content style={{ paddingTop: 0 }}>
           <img alt="" style={{ marginBottom: '20px', width: '100%' }} src={this.props.isNotList ? this.props.job.imgSrc : null} />
           <Card.Header style={{ color: 'black' }} icon="ellipsis vertical">{this.props.job.title}</Card.Header>
+          { this.props.job.is_featured ?
+            <Label style={{ background: '#fbd233' }} attached="top right">
+              FEATURED
+            </Label> :
+            null
+          }
           <span className="course-desc" >
             <Icon name="signal" style={{ color: '#c1c1c1' }} className="course-desc" />
             {this.props.job.industries[0] ? this.props.job.industries[0].name : null}

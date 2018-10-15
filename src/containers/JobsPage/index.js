@@ -58,6 +58,7 @@ class JobsPage extends React.Component {
           tablet={8}
           mobile={16}
           key={index}
+          className="jobItem"
         >
           <JobItem job={job} key={index} />
         </Grid.Column>))

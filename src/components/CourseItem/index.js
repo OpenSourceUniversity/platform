@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { Card, Icon, Button, Image } from 'semantic-ui-react';
+import { Card, Icon, Button, Image, Label } from 'semantic-ui-react';
 
 
 class CourseItemWithoutRouter extends React.Component {
@@ -33,16 +33,22 @@ class CourseItemWithoutRouter extends React.Component {
             style = Object.assign({}, style, { height: '400px' });
           }
           if (this.props.course.is_featured) {
-            style = Object.assign({}, style, { border: '1px solid red' });
+            style = Object.assign({}, style, { border: '1px solid #fbd233', background: '#fffaea' });
           }
           return style;
         })()
         }
         onClick={() => { this.props.history.push(`/course-page/${this.props.course.id}/`); }}
       >
-        <Card.Content>
+        <Card.Content style={{ paddingTop: 0 }}>
           <img alt="" style={{ marginBottom: '20px', width: '100%' }} src={this.props.isNotList ? this.props.course.imgSrc : null} />
           <Card.Header style={{ color: 'black', marginBottom: '20px' }} icon="ellipsis vertical">{this.props.course.title}</Card.Header>
+          { this.props.course.is_featured ?
+            <Label style={{ background: '#fbd233' }} attached="top right">
+              FEATURED
+            </Label> :
+            null
+          }
           <span className="course-desc" >
             <Icon name="signal" style={{ color: '#c1c1c1' }} className="course-desc" />
             {this.props.course.industries[0] ? this.props.course.industries[0].name : null}

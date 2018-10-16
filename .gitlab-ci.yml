@@ -8,8 +8,6 @@ before_script:
   - cp src/config.js.dist src/config.js
 
 stages:
-  # - lint
-  # - build_production
   - release_production
 
 variables:

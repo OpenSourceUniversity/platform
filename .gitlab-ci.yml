@@ -11,6 +11,8 @@ before_script:
   - cp src/config.js.dist src/config.js
 
 stages:
+  - lint
+  - build_production
   - release_production
 
 variables:
@@ -18,16 +20,16 @@ variables:
   CONTAINER_IMAGE_LATEST: ${CI_REGISTRY}/${CI_PROJECT_PATH}:latest
   DOCKER_DRIVER: overlay2
 
-# run_js_linter:
-#   stage: lint
-#   script:
-#     - npm run lint
-#
-# build_production:
-#   stage: build_production
-#   script:
-#     - echo $APP_CONFIG > src/config.js
-#     - NODE_ENV="production" npm run build
+run_js_linter:
+  stage: lint
+  script:
+    - npm run lint
+
+build_production:
+  stage: build_production
+  script:
+    - echo $APP_CONFIG > src/config.js
+    - NODE_ENV="production" npm run build
 
 release_production:
   before_script: []

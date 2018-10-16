@@ -66,6 +66,18 @@ class CertificateItemWithoutRouter extends React.Component {
         return 'orange';
       }
     }
+    function getColorCode() {
+      switch (status) {
+      case 'verified':
+        return '#1ba685';
+      case 'revoked':
+        return '#e64425';
+      case 'expired':
+        return '#3c97d3';
+      default:
+        return '#f16722';
+      }
+    }
     function getIndustriesString() {
       let industriesStr = '';
       for (let i = 0; i < industries.length; i += 1) {
@@ -73,9 +85,9 @@ class CertificateItemWithoutRouter extends React.Component {
       }
       return industriesStr.slice(0, industriesStr.length - 2);
     }
-    const color = getColor();
+    const color = getColorCode();
     return (
-      <Card color={color} onClick={() => { this.props.history.push(`/certificate/${this.props.certificate.id}/`); }}>
+      <Card color={getColor()} onClick={() => { this.props.history.push(`/certificate/${this.props.certificate.id}/`); }}>
         <Card.Content>
           <Card.Header>{this.props.certificate.certificate_title}</Card.Header>
           <Card.Meta>{ getIndustriesString() }</Card.Meta>

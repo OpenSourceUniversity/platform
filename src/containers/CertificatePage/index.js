@@ -11,6 +11,7 @@ import { requireVerification } from '../../util/verification/verificationRequest
 import resetVerificationRequestMessages from '../../util/verification/resetVerificationRequestMessages';
 import deleteCertificate from '../../util/certificate/deleteCertificate';
 import { getProfileTypeName } from '../../util/activeAccount';
+import { decrypt } from '../../util/privacy';
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -99,6 +100,76 @@ class CertificatePage extends React.Component {
       dayString = `${day}th`;
     }
     return `${monthString} ${dayString}, ${year}`;
+  }
+
+  decryptCertificate = () => {
+    /* eslint-disable react/no-did-update-set-state */
+    this.setState({ isFetching: true });
+    const mimtypes = {
+      '89504E47': 'image/png',
+      47494638: 'image/gif',
+      25504446: 'application/pdf',
+      FFD8FFDB: 'image/jpeg',
+      FFD8FFE0: 'image/jpeg',
+      FFD8FFE1: 'image/jpeg',
+    };
+    if (this.props.certificate.checksum) {
+      /* eslint-disable global-require */
+      const hdkey = require('ethereumjs-wallet/hdkey');
+      const bip39 = require('bip39');
+      const mnemonic = bip39.entropyToMnemonic(this.props.certificate.checksum);
+      const seed = bip39.mnemonicToSeed(mnemonic);
+      const hdKeyInstance = hdkey.fromMasterSeed(seed);
+      const walletInstance = hdKeyInstance.getWallet();
+      const privateKey = walletInstance.getPrivateKey();
+      fetch(`https://ipfs.io/ipfs/${this.props.certificate.ipfs_hash}`)
+        .then(response => response.arrayBuffer().then((buffer) => {
+          const encryptedBuffer = Buffer.from(buffer);
+          const decryptedBuffer = decrypt(privateKey, encryptedBuffer);
+          const uint8Array = new Uint8Array(decryptedBuffer);
+          const first4Bytest = uint8Array.slice(0, 4);
+          const bytes = [];
+          first4Bytest.forEach((byte) => {
+            bytes.push(byte.toString(16));
+          });
+          const hexFirstBytes = bytes.join('').toUpperCase();
+          if (!mimtypes[hexFirstBytes]) {
+            return;
+          }
+          const blob = new Blob([uint8Array], { type: mimtypes[hexFirstBytes] });
+          const url = URL.createObjectURL(blob);
+          if (mimtypes[hexFirstBytes] === 'application/pdf') {
+            document.getElementById('CertificatePDFFile').data = url;
+            document.getElementById('CertificatePDFFile').height = `${window.innerHeight * 0.8}px`;
+          } else {
+            document.getElementById('CertificateFile').src = url;
+          }
+          this.setState({ isFetching: false });
+        }));
+    } else {
+      fetch(`https://ipfs.io/ipfs/${this.props.certificate.ipfs_hash}`)
+        .then(response => response.arrayBuffer().then((buffer) => {
+          const uint8Array = new Uint8Array(buffer);
+          const first4Bytest = uint8Array.slice(0, 4);
+          const bytes = [];
+          first4Bytest.forEach((byte) => {
+            bytes.push(byte.toString(16));
+          });
+          const hexFirstBytes = bytes.join('').toUpperCase();
+          if (!mimtypes[hexFirstBytes]) {
+            return;
+          }
+          const blob = new Blob([uint8Array], { type: mimtypes[hexFirstBytes] });
+          const url = URL.createObjectURL(blob);
+          if (mimtypes[hexFirstBytes] === 'application/pdf') {
+            document.getElementById('CertificatePDFFile').data = url;
+            document.getElementById('CertificatePDFFile').height = `${window.innerHeight * 0.8}px`;
+          } else {
+            document.getElementById('CertificateFile').src = url;
+          }
+          this.setState({ isFetching: false });
+        }));
+    }
   }
 
   handleSubmit(event, component) {
@@ -202,11 +273,11 @@ class CertificatePage extends React.Component {
     function getColor() {
       switch (status) {
       case 'verified':
-        return 'green';
+        return '#1ba685';
       case 'revoked':
-        return 'red';
+        return '#e64425';
       case 'expired':
-        return 'blue';
+        return '#3c97d3';
       default:
         return '#f16722';
       }
@@ -265,7 +336,24 @@ class CertificatePage extends React.Component {
               </Dimmer>
               <div style={{ height: this.props.address.toLowerCase() === this.props.certificate.holder_eth_address ? '40px' : 0 }} >
                 {this.props.address.toLowerCase() === this.props.certificate.holder_eth_address ?
-                  <Modal open={this.state.modalOpen} onClose={this.handleClose} trigger={<Button floated="left" onClick={this.handleOpen} basic>Delete</Button>} size="small">
+                  <Modal
+                    open={this.state.modalOpen}
+                    onClose={this.handleClose}
+                    trigger={
+                      <Button
+                        floated="left"
+                        labelPosition="left"
+                        icon
+                        onClick={this.handleOpen}
+                        basic
+                      >
+                        <Icon name="trash" />
+                        Delete
+                      </Button>
+                    }
+                    size="small"
+                    closeIcon
+                  >
                     <Header icon="archive" content="Delete certificate confirmation" />
                     <Modal.Content>
                       <Dimmer active={this.props.isDeleting} page>
@@ -300,12 +388,14 @@ class CertificatePage extends React.Component {
                   null
                 }
                 {this.props.address.toLowerCase() === this.props.certificate.holder_eth_address ?
-                  <Modal trigger={
-                    <Button icon labelPosition="left" positive floated="right">
-                      <Icon name="checkmark" />
-                      Verifiy Certificate
-                    </Button>
-                  }
+                  <Modal
+                    trigger={
+                      <Button icon labelPosition="left" positive floated="right">
+                        <Icon name="checkmark" />
+                        Verifiy Certificate
+                      </Button>
+                    }
+                    closeIcon
                   >
                     <Modal.Header>Verification Request</Modal.Header>
                     <Modal.Content>
@@ -345,6 +435,37 @@ class CertificatePage extends React.Component {
                         </Form.Field>
                         <Button type="submit" primary size="huge">Submit</Button>
                       </Form>
+                    </Modal.Content>
+                  </Modal> :
+                  null
+                }
+                {this.props.address.toLowerCase() === this.props.certificate.holder_eth_address ?
+                  <Modal
+                    style={{ marginTop: '0' }}
+                    trigger={
+                      <Button icon labelPosition="left" basic floated="right">
+                        <Icon name="file pdf outline" />
+                        View certificate file
+                      </Button>
+                    }
+                    onOpen={this.decryptCertificate}
+                    closeIcon
+                  >
+                    <Modal.Header>Certificate file</Modal.Header>
+                    <Modal.Content>
+                      <Dimmer active={this.state.isFetching} page>
+                        <Loader size="medium">
+                          <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
+                            <image href={loader} x="0" y="0" width="100%" height="100%" />
+                          </svg>
+                        </Loader>
+                      </Dimmer>
+                      <div style={{ width: '100%', textAlign: 'center' }}>
+                        <img style={{ maxWidth: '100%', maxHeight: '70vh' }} id="CertificateFile" alt="" src="" />
+                      </div>
+                      <object alt="" id="CertificatePDFFile" data="" type="application/pdf" width="100%" height="1px">
+                        <p>Alternative text</p>
+                      </object>
                     </Modal.Content>
                   </Modal> :
                   null

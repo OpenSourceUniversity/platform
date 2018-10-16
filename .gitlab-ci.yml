@@ -3,6 +3,10 @@ image: node:10-alpine
 services:
   - docker:dind
 
+cache:
+  paths:
+    - node_modules/
+
 before_script:
   - apk add g++ make eudev-dev libstdc++ libusb libusb-dev git python bash linux-headers
   - npm install -g truffle

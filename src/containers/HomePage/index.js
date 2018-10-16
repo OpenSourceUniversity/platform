@@ -81,7 +81,9 @@ class HomePage extends React.Component {
       return (
         <Container className="home-page">
           <Segment style={{ padding: '2em', minHeight: '20em' }} >
-            <Header style={{ textAlign: 'center' }} size="large">My Job Positions</Header>
+            <Header size="large" floated="left">
+              My Job Positions
+            </Header>
             <Button style={{ marginBottom: '1em' }} icon labelPosition="left" positive floated="right" as={Link} to="/businesses/add/">
               <Icon name="plus" />
               Add Job Position
@@ -113,7 +115,9 @@ class HomePage extends React.Component {
       return (
         <Container className="home-page">
           <Segment style={{ padding: '2em', minHeight: '20em' }} >
-            <Header style={{ textAlign: 'center' }} size="large">My Courses</Header>
+            <Header size="large" floated="left">
+              My Courses
+            </Header>
             <Button style={{ marginBottom: '1em' }} icon labelPosition="left" positive floated="right" as={Link} to="/academies/add/">
               <Icon name="plus" />
               Add Course
@@ -145,13 +149,16 @@ class HomePage extends React.Component {
     return (
       <Container className="home-page">
         <Segment style={{ padding: '2em', minHeight: '20em' }} >
-          <Header style={{ textAlign: 'center' }} size="large">Certificates</Header>
-          <Button style={{ marginBottom: '1em' }} icon labelPosition="left" positive floated="right" as={Link} to="/certificates/add">
+          <Header size="large" floated="left">
+            Certificates
+          </Header>
+          <Button icon labelPosition="left" positive floated="right" as={Link} to="/certificates/add">
             <Icon name="plus" />
-              Add Certificate
+            Add Certificate
           </Button>
 
           <Divider clearing />
+
           <Dimmer active={this.props.isFetching} inverted>
             <Loader size="large">Loading</Loader>
           </Dimmer>
@@ -173,7 +180,14 @@ class HomePage extends React.Component {
         </Segment>
         <Container>
           <Segment style={{ padding: '2em' }}>
-            <Header style={{ textAlign: 'center' }} size="huge">Courses</Header>
+            <Header size="large" floated="left">
+              Courses
+            </Header>
+            <Button primary floated="right" as={Link} to="/courses">
+                Explore all courses
+            </Button>
+
+            <Divider clearing />
             <Grid>
               {
                 this.props.featuredCourses.length ?
@@ -183,18 +197,20 @@ class HomePage extends React.Component {
                   </div>
               }
             </Grid>
-            <Divider style={{ marginTop: '3em' }} clearing />
-            <div style={{ textAlign: 'center' }}>
-              <Button primary style={{ margin: '1em' }}as={Link} to="/courses">
-                  Explore all courses
-              </Button>
-            </div>
+            <Divider style={{ marginTop: '2em' }} hidden />
           </Segment>
         </Container>
         <Divider hidden />
         <Container>
           <Segment style={{ padding: '2em' }}>
-            <Header style={{ textAlign: 'center' }} size="huge">Job Positions</Header>
+            <Header size="large" floated="left">
+              Job Positions
+            </Header>
+            <Button primary floated="right" as={Link} to="/jobs">
+                Explore all Jobs
+            </Button>
+
+            <Divider clearing />
             <Grid>
               {
                 this.props.featuredJobs.length ?
@@ -204,12 +220,7 @@ class HomePage extends React.Component {
                   </div>
               }
             </Grid>
-            <Divider style={{ marginTop: '3em' }} clearing />
-            <div style={{ textAlign: 'center' }}>
-              <Button primary style={{ margin: '1em' }}as={Link} to="/jobs">
-                  Explore all Jobs
-              </Button>
-            </div>
+            <Divider style={{ marginTop: '2em' }} hidden />
           </Segment>
         </Container>
       </Container>

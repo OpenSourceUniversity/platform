@@ -1,7 +1,7 @@
-image: node:latest
+image: 10-alpine
 
 before_script:
-  - apt-get update && apt-get install -y build-essential libudev-dev libstdc++6 libusb-1.0-0-dev
+  - apk add g++ make eudev-dev libstdc++ libusb
   - npm install -g truffle
   - npm install
   - truffle compile

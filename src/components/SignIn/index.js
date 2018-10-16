@@ -6,11 +6,6 @@ import login from '../../util/auth/login';
 
 
 class SignInWithoutRouter extends React.Component {
-  constructor(props) {
-    super(props);
-    this.refPassphrase = null;
-  }
-
   loginSubmit(event, component) {
     event.preventDefault();
     const passphrase = event.target.elements.passphrase.value;

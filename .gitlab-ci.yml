@@ -1,4 +1,4 @@
-image: node:10-alpine
+
 
 before_script:
   - apk add g++ make eudev-dev libstdc++ libusb libusb-dev git python bash linux-headers
@@ -29,6 +29,7 @@ build_production:
     - NODE_ENV="production" npm run build
 
 release_production:
+  before_script: []
   stage: release_production
   image: docker:latest
   script:

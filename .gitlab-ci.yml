@@ -1,5 +1,8 @@
 image: node:10-alpine
 
+services:
+  - docker:dind
+
 before_script:
   - apk add g++ make eudev-dev libstdc++ libusb libusb-dev git python bash linux-headers
   - npm install -g truffle
@@ -31,8 +34,6 @@ release_production:
   before_script: []
   stage: release_production
   image: docker:stable
-  services:
-    - docker:dind
   script:
     - docker info
     - docker login -u gitlab-ci-token -p ${CI_BUILD_TOKEN} ${CI_REGISTRY}

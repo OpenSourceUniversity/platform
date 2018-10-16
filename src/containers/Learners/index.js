@@ -106,64 +106,61 @@ class LearnersPage extends React.Component {
           Learners
         </Header>
         <Grid>
-          <Grid.Column width={3}>
-            <Segment>
-              <Accordion as={Menu} vertical>
-                <Header style={{ textAlign: 'center', paddingTop: '10px' }}>
-                  Advanced filter
-                </Header>
-                <Menu.Item>
-                  <Accordion.Title
-                    active={activeIndex === 0}
-                    index={0}
-                    onClick={this.handleClick}
-                  >
-                    <Icon name="block layout" />
-                    Type
-                  </Accordion.Title>
-                  <Accordion.Content
-                    active={activeIndex === 0}
-                    content={this.renderIndustryGroup()}
-                  />
-                </Menu.Item>
-              </Accordion>
-            </Segment>
+          <Grid.Column width={5}>
+            <Accordion as={Menu} vertical>
+              <Header style={{ textAlign: 'center', paddingTop: '10px' }}>
+                Advanced filter
+              </Header>
+              <Menu.Item>
+                <Accordion.Title
+                  active={activeIndex === 0}
+                  index={0}
+                  onClick={this.handleClick}
+                >
+                  <Icon name="block layout" />
+                  Type
+                </Accordion.Title>
+                <Accordion.Content
+                  active={activeIndex === 0}
+                  content={this.renderIndustryGroup()}
+                />
+              </Menu.Item>
+            </Accordion>
           </Grid.Column>
 
-          <Grid.Column width={10}>
+          <Grid.Column width={11}>
             <Segment>
-
               {this.renderSearch()}
-
-              <Divider clearing />
-              {(() => {
-                switch (this.state.activeItem) {
-                default: return this.props.learners.length ?
-                  this.renderLearners() :
-                  <div style={{ textAlign: 'center', width: '100%' }}>
-                    <p style={{ textAlign: 'center' }}>There are no learners yet.</p>
-                  </div>;
-                }
-              })()}
-
-              <Dimmer active={this.props.isFetching} inverted>
-                <Loader size="large">Loading</Loader>
-              </Dimmer>
-
-              <div style={{ display: !this.props.next ? 'none' : 'block', marginTop: '20px', textAlign: 'center' }}>
-                <Button
-                  onClick={() => { this.props.fetchLearners(this.props.next); }}
-                  icon
-                  labelPosition="left"
-                >
-                  <Icon
-                    name={!this.props.isFetching ? 'arrow down' : 'spinner'}
-                    loading={this.props.isFetching}
-                  />
-                  Load More
-                </Button>
-              </div>
             </Segment>
+
+            <Divider clearing />
+            {(() => {
+              switch (this.state.activeItem) {
+              default: return this.props.learners.length ?
+                this.renderLearners() :
+                <div style={{ textAlign: 'center', width: '100%' }}>
+                  <p style={{ textAlign: 'center' }}>There are no learners yet.</p>
+                </div>;
+              }
+            })()}
+
+            <Dimmer active={this.props.isFetching} inverted>
+              <Loader size="large">Loading</Loader>
+            </Dimmer>
+
+            <div style={{ display: !this.props.next ? 'none' : 'block', marginTop: '20px', textAlign: 'center' }}>
+              <Button
+                onClick={() => { this.props.fetchLearners(this.props.next); }}
+                icon
+                labelPosition="left"
+              >
+                <Icon
+                  name={!this.props.isFetching ? 'arrow down' : 'spinner'}
+                  loading={this.props.isFetching}
+                />
+                Load More
+              </Button>
+            </div>
           </Grid.Column>
         </Grid>
 

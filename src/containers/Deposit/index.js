@@ -12,6 +12,7 @@ import GasPriceExtension from '../../components/GasPriceExtension';
 import { withdraw, resetWithdrawProps } from './actions';
 import getWithdrawTransactions from '../../util/withdraw/getWithdrawTransactions';
 
+
 class Deposit extends React.Component {
   state = {
     coin: 'edu',

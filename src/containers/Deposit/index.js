@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import React from 'react';
 import QRCode from 'qrcode.react';
-import { Tab, Segment, Container, Grid, Card, Image, Button, Icon, Header, Divider, Statistic, Table, Input, Form, Dropdown, Dimmer, Message, Breadcrumb } from 'semantic-ui-react';
+import { Segment, Container, Grid, Card, Image, Button, Icon, Header, Divider, Statistic, Table, Input, Form, Dropdown, Dimmer, Message, Breadcrumb, Menu } from 'semantic-ui-react';
 import TransactionHistoryItem from 'components/TransactionHistoryItem';
 import { initWalletUnlocker } from '../../util/auth/walletUnlocker';
 import getBalances from '../../util/web3/getBalances';
@@ -12,22 +12,14 @@ import GasPriceExtension from '../../components/GasPriceExtension';
 import { withdraw, resetWithdrawProps } from './actions';
 import getWithdrawTransactions from '../../util/withdraw/getWithdrawTransactions';
 
-const panes = [
-  { menuItem: 'Deposit', render: () => <Tab.Pane attached='bottom'> Deposit Content Here </Tab.Pane> },
-  { menuItem: 'Withdraw', render: () => <Tab.Pane attached='bottom'> Withdraw Content Here </Tab.Pane> },
-]
-
 class Deposit extends React.Component {
-  constructor(props) {
-    super(props);
-    this.props.getBalances();
-  }
-
   state = {
     coin: 'edu',
+    activeMenuItem: 'Deposit',
   }
 
   componentDidMount() {
+    this.props.getBalances();
     this.props.setSecondaryNav('account');
     this.props.getWithdrawTransactions();
     document.title = 'Deposit or Withdraw';
@@ -48,6 +40,8 @@ class Deposit extends React.Component {
     default: return avatarPlaceholder;
     }
   }
+
+  handleItemClick = (e, { name }) => this.setState({ activeMenuItem: name })
 
   transactionsScroll = (event) => {
     const { scrollHeight, scrollTop, offsetHeight } = event.currentTarget;
@@ -79,6 +73,7 @@ class Deposit extends React.Component {
   }
 
   showPrivateKey() {
+    /* eslint-disable no-alert */
     store.dispatch(initWalletUnlocker((wallet) => {
       prompt('Copy your private key', wallet.getPrivateKeyString());
     }));
@@ -131,8 +126,33 @@ class Deposit extends React.Component {
         <Grid>
           <Grid.Row>
             <Grid.Column mobile={16} tablet={8} computer={8}>
-              <Tab menu={{ attached: 'top', size: 'huge' }} panes={panes} />
-              <Card fluid>
+              <Menu style={{ margin: '0 -1px' }}>
+                <Menu.Item
+                  name="Deposit"
+                  active={this.state.activeMenuItem === 'Deposit'}
+                  onClick={this.handleItemClick}
+                >
+                  Deposit
+                </Menu.Item>
+
+                <Menu.Item
+                  name="Withdraw"
+                  active={this.state.activeMenuItem === 'Withdraw'}
+                  onClick={this.handleItemClick}
+                >
+                  Withdraw
+                </Menu.Item>
+              </Menu>
+              <Card
+                fluid
+                style={{
+                  marginTop: 0,
+                  borderTopLeftRadius: 0,
+                  borderTopRightRadius: 0,
+                  padding: '1em',
+                  display: this.state.activeMenuItem === 'Deposit' ? null : 'none',
+                }}
+              >
                 <Card.Content>
                   <Image floated="right" style={{ borderRadius: '50%' }} size="mini" src={this.getAvatar()} />
                   <Card.Header>
@@ -160,7 +180,16 @@ class Deposit extends React.Component {
                   </div>
                 </Card.Content>
               </Card>
-              <Card fluid>
+              <Card
+                fluid
+                style={{
+                  marginTop: 0,
+                  borderTopLeftRadius: 0,
+                  borderTopRightRadius: 0,
+                  padding: '1em',
+                  display: this.state.activeMenuItem === 'Withdraw' ? null : 'none',
+                }}
+              >
                 <Card.Content>
                   <Image floated="right" style={{ borderRadius: '50%' }} size="mini" src={this.getAvatar()} />
                   <Card.Header>

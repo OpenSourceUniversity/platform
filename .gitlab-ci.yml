@@ -17,7 +17,6 @@ variables:
   CONTAINER_IMAGE: ${CI_REGISTRY}/${CI_PROJECT_PATH}:${CI_BUILD_REF_NAME}_${CI_BUILD_REF}
   CONTAINER_IMAGE_LATEST: ${CI_REGISTRY}/${CI_PROJECT_PATH}:latest
   DOCKER_DRIVER: overlay2
-  DOCKER_HOST: tcp://docker:2375
 
 # run_js_linter:
 #   stage: lint

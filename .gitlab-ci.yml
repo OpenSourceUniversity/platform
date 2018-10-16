@@ -4,7 +4,10 @@ services:
   - docker:dind
 
 cache:
+  untracked: true
+  key: "$CI_BUILD_REF_NAME"
   paths:
+    - public/
     - node_modules/
 
 before_script:

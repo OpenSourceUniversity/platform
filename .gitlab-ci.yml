@@ -1,7 +1,7 @@
 image: node:10-alpine
 
 before_script:
-  - apk add g++ make eudev-dev libstdc++ libusb git python bash
+  - apk add g++ make eudev-dev libstdc++ libusb git python bash linux-headers
   - npm install -g truffle
   - npm install
   - truffle compile

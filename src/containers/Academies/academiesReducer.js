@@ -1,21 +1,7 @@
 const INITIAL_STATE = {
   isFetching: false,
   error: null,
-  academies: [
-    {
-      user:
-      {
-        username: null,
-      },
-      academy_name: null,
-      academy_website: null,
-      academy_email: null,
-      academy_country: null,
-      academy_about: null,
-      academy_logo: null,
-      courses_count: null,
-    },
-  ],
+  academies: [],
   next: null,
 };
 
@@ -28,7 +14,7 @@ export default function academiesReducer(state = INITIAL_STATE, action) {
   case 'FETCH_ACADEMIES_SUCCESS':
     return Object.assign({}, state, {
       isFetching: false,
-      academies: action.results,
+      academies: state.academies.concat(action.results),
       next: action.next,
     });
   case 'FETCH_ACADEMIES_FAILURE':

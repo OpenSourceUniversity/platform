@@ -2,7 +2,8 @@ import store from '../../store';
 import Config from '../../config';
 
 const { bdnUrl } = Config.network;
-const START_URL = `${bdnUrl}api/v1/profile/get_businesses/?offset=0&limit=40`;
+const LIMIT_PAGINATION = 20;
+const START_URL = `${bdnUrl}api/v1/profile/get_businesses/?offset=0&limit=${LIMIT_PAGINATION}`;
 
 
 export function fetchBusinesses(url = START_URL) {
@@ -25,7 +26,7 @@ export function fetchBusinesses(url = START_URL) {
         } else {
           dispatch({
             type: 'FETCH_BUSINESSES_SUCCESS',
-            results: body,
+            results: body.results,
             next: body.next,
           });
         }
@@ -36,5 +37,13 @@ export function fetchBusinesses(url = START_URL) {
           error,
         });
       });
+  };
+}
+
+export function resetBusinesses() {
+  return function dispatcher(dispatch) {
+    dispatch({
+      type: 'RESET_FETCHED_BUSINESSES',
+    });
   };
 }

@@ -1,21 +1,7 @@
 const INITIAL_STATE = {
   isFetching: false,
   error: null,
-  learners: [
-    {
-      user:
-      {
-        username: null,
-      },
-      full_name: null,
-      learner_position: null,
-      learner_specialisation: null,
-      learner_about: null,
-      learner_country: null,
-      learner_avatar: null,
-      certificates_count: null,
-    },
-  ],
+  learners: [],
   next: null,
 };
 
@@ -28,7 +14,7 @@ export default function learnersReducer(state = INITIAL_STATE, action) {
   case 'FETCH_LEARNERS_SUCCESS':
     return Object.assign({}, state, {
       isFetching: false,
-      learners: action.results,
+      learners: state.learners.concat(action.results),
       next: action.next,
     });
   case 'FETCH_LEARNERS_FAILURE':

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Form, Dimmer, Loader, Button, Container, Header, Divider, Grid, Segment, Accordion, Menu, Icon, Breadcrumb } from 'semantic-ui-react';
 import AcademyItem from 'components/AcademyItem';
-import { fetchAcademies } from './actions';
+import { fetchAcademies, resetAcademies } from './actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import search from '../../util/search/search';
 import storeSearchType from '../../util/search/storeSearchType';
@@ -12,6 +12,7 @@ class AcademiesPage extends React.Component {
   state = { activeIndex: 0, activeItem: 'trending' }
 
   componentDidMount() {
+    this.props.resetAcademies();
     this.props.setSecondaryNav('academia');
     this.props.storeSearchType('academies');
     const params = new URLSearchParams(this.props.location.search);
@@ -199,6 +200,9 @@ function mapDispatchToProps(dispatch) {
     },
     search(query) {
       dispatch(search(query));
+    },
+    resetAcademies() {
+      dispatch(resetAcademies());
     },
   };
 }

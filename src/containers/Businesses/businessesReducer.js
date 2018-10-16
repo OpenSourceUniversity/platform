@@ -1,21 +1,7 @@
 const INITIAL_STATE = {
   isFetching: false,
   error: null,
-  businesses: [
-    {
-      user:
-      {
-        username: null,
-      },
-      company_name: null,
-      company_website: null,
-      company_email: null,
-      company_country: null,
-      company_about: null,
-      company_logo: null,
-      jobs_count: null,
-    },
-  ],
+  businesses: [],
   next: null,
 };
 
@@ -28,7 +14,7 @@ export default function businessesReducer(state = INITIAL_STATE, action) {
   case 'FETCH_BUSINESSES_SUCCESS':
     return Object.assign({}, state, {
       isFetching: false,
-      businesses: action.results,
+      businesses: state.businesses.concat(action.results),
       next: action.next,
     });
   case 'FETCH_BUSINESSES_FAILURE':

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Form, Dimmer, Loader, Button, Container, Header, Divider, Grid, Segment, Accordion, Menu, Icon, Breadcrumb } from 'semantic-ui-react';
 import LearnerItem from 'components/LearnerItem';
-import { fetchLearners } from './actions';
+import { fetchLearners, resetLearners } from './actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import search from '../../util/search/search';
 import storeSearchType from '../../util/search/storeSearchType';
@@ -12,6 +12,7 @@ class LearnersPage extends React.Component {
   state = { activeIndex: 0, activeItem: 'trending' }
 
   componentDidMount() {
+    this.props.resetLearners();
     this.props.setSecondaryNav('academia');
     this.props.storeSearchType('learners');
     const params = new URLSearchParams(this.props.location.search);
@@ -195,6 +196,9 @@ function mapDispatchToProps(dispatch) {
     },
     search(query) {
       dispatch(search(query));
+    },
+    resetLearners() {
+      dispatch(resetLearners());
     },
   };
 }

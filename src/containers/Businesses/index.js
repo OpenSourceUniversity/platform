@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Form, Dimmer, Loader, Button, Container, Header, Divider, Grid, Segment, Accordion, Menu, Icon, Breadcrumb } from 'semantic-ui-react';
 import BusinessItem from 'components/BusinessItem';
-import { fetchBusinesses } from './actions';
+import { fetchBusinesses, resetBusinesses } from './actions';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import storeSearchType from '../../util/search/storeSearchType';
 import search from '../../util/search/search';
@@ -12,6 +12,7 @@ class BusinessesPage extends React.Component {
   state = { activeIndex: 0, activeItem: 'trending' }
 
   componentDidMount() {
+    this.props.resetBusinesses();
     this.props.setSecondaryNav('business');
     this.props.storeSearchType('businesses');
     const params = new URLSearchParams(this.props.location.search);
@@ -200,6 +201,9 @@ function mapDispatchToProps(dispatch) {
     },
     search(query) {
       dispatch(search(query));
+    },
+    resetBusinesses() {
+      dispatch(resetBusinesses());
     },
   };
 }

@@ -16,16 +16,16 @@ variables:
   DOCKER_DRIVER: overlay2
   DOCKER_HOST: tcp://docker:2375
 
-run_js_linter:
-  stage: lint
-  script:
-    - npm run lint
-
-build_production:
-  stage: build_production
-  script:
-    - echo $APP_CONFIG > src/config.js
-    - NODE_ENV="production" npm run build
+# run_js_linter:
+#   stage: lint
+#   script:
+#     - npm run lint
+#
+# build_production:
+#   stage: build_production
+#   script:
+#     - echo $APP_CONFIG > src/config.js
+#     - NODE_ENV="production" npm run build
 
 release_production:
   before_script: []

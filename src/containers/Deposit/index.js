@@ -13,9 +13,9 @@ import { withdraw, resetWithdrawProps } from './actions';
 import getWithdrawTransactions from '../../util/withdraw/getWithdrawTransactions';
 
 const panes = [
-  { menuItem: 'Deposit', render: () => <Tab.Pane attached='bottom'> Deposit Content Here </Tab.Pane> },
-  { menuItem: 'Withdraw', render: () => <Tab.Pane attached='bottom'> Withdraw Content Here </Tab.Pane> },
-]
+  { menuItem: 'Deposit', render: () => <Tab.Pane attached="bottom"> Deposit Content Here </Tab.Pane> },
+  { menuItem: 'Withdraw', render: () => <Tab.Pane attached="bottom"> Withdraw Content Here </Tab.Pane> },
+];
 
 class Deposit extends React.Component {
   constructor(props) {

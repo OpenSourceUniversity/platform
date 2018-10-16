@@ -1,17 +1,49 @@
-image: node:latest
+image: node:10-alpine
+
+services:
+  - docker:dind
+
+cache:
+  untracked: true
+  key: "$CI_BUILD_REF_NAME"
+  paths:
+    - public/
+    - node_modules/
 
 before_script:
-  - apt-get update && apt-get install -y build-essential libudev-dev libstdc++6 libusb-1.0-0-dev
+  - apk add g++ make eudev-dev libstdc++ libusb libusb-dev git python bash linux-headers
   - npm install -g truffle
   - npm install
+  - truffle compile
   - cp src/config.js.dist src/config.js
 
 stages:
   - lint
+  - build_production
+  - release_production
+
+variables:
+  CONTAINER_IMAGE: ${CI_REGISTRY}/${CI_PROJECT_PATH}:${CI_BUILD_REF_NAME}_${CI_BUILD_REF}
+  CONTAINER_IMAGE_LATEST: ${CI_REGISTRY}/${CI_PROJECT_PATH}:latest
+  DOCKER_DRIVER: overlay2
 
 run_js_linter:
   stage: lint
   script:
-    - truffle compile
     - npm run lint
 
+build_production:
+  stage: build_production
+  script:
+    - echo $APP_CONFIG > src/config.js
+    - NODE_ENV="production" npm run build
+
+release_production:
+  before_script: []
+  stage: release_production
+  image: docker:stable
+  script:
+    - docker info
+    - docker login -u gitlab-ci-token -p ${CI_BUILD_TOKEN} ${CI_REGISTRY}
+    - docker build -t ${CONTAINER_IMAGE_LATEST} . -f docks/Dockerfile
+    - docker push ${CONTAINER_IMAGE_LATEST}

@@ -52,7 +52,7 @@ class App extends React.Component {
         </div>
         {this.props.isLoggedIn ?
           <Container className="footer" textAlign="center">
-            Account: {this.props.address}
+            Wallet Address: {this.props.address}
           </Container> :
           null
         }

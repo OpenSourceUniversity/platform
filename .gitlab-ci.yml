@@ -4,6 +4,7 @@ before_script:
   - apt-get update && apt-get install -y build-essential libudev-dev libstdc++6 libusb-1.0-0-dev
   - npm install -g truffle
   - npm install
+  - truffle compile
   - cp src/config.js.dist src/config.js
 
 stages:
@@ -19,7 +20,6 @@ variables:
 run_js_linter:
   stage: lint
   script:
-    - truffle compile
     - npm run lint
 
 build_production:

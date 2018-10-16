@@ -1,4 +1,4 @@
-
+image: node:10-alpine
 
 before_script:
   - apk add g++ make eudev-dev libstdc++ libusb libusb-dev git python bash linux-headers

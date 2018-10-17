@@ -29,7 +29,14 @@ class LearnerItemWithoutRouter extends React.Component {
                 circular
                 className="profilePicSegment"
                 style={{
-                  width: 175, height: 175, backgroundImage: `url(${this.props.learner.learner_avatar ? `https://ipfs.io/ipfs/${this.props.learner.learner_avatar}` : avatarPlaceholder})`, backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center center',
+                  maxWidth: 125,
+                  maxHeight: 125,
+                  backgroundImage: `url(${this.props.learner.learner_avatar ?
+                    `https://ipfs.io/ipfs/${this.props.learner.learner_avatar}` :
+                    avatarPlaceholder})`,
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: 'contain',
+                  backgroundPosition: 'center center',
                 }}
               />
             </Grid.Column>

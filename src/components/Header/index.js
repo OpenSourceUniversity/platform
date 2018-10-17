@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Container, Menu, Dropdown, Grid, Image, Icon, List, Button, Step, Label } from 'semantic-ui-react';
+import { Container, Menu, Dropdown, Grid, Image, Icon, List, Button, Step, Label, Responsive } from 'semantic-ui-react';
 import HeaderSearchComponent from '../HeaderSearchComponent';
 import NotificationsComponent from '../NotificationsComponent';
 import logout from '../../util/auth/logout';
@@ -13,12 +13,11 @@ import { resetAddJobProps } from '../../containers/AddJobPosition/actions';
 
 
 class HeaderWithoutRouter extends React.Component {
-  constructor(props) {
-    super(props);
+  state = {}
+
+  componentDidMount() {
     this.props.getBalances();
   }
-
-  state = { }
 
   handleItemClick = (e, { name }) => {
     this.setState({ activeItem: name });
@@ -120,7 +119,9 @@ class HeaderWithoutRouter extends React.Component {
             return null;
           })()}
         />
-        {this.props.activeAccount}
+        <Responsive as="span" {...Responsive.onlyComputer}>
+          {this.props.activeAccount}
+        </Responsive>
       </span>
     );
 
@@ -282,10 +283,16 @@ class HeaderWithoutRouter extends React.Component {
           <Grid divided="vertically">
             { this.props.isLoggedIn ? (
               <Grid.Row className="main-nav" style={{ zIndex: '99' }} >
-                <Menu.Item name="home" onClick={this.handleItemClick}>
+                <Responsive as={Menu.Item} {...Responsive.onlyComputer} name="home" onClick={this.handleItemClick}>
                   <img className="main-nav-logo" alt="" src={logo} />
-                </Menu.Item>
-                <Dropdown className="explore-dropdown" item trigger={exploreTrigger}>
+                </Responsive>
+                <Responsive as={Menu.Item} {...Responsive.onlyTablet} name="home" onClick={this.props.showSidebar}>
+                  <img className="main-nav-logo" alt="" src={logo} />
+                </Responsive>
+                <Responsive as={Menu.Item} {...Responsive.onlyMobile} name="home" onClick={this.props.showSidebar}>
+                  <img className="main-nav-logo" alt="" src={logo} />
+                </Responsive>
+                <Responsive as={Dropdown} {...Responsive.onlyComputer} className="explore-dropdown" item trigger={exploreTrigger}>
                   <Dropdown.Menu>
                     <div className="d-flex">
                       <Dropdown.Item name="academia" className="nav-list">
@@ -313,9 +320,8 @@ class HeaderWithoutRouter extends React.Component {
                       </Dropdown.Item>
                     </div>
                   </Dropdown.Menu>
-                </Dropdown>
-
-                <HeaderSearchComponent />
+                </Responsive>
+                <Responsive as={HeaderSearchComponent} {...Responsive.onlyComputer} />
 
                 <Menu.Menu position="right">
                   <Menu.Item disabled style={{ cursor: 'pointer!important' }} className="nav-disabled-beta" name="network" onClick={this.handleItemClick}>
@@ -405,7 +411,7 @@ class HeaderWithoutRouter extends React.Component {
             )
             }
 
-            <Grid.Row className="secondary-nav" style={{ zIndex: '98' }}>
+            <Responsive {...Responsive.onlyComputer} as={Grid.Row} className="secondary-nav" style={{ zIndex: '98' }}>
               {(() => {
                 if (this.props.isLoggedIn) {
                   if (this.props.activeAccount === 'Learner') {
@@ -433,7 +439,7 @@ class HeaderWithoutRouter extends React.Component {
                 }
                 return null;
               })()}
-            </Grid.Row>
+            </Responsive>
           </Grid>
         </Container>
       </Menu>

@@ -174,7 +174,7 @@ class HomePage extends React.Component {
                 You do not have any certificates yet. Go ahead and add some.
             </p>
           </Message>
-          <Grid width={16}>
+          <Grid centered width={16}>
             { this.renderCertificates() }
           </Grid>
         </Segment>

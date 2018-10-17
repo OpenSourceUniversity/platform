@@ -598,12 +598,18 @@ div#Main {
 // ***Account settings page END***
 .profilePicSegment {
   display: block;
+  width: 100%;
   margin: 0 auto;
   padding: 3px;
   box-shadow: none;
   border-width: 2px;
   cursor: pointer;
   border-width: 0;
+}
+.profilePicSegment:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
 }
 .profilePicSegment:hover {
   border-color: #f16722;

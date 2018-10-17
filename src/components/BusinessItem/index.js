@@ -29,7 +29,14 @@ class BusinessItemWithoutRouter extends React.Component {
                 circular
                 className="profilePicSegment"
                 style={{
-                  width: 175, height: 175, backgroundImage: `url(${this.props.business.company_logo ? `https://ipfs.io/ipfs/${this.props.business.company_logo}` : avatarPlaceholder})`, backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center center',
+                  maxWidth: 125,
+                  maxHeight: 125,
+                  backgroundImage: `url(${this.props.business.company_logo ?
+                    `https://ipfs.io/ipfs/${this.props.business.company_logo}` :
+                    avatarPlaceholder})`,
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: 'contain',
+                  backgroundPosition: 'center center',
                 }}
               />
             </Grid.Column>

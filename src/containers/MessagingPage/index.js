@@ -343,7 +343,12 @@ class MessagesPage extends React.Component {
       <Container fluid style={{ marginTop: '-1px' }}>
         <Segment>
           <Grid>
-            <Grid.Column width={4} style={{ paddingLeft: 0, paddingTop: 0, paddingBottom: 0 }} >
+            <Grid.Column
+              width={4}
+              style={{
+                paddingLeft: 0, paddingTop: 0, paddingBottom: 0, height: '78vh',
+              }}
+            >
               <Menu className="messagingThreads" style={{ height: '100%' }} fluid vertical secondary pointing>
                 <Dimmer active={this.props.isFetchingThreads} inverted>
                   <Loader size="medium">

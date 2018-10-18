@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Container, Feed, Dropdown, Image, Label } from 'semantic-ui-react';
+import { Button, Container, Feed, Dropdown, Image, Label, Responsive } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import store from '../../store';
@@ -134,47 +134,141 @@ class NotificationsComponent extends Dropdown {
     );
 
     return (
-      <Dropdown
-        style={{ padding: 0 }}
-        item
-        trigger={notificationsTrigger}
-        pointing="top right"
-        icon={null}
-      >
-        <Dropdown.Menu>
-          <Container
-            onScroll={this.notificationsScroll}
-            style={{
-              maxHeight: '400px', overflowY: 'scroll', overflowX: 'none', width: '400px',
-            }}
-          >
-            <Feed>
-              {this.props.notifications.length ?
-                this.renderNotificationItems() :
-                <div style={{ textAlign: 'center', width: '100%' }}>
-                  <p style={{ textAlign: 'center' }}>There are no any notifications yet.</p>
-                </div>
-              }
-              <Feed.Event style={{ display: this.props.isFetching ? 'block' : 'none' }}>
-                <Feed.Content style={{ textAlign: 'center' }}>
-                  Loading notifications...
-                </Feed.Content>
-              </Feed.Event>
-            </Feed>
-          </Container>
-          <Button
-            as={Link}
-            to="/notifications/"
-            style={{
-              textAlign: 'center',
-              margin: '0 auto',
-              width: '100%',
-            }}
-          >
-            All Notifications
-          </Button>
-        </Dropdown.Menu>
-      </Dropdown>
+      <div>
+        <Responsive
+          as={Dropdown}
+          {...Responsive.onlyComputer}
+          style={{ paddingTop: '29px', paddingBottom: '28px' }}
+          item
+          trigger={notificationsTrigger}
+          pointing="top right"
+          icon={null}
+        >
+          <Dropdown.Menu>
+            <Container
+              onScroll={this.notificationsScroll}
+              style={{
+                maxHeight: '400px', overflowY: 'scroll', overflowX: 'none', width: '400px',
+              }}
+            >
+              <Feed>
+                {this.props.notifications.length ?
+                  this.renderNotificationItems() :
+                  <div style={{ textAlign: 'center', width: '100%' }}>
+                    <p style={{ textAlign: 'center' }}>There are no any notifications yet.</p>
+                  </div>
+                }
+                <Feed.Event style={{ display: this.props.isFetching ? 'block' : 'none' }}>
+                  <Feed.Content style={{ textAlign: 'center' }}>
+                    Loading notifications...
+                  </Feed.Content>
+                </Feed.Event>
+              </Feed>
+            </Container>
+            <Button
+              as={Link}
+              to="/notifications/"
+              style={{
+                textAlign: 'center',
+                margin: '0 auto',
+                width: '100%',
+              }}
+            >
+              All Notifications
+            </Button>
+          </Dropdown.Menu>
+        </Responsive>
+        <Responsive
+          as={Dropdown}
+          {...Responsive.onlyTablet}
+          style={{ paddingTop: '29px', paddingBottom: '28px' }}
+          item
+          trigger={notificationsTrigger}
+          pointing="top right"
+          icon={null}
+        >
+          <Dropdown.Menu>
+            <Container
+              onScroll={this.notificationsScroll}
+              style={{
+                maxHeight: '400px', overflowY: 'scroll', overflowX: 'none', width: '400px',
+              }}
+            >
+              <Feed>
+                {this.props.notifications.length ?
+                  this.renderNotificationItems() :
+                  <div style={{ textAlign: 'center', width: '100%' }}>
+                    <p style={{ textAlign: 'center' }}>There are no any notifications yet.</p>
+                  </div>
+                }
+                <Feed.Event style={{ display: this.props.isFetching ? 'block' : 'none' }}>
+                  <Feed.Content style={{ textAlign: 'center' }}>
+                    Loading notifications...
+                  </Feed.Content>
+                </Feed.Event>
+              </Feed>
+            </Container>
+            <Button
+              as={Link}
+              to="/notifications/"
+              style={{
+                textAlign: 'center',
+                margin: '0 auto',
+                width: '100%',
+              }}
+            >
+              All Notifications
+            </Button>
+          </Dropdown.Menu>
+        </Responsive>
+        <Responsive
+          as={Dropdown}
+          {...Responsive.onlyMobile}
+          style={{ paddingTop: '25px', paddingBottom: '24px', position: 'static' }}
+          item
+          trigger={notificationsTrigger}
+          pointing="top right"
+          icon={null}
+        >
+          <Dropdown.Menu style={{ width: '100vw' }} className="mobile-notification-menu">
+            <Container
+              onScroll={this.notificationsScroll}
+              className="mobile-notification"
+              style={{
+                maxHeight: '400px',
+                overflowY: 'scroll',
+                overflowX: 'none',
+                width: '400px',
+              }}
+            >
+              <Feed>
+                {this.props.notifications.length ?
+                  this.renderNotificationItems() :
+                  <div style={{ textAlign: 'center', width: '100%' }}>
+                    <p style={{ textAlign: 'center' }}>There are no any notifications yet.</p>
+                  </div>
+                }
+                <Feed.Event style={{ display: this.props.isFetching ? 'block' : 'none' }}>
+                  <Feed.Content style={{ textAlign: 'center' }}>
+                    Loading notifications...
+                  </Feed.Content>
+                </Feed.Event>
+              </Feed>
+            </Container>
+            <Button
+              as={Link}
+              to="/notifications/"
+              style={{
+                textAlign: 'center',
+                margin: '0 auto',
+                width: '100%',
+              }}
+            >
+              All Notifications
+            </Button>
+          </Dropdown.Menu>
+        </Responsive>
+      </div>
     );
   }
 

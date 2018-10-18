@@ -1,11 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-import { Header, Divider, Grid, Sticky, Segment, List, Statistic, Dimmer, Loader, Message, Button } from 'semantic-ui-react';
+import { Header, Divider, Grid, Sticky, Segment, List, Statistic, Dimmer, Loader, Message, Button, Responsive } from 'semantic-ui-react';
 import SkillItem from 'components/SkillItem';
 import CertificateItem from 'components/CertificateItem';
 import getProfileView from '../../util/profiles/getProfileView';
 import openThread from '../../util/messaging/openThread';
+
+
+const colors = [
+  'grey',
+];
 
 /* eslint-disable camelcase */
 class ViewLearnerProfile extends React.Component {
@@ -84,6 +89,13 @@ class ViewLearnerProfile extends React.Component {
     const phoneNumber = `tel:${this.props.learner.phone_number}`;
     return (
       <div>
+        <Responsive as={Grid} {...Responsive.onlyComputer}>
+          {colors.map(color => (
+            <Grid.Row className="profileBackground" color={color} key={color}>
+              <Grid.Column />
+            </Grid.Row>
+          ))}
+        </Responsive>
         <Dimmer active={this.props.profileViewIsFetching} inverted>
           <Loader size="large">Loading</Loader>
         </Dimmer>
@@ -114,7 +126,7 @@ class ViewLearnerProfile extends React.Component {
         </Dimmer>
         <Grid>
           <Grid.Column mobile={16} tablet={8} computer={5}>
-            <Sticky offset={150}>
+            <Responsive as={Sticky} {...Responsive.onlyComputer} offset={150}>
               <Segment.Group className="profileSegment">
                 <Segment textAlign="center">
                   <Segment
@@ -150,7 +162,7 @@ class ViewLearnerProfile extends React.Component {
                   <Header size="small" color="grey">
                     ETH Address:
                   </Header>
-                  <p>{this.props.eth_address}</p>
+                  <p style={{ whiteSpace: 'pre-line', wordBreak: 'break-word' }} >{this.props.eth_address}</p>
                 </Segment>
                 <Segment>
                   <List>
@@ -171,7 +183,119 @@ class ViewLearnerProfile extends React.Component {
                   </Statistic.Group>
                 </Segment>
               </Segment.Group>
-            </Sticky>
+            </Responsive>
+            <Responsive as={Segment.Group} {...Responsive.onlyTablet} className="profileSegment">
+              <Segment textAlign="center">
+                <Segment
+                  textAlign="center"
+                  circular
+                  className="profilePicSegment"
+                  style={{
+                    width: 175,
+                    height: 175,
+                    backgroundImage: `url(${this.props.learner.learner_avatar ? `https://ipfs.io/ipfs/${this.props.learner.learner_avatar}` : avatarPlaceholder})`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'contain',
+                    backgroundPosition: 'center center',
+                    borderWidth: 0,
+                    cursor: 'auto',
+                  }}
+                />
+                <Header size="large">
+                  {this.props.learner.full_name}
+                </Header>
+                <Header size="small" color="grey">
+                  {this.props.learner.learner_position ? this.props.learner.learner_position : '-'}
+                </Header>
+                <Button
+                  primary
+                  size="large"
+                  className="fluid"
+                  content="SEND MESSAGE"
+                  name={this.props.eth_address.toLowerCase()}
+                  icon="mail outline"
+                  onClick={this.openMessaging}
+                />
+                <Header size="small" color="grey">
+                  ETH Address:
+                </Header>
+                <p style={{ whiteSpace: 'pre-line', wordBreak: 'break-word' }} >{this.props.eth_address}</p>
+              </Segment>
+              <Segment>
+                <List>
+                  <List.Item icon={{ name: 'users', style: { width: '22px' } }} content={this.props.learner.learner_specialisation ? this.props.learner.learner_specialisation : '-'} />
+                  <List.Item icon={{ name: 'marker', style: { width: '22px' } }} content={this.props.learner.learner_country ? this.props.learner.learner_country : '-'} />
+                  <List.Item icon={{ name: 'linkify', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={site}>{this.props.learner.learner_site ? this.props.learner.learner_site : '-'}</a>} />
+                  <List.Item icon={{ name: 'phone', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={phoneNumber}>{this.props.learner.phone_number ? this.props.learner.phone_number : '-'}</a>} />
+                </List>
+              </Segment>
+              <Segment>
+                <Statistic.Group size="tiny" color="orange" horizontal>
+                  <Statistic>
+                    <Statistic.Value>
+                      {this.props.certificates ? this.props.certificates.length : 0}
+                    </Statistic.Value>
+                    <Statistic.Label>Certificates</Statistic.Label>
+                  </Statistic>
+                </Statistic.Group>
+              </Segment>
+            </Responsive>
+            <Responsive as={Segment.Group} {...Responsive.onlyMobile} className="profileSegment">
+              <Segment textAlign="center">
+                <Segment
+                  textAlign="center"
+                  circular
+                  className="profilePicSegment"
+                  style={{
+                    width: 175,
+                    height: 175,
+                    backgroundImage: `url(${this.props.learner.learner_avatar ? `https://ipfs.io/ipfs/${this.props.learner.learner_avatar}` : avatarPlaceholder})`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'contain',
+                    backgroundPosition: 'center center',
+                    borderWidth: 0,
+                    cursor: 'auto',
+                  }}
+                />
+                <Header size="large" style={{ whiteSpace: 'pre-line', wordBreak: 'break-word' }} >
+                  {this.props.learner.full_name}
+                </Header>
+                <Header size="small" color="grey" style={{ whiteSpace: 'pre-line', wordBreak: 'break-word' }} >
+                  {this.props.learner.learner_position ? this.props.learner.learner_position : '-'}
+                </Header>
+                <Button
+                  primary
+                  size="large"
+                  className="fluid"
+                  content="SEND MESSAGE"
+                  name={this.props.eth_address.toLowerCase()}
+                  icon="mail outline"
+                  onClick={this.openMessaging}
+                />
+                <Header size="small" color="grey">
+                  ETH Address:
+                </Header>
+                <p style={{ whiteSpace: 'pre-line', wordBreak: 'break-word' }} >{this.props.eth_address}</p>
+              </Segment>
+              <Segment>
+                <List>
+                  <List.Item icon={{ name: 'users', style: { width: '22px' } }} content={this.props.learner.learner_specialisation ? this.props.learner.learner_specialisation : '-'} />
+                  <List.Item icon={{ name: 'marker', style: { width: '22px' } }} content={this.props.learner.learner_country ? this.props.learner.learner_country : '-'} />
+                  <List.Item icon={{ name: 'linkify', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={site}>{this.props.learner.learner_site ? this.props.learner.learner_site : '-'}</a>} />
+                  <List.Item icon={{ name: 'phone', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={phoneNumber}>{this.props.learner.phone_number ? this.props.learner.phone_number : '-'}</a>} />
+                </List>
+              </Segment>
+              <Segment>
+                <Statistic.Group size="tiny" color="orange" horizontal>
+                  <Statistic>
+                    <Statistic.Value>
+                      {this.props.certificates ? this.props.certificates.length : 0}
+                    </Statistic.Value>
+                    <Statistic.Label>Certificates</Statistic.Label>
+                  </Statistic>
+                </Statistic.Group>
+              </Segment>
+            </Responsive>
           </Grid.Column>
           <Grid.Column mobile={16} tablet={8} computer={11}>
             <Segment style={{ paddingBottom: '2em' }} size="large">

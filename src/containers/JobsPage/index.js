@@ -9,7 +9,7 @@ import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 import storeSearchType from '../../util/search/storeSearchType';
 
 class JobsPage extends React.Component {
-  state = { activeIndex: 0, activeItem: 'trending' }
+  state = { activeIndex: -1, activeItem: 'trending' }
 
   componentDidMount() {
     this.props.storeSearchType('jobs');
@@ -79,7 +79,7 @@ class JobsPage extends React.Component {
           Jobs List
         </Header>
         <Grid>
-          <Grid.Column width={5}>
+          <Grid.Column mobile={16} tablet={6} computer={5}>
             <Accordion as={Menu} vertical>
               <Header style={{ textAlign: 'center', paddingTop: '10px' }}>
                 Idustries
@@ -92,6 +92,7 @@ class JobsPage extends React.Component {
                 >
                   <Icon name="block layout" />
                   Industry
+                  <i aria-hidden="true" className="dropdown icon" />
                 </Accordion.Title>
                 <Accordion.Content
                   active={activeIndex === 0}
@@ -101,7 +102,7 @@ class JobsPage extends React.Component {
             </Accordion>
           </Grid.Column>
 
-          <Grid.Column width={11}>
+          <Grid.Column mobile={16} tablet={10} computer={10}>
             <Segment padded>
               {this.renderSearch()}
             </Segment>

@@ -97,14 +97,14 @@ class NotificationSummaryComponent extends React.Component {
     let summary;
     if (target) {
       if (actionObject) {
-        summary = (<span>{actor} {verb} {actionObject} on {target}</span>);
+        summary = (<span style={{ whiteSpace: 'pre-line', wordBreak: 'break-word' }}>{actor} {verb} {actionObject} on {target}</span>);
       } else {
-        summary = (<span>{actor} {verb} your {target}</span>);
+        summary = (<span style={{ whiteSpace: 'pre-line', wordBreak: 'break-word' }}>{actor} {verb} your {target}</span>);
       }
     } else if (actionObject) {
-      summary = (<span>{actor} {verb} {actionObject}</span>);
+      summary = (<span style={{ whiteSpace: 'pre-line', wordBreak: 'break-word' }}>{actor} {verb} {actionObject}</span>);
     } else {
-      summary = (<span>{actor} {verb}</span>);
+      summary = (<span style={{ whiteSpace: 'pre-line', wordBreak: 'break-word' }}>{actor} {verb}</span>);
     }
     return summary;
   }

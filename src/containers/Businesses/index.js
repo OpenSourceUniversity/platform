@@ -9,7 +9,7 @@ import search from '../../util/search/search';
 
 
 class BusinessesPage extends React.Component {
-  state = { activeIndex: 0, activeItem: 'trending' }
+  state = { activeIndex: -1, activeItem: 'trending' }
 
   componentDidMount() {
     this.props.resetBusinesses();
@@ -110,7 +110,7 @@ class BusinessesPage extends React.Component {
           Businesses
         </Header>
         <Grid>
-          <Grid.Column width={3}>
+          <Grid.Column mobile={16} tablet={6} computer={3}>
             <Segment>
               <Accordion as={Menu} vertical>
                 <Header style={{ textAlign: 'center', paddingTop: '10px' }}>
@@ -124,6 +124,7 @@ class BusinessesPage extends React.Component {
                   >
                     <Icon name="block layout" />
                     Type
+                    <i aria-hidden="true" className="dropdown icon" />
                   </Accordion.Title>
                   <Accordion.Content
                     active={activeIndex === 0}
@@ -134,7 +135,7 @@ class BusinessesPage extends React.Component {
             </Segment>
           </Grid.Column>
 
-          <Grid.Column width={10}>
+          <Grid.Column mobile={16} tablet={10} computer={10}>
             <Segment>
 
               {this.renderSearch()}

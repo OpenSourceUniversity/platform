@@ -38,14 +38,21 @@ class AccountSettings extends React.Component {
             Account Settings
           </Header>
           <Divider clearing />
-          <Grid reversed="mobile">
-            <Grid.Row className="double-form">
-              <Grid.Column width={6}>
-                <Segment>
-                  <Header>
-                    Set active profile:
-                  </Header>
-                  <Menu fluid vertical pointing>
+          <Segment>
+            <Grid>
+              <Grid.Row className="double-form">
+                <Grid.Column
+                  mobile={16}
+                  tablet={6}
+                  computer={6}
+                  style={{ paddingRight: 0, paddingLeft: 0 }}
+                >
+                  <Menu fluid vertical pointing secondary style={{ height: '100%' }}>
+                    <Menu.Header>
+                      <Header style={{ paddingLeft: '15px' }}>
+                        Set active profile:
+                      </Header>
+                    </Menu.Header>
                     <Menu.Item name="Learner" active={this.props.activeAccount === 'Learner'} onClick={(e, { name }) => this.props.setActiveAccount(name)}>
                       <svg width="16" height="16" className="cogs icon">
                         <image href={learners} x="0" y="0" width="100%" height="100%" />
@@ -65,22 +72,22 @@ class AccountSettings extends React.Component {
                       Business
                     </Menu.Item>
                   </Menu>
-                </Segment>
-              </Grid.Column>
-              <Grid.Column stretched width={10}>
-                <Segment className="settings">
-                  {(() => {
-                    switch (this.props.activeAccount) {
-                    case 'Academy': return <AcademySettings />;
-                    case 'Learner': return <LearnerSettings />;
-                    case 'Business': return <BusinessSettings />;
-                    default: return null;
-                    }
-                  })()}
-                </Segment>
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
+                </Grid.Column>
+                <Grid.Column mobile={16} tablet={10} computer={10} style={{ paddingLeft: 0 }}>
+                  <div className="settings">
+                    {(() => {
+                      switch (this.props.activeAccount) {
+                      case 'Academy': return <AcademySettings />;
+                      case 'Learner': return <LearnerSettings />;
+                      case 'Business': return <BusinessSettings />;
+                      default: return null;
+                      }
+                    })()}
+                  </div>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </Segment>
         </Container>
       </div>
     );

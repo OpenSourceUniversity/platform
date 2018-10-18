@@ -63,12 +63,14 @@ class App extends React.Component {
         <Sidebar.Pushable as="div">
           <Responsive
             as={MobileHeader}
+            showSidebar={this.handleSlidebarClick}
             onHideFunc={this.handleSidebarHide}
             {...Responsive.onlyTablet}
             visible={this.state.visible}
           />
           <Responsive
             as={MobileHeader}
+            showSidebar={this.handleSlidebarClick}
             onHideFunc={this.handleSidebarHide}
             {...Responsive.onlyMobile}
             visible={this.state.visible}

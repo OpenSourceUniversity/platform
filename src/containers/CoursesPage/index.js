@@ -12,7 +12,7 @@ import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 
 
 class CoursesPage extends React.Component {
-  state = { activeIndex: 0, activeItem: 'trending' }
+  state = { activeIndex: -1, activeItem: 'trending' }
 
   componentDidMount() {
     this.props.setSecondaryNav('academia');
@@ -116,7 +116,7 @@ class CoursesPage extends React.Component {
           Courses
         </Header>
         <Grid>
-          <Grid.Column width={5}>
+          <Grid.Column mobile={16} tablet={6} computer={5}>
             <Accordion as={Menu} vertical>
               <Header style={{ textAlign: 'center', paddingTop: '10px' }}>
                 Advanced filter
@@ -129,6 +129,7 @@ class CoursesPage extends React.Component {
                 >
                   <Icon name="block layout" />
                   Industries
+                  <i aria-hidden="true" className="dropdown icon" />
                 </Accordion.Title>
                 <Accordion.Content
                   active={activeIndex === 0}
@@ -138,7 +139,7 @@ class CoursesPage extends React.Component {
             </Accordion>
           </Grid.Column>
 
-          <Grid.Column width={11}>
+          <Grid.Column mobile={16} tablet={10} computer={10}>
             <Segment padded>
               {this.renderSearch()}
             </Segment>

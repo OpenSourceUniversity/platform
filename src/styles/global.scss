@@ -1,6 +1,12 @@
 body {
   background: #ecf0f1;
 }
+/* GLOBAL */
+.header, p {
+  white-space: pre-line;
+  word-break: break-word;
+}
+
 .d-flex {
   display:flex;
 }
@@ -11,6 +17,12 @@ div.App {
   .deposit {
     .form .ui.dropdown > .dropdown.icon {
       top: 0;
+    }
+  }
+  .mobile-sidebar {
+    .academia, .home-link, .businesses {
+      font-weight: 800;
+      color: black !important;
     }
   }
   /*
@@ -63,6 +75,12 @@ div.App {
   div.menu.massive.top  {
     .item:before {
       background: none;
+    }
+    .menu.transition.visible.mobile-notification-menu::after {
+      left: 50%!important;
+    }
+    .ui.container.mobile-notification {
+      margin: 0!important;
     }
     .nav-disabled-beta {
       display: none;
@@ -236,7 +254,6 @@ div.App {
     div.row.secondary-nav {
       background-color: #f9f9f9;
       padding-top: 0;
-      padding-left: 0.7em;
       padding-bottom: 0;
       -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.08);
       -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.08);
@@ -298,9 +315,6 @@ div.App {
           background-color: transparent !important;
         }
       }
-    }
-    .grid {
-      width: 102%;
     }
   }
 }
@@ -583,8 +597,8 @@ div#Main {
       margin-bottom: 0 !important;
       height: 100%;
     }
-    div.segment.settings {
-      padding: 40px 80px;
+    div.settings {
+      padding: 40px 5%;
     }
     button .cancel-button {
       float: right !important;
@@ -592,6 +606,18 @@ div#Main {
     div.menu {
       svg {
         margin-right: 10px;
+      }
+      .ui.header {
+        padding-bottom: 5px;
+      }
+      .active.item {
+        border-right-color: #f16722 !important;
+        border-right-width: 3px!important;
+        background-color: #ececec!important;
+        font-weight: 800!important;
+      }
+      .item, .ui.header {
+        border-bottom: 1px solid lightgrey;
       }
     }
   }
@@ -689,9 +715,11 @@ input[type="file"] {
 .profileBackground {
   min-height: 250px;
 }
-.profileDetails {
-  position: relative;
-  top: -190px;
+@media screen and (min-width: 992px) {
+  .profileDetails {
+    position: relative;
+    top: -190px;
+  }
 }
 
 .ui.cards>.red.card, .ui.red.card, .ui.red.cards>.card {

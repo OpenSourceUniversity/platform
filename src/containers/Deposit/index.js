@@ -167,7 +167,14 @@ class Deposit extends React.Component {
                   </Card.Meta>
                   <Card.Description>
                     <Form className="attached fluid segment">
-                      <Form.Input id="WalletAddress" style={{ fontSize: '0.9em' }} readOnly label="ETH/EDU Deposit Address:" fluid value={this.props.address} />
+                      <Form.Input
+                        id="WalletAddress"
+                        style={{ whiteSpace: 'pre-line', wordBreak: 'break-word', fontSize: '0.9em' }}
+                        readOnly
+                        label="ETH/EDU Deposit Address:"
+                        fluid
+                        value={this.props.address}
+                      />
                     </Form>
                   </Card.Description>
                 </Card.Content>

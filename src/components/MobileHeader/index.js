@@ -24,6 +24,7 @@ class MobileHeaderWithoutRouter extends Sidebar {
     }
     if (this.props.history.location.pathname !== newPath) {
       this.props.history.push(newPath);
+      this.props.showSidebar();
     }
   }
 
@@ -113,13 +114,14 @@ class MobileHeaderWithoutRouter extends Sidebar {
     return (
       <Sidebar
         as={Menu}
-        inverted
+        animation="overlay"
         vertical
-        width="thin"
-        style={{ zIndex: 100 }}
+        className="mobile-sidebar"
+        width="wide"
+        style={{ zIndex: 100, maxWidth: '100%' }}
         visible={this.props.visible}
       >
-        <Menu.Item header>Explore</Menu.Item>
+        <Menu.Item name="home" className="home-link" onClick={this.handleItemClick} active={activeItem === 'home'} >Home</Menu.Item>
         <Menu.Item>
           {(() => {
             switch (this.props.activeAccount) {

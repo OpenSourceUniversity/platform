@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Container, Header, Divider, Grid, Sticky, Segment, List, Button } from 'semantic-ui-react';
+import { Container, Header, Divider, Grid, Sticky, Segment, List, Button, Responsive } from 'semantic-ui-react';
 import { fetchDepartmentCourses } from '../ViewAcademyProfile/actions';
 import CourseItem from '../../components/CourseItem';
 
@@ -24,6 +24,7 @@ class AcademyProfile extends React.Component {
           tablet={8}
           mobile={16}
           key={index}
+          style={{ marginTop: '10px' }}
         >
           <CourseItem course={course} key={index} />
         </Grid.Column>))
@@ -37,17 +38,17 @@ class AcademyProfile extends React.Component {
 
     return (
       <div>
-        <Grid>
+        <Responsive as={Grid} {...Responsive.onlyComputer}>
           {colors.map(color => (
-            <Grid.Row className="profileBackground" color={color} key={color}>
+            <Grid.Row className="profileBackground" style={{ background: color }} key={color}>
               <Grid.Column />
             </Grid.Row>
           ))}
-        </Grid>
+        </Responsive>
         <Container>
           <Grid className="profileDetails">
             <Grid.Column mobile={16} tablet={8} computer={5}>
-              <Sticky offset={150}>
+              <Responsive as={Sticky} {...Responsive.onlyComputer} offset={150}>
                 <Segment.Group className="profileSegment">
                   <Segment textAlign="center">
                     <Segment
@@ -90,7 +91,91 @@ class AcademyProfile extends React.Component {
                     </List>
                   </Segment>
                 </Segment.Group>
-              </Sticky>
+              </Responsive>
+              <Responsive as={Segment.Group} {...Responsive.onlyTablet}>
+                <Segment textAlign="center">
+                  <Segment
+                    textAlign="center"
+                    circular
+                    className="profilePicSegment"
+                    style={{
+                      width: 175,
+                      height: 175,
+                      backgroundImage: `url(${this.props.profiles.academy_logo ? `https://ipfs.io/ipfs/${this.props.profiles.academy_logo}` : avatarPlaceholder})`,
+                      backgroundRepeat: 'no-repeat',
+                      backgroundSize: 'contain',
+                      backgroundPosition: 'center center',
+                      borderWidth: 0,
+                      cursor: 'auto',
+                    }}
+                  />
+                  <Header size="large">
+                    {this.props.profiles.academy_name}
+                  </Header>
+                </Segment>
+                <Segment padded>
+                  <Button
+                    as="a"
+                    primary
+                    size="large"
+                    className="fluid"
+                    content="MESSAGE US"
+                    icon="mail outline"
+                    href={email}
+                  />
+                </Segment>
+                <Segment padded="very">
+                  <List>
+                    {/* <List.Item icon={{ name: 'users', style: { width: '22px' } }}
+                  content={<span>{this.props.profiles.students}</span>} /> */}
+                    <List.Item icon={{ name: 'marker', style: { width: '22px' } }} content={this.props.profiles.academy_country ? this.props.profiles.academy_country : '-'} />
+                    <List.Item icon={{ name: 'mail', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={email}>{this.props.profiles.academy_email}</a>} />
+                    <List.Item icon={{ name: 'linkify', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={link}>{this.props.profiles.academy_website}</a>} />
+                  </List>
+                </Segment>
+              </Responsive>
+              <Responsive as={Segment.Group} {...Responsive.onlyMobile}>
+                <Segment textAlign="center">
+                  <Segment
+                    textAlign="center"
+                    circular
+                    className="profilePicSegment"
+                    style={{
+                      width: 175,
+                      height: 175,
+                      backgroundImage: `url(${this.props.profiles.academy_logo ? `https://ipfs.io/ipfs/${this.props.profiles.academy_logo}` : avatarPlaceholder})`,
+                      backgroundRepeat: 'no-repeat',
+                      backgroundSize: 'contain',
+                      backgroundPosition: 'center center',
+                      borderWidth: 0,
+                      cursor: 'auto',
+                    }}
+                  />
+                  <Header size="large">
+                    {this.props.profiles.academy_name}
+                  </Header>
+                </Segment>
+                <Segment padded>
+                  <Button
+                    as="a"
+                    primary
+                    size="large"
+                    className="fluid"
+                    content="MESSAGE US"
+                    icon="mail outline"
+                    href={email}
+                  />
+                </Segment>
+                <Segment padded="very">
+                  <List>
+                    {/* <List.Item icon={{ name: 'users', style: { width: '22px' } }}
+                  content={<span>{this.props.profiles.students}</span>} /> */}
+                    <List.Item icon={{ name: 'marker', style: { width: '22px' } }} content={this.props.profiles.academy_country ? this.props.profiles.academy_country : '-'} />
+                    <List.Item icon={{ name: 'mail', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={email}>{this.props.profiles.academy_email}</a>} />
+                    <List.Item icon={{ name: 'linkify', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={link}>{this.props.profiles.academy_website}</a>} />
+                  </List>
+                </Segment>
+              </Responsive>
             </Grid.Column>
             <Grid.Column mobile={16} tablet={8} computer={11}>
               <Segment padded="very" size="large">

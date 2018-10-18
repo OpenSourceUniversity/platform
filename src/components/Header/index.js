@@ -280,16 +280,16 @@ class HeaderWithoutRouter extends React.Component {
     return (
       <Menu size="massive" fixed="top">
         <Container fluid>
-          <Grid divided="vertically">
+          <Grid style={{ marginRight: 0, marginLeft: 0, width: '100%' }}>
             { this.props.isLoggedIn ? (
               <Grid.Row className="main-nav" style={{ zIndex: '99' }} >
-                <Responsive as={Menu.Item} {...Responsive.onlyComputer} name="home" onClick={this.handleItemClick}>
+                <Responsive style={{ paddingLeft: 0 }} as={Menu.Item} {...Responsive.onlyComputer} name="home" onClick={this.handleItemClick}>
                   <img className="main-nav-logo" alt="" src={logo} />
                 </Responsive>
                 <Responsive as={Menu.Item} {...Responsive.onlyTablet} name="home" onClick={this.props.showSidebar}>
                   <img className="main-nav-logo" alt="" src={logo} />
                 </Responsive>
-                <Responsive as={Menu.Item} {...Responsive.onlyMobile} name="home" onClick={this.props.showSidebar}>
+                <Responsive as={Menu.Item} {...Responsive.onlyMobile} style={{ padding: 0, paddingRight: '10px' }} name="home" onClick={this.props.showSidebar}>
                   <img className="main-nav-logo" alt="" src={logo} />
                 </Responsive>
                 <Responsive as={Dropdown} {...Responsive.onlyComputer} className="explore-dropdown" item trigger={exploreTrigger}>
@@ -337,10 +337,8 @@ class HeaderWithoutRouter extends React.Component {
                       { this.props.unreadAllMessagesCount }
                     </Label>
                   </Menu.Item>
-                  <Menu.Item style={{ cursor: 'pointer!important' }}>
-                    <NotificationsComponent />
-                  </Menu.Item>
-                  <Dropdown item trigger={avatarTrigger} pointing="top right">
+                  <NotificationsComponent />
+                  <Dropdown item trigger={avatarTrigger} pointing="top right" style={{ paddingRight: 0 }}>
                     <Dropdown.Menu>
                       <Dropdown.Item className="account-nav-setter" name="account">
 

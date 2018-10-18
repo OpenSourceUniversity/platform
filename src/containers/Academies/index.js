@@ -9,7 +9,7 @@ import storeSearchType from '../../util/search/storeSearchType';
 
 
 class AcademiesPage extends React.Component {
-  state = { activeIndex: 0, activeItem: 'trending' }
+  state = { activeIndex: -1, activeItem: 'trending' }
 
   componentDidMount() {
     this.props.resetAcademies();
@@ -124,6 +124,7 @@ class AcademiesPage extends React.Component {
                   >
                     <Icon name="block layout" />
                     Type
+                    <i aria-hidden="true" className="dropdown icon" />
                   </Accordion.Title>
                   <Accordion.Content
                     active={activeIndex === 0}

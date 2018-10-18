@@ -1,11 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-import { Header, Divider, Grid, Sticky, Segment, List, Button, Dimmer, Loader, Message } from 'semantic-ui-react';
+import { Header, Divider, Grid, Sticky, Segment, List, Button, Dimmer, Loader, Message, Responsive } from 'semantic-ui-react';
 import { fetchCompanyJobs } from './actions';
 import JobItem from '../../components/JobItem';
 import getProfileView from '../../util/profiles/getProfileView';
 import openThread from '../../util/messaging/openThread';
+
+const colors = [
+  'blue',
+];
 
 /* eslint-disable camelcase */
 class ViewBusinessProfile extends React.Component {
@@ -33,6 +37,7 @@ class ViewBusinessProfile extends React.Component {
           tablet={8}
           mobile={16}
           key={index}
+          style={{ marginTop: '10px' }}
         >
           <JobItem job={job} key={index} />
         </Grid.Column>))
@@ -46,6 +51,13 @@ class ViewBusinessProfile extends React.Component {
     const showDimmer = !!(this.props.profileViewError) || !(this.props.company.company_name);
     return (
       <div>
+        <Responsive as={Grid} {...Responsive.onlyComputer}>
+          {colors.map(color => (
+            <Grid.Row className="profileBackground" color={color} key={color}>
+              <Grid.Column />
+            </Grid.Row>
+          ))}
+        </Responsive>
         <Dimmer active={this.props.profileViewIsFetching} inverted>
           <Loader size="large">Loading</Loader>
         </Dimmer>
@@ -68,7 +80,7 @@ class ViewBusinessProfile extends React.Component {
         </Dimmer>
         <Grid>
           <Grid.Column mobile={16} tablet={8} computer={5}>
-            <Sticky offset={150}>
+            <Responsive as={Sticky} {...Responsive.onlyComputer} offset={150}>
               <Segment.Group className="profileSegment">
                 <Segment textAlign="center">
                   <Segment
@@ -106,14 +118,102 @@ class ViewBusinessProfile extends React.Component {
                 </Segment>
                 <Segment>
                   <List>
-                    { <List.Item icon={{ name: 'users', style: { width: '22px' } }} content={<span>{this.props.eth_address}</span>} /> }
+                    { <List.Item icon={{ name: 'users', style: { width: '22px' } }} content={<span style={{ whiteSpace: 'pre-line', wordBreak: 'break-word' }} >{this.props.eth_address}</span>} /> }
                     <List.Item icon="mail" content={<a href={email}>{this.props.company.company_email}</a>} />
                     <List.Item icon="linkify" content={<a href={link}>{this.props.company.company_website}</a>} />
                   </List>
                 </Segment>
                 <Segment />
               </Segment.Group>
-            </Sticky>
+            </Responsive>
+            <Responsive as={Segment.Group} {...Responsive.onlyTablet} className="profileSegment">
+              <Segment textAlign="center">
+                <Segment
+                  textAlign="center"
+                  circular
+                  className="profilePicSegment"
+                  style={{
+                    width: 175,
+                    height: 175,
+                    backgroundImage: `url(${this.props.company.company_logo ? `https://ipfs.io/ipfs/${this.props.company.company_logo}` : avatarPlaceholder})`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'contain',
+                    backgroundPosition: 'center center',
+                    borderWidth: 0,
+                    cursor: 'auto',
+                  }}
+                />
+                <Header size="large">
+                  {this.props.company.company_name}
+                </Header>
+                <Header size="small" color="grey">
+                  {this.props.company.company_country ? this.props.company.company_country : '-'}
+                </Header>
+              </Segment>
+              <Segment>
+                <Button
+                  primary
+                  size="large"
+                  className="fluid"
+                  content="SEND MESSAGE"
+                  name={this.props.eth_address.toLowerCase()}
+                  icon="mail outline"
+                  onClick={this.openMessaging}
+                />
+              </Segment>
+              <Segment>
+                <List>
+                  { <List.Item icon={{ name: 'users', style: { width: '22px' } }} content={<span style={{ whiteSpace: 'pre-line', wordBreak: 'break-word' }} >{this.props.eth_address}</span>} /> }
+                  <List.Item icon="mail" content={<a href={email}>{this.props.company.company_email}</a>} />
+                  <List.Item icon="linkify" content={<a href={link}>{this.props.company.company_website}</a>} />
+                </List>
+              </Segment>
+              <Segment />
+            </Responsive>
+            <Responsive as={Segment.Group} {...Responsive.onlyMobile} className="profileSegment">
+              <Segment textAlign="center">
+                <Segment
+                  textAlign="center"
+                  circular
+                  className="profilePicSegment"
+                  style={{
+                    width: 175,
+                    height: 175,
+                    backgroundImage: `url(${this.props.company.company_logo ? `https://ipfs.io/ipfs/${this.props.company.company_logo}` : avatarPlaceholder})`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'contain',
+                    backgroundPosition: 'center center',
+                    borderWidth: 0,
+                    cursor: 'auto',
+                  }}
+                />
+                <Header size="large">
+                  {this.props.company.company_name}
+                </Header>
+                <Header size="small" color="grey">
+                  {this.props.company.company_country ? this.props.company.company_country : '-'}
+                </Header>
+              </Segment>
+              <Segment>
+                <Button
+                  primary
+                  size="large"
+                  className="fluid"
+                  content="SEND MESSAGE"
+                  name={this.props.eth_address.toLowerCase()}
+                  icon="mail outline"
+                  onClick={this.openMessaging}
+                />
+              </Segment>
+              <Segment>
+                <List>
+                  { <List.Item icon={{ name: 'users', style: { width: '22px' } }} content={<span style={{ whiteSpace: 'pre-line', wordBreak: 'break-word' }} >{this.props.eth_address}</span>} /> }
+                  <List.Item icon="mail" content={<a href={email}>{this.props.company.company_email}</a>} />
+                  <List.Item icon="linkify" content={<a href={link}>{this.props.company.company_website}</a>} />
+                </List>
+              </Segment>
+              <Segment />
+            </Responsive>
           </Grid.Column>
           <Grid.Column mobile={16} tablet={8} computer={11}>
             <Segment size="large">

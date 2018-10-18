@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Container, Header, Divider, Grid, Sticky, Segment, List, Button, Statistic, Dimmer, Loader, Message, Icon } from 'semantic-ui-react';
+import { Container, Header, Divider, Grid, Sticky, Segment, List, Button, Statistic, Dimmer, Loader, Message, Icon, Responsive } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import SkillItem from 'components/SkillItem';
 import CertificateItem from 'components/CertificateItem';
@@ -79,17 +79,17 @@ class LearnerProfile extends React.Component {
 
     return (
       <div>
-        <Grid>
+        <Responsive as={Grid} {...Responsive.onlyComputer}>
           {colors.map(color => (
             <Grid.Row className="profileBackground" color={color} key={color}>
               <Grid.Column />
             </Grid.Row>
           ))}
-        </Grid>
+        </Responsive>
         <Container>
           <Grid className="profileDetails">
             <Grid.Column mobile={16} tablet={8} computer={5}>
-              <Sticky offset={150}>
+              <Responsive as={Sticky} {...Responsive.onlyComputer} offset={150}>
                 <Segment.Group className="profileSegment">
                   <Segment textAlign="center">
                     <Segment
@@ -131,7 +131,89 @@ class LearnerProfile extends React.Component {
                     </Statistic.Group>
                   </Segment>
                 </Segment.Group>
-              </Sticky>
+              </Responsive>
+              <Responsive as={Segment.Group} {...Responsive.onlyTablet}>
+                <Segment textAlign="center">
+                  <Segment
+                    textAlign="center"
+                    circular
+                    className="profilePicSegment"
+                    style={{
+                      width: 175,
+                      height: 175,
+                      backgroundImage: `url(${this.props.profiles.learner_avatar ? `https://ipfs.io/ipfs/${this.props.profiles.learner_avatar}` : avatarPlaceholder})`,
+                      backgroundRepeat: 'no-repeat',
+                      backgroundSize: 'contain',
+                      backgroundPosition: 'center center',
+                      borderWidth: 0,
+                      cursor: 'auto',
+                    }}
+                  />
+                  <Header size="large">
+                    {this.props.profiles.full_name}
+                  </Header>
+                  <Header size="small" color="grey">
+                    {this.props.profiles.learner_position ? this.props.profiles.learner_position : '-'}
+                  </Header>
+                </Segment>
+                <Segment padded="very">
+                  <List>
+                    <List.Item icon={{ name: 'users', style: { width: '22px' } }} content={this.props.profiles.learner_specialisation ? this.props.profiles.learner_specialisation : '-'} />
+                    <List.Item icon={{ name: 'marker', style: { width: '22px' } }} content={this.props.profiles.learner_country ? this.props.profiles.learner_country : '-'} />
+                    <List.Item icon={{ name: 'linkify', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={site}>{this.props.profiles.learner_site ? this.props.profiles.learner_site : '-'}</a>} />
+                    <List.Item icon={{ name: 'phone', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={phoneNumber}>{this.props.profiles.phone_number ? this.props.profiles.phone_number : '-'}</a>} />
+                  </List>
+                </Segment>
+                <Segment padded="very">
+                  <Statistic.Group size="tiny" color="orange" horizontal>
+                    <Statistic>
+                      <Statistic.Value>{this.props.certificates.length}</Statistic.Value>
+                      <Statistic.Label>Certificates</Statistic.Label>
+                    </Statistic>
+                  </Statistic.Group>
+                </Segment>
+              </Responsive>
+              <Responsive as={Segment.Group} {...Responsive.onlyMobile} >
+                <Segment textAlign="center">
+                  <Segment
+                    textAlign="center"
+                    circular
+                    className="profilePicSegment"
+                    style={{
+                      width: 175,
+                      height: 175,
+                      backgroundImage: `url(${this.props.profiles.learner_avatar ? `https://ipfs.io/ipfs/${this.props.profiles.learner_avatar}` : avatarPlaceholder})`,
+                      backgroundRepeat: 'no-repeat',
+                      backgroundSize: 'contain',
+                      backgroundPosition: 'center center',
+                      borderWidth: 0,
+                      cursor: 'auto',
+                    }}
+                  />
+                  <Header size="large">
+                    {this.props.profiles.full_name}
+                  </Header>
+                  <Header size="small" color="grey">
+                    {this.props.profiles.learner_position ? this.props.profiles.learner_position : '-'}
+                  </Header>
+                </Segment>
+                <Segment padded="very">
+                  <List>
+                    <List.Item icon={{ name: 'users', style: { width: '22px' } }} content={this.props.profiles.learner_specialisation ? this.props.profiles.learner_specialisation : '-'} />
+                    <List.Item icon={{ name: 'marker', style: { width: '22px' } }} content={this.props.profiles.learner_country ? this.props.profiles.learner_country : '-'} />
+                    <List.Item icon={{ name: 'linkify', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={site}>{this.props.profiles.learner_site ? this.props.profiles.learner_site : '-'}</a>} />
+                    <List.Item icon={{ name: 'phone', style: { width: '22px' } }} content={<a target="_blank" rel="noopener noreferrer" href={phoneNumber}>{this.props.profiles.phone_number ? this.props.profiles.phone_number : '-'}</a>} />
+                  </List>
+                </Segment>
+                <Segment padded="very">
+                  <Statistic.Group size="tiny" color="orange" horizontal>
+                    <Statistic>
+                      <Statistic.Value>{this.props.certificates.length}</Statistic.Value>
+                      <Statistic.Label>Certificates</Statistic.Label>
+                    </Statistic>
+                  </Statistic.Group>
+                </Segment>
+              </Responsive>
             </Grid.Column>
             <Grid.Column mobile={16} tablet={8} computer={11}>
               <Segment padded="very" size="large">
@@ -184,31 +266,7 @@ class LearnerProfile extends React.Component {
                       </div>
                   }
                 </Segment>
-                <Segment padded="very">
-                  <Header>
-                    Experience
-                  </Header>
-                  <Segment style={{
-                    textAlign: 'center', background: '#7f8fa6', color: '#fff', borderRadius: '10px', opacity: 0.7,
-                  }}
-                  >
-                      Coming in Beta
-                  </Segment>
-                  <Divider clearing />
-                </Segment>
               </Segment.Group>
-              <Segment padded="very" size="large">
-                <Header>
-                  Reviews
-                </Header>
-                <Segment style={{
-                  textAlign: 'center', background: '#7f8fa6', color: '#fff', borderRadius: '10px', opacity: 0.7,
-                }}
-                >
-                    Coming in Beta
-                </Segment>
-                <Divider clearing />
-              </Segment>
             </Grid.Column>
           </Grid>
         </Container>

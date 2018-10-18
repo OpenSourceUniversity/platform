@@ -9,7 +9,7 @@ import storeSearchType from '../../util/search/storeSearchType';
 
 
 class LearnersPage extends React.Component {
-  state = { activeIndex: 0, activeItem: 'trending' }
+  state = { activeIndex: -1, activeItem: 'trending' }
 
   componentDidMount() {
     this.props.resetLearners();
@@ -106,7 +106,7 @@ class LearnersPage extends React.Component {
           Learners
         </Header>
         <Grid>
-          <Grid.Column width={5}>
+          <Grid.Column mobile={16} tablet={6} computer={3}>
             <Accordion as={Menu} vertical>
               <Header style={{ textAlign: 'center', paddingTop: '10px' }}>
                 Advanced filter
@@ -119,6 +119,7 @@ class LearnersPage extends React.Component {
                 >
                   <Icon name="block layout" />
                   Type
+                  <i aria-hidden="true" className="dropdown icon" />
                 </Accordion.Title>
                 <Accordion.Content
                   active={activeIndex === 0}
@@ -128,7 +129,7 @@ class LearnersPage extends React.Component {
             </Accordion>
           </Grid.Column>
 
-          <Grid.Column width={11}>
+          <Grid.Column mobile={16} tablet={10} computer={10}>
             <Segment>
               {this.renderSearch()}
             </Segment>

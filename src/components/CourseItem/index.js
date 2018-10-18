@@ -58,7 +58,7 @@ class CourseItemWithoutRouter extends React.Component {
           (null) :
           (
             <Card.Content extra>
-              { this.props.course.description }
+              { this.props.course.description ? `${this.props.course.description.substr(0, 100)}...` : '-'}
             </Card.Content>
           )
         }

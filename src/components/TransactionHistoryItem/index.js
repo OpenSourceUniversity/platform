@@ -26,8 +26,13 @@ export default class TransactionHistoryItem extends React.Component {
         <Table.Cell>{ this.props.historyDetails.currency.toUpperCase() }</Table.Cell>
         <Table.Cell textAlign="right">{ this.toJsDate(this.props.historyDetails.date) }</Table.Cell>
         <Table.Cell textAlign="center">
-          <Modal className="modalFix" style={{ display: 'flex!important', textAlign: 'center' }} trigger={<Button size="tiny" icon="unordered list" />}>
-            <Modal.Content>
+          <Modal
+            className="modalFix"
+            style={{ display: 'flex!important', textAlign: 'center', marginTop: 0 }}
+            trigger={<Button size="tiny" icon="unordered list" />}
+            closeIcon
+          >
+            <Modal.Content style={{ maxHeight: '70vh', overflowY: 'scroll' }}>
               <Modal.Header style={{ marginBottom: '1em' }}>
                 <Header>
                   Transaction Details
@@ -37,31 +42,40 @@ export default class TransactionHistoryItem extends React.Component {
                 <Header size="small" style={{ margin: 0 }}>
                   Type:
                 </Header>
-                <p>{ this.props.historyDetails.type }</p>
+                <p style={{ whiteSpace: 'pre-line', wordBreak: 'break-word' }} >{ this.props.historyDetails.type }</p>
                 <Header size="small" style={{ margin: 0 }}>
                   Currency:
                 </Header>
-                <p>{ this.props.historyDetails.currency.toUpperCase() } </p>
+                <p style={{ whiteSpace: 'pre-line', wordBreak: 'break-word' }} >{ this.props.historyDetails.currency.toUpperCase() } </p>
                 <Header size="small" style={{ margin: 0 }}>
                   Value:
                 </Header>
-                <p>{ this.props.historyDetails.value } </p>
+                <p style={{ whiteSpace: 'pre-line', wordBreak: 'break-word' }} >{ this.props.historyDetails.value } </p>
                 <Header size="small" style={{ margin: 0 }}>
                   Date:
                 </Header>
-                <p>{ this.toJsDate(this.props.historyDetails.date) } </p>
+                <p style={{ whiteSpace: 'pre-line', wordBreak: 'break-word' }} >{ this.toJsDate(this.props.historyDetails.date) } </p>
                 <Header size="small" style={{ margin: 0 }}>
                   From:
                 </Header>
-                <p>{ this.props.historyDetails.sender } </p>
+                <p style={{ whiteSpace: 'pre-line', wordBreak: 'break-word' }} >{ this.props.historyDetails.sender } </p>
                 <Header size="small" style={{ margin: 0 }}>
                   To:
                 </Header>
-                <p>{ this.props.historyDetails.receiver } </p>
+                <p style={{ whiteSpace: 'pre-line', wordBreak: 'break-word' }} >{ this.props.historyDetails.receiver } </p>
                 <Header size="small" style={{ margin: 0 }}>
                   TX:
                 </Header>
-                <p><a target="blank" href={`https://etherscan.io/tx/${this.props.historyDetails.tx_hash}`}>{ this.props.historyDetails.tx_hash }</a></p>
+                <p
+                  style={{ whiteSpace: 'pre-line', wordBreak: 'break-word' }}
+                >
+                  <a
+                    target="blank"
+                    href={`https://etherscan.io/tx/${this.props.historyDetails.tx_hash}`}
+                  >
+                    { this.props.historyDetails.tx_hash }
+                  </a>
+                </p>
               </Modal.Description>
             </Modal.Content>
           </Modal>

@@ -232,7 +232,7 @@ class CertificatePage extends React.Component {
           <Divider clearing />
           <span style={{ lineHeight: '4.4' }}>
             <a
-              href={`${etherscanUrl}${verification.tx_hash}`}
+              href={`${etherscanUrl}tx/${verification.tx_hash}`}
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -246,7 +246,7 @@ class CertificatePage extends React.Component {
             </Link>
           </span>
           <span style={{ float: 'right' }}>
-            <QRCode value={`${etherscanUrl}${verification.tx_hash}`} size={64} />
+            <QRCode value={`${etherscanUrl}tx/${verification.tx_hash}`} size={64} />
           </span>
           <Divider clearing />
         </div>
@@ -390,9 +390,9 @@ class CertificatePage extends React.Component {
                 {this.props.address.toLowerCase() === this.props.certificate.holder_eth_address ?
                   <Modal
                     trigger={
-                      <Button icon labelPosition="left" positive floated="right">
+                      <Button icon labelPosition="left" positive floated="right" style={{ marginTop: '5px' }} >
                         <Icon name="checkmark" />
-                        Verifiy Certificate
+                        Verify Certificate
                       </Button>
                     }
                     closeIcon
@@ -443,7 +443,7 @@ class CertificatePage extends React.Component {
                   <Modal
                     style={{ marginTop: '0' }}
                     trigger={
-                      <Button icon labelPosition="left" basic floated="right">
+                      <Button icon labelPosition="left" basic floated="right" style={{ marginTop: '5px' }} >
                         <Icon name="file pdf outline" />
                         View certificate file
                       </Button>
@@ -464,7 +464,7 @@ class CertificatePage extends React.Component {
                         <img style={{ maxWidth: '100%', maxHeight: '70vh' }} id="CertificateFile" alt="" src="" />
                       </div>
                       <object alt="" id="CertificatePDFFile" data="" type="application/pdf" width="100%" height="1px">
-                        <p>Alternative text</p>
+                        <p>Can&#39;t load certificate PDF file on this device</p>
                       </object>
                     </Modal.Content>
                   </Modal> :
@@ -472,7 +472,7 @@ class CertificatePage extends React.Component {
                 }
               </div>
               <Divider hidden />
-              <Container style={{ textAlign: 'left', padding: '0 10em 5em 10em' }} >
+              <Container style={{ textAlign: 'left', padding: '0 10% 5% 10%' }} >
                 <Header size="huge" >
                   { certificateStatusIcon }
                   <Header.Content>
@@ -492,12 +492,14 @@ class CertificatePage extends React.Component {
                 <Divider hidden />
                 <span>
                   {this.props.certificate.verifications.length > 0 ?
-                    <Modal trigger={
-                      <Button positive color={color}>
-                        <Icon name="checkmark" />
-                        Verification History
-                      </Button>
-                    }
+                    <Modal
+                      trigger={
+                        <Button positive color={color}>
+                          <Icon name="checkmark" />
+                          Verification History
+                        </Button>
+                      }
+                      closeIcon
                     >
                       <Modal.Header>Verifications History</Modal.Header>
                       <Modal.Content>
@@ -552,7 +554,7 @@ class CertificatePage extends React.Component {
                 <Divider hidden />
                 <Header size="huge">
                   <QRCode value={etherscanUser} size={64} />
-                  <Header.Content style={{ paddingLeft: '1em' }} >
+                  <Header.Content style={{ paddingLeft: '2%' }} >
                     <span>
                       {this.props.certificate.holder_names}
                     </span>

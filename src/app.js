@@ -60,27 +60,27 @@ class App extends React.Component {
           </div> :
           null
         }
+        <Responsive
+          as={MobileHeader}
+          showSidebar={this.handleSlidebarClick}
+          onHideFunc={this.handleSidebarHide}
+          {...Responsive.onlyTablet}
+          visible={this.state.visible}
+        />
+        <Responsive
+          as={MobileHeader}
+          showSidebar={this.handleSlidebarClick}
+          onHideFunc={this.handleSidebarHide}
+          {...Responsive.onlyMobile}
+          visible={this.state.visible}
+        />
         <Sidebar.Pushable as="div">
-          <Responsive
-            as={MobileHeader}
-            showSidebar={this.handleSlidebarClick}
-            onHideFunc={this.handleSidebarHide}
-            {...Responsive.onlyTablet}
-            visible={this.state.visible}
-          />
-          <Responsive
-            as={MobileHeader}
-            showSidebar={this.handleSlidebarClick}
-            onHideFunc={this.handleSidebarHide}
-            {...Responsive.onlyMobile}
-            visible={this.state.visible}
-          />
           <Sidebar.Pusher dimmed={this.state.visible}>
             <div id="Main">
               <Main />
             </div>
             {this.props.isLoggedIn ?
-              <Container className="footer" textAlign="center">
+              <Container className="footer" textAlign="center" style={{ whiteSpace: 'pre-line', wordBreak: 'break-word' }} >
                 Wallet Address: {this.props.address}
               </Container> :
               null

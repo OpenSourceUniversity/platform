@@ -34,7 +34,6 @@ export default function login(passphrase) {
       setTimeout(() => {
         try {
           const wallet = Wallet.fromV3(v3Wallet, passphrase);
-          console.log(wallet);
           const address = wallet.getChecksumAddressString();
           const privateKey = wallet.getPrivateKey();
           dispatch(storeSignedAddress(address.slice(2), privateKey));

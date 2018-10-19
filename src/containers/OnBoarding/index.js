@@ -52,6 +52,7 @@ class OnBoarding extends React.Component {
         className="onboarding"
         style={{
           backgroundColor: 'white',
+          overflowY: 'scroll',
         }}
       >
         <section className="left-col">

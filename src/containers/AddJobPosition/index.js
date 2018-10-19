@@ -102,7 +102,7 @@ class AddJobPosition extends React.Component {
         <Divider clearing />
 
         <Grid style={{ display: this.props.isAdded ? 'none' : 'block' }}>
-          <Grid.Column width={10}>
+          <Grid.Column mobile={16} tablet={16} computer={10}>
             <Segment padded="very">
               <Dimmer className="belowNavBar" active={this.props.isAdding} inverted>
                 <Loader size="medium">
@@ -260,7 +260,7 @@ class AddJobPosition extends React.Component {
               </Form>
             </Segment>
           </Grid.Column>
-          <Grid.Column width={6}>
+          <Grid.Column width={6} only="computer">
             <Message positive={!this.props.match.params.id} warning={!!this.props.match.params.id}>
               <Message.Header>
                 {this.props.match.params.id ? 'Editing' : 'Adding'} Job Position

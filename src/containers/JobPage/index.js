@@ -92,7 +92,7 @@ class JobPage extends React.Component {
             <Dimmer active={this.props.isFetching} inverted>
               <Loader size="large">Loading</Loader>
             </Dimmer>
-            <Grid>
+            <Grid reversed="mobile vertically">
               {this.props.address.toLowerCase() === this.props.job.company.eth_address ?
                 <Grid.Column width={16}>
                   <Segment clearing floated="right">
@@ -194,7 +194,7 @@ class JobPage extends React.Component {
                 </Grid.Column> :
                 null
               }
-              <Grid.Column width={11}>
+              <Grid.Column mobile={16} tablet={10} computer={11}>
                 <Segment style={{ padding: '40px' }}>
                   <div>
                     <Header style={{ fontSize: '1.7em' }}>
@@ -230,7 +230,7 @@ class JobPage extends React.Component {
                   <Divider hidden />
                 </Segment>
               </Grid.Column>
-              <Grid.Column width={5}>
+              <Grid.Column mobile={16} tablet={6} computer={5}>
                 <Segment style={{ padding: '40px' }}>
                   <div style={{ textAlign: 'center' }}>
                     <Header style={{ fontSize: '1.5em' }}>

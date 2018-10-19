@@ -99,7 +99,7 @@ class AddCourse extends React.Component {
         <Divider clearing />
 
         <Grid style={{ display: this.props.isAdded ? 'none' : 'block' }}>
-          <Grid.Column width={10}>
+          <Grid.Column mobile={16} tablet={16} computer={10}>
             <Dimmer className="belowNavBar" active={this.props.isAdding} inverted>
               <Loader size="medium">
                 <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
@@ -224,7 +224,7 @@ class AddCourse extends React.Component {
               <Button type="submit" disabled={this.validation()} primary size="huge">Submit</Button>
             </Form>
           </Grid.Column>
-          <Grid.Column width={6}>
+          <Grid.Column width={6} only="computer">
             <Message positive={!this.props.match.params.id} warning={!!this.props.match.params.id}>
               <Message.Header>
                 {this.props.match.params.id ? 'Editing' : 'Adding'} Course

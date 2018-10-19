@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimmer, Header, Container, Image, Loader, Form, Segment, Menu, Grid, Label, Divider } from 'semantic-ui-react';
+import { Dimmer, Header, Container, Image, Loader, Form, Segment, Menu, Grid, Label, Divider, Sidebar, Responsive, Icon, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import Message from '../../components/Message';
@@ -12,7 +12,13 @@ import { resetMessages, resetActiveThread } from './actions';
 
 
 class MessagesPage extends React.Component {
-  state = { activeThread: null, privateKey: null, publicKey: null }
+  state = {
+    activeThread: null,
+    privateKey: null,
+    publicKey: null,
+    visibleThreads: true,
+    visibleProfileInfo: false,
+  }
 
   componentDidMount() {
     this.props.fetchThreads();
@@ -132,6 +138,10 @@ class MessagesPage extends React.Component {
     }
     return null;
   }
+
+  handleThreadsClick = () => this.setState({ visibleThreads: !this.state.visibleThreads })
+
+  handleProfileClick = () => this.setState({ visibleProfileInfo: !this.state.visibleProfileInfo })
 
   toAgoDate(pythonDateStr) {
     const jsDateStr = `${pythonDateStr.substr(0, 10)} ${pythonDateStr.substr(11, 8)}`;
@@ -342,7 +352,7 @@ class MessagesPage extends React.Component {
     return (
       <Container fluid style={{ marginTop: '-1px' }}>
         <Segment>
-          <Grid>
+          <Responsive as={Grid} {...Responsive.onlyComputer}>
             <Grid.Column
               width={4}
               style={{
@@ -400,7 +410,283 @@ class MessagesPage extends React.Component {
             <Grid.Column width={3} style={{ paddingBottom: 0 }} >
               {this.renderUserInfo()}
             </Grid.Column>
-          </Grid>
+          </Responsive>
+          <Responsive
+            as={Sidebar.Pushable}
+            {...Responsive.onlyTablet}
+            style={{ paddingTop: 0, paddingBottom: 0, display: this.props.match.params.id ? null : 'none' }}
+          >
+            <Sidebar
+              as={Menu}
+              animation="overlay"
+              vertical
+              className="messagingThreads"
+              direction="left"
+              fluid
+              width="wide"
+              style={{ height: '100%', width: '100%', background: 'white' }}
+              pointing
+              secondary
+              visible={this.state.visibleThreads}
+            >
+              <Dimmer active={this.props.isFetchingThreads} inverted>
+                <Loader size="medium">
+                  <p>Fetching your threads</p>
+                  <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
+                    <image href={loader} x="0" y="0" width="100%" height="100%" />
+                  </svg>
+                </Loader>
+              </Dimmer>
+              <div style={{ textAlign: 'right', paddingBottom: '5px' }}>
+                <Button
+                  onClick={this.handleThreadsClick}
+                  icon
+                  labelPosition="right"
+                >
+                  <Icon
+                    name="arrow right"
+                  />
+                    Messaging
+                </Button>
+              </div>
+              {this.renderThreads()}
+              {this.props.threads.length ? null : <span>You haven&#39;t any open thread</span>}
+            </Sidebar>
+            <div
+              style={{
+                position: 'fixed',
+                background: 'white',
+                zIndex: 100,
+                width: '100%',
+                paddingBottom: '5px',
+                borderBottom: '1px solid lightgray',
+              }}
+            >
+              <Button
+                onClick={this.handleThreadsClick}
+                icon
+                labelPosition="left"
+              >
+                <Icon
+                  name="arrow left"
+                />
+                  Threads
+              </Button>
+              <Button
+                onClick={this.handleProfileClick}
+                icon
+                labelPosition="left"
+                floated="right"
+              >
+                <Icon
+                  name="arrow right"
+                />
+                  Profile Info
+              </Button>
+            </div>
+            <div
+              id="MessageHistory"
+              style={{ height: '78vh', overflowY: 'scroll', padding: '43px 5% 5% 5%' }}
+              onScroll={this.messagesScroll}
+            >
+              <Dimmer active={this.props.isFetchingMessages} inverted>
+                <Loader size="medium">
+                  <p>Fetching your messages</p>
+                  <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
+                    <image href={loader} x="0" y="0" width="100%" height="100%" />
+                  </svg>
+                </Loader>
+              </Dimmer>
+              {this.renderMessages()}
+            </div>
+            <Form onSubmit={this.sendMessage} >
+              <Form.Group inline>
+                <Form.TextArea
+                  className="messageInput"
+                  rows={2}
+                  style={{ resize: 'none' }}
+                  ref={(arg) => { this.inputRef = arg; }}
+                  onKeyDown={this.onEnterPress}
+                  autoComplete="off"
+                  type="text"
+                  name="message"
+                  placeholder="Type your message here..."
+                />
+                <Form.Button color="orange" className="sendButton" content="Send" type="submit" />
+              </Form.Group>
+            </Form>
+            <Sidebar
+              as={Menu}
+              animation="overlay"
+              vertical
+              className="messagingThreads"
+              direction="right"
+              fluid
+              width="wide"
+              style={{
+                height: '100%',
+                width: '100%',
+                paddingBottom: 0,
+                background: 'white',
+              }}
+              pointing
+              secondary
+              visible={this.state.visibleProfileInfo}
+            >
+              <div style={{ paddingBottom: '5px' }} >
+                <Button
+                  onClick={this.handleProfileClick}
+                  icon
+                  labelPosition="left"
+                >
+                  <Icon
+                    name="arrow left"
+                  />
+                    Messaging
+                </Button>
+              </div>
+              {this.renderUserInfo()}
+            </Sidebar>
+          </Responsive>
+          <Responsive
+            as={Sidebar.Pushable}
+            {...Responsive.onlyMobile}
+            style={{ paddingTop: 0, paddingBottom: 0, display: this.props.match.params.id ? null : 'none' }}
+          >
+            <Sidebar
+              as={Menu}
+              animation="overlay"
+              vertical
+              className="messagingThreads"
+              direction="left"
+              fluid
+              width="wide"
+              style={{ height: '100%', width: '100%', background: 'white' }}
+              pointing
+              secondary
+              visible={this.state.visibleThreads}
+            >
+              <Dimmer active={this.props.isFetchingThreads} inverted>
+                <Loader size="medium">
+                  <p>Fetching your threads</p>
+                  <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
+                    <image href={loader} x="0" y="0" width="100%" height="100%" />
+                  </svg>
+                </Loader>
+              </Dimmer>
+              <div style={{ textAlign: 'right', paddingBottom: '5px' }}>
+                <Button
+                  onClick={this.handleThreadsClick}
+                  icon
+                  labelPosition="right"
+                >
+                  <Icon
+                    name="arrow right"
+                  />
+                    Messaging
+                </Button>
+              </div>
+              {this.renderThreads()}
+              {this.props.threads.length ? null : <span>You haven&#39;t any open thread</span>}
+            </Sidebar>
+            <div
+              style={{
+                position: 'fixed',
+                background: 'white',
+                zIndex: 100,
+                width: '100%',
+                paddingBottom: '5px',
+                borderBottom: '1px solid lightgray',
+              }}
+            >
+              <Button
+                onClick={this.handleThreadsClick}
+                icon
+                labelPosition="left"
+                style={{ fontSize: '12px' }}
+              >
+                <Icon
+                  name="arrow left"
+                />
+                  Threads
+              </Button>
+              <Button
+                onClick={this.handleProfileClick}
+                icon
+                labelPosition="left"
+                floated="right"
+                style={{ fontSize: '12px' }}
+              >
+                <Icon
+                  name="arrow right"
+                />
+                  Profile Info
+              </Button>
+            </div>
+            <div
+              id="MessageHistory"
+              style={{ height: '78vh', overflowY: 'scroll', padding: '37px 5% 5% 5%' }}
+              onScroll={this.messagesScroll}
+            >
+              <Dimmer active={this.props.isFetchingMessages} inverted>
+                <Loader size="medium">
+                  <p>Fetching your messages</p>
+                  <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
+                    <image href={loader} x="0" y="0" width="100%" height="100%" />
+                  </svg>
+                </Loader>
+              </Dimmer>
+              {this.renderMessages()}
+            </div>
+            <Form onSubmit={this.sendMessage} >
+              <Form.Group inline>
+                <Form.TextArea
+                  className="messageInput"
+                  rows={2}
+                  style={{ resize: 'none' }}
+                  ref={(arg) => { this.inputRef = arg; }}
+                  onKeyDown={this.onEnterPress}
+                  autoComplete="off"
+                  type="text"
+                  name="message"
+                  placeholder="Type your message here..."
+                />
+                <Form.Button color="orange" style={{ right: 0 }} className="sendButton" content="Send" type="submit" />
+              </Form.Group>
+            </Form>
+            <Sidebar
+              as={Menu}
+              animation="overlay"
+              vertical
+              className="messagingThreads"
+              direction="right"
+              fluid
+              width="wide"
+              style={{
+                height: '100%',
+                width: '100%',
+                paddingBottom: 0,
+                background: 'white',
+              }}
+              pointing
+              secondary
+              visible={this.state.visibleProfileInfo}
+            >
+              <div style={{ paddingBottom: '5px' }} >
+                <Button
+                  onClick={this.handleProfileClick}
+                  icon
+                  labelPosition="left"
+                >
+                  <Icon
+                    name="arrow left"
+                  />
+                    Messaging
+                </Button>
+              </div>
+              {this.renderUserInfo()}
+            </Sidebar>
+          </Responsive>
         </Segment>
       </Container>
     );

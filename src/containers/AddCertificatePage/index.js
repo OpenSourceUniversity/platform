@@ -197,7 +197,7 @@ class AddCertificatePage extends React.Component {
         <Form size="large" onSubmit={(event) => { this.handleSubmit(event, this); }}>
           <Grid divided="vertically">
             <Grid.Row columns={2}>
-              <Grid.Column width={10}>
+              <Grid.Column mobile={16} tablet={10} computer={10}>
                 <Segment style={{ display: (this.props.isAdded || this.props.error) ? 'none' : 'block' }}>
                   <Form.Field required>
                     <label htmlFor="certificate_title">
@@ -394,7 +394,7 @@ class AddCertificatePage extends React.Component {
                   </Form.Field>
                 </Segment>
               </Grid.Column>
-              <Grid.Column width={6}>
+              <Grid.Column mobile={16} tablet={6} computer={6}>
                 <Segment style={{ display: (this.props.isAdded || this.props.error) ? 'none' : 'block' }}>
                   <Form.Field required>
                     <label htmlFor="certificate_file">
@@ -437,7 +437,7 @@ class AddCertificatePage extends React.Component {
                     </Dropzone>
                   </Form.Field>
                 </Segment>
-                <Segment style={{ display: (this.props.isAdded || this.props.error) ? 'none' : 'block' }}>
+                <Segment style={{ textAlign: 'center', display: (this.props.isAdded || this.props.error) ? 'none' : 'block' }}>
                   <Button disabled={this.validation()} type="submit" primary size="huge">Upload Certificate</Button>
                 </Segment>
               </Grid.Column>

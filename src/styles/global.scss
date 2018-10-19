@@ -581,6 +581,27 @@ div#Main {
         right: 0;
       }
     }
+    .job-applications-feed {
+      font-size: 11px!important;
+    }
+    .job-applications {
+      .segment {
+        padding-left: 0;
+        padding-right: 0;
+        .grid {
+          margin-left: 0;
+          margin-right: 0;
+        }
+        .column {
+          padding-left: 2px!important;
+          padding-right: 2px!important;
+        }
+        .event {
+          padding-left: 2px!important;
+          padding-right: 2px!important;
+        }
+      }
+    }
   }
 // ***Onboarding page END***
 

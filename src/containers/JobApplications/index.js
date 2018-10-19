@@ -41,7 +41,7 @@ class JobApplicationsPage extends React.Component {
 
   render() {
     return (
-      <Container>
+      <Container className="job-applications">
         <Breadcrumb>
           <Breadcrumb.Section href="/#/">Home</Breadcrumb.Section>
           <Breadcrumb.Divider icon="right angle" />
@@ -57,7 +57,7 @@ class JobApplicationsPage extends React.Component {
           <Dimmer active={this.props.isFetching} inverted>
             <Loader size="large">Loading</Loader>
           </Dimmer>
-          <Feed size="large">
+          <Feed size="large" className="job-applications-feed">
             <Grid style={{ textAlign: 'center' }}>
               <Grid.Column width={4}>
                 <Header>

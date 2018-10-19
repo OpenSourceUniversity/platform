@@ -15,7 +15,6 @@ export function withdraw(wallet, recipient, amountLong, coin) {
     const amount = Number(amountLong) * (10 ** 18);
     const { ethBalance, eduBalance } = store.getState().web3;
     const gasPrice = (store.getState().withdraw.gasPrice * (10 ** 9)).toString(16);
-    console.log(gasPrice);
     if (coin === 'edu' && amountLong > eduBalance) {
       dispatch({
         type: 'WITHDRAW_ERROR',

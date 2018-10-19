@@ -118,7 +118,7 @@ class MobileHeaderWithoutRouter extends Sidebar {
         vertical
         className="mobile-sidebar"
         width="wide"
-        style={{ zIndex: 100, maxWidth: '100%' }}
+        style={{ zIndex: 100, maxWidth: '100%', paddingTop: '77px' }}
         visible={this.props.visible}
       >
         <Menu.Item name="home" className="home-link" onClick={this.handleItemClick} active={activeItem === 'home'} >Home</Menu.Item>

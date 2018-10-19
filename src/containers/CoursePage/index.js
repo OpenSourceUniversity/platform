@@ -95,7 +95,7 @@ class CoursePage extends React.Component {
             <Header size="large">
               {this.props.course.title}
             </Header>
-            <Grid>
+            <Grid reversed="mobile vertically">
               {this.props.address.toLowerCase() === this.props.course.provider.eth_address ?
                 <Grid.Column width={16}>
                   <Segment clearing floated="right">
@@ -197,7 +197,7 @@ class CoursePage extends React.Component {
                 </Grid.Column> :
                 null
               }
-              <Grid.Column width={11}>
+              <Grid.Column mobile={16} tablet={10} computer={11}>
                 <Segment style={{ padding: '40px' }}>
                   <Header style={{ fontSize: '1.5em' }}>
                     Skills
@@ -212,7 +212,7 @@ class CoursePage extends React.Component {
                     <Grid.Row>
                       <Grid.Column width={16}>
                         <Button as={Link} to="/certificates/add" onClick={this.registerCertificateClick} color="green" size="huge">Register Certificate</Button>
-                        <Button basic size="big" as="a" target="_blank" href={this.props.course.external_link}>
+                        <Button style={{ marginTop: '5px' }} basic size="big" as="a" target="_blank" href={this.props.course.external_link}>
                           <Icon name="world" /> Visit Course Page
                         </Button>
                       </Grid.Column>
@@ -230,7 +230,7 @@ class CoursePage extends React.Component {
                 </Segment>
 
               </Grid.Column>
-              <Grid.Column width={5}>
+              <Grid.Column mobile={16} tablet={6} computer={5}>
                 <Segment.Group>
                   <Segment padded textAlign="center">
                     <Header style={{ fontSize: '1.5em' }}>
@@ -266,7 +266,7 @@ class CoursePage extends React.Component {
                       {this.props.course.provider.name}
                     </Header>
                     <br />
-                    <span>
+                    <span style={{ whiteSpace: 'pre-line', wordBreak: 'break-word' }} >
                       {this.props.course.provider.eth_address ? this.props.course.provider.eth_address : ''}
                     </span>
                   </Segment>
@@ -275,7 +275,7 @@ class CoursePage extends React.Component {
                       Industry
                     </Header>
                     <Icon name="industry" />
-                    <span style={{ color: 'grey' }} >
+                    <span style={{ color: 'grey', whiteSpace: 'pre-line', wordBreak: 'break-word' }} >
                       {this.props.course.industries[0] ?
                         this.props.course.industries[0].name : null}
                     </span>
@@ -285,24 +285,15 @@ class CoursePage extends React.Component {
                       Tutor
                     </Header>
                     <Icon name="user outline" />
-                    <span style={{ color: 'grey' }} >
+                    <span style={{ color: 'grey', whiteSpace: 'pre-line', wordBreak: 'break-word' }} >
                       {this.props.course.tutor}
-                    </span>
-                  </Segment>
-                  <Segment padded>
-                    <Header style={{ marginBottom: '5px' }}>
-                      Language
-                    </Header>
-                    <Icon name="world" />
-                    <span style={{ color: 'grey' }} >
-                      English
                     </span>
                   </Segment>
                   <Segment padded>
                     <Header style={{ marginBottom: '5px' }}>
                       Course code
                     </Header>
-                    <span style={{ color: 'grey' }} >
+                    <span style={{ color: 'grey', whiteSpace: 'pre-line', wordBreak: 'break-word' }} >
                       {this.props.course.id}
                     </span>
                   </Segment>

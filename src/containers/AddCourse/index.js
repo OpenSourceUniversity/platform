@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Container, Header, Button, Message, Divider, Breadcrumb, Form, Input, Grid, TextArea, Loader, Dimmer } from 'semantic-ui-react';
+import { Container, Header, Button, Message, Divider, Breadcrumb, Form, Input, Grid, TextArea, Loader, Dimmer, Image } from 'semantic-ui-react';
 import SkillsInput from '../../components/SkillsInput';
 import IndustriesInput from '../../components/IndustriesInput';
 import { addCourse, getDefaultValues, editCourse, resetAddCourseProps } from './actions';
@@ -102,9 +102,7 @@ class AddCourse extends React.Component {
           <Grid.Column mobile={16} tablet={16} computer={10}>
             <Dimmer className="belowNavBar" active={this.props.isAdding} inverted>
               <Loader size="medium">
-                <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
-                  <image href={loader} x="0" y="0" width="100%" height="100%" />
-                </svg>
+                <Image src={loader} style={{ display: 'block', margin: '0 auto 10px auto', width: '96px' }} />
                 Adding course...
               </Loader>
             </Dimmer>

@@ -324,9 +324,7 @@ class CertificatePage extends React.Component {
             <Segment style={{ textAlign: 'center' }}>
               <Dimmer active={this.props.certificate.isFetching} inverted>
                 <Loader size="large">
-                  <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
-                    <image href={loader} x="0" y="0" width="100%" height="100%" />
-                  </svg>
+                  <Image src={loader} style={{ display: 'block', margin: '0 auto 10px auto', width: '96px' }} />
                 </Loader>
               </Dimmer>
               <div style={{ height: this.props.address.toLowerCase() === this.props.certificate.holder_eth_address ? '40px' : 0 }} >
@@ -353,9 +351,7 @@ class CertificatePage extends React.Component {
                     <Modal.Content>
                       <Dimmer active={this.props.isDeleting} page>
                         <Loader size="medium">
-                          <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
-                            <image href={loader} x="0" y="0" width="100%" height="100%" />
-                          </svg>
+                          <Image src={loader} style={{ display: 'block', margin: '0 auto 10px auto', width: '96px' }} />
                         </Loader>
                       </Dimmer>
                       <Message error hidden={!this.props.error}>
@@ -396,9 +392,7 @@ class CertificatePage extends React.Component {
                     <Modal.Content>
                       <Dimmer active={this.props.requestSending} page>
                         <Loader size="medium">
-                          <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
-                            <image href={loader} x="0" y="0" width="100%" height="100%" />
-                          </svg>
+                          <Image src={loader} style={{ display: 'block', margin: '0 auto 10px auto', width: '96px' }} />
                         </Loader>
                       </Dimmer>
                       <Message error hidden={!this.props.requestError}>
@@ -450,9 +444,8 @@ class CertificatePage extends React.Component {
                     <Modal.Content>
                       <Dimmer active={this.state.isFetching} page>
                         <Loader size="medium">
-                          <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
-                            <image href={loader} x="0" y="0" width="100%" height="100%" />
-                          </svg>
+                          <Image src={loader} style={{ display: 'block', margin: '0 auto 10px auto', width: '96px' }} />
+                          Fetching certificate file...
                         </Loader>
                       </Dimmer>
                       <div style={{ width: '100%', textAlign: 'center' }}>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Container, Header, Grid, Button, Icon, Divider, Checkbox, Breadcrumb, Loader, Message, Dimmer, Menu, Segment, Form, Responsive, Sidebar } from 'semantic-ui-react';
+import { Container, Header, Grid, Button, Icon, Divider, Checkbox, Breadcrumb, Loader, Message, Dimmer, Menu, Segment, Form, Responsive, Sidebar, Image } from 'semantic-ui-react';
 import SkillItem from 'components/SkillItem';
 import fetchVerifications from '../../util/verification/fetchVerifications';
 import fetchVerification from '../../util/verification/fetchVerification';
@@ -356,9 +356,7 @@ class CertificatesVerificationPage extends React.Component {
                 active={this.props.isUpdating || this.props.isVerifying || this.state.isFetching}
               >
                 <Loader size="medium">
-                  <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
-                    <image href={loader} x="0" y="0" width="100%" height="100%" />
-                  </svg>
+                  <Image src={loader} style={{ display: 'block', margin: '0 auto 10px auto', width: '96px' }} />
                   {
                     (() => {
                       if (this.props.isUpdating) {
@@ -425,7 +423,7 @@ class CertificatesVerificationPage extends React.Component {
         <Responsive
           as={Sidebar.Pushable}
           {...Responsive.onlyTablet}
-          style={{ paddingTop: 0, paddingBottom: 0 }}
+          style={{ paddingTop: 0, paddingBottom: 0, minHeight: '100vh' }}
         >
           <Sidebar
             as={Menu}
@@ -483,9 +481,7 @@ class CertificatesVerificationPage extends React.Component {
                 active={this.props.isUpdating || this.props.isVerifying || this.state.isFetching}
               >
                 <Loader size="medium">
-                  <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
-                    <image href={loader} x="0" y="0" width="100%" height="100%" />
-                  </svg>
+                  <Image src={loader} style={{ display: 'block', margin: '0 auto 10px auto', width: '96px' }} />
                   {
                     (() => {
                       if (this.props.isUpdating) {
@@ -552,7 +548,7 @@ class CertificatesVerificationPage extends React.Component {
         <Responsive
           as={Sidebar.Pushable}
           {...Responsive.onlyMobile}
-          style={{ paddingTop: 0, paddingBottom: 0 }}
+          style={{ paddingTop: 0, paddingBottom: 0, minHeight: '100vh' }}
         >
           <Sidebar
             as={Menu}
@@ -610,9 +606,7 @@ class CertificatesVerificationPage extends React.Component {
                 active={this.props.isUpdating || this.props.isVerifying || this.state.isFetching}
               >
                 <Loader size="medium">
-                  <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
-                    <image href={loader} x="0" y="0" width="100%" height="100%" />
-                  </svg>
+                  <Image src={loader} style={{ display: 'block', margin: '0 auto 10px auto', width: '96px' }} />
                   {
                     (() => {
                       if (this.props.isUpdating) {

@@ -363,9 +363,7 @@ class MessagesPage extends React.Component {
                 <Dimmer active={this.props.isFetchingThreads} inverted>
                   <Loader size="medium">
                     <p>Fetching your threads</p>
-                    <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
-                      <image href={loader} x="0" y="0" width="100%" height="100%" />
-                    </svg>
+                    <Image src={loader} style={{ display: 'block', margin: '0 auto 10px auto', width: '96px' }} />
                   </Loader>
                 </Dimmer>
                 {this.renderThreads()}
@@ -382,9 +380,7 @@ class MessagesPage extends React.Component {
                   <Dimmer active={this.props.isFetchingMessages} inverted>
                     <Loader size="medium">
                       <p>Fetching your messages</p>
-                      <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
-                        <image href={loader} x="0" y="0" width="100%" height="100%" />
-                      </svg>
+                      <Image src={loader} style={{ display: 'block', margin: '0 auto 10px auto', width: '96px' }} />
                     </Loader>
                   </Dimmer>
                   {this.renderMessages()}
@@ -432,9 +428,7 @@ class MessagesPage extends React.Component {
               <Dimmer active={this.props.isFetchingThreads} inverted>
                 <Loader size="medium">
                   <p>Fetching your threads</p>
-                  <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
-                    <image href={loader} x="0" y="0" width="100%" height="100%" />
-                  </svg>
+                  <Image src={loader} style={{ display: 'block', margin: '0 auto 10px auto', width: '96px' }} />
                 </Loader>
               </Dimmer>
               <div style={{ textAlign: 'right', paddingBottom: '5px' }}>
@@ -497,9 +491,7 @@ class MessagesPage extends React.Component {
                 <Dimmer active={this.props.isFetchingMessages} inverted>
                   <Loader size="medium">
                     <p>Fetching your messages</p>
-                    <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
-                      <image href={loader} x="0" y="0" width="100%" height="100%" />
-                    </svg>
+                    <Image src={loader} style={{ display: 'block', margin: '0 auto 10px auto', width: '96px' }} />
                   </Loader>
                 </Dimmer>
                 {this.renderMessages()}
@@ -575,9 +567,7 @@ class MessagesPage extends React.Component {
               <Dimmer active={this.props.isFetchingThreads} inverted>
                 <Loader size="medium">
                   <p>Fetching your threads</p>
-                  <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
-                    <image href={loader} x="0" y="0" width="100%" height="100%" />
-                  </svg>
+                  <Image src={loader} style={{ display: 'block', margin: '0 auto 10px auto', width: '96px' }} />
                 </Loader>
               </Dimmer>
               <div style={{ textAlign: 'right', paddingBottom: '5px' }}>
@@ -642,9 +632,7 @@ class MessagesPage extends React.Component {
                 <Dimmer active={this.props.isFetchingMessages} inverted>
                   <Loader size="medium">
                     <p>Fetching your messages</p>
-                    <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
-                      <image href={loader} x="0" y="0" width="100%" height="100%" />
-                    </svg>
+                    <Image src={loader} style={{ display: 'block', margin: '0 auto 10px auto', width: '96px' }} />
                   </Loader>
                 </Dimmer>
                 {this.renderMessages()}

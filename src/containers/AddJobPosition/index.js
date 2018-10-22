@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Container, Segment, Header, Button, Message, Divider, Breadcrumb, Form, Input, Grid, TextArea, Dimmer, Loader } from 'semantic-ui-react';
+import { Container, Segment, Header, Button, Message, Divider, Breadcrumb, Form, Input, Grid, TextArea, Dimmer, Loader, Image } from 'semantic-ui-react';
 import SkillsInput from 'components/SkillsInput';
 import IndustriesInput from 'components/IndustriesInput';
 import { getDefaultValues, resetAddJobProps } from './actions';
@@ -106,9 +106,7 @@ class AddJobPosition extends React.Component {
             <Segment padded="very">
               <Dimmer className="belowNavBar" active={this.props.isAdding} inverted>
                 <Loader size="medium">
-                  <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
-                    <image href={loader} x="0" y="0" width="100%" height="100%" />
-                  </svg>
+                  <Image src={loader} style={{ display: 'block', margin: '0 auto 10px auto', width: '96px' }} />
                   Adding job position...
                 </Loader>
               </Dimmer>

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { Card, Grid, Button, Input, Dimmer, Loader } from 'semantic-ui-react';
+import { Card, Grid, Button, Input, Dimmer, Loader, Image } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import storeV3Wallet from '../../util/auth/storeV3Wallet';
 import store from '../../store';
@@ -72,13 +72,11 @@ class WalletCreatedWithoutRouter extends React.Component {
         <Dimmer className="belowNavBar" active={this.props.isLoggingIn} inverted>
           <Loader size="medium">
             <p>This may take a few moments</p>
-            <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
-              <image href={loader} x="0" y="0" width="100%" height="100%" />
-            </svg>
+            <Image src={loader} style={{ display: 'block', margin: '0 auto 10px auto', width: '96px' }} />
             Wallet is Creating...
           </Loader>
         </Dimmer>
-        <Card.Header>
+        <Card.Header className="card-logo">
           <Grid centered>
             <Grid.Row>
               <img alt="" className="logo" src={logo} />

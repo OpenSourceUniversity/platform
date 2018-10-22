@@ -73,6 +73,18 @@ div.App {
   }
 
   div.menu.massive.top  {
+    .profile-dropdown {
+      .menu.transition {
+        min-width: max-content;
+      }
+      .account-nav-setter {
+        .ui.image {
+          display: inline-block;
+          width: 18px;
+          margin-right: 5px;
+        }
+      }
+    }
     .item:before {
       background: none;
     }
@@ -239,6 +251,7 @@ div.App {
               margin-bottom: -3px;
             }
             span.balance-nav {
+              padding-left: 10px;
               span.fraction {
                 font-size: 50%;
               }
@@ -474,7 +487,8 @@ div#Main {
         div.textAreaButtons {
           border: 1px solid grey !important;
           border-radius: 5px !important;
-          height: 180px !important;
+          min-height: 180px !important;
+          height: 100%;
           button {
             background-color: inherit !important;
             border-color: red !important;
@@ -562,7 +576,7 @@ div#Main {
       max-width: 260px;
     }
   }
-  @media (max-width:760px) {
+  @media (max-width:992px) {
     .onboarding {
       flex-direction: column;
       margin: 0 !important;
@@ -579,6 +593,24 @@ div#Main {
         margin: 0 auto;
         left: 0;
         right: 0;
+      }
+      div.onboarding-card {
+        margin-bottom: 4em;
+        width: 85%;
+        padding: 2em;
+      }
+      .card-logo {
+        display: none;
+      }
+      .phrase-button {
+        float: initial !important;
+        margin-top: 10px !important;
+      }
+      .recovery {
+        .button {
+          float: initial !important;
+          margin-top: 10px !important;
+        }
       }
     }
     .job-applications-feed {
@@ -778,7 +810,7 @@ input[type="file"] {
   right: 4em;
 }
 
-.messagingThreads, verificationsList {
+.messagingThreads, .verificationsList {
   overflow-x: hidden;
   overflow-y: scroll;
   .item {
@@ -797,7 +829,7 @@ input[type="file"] {
   }
 }
 
-.messagingThreads::-webkit-scrollbar {
+.messagingThreads::-webkit-scrollbar, .verificationsList::-webkit-scrollbar {
   width: 0px!important;  /* remove scrollbar space */
   background: transparent;  /* optional: just make scrollbar invisible */
 }

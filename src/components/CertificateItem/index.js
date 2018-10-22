@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { Card } from 'semantic-ui-react';
+import { Card, Image } from 'semantic-ui-react';
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -36,22 +36,17 @@ class CertificateItemWithoutRouter extends React.Component {
     /* eslint-enable global-require */
     const status = this.renderStatus();
     const certificateStatusIcon = (
-      <svg width="32" height="32" style={{ marginBottom: '-12px' }}>
-        <image
-          href={(() => {
-            switch (status) {
-            case 'verified': return verified;
-            case 'revoked': return revoked;
-            case 'expired': return expired;
-            default: return validated;
-            }
-          })()}
-          x="0"
-          y="0"
-          width="100%"
-          height="100%"
-        />
-      </svg>
+      <Image
+        src={(() => {
+          switch (status) {
+          case 'verified': return verified;
+          case 'revoked': return revoked;
+          case 'expired': return expired;
+          default: return validated;
+          }
+        })()}
+        style={{ width: '32px', paddingRight: '5px' }}
+      />
     );
     const { industries } = this.props.certificate;
     function getColor() {

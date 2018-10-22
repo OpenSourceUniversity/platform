@@ -3,7 +3,8 @@ import Config from '../../config';
 
 
 const { bdnUrl } = Config.network;
-const START_URL = `${bdnUrl}api/v1/verifications/?active_profile=${store.getState().activeAccount.activeAccount}`;
+const LIMIT_PAGINATION = 20;
+const START_URL = `${bdnUrl}api/v1/verifications/?active_profile=${store.getState().activeAccount.activeAccount}&offset=0&limit=${LIMIT_PAGINATION}`;
 
 export default function fetchVerifications(url = START_URL) {
   return function dispatcher(dispatch) {
@@ -25,7 +26,8 @@ export default function fetchVerifications(url = START_URL) {
         } else {
           dispatch({
             type: 'FETCH_VERIFICATIONS_SUCCESS',
-            verifications: body,
+            verifications: body.results,
+            nextUrl: body.next,
           });
         }
       })

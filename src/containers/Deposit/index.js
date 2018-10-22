@@ -118,9 +118,7 @@ class Deposit extends React.Component {
 
         </Dimmer>
         <Header size="large">
-          <svg width="32" height="32" className="icon">
-            <image href={settings} x="0" y="0" width="100%" height="100%" />
-          </svg>
+          <Image src={settings} className="icon" style={{ width: '32px', marginTop: 0 }} />
           Deposit/Withdraw
         </Header>
         <Divider />
@@ -266,9 +264,7 @@ class Deposit extends React.Component {
               <Segment>
                 <Statistic size="tiny" color="orange">
                   <Statistic.Value>
-                    <svg width="24" height="24">
-                      <image href={token} x="0" y="0" width="100%" height="100%" />
-                    </svg>
+                    <Image src={token} style={{ width: '24px', height: '24px', display: 'inline-block' }} />
                     {this.props.balancesError ? (this.props.balancesError) :
                       (this.props.eduBalance.toFixed(2))
                     }
@@ -277,9 +273,7 @@ class Deposit extends React.Component {
                 </Statistic>
                 <Statistic size="tiny">
                   <Statistic.Value>
-                    <svg width="24" height="24">
-                      <image href={ethereum} x="0" y="0" width="100%" height="100%" />
-                    </svg>
+                    <Image src={ethereum} style={{ width: '24px', height: '24px', display: 'inline-block' }} />
                     {this.props.balancesError ? (this.props.balancesError) :
                       (this.props.ethBalance.toFixed(4))
                     }

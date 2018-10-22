@@ -1,7 +1,7 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
-import { Container, Grid, Header, Segment, Button, Message, Divider, Breadcrumb, Form, Input, Dimmer, Loader, Dropdown, Icon } from 'semantic-ui-react';
+import { Container, Grid, Header, Segment, Button, Message, Divider, Breadcrumb, Form, Input, Dimmer, Loader, Dropdown, Icon, Image } from 'semantic-ui-react';
 import SkillsInput from '../../components/SkillsInput';
 import IndustriesInput from '../../components/IndustriesInput';
 import storeCertificateOnIpfs from '../../util/certificate/storeCertificateOnIpfs';
@@ -180,9 +180,7 @@ class AddCertificatePage extends React.Component {
         <Dimmer className="belowNavBar" active={this.props.isAdding || this.props.isEncrypting} inverted>
           <Loader size="medium">
             <p>This may take a few moments</p>
-            <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
-              <image href={loader} x="0" y="0" width="100%" height="100%" />
-            </svg>
+            <Image src={loader} style={{ display: 'block', margin: '0 auto 10px auto', width: '96px' }} />
             {(() => {
               if (this.props.isEncrypting) {
                 return 'Encrypting certificate file...';

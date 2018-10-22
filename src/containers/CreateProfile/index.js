@@ -28,7 +28,7 @@ class CreateAccount extends React.Component {
           </Header>
           <Divider clearing />
           <Grid columns={3}>
-            <Grid.Column>
+            <Grid.Column mobile={16} tablet={16} computer={5}>
               <Segment style={{ minHeight: '400px' }} padded="very" className="padded-top-segment">
                 <img className="hex-icon" alt="" src={academia} />
                 <Header>
@@ -47,7 +47,7 @@ class CreateAccount extends React.Component {
                 <Button style={{ marginTop: '30px' }} name="Academy" as={Link} to="/settings" onClick={(e, { name }) => this.props.setActiveAccount(name)} fluid> SELECT </Button>
               </Segment>
             </Grid.Column>
-            <Grid.Column>
+            <Grid.Column mobile={16} tablet={16} computer={6}>
               <Segment style={{ minHeight: '400px' }} padded="very" className="padded-top-segment">
                 <img className="hex-icon" alt="" src={learners} />
                 <Header>
@@ -65,7 +65,7 @@ class CreateAccount extends React.Component {
                 <Button style={{ marginTop: '30px' }} primary name="Learner" as={Link} to="/settings" onClick={(e, { name }) => this.props.setActiveAccount(name)} fluid> SELECT </Button>
               </Segment>
             </Grid.Column>
-            <Grid.Column>
+            <Grid.Column mobile={16} tablet={16} computer={5}>
               <Segment style={{ minHeight: '400px' }} padded="very" className="padded-top-segment">
                 <img className="hex-icon" alt="" src={businesses} />
                 <Header>

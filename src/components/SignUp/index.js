@@ -34,7 +34,7 @@ export default class SignUp extends React.Component {
     /* eslint-disable jsx-a11y/label-has-for */
     return (
       <div>
-        <Card.Header>
+        <Card.Header className="card-logo">
           <Grid centered>
             <Grid.Row>
               <img alt="" className="logo" src={logo} />

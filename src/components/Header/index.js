@@ -325,20 +325,16 @@ class HeaderWithoutRouter extends React.Component {
 
                 <Menu.Menu position="right">
                   <Menu.Item disabled style={{ cursor: 'pointer!important' }} className="nav-disabled-beta" name="network" onClick={this.handleItemClick}>
-                    <svg width="20" height="20" className="network" style={{ opacity: 0.5, cursor: 'pointer' }} >
-                      <image href={network} x="0" y="0" width="100%" height="100%" />
-                    </svg>
+                    <Image src={network} className="network" style={{ opacity: 0.5, cursor: 'pointer' }} />
                   </Menu.Item>
                   <Menu.Item name="messaging" onClick={this.handleItemClick}>
-                    <svg width="20" height="20" className="inbox" >
-                      <image href={messages} x="0" y="0" width="100%" height="100%" />
-                    </svg>
+                    <Image src={messages} className="inbox" />
                     <Label style={{ top: 18, left: 40, display: this.props.unreadAllMessagesCount === 0 ? 'none' : 'block' }} color="red" size="mini" floating>
                       { this.props.unreadAllMessagesCount }
                     </Label>
                   </Menu.Item>
                   <NotificationsComponent />
-                  <Dropdown item trigger={avatarTrigger} pointing="top right" style={{ paddingRight: 0 }}>
+                  <Dropdown item trigger={avatarTrigger} className="profile-dropdown" pointing="top right" style={{ paddingRight: 0 }}>
                     <Dropdown.Menu>
                       <Dropdown.Item className="account-nav-setter" name="account">
 
@@ -346,9 +342,7 @@ class HeaderWithoutRouter extends React.Component {
                           EDU Balance
                           {this.props.balancesError ? (this.props.balancesError) : (
                             <span className="balance-nav">
-                              <svg width="16" height="16" className="edu-token">
-                                <image href={token} x="0" y="0" width="100%" height="100%" />
-                              </svg>
+                              <Image className="edu-token" src={token} />
                               <span className="integer">
                                 {this.props.eduBalance.toString().split('.')[0]}
                               </span>
@@ -360,33 +354,23 @@ class HeaderWithoutRouter extends React.Component {
                         </Dropdown.Item>
 
                         <Dropdown.Item name="profile" className="profile-nav" active={activeItem === 'profile'} onClick={this.handleItemClick}>
-                          <svg width="16" height="16">
-                            <image href={profile} x="0" y="0" width="100%" height="100%" />
-                          </svg>
+                          <Image src={profile} />
                           My Profile
                         </Dropdown.Item>
                         <Dropdown.Item name="deposit" className="deposit-nav" active={activeItem === 'deposit'} onClick={this.handleItemClick}>
-                          <svg width="16" height="16">
-                            <image href={deposit} x="0" y="0" width="100%" height="100%" />
-                          </svg>
+                          <Image src={deposit} />
                           Deposit/Withdraw
                         </Dropdown.Item>
                         <Dropdown.Item name="settings" className="settings-nav" active={activeItem === 'settings'} onClick={this.handleItemClick}>
-                          <svg width="16" height="16">
-                            <image href={settings} x="0" y="0" width="100%" height="100%" />
-                          </svg>
+                          <Image src={settings} />
                           Account Settings
                         </Dropdown.Item>
                         <Dropdown.Item name="social-network" className="social-network" active={activeItem === 'social-network'} onClick={this.handleItemClick}>
-                          <svg width="16" height="16">
-                            <image href={settings} x="0" y="0" width="100%" height="100%" />
-                          </svg>
+                          <Image src={settings} />
                           LinkedIn contacts
                         </Dropdown.Item>
                         <Dropdown.Item name="onboarding" className="logout-nav" onClick={this.loginFunc}>
-                          <svg width="16" height="16">
-                            <image href={logoutImage} x="0" y="0" width="100%" height="100%" />
-                          </svg>
+                          <Image src={logoutImage} />
                           Logout
                         </Dropdown.Item>
                       </Dropdown.Item>

@@ -14,7 +14,7 @@ export default class PasswordRecovery extends React.Component {
     /* eslint-enable global-require */
     return (
       <div className="recovery">
-        <Card.Header>
+        <Card.Header className="card-logo">
           <Grid centered>
             <Grid.Row>
               <img alt="" className="logo" src={logo} />

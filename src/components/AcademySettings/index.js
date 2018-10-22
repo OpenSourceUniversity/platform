@@ -1,7 +1,7 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
-import { Input, Form, Button, Header, Divider, Message, Dimmer, Loader, Container, Icon } from 'semantic-ui-react';
+import { Input, Form, Button, Header, Divider, Message, Dimmer, Loader, Container, Icon, Image } from 'semantic-ui-react';
 import AvatarEditor from 'react-avatar-editor';
 import Slider from 'rc-slider';
 import Countries from '../../data/countriesList';
@@ -118,9 +118,7 @@ class AcademySettings extends React.Component {
       <div className="academia-settings">
         <Dimmer className="belowNavBar" active={this.props.isFetching} inverted>
           <Loader size="medium">
-            <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
-              <image href={loader} x="0" y="0" width="100%" height="100%" />
-            </svg>
+            <Image src={loader} style={{ display: 'block', margin: '0 auto 10px auto', width: '96px' }} />
             Saving information...
           </Loader>
         </Dimmer>

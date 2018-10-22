@@ -87,7 +87,7 @@ class NotificationItem extends Dropdown.Item {
         }}
       >
         <Feed.Label>
-          <img style={{ borderRadius: 0 }} src={getIcon()} alt="" />
+          <Image style={{ borderRadius: 0 }} src={getIcon()} alt="" />
         </Feed.Label>
         <Feed.Content style={{ marginTop: 0 }} >
           <Feed.Meta style={{ margin: 0 }}>

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import QRCode from 'qrcode.react';
-import { Header, Divider, Segment, Container, Dimmer, Loader, Breadcrumb, Modal, Button, Icon, Form, Input, Message } from 'semantic-ui-react';
+import { Header, Divider, Segment, Container, Dimmer, Loader, Breadcrumb, Modal, Button, Icon, Form, Input, Message, Image } from 'semantic-ui-react';
 import SkillItem from 'components/SkillItem';
 import fetchCertificate from '../../util/certificate/fetchCertificate';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
@@ -283,22 +283,17 @@ class CertificatePage extends React.Component {
       }
     }
     const certificateStatusIcon = (
-      <svg width="64" height="64" style={{ marginBottom: '-12px' }}>
-        <image
-          href={(() => {
-            switch (status) {
-            case 'verified': return verified;
-            case 'revoked': return revoked;
-            case 'expired': return expired;
-            default: return validated;
-            }
-          })()}
-          x="0"
-          y="0"
-          width="100%"
-          height="100%"
-        />
-      </svg>
+      <Image
+        src={(() => {
+          switch (status) {
+          case 'verified': return verified;
+          case 'revoked': return revoked;
+          case 'expired': return expired;
+          default: return validated;
+          }
+        })()}
+        style={{ width: '64px' }}
+      />
     );
     const etherscanUser = `${etherscanUrl}${this.props.certificate.holder_eth_address}`;
     const color = getColor();

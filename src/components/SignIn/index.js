@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Card, Form, Input, Grid, Button, Loader, Dimmer } from 'semantic-ui-react';
+import { Card, Form, Input, Grid, Button, Loader, Dimmer, Image } from 'semantic-ui-react';
 import login from '../../util/auth/login';
 
 
@@ -22,13 +22,11 @@ class SignInWithoutRouter extends React.Component {
         <Dimmer active={this.props.isLoggingIn} inverted>
           <Loader size="medium">
             <p>This may take a few moments</p>
-            <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
-              <image href={loader} x="0" y="0" width="100%" height="100%" />
-            </svg>
+            <Image src={loader} style={{ display: 'block', margin: '0 auto 10px auto', width: '96px' }} />
             Wallet is Unlocking...
           </Loader>
         </Dimmer>
-        <Card.Header>
+        <Card.Header className="card-logo">
           <Grid centered>
             <Grid.Row>
               <img alt="" className="logo" src={logo} />

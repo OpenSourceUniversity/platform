@@ -414,7 +414,7 @@ class MessagesPage extends React.Component {
           <Responsive
             as={Sidebar.Pushable}
             {...Responsive.onlyTablet}
-            style={{ paddingTop: 0, paddingBottom: 0, display: this.props.match.params.id ? null : 'none' }}
+            style={{ paddingTop: 0, paddingBottom: 0 }}
           >
             <Sidebar
               as={Menu}
@@ -484,37 +484,43 @@ class MessagesPage extends React.Component {
                   Profile Info
               </Button>
             </div>
-            <div
-              id="MessageHistory"
-              style={{ height: '78vh', overflowY: 'scroll', padding: '43px 5% 5% 5%' }}
-              onScroll={this.messagesScroll}
-            >
-              <Dimmer active={this.props.isFetchingMessages} inverted>
-                <Loader size="medium">
-                  <p>Fetching your messages</p>
-                  <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
-                    <image href={loader} x="0" y="0" width="100%" height="100%" />
-                  </svg>
-                </Loader>
-              </Dimmer>
-              {this.renderMessages()}
+            <div style={{ display: this.props.match.params.id ? null : 'none' }}>
+              <div
+                id="MessageHistory"
+                style={{
+                  height: '72vh',
+                  overflowY: 'scroll',
+                  padding: '43px 5% 5% 5%',
+                }}
+                onScroll={this.messagesScroll}
+              >
+                <Dimmer active={this.props.isFetchingMessages} inverted>
+                  <Loader size="medium">
+                    <p>Fetching your messages</p>
+                    <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
+                      <image href={loader} x="0" y="0" width="100%" height="100%" />
+                    </svg>
+                  </Loader>
+                </Dimmer>
+                {this.renderMessages()}
+              </div>
+              <Form onSubmit={this.sendMessage} >
+                <Form.Group inline>
+                  <Form.TextArea
+                    className="messageInput"
+                    rows={2}
+                    style={{ resize: 'none' }}
+                    ref={(arg) => { this.inputRef = arg; }}
+                    onKeyDown={this.onEnterPress}
+                    autoComplete="off"
+                    type="text"
+                    name="message"
+                    placeholder="Type your message here..."
+                  />
+                  <Form.Button color="orange" className="sendButton" content="Send" type="submit" />
+                </Form.Group>
+              </Form>
             </div>
-            <Form onSubmit={this.sendMessage} >
-              <Form.Group inline>
-                <Form.TextArea
-                  className="messageInput"
-                  rows={2}
-                  style={{ resize: 'none' }}
-                  ref={(arg) => { this.inputRef = arg; }}
-                  onKeyDown={this.onEnterPress}
-                  autoComplete="off"
-                  type="text"
-                  name="message"
-                  placeholder="Type your message here..."
-                />
-                <Form.Button color="orange" className="sendButton" content="Send" type="submit" />
-              </Form.Group>
-            </Form>
             <Sidebar
               as={Menu}
               animation="overlay"
@@ -551,7 +557,7 @@ class MessagesPage extends React.Component {
           <Responsive
             as={Sidebar.Pushable}
             {...Responsive.onlyMobile}
-            style={{ paddingTop: 0, paddingBottom: 0, display: this.props.match.params.id ? null : 'none' }}
+            style={{ paddingTop: 0, paddingBottom: 0 }}
           >
             <Sidebar
               as={Menu}
@@ -623,37 +629,43 @@ class MessagesPage extends React.Component {
                   Profile Info
               </Button>
             </div>
-            <div
-              id="MessageHistory"
-              style={{ height: '78vh', overflowY: 'scroll', padding: '37px 5% 5% 5%' }}
-              onScroll={this.messagesScroll}
-            >
-              <Dimmer active={this.props.isFetchingMessages} inverted>
-                <Loader size="medium">
-                  <p>Fetching your messages</p>
-                  <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
-                    <image href={loader} x="0" y="0" width="100%" height="100%" />
-                  </svg>
-                </Loader>
-              </Dimmer>
-              {this.renderMessages()}
+            <div style={{ display: this.props.match.params.id ? null : 'none' }}>
+              <div
+                id="MessageHistory"
+                style={{
+                  height: '72vh',
+                  overflowY: 'scroll',
+                  padding: '37px 5% 5% 5%',
+                }}
+                onScroll={this.messagesScroll}
+              >
+                <Dimmer active={this.props.isFetchingMessages} inverted>
+                  <Loader size="medium">
+                    <p>Fetching your messages</p>
+                    <svg width="96" height="96" style={{ display: 'block', margin: '0 auto 10px auto' }}>
+                      <image href={loader} x="0" y="0" width="100%" height="100%" />
+                    </svg>
+                  </Loader>
+                </Dimmer>
+                {this.renderMessages()}
+              </div>
+              <Form onSubmit={this.sendMessage} >
+                <Form.Group inline>
+                  <Form.TextArea
+                    className="messageInput"
+                    rows={2}
+                    style={{ resize: 'none' }}
+                    ref={(arg) => { this.inputRef = arg; }}
+                    onKeyDown={this.onEnterPress}
+                    autoComplete="off"
+                    type="text"
+                    name="message"
+                    placeholder="Type your message here..."
+                  />
+                  <Form.Button color="orange" style={{ right: 0 }} className="sendButton" content="Send" type="submit" />
+                </Form.Group>
+              </Form>
             </div>
-            <Form onSubmit={this.sendMessage} >
-              <Form.Group inline>
-                <Form.TextArea
-                  className="messageInput"
-                  rows={2}
-                  style={{ resize: 'none' }}
-                  ref={(arg) => { this.inputRef = arg; }}
-                  onKeyDown={this.onEnterPress}
-                  autoComplete="off"
-                  type="text"
-                  name="message"
-                  placeholder="Type your message here..."
-                />
-                <Form.Button color="orange" style={{ right: 0 }} className="sendButton" content="Send" type="submit" />
-              </Form.Group>
-            </Form>
             <Sidebar
               as={Menu}
               animation="overlay"

@@ -127,9 +127,43 @@ class NotificationsComponent extends Dropdown {
     const notificationsTrigger = (
       <span>
         <Image style={{ cursor: 'pointer' }} className="notifications icon" src={notifications} />
-        <Label style={{ top: -18, display: this.props.unreadNotificationsCount === 0 ? 'none' : 'block' }} color="red" size="mini" floating>
+        <Label
+          style={{
+            padding: '0.3em 0.78571429em',
+            top: '18px',
+            left: '70%',
+            backgroundColor: '#f16722',
+            color: '#fff',
+            display: this.props.unreadNotificationsCount === 0 ? 'none' : null,
+          }}
+          size="mini"
+          floating
+        >
           { this.props.unreadNotificationsCount }
         </Label>
+      </span>
+    );
+
+    const notificationsMobileTrigger = (
+      <span>
+        <Image
+          style={{ cursor: 'pointer' }}
+          className="notifications icon"
+          src={notifications}
+          label={{
+            floating: true,
+            size: 'mini',
+            content: this.props.unreadNotificationsCount,
+            style: {
+              top: '-10px',
+              left: '105%',
+              color: '#fff',
+              padding: '0.3em 0.78571429em',
+              backgroundColor: '#f16722',
+              display: this.props.unreadNotificationsCount === 0 ? 'none' : null,
+            },
+          }}
+        />
       </span>
     );
 
@@ -211,6 +245,7 @@ class NotificationsComponent extends Dropdown {
             <Button
               as={Link}
               to="/notifications/"
+              onClick={this.props.handleSidebarHide}
               style={{
                 textAlign: 'center',
                 margin: '0 auto',
@@ -226,7 +261,7 @@ class NotificationsComponent extends Dropdown {
           {...Responsive.onlyMobile}
           style={{ paddingTop: '25px', paddingBottom: '24px', position: 'static' }}
           item
-          trigger={notificationsTrigger}
+          trigger={notificationsMobileTrigger}
           pointing="top right"
           icon={null}
         >
@@ -258,6 +293,7 @@ class NotificationsComponent extends Dropdown {
             <Button
               as={Link}
               to="/notifications/"
+              onClick={this.props.handleSidebarHide}
               style={{
                 textAlign: 'center',
                 margin: '0 auto',

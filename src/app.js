@@ -34,26 +34,14 @@ class App extends React.Component {
   handleSidebarHide = () => this.setState({ visible: false })
 
   render() {
-    // /* eslint-disable global-require */
-    // const logo = require('./icons/edu-logo.png');
-    // if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|
-    // IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-    //   return (
-    //     <div style={{ height: '100hv' }}>
-    //       <Dimmer style={{ paddingTop: '40%' }} active>
-    //         <img alt="" src={logo} />
-    //         <h1>
-    //           We are sorry, but this version of platform doesn&#39;t support mobile devices
-    //         </h1>
-    //       </Dimmer>
-    //     </div>
-    //   );
-    // }
     return (
       <div className="App">
         {this.props.isLoggedIn ?
           <div>
-            <Header showSidebar={this.handleSlidebarClick} />
+            <Header
+              handleSidebarHide={this.handleSidebarHide}
+              showSidebar={this.handleSlidebarClick}
+            />
             <Responsive as="div" {...Responsive.onlyComputer} style={{ height: `${this.props.secondaryNav ? 165 : 77}px` }} />
             <Responsive as="div" {...Responsive.onlyTablet} style={{ height: '77px' }} />
             <Responsive as="div" {...Responsive.onlyMobile} style={{ height: '77px' }} />

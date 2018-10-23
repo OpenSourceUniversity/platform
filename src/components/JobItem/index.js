@@ -43,7 +43,7 @@ class JobItemWithoutRouter extends React.Component {
           <img alt="" style={{ marginBottom: '20px', width: '100%' }} src={this.props.isNotList ? this.props.job.imgSrc : null} />
           <Card.Header style={{ color: 'black' }} icon="ellipsis vertical">{this.props.job.title}</Card.Header>
           { this.props.job.is_featured ?
-            <Label style={{ background: '#fbd233' }} attached="top right">
+            <Label size="small" style={{ background: '#fbd233', opacity: '0.8' }} attached="top right">
               FEATURED
             </Label> :
             null

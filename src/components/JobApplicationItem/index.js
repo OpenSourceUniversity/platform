@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Feed, Dropdown, Grid, Header, Icon } from 'semantic-ui-react';
+import { Button, Feed, Dropdown, Grid, Header, Icon, Responsive } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import SkillItem from 'components/SkillItem';
@@ -62,7 +62,7 @@ class JobApplicationItem extends Dropdown.Item {
       return 'There is no matching skills';
     }
     return skills.map((skill, index) => (
-      <SkillItem skill={skill} key={index} />
+      <SkillItem style={{ fontSize: 'inherit' }} skill={skill} key={index} />
     ));
   }
 
@@ -76,7 +76,9 @@ class JobApplicationItem extends Dropdown.Item {
           borderBottom: '1px solid #ccc',
         }}
       >
-        <Feed.Label
+        <Responsive
+          as={Feed.Label}
+          {...Responsive.onlyComputer}
           onClick={
             application ?
               () => { this.props.history.push(`/view-profile/learner/${application.issuer_eth_address}/`); } :
@@ -93,7 +95,7 @@ class JobApplicationItem extends Dropdown.Item {
                 avatarPlaceholder}
             alt=""
           />
-        </Feed.Label>
+        </Responsive>
         <Feed.Content style={{ marginTop: 0 }} >
           <Feed.Summary>
             <Grid>
@@ -136,7 +138,9 @@ class JobApplicationItem extends Dropdown.Item {
                   application.state === 'rejected' || application.state === 'approved' ?
                     this.renderState(application.state) :
                     <div>
-                      <Button
+                      <Responsive
+                        as={Button}
+                        {...Responsive.onlyComputer}
                         name="approve"
                         inverted
                         color="green"
@@ -149,8 +153,10 @@ class JobApplicationItem extends Dropdown.Item {
                         }
                       >
                         APPROVE
-                      </Button>
-                      <Button
+                      </Responsive>
+                      <Responsive
+                        as={Button}
+                        {...Responsive.onlyComputer}
                         name="reject"
                         inverted
                         color="red"
@@ -162,7 +168,74 @@ class JobApplicationItem extends Dropdown.Item {
                         }
                       >
                         REJECT
-                      </Button>
+                      </Responsive>
+                      <Responsive
+                        as={Button}
+                        {...Responsive.onlyTablet}
+                        name="approve"
+                        inverted
+                        color="green"
+                        icon
+                        onClick={
+                          (e, { name }) => {
+                            const { id } = application;
+                            const address = application.issuer_eth_address;
+                            this.props.changeApplicationState(id, name, address);
+                          }
+                        }
+                      >
+                        <Icon name="check" />
+                      </Responsive>
+                      <Responsive
+                        as={Button}
+                        {...Responsive.onlyTablet}
+                        name="reject"
+                        inverted
+                        color="red"
+                        icon
+                        onClick={
+                          (e, { name }) => {
+                            const { id } = application;
+                            this.props.changeApplicationState(id, name, null);
+                          }
+                        }
+                      >
+                        <Icon name="delete" />
+                      </Responsive>
+                      <Responsive
+                        as={Button}
+                        {...Responsive.onlyMobile}
+                        name="approve"
+                        inverted
+                        color="green"
+                        icon
+                        onClick={
+                          (e, { name }) => {
+                            const { id } = application;
+                            const address = application.issuer_eth_address;
+                            this.props.changeApplicationState(id, name, address);
+                          }
+                        }
+                      >
+                        <Icon name="check" />
+                      </Responsive>
+                      <Responsive
+                        as={Button}
+                        {...Responsive.onlyMobile}
+                        style={{ marginTop: '5px' }}
+                        name="reject"
+                        inverted
+                        color="red"
+                        icon
+                        onClick={
+                          (e, { name }) => {
+                            const { id } = application;
+                            this.props.changeApplicationState(id, name, null);
+                          }
+                        }
+                      >
+                        <Icon name="delete" />
+                      </Responsive>
                     </div>
                 }
               </Grid.Column>

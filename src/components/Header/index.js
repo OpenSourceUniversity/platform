@@ -22,6 +22,7 @@ class HeaderWithoutRouter extends React.Component {
   handleItemClick = (e, { name }) => {
     this.setState({ activeItem: name });
     let newPath;
+    this.props.handleSidebarHide();
     if (name === 'home') {
       newPath = '/';
     } else if (name === 'onboarding') {
@@ -329,11 +330,20 @@ class HeaderWithoutRouter extends React.Component {
                   </Menu.Item>
                   <Menu.Item name="messaging" onClick={this.handleItemClick}>
                     <Image src={messages} className="inbox" />
-                    <Label style={{ top: 18, left: 40, display: this.props.unreadAllMessagesCount === 0 ? 'none' : 'block' }} color="red" size="mini" floating>
+                    <Label
+                      style={{
+                        top: 18,
+                        left: 40,
+                        backgroundColor: '#f16722',
+                        display: this.props.unreadAllMessagesCount === 0 ? 'none' : null,
+                      }}
+                      size="mini"
+                      floating
+                    >
                       { this.props.unreadAllMessagesCount }
                     </Label>
                   </Menu.Item>
-                  <NotificationsComponent />
+                  <NotificationsComponent handleSidebarHide={this.props.handleSidebarHide} />
                   <Dropdown item trigger={avatarTrigger} className="profile-dropdown" pointing="top right" style={{ paddingRight: 0 }}>
                     <Dropdown.Menu>
                       <Dropdown.Item className="account-nav-setter" name="account">

@@ -11,7 +11,7 @@ export default class SkillItem extends React.Component {
         size={this.props.isCertificatePage ? 'huge' : null}
         style={{
           borderRadius: this.props.isCertificatePage ? '100px' : null,
-          fontSize: this.props.isCertificatePage ? '1.2em' : null,
+          fontSize: this.props.isCertificatePage ? '1.2em' : 'inherit',
           borderWidth: this.props.isCertificatePage ? '2px' : null,
           color: this.props.color,
           borderColor: this.props.color,

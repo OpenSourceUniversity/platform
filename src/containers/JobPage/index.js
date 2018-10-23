@@ -56,9 +56,11 @@ class JobPage extends React.Component {
     const languages = [];
     try {
       for (let i = 0; i < languagesArr.length; i += 1) {
-        languages.push({
-          have_icon: false, check: true, name: languagesArr[i], basic: false,
-        });
+        if (languagesArr[i]) {
+          languages.push({
+            have_icon: false, check: true, name: languagesArr[i], basic: false,
+          });
+        }
       }
       return languages.map((language, index) => (
         <SkillItem skill={language} key={index} />

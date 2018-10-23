@@ -232,7 +232,8 @@ class ViewAcademyProfile extends React.Component {
                     <p style={{ textAlign: 'center' }}>There are no courses yet.</p>
                   </div>
               }
-            </Segment>
+            </Segment> :
+            <div style={{ height: '40px' }} />
           </Grid.Column>
         </Grid>
       </div>

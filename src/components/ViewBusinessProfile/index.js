@@ -239,6 +239,7 @@ class ViewBusinessProfile extends React.Component {
                   </div>
               }
             </Segment>
+            <div style={{ height: '40px' }} />
           </Grid.Column>
         </Grid>
       </div>

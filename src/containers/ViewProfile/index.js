@@ -5,11 +5,20 @@ import ViewLearnerProfile from 'components/ViewLearnerProfile';
 import ViewAcademyProfile from 'components/ViewAcademyProfile';
 import ViewBusinessProfile from 'components/ViewBusinessProfile';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
+import { enablePublicPageView, disablePublicPageView } from '../../util/auth/changePublicPageView';
 
 class ViewProfile extends React.Component {
   componentDidMount() {
-    this.props.setSecondaryNav('account');
+    if (this.props.isLoggedIn) {
+      this.props.setSecondaryNav('account');
+    } else {
+      this.props.enablePublicPageView();
+    }
     document.title = 'View Profile';
+  }
+
+  componentWillUnmount() {
+    this.props.disablePublicPageView();
   }
 
   render() {
@@ -32,6 +41,7 @@ class ViewProfile extends React.Component {
 function mapStateToProps(state) {
   return {
     activeAccount: state.activeAccount.activeAccount,
+    isLoggedIn: state.auth.isLoggedIn,
   };
 }
 
@@ -39,6 +49,12 @@ function mapDispatchToProps(dispatch) {
   return {
     setSecondaryNav(secondaryNav) {
       dispatch(setSecondaryNav(secondaryNav));
+    },
+    enablePublicPageView() {
+      dispatch(enablePublicPageView());
+    },
+    disablePublicPageView() {
+      dispatch(disablePublicPageView());
     },
   };
 }

@@ -12,6 +12,7 @@ import resetVerificationRequestMessages from '../../util/verification/resetVerif
 import deleteCertificate from '../../util/certificate/deleteCertificate';
 import { getProfileTypeName } from '../../util/activeAccount';
 import { decrypt } from '../../util/privacy';
+import { enablePublicPageView, disablePublicPageView } from '../../util/auth/changePublicPageView';
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -24,8 +25,16 @@ class CertificatePage extends React.Component {
   componentDidMount() {
     const { bdnUrl } = Config.network;
     this.props.fetchCertificate(`${bdnUrl}api/v1/certificates/${this.props.match.params.id}/`);
-    this.props.setSecondaryNav('academia');
     document.title = 'Certificate';
+    if (!this.props.address) {
+      this.props.enablePublicPageView();
+    } else {
+      this.props.setSecondaryNav('academia');
+    }
+  }
+
+  componentWillUnmount() {
+    this.props.disablePublicPageView();
   }
 
   getDateString(dateStr) {
@@ -327,138 +336,141 @@ class CertificatePage extends React.Component {
                   <Image src={loader} style={{ display: 'block', margin: '0 auto 10px auto', width: '96px' }} />
                 </Loader>
               </Dimmer>
-              <div style={{ height: this.props.address.toLowerCase() === this.props.certificate.holder_eth_address ? '40px' : 0 }} >
-                {this.props.address.toLowerCase() === this.props.certificate.holder_eth_address ?
-                  <Modal
-                    open={this.state.modalOpen}
-                    onClose={this.handleClose}
-                    trigger={
-                      <Button
-                        floated="left"
-                        labelPosition="left"
-                        icon
-                        onClick={this.handleOpen}
-                        basic
-                      >
-                        <Icon name="trash" />
-                        Delete
-                      </Button>
-                    }
-                    size="small"
-                    closeIcon
-                  >
-                    <Header icon="archive" content="Delete certificate confirmation" />
-                    <Modal.Content>
-                      <Dimmer active={this.props.isDeleting} page>
-                        <Loader size="medium">
-                          <Image src={loader} style={{ display: 'block', margin: '0 auto 10px auto', width: '96px' }} />
-                        </Loader>
-                      </Dimmer>
-                      <Message error hidden={!this.props.error}>
+              {this.props.address ?
+                <div style={{ height: this.props.address.toLowerCase() === this.props.certificate.holder_eth_address ? '40px' : 0 }} >
+                  {this.props.address.toLowerCase() === this.props.certificate.holder_eth_address ?
+                    <Modal
+                      open={this.state.modalOpen}
+                      onClose={this.handleClose}
+                      trigger={
+                        <Button
+                          floated="left"
+                          labelPosition="left"
+                          icon
+                          onClick={this.handleOpen}
+                          basic
+                        >
+                          <Icon name="trash" />
+                          Delete
+                        </Button>
+                      }
+                      size="small"
+                      closeIcon
+                    >
+                      <Header icon="archive" content="Delete certificate confirmation" />
+                      <Modal.Content>
+                        <Dimmer active={this.props.isDeleting} page>
+                          <Loader size="medium">
+                            <Image src={loader} style={{ display: 'block', margin: '0 auto 10px auto', width: '96px' }} />
+                          </Loader>
+                        </Dimmer>
+                        <Message error hidden={!this.props.error}>
+                          <p>
+                            {this.props.error}
+                          </p>
+                        </Message>
                         <p>
-                          {this.props.error}
+                        You want to delete your certificate,&nbsp;
+                        named: {this.props.certificate.certificate_title}.
                         </p>
-                      </Message>
-                      <p>
-                      You want to delete your certificate,&nbsp;
-                      named: {this.props.certificate.certificate_title}.
-                      </p>
-                      <p>
-                      Please, confirm this action.
-                      </p>
-                    </Modal.Content>
-                    <Modal.Actions>
-                      <Button onClick={this.handleClose} floated="left" basic>
-                        <Icon name="remove" /> Cancel
-                      </Button>
-                      <Button color="red" inverted onClick={() => { this.props.deleteCertificate(this.props.match.params.id); }}>
-                        <Icon name="trash" /> Delete
-                      </Button>
-                    </Modal.Actions>
-                  </Modal> :
-                  null
-                }
-                {this.props.address.toLowerCase() === this.props.certificate.holder_eth_address ?
-                  <Modal
-                    trigger={
-                      <Button icon labelPosition="left" positive floated="right" style={{ marginTop: '5px' }} >
-                        <Icon name="checkmark" />
-                        Verify Certificate
-                      </Button>
-                    }
-                    closeIcon
-                  >
-                    <Modal.Header>Verification Request</Modal.Header>
-                    <Modal.Content>
-                      <Dimmer active={this.props.requestSending} page>
-                        <Loader size="medium">
-                          <Image src={loader} style={{ display: 'block', margin: '0 auto 10px auto', width: '96px' }} />
-                        </Loader>
-                      </Dimmer>
-                      <Message error hidden={!this.props.requestError}>
                         <p>
-                          {this.props.requestError}
+                        Please, confirm this action.
                         </p>
-                      </Message>
-                      <Message positive hidden={!this.props.requestSuccess}>
-                        <p>
-                          Verification requested.
-                        </p>
-                      </Message>
-                      <Form size="large" onSubmit={(event) => { this.handleSubmit(event, this); }}>
-                        <Form.Field required>
-                          <label htmlFor="verifier_eth_address">
-                            Please, enter instance ETH address
-                          </label>
-                          <Input
-                            id="verifier_eth_address"
-                            name="verifier_eth_address"
-                            iconPosition="left"
-                            icon="file"
-                            placeholder="ETH address"
-                          />
-                        </Form.Field>
-                        <Form.Field id="verifierType" name="verifierType" label="Type of verifier" control="select">
-                          <option value={2}>Academy</option>
-                          <option value={3}>Business</option>
-                        </Form.Field>
-                        <Button type="submit" primary size="huge">Submit</Button>
-                      </Form>
-                    </Modal.Content>
-                  </Modal> :
-                  null
-                }
-                {this.props.address.toLowerCase() === this.props.certificate.holder_eth_address ?
-                  <Modal
-                    style={{ marginTop: '0' }}
-                    trigger={
-                      <Button icon labelPosition="left" basic floated="right" style={{ marginTop: '5px' }} >
-                        <Icon name="file pdf outline" />
-                        View certificate file
-                      </Button>
-                    }
-                    onOpen={this.decryptCertificate}
-                    closeIcon
-                  >
-                    <Modal.Header>Certificate file</Modal.Header>
-                    <Modal.Content>
-                      <Dimmer active={this.state.isFetching} page>
-                        <Loader size="medium">
-                          <Image src={loader} style={{ display: 'block', margin: '0 auto 10px auto', width: '96px' }} />
-                          Fetching certificate file...
-                        </Loader>
-                      </Dimmer>
-                      <div style={{ width: '100%', textAlign: 'center' }}>
-                        <img style={{ maxWidth: '100%', maxHeight: '70vh' }} id="CertificateFile" alt="" src="" />
-                      </div>
-                      <object alt="" id="CertificatePDFFile" data="" type="application/pdf" width="100%" height="1px">
-                        <p>Can&#39;t load certificate PDF file on this device</p>
-                      </object>
-                    </Modal.Content>
-                  </Modal> :
-                  null
-                }
-              </div>
+                      </Modal.Content>
+                      <Modal.Actions>
+                        <Button onClick={this.handleClose} floated="left" basic>
+                          <Icon name="remove" /> Cancel
+                        </Button>
+                        <Button color="red" inverted onClick={() => { this.props.deleteCertificate(this.props.match.params.id); }}>
+                          <Icon name="trash" /> Delete
+                        </Button>
+                      </Modal.Actions>
+                    </Modal> :
+                    null
+                  }
+                  {this.props.address.toLowerCase() === this.props.certificate.holder_eth_address ?
+                    <Modal
+                      trigger={
+                        <Button icon labelPosition="left" positive floated="right" style={{ marginTop: '5px' }} >
+                          <Icon name="checkmark" />
+                          Verify Certificate
+                        </Button>
+                      }
+                      closeIcon
+                    >
+                      <Modal.Header>Verification Request</Modal.Header>
+                      <Modal.Content>
+                        <Dimmer active={this.props.requestSending} page>
+                          <Loader size="medium">
+                            <Image src={loader} style={{ display: 'block', margin: '0 auto 10px auto', width: '96px' }} />
+                          </Loader>
+                        </Dimmer>
+                        <Message error hidden={!this.props.requestError}>
+                          <p>
+                            {this.props.requestError}
+                          </p>
+                        </Message>
+                        <Message positive hidden={!this.props.requestSuccess}>
+                          <p>
+                            Verification requested.
+                          </p>
+                        </Message>
+                        <Form size="large" onSubmit={(event) => { this.handleSubmit(event, this); }}>
+                          <Form.Field required>
+                            <label htmlFor="verifier_eth_address">
+                              Please, enter instance ETH address
+                            </label>
+                            <Input
+                              id="verifier_eth_address"
+                              name="verifier_eth_address"
+                              iconPosition="left"
+                              icon="file"
+                              placeholder="ETH address"
+                            />
+                          </Form.Field>
+                          <Form.Field id="verifierType" name="verifierType" label="Type of verifier" control="select">
+                            <option value={2}>Academy</option>
+                            <option value={3}>Business</option>
+                          </Form.Field>
+                          <Button type="submit" primary size="huge">Submit</Button>
+                        </Form>
+                      </Modal.Content>
+                    </Modal> :
+                    null
+                  }
+                  {this.props.address.toLowerCase() === this.props.certificate.holder_eth_address ?
+                    <Modal
+                      style={{ marginTop: '0' }}
+                      trigger={
+                        <Button icon labelPosition="left" basic floated="right" style={{ marginTop: '5px' }} >
+                          <Icon name="file pdf outline" />
+                          View certificate file
+                        </Button>
+                      }
+                      onOpen={this.decryptCertificate}
+                      closeIcon
+                    >
+                      <Modal.Header>Certificate file</Modal.Header>
+                      <Modal.Content>
+                        <Dimmer active={this.state.isFetching} page>
+                          <Loader size="medium">
+                            <Image src={loader} style={{ display: 'block', margin: '0 auto 10px auto', width: '96px' }} />
+                            Fetching certificate file...
+                          </Loader>
+                        </Dimmer>
+                        <div style={{ width: '100%', textAlign: 'center' }}>
+                          <img style={{ maxWidth: '100%', maxHeight: '70vh' }} id="CertificateFile" alt="" src="" />
+                        </div>
+                        <object alt="" id="CertificatePDFFile" data="" type="application/pdf" width="100%" height="1px">
+                          <p>Can&#39;t load certificate PDF file on this device</p>
+                        </object>
+                      </Modal.Content>
+                    </Modal> :
+                    null
+                  }
+                </div> :
+                null
+              }
               <Divider hidden />
               <Container style={{ textAlign: 'left', padding: '0 10% 5% 10%' }} >
                 <Header size="huge" >
@@ -591,6 +603,12 @@ function mapDispatchToProps(dispatch) {
     },
     resetVerificationRequestMessages() {
       dispatch(resetVerificationRequestMessages());
+    },
+    enablePublicPageView() {
+      dispatch(enablePublicPageView());
+    },
+    disablePublicPageView() {
+      dispatch(disablePublicPageView());
     },
   };
 }

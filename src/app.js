@@ -36,7 +36,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        {this.props.isLoggedIn ?
+        {this.props.isLoggedIn || this.props.isPublicView ?
           <div>
             <Header
               handleSidebarHide={this.handleSidebarHide}
@@ -86,6 +86,7 @@ class App extends React.Component {
 function mapStateToProps(state) {
   return {
     address: state.auth.address,
+    isPublicView: state.auth.isPublicView,
     isLoggedIn: state.auth.isLoggedIn,
     secondaryNav: state.secondaryNav.secondaryNav,
   };

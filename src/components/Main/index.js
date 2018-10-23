@@ -83,7 +83,7 @@ class Main extends React.Component {
         <PrivateRoute {...this.props} exact path="/" component={HomePage} />
         <PrivateRoute {...this.props} exact path="/certificates" component={CertificatesPage} />
         <PrivateRoute {...this.props} exact path="/certificates/add" component={AddCertificatePage} />
-        <PrivateRoute {...this.props} path="/certificate/:id/" component={CertificatePage} />
+        <Route {...this.props} path="/certificate/:id/" component={CertificatePage} />
         <PrivateRoute {...this.props} exact path="/businesses/add/" component={AddJobPosition} />
         <PrivateRoute {...this.props} exact path="/businesses/edit/:id/" component={AddJobPosition} />
         <PrivateRoute {...this.props} exact path="/academies/add/" component={AddCourse} />
@@ -98,7 +98,7 @@ class Main extends React.Component {
         <PrivateRoute {...this.props} path="/learners" component={LearnersPage} />
         <PrivateRoute {...this.props} path="/jobs" component={JobsPage} />
         <PrivateRoute {...this.props} path="/profile" component={ProfilePage} />
-        <PrivateRoute {...this.props} path="/view-profile/:type/:eth_address/" component={ViewProfile} />
+        <Route {...this.props} path="/view-profile/:type/:eth_address/" component={ViewProfile} />
         <PrivateRouteCreateProfile isLoggedIn={this.props.isLoggedIn} path="/settings" component={AccountSettings} />
         <Route path="/onboarding" component={OnBoarding} />
         <PrivateRoute {...this.props} path="/social-network" component={SocialNetworkPage} />

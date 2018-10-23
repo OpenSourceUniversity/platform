@@ -27,6 +27,7 @@ class HeaderWithoutRouter extends React.Component {
       newPath = '/';
     } else if (name === 'onboarding') {
       this.props.setOnBoardingActiveElement('signin');
+      newPath = `/${name}`;
     } else {
       newPath = `/${name}`;
       this.props.resetAddJobProps();
@@ -390,12 +391,12 @@ class HeaderWithoutRouter extends React.Component {
               </Grid.Row>
             ) : (
               <Grid.Row className="main-nav">
-                <Menu.Item name="home" onClick={this.handleItemClick}>
+                <Menu.Item style={{ paddingLeft: 0, paddingRight: 0 }} name="home" onClick={this.handleItemClick}>
                   <img className="main-nav-logo" alt="" style={{ marginRight: `${15}px` }} src={logo} />
                   Open Source <br /> University
                 </Menu.Item>
-                <Menu.Menu position="right">
-                  <Menu.Item name="network">
+                <Menu.Menu position="right" style={{ paddingRight: 0 }} >
+                  <Menu.Item name="network" style={{ paddingLeft: 0 }} >
                     <Button primary name="onboarding" onClick={this.handleItemClick} >LOGIN </Button>
                   </Menu.Item>
                 </Menu.Menu>

@@ -12,6 +12,7 @@ const initialState = {
   walletUnlockerCallback: () => {},
   walletUnlockerExtension: null,
   isUnlocking: false,
+  isPublicView: false,
 };
 
 
@@ -74,6 +75,14 @@ const authReducer = (state = initialState, action) => {
   case 'WALLET_IS_UNLOCKING':
     return Object.assign({}, state, {
       isUnlocking: true,
+    });
+  case 'PUBLIC_VIEW_ENABLE':
+    return Object.assign({}, state, {
+      isPublicView: true,
+    });
+  case 'PUBLIC_VIEW_DISABLE':
+    return Object.assign({}, state, {
+      isPublicView: false,
     });
   default:
     return state;

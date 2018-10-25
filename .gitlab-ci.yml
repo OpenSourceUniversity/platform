@@ -37,6 +37,8 @@ build_production:
   script:
     - echo $APP_CONFIG > src/config.js
     - NODE_ENV="production" npm run build
+  only:
+    - master
 
 release_production:
   before_script: []
@@ -47,3 +49,5 @@ release_production:
     - docker login -u gitlab-ci-token -p ${CI_BUILD_TOKEN} ${CI_REGISTRY}
     - docker build -t ${CONTAINER_IMAGE_LATEST} . -f docks/Dockerfile
     - docker push ${CONTAINER_IMAGE_LATEST}
+  only:
+    - master

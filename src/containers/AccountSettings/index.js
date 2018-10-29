@@ -3,13 +3,15 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Container, Header, Divider, Grid, Segment, Menu, Breadcrumb, Image } from 'semantic-ui-react';
 import LearnerSettings from 'components/LearnerSettings';
-import AcademySettings from 'components/AcademySettings';
-import BusinessSettings from 'components/BusinessSettings';
+import AcademySettings from '../../components/AcademySettings';
+import BusinessSettings from '../../components/BusinessSettings';
+import UserSettings from '../../components/UserSettings';
 import { setActiveAccount } from '../../util/activeAccount';
 import setSecondaryNav from '../../util/secondaryNav/setSecondaryNav';
 
 
 class AccountSettings extends React.Component {
+  state = { }
   componentDidMount() {
     this.props.setSecondaryNav('account');
     document.title = 'Account Settings';
@@ -51,7 +53,16 @@ class AccountSettings extends React.Component {
                         Set active profile:
                       </Header>
                     </Menu.Header>
-                    <Menu.Item name="Learner" active={this.props.activeAccount === 'Learner'} onClick={(e, { name }) => this.props.setActiveAccount(name)}>
+                    <Menu.Item
+                      name="Learner"
+                      active={this.props.activeAccount === 'Learner'}
+                      onClick={
+                        (e, { name }) => {
+                          this.props.setActiveAccount(name);
+                          this.setState({ userSettings: false });
+                        }
+                      }
+                    >
                       <Image
                         src={learners}
                         className="cogs icon"
@@ -64,7 +75,16 @@ class AccountSettings extends React.Component {
                       />
                     Learner
                     </Menu.Item>
-                    <Menu.Item name="Academy" active={this.props.activeAccount === 'Academy'} onClick={(e, { name }) => this.props.setActiveAccount(name)}>
+                    <Menu.Item
+                      name="Academy"
+                      active={this.props.activeAccount === 'Academy'}
+                      onClick={
+                        (e, { name }) => {
+                          this.props.setActiveAccount(name);
+                          this.setState({ userSettings: false });
+                        }
+                      }
+                    >
                       <Image
                         src={academia}
                         className="cogs icon"
@@ -77,7 +97,16 @@ class AccountSettings extends React.Component {
                       />
                       Academy
                     </Menu.Item>
-                    <Menu.Item name="Business" active={this.props.activeAccount === 'Business'} onClick={(e, { name }) => this.props.setActiveAccount(name)}>
+                    <Menu.Item
+                      name="Business"
+                      active={this.props.activeAccount === 'Business'}
+                      onClick={
+                        (e, { name }) => {
+                          this.props.setActiveAccount(name);
+                          this.setState({ userSettings: false });
+                        }
+                      }
+                    >
                       <Image
                         src={businesses}
                         className="cogs icon"
@@ -90,11 +119,36 @@ class AccountSettings extends React.Component {
                       />
                       Business
                     </Menu.Item>
+                    <Menu.Header>
+                      <Header style={{ padding: '15px' }}>
+                        Account Settings:
+                      </Header>
+                    </Menu.Header>
+                    <Menu.Item
+                      name="UserSettings"
+                      active={this.state.userSettings}
+                      onClick={() => this.setState({ userSettings: true })}
+                    >
+                      <Image
+                        src={learners}
+                        className="cogs icon"
+                        style={{
+                          width: '16px',
+                          display: 'inline-block',
+                          marginRight: '10px',
+                          height: '16px',
+                        }}
+                      />
+                    General Settings
+                    </Menu.Item>
                   </Menu>
                 </Grid.Column>
                 <Grid.Column mobile={16} tablet={10} computer={10} style={{ paddingLeft: 0 }}>
                   <div className="settings">
                     {(() => {
+                      if (this.state.userSettings) {
+                        return <UserSettings />;
+                      }
                       switch (this.props.activeAccount) {
                       case 'Academy': return <AcademySettings />;
                       case 'Learner': return <LearnerSettings />;

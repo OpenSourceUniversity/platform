@@ -2,14 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Card, Form, Input, Grid, Button, Loader, Dimmer, Image } from 'semantic-ui-react';
-import login from '../../util/auth/login';
+import { getWallet } from '../../util/accountSettings/actions';
 
 
 class SignInWithoutRouter extends React.Component {
   loginSubmit(event, component) {
     event.preventDefault();
     const passphrase = event.target.elements.passphrase.value;
-    component.props.login(passphrase);
+    const email = event.target.elements.email.value;
+    const walletAccessData = {
+      password: passphrase,
+      email,
+    };
+    component.props.getWallet(walletAccessData);
   }
 
   render() {
@@ -46,16 +51,16 @@ class SignInWithoutRouter extends React.Component {
             Welcome Back! <br />
           </span>
           <span className="orange">
-            Please enter your encryption passphrase to access your wallet
+            Please enter your email and encryption passphrase to access your wallet
           </span><br />
         </Card.Description>
         <Card.Content>
           <Form onSubmit={(event) => { this.loginSubmit(event, this); }}>
-            <Form.Group inline>
-              <Form.Field inline width="16" icon={{ icon: 'lock' }}>
-                <Input name="passphrase" type="password" placeholder="Passphrase" />
-              </Form.Field>
-            </Form.Group>
+            <Form.Field name="email" width="16" label={{ icon: 'mail' }} control="input" type="email" placeholder="example@mail.com" />
+            <br />
+            <Form.Field width="16" icon={{ icon: 'lock' }}>
+              <Input name="passphrase" type="password" placeholder="Passphrase" />
+            </Form.Field>
             <span style={{ color: 'red' }}>
               {this.props.loginError}
             </span>
@@ -81,8 +86,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    login(passphrase) {
-      dispatch(login(passphrase));
+    getWallet(walletAccessData) {
+      dispatch(getWallet(walletAccessData));
     },
   };
 }

@@ -26,6 +26,10 @@ const authReducer = (state = initialState, action) => {
       isLoggingIn: false,
       address: localStorage.getItem('address'),
     });
+  case 'SET_V3WALLET':
+    return Object.assign({}, state, {
+      v3Wallet: action.v3Wallet,
+    });
   case 'SIGNED_ADDRESS_STORED':
     return Object.assign({}, state, {
       signedAddress: action.payload.signedAddress,
@@ -44,6 +48,10 @@ const authReducer = (state = initialState, action) => {
       loginError: action.payload.loginError,
       isLoggedIn: false,
       isLoggingIn: false,
+    });
+  case 'SIGN_UP_ERROR':
+    return Object.assign({}, state, {
+      loginError: action.payload.loginError,
     });
   case 'LOGGED_IN':
     return Object.assign({}, state, {

@@ -7,6 +7,7 @@ import storeV3Wallet from '../../util/auth/storeV3Wallet';
 import store from '../../store';
 import signUpStep from '../../util/auth/signUpStep';
 import setIsLoggingIn from './actions';
+import { } from '../../util/accountSettings/actions';
 
 class WalletCreatedWithoutRouter extends React.Component {
   static propTypes = {
@@ -46,6 +47,7 @@ class WalletCreatedWithoutRouter extends React.Component {
       this.props.storeV3Wallet(
         v3Wallet, wallet.getChecksumAddressString(),
         wallet.getPublicKey(), wallet.getPrivateKey(),
+        this.props.passphrase,
       );
       const { email } = this.props;
       const data = {
@@ -136,8 +138,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    storeV3Wallet(v3Wallet, checksumAddress, publicKey, privateKey) {
-      dispatch(storeV3Wallet(v3Wallet, checksumAddress, publicKey, privateKey));
+    storeV3Wallet(v3Wallet, checksumAddress, publicKey, privateKey, passphrase) {
+      dispatch(storeV3Wallet(v3Wallet, checksumAddress, publicKey, privateKey, passphrase));
     },
     setIsLoggingIn() {
       dispatch(setIsLoggingIn());

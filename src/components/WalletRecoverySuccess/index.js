@@ -40,6 +40,7 @@ class WalletRecoverySuccessWithoutRouter extends React.Component {
       this.props.storeV3Wallet(
         v3Wallet, wallet.getChecksumAddressString(),
         wallet.getPublicKey(), wallet.getPrivateKey(),
+        this.props.passphrase,
       );
       this.address = wallet.getChecksumAddressString();
     }, 3000);
@@ -100,8 +101,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    storeV3Wallet(v3Wallet, checksumAddress, publicKey, privateKey) {
-      dispatch(storeV3Wallet(v3Wallet, checksumAddress, publicKey, privateKey));
+    storeV3Wallet(v3Wallet, checksumAddress, publicKey, privateKey, passphrase) {
+      dispatch(storeV3Wallet(v3Wallet, checksumAddress, publicKey, privateKey, passphrase));
     },
     setIsLoggingIn() {
       dispatch(setIsLoggingIn());

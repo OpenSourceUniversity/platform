@@ -343,6 +343,72 @@ div.modals.visible.transition {
 div#Main {
     border-radius: 5px;
 
+  .user-settings {
+    .invisible {
+      position: absolute;
+      z-index: -1;
+      width: 0;
+      height: 0;
+      opacity: 0;
+    }
+    .label-cbx {
+      user-select: none;
+      cursor: pointer;
+      margin-bottom: 0;
+    }
+    .label-cbx input:checked + .checkbox {
+      border-color: #f06823;
+    }
+    .label-cbx input:checked + .checkbox svg path {
+      fill: #f06823;
+    }
+    .label-cbx input:checked + .checkbox svg polyline {
+      stroke-dashoffset: 0;
+    }
+    .label-cbx:hover .checkbox svg path {
+      stroke-dashoffset: 0;
+    }
+    .label-cbx .checkbox {
+      position: relative;
+      top: 2px;
+      float: left;
+      margin-right: 8px;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #C8CCD4;
+      border-radius: 3px;
+    }
+    .label-cbx .checkbox svg {
+      position: absolute;
+      top: -2px;
+      left: -2px;
+    }
+    .label-cbx .checkbox svg path {
+      fill: none;
+      stroke: #f06823;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 71px;
+      stroke-dashoffset: 71px;
+      transition: all 0.6s ease;
+    }
+    .label-cbx .checkbox svg polyline {
+      fill: none;
+      stroke: #FFF;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 18px;
+      stroke-dashoffset: 18px;
+      transition: all 0.3s ease;
+    }
+    .label-cbx > span {
+      pointer-events: none;
+      vertical-align: middle;
+    }
+  }
+
 //**Onboarding page***
   .onboarding {
     display: flex;

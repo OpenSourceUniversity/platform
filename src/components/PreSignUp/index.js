@@ -1,9 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Card, Form, Grid, Button } from 'semantic-ui-react';
-import store from '../../store';
 import signUpStep from '../../util/auth/signUpStep';
 
-export default class PreSignUp extends React.Component {
+class PreSignUp extends React.Component {
   state = {}
   emailSubmit = (event) => {
     const email = event.target.elements.email.value;
@@ -12,7 +12,7 @@ export default class PreSignUp extends React.Component {
         email,
         step: 1,
       };
-      store.dispatch(signUpStep(data));
+      this.props.signUpStep(data);
       this.props.setEmail(email);
       this.props.handleItemClick(event, event.target.elements.signup);
     } else {
@@ -58,6 +58,9 @@ export default class PreSignUp extends React.Component {
             <span style={{ color: 'red' }}>
               {this.state.errorMessage}
             </span>
+            <span style={{ color: 'red' }}>
+              {this.props.loginError}
+            </span>
             <Form.Button type="submit" name="signup" className="orange-button">SET MY EMAIL</Form.Button>
           </Form>
           <div className="sign-up">
@@ -69,3 +72,19 @@ export default class PreSignUp extends React.Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    loginError: state.auth.loginError,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    signUpStep(data) {
+      dispatch(signUpStep(data));
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PreSignUp);

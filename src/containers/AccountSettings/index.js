@@ -130,7 +130,7 @@ class AccountSettings extends React.Component {
                       onClick={() => this.setState({ userSettings: true })}
                     >
                       <Image
-                        src={learners}
+                        src={settings}
                         className="cogs icon"
                         style={{
                           width: '16px',

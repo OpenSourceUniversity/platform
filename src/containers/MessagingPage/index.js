@@ -251,12 +251,12 @@ class MessagesPage extends React.Component {
   }
 
   renderMessages() {
-    if (this.props.match.params.id) {
-      this.setKeys(this.props.match.params.id);
-    }
     const { messages } = this.props;
     const opponent = this.getOpponent();
     const address = this.props.address.toLowerCase();
+    if (this.props.match.params.id && messages.length) {
+      this.setKeys(this.props.match.params.id);
+    }
     return messages.map((message, index, array) => (
       <Message
         key={index}
@@ -274,6 +274,9 @@ class MessagesPage extends React.Component {
 
   renderThreads() {
     const { threads } = this.props;
+    if (!threads.length) {
+      return null;
+    }
     return threads.map((thread, index) => (
       <Menu.Item
         key={index}
@@ -366,7 +369,7 @@ class MessagesPage extends React.Component {
                     <Image src={loader} style={{ display: 'block', margin: '0 auto 10px auto', width: '96px' }} />
                   </Loader>
                 </Dimmer>
-                {this.renderThreads()}
+                { window.innerWidth >= 992 ? this.renderThreads() : null }
                 {this.props.threads.length ? null : <span>You haven&#39;t any open thread</span>}
               </Menu>
             </Grid.Column>
@@ -383,7 +386,7 @@ class MessagesPage extends React.Component {
                       <Image src={loader} style={{ display: 'block', margin: '0 auto 10px auto', width: '96px' }} />
                     </Loader>
                   </Dimmer>
-                  {this.renderMessages()}
+                  { window.innerWidth >= 992 ? this.renderMessages() : null }
                 </div>
                 <Form onSubmit={this.sendMessage} >
                   <Form.Group inline>
@@ -404,7 +407,7 @@ class MessagesPage extends React.Component {
               </div>
             </Grid.Column>
             <Grid.Column width={3} style={{ paddingBottom: 0 }} >
-              {this.renderUserInfo()}
+              { window.innerWidth >= 992 ? this.renderUserInfo() : null }
             </Grid.Column>
           </Responsive>
           <Responsive
@@ -443,7 +446,9 @@ class MessagesPage extends React.Component {
                     Messaging
                 </Button>
               </div>
-              {this.renderThreads()}
+              { (window.innerWidth <= 991 && window.innerWidth >= 768) ?
+                this.renderThreads() :
+                null }
               {this.props.threads.length ? null : <span>You haven&#39;t any open thread</span>}
             </Sidebar>
             <div
@@ -481,6 +486,7 @@ class MessagesPage extends React.Component {
             <div style={{ display: this.props.match.params.id ? null : 'none' }}>
               <div
                 id="MessageHistory"
+                {...Responsive.onlyTablet}
                 style={{
                   height: '72vh',
                   overflowY: 'scroll',
@@ -494,7 +500,9 @@ class MessagesPage extends React.Component {
                     <Image src={loader} style={{ display: 'block', margin: '0 auto 10px auto', width: '96px' }} />
                   </Loader>
                 </Dimmer>
-                {this.renderMessages()}
+                {(window.innerWidth <= 991 && window.innerWidth >= 768) ?
+                  this.renderMessages() :
+                  null }
               </div>
               <Form onSubmit={this.sendMessage} >
                 <Form.Group inline>
@@ -543,7 +551,9 @@ class MessagesPage extends React.Component {
                     Messaging
                 </Button>
               </div>
-              {this.renderUserInfo()}
+              {(window.innerWidth <= 991 && window.innerWidth >= 768) ?
+                this.renderUserInfo() :
+                null }
             </Sidebar>
           </Responsive>
           <Responsive
@@ -582,7 +592,7 @@ class MessagesPage extends React.Component {
                     Messaging
                 </Button>
               </div>
-              {this.renderThreads()}
+              { window.innerWidth <= 767 ? this.renderThreads() : null }
               {this.props.threads.length ? null : <span>You haven&#39;t any open thread</span>}
             </Sidebar>
             <div
@@ -622,6 +632,7 @@ class MessagesPage extends React.Component {
             <div style={{ display: this.props.match.params.id ? null : 'none' }}>
               <div
                 id="MessageHistory"
+                {...Responsive.onlyMobile}
                 style={{
                   height: '72vh',
                   overflowY: 'scroll',
@@ -635,7 +646,7 @@ class MessagesPage extends React.Component {
                     <Image src={loader} style={{ display: 'block', margin: '0 auto 10px auto', width: '96px' }} />
                   </Loader>
                 </Dimmer>
-                {this.renderMessages()}
+                { window.innerWidth <= 767 ? this.renderMessages() : null }
               </div>
               <Form onSubmit={this.sendMessage} >
                 <Form.Group inline>
@@ -684,7 +695,7 @@ class MessagesPage extends React.Component {
                     Messaging
                 </Button>
               </div>
-              {this.renderUserInfo()}
+              { window.innerWidth <= 767 ? this.renderUserInfo() : null }
             </Sidebar>
           </Responsive>
         </Segment>

@@ -40,6 +40,16 @@ class MessagesPage extends React.Component {
     document.title = 'Messaging';
   }
 
+  shouldComponentUpdate(nextProps) {
+    if (this.props.messages === nextProps.messages) {
+      return false;
+    }
+    if (this.props.messages.length === 0 && nextProps.messages.length === 0) {
+      return false;
+    }
+    return true;
+  }
+
   componentDidUpdate(prevProps) {
     if (prevProps.nextUrl === this.props.nextUrl || !prevProps.nextUrl) {
       const objDiv = document.getElementById('MessageHistory');

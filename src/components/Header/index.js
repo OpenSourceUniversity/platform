@@ -144,7 +144,7 @@ class HeaderWithoutRouter extends React.Component {
         key: 'settings', content: 'Account Settings', name: 'settings', className: 'settings-nav', active: activeItem === 'settings', onClick: this.handleItemClick,
       },
       {
-        key: 'social_network', content: 'LinkedIn contacts', name: 'social-network', className: 'social-network', active: activeItem === 'social-network', onClick: this.handleItemClick,
+        key: 'social_network', style: { display: this.props.activeAccount === 'Learner' ? null : 'none' }, content: 'LinkedIn contacts', name: 'social-network', className: 'social-network', active: activeItem === 'social-network', onClick: this.handleItemClick,
       },
       {
         key: 'onboarding', content: 'Logout', name: 'onboarding', className: 'logout-nav', onClick: this.loginFunc,
@@ -376,10 +376,13 @@ class HeaderWithoutRouter extends React.Component {
                           <Image src={settings} />
                           Account Settings
                         </Dropdown.Item>
-                        <Dropdown.Item name="social-network" className="social-network" active={activeItem === 'social-network'} onClick={this.handleItemClick}>
-                          <Image src={settings} />
-                          LinkedIn contacts
-                        </Dropdown.Item>
+                        { this.props.activeAccount === 'Learner' ?
+                          <Dropdown.Item name="social-network" className="social-network" active={activeItem === 'social-network'} onClick={this.handleItemClick}>
+                            <Image src={settings} />
+                            LinkedIn contacts
+                          </Dropdown.Item> :
+                          null
+                        }
                         <Dropdown.Item name="onboarding" className="logout-nav" onClick={this.loginFunc}>
                           <Image src={logoutImage} />
                           Logout

@@ -44,7 +44,7 @@ class PreSignUp extends React.Component {
         </Card.Header>
         <Card.Description>
           <span className="welcome">
-            New ERC20 Wallet <br />
+            Sign Up <br />
           </span>
           <span className="orange">
             Please enter your email

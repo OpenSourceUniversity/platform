@@ -6,7 +6,7 @@ const initialState = {
   isLoggedIn: JSON.parse(localStorage.getItem('isLoggedIn')),
   loginError: null,
   isLoggingIn: false,
-  onBoardingActiveElement: 'signin',
+  onBoardingActiveElement: 'presignup',
   walletUnlockerModalOpen: false,
   walletUnlockerError: null,
   walletUnlockerCallback: () => {},

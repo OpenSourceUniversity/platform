@@ -76,6 +76,17 @@ const PrivateRouteCreateProfile = ({ component: Component, ...rest }) => (
   />
 );
 
+const OnboardingRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props => (
+      rest.isLoggedIn !== true ?
+        <Component {...props} />
+        : <Redirect to="/" />
+    )}
+  />
+);
+
 class Main extends React.Component {
   render() {
     return (
@@ -100,7 +111,7 @@ class Main extends React.Component {
         <PrivateRoute {...this.props} path="/profile" component={ProfilePage} />
         <Route {...this.props} path="/view-profile/:type/:eth_address/" component={ViewProfile} />
         <PrivateRouteCreateProfile isLoggedIn={this.props.isLoggedIn} path="/settings" component={AccountSettings} />
-        <Route path="/onboarding" component={OnBoarding} />
+        <OnboardingRoute isLoggedIn={this.props.isLoggedIn} path="/onboarding" component={OnBoarding} />
         <PrivateRoute {...this.props} path="/social-network" component={SocialNetworkPage} />
         <PrivateRoute {...this.props} path="/deposit" component={Deposit} />
         <PrivateRoute {...this.props} path="/course-page/:id/" component={CoursePage} />

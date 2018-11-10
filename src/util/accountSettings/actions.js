@@ -5,30 +5,6 @@ import login from '../../util/auth/login';
 
 const { bdnUrl } = Config.network;
 
-export function setEmailSettings(emailSettings) {
-  return function action(dispatch) {
-    dispatch({
-      type: 'SAVE_ACCOUNT_SETTINGS_REQUEST',
-    });
-    const axiosConfig = {
-      headers: {
-        'Auth-Signature': store.getState().auth.signedAddress,
-        'Auth-Eth-Address': store.getState().auth.address.slice(2),
-      },
-    };
-    axios.post(`${bdnUrl}api/v1/user-settings/`, emailSettings, axiosConfig).then(() => {
-      dispatch({
-        type: 'SAVE_EMAIL_SETTINGS',
-      });
-    }).catch((error) => {
-      dispatch({
-        type: 'ACCOUNT_SETTINGS_ERROR',
-        error: error.response.data.error,
-      });
-    });
-  };
-}
-
 export function getWallet(walletAccessData) {
   return function action(dispatch) {
     axios.post(`${bdnUrl}api/v1/user-settings/get_wallet/`, walletAccessData).then((body) => {
@@ -174,5 +150,30 @@ export function getAccountSettings() {
           error: 'Error while getting default values.',
         });
       });
+  };
+}
+
+export function setEmailSettings(emailSettings) {
+  return function action(dispatch) {
+    dispatch({
+      type: 'SAVE_ACCOUNT_SETTINGS_REQUEST',
+    });
+    const axiosConfig = {
+      headers: {
+        'Auth-Signature': store.getState().auth.signedAddress,
+        'Auth-Eth-Address': store.getState().auth.address.slice(2),
+      },
+    };
+    axios.post(`${bdnUrl}api/v1/user-settings/`, emailSettings, axiosConfig).then(() => {
+      dispatch({
+        type: 'SAVE_EMAIL_SETTINGS',
+      });
+      dispatch(getAccountSettings());
+    }).catch((error) => {
+      dispatch({
+        type: 'ACCOUNT_SETTINGS_ERROR',
+        error: error.response.data.error,
+      });
+    });
   };
 }

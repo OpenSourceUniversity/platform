@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Form, Button, Header, Divider, Message, Dimmer, Loader, Image } from 'semantic-ui-react';
+import { Form, Button, Header, Divider, Message, Dimmer, Loader, Image, Icon } from 'semantic-ui-react';
 import { getAccountSettings, setWalletSettings, setEmailSettings, setToRequest, setToError } from '../../util/accountSettings/actions';
 import storeV3Wallet from '../../util/auth/storeV3Wallet';
 
@@ -160,6 +160,18 @@ class UserSettings extends React.Component {
             key={`email:${this.props.accountSettings.user || ''}`}
             defaultValue={this.props.accountSettings.user ? this.props.accountSettings.user.email : ''}
           />
+          <Divider hidden />
+          {
+            this.props.accountSettings.email_verified ?
+              <div>
+                <Icon name="check" color="green" />
+                <span> Email verified</span>
+              </div> :
+              <div>
+                <Icon name="close" color="red" />
+                <span> Email not verified. Verification email sent</span>
+              </div>
+          }
           <Divider clearing />
           <p>Subscribtion settings</p>
           <Form.Field inline className="check-box">

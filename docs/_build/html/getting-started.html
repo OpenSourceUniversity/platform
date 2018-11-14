@@ -1,0 +1,296 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Getting Started &mdash; osu-platform 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="User’s Manual" href="user-manual.html" />
+    <link rel="prev" title="Welcome to osu-platform’s documentation!" href="index.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> osu-platform
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">User Documentation:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running">Running</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-the-tests">Running the tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#built-with">Built With</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contributing">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#versioning">Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user-manual.html">User’s Manual</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">osu-platform</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Getting Started</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/getting-started.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<p>These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.</p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>Make sure you have the following dependencies installed on your system.</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">nodejs</span> <span class="pre">&gt;=</span> <span class="pre">9.3.0</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">npm</span> <span class="pre">&gt;=</span> <span class="pre">5.5.1</span></code></li>
+</ul>
+<p>Navigate to the project directory and execute the following command in order to install project dependencies:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">npm install</span>
+</pre></div>
+</div>
+<p>Install truffle as global dependency and compile the smart contracts.</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">npm</span> <span class="pre">install</span> <span class="pre">-g</span> <span class="pre">truffle</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">truffle</span> <span class="pre">compile</span></code></li>
+</ul>
+</div>
+<div class="section" id="running">
+<h2>Running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
+<p>Within the project directory execute the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">npm run start</span>
+</pre></div>
+</div>
+<p>This script will run the <code class="docutils literal notranslate"><span class="pre">webpack-dev-server</span></code> in hot reloading mode. Open your browser on this address and you are ready to develop: <a class="reference external" href="http://localhost:8080/">http://localhost:8080/</a></p>
+</div>
+<div class="section" id="running-the-tests">
+<h2>Running the tests<a class="headerlink" href="#running-the-tests" title="Permalink to this headline">¶</a></h2>
+<p>To be added.</p>
+<p><strong>Coding style</strong></p>
+<p>Make sure the style of the source code you commit is consistent with the style of the rest of the project.</p>
+<p>If you are in doubt refer to the Airbnb style guide for JavaScript code and to the Solidity Style Guide for smart contracts.</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/airbnb/javascript">Airbnb Style Guide</a> - JavaScript</li>
+<li><a class="reference external" href="http://solidity.readthedocs.io/en/develop/style-guide.html">Solidity Style Guide</a> - Solidity</li>
+</ul>
+<p><strong>Automatically linting your code</strong></p>
+<p>Before commiting your changes, make sure the following command exits with zero-code:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">npm run lint</span>
+</pre></div>
+</div>
+<p><strong>Editor configuration</strong></p>
+<p>For Atom install <a class="reference external" href="https://atom.io/packages/linter-eslint">linter-eslint</a>: <code class="docutils literal notranslate"><span class="pre">apm</span> <span class="pre">install</span> <span class="pre">linter-eslint</span></code>.</p>
+</div>
+<div class="section" id="deployment">
+<h2>Deployment<a class="headerlink" href="#deployment" title="Permalink to this headline">¶</a></h2>
+<p>To be added.</p>
+</div>
+<div class="section" id="built-with">
+<h2>Built With<a class="headerlink" href="#built-with" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://git.codeideo.com/edu-ico/platform/master/react.semantic-ui.com">Semantic UI</a> - UI Framework</li>
+<li><a class="reference external" href="http://truffleframework.com/">Truffle</a> - Development framework for Ethereum</li>
+</ul>
+</div>
+<div class="section" id="contributing">
+<h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h2>
+<p>Please read <a class="reference external" href="https://git.codeideo.com/edu-ico/platform/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a> for details on our code of conduct, and the process for submitting pull requests to us.</p>
+</div>
+<div class="section" id="versioning">
+<h2>Versioning<a class="headerlink" href="#versioning" title="Permalink to this headline">¶</a></h2>
+<p>We use <a class="reference external" href="http://semver.org/">SemVer</a> for versioning. For the versions available, see the <a class="reference external" href="https://github.com/your/project/tags">tags on this repository</a>.</p>
+</div>
+<div class="section" id="authors">
+<h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><strong>RECHAINED</strong> - <em>Initial work</em> - <a class="reference external" href="https://rechained.com/">RECHAINED</a></li>
+</ul>
+</div>
+<div class="section" id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
+<p>This project is licensed under the MIT License - see the <a class="reference external" href="https://git.codeideo.com/edu-ico/platform/blob/master/LICENSE.md">LICENSE.md</a> file for details</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="user-manual.html" class="btn btn-neutral float-right" title="User’s Manual" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Welcome to osu-platform’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Open Source University
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

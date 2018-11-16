@@ -16,7 +16,7 @@ export function getWallet(walletAccessData) {
       });
       dispatch(login(walletAccessData.password));
     }).catch((error) => {
-      if (error.response.data.error === 'Wallet not stored' || error.response.status === 404) {
+      if (error.response && (error.response.data.error === 'Wallet not stored' || error.response.status === 404)) {
         dispatch(login(walletAccessData.password));
       } else {
         dispatch({

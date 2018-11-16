@@ -32,30 +32,29 @@ class UserSettings extends React.Component {
   changePassphrase(event, component) {
     event.preventDefault();
     component.props.setToRequest();
-    const mnemonicPhrase = event.target.elements.mnemonicPhrase.value.toLowerCase();
-    const passphrase = event.target.elements.passphrase.value;
+    const oldPassphrase = event.target.elements.passphrase.value;
+    const newPassphrase = event.target.elements.newPassphrase.value;
     /* eslint-disable global-require */
-    const hdkey = require('ethereumjs-wallet/hdkey');
-    const bip39 = require('bip39');
+    const Wallet = require('ethereumjs-wallet');
+    const { v3Wallet } = component.props;
     /* eslint-enable global-require */
     setTimeout(() => {
-      const seed = bip39.mnemonicToSeed(mnemonicPhrase);
-      const wallet = hdkey.fromMasterSeed(seed).getWallet();
-      const v3Wallet = wallet.toV3(passphrase);
-      if (v3Wallet.address === component.props.v3Wallet.address) {
+      try {
+        const wallet = Wallet.fromV3(v3Wallet, oldPassphrase);
+        const newV3Wallet = wallet.toV3(newPassphrase);
         this.props.storeV3Wallet(
-          v3Wallet, wallet.getChecksumAddressString(),
+          newV3Wallet, wallet.getChecksumAddressString(),
           wallet.getPublicKey(), wallet.getPrivateKey(),
         );
         if (this.walletSaveRef.checked) {
           const walletData = {
             save_wallet: this.walletSaveRef.checked,
-            password: passphrase,
-            wallet: JSON.stringify(v3Wallet),
+            password: newPassphrase,
+            wallet: JSON.stringify(newV3Wallet),
           };
           component.props.setWalletSettings(walletData);
         }
-      } else {
+      } catch (e) {
         component.props.setToError();
       }
     }, 3000);
@@ -129,18 +128,19 @@ class UserSettings extends React.Component {
           <Header>Change my passphrase</Header>
           <Form.Field
             required
-            label="12 words mnemonic phrase"
+            label="Old passphrase"
             control="input"
-            name="mnemonicPhrase"
+            type="password"
+            name="passphrase"
             maxLength={130}
-            placeholder="Your mnemonic phrase"
+            placeholder="Old passphrase"
           />
           <Form.Field
             required
             label="New passphrase"
             control="input"
             type="password"
-            name="passphrase"
+            name="newPassphrase"
             maxLength={130}
             placeholder="New passphrase"
           />

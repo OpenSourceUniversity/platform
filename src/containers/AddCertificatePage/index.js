@@ -1,7 +1,7 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
-import { Container, Grid, Header, Segment, Button, Message, Divider, Breadcrumb, Form, Input, Dimmer, Loader, Dropdown, Icon, Image } from 'semantic-ui-react';
+import { Container, Grid, Header, Segment, Button, Message, Divider, Breadcrumb, Form, Input, Dimmer, Loader, Dropdown, Icon, Image, Checkbox } from 'semantic-ui-react';
 import SkillsInput from '../../components/SkillsInput';
 import IndustriesInput from '../../components/IndustriesInput';
 import storeCertificateOnIpfs from '../../util/certificate/storeCertificateOnIpfs';
@@ -10,7 +10,7 @@ import { resetAddCertificateProps, resetCertificateAutocomplete } from './action
 
 
 class AddCertificatePage extends React.Component {
-  state = {}
+  state = { byEmail: false }
 
   componentDidMount() {
     document.title = 'Add Certificate';
@@ -78,6 +78,9 @@ class AddCertificatePage extends React.Component {
       courseLink = `http://${courseLink}`;
     }
 
+    const isAnonymous = component.state.byEmail;
+
+
     const certificateData = {
       institution_title: event.target.elements.institution_title.value,
       institution_link: institutionLink,
@@ -86,12 +89,16 @@ class AddCertificatePage extends React.Component {
       course_link: courseLink,
       industries,
       skills,
-      holder_eth_address: component.props.activeAccount === 'Learner' ? component.props.ethAddress : event.target.elements.holder_eth_address.value,
       granted_to_type: component.props.activeAccount === 'Learner' ? 1 : component.state.granted_to_type,
       score: event.target.elements.score.value,
       expiration_date: event.target.elements.expiration_date.value,
       checksum_hash: component.state.hash,
     };
+    if (isAnonymous) {
+      certificateData.holder_email = event.target.elements.holder_email.value;
+    } else {
+      certificateData.holder_eth_address = component.props.activeAccount === 'Learner' ? component.props.ethAddress : event.target.elements.holder_eth_address.value;
+    }
     if (event.target.elements.duration.value) {
       certificateData.duration = event.target.elements.duration.value;
     }
@@ -119,8 +126,13 @@ class AddCertificatePage extends React.Component {
     this.setState({ [name]: value });
   }
 
+  handleCheckboxChange = (e, { checked }) => {
+    this.setState({ byEmail: checked });
+  }
+
   validation = () => !this.state.buffer || !this.state.certificate_title
-        || !(this.props.activeAccount === 'Learner' ? this.props.ethAddress : this.state.holder_eth_address)
+        || !(this.props.activeAccount === 'Learner' ? this.props.ethAddress : true)
+        || !(!(this.props.activeAccount === 'Learner') && this.state.byEmail ? this.state.holder_email : this.state.holder_eth_address)
         || !this.state.institution_title || !this.state.institution_link
         || !(this.props.activeAccount === 'Learner' ? true : this.state.granted_to_type)
 
@@ -277,21 +289,49 @@ class AddCertificatePage extends React.Component {
                       placeholder="Certificate expiration date"
                     />
                   </Form.Field>
-                  <Form.Field required>
-                    <label htmlFor="holder_eth_address">
-                      Learner address
-                    </label>
-                    <Input
-                      id="holder_eth_address"
-                      name="holder_eth_address"
-                      iconPosition="left"
-                      icon="globe"
-                      placeholder="ETH address of learner"
-                      defaultValue={this.props.activeAccount === 'Learner' ? this.props.ethAddress : ''}
-                      readOnly={this.props.activeAccount === 'Learner'}
-                      onChange={this.handleChange}
+                  {this.props.activeAccount === 'Learner' ?
+                    null :
+                    <Checkbox
+                      name="by_email"
+                      label="Add by email"
+                      style={{ marginBottom: '10px' }}
+                      toggle
+                      onChange={this.handleCheckboxChange}
+                      defaultChecked={false}
                     />
-                  </Form.Field>
+                  }
+                  {this.state.byEmail ?
+                    <Form.Field required>
+                      <label htmlFor="holder_email">
+                        Holder email
+                      </label>
+                      <Input
+                        id="holder_email"
+                        name="holder_email"
+                        iconPosition="left"
+                        icon="globe"
+                        placeholder="Holder email"
+                        type="email"
+                        maxLength={130}
+                        onChange={this.handleChange}
+                      />
+                    </Form.Field> :
+                    <Form.Field required>
+                      <label htmlFor="holder_eth_address">
+                        Learner address
+                      </label>
+                      <Input
+                        id="holder_eth_address"
+                        name="holder_eth_address"
+                        iconPosition="left"
+                        icon="globe"
+                        placeholder="ETH address of learner"
+                        defaultValue={this.props.activeAccount === 'Learner' ? this.props.ethAddress : ''}
+                        readOnly={this.props.activeAccount === 'Learner'}
+                        onChange={this.handleChange}
+                      />
+                    </Form.Field>
+                  }
                   {this.props.activeAccount === 'Learner' ?
                     null :
                     <Form.Field required>

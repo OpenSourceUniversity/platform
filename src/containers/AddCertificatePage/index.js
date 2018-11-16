@@ -130,11 +130,20 @@ class AddCertificatePage extends React.Component {
     this.setState({ byEmail: checked });
   }
 
-  validation = () => !this.state.buffer || !this.state.certificate_title
+  validation = () => {
+    if (this.state.byEmail) {
+      return !this.state.buffer || !this.state.certificate_title
         || !(this.props.activeAccount === 'Learner' ? this.props.ethAddress : true)
-        || !(!(this.props.activeAccount === 'Learner') && this.state.byEmail ? this.state.holder_email : this.state.holder_eth_address)
+        || !(!(this.props.activeAccount === 'Learner') && this.state.byEmail ?
+          this.state.holder_email : this.state.holder_eth_address)
         || !this.state.institution_title || !this.state.institution_link
-        || !(this.props.activeAccount === 'Learner' ? true : this.state.granted_to_type)
+        || !(this.props.activeAccount === 'Learner' ? true : this.state.granted_to_type);
+    }
+    return !this.state.buffer || !this.state.certificate_title
+        || !(this.props.activeAccount === 'Learner' ? this.props.ethAddress : true)
+        || !this.state.institution_title || !this.state.institution_link
+        || !(this.props.activeAccount === 'Learner' ? true : this.state.granted_to_type);
+  }
 
   captureCertificateFile = (file) => {
     if (file.type.match(/image.*/) || file.type === 'application/pdf') {

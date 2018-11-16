@@ -128,6 +128,8 @@ class AddCertificatePage extends React.Component {
 
   handleCheckboxChange = (e, { checked }) => {
     this.setState({ byEmail: checked });
+    this.state({ holder_email: null });
+    this.state({ holder_eth_address: null });
   }
 
   validation = () => {

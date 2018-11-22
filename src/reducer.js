@@ -29,6 +29,7 @@ import verificationRequestReducer from './util/verification/verificationRequestR
 import messagingReducer from './util/messaging/messagingReducer';
 import jobApplicationReducer from './util/jobApplication/jobApplicationReducer';
 import accountSettingsReducer from './util/accountSettings/accountSettingsReducer';
+import errorModalReducer from './util/errorModal/errorModalReducer';
 
 
 const reducer = combineReducers({
@@ -62,6 +63,7 @@ const reducer = combineReducers({
   messaging: messagingReducer,
   jobApplication: jobApplicationReducer,
   accountSettings: accountSettingsReducer,
+  errorModal: errorModalReducer,
 });
 
 export default reducer;

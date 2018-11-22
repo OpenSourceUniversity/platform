@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Container, Sidebar, Responsive } from 'semantic-ui-react';
 import WalletUnlocker from 'components/WalletUnlocker';
+import ErrorModal from 'components/ErrorModal';
 import React from 'react';
 import getDefaultValues from './util/profiles/getDefaultValues';
 import getIpfs from './util/ipfs/getIpfs';
@@ -74,6 +75,7 @@ class App extends React.Component {
               null
             }
             <WalletUnlocker />
+            <ErrorModal />
           </Sidebar.Pusher>
         </Sidebar.Pushable>
       </div>

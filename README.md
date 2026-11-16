@@ -2,6 +2,15 @@
 
 # Open Source University Platform
 
+> **Archived, no longer maintained.** This repository holds the 2017 to 2020 OS.University platform (a credentials wallet on the Ethereum blockchain). It is not deployed and its dependencies are out of date; do not run it in production.
+>
+> The project continues as **[The Open Source University Foundation](https://opensourceuni.org)**, which issues **Open Source Diplomas™**: verifiable diplomas that bring a learner's existing credentials together against an open learning pathway, delivered into European Digital Identity Wallets as electronic attestations of attributes or as signed PDF documents.
+>
+> * Website: https://opensourceuni.org
+> * Portal (pathways, diplomas, verification): https://portal.opensourceuni.org
+> * Attestation rulebook (CC BY 4.0): https://portal.opensourceuni.org/rulebook
+> * Policy and Practice Statement: https://portal.opensourceuni.org/practice-statement
+
 Empowering 7 billion learners to connect to world's top academic education and professional development opportunities on the Ethereum blockchain.
 
 ## Getting Started
